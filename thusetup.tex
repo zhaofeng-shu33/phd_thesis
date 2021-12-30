@@ -111,7 +111,7 @@
 \usepackage{amsthm}
 % 也可以使用 ntheorem
 % \usepackage[amsmath,thmmarks,hyperref]{ntheorem}
-
+\usepackage{mathtools}
 \thusetup{
   %
   % 数学字体
@@ -166,6 +166,7 @@
 % 定义所有的图片文件在 figures 子目录下
 \graphicspath{{figures/}}
 
+
 % 数学命令
 \makeatletter
 \newcommand\dif{%  % 微分符号
@@ -177,6 +178,8 @@
   \fi
 }
 \makeatother
+% customized math symbols used in the thesis
 
+\input{math_symbols.tex}
 % hyperref 宏包在最后调用
 \usepackage{hyperref}

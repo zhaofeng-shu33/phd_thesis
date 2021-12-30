@@ -12,3 +12,4 @@ thuthesis-example.pdf
 *.blg
 *.fdb_latexmk
 *.out
+build
