@@ -1,0 +1,14 @@
+.vscode
+*.aux
+*.fls
+*.lof
+*.lot
+*.log
+thuthesis-example.pdf
+*.toc
+*.xdv
+*.synctex.gz
+*.bbl
+*.blg
+*.fdb_latexmk
+*.out
