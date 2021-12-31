@@ -25,11 +25,14 @@
 这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式早已有之。
 在这里我们采用其最为广泛的形式，即针对带权的有向图的社群发现算法。
 \begin{equation}\label{eq:IP}
-  \lambda(1) := \min_{\P}\frac{ f[\P] }{  \abs{\P} - 1 } 
+  \lambda(1) := \min_{\P \in \Pi'}\frac{ f[\P] }{  \abs{\P} - 1 } 
 \end{equation}
 在式 \eqref{eq:IP} 中，
 $\P$ 表示 $V$的一个分割， 也即  $P=\{C_1, \dots, C_k\}, \cup_{i=1}^k C_i=V$。
-$\abs{\mathcal{P}}$ 表示集合 $\P$ 中元素的个数。作用在$V$的子集$C$上的函数$f$
+$\abs{\mathcal{P}}$ 表示集合 $\P$ 中元素的个数。
+$\Pi$ 是 $V$ 上所有分割的集合而 $\Pi'=\Pi\backslash\{V\}$ 表示 $\Pi$
+除去 $V$本身.
+作用在$V$的子集$C$上的函数$f$
 表示$C$和 $C$的补集 $V\backslash C$ 之间边的权值之和，即
 $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$.
 而作用在$V$的分割$\P$上的函数 $f[\P]$ 则是$f$分别作用$\P$中每一个元素之和。
@@ -42,7 +45,10 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$.
 
 下面介绍如何求解 $\lambda(1)$ 及其对应的分割$\P^*$。xx的研究指出，
 求解 \eqref{eq:IP} 等价于求解下面的组合优化问题
-
+\begin{align}
+  h_{\P}(\lambda) &=  f[\P] - \abs{\P} \lambda  \label{eq:hPL}\\
+  h(\lambda) &= \min_{\P \in \Pi'(V)} h_{\P}(\lambda) \label{eq:hlambda}
+  \end{align}
 图片通常在 \env{figure} 环境中使用 \cs{includegraphics} 插入，如图~\ref{fig:example} 的源代码。
 建议矢量图片使用 PDF 格式，比如数据可视化的绘图；
 照片应使用 JPG 格式；
