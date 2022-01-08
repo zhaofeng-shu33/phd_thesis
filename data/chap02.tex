@@ -25,7 +25,7 @@
 这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式早已有之。
 在这里我们采用其最为广泛的形式，即针对带权的有向图的社群发现算法。
 \begin{equation}\label{eq:IP}
-  \lambda(1) := \min_{\P \in \Pi'}\frac{ f[\P] }{  \abs{\P} - 1 } 
+  \lambda_1 := \min_{\P \in \Pi'}\frac{ f[\P] }{  \abs{\P} - 1 } 
 \end{equation}
 在式 \eqref{eq:IP} 中，
 $\P$ 表示 $V$的一个分割， 也即  $P=\{C_1, \dots, C_k\}, \cup_{i=1}^k C_i=V$。
@@ -34,155 +34,174 @@ $\Pi$ 是 $V$ 上所有分割的集合而 $\Pi'=\Pi\backslash\{V\}$ 表示 $\Pi$
 除去 $V$本身.
 作用在$V$的子集$C$上的函数$f$
 表示$C$和 $C$的补集 $V\backslash C$ 之间边的权值之和，即
-$f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$.
+$f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 而作用在$V$的分割$\P$上的函数 $f[\P]$ 则是$f$分别作用$\P$中每一个元素之和。
 即 $f[\P]=\sum_{C \in \P} f(C)$。有了如上的符号解释，
 式 \eqref{eq:IP} 即不难理解，它表示各分割之间所有边的和对分割总数的平均值。
 
 式 \eqref{eq:IP} 实际给出了一个社群发现的标准，对于扁平化的社群而言，
-最小值$\lambda(1)$ 对应的社群为
+最小值$\lambda_1$ 对应的社群为
 分割$\P^*$的子集。
 
-下面介绍如何求解 $\lambda(1)$ 及其对应的分割$\P^*$。xx的研究指出，
+下面介绍如何求解 $\lambda_1$ 及其对应的分割$\P^*$。永野清仁 \cite{mac} 的研究指出，
 求解 \eqref{eq:IP} 等价于求解下面的组合优化问题
-\begin{align}
-  h_{\P}(\lambda) &=  f[\P] - \abs{\P} \lambda  \label{eq:hPL}\\
-  h(\lambda) &= \min_{\P \in \Pi'(V)} h_{\P}(\lambda) \label{eq:hlambda}
+\begin{align}\label{eq:hlambda}
+  h(\lambda) &= \min_{\P \in \Pi'} f[\P] - \abs{\P} \lambda 
   \end{align}
-图片通常在 \env{figure} 环境中使用 \cs{includegraphics} 插入，如图~\ref{fig:example} 的源代码。
-建议矢量图片使用 PDF 格式，比如数据可视化的绘图；
-照片应使用 JPG 格式；
-其他的栅格图应使用无损的 PNG 格式。
-注意，LaTeX 不支持 TIFF 格式；EPS 格式已经过时。
+其中 $\lambda$ 是一个非负实数。
+式 \eqref{eq:hlambda} 解的结构可以由一系列嵌套的分割
+来描述，即存在正整数$k$，使得式 \eqref{eq:hlambda} 的解
+为：
+\begin{equation}\label{eq:PSP_structure}
+  h(\lambda) = \begin{cases} h_{\P_0}(\lambda) & 0\leq \lambda < \lambda_1 \\
+  h_{\P_i}(\lambda) & \lambda_i \leq \lambda < \lambda_{i+1} \textrm{ for } i = 1, \dots, k-1 \\
+  h_{\P_k}(\lambda) & \lambda \geq \lambda_k
+  \end{cases}
+\end{equation}
+在式 \eqref{eq:PSP_structure} 中，$\lambda_1, \dots, \lambda_{k-1},
+\lambda_k$ 是递增的数列，而 $h_{\P}(\lambda)=f[\P]-|\P|\lambda$。
+对于分割 $\P_0, \dots, \P_k$ 来说，
+它们也有一个序关系。我们称分割 $P$ 是 $Q$ 的一个细分，
+如果 $\forall C \in P, \exists C' \in Q, s.t. C\subset C'$，
+并记为 $P \preceq Q$。基于细分的此种定义，我们有：
+$\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
+其中 $\P_0=\{V\}$ 而 $\P_k=\cup_{i=1}^n \{ i\}$。
 
+在得到 $h(\lambda)$ 的表达式后，
+我们指出 式 \eqref{eq:IP} 和
+\eqref{eq:PSP_structure} 中的$\lambda_1$ 取值
+相同，因此我们用了相同的符号。而 $\P^*=\P_1$。
+从而式 \eqref{eq:IP}的解可以从式 \eqref{eq:PSP_structure}
+的解中获得。
+
+下面举一个简单的例子来解释上面的结论。
+考虑一个带权的有向图$G(V,E)$，其结构
+如图 \ref{fig:example_directed} 所示。
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\linewidth]{example-image-a.pdf}
-  \caption*{国外的期刊习惯将图表的标题和说明文字写成一段，需要改写为标题只含图表的名称，其他说明文字以注释方式写在图表下方，或者写在正文中。}
-  \caption{示例图片标题}
-  \label{fig:example}
+  \begin{subfigure}[b]{0.5\linewidth}
+  \includegraphics[width=\textwidth]{example_directed.pdf}
+  \caption{一个有三个节点的带权有向图}
+  \label{fig:example_directed}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.5\linewidth}
+    \includegraphics[width=\textwidth]{dt.pdf}
+    \caption{$h(\lambda)$ 的图像}
+    \label{fig:dt}
+    \end{subfigure}  
 \end{figure}
 
-若图或表中有附注，采用英文小写字母顺序编号，附注写在图或表的下方。
-国外的期刊习惯将图表的标题和说明文字写成一段，需要改写为标题只含图表的名称，其他说明文字以注释方式写在图表下方，或者写在正文中。
+因为
+$G$ 包含的节点只有3个，可以使用枚举法计算对应的 $h(\lambda)$
+函数，其函数图像如图 \ref{fig:dt} 所示。其中
+$\P_0=\{ \{1,2,3\} \}, \P_1 = \{\{1,3\}, \{2\} \},
+\P_2 =\{\{1\},\{2\},\{3\} \}$。
+从图\ref{fig:dt} 中可以看到，在这个简单的例子中
+$h(\lambda)$
+是一个分段线性函数，对于一般的图$G$对应的
+$h(\lambda)$ 也是如此。
 
-如果一个图由两个或两个以上分图组成时，各分图分别以 (a)、(b)、(c)...... 作为图序，并须有分图题。
-推荐使用 \pkg{subcaption} 宏包来处理， 比如图~\ref{fig:subfig-a} 和图~\ref{fig:subfig-b}。
+因此，基于最小平均分割的方法，\ref{fig:example_directed}
+中的图将被 划分成 $\P^*=\P_1$，即节点1和3被分成一类，
+而节点2单独分成1类，这符合我们的直觉。
 
-\begin{figure}
-  \centering
-  \subcaptionbox{分图 A\label{fig:subfig-a}}
-    {\includegraphics[width=0.35\linewidth]{example-image-a.pdf}}
-  \subcaptionbox{分图 B\label{fig:subfig-b}}
-    {\includegraphics[width=0.35\linewidth]{example-image-b.pdf}}
-  \caption{多个分图的示例}
-  \label{fig:multi-image}
-\end{figure}
-
-
-
-\section{表格}
-
-表应具有自明性。为使表格简洁易读，尽可能采用三线表，如表~\ref{tab:three-line}。
-三条线可以使用 \pkg{booktabs} 宏包提供的命令生成。
-
-\begin{table}
-  \centering
-  \caption{三线表示例}
-  \begin{tabular}{ll}
-    \toprule
-    文件名          & 描述                         \\
-    \midrule
-    thuthesis.dtx   & 模板的源文件，包括文档和注释 \\
-    thuthesis.cls   & 模板文件                     \\
-    thuthesis-*.bst & BibTeX 参考文献表样式文件    \\
-    \bottomrule
-  \end{tabular}
-  \label{tab:three-line}
-\end{table}
-
-表格如果有附注，尤其是需要在表格中进行标注时，可以使用 \pkg{threeparttable} 宏包。
-研究生要求使用英文小写字母 a、b、c……顺序编号，本科生使用圈码 ①、②、③……编号。
-
-\begin{table}
-  \centering
-  \begin{threeparttable}[c]
-    \caption{带附注的表格示例}
-    \label{tab:three-part-table}
-    \begin{tabular}{ll}
-      \toprule
-      文件名                 & 描述                         \\
-      \midrule
-      thuthesis.dtx\tnote{a} & 模板的源文件，包括文档和注释 \\
-      thuthesis.cls\tnote{b} & 模板文件                     \\
-      thuthesis-*.bst        & BibTeX 参考文献表样式文件    \\
-      \bottomrule
-    \end{tabular}
-    \begin{tablenotes}
-      \item [a] 可以通过 xelatex 编译生成模板的使用说明文档；
-        使用 xetex 编译 \file{thuthesis.ins} 时则会从 \file{.dtx} 中去除掉文档和注释，得到精简的 \file{.cls} 文件。
-      \item [b] 更新模板时，一定要记得编译生成 \file{.cls} 文件，否则编译论文时载入的依然是旧版的模板。
-    \end{tablenotes}
-  \end{threeparttable}
-\end{table}
-
-如某个表需要转页接排，可以使用 \pkg{longtable} 宏包，需要在随后的各页上重复表的编号。
-编号后跟表题（可省略）和“（续）”，置于表上方。续表均应重复表头。
-
-\begin{longtable}{cccc}
-    \caption{跨页长表格的表题} \\
-    \toprule
-    表头 1 & 表头 2 & 表头 3 & 表头 4 \\
-    \midrule
-  \endfirsthead
-    \caption[]{跨页长表格的表题（续）} \\
-    \toprule
-    表头 1 & 表头 2 & 表头 3 & 表头 4 \\
-    \midrule
-  \endhead
-    \bottomrule
-  \endfoot
-  Row 1  & & & \\
-  Row 2  & & & \\
-  Row 3  & & & \\
-  Row 4  & & & \\
-  Row 5  & & & \\
-  Row 6  & & & \\
-  Row 7  & & & \\
-  Row 8  & & & \\
-  Row 9  & & & \\
-  Row 10 & & & \\
-\end{longtable}
-
-
-
-\section{算法}
-
-算法环境可以使用 \pkg{algorithms} 或者 \pkg{algorithm2e} 宏包。
+对于一般的图，其节点数目可能很多，此时用枚举法计算
+$h(\lambda)$ 变得不可行。幸运的是，计算
+$h(\lambda)$ 有多项式时间的算法。下面对\cite{mac}中描述的
+方法进行介绍。我们把这一方法称为 PSP 算法
+\footnote{该方法最早由
+印度学者 纳拉亚南 在 1991 年提出 \cite{narayanan}
+}，
+其中
+PSP 是 principal sequence of partition 的缩写，译为
+主分割序列。
+    
+求解 \eqref{eq:PSP_structure} 只需得到在每一个
+分界点处对应的 $\lambda$ 和 分割$\P$ 即可。
+考虑到 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$
+，
+我们有 $|\P_0| \leq |\P_1| \dots \leq |\P_k|$，
+即随着 $\lambda $ 的增大，线性函数的斜率逐渐增大。
+这从图 \ref{fig:dt} 中也可以得到印证。
+利用这一特点，我们基于分治的思想采用算法\ref{alg:psp}
+获得分割序列。
 
 \renewcommand{\algorithmicrequire}{\textbf{输入：}\unskip}
 \renewcommand{\algorithmicensure}{\textbf{输出：}\unskip}
 
 \begin{algorithm}
-  \caption{Calculate $y = x^n$}
-  \label{alg1}
+  \caption{求解主分割序列的算法 (PSP算法)}
+  \label{alg:psp}
   \small
-  \begin{algorithmic}
-    \REQUIRE $n \geq 0$
-    \ENSURE $y = x^n$
-
-    \STATE $y \leftarrow 1$
-    \STATE $X \leftarrow x$
-    \STATE $N \leftarrow n$
-
-    \WHILE{$N \neq 0$}
-      \IF{$N$ is even}
-        \STATE $X \leftarrow X \times X$
-        \STATE $N \leftarrow N / 2$
-      \ELSE[$N$ is odd]
-        \STATE $y \leftarrow y \times X$
-        \STATE $N \leftarrow N - 1$
-      \ENDIF
-    \ENDWHILE
+  \begin{algorithmic}[1]
+    \REQUIRE 图$G$
+    \ENSURE 序列 $L=[\lambda_1, \dots, \lambda_k]$
+    和 $\mathcal{Q}=[\P_0, \dots, \P_k]$.
+    \STATE \textbf{L}  $\leftarrow []$.
+    \STATE $Q\leftarrow \{V\}, P \leftarrow \{ \{i \} | i \in V\}$
+    \STATE $\mathbf{PSP}= [Q, P]$
+    \STATE \texttt{Split}$(Q,P)$
+    \STATE 对 $L$ 和 $\mathcal{Q}$
+    按从小到大排序 \footnotemark
+    \FUNCTION{\texttt{Split}$(Q,P)$}
+     \STATE\label{alg:lambda} $\lambda' =
+     {1 \over \abs{P} - \abs{Q}} (f(P)-f(Q))$
+     \STATE\label{alg:lambda_plus} $h' = {1 \over \abs{P} - \abs{Q}}(\abs{P} f(Q) - \abs{Q} f(P))$
+     \STATE\label{alg:lambda_f} $(\tilde{h}, P') = \texttt{DT}(G,\lambda')$
+     \IF{$\tilde{h} = h'$}
+       \STATE\label{algorithme:terminer} insert $\lambda'$ to $\mathbf{L}$
+     \ELSE
+       \STATE insert $P'$ to $\mathcal{Q}$
+       \STATE\label{algorithme:gauche} \texttt{Split}$(Q, P')$
+       \STATE\label{algorithme:droit} \texttt{Split}$(P',P)$
+     \ENDIF
+    \ENDFUNCTION
   \end{algorithmic}
 \end{algorithm}
+\footnotetext{$\mathcal{Q}$
+中按集合的大小排序}
+
+在算法\ref{alg:psp}第\ref{alg:lambda_f}行，
+函数 \texttt{DT} 是用来求解 式\ref{eq:hlambda} 获得最优值
+$\tilde{h}$ 和最优值对应的分割 $P'$。
+
+在算法 \ref{alg:lambda}、\ref{alg:lambda_plus} 行，
+求解 $(\lambda', h')$ 相当于在二维 $(\lambda, h)$
+平面上计算直线
+$h = f[P] - |P| \lambda $
+和 $h = f[Q] - |Q| \lambda $ 的交点。假设 $P, Q$ 对应的
+分界点分别是 $\lambda_P, \lambda_Q$（约定 $\{V\}$ 对应 0，
+$\{\{i\}|i\in V\}$ 对应 $+\infty$），那么根据几何直观
+$\lambda_Q \leq \lambda' \leq \lambda_P$。
+紧接着，\ref{algorithme:gauche} 行的调用对应在
+$[\lambda_Q, \lambda']$
+区间范围内寻找剩余的分界点，而
+\ref{algorithme:droit} 行的调用对应在
+$[\lambda', \lambda_P]$
+区间范围内寻找剩余的分界点。最后，
+\ref{algorithme:terminer} 行表明
+$[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
+\texttt{Split} 函数。
+
+如前所述，函数 \texttt{DT}
+（Dilworth truncation，迪尔沃思截断）
+是用于解式\ref{eq:hlambda}的算法，它实际上是一种贪心算法，
+由算法 给出。
+
+\begin{algorithm}
+  \caption{迪尔沃思截断算法}\label{alg:dt}
+  \begin{algorithmic}[1]
+  \REQUIRE 图$G$ 和 $\lambda$
+  \ENSURE 分割 $\P$ 和 $h$
+  \STATE
+  $V^0 = \emptyset, x = $ \texttt{zero vector},
+  $\mathcal{A} = \{\}$
+  \FOR{$l=1, 2, \dots, n$}
+  \STATE $V^l = \{l\} \cup V^{l-1}$
+  \STATE\label{alg:tight} compute $x^*_l = \displaystyle\min_{ A: l \in A \subseteq V^l} f_{\lambda}(A)- x(A)$ and $T^l$ is one of the minimizer.
+  \STATE $U^l = T^l \cup [\cup \{A | A \in \mathcal{A}, A \cap T^l \neq \emptyset\}] $
+  \STATE $\mathcal{A} = \{U^l\} \cup \{A | A \in \mathcal{A}, A \cap T^l = \emptyset \}$
+  \ENDFOR
+  \STATE $\P^* = \mathcal{A}, h_{\lambda} = x^*(V)$
+  \end{algorithmic}
+  \end{algorithm}
