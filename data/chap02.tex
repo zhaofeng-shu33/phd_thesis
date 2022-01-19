@@ -184,24 +184,31 @@ $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 \texttt{Split} 函数。
 
 如前所述，函数 \texttt{DT}
-（Dilworth truncation，迪尔沃思截断）
-是用于解式\ref{eq:hlambda}的算法，它实际上是一种贪心算法，
-由算法 给出。
+（Dilworth truncation，迪尔沃思截断\footnote{采用迪尔沃思截断
+这个名称是沿用了文献\cite{mac}}中的称谓）
+是用于求解式\eqref{eq:hlambda}的算法，它实际上是一种贪心算法，
+由算法\ref{alg:dt} 给出。
 
 \begin{algorithm}
   \caption{迪尔沃思截断算法}\label{alg:dt}
   \begin{algorithmic}[1]
-  \REQUIRE 图$G$ 和 $\lambda$
+  \REQUIRE 图 $G$ 和 $\lambda$
   \ENSURE 分割 $\P$ 和 $h$
   \STATE
-  $V^0 = \emptyset, x = $ \texttt{zero vector},
+  $V^0 = \emptyset, x $ 是 $n$ 长的向量\footnotemark[1],
   $\mathcal{A} = \{\}$
   \FOR{$l=1, 2, \dots, n$}
   \STATE $V^l = \{l\} \cup V^{l-1}$
-  \STATE\label{alg:tight} compute $x^*_l = \displaystyle\min_{ A: l \in A \subseteq V^l} f_{\lambda}(A)- x(A)$ and $T^l$ is one of the minimizer.
-  \STATE $U^l = T^l \cup [\cup \{A | A \in \mathcal{A}, A \cap T^l \neq \emptyset\}] $
+  \STATE\label{alg:tight} 计算 $x^* = \displaystyle\min_{ A: l \in A \subseteq V^l} f(A)- x(A)$。
+   $T^l$ 是达到此最小值的集合，并且 $x_l \leftarrow x^* - \lambda$。 
+    \STATE $U^l = T^l \cup [\cup \{A | A \in \mathcal{A}, A \cap T^l \neq \emptyset\}] $
   \STATE $\mathcal{A} = \{U^l\} \cup \{A | A \in \mathcal{A}, A \cap T^l = \emptyset \}$
   \ENDFOR
-  \STATE $\P^* = \mathcal{A}, h_{\lambda} = x^*(V)$
+  \STATE $\P^* = \mathcal{A}, h_{\lambda} = x(V)$
   \end{algorithmic}
   \end{algorithm}
+\footnotetext[1]{$n$ 是图$G$中节点的个数}
+
+算法\ref{alg:dt}涉及到一种新的运算记号$x(A)$，
+这里 $x$ 表示一个向量而 $A$ 是一个集合
+$x(A)$ 定义为 $\sum_{i \in A} x_i$。
