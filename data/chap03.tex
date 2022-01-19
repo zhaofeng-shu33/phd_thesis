@@ -1,8 +1,46 @@
 % !TeX root = ../thuthesis-example.tex
 
-\chapter{数学符号和公式}
+\chapter{信息聚类理论与算法}
+数据聚类方法与社群发现方法有着天然的联系。
 
-\section{数学符号}
+\section{社群发现场景下的多变量互信息理论}
+
+\section{基于图分割的社群发现算法及其改进}
+
+\section{基于图分割的社群发现算法在异常值检测领域的应用}
+
+\section{代码实现}
+尽管最大流算法包比较多，但我们尚未发现
+求解层次分割（式\eqref{eq:PSP_structure}）的开源实现。
+因此我们使用 C++ 实现了跨平台的PSP算法，并且
+我们提供了Python编程语言的接口函数，并在 \url{pypi.org}
+平台上以 pspartition
+的名字发布，以供后面的研究者使用。
+我们的实现使用 CMake 编译，依赖于第三方库 LEMON \cite{dezsHo2011lemon}。 
+LEMON 库在我们的算法包中用于构建所需的图数据结构和最大流算法。
+这里顺便提及的一点是 LEMON 库里使用的
+最大流算法是基于最大标签选择策略的前置推送-标签重贴(push-relabel) 算法。
+根据文献\citet{ahuja1997computational}的比较，该算法
+的效率比起其他解最大流问题的算法有明显的优势。
+
+在Python的接口函数方面，我们采用了CPython
+跨语言编程的方式，将由 NetworkX \cite{SciPyProceedings_11} 构建的图
+转换成用边表示的图传递到C++中的类构造函数中，
+计算完成后再把C++中的集合转换成Python中的列表
+进行返回。用于求解例 \ref{ex:psp}
+的示例 Python 代码如下。
+\begin{lstlisting}[language=Python]
+  from pspartition import PsPartition
+  a = [[0,1,1], [0,2,5], [1,2,1]] # a graph
+  p = PsPartition(3, a) # 3 nodes
+  p.run()  
+  cv = p.get_critical_values()
+  pl = p.get_partitions()
+  print(cv)
+  print(pl)
+  \end{lstlisting}
+\section{实验结果}
+
 
 中文论文的数学符号默认遵循 GB/T 3102.11—1993《物理科学和技术中使用的数学符号》
 \footnote{原 GB 3102.11—1993，自 2017 年 3 月 23 日起，该标准转为推荐性标准。}。

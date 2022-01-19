@@ -75,8 +75,11 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 的解中获得。
 
 下面举一个简单的例子来解释上面的结论。
+\begin{example}\label{ex:psp}
 考虑一个带权的有向图$G(V,E)$，其结构
 如图 \ref{fig:example_directed} 所示。
+试求解该图的主分割序列。
+\end{example}
 \begin{figure}
   \centering
   \begin{subfigure}[b]{0.5\linewidth}
@@ -185,7 +188,7 @@ $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 
 如前所述，函数 \texttt{DT}
 （Dilworth truncation，迪尔沃思截断\footnote{采用迪尔沃思截断
-这个名称是沿用了文献\cite{mac}}中的称谓）
+这个名称是沿用了文献\cite{mac}中的称谓}）
 是用于求解式\eqref{eq:hlambda}的算法，它实际上是一种贪心算法，
 由算法\ref{alg:dt} 给出。
 
@@ -212,3 +215,33 @@ $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 算法\ref{alg:dt}涉及到一种新的运算记号$x(A)$，
 这里 $x$ 表示一个向量而 $A$ 是一个集合
 $x(A)$ 定义为 $\sum_{i \in A} x_i$。
+此外，采用\cite{pin}中的方法，我们可以把\ref{alg:tight} 行中的最优化
+问题转化成有向图上的最大流问题。
+具体而言，
+针对 $\displaystyle\min_{ A: l \in A \subseteq V^l} f(A)- x(A)$，
+我们首先构造一个图$G'$包含节点$V'=\{0, 1, 2, \dots, l\}=\{0\} \cup V^l$。
+节点 $0$ 是相对新加入的，作为最大流算法的源节点。
+而$l$是目标节点。图$G'$中有向边的权值有如下定义：
+\begin{equation}\label{eq:wij_prime}
+  w'_{ij} = \begin{cases}
+    \max\{0, -x_{i}\} & \textrm{ if } i = 0 \\
+    \max\{0, -x_{i}\} + w_{il} & \textrm{ else if } j = l \\
+    w_{ij} & \textrm{ otherwise }
+  \end{cases}
+\end{equation}
+
+按照定义式 \eqref{eq:wij_prime}, 源节点0和目标节点j
+之间的权值为零，即两节点间没有边相连。
+基于定义好的图$G'$和$s=0,t=l$，我们求解如下
+标准的最大流问题：
+\begin{equation}\label{eq:maxflow}
+  \beta = \min_{A \subseteq V^l: l\in A }
+  c(V' \backslash A, A)
+\end{equation}
+
+达到式\eqref{eq:maxflow}
+最小值的集合即是 $T^l$，并且$x^*$和 $\beta$
+有如下关系式：
+\begin{equation}\label{eq:beta_alpha}
+  \beta = x^* + \sum_{x_v > 0, 1\leq v < l} x_v
+\end{equation}
