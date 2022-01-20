@@ -12,7 +12,8 @@
 \section{代码实现}
 尽管最大流算法包比较多，但我们尚未发现
 求解层次分割（式\eqref{eq:PSP_structure}）的开源实现。
-因此我们使用 C++ 实现了跨平台的PSP算法，并且
+因此我们使用 C++ 实现了跨平台的PSP算法\ref{alg:psp}
+（内嵌迪尔沃思截断算法\ref{alg:dt}），并且
 我们提供了Python编程语言的接口函数，并在 \url{pypi.org}
 平台上以 pspartition
 的名字发布，以供后面的研究者使用。

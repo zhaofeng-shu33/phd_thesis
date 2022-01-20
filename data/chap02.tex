@@ -2,7 +2,7 @@
 
 \chapter{背景知识}
 
-\section{社群发现}
+\section{社群发现}\label{sec:community_detection}
 
 社群发现（community detection）虽然没有严格的数学定义，但公认的做法是
 将现实世界的社群建模成图(graph)结构，在图结构上进行社群发现。社群根据其属性
@@ -22,7 +22,8 @@
 
 不同的社群发现算法根据自己的标准寻找社群结构，这给一般意义上的比较造成了困难。
 在本节中我们介绍的社群发现算法采用的标准叫做最小化平均误差。
-这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式早已有之。
+这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式
+\footnote{与图强度的定义一致 \cite{cunningham1985optimal}}。
 在这里我们采用其最为广泛的形式，即针对带权的有向图的社群发现算法。
 \begin{equation}\label{eq:IP}
   \lambda_1 := \min_{\P \in \Pi'}\frac{ f[\P] }{  \abs{\P} - 1 } 
@@ -245,3 +246,63 @@ $x(A)$ 定义为 $\sum_{i \in A} x_i$。
 \begin{equation}\label{eq:beta_alpha}
   \beta = x^* + \sum_{x_v > 0, 1\leq v < l} x_v
 \end{equation}
+
+\section{信息聚类}
+在信息论领域，互信息提供了两个随机变量之间的
+距离度量。使用 KL 散度的记号，随机变量$X$
+和 $Y$ 之间的互信息定义为：
+\begin{equation}\label{eq:mutual_info}
+  I(X;Y) = D(P_{XY} ||P_XP_Y)
+\end{equation}
+其中 $P_X, P_Y$分别表示边缘分布，而$P_{XY}$
+表示两个随机变量的联合分布。有多种方法可将互信息
+的概念推广到两个及以上的随机变量，
+其中华人学者陈聪提出了一种推广 \cite{ska} 具有多种好的性质，
+且涵盖了图结构的情形，我们把他的推广叫做多变量互信息，英文全称是
+Multivariate Mutual Information (MMI)。
+
+下面我们对MMI做简要的介绍。定义$V$是随机变量
+的序号集合，$C$是 $V$的子集，$Z_C=\{Z_i | i \in C\}$
+表示随机变量序号在 $C$ 中的随机变量 $Z_i$ 的集合。
+$\P$ 表示$V$ 的一个分割，$P_{Z_C}$表示$Z_C$
+的联合分布。$\Pi'(V)$ 是
+除去$\{V\}$外所有$V$的分割的集合。MMI的度量定义为：
+\begin{align}
+  I(Z_V) &:= \min_{\P \in \Pi'(V)} I_{\P}(Z_V) \textrm{ where } \label{eq:IZV}\\  
+  I_{\P}(Z_V) &:= \frac{1}{|\P| - 1}D(P_{Z_V} || \prod_{C\in \P} P_{Z_C}) \label{eq:IPZV}
+\end{align}
+在上面的定义中，如果$Z_V$彼此独立，那么$I(Z_V)=0$，
+反之亦然。
+
+式\eqref{eq:IPZV}给出了特定分割下的多变量互信息，
+也可根据下式把KL散度改写成熵的形式。
+\begin{equation}\label{eq:entropy_expression}
+  D(P_{Z_V} || \prod_{C\in \P} P_{Z_C}) 
+  = \sum_{C \in \P}
+  H(Z_C) - H(Z_V)
+\end{equation}
+对于一般的分布，式\ref{eq:IZV}
+难于计算。陈聪提出了一种特殊的PIN模型\cite{pin}\footnote{PIN 是 pairewise independent network
+的缩写}，
+使得多变量互信息可以用\ref{sec:community_detection}节
+介绍的PSP算法进行计算。
+这里略去PIN模型的数学定义，而是通过下面的例子
+阐发它和图结构的联系。
+\begin{example}\label{ex:mmi}
+  令$V=\{1,2,3\}$，$Z_1=(X_a, X_c)$,
+  $Z_2=(X_a,X_b)$ 且 $Z_3=(X_b,X_c)$。
+  $X_a,X_b,X_c$是独立的随机变量且它们的熵分别为：
+  $H(X_a)=H(X_b)=1, H(X_c)=5$。
+  利用联合熵的公式不难计算出$H(Z_1)=H(X_a)+H(X_c)$以及
+  $H(Z_1, Z_2) = H(X_a) + H(X_b) + H(X_c)$等。
+  若 $\P=\{\{1,2\}, \{3\}\}$，则根据
+  \eqref{eq:entropy_expression}式，
+  $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = H(X_a)
+  +H(X_b)$。我们可以将上面的计算用图\ref{fig:example_directed}
+  进行对应，即把$Z_i$对应到第$i$的节点，
+  $KL$散度即为不同的类别之间边的权值之和。
+\end{example}
+例\ref{ex:mmi}中虽然只有三个节点，
+但对于一般的情形，PIN模型也是和一个有向图有
+着类似的对应关系。因此，在PIN模型下多变量互信息可以用
+PSP算法进行计算。
