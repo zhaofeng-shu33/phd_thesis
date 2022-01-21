@@ -10,9 +10,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="13.631797mm"
-   height="14.317055mm"
-   viewBox="0 0 13.631797 14.317055"
+   width="13.088456mm"
+   height="9.5214815mm"
+   viewBox="0 0 13.088456 9.5214817"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="-68.99595"
-     inkscape:cy="31.062964"
+     inkscape:zoom="11.2"
+     inkscape:cx="3.8198961"
+     inkscape:cy="26.272129"
      inkscape:document-units="mm"
      inkscape:current-layer="g1485"
      showgrid="false"
@@ -94,56 +94,55 @@
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1"
-     transform="translate(-70.831907,-102.0387)">
+     transform="translate(-70.926401,-106.4563)">
     <ellipse
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.161;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path1127"
-       cx="74.47139"
-       cy="104.66722"
-       rx="0.60135639"
-       ry="0.56794775" />
-    <ellipse
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       cx="73.774315"
+       cy="108.36601"
+       rx="1.0888041"
+       ry="1.0219867" />
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.147;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path1127-1"
-       cx="80.685402"
-       cy="104.70063"
-       rx="0.60135639"
-       ry="0.56794775" />
+       cx="81.040703"
+       cy="108.41612"
+       r="1.0125271" />
     <ellipse
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.122;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path1127-16"
-       cx="74.131935"
-       cy="114.19408"
-       rx="0.60135639"
-       ry="0.56794775" />
+       cx="73.714325"
+       cy="114.61169"
+       rx="0.9579348"
+       ry="0.92452615" />
     <ellipse
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.12;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path1127-7"
-       cx="80.412758"
-       cy="114.06042"
-       rx="0.60135639"
-       ry="0.56794775" />
+       cx="80.796959"
+       cy="114.49473"
+       rx="0.92573023"
+       ry="0.94243461" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 74.471391,105.36881 -0.200452,8.21853"
+       d="m 74.197975,109.32062 0.07296,4.56713"
        id="path1156"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 80.718816,105.13495 -0.200452,8.21853"
+       d="m 80.529828,109.27575 -0.01146,4.278"
        id="path1156-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 75.000557,104.83964 5.189092,-0.23386"
+       d="m 74.697907,108.83925 5.362611,-1.1e-4"
        id="path1173"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 74.800106,114.11651 5.18909,-0.23386"
+       d="m 74.570907,114.11651 5.418289,-0.23386"
        id="path1175"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -161,7 +160,7 @@
        id="g1485">
       <g
          id="surface1"
-         transform="matrix(1,0,0,0.80983737,0,25.627267)">
+         transform="matrix(0.76476492,0,0,0.49288348,37.893313,80.013475)">
         <g
            style="fill:#000000;fill-opacity:1"
            id="g1482">
@@ -184,7 +183,7 @@
          ns1:pdfconverter="pdf2svg"
          ns1:texconverter="pdflatex"
          ns1:version="0.10.1"
-         transform="matrix(0.65664356,0,0,0.75073698,74.232029,33.858347)">
+         transform="matrix(0.4343742,0,0,0.47220174,104.69576,83.194627)">
         <g
            id="g1558">
           <g
@@ -200,7 +199,7 @@
         </g>
       </g>
       <g
-         transform="matrix(0.78593663,0,0,0.73396705,32.000471,60.982268)"
+         transform="matrix(0.53294796,0,0,0.44571776,72.651712,103.33541)"
          ns1:version="0.10.1"
          ns1:texconverter="pdflatex"
          ns1:pdfconverter="pdf2svg"
@@ -236,7 +235,7 @@
          ns1:pdfconverter="pdf2svg"
          ns1:texconverter="pdflatex"
          ns1:version="0.10.1"
-         transform="matrix(0.83721976,0,0,0.75557911,45.48347,57.03536)">
+         transform="matrix(0.58696968,0,0,0.49100621,80.949646,96.963852)">
         <g
            id="g1734">
           <g
@@ -252,7 +251,7 @@
         </g>
       </g>
       <g
-         transform="matrix(1.0951356,0,0,0.7779031,-3.328032,28.407813)"
+         transform="matrix(1.0951356,0,0,0.7779031,-3.7139645,40.334854)"
          ns1:version="0.10.1"
          ns1:texconverter="pdflatex"
          ns1:pdfconverter="pdf2svg"
@@ -288,7 +287,7 @@
          ns1:pdfconverter="pdf2svg"
          ns1:texconverter="pdflatex"
          ns1:version="0.10.1"
-         transform="matrix(0.58069653,0,0,0.7076673,74.256495,71.207099)">
+         transform="matrix(0.58069653,0,0,0.7076673,74.201362,70.186604)">
         <g
            id="g4542">
           <g
@@ -304,7 +303,7 @@
         </g>
       </g>
       <g
-         transform="matrix(0.54837917,0,0,0.58689926,64.366681,69.181678)"
+         transform="matrix(0.54837917,0,0,0.58689926,85.92377,72.179383)"
          ns1:version="0.10.1"
          ns1:texconverter="pdflatex"
          ns1:pdfconverter="pdf2svg"
@@ -316,7 +315,8 @@
          ns1:jacobian_sqrt="1.049564"
          id="g4876">
         <g
-           id="g4874">
+           id="g4874"
+           transform="translate(-38.908401,7.6072131)">
           <g
              style="fill:#000000;fill-opacity:1"
              id="g4864">
@@ -360,7 +360,7 @@
          ns1:pdfconverter="pdf2svg"
          ns1:texconverter="pdflatex"
          ns1:version="0.10.1"
-         transform="matrix(0.55991531,0,0,0.7076673,86.784183,51.18272)">
+         transform="matrix(0.55991531,0,0,0.7076673,85.736652,59.984494)">
         <g
            id="g5222">
           <g

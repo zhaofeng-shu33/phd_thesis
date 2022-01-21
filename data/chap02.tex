@@ -343,7 +343,7 @@ $C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
 
   \begin{figure}[!ht]
     \centering
-    \begin{subfigure}[b]{0.33\linewidth}
+    \begin{subfigure}[b]{0.38\linewidth}
       \centering
       \includegraphics[width=\textwidth]{top_down.pdf}
       \caption{}\label{fig:top_down}
@@ -353,10 +353,32 @@ $C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
     \includegraphics[width=\textwidth]{threshold_a.pdf}
     \caption{}\label{fig:threshold_a}
   \end{subfigure}~
-  \begin{subfigure}[b]{0.33\linewidth}
+  \begin{subfigure}[b]{0.29\linewidth}
     \centering
     \includegraphics[width=\textwidth]{threshold_b.pdf}
     \caption{}\label{fig:threshold_b}
   \end{subfigure}
-    \caption{xxx}\label{fig:mmi_example}
+    \caption{聚类树示例}\label{fig:mmi_example}
   \end{figure}
+自顶向下
+获得聚类树的示意图由图 \ref{fig:top_down} 给出。
+下面我们用一个简单的例子来说明聚类树的结构。
+  \begin{example}\label{ex:mmi_tree}
+考虑图\ref{fig:threshold_b}所示的情形，
+$V=\{1,2,3,4\}$。互信息在图的边上标出，
+比如 $I(Z_1;Z_2)=1, I(Z_1;Z_4)=0$。
+利用定义式\ref{eq:IZV}不难求出
+$I(Z_V)=0.9$。 
+我们可以写出完整的聚类结果：
+\begin{equation*}
+\P = 
+\begin{cases}
+\{\{1,2,3,4\}\} & \lambda < 0.9 \\
+\{\{1,2\},\{3,4\}\} & 0.9 \leq \lambda < 1 \\
+\{\{1\},\{2\},\{3,4\}\} & 1 \leq \lambda < 2\\
+\{\{1\},\{2\},\{3\},\{4\}\} & \lambda \geq 2
+\end{cases}
+\end{equation*}
+把各临界值$\lambda_i$ 标到聚类树上即如图
+\ref{fig:threshold_a}所示。
+\end{example}
