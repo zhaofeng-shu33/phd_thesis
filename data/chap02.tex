@@ -300,9 +300,63 @@ $\P$ 表示$V$ 的一个分割，$P_{Z_C}$表示$Z_C$
   $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = H(X_a)
   +H(X_b)$。我们可以将上面的计算用图\ref{fig:example_directed}
   进行对应，即把$Z_i$对应到第$i$的节点，
-  $KL$散度即为不同的类别之间边的权值之和。
+  $Z_i$与$Z_j$之间的互信息对应到第$i$和第$j$个节点之间
+  边的权值，而KL散度即为不同的类别之间边的权值之和。
 \end{example}
 例\ref{ex:mmi}中虽然只有三个节点，
 但对于一般的情形，PIN模型也是和一个有向图有
 着类似的对应关系。因此，在PIN模型下多变量互信息可以用
 PSP算法进行计算。
+
+基于MMI可以对随机变量进行聚类，聚类簇
+定义为
+\begin{align}
+  C(Z_V) &:= \bigcup_{\gamma \in \R} C_{\gamma}(Z_V)
+  \label{eq:czv}\\
+  C_{\gamma}(Z_V) &:= \textrm{maximal}
+  \{ B \subseteq V \big\vert |B|>1, I(Z_B) > \gamma  \}
+\end{align}
+理论分析表明，基于定义式\ref{eq:czv} 可以得到和
+式\ref{eq:PSP_structure}类似的层次聚类结果。
+即存在一系列的临界值$\lambda_1 < \dots < \lambda_k$和分割
+$\P_k \preceq \dots \preceq \P_0$，使得
+$C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
+且$C_{\lambda_i}(Z_V) = \P_i$。
+
+有两种生成聚类簇的方法，它们均可以通过聚类树
+来描述。聚类树可看成是一系列
+嵌套的分割$\P_i$的另一种描述方式。
+聚类树有一个根节点$V$，
+其所有的叶节点为 $\{j\}$，其他节点均对应着
+一个聚类簇。
+
+\begin{description}
+  \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$, 
+  把 $\P^*$ 中每一个元素作为 $V$ 的子节点。
+  对于每一个子节点$C$，求解$I(Z_C)=I_{\P_C}(Z_C)$
+  并使用分割 $\P_C$ 对子树进一步细分直到子节点变成单元素集为止。
+  \item[自底向上\footnotemark] 假设 $I(Z_C) = \max_{B\subseteq V} I(Z_B)$ 并且 
+  将 $C$ 中所有的元素合并成一个作为聚类树的子节点。对于当前所有子节点，找到MMI
+  最大的集合进行合并直到所有子节点合并成根节点$V$为止。
+  \end{description}
+  \footnotetext{参见\cite{agg_ic}}
+
+  \begin{figure}[!ht]
+    \centering
+    \begin{subfigure}[b]{0.33\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{top_down.pdf}
+      \caption{}\label{fig:top_down}
+    \end{subfigure}~
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{threshold_a.pdf}
+    \caption{}\label{fig:threshold_a}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{threshold_b.pdf}
+    \caption{}\label{fig:threshold_b}
+  \end{subfigure}
+    \caption{xxx}\label{fig:mmi_example}
+  \end{figure}
