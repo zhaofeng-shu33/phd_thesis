@@ -199,7 +199,7 @@ $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
   \REQUIRE 图 $G$ 和 $\lambda$
   \ENSURE 分割 $\P$ 和 $h$
   \STATE
-  $V^0 = \emptyset, x $ 是 $n$ 长的向量\footnotemark[1],
+  $V^0 = \emptyset, x $ 是 $n$ 长的向量\footnotemark,
   $\mathcal{A} = \{\}$
   \FOR{$l=1, 2, \dots, n$}
   \STATE $V^l = \{l\} \cup V^{l-1}$
@@ -211,7 +211,7 @@ $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
   \STATE $\P^* = \mathcal{A}, h_{\lambda} = x(V)$
   \end{algorithmic}
   \end{algorithm}
-\footnotetext[1]{$n$ 是图$G$中节点的个数}
+\footnotetext{$n$ 是图$G$中节点的个数}
 
 算法\ref{alg:dt}涉及到一种新的运算记号$x(A)$，
 这里 $x$ 表示一个向量而 $A$ 是一个集合
@@ -234,13 +234,13 @@ $x(A)$ 定义为 $\sum_{i \in A} x_i$。
 按照定义式 \eqref{eq:wij_prime}, 源节点0和目标节点j
 之间的权值为零，即两节点间没有边相连。
 基于定义好的图$G'$和$s=0,t=l$，我们求解如下
-标准的最大流问题：
-\begin{equation}\label{eq:maxflow}
+标准的最小割问题：
+\begin{equation}\label{eq:mincut}
   \beta = \min_{A \subseteq V^l: l\in A }
   c(V' \backslash A, A)
 \end{equation}
 
-达到式\eqref{eq:maxflow}
+达到式\eqref{eq:mincut}
 最小值的集合即是 $T^l$，并且$x^*$和 $\beta$
 有如下关系式：
 \begin{equation}\label{eq:beta_alpha}
@@ -382,3 +382,62 @@ $I(Z_V)=0.9$。
 把各临界值$\lambda_i$ 标到聚类树上即如图
 \ref{fig:threshold_a}所示。
 \end{example}
+
+\section{参数化的最大流算法}
+最大流算法用于解决网络流中从一点到另一点的最优运输路径的问题。
+其中一类基于前置推送-标签重贴(push-relabel) \cite{Goldberg1988} 的算法
+具有良好的效率。如果要解一系列的最大流问题并且这一系列的问题
+之间有一定的关联性，重复调用最大流算法显然不是最优的选择。
+基于这种考虑，有学者提出了参数化的最大流算法\cite{Gallo1989}用于求解
+具有特殊结构的一系列的最大流问题。下面对参数化的最大流算法
+进行简单的介绍。
+
+首先让我们回顾一下最大流问题。
+考虑一有向图$G(V,E)$。其节点集$V$
+中包含两个特殊的节点：源节点$s$
+和目标节点$t$。对每一对有向边
+$(u,v)$存在一个非负的容量函数
+$c(u,v)$。如果$u,v$之间没有有向边
+定义$c(u,v)=0$。
+最大流问题是求解流量函数
+$f(u,v)$，使得$\sum_{v\in V} f(v,t)$
+最大。流量函数需要满足如下约束
+\begin{align}
+  f(u, v) \leq c(u, v) \textrm{ for } (u, v) \in V \times V \\
+  f(u, v) = -f(v, u) \textrm{ for } (u, v) \in V \times V \\
+  \sum_{v \in V} f(u,v) = 0 \textrm{ for } v\in V\backslash\{s, t\}
+\end{align}
+最大流和形如式\eqref{eq:mincut}所示的最小割问题
+互为对偶问题。因此求解最大流问题的算法也可以
+用于求解最小割问题。
+
+参数化的最大流算法考虑的问题是在最大流问题的
+基础上，假设$c(s,v)$ 
+是关于$\lambda$的增函数
+且$c(v, t)$是$\lambda$的减函数，
+分别记为
+$c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
+对于一系列的$\lambda_1 < \dots < \lambda_k$，
+我们可以得到 $k$ 个最大流问题。参数化的最大流算法
+即基于前置推送-标签重贴算法，通过保留
+在$\lambda_{i-1}$上的计算状态并用于下一步的初始化，
+以及适当地使用并行化的技术，使得计算$k$ 个最大流问题
+的时间复杂度和只计算一个最大流问题近似相等。
+\citet{kolmogorov} 提出一种方法，将求解式\ref{eq:hlambda}
+转化为求解n次参数最大流问题。
+这种方法与算法\ref{alg:dt}的思路不一样，
+因为其基于参数化最大流，
+我们称之为PMF算法
+\footnote{PMF 是 parametric maximal flow 的缩写}。
+
+\section{局部信息几何}
+KL散度可用于度量两种不同概率分布
+之间的距离。当这两种分布比较接近时，
+局部信息几何刻画了KL散度的近似表达式。
+下面我们以离散分布为例，给出分布之间距离的接近的
+形式化定义。
+$P_0$ 表示概率质量函数 (PMF)，其定义域为字母集$\mathcal{X}$。
+我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，如果
+\begin{equation}
+P \in N^{(\epsilon)}(P_0) \iff \sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P(x)} < \epsilon^2
+\end{equation}
