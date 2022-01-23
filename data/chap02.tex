@@ -431,13 +431,57 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 \footnote{PMF 是 parametric maximal flow 的缩写}。
 
 \section{局部信息几何}
+局部信息几何的理论是由华人学者郑立中等人提出\cite{huang2019universal}，
+可从理论的层面分析机器学习中的特征提取\cite{huang2017information}、人工神经网络
+\cite{huang2019information}等问题。
+下面对本工作中用到的局部信息几何的内容进行简要的介绍。
+
 KL散度可用于度量两种不同概率分布
 之间的距离。当这两种分布比较接近时，
 局部信息几何刻画了KL散度的近似表达式。
-下面我们以离散分布为例，给出分布之间距离的接近的
+我们以离散分布为例，给出分布之间距离的接近的
 形式化定义。
-$P_0$ 表示概率质量函数 (PMF)，其定义域为字母集$\mathcal{X}$。
+$P_0$ 表示一概率质量函数 (PMF)，
+其定义域为字母集$\mathcal{X}$，
+$\epsilon$表示一无穷小量。
 我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，如果
-\begin{equation}
-P \in N^{(\epsilon)}(P_0) \iff \sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P(x)} < \epsilon^2
+\begin{equation}\label{eq:P_neighborhood}
+P \in N^{(\epsilon)}(P_0) \iff
+\sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P_0(x)} \leq \epsilon^2
 \end{equation}
+式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
+\sqrt{P_0(x)} \phi(x)$的简化形式, 其中 $\phi(x)$
+叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
+对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，我们有
+\begin{equation}\label{eq:approx:ig}
+D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
+\end{equation}
+对于两个弱独立的随机变量，也有类似式\ref{eq:approx:ig}
+的结论。
+我们称 $X$ 和 $Y$ 是 \textbf{弱独立}的，如果 对于任何 $x \in \mathcal{X}$
+$Y$关于$X$的条件 PMF 
+$P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内。
+在弱独立的假设下, 由 $D(P_{XY}||P_XP_Y)$ 所定义的互信息$I(X;Y)$, 
+通过对式\eqref{eq:approx:ig}的化简，可以表示为：
+\begin{equation}\label{eq:Ixy}
+I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsilon^2)
+\textrm{ 其中 }  B(x,y)=\frac{P_{X,Y}(x,y) - P_X(x) P_Y(y)}{\sqrt{P_X(x)P_Y(y)}}
+\end{equation}
+在式\eqref{eq:Ixy}中， $\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y)$
+一项可以写成 $\norm{B}_F^2$。这里 $B$表示$\mathcal{X} \times \mathcal{Y}$的矩阵，
+$F$表示矩阵的Frobenius范数。
+Equation \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
+$I(X;Y)$可用$\frac{1}{2} \norm{B}_F^2$
+近似，其阶数为 $O(\epsilon^2)$。
+
+\begin{example}
+考虑 $P_0=(X_0,Y_0,Z_0)$是一个三维的随机向量，
+其中$X_0,Y_0,Z_0$
+是独立同分布的伯努利随机变量，每个随机变量从
+$\{0, 1\}$之间取值。
+定义 $P(x,y,z)=\frac{1}{8}(1+\epsilon (-1)^{x+y+z})$，
+则 $P\in N^{(\epsilon)}(P_0)$，而
+$\phi(x,y,z) = \frac{(-1)^{x+y+z}}{2\sqrt{2}}$。
+
+
+\end{example}
