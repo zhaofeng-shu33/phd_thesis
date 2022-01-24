@@ -444,14 +444,16 @@ KL散度可用于度量两种不同概率分布
 $P_0$ 表示一概率质量函数 (PMF)，
 其定义域为字母集$\mathcal{X}$，
 $\epsilon$表示一无穷小量。
+\begin{definition}\label{def:eps_neighborhood}
 我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，如果
 \begin{equation}\label{eq:P_neighborhood}
 P \in N^{(\epsilon)}(P_0) \iff
 \sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P_0(x)} \leq \epsilon^2
 \end{equation}
+\end{definition}
 式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
 \sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式, 其中 $\phi(x)$
-叫做特征函数，不包含$\epsilon$项，它的欧氏范数 $||\phi || $ 不超过1。
+叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
 对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，我们有
 \begin{equation}\label{eq:approx:ig}
 D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)

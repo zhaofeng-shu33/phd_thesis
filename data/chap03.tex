@@ -18,7 +18,7 @@
   $Z_1, \dots Z_n$关于
   $U$的条件分布是独立的。
   \end{definition}
-\begin{example}
+\begin{example}\label{ex:xy_weak_ext}
     考虑例 \ref{ex:Pweak_1}给出的分布，给定$X,Y$
     的分布为$P(x,y)=\frac{1}{4}(1+\epsilon(-1)^{x+y})$。
     我们构造一分布$U$如表所示：
@@ -51,8 +51,54 @@
       $\frac{1}{4}[1+\epsilon, 1-\epsilon, 1-\epsilon, 1+\epsilon]$
       的 $\sqrt{\epsilon}$-邻域内，而$\epsilon$-邻域包含
       $\epsilon$-邻域。因此
-      $X,Y$是$\epsilon-$弱独立的。
+      $X,Y$是$\epsilon$-弱独立的。
 \end{example}
+例\ref{ex:xy_weak_ext}展示了定义\ref{def:general}和
+定义\ref{def:weak_indepedent}在两变量情形的一个共用的例子。
+事实上，我们可以证明定义\ref{def:general}是
+定义\ref{def:weak_indepedent}的拓展。
+\begin{theorem}
+  如果 对于任何 $x \in \mathcal{X}$，
+$Y$关于$X$的条件 PMF 
+$P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
+一个随机变量 $U$
+  使得
+  $(X, Y)|U$的PMF 在 $(X, \dots, Y)$的
+  $\epsilon$邻域内并且
+  $X, \dots Y$关于
+  $U$的条件分布是独立的。
+\end{theorem}
+\begin{proof}
+  由$\epsilon$邻域的定义式\ref{def:eps_neighborhood}，
+  $P_{Y|X=x}(y) = P_Y(y) + \sqrt{P_Y(y)}\phi_{Y|X=x}(y)
+  \epsilon$。定义$\phi_{XY}(x,y)=\sqrt{P_X(x)}\phi_{Y|X=x}(y)$
+  则有
+  $P_{XY}(x,y) = P_X(x)P_Y(y) + \sqrt{P_X(x)}\sqrt{P_Y(y)}\phi_{XY}(x,y)
+  \epsilon$。
+  假设$x\in \mathcal{X}$ 且 $y\in \mathcal{Y}$，
+  $\mathcal{X}, \mathcal{Y}$ 均为有限的字母集。
+  $\phi_{XY}$ 是 $|\mathcal{X}| \times |\mathcal{Y}|$
+  的矩阵，其秩为 $r$。可以通过$SVG$分解为
+  $\frac{1}{r}\sum_{i=1}^r \phi_i \psi^T_i$，其中$\phi, \psi$
+  分别为长度为$|\mathcal{X}|, |\mathcal{Y}|$的
+  列向量。构造 $U$ 是$\{1, 2, \dots, 2r\}$ 上面的均匀分布。
+  $Z_1, Z_2$ 做如下构造：
+  \begin{align*}
+    P(Z_1=x|U=i) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_i(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
+    P(Z_2=y|U=i) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_i(y) \sqrt{\epsilon}, y \in \mathcal{Y}\\
+  \end{align*}
+  $Z_1 | U$ 与$Z_2 | U$ 独立，因此，
+  $Z_1, Z_2$ 的联合分布为：
+  \begin{align*}
+  P(Z_1=x, Z_2=y)& =\sum_{i=1}^{2r}P(U=i)P(Z_1=x|U=i)P(Z_2=y|U=i)\\
+  &=P_X(x)P_Y(y) + \sqrt{P_X(x)}\sqrt{P_Y(y)}\frac{\epsilon}{r}
+  \sum_{i=1}^{r}\phi_i(x)
+  \psi(y) =P(X=x,Y=y)
+  \end{align*}
+  因此，$Z_1, Z_2$与$X,Y$具有相同的分布。
+  不然验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\epsilon$邻域内，
+  故结论得证。
+  \end{proof}
 \section{基于图分割的社群发现算法及其改进}
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
