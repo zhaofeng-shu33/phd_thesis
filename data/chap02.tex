@@ -450,8 +450,8 @@ P \in N^{(\epsilon)}(P_0) \iff
 \sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P_0(x)} \leq \epsilon^2
 \end{equation}
 式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
-\sqrt{P_0(x)} \phi(x)$的简化形式, 其中 $\phi(x)$
-叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
+\sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式, 其中 $\phi(x)$
+叫做特征函数，不包含$\epsilon$项，它的欧氏范数 $||\phi || $ 不超过1。
 对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，我们有
 \begin{equation}\label{eq:approx:ig}
 D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
@@ -459,7 +459,7 @@ D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
 对于两个弱独立的随机变量，也有类似式\ref{eq:approx:ig}
 的结论。
 \begin{definition}\label{def:weak_indepedent}
-我们称 $X$ 和 $Y$ 是 \textbf{弱独立}的，
+我们称 $X$ 和 $Y$ 是 $\epsilon$-\textbf{弱独立}的，
 如果 对于任何 $x \in \mathcal{X}$，
 $Y$关于$X$的条件 PMF 
 $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内。
@@ -477,7 +477,7 @@ Equation \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
 $I(X;Y)$可用$\frac{1}{2} \norm{B}_F^2$
 近似，其阶数为 $O(\epsilon^2)$。
 
-\begin{example}
+\begin{example}\label{ex:Pweak_1}
 考虑 $P_0=(X_0,Y_0)$是一个两维的随机向量，
 $P_0(x,y)=\frac{1}{4}$ 对于$x,y \in \{0,1\}$。
 不然发现$X_0,Y_0$

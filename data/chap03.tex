@@ -9,9 +9,49 @@
 并在多个随机变量弱独立的条件下，对
 \ref{sec:info_clustering}节介绍的多变量互信息
 进行化简。
-
+\begin{definition}\label{def:general}
+  称$Z_1, \dots, Z_n (n\geq 2)$
+  是$\epsilon$-弱独立的，如果存在一个随机变量 $U$
+  使得
+  $(Z_1, \dots, Z_n)|U$的PMF 在 $(Z_1, \dots, Z_n)$的
+  $\epsilon$邻域内并且
+  $Z_1, \dots Z_n$关于
+  $U$的条件分布是独立的。
+  \end{definition}
 \begin{example}
-  xxx
+    考虑例 \ref{ex:Pweak_1}给出的分布，给定$X,Y$
+    的分布为$P(x,y)=\frac{1}{4}(1+\epsilon(-1)^{x+y})$。
+    我们构造一分布$U$如表所示：
+    \begin{table}
+      \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $P(U=i|X=j, Y=k)$ & $j=0,k=0$ &
+        $j=0,k=1$ & $j=1,k=0$  & $j=1,k=1$ \\
+        \hline
+        $i=0$ & $\frac{(1-\sqrt{\epsilon})^2}{2(1+\epsilon)}$
+        & $\frac{1}{2}$ & $\frac{1}{2}$ 
+        &  $\frac{(1+\sqrt{\epsilon})^2}{2(1+\epsilon)}$\\
+        \hline
+        $i=1$ & $\frac{(1+\sqrt{\epsilon})^2}{2(1+\epsilon)}$
+        & $\frac{1}{2}$ & $\frac{1}{2}$
+        & $\frac{(1-\sqrt{\epsilon})^2}{2(1+\epsilon)}$
+        \\
+        \hline
+      \end{tabular}
+    \end{table}
+
+    不难验证$P(X=j, Y=k | U=i)=P(X=j | U=i)
+      P(Y=k| U=i)$。此外， $(X, Y)|U=0$
+      的PMF 可以写成向量的形式
+      $\frac{1}{4}[(1-\sqrt{\epsilon})^2,
+      1-\epsilon,
+      1-\epsilon,
+      (1+\sqrt{\epsilon})^2]$，它在
+      $(X,Y)$的PMF 向量
+      $\frac{1}{4}[1+\epsilon, 1-\epsilon, 1-\epsilon, 1+\epsilon]$
+      的 $\sqrt{\epsilon}$-邻域内，而$\epsilon$-邻域包含
+      $\epsilon$-邻域。因此
+      $X,Y$是$\epsilon-$弱独立的。
 \end{example}
 \section{基于图分割的社群发现算法及其改进}
 
