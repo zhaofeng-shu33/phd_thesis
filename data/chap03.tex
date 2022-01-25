@@ -14,7 +14,7 @@
   是$\epsilon$-弱独立的，如果存在一个随机变量 $U$
   使得
   $(Z_1, \dots, Z_n)|U$的PMF 在 $(Z_1, \dots, Z_n)$的
-  $\epsilon$邻域内并且
+  $\sqrt[n]{\epsilon}$邻域内并且
   $Z_1, \dots Z_n$关于
   $U$的条件分布是独立的。
   \end{definition}
@@ -49,15 +49,14 @@
       (1+\sqrt{\epsilon})^2]$，它在
       $(X,Y)$的PMF 向量
       $\frac{1}{4}[1+\epsilon, 1-\epsilon, 1-\epsilon, 1+\epsilon]$
-      的 $\sqrt{\epsilon}$-邻域内，而$\epsilon$-邻域包含
-      $\epsilon$-邻域。因此
+      的 $\sqrt{\epsilon}$-邻域内。因此
       $X,Y$是$\epsilon$-弱独立的。
 \end{example}
 例\ref{ex:xy_weak_ext}展示了定义\ref{def:general}和
 定义\ref{def:weak_indepedent}在两变量情形的一个共用的例子。
 事实上，我们可以证明定义\ref{def:general}是
 定义\ref{def:weak_indepedent}的拓展。
-\begin{theorem}
+\begin{theorem}\label{thm:weak_independence_equivalent}
   如果 对于任何 $x \in \mathcal{X}$，
 $Y$关于$X$的条件 PMF 
 $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
@@ -84,8 +83,8 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   列向量。构造 $U$ 是$\{1, 2, \dots, 2r\}$ 上面的均匀分布。
   $Z_1, Z_2$ 做如下构造：
   \begin{align*}
-    P(Z_1=x|U=i) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_i(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
-    P(Z_2=y|U=i) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_i(y) \sqrt{\epsilon}, y \in \mathcal{Y}\\
+    P(Z_1=x|U=i) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_{\lceil i/2 \rceil}(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
+    P(Z_2=y|U=i) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_{\lceil i/2 \rceil}(y) \sqrt{\epsilon}, y \in \mathcal{Y}\\
   \end{align*}
   $Z_1 | U$ 与$Z_2 | U$ 独立，因此，
   $Z_1, Z_2$ 的联合分布为：
@@ -99,6 +98,19 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   不然验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\epsilon$邻域内，
   故结论得证。
   \end{proof}
+  定理\ref{thm:weak_independence_equivalent}的证明提供了一种生成
+  满足弱独立条件的随机变量的方法。即给定均匀分布
+  $U$ 在 $n! \times r$个点上取值，
+  并且$Z_i|U$在分布$Z_i$的
+  $\sqrt[n]{\epsilon}$ 邻域内：
+  \begin{equation}
+    P(Z_j=z|U=i) = P_{Z_j}(z) + 
+    (-1)^{i \,\mathrm{mod}\, n!}\sqrt{P_{Z_j(z)}}
+    \phi_{\lceil\, i/n!\, \rceil}(x) \sqrt[n]{\epsilon}, z \in \mathcal{Z_j}
+  \end{equation}
+  假设$Z_1|U, \dots, Z_n|U$ 独立，可得到
+  $(Z_1, \dots, Z_n)|U$的分布。
+  不然验证通过这种方法构造出来的分布$Z_1, \dots, Z_n$是弱独立的。
 \section{基于图分割的社群发现算法及其改进}
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
