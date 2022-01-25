@@ -95,7 +95,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   \psi(y) =P(X=x,Y=y)
   \end{align*}
   因此，$Z_1, Z_2$与$X,Y$具有相同的分布。
-  不然验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\epsilon$邻域内，
+  不难验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\epsilon$邻域内，
   故结论得证。
   \end{proof}
   定理\ref{thm:weak_independence_equivalent}的证明提供了一种生成
@@ -106,11 +106,29 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   \begin{equation}
     P(Z_j=z|U=i) = P_{Z_j}(z) + 
     (-1)^{i \,\mathrm{mod}\, n!}\sqrt{P_{Z_j(z)}}
-    \phi_{\lceil\, i/n!\, \rceil}(x) \sqrt[n]{\epsilon}, z \in \mathcal{Z_j}
+    \phi_{\lceil\, i/n!\, \rceil}(z) \sqrt[n]{\epsilon}, z \in \mathcal{Z_j}
   \end{equation}
   假设$Z_1|U, \dots, Z_n|U$ 独立，可得到
   $(Z_1, \dots, Z_n)|U$的分布。
   不然验证通过这种方法构造出来的分布$Z_1, \dots, Z_n$是弱独立的。
+
+与\ref{sec:info_clustering}介绍的 PIN 模型类似，
+在多个随机变量弱独立的条件下，KL散度的计算可以
+与图结构进行对应。即有如下定理：
+\begin{theorem}\label{thm:DPX}
+若 $Z_1, \dots, Z_n$ $\epsilon$-弱独立, 则有
+\begin{equation}\label{eq:PXV}
+D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
+\sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_F^2 + o(\epsilon^2)
+\end{equation}
+其中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
+之间的$B$ 矩阵（参见式\ref{eq:Ixy}）。 
+\end{theorem}
+若$ n = 2$，定理\ref{thm:DPX} 即是用 $B$ 矩阵估计互信息，
+与 式 \eqref{eq:Ixy} 相同。
+因此，定理\ref{thm:DPX}可看成式 \eqref{eq:Ixy} 
+的拓展。
+
 \section{基于图分割的社群发现算法及其改进}
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
