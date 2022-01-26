@@ -33,10 +33,11 @@
   由多个随机变量弱独立的定义式 \ref{def:general},
   我们可以找到 一个在字母集 $\{1, 2,\dots, K\}$上的
   离散分布 $U$, 使得 $Z_1, \dots, Z_n$
-  关于 $U$ 条件独立。
-  又因为 $(Z_1, \dots, Z_n)$ 和 $U$ 弱独立，
+  关于 $U$ 条件独立。不失一般性，我们假设
+  $(Z_1, \dots, Z_n)$ $\epsilon^n$-弱独立。
+  则 $(Z_1, \dots, Z_n)$ 和 $U$ $\epsilon$-弱独立，
   由引理 \ref{lem:xyz} 可得 $Z_i$
-  和 $U$ 弱独立，也即有 
+  和 $U$ $\epsilon$-弱独立，也即有 
 \begin{equation}\label{XUk}
 P_{Z_i | U=k}(z) = P_{Z_i} (z) \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} \right)
 \end{equation}
@@ -66,9 +67,51 @@ P_{Z_i}(z) &= \sum_{k=1}^{K} P_{Z_i | U=k}(z) P_U(u_k) \\
 因此 \eqref{eq:XiXj} 化简为
 \begin{equation}\label{eq:PXiXj}
 P_{Z_i, Z_j}(z_i, z_j) = P_{Z_i}(z_i)
-P_{Z_j}(z_j) (1+\epsilon^2 \sum_{k=1}^K P_U(u_k)
+P_{Z_j}(z_j) \left(
+  1+\epsilon^2 \sum_{k=1}^K P_U(u_k)
 \frac{\phi^{(k,i)}(z_i)
-	\phi^{(k,j)}(z_j)}{\sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}})
+	\phi^{(k,j)}(z_j)}{\sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}}
+  \right)
+\end{equation}
+对于2个以上的随机变量:
+\begin{align*}
+P_{Z_1,\dots,Z_n}(z_1,\dots,z_n)  &= \sum_{k=1}^{K} P_{Z_1,\dots,Z_n | U=k}(z_1,\dots,z_n) P_U(u_k) \\
+&=  \sum_{k=1}^{K}P_U(u_k) \prod_{i=1}^n P_{Z_i|U=k}(z_i)\\
+&= \sum_{k=1}^{K} P_U(u_k)\prod_{i=1}^n \left(P_{Z_i} (z_i)( 1 + \epsilon {\phi^{(k,i)}(z_i ) \over \sqrt{P_{Z_i}(z_i)}} )\right)\\
+&=  \sum_{k=1}^{K}P_U(u_k) (\prod_{i=1}^n  P_{Z_i} (z_i))
+\left( 1 + \epsilon\sum_{i=1}^n {\phi^{(k,i)}(z_i) \over \sqrt{P_{Z_i}(z_i)}} + \epsilon^2\sum_{i\neq j}{\phi^{(k,i)}(z_i)\phi^{(k,j)}(z_j)\over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)+o(\epsilon^2) \\
+&= (\prod_{i=1}^n  P_{Z_i} (z_i))
+\Big(1+\epsilon\sum_{i=1}^n \sum_{k=1}^{K} P_U(u_k){\phi^{(k,i)}(z_i) \over \sqrt{P_{Z_i}(z_i)}} \\
+&+\epsilon^2 \sum_{k=1}^{K} P_U(u_k)\sum_{i\neq j}{\phi^{(k,i)}(z_i)\phi^{(k,j)}(z_j)\over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} } 
+\Big) + o(\epsilon^2)\\
+&= (\prod_{i=1}^n  P_{Z_i} (z_i))
+\left(1 +\epsilon^2\sum_{i\neq j} \sum_{k=1}^{K}P_U(u_k){\phi^{(k,i)}(z_i)\phi^{(k,j)}(z_j)\over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right) + o(\epsilon^2)
+\end{align*}
+由 \eqref{eq:PXiXj},
+令 $B_{ij}(z_i, z_j)={P_{Z_i, Z_j}(z_i,z_j) - P_{Z_i}(z_i)P_{Z_j}(z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}} $ 可得:
+\begin{align}
+\epsilon^2\sum_{k=1}^{K}P_U(u_k)
+{\phi^{k,i}(z_i)\phi^{k,j}(z_j)\over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} } & = {P_{Z_i, Z_j}(z_i, z_j) - P_{Z_i}(z_i)P_{Z_j}(z_j) \over P_{Z_i}(z_i)P_{Z_j}(z_j)} \notag\\
+& = {B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} } \label{eq:Bsecond}
+\end{align}
+因此，我们有
+\begin{equation}\label{eq:sep}
+P_{Z_1,\dots,Z_n}(z_1,\dots,z_n) =  (\prod_{i=1}^n  P_{Z_i} (z_i))\left ( 1 + \sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right) +o(\epsilon^2)
+\end{equation}
+因此 $P_{Z_1,\dots, Z_n}$ 在 $P_{Z_1}\dots P_{Z_n}$ 的
+邻域内。
+ $$\phi(z_1,\dots, z_n)=
+\sqrt{P_{Z_1}(z_1)\dots P_{Z_n}(z_n)}\left(\sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)+o(\epsilon^2)$$
+
+Using Equation \eqref{eq:approx:ig} from information geometry:
+\begin{align*}
+D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) & ={1 \over 2} \sum_{z_1,\dots,z_n}\phi^2(z_1,\dots, z_n) \\
+& = {1\over 2}\sum_{z_1,\dots,z_n} (\prod_{i=1}^n  P_{Z_i} (z_i)) \left(\sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)^2 +o(\epsilon^2) 
+\end{align*}
+From the definition of $B_{ij}$, the above is the summation over $\norm{B_{ij}}^2_F$(the coupling term is zero).
+Therefore we get the second order approximation for the total partition:
+\begin{equation}
+D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) =   {1 \over 2} \sum_{i\neq j} \norm{B_{ij}}^2_F + o(\epsilon^2)
 \end{equation}
 \end{proof}
 \begin{figure}
