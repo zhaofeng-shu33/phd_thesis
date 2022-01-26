@@ -112,7 +112,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   $(Z_1, \dots, Z_n)|U$的分布。
   不然验证通过这种方法构造出来的分布$Z_1, \dots, Z_n$是弱独立的。
 
-与\ref{sec:info_clustering}介绍的 PIN 模型类似，
+与\ref{sec:info_clustering}节介绍的 PIN 模型类似，
 在多个随机变量弱独立的条件下，KL散度的计算可以
 与图结构进行对应。即有如下定理：
 \begin{theorem}\label{thm:DPX}
@@ -122,7 +122,8 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 \sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_F^2 + o(\epsilon^2)
 \end{equation}
 其中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
-之间的$B$ 矩阵（参见式\ref{eq:Ixy}）。 
+之间的$B$ 矩阵（参见式\ref{eq:Ixy}）而 $\P$是$V$的一个分割（
+参见式\ref{eq:IPZV}）。 
 \end{theorem}
 若$ n = 2$，定理\ref{thm:DPX} 即是用 $B$ 矩阵估计互信息，
 与 式 \eqref{eq:Ixy} 相同。

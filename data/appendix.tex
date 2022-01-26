@@ -99,17 +99,23 @@ P_{Z_1,\dots,Z_n}(z_1,\dots,z_n)  &= \sum_{k=1}^{K} P_{Z_1,\dots,Z_n | U=k}(z_1,
 P_{Z_1,\dots,Z_n}(z_1,\dots,z_n) =  (\prod_{i=1}^n  P_{Z_i} (z_i))\left ( 1 + \sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right) +o(\epsilon^2)
 \end{equation}
 因此 $P_{Z_1,\dots, Z_n}$ 在 $P_{Z_1}\dots P_{Z_n}$ 的
-邻域内。
- $$\phi(z_1,\dots, z_n)=
-\sqrt{P_{Z_1}(z_1)\dots P_{Z_n}(z_n)}\left(\sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)+o(\epsilon^2)$$
+$\epsilon$ 邻域内，且特征函数是
+$$\phi(z_1,\dots, z_n)=
+\sqrt{P_{Z_1}(z_1)\dots P_{Z_n}(z_n)}
+\left(\sum_{i\neq j}{B_{ij}(z_i, z_j) 
+\over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)
++o(\epsilon^2)$$
 
-Using Equation \eqref{eq:approx:ig} from information geometry:
+由 信息几何的式\eqref{eq:approx:ig} 可得
 \begin{align*}
 D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) & ={1 \over 2} \sum_{z_1,\dots,z_n}\phi^2(z_1,\dots, z_n) \\
 & = {1\over 2}\sum_{z_1,\dots,z_n} (\prod_{i=1}^n  P_{Z_i} (z_i)) \left(\sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)^2 +o(\epsilon^2) 
 \end{align*}
-From the definition of $B_{ij}$, the above is the summation over $\norm{B_{ij}}^2_F$(the coupling term is zero).
-Therefore we get the second order approximation for the total partition:
+由 $B_{ij}$
+的定义式 \eqref{eq:Ixy},
+上式可化为对 $\norm{B_{ij}}^2_F$
+的求和(平方和中的交叉项外面再求和得零)。
+因此，对于分割$\P=\{\{i\},i\in V\}$ 我们得到
 \begin{equation}
 D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) =   {1 \over 2} \sum_{i\neq j} \norm{B_{ij}}^2_F + o(\epsilon^2)
 \end{equation}
