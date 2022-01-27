@@ -112,13 +112,36 @@ D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) & ={1 \over 2} \sum_{z_1,\dots,z_n}
 & = {1\over 2}\sum_{z_1,\dots,z_n} (\prod_{i=1}^n  P_{Z_i} (z_i)) \left(\sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)^2 +o(\epsilon^2) 
 \end{align*}
 由 $B_{ij}$
-的定义式 \eqref{eq:Ixy},
+的定义式 \eqref{eq:Ixy}，
 上式可化为对 $\norm{B_{ij}}^2_F$
 的求和(平方和中的交叉项外面再求和得零)。
 因此，对于分割$\P=\{\{i\},i\in V\}$ 我们得到
 \begin{equation}
 D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) =   {1 \over 2} \sum_{i\neq j} \norm{B_{ij}}^2_F + o(\epsilon^2)
 \end{equation}
+对于任意的分割 $\P$，
+由式\eqref{eq:sep}可得，对于 $C\in \P$，
+我们有
+\begin{equation}
+P_{Z_C}(z_C) = \prod_{i\in C} P_{Z_i}(z_i)
+\left(1 + \epsilon^2 \sum_{i\neq j,i,j\in C} \frac{B_{ij}(z_i, z_j)}{\sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}}
+\right) + o(\epsilon^2)
+\end{equation}
+将上式相乘可得:
+\begin{equation}
+\prod_{C\in \P}P_{Z_C}(z_C) = \prod_{i=1}^n P_{Z_i}(z_i)
+\left(1+\epsilon^2 \sum_{C\in\P}\sum_{i\neq j,i,j\in C}\frac{B_{ij}(z_i, z_j)}{\sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}}
+\right) + o(\epsilon^2)
+\end{equation}
+所以 $\prod_{C\in \P}P_{Z_C}$ 在 $P_{Z_1}\dots P_{Z_n}$ 的$\epsilon$ 邻域内，
+且 $$\phi_{\P}(z_1,\dots, z_n)=
+\sqrt{P_{Z_1}(z_1)\dots P_{Z_n}(z_n)}\left(\sum_{C\in\P}\sum_{i\neq j,i,j\in C}\frac{B_{ij}(z_i, z_j)}{\sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}}\right)+o(\epsilon^2)$$
+由  \eqref{eq:approx:ig} 得:
+\begin{align*}
+D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_n}(\phi(z_1,\dots, z_n)-\phi_{\P}(z_1, \dots, z_n))^2 \\
+& = {1\over 2}\sum_{z_1,\dots,z_n} \prod_{i=1}^n  P_{Z_i} (z_i) \left(\sum_{\substack{(i,j) \not\in C\\ C\in \P}} {B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)^2 +o(\epsilon^2) \\
+& = \frac{1}{2} \sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_F^2 + o(\epsilon^2)
+\end{align*}
 \end{proof}
 \begin{figure}
   \centering
