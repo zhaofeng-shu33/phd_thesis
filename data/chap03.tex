@@ -130,6 +130,43 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 因此，定理\ref{thm:DPX}可看成式 \eqref{eq:Ixy} 
 的拓展。
 
+定理 \ref{thm:DPX} 是关于弱独立的随机变量的。
+现在我们把它拓展到针对数据样本。
+给定一 $K$ 个聚类簇的数据集，一共有 $n$ 个样本。
+每个 聚类簇被看成一个随机变量。
+假设第 $i$ 个 聚类簇 $Z_i$ 字母集 为 $\abs{\mathcal{Z}_i}$，
+全局约束是 $\sum_{i=1}^K \abs{\mathcal{Z}_i} = n$。
+假设$Z_1, \dots, Z_K$弱独立，
+由弱独立的定义式 \ref{def:general}， $Z_i$ 和 $Z_j$ $\epsilon$-弱独立 （$i\neq j$）,
+于是我们有
+\begin{equation}\label{eq:phi_w}
+P_{Z_i Z_j}(z_i, z_j) = P_{Z_i}(z_i)P_{Z_j}(z_j) + \epsilon \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} \phi_{Z_i Z_j}(z_i, z_j) + o(\epsilon)
+\end{equation}
+因此，由 \eqref{eq:Ixy}式，
+ $\norm{B_{ij}}_F^2 = \epsilon^2 \sum_{z_r \in \mathcal{Z}_i, z_s \in \mathcal{Z}_j} \phi^2_{Z_i Z_j}(z_r, z_s)$ 
+ 并且 式 \eqref{eq:PXV} 可以展开成
+\begin{equation}\label{eq:PXV_Data}
+D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) =
+{\epsilon^2\over 2}\sum_{\substack{(i,j) \not\in C\\ C\in \P}}
+\sum_{z_r \in \mathcal{Z}_i, z_s \in \mathcal{Z}_j}  \phi^2_{Z_i Z_j}(z_r, z_s) + o(\epsilon^2)
+\end{equation}
+We can treat the term
+$\phi^2_{Z_i Z_j}(z_r, z_s)$ as the weight of an edge for a graph with $n$ nodes.
+Each vertex of the graph is corresponding to a data sample.
+To simplify the notation, let $w_{rs} = \phi^2_{Z_{d(z_r)}Z_{d(z_s)}}(z_r, z_s)$ \footnote{When $d(z_r) = d(z_s)$, we can still formally define $w_{rs}$ to be some value larger than $\phi^2_{Z_i Z_j}(z_r, z_s)$ for $i\neq j$.} where $d(z_r)$ maps the vertex to its underlining random variable index, $1\leq r,s \leq \abs{V}$.
+We can also expand each $Z_i$ to its alphabet and treat $\P$ as the partition of graph vertices.
+Suppose the graph $G(V, E)$ we considered is directed
+\footnote{Without loss of generality we only consider directly graph in this article to reduce computational cost in algorithm part},
+we can define the graph in-cut function $f(C)$ for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$, which is the total weight of edges coming
+into $C$.
+From Equation \eqref{eq:PXV_Data}, we can characterize the KL divergence by the total inter-cluster edge weight as
+\begin{equation}\label{eq:PXV_Data_Simplified}
+D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = \epsilon^2 \sum_{C \in \P} f(C)+ o(\epsilon^2)
+\end{equation}
+Notice that for directed graph, each edge weight is counted only once in the summation. Therefore there is no need to divide 2 in
+Equation \eqref{eq:PXV_Data_Simplified}.
+Combining Equation \eqref{eq:IZV} and \eqref{eq:PXV_Data_Simplified} we get the expression for the second order coefficient of multivariate mutual information (MMI)
+
 \section{基于图分割的社群发现算法及其改进}
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
