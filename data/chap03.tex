@@ -150,22 +150,51 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) =
 {\epsilon^2\over 2}\sum_{\substack{(i,j) \not\in C\\ C\in \P}}
 \sum_{z_r \in \mathcal{Z}_i, z_s \in \mathcal{Z}_j}  \phi^2_{Z_i Z_j}(z_r, z_s) + o(\epsilon^2)
 \end{equation}
-We can treat the term
-$\phi^2_{Z_i Z_j}(z_r, z_s)$ as the weight of an edge for a graph with $n$ nodes.
-Each vertex of the graph is corresponding to a data sample.
-To simplify the notation, let $w_{rs} = \phi^2_{Z_{d(z_r)}Z_{d(z_s)}}(z_r, z_s)$ \footnote{When $d(z_r) = d(z_s)$, we can still formally define $w_{rs}$ to be some value larger than $\phi^2_{Z_i Z_j}(z_r, z_s)$ for $i\neq j$.} where $d(z_r)$ maps the vertex to its underlining random variable index, $1\leq r,s \leq \abs{V}$.
-We can also expand each $Z_i$ to its alphabet and treat $\P$ as the partition of graph vertices.
-Suppose the graph $G(V, E)$ we considered is directed
-\footnote{Without loss of generality we only consider directly graph in this article to reduce computational cost in algorithm part},
-we can define the graph in-cut function $f(C)$ for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$, which is the total weight of edges coming
-into $C$.
-From Equation \eqref{eq:PXV_Data}, we can characterize the KL divergence by the total inter-cluster edge weight as
+我们可以把
+$\phi^2_{Z_i Z_j}(z_r, z_s)$ 这一项
+当成一个有$n$个节点的图的
+边的权值。
+图的每一个节点对应一个数据点。
+为简化符号, 令 $w_{rs} = \phi^2_{Z_{d(z_r)}Z_{d(z_s)}}(z_r, z_s)$
+\footnote{当 $d(z_r) = d(z_s)$ 时，
+我们仍可以形式化的定义 $w_{rs}$ 为远大于$\max\{\phi^2_{Z_i Z_j}(z_r, z_s), i\neq j\}$
+的值。}，
+其中，$d(z_r)$ 把节点映射到它所属的随机变量的序号， 定义域 为 $1\leq r,s \leq \abs{V}$。
+我们也可以展开 每个 $Z_i$ 到它的节点集 并且将分割 $\P$
+看成是对节点集的分割。
+假设我们考虑的图 $G(V, E)$ 是有向的
+\footnote{有向图的假设可以减少计算量而不失一般性}，
+类似 式 \ref{eq:IP} 我们定义图的入割函数 (in-cut function) $f(C)$ for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
+它是所有进入$C$的有向边的权值之和。
+基于上面定义的符号，表示KL散度的式 \eqref{eq:PXV_Data} 可以写成聚类簇之间边的权值之和
+的形式：
 \begin{equation}\label{eq:PXV_Data_Simplified}
 D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = \epsilon^2 \sum_{C \in \P} f(C)+ o(\epsilon^2)
 \end{equation}
-Notice that for directed graph, each edge weight is counted only once in the summation. Therefore there is no need to divide 2 in
-Equation \eqref{eq:PXV_Data_Simplified}.
-Combining Equation \eqref{eq:IZV} and \eqref{eq:PXV_Data_Simplified} we get the expression for the second order coefficient of multivariate mutual information (MMI)
+从而我们获得了在多变量弱独立条件下数据聚类的表达式。
+由于$\epsilon$是给定的无穷小量，我们更关心$\epsilon^2$
+的系数，该系数即与式\eqref{eq:IP}中的$f[\P]$一样，
+也在我们求解等价的优化问题式\eqref{eq:hlambda}中出现过。
+\section{与数据聚类问题的联系}
+社群发现是输入一张图获得节点所属的类别，而
+数据聚类的任务与社群发现相同，但其输入是一个数据矩阵，
+其中行数是数据的个数而
+每一行的向量代表该数据的特征。二者可以通过
+输入数据的格式转换来实现算法互通。一般而言，
+从数据矩阵到图的变换是可以通过选取一
+相似度度量$d(\cdot,\cdot)$作用到数据上
+获得图中边的权值，即$w_{ij}=d(x_i, x_j)$。
+在这一节中，
+我们研究的重点是如何用
+\eqref{eq:hlambda} 实现数据聚类的任务。
+在永野清仁的文章中\cite{mac}，已经有用RBF核作为相似度度量的
+尝试，但局限于该相似度度量在小规模真实世界数据集上表
+现不佳，此外相似度度量本身具有一些超参数，也会影响聚类
+效果。我们通过使用交叉验证、网格搜索，及对
+不同相似度度量的枚举，试图寻找特定问题下具有
+较好表现的相似度度量及其超参数。
+
+我们使用5种数据集，
 
 \section{基于图分割的社群发现算法及其改进}
 
