@@ -284,21 +284,35 @@ $C_i(i=1,\dots, t)$
 	\begin{algorithmic}[1]
 		\REQUIRE 有向图 $G(V, E)$; 边的权值函数 $w(e)$，其中 $e\in E$
 		\ENSURE 聚类树 $\mathcal{T}(K, E)$ 其中 $K \subseteq 2^{V}$ 表示节点集
-    而 $E$ 表示边的集合
-		\STATE initialize tree $\mathcal{T}$ with $V$ as root node, $\{j\}(j \in V)$ as leaf node and no stem node
+    而 $E$ 表示边的集合。
+		\STATE 初始化 树 $\mathcal{T}$：
+     $V$ 是根节点，
+     $\{j\}(j \in V)$ 是诸叶节点，
+     无其他节点。
 		\STATE \texttt{Split}($G, V$)
 		\FUNCTION{\texttt{Split}($\widetilde{G}, \widetilde{V}$)}
-		\STATE $w$ is the summation of all edge weights of $\widetilde{G}$ 
-		\STATE $\gamma' = \frac{w}{\abs{V(\widetilde{G})}-1}$ where $V(\widetilde{G})$ is the node set of graph $\widetilde{G}$ \label{alg:gamma_apostrophe}
-		\STATE $(\tilde{h}, P') = \texttt{DT}(\widetilde{G}, \gamma')$ where $\P'$ is the minimizer of $h(\gamma')$ in equation \eqref{eq:hPLambda} and $\tilde{h}$ is the corresponding minimal value  \label{line:DT}
+		\STATE $w$ 是 $\widetilde{G}$ 所有边的权值之和。
+		\STATE $\gamma' = \frac{w}{\abs{V(\widetilde{G})}-1}$
+    其中 $V(\widetilde{G})$ 是 图$\widetilde{G}$
+    的节点集。
+    \label{alg:gamma_apostrophe}
+		\STATE $(\tilde{h}, P') = \texttt{DT}(\widetilde{G}, \gamma')$ 其中
+    $\P'$ 是在 式 \eqref{eq:hlambda} 中达到
+    最小值 $h(\gamma')$的分割
+    并且 $\tilde{h}$ 是对应的最小值。 \label{line:DT}
 		\IF{$\tilde{h} = - \gamma'$}
-		\STATE add edge weight $\gamma'$ in $\mathcal{T}$ starting from $\widetilde{V}$ to its children
+		\STATE 在聚类树
+    $\mathcal{T}$ 中把权值 $\gamma'$ 标记在从 $\widetilde{V}$ 出发
+    到其所有子节点的边上。
 		\ELSE
 		\FOR{$S$ in $P'$ and $\abs{S}>1$}
-		\STATE make each children of $\widetilde{V}$ in $\mathcal{T}$ have new parent $S$		
-		\STATE make the parent of $S$ be $\widetilde{V}$
-		\STATE \texttt{Split}($\widetilde{G}[S], S$) where $\widetilde{G}[S]$ is the subgraph of $\widetilde{G}$ restricted on $S$ \label{line:SplitDown}
-		\STATE contract $S$ to a single node in $\widetilde{G}$ % graph \widetilde{G} is modified
+		\STATE 在聚类树
+    $\mathcal{T}$ 中构造新的节点$S$，并修改 $\widetilde{V}$的子节点的父亲节点 为$S$，
+    而$S$的父节点为$\widetilde{V}$。
+		\STATE \texttt{Split}($\widetilde{G}[S], S$)
+    其中 $\widetilde{G}[S]$ 是 $\widetilde{G}$ 限制在 $S$
+    上的子图。\label{line:SplitDown}
+		\STATE 在 $\widetilde{G}$ 中将 $S$ 缩成一个节点。 % graph \widetilde{G} is modified
 		\ENDFOR 
 		\STATE \texttt{Split}($\widetilde{G}, \widetilde{V}$)		\label{line:SplitUp}
 		\ENDIF
@@ -306,6 +320,18 @@ $C_i(i=1,\dots, t)$
 	\end{algorithmic}
 \end{algorithm}
 
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=10cm]{alg_illustration.pdf}
+	\caption{HPSP 求解图(a)的主分割序列，聚类树经(b), (c) 演化到 (d) }\label{fig:alg_eg}
+\end{figure}
+
+\begin{example}
+	We use a simple example to explain Algorithm \ref{alg:psp_i_simplified}. Consider a graph $G(V, E)$ with $V=\{1,2,3,4\}, E=\{(1,2),(1,3),(2,3),(1,4),(2,4)\}$. The weight values are $w_{13}=2, w_{12}=5, w_{23}=2, w_{14}=1, w_{24}=1$. The graph is illustrated
+	in Fig. \ref{fig:alg_eg} (a). Initially, the hierarchical tree is shown in Fig. \ref{fig:alg_eg} (b). Computing $\gamma' = \frac{11}{4-1}, \tilde{h} = -\frac{16}{3} < -\gamma' $ and $\P' = \{\{1,2,3\},\{4\}\}$ from line \ref {alg:DT} in Algorithm \ref{alg:psp_i_simplified} we get the hierarchical tree shown in Fig. \ref{fig:alg_eg} (c).
+	
+	Then we run PSP for the subgraph $G[\{1,2,3\}]$, $\gamma' = \frac{9}{2}, \tilde{h} = -5 < -\gamma'$ and $\P= \{\{1,2\},\{3\}\}$ we get the tree shown in Fig. \ref{fig:alg_eg} (d). Other computation gives the edge weight of $\mathcal{T}$ shown in Fig. \ref{fig:alg_eg} (d).
+\end{example}	
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
 
 \section{代码实现}
