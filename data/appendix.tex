@@ -173,7 +173,21 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 \end{table}
 
 
-\section{数学公式}
+\section{数据集}
+Gaussian 数据集是用\texttt{scikit-learn}
+\cite{scikit-learn}
+的 make\_blobs 函数生成，每类25个数据点，共4类。
+其中心分别为$[3,3],[-3,-3],[3,-3],[-3,3]$，
+标准差均为1。
+
+Circle 数据集共3类，每一类的数据点个数分别为 $[60,100,140]$，
+并使用如下的极坐标公式生成：
+\begin{align*}
+r &= 0.1 \times i + 0.01(2u-1), i = 1, 2, 3\\
+\theta & = 2\pi v
+\end{align*}
+其中 $u,v$ 是 $[0,1]$ 间的随机数，彼此独立。
+
 
 附录中的数学公式示例（公式\eqref{eq:appendix-equation}）。
 \begin{equation}

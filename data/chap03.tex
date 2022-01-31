@@ -194,9 +194,117 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = \epsilon^2 \sum_{C \in \P} f(C)+ o(\ep
 不同相似度度量的枚举，试图寻找特定问题下具有
 较好表现的相似度度量及其超参数。
 
-我们使用5种数据集，
+我们使用5种数据集对基于图分割的数据聚类方法
+进行测试，各数据集的基本情况如表\ref{tab:clustering_dataset}
+所示。
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+    \toprule
+    名称 & 样本数量 & 类别数量 & 特征维度 \\
+    \midrule
+    Gaussian & 100 & 4 & 2 \\
+    Circle & 300 & 3 & 2 \\
+    Iris & 150 & 3 & 4 \\
+    Glass & 214 & 6 & 9 \\
+    Libras & 360 & 15 & 90 \\
+    \bottomrule
+  \end{tabular}
+  \caption{数据聚类测试数据}\label{tab:clustering_dataset}
+\end{table}
+其中，Gaussian 和 Circle 是人工生成的数据集。
+Iris, Glass 和 Libras 是来自 UCI 机器学习标准数据集
+\cite{Dua:2019}。
+
+首先我们展示在两个人工生成的数据集上的聚类效果，
+Gaussian 数据集的相似度度量取 式\ref{eq:rbf_kernel} 所示的 RBF 核,
+$\gamma=0.6$。
+\begin{equation}\label{eq:rbf_kernel}
+  w_{ij}=\exp(-\gamma ||x_i-x_j||^2)
+\end{equation}
+Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己距离最近的$k$
+个数据点有边相连\footnote{所有边权值均为1}，取$k=7$。
+聚类效果如图 \ref{fig:artificial_dataset_effect} 所示。
+
+\begin{figure}[!ht]
+  \begin{subfigure}[b]{\linewidth}
+  \includegraphics[width=\textwidth]{4part.pdf}
+  \caption{有4个类别的 Gaussian 数据集}
+  \label{fig:4p}
+\end{subfigure}
+\begin{subfigure}[b]{\linewidth}
+  \includegraphics[width=\textwidth]{3circle.pdf}
+  \caption{有3个类别的 Circle 数据集}
+  \label{fig:3c}
+\end{subfigure}
+\caption{人工生成的数据集聚类效果}
+\label{fig:artificial_dataset_effect}
+\end{figure}
+
+从图中可以看到，通过选取适当的阈值 $\lambda$，
+可获得与数据的真实类别十分接近的聚类结果，对应于图
+\ref{fig:4p} 中的 $\lambda=0.42$
+和图\ref{fig:3c} 中的 $\lambda=0.0$。
 
 \section{基于图分割的社群发现算法及其改进}
+在本节中，我们首先介绍我们对PSP算法的改进，并在一定
+的假设下证明其理论复杂度，最后比较求解图分割的三种不同实现下
+的算法效率。
+
+我们改进的PSP算法仍将使用
+算法 \ref{alg:psp} 中提到的
+\texttt{DT} 子函数。
+在算法\ref{alg:psp} 中，我们观察到
+每次调用 \texttt{DT} 是相互独立的，
+并没有利用到聚类树的 固有性质。
+如果聚类树的嵌套性质可以被考虑进来的话, 
+我们可以在后面的计算中
+仅在子图上进行 \texttt{DT} 的调用，
+从而可以实现计算效率比PSP算法提升一个数量级。
+
+
+具体来说,
+假设我们第一次调用DT后得到了
+$P_i = \{C_1, \dots, C_t\}$。
+然后我们 分别对每个
+$C_i(i=1,\dots, t)$
+计算 PSP分割。
+并从子图的计算中构造 $P_j(j>i)$。
+对于 $P_j(j<i)$，
+我们可以把 图 $G$
+缩成 图 $G^t$，其中 每个$C_i$集合中的点缩成一个单独的节点。
+因此图 $G^t$共有 $t$ 个节点。
+通过在$G^t$ 上调用 DT 函数我们可以得到  $P_j(j<i)$。
+我们把我们的改进方法称为 HPSP，其中 H 表示 “层次的”
+英文首字母\footnote{hierarchical}，
+其描述在算法\ref{alg:psp_i_simplified}中给出。
+
+\begin{algorithm}
+	\caption{改进的求解主分割序列的算法}\label{alg:psp_i_simplified}
+	\begin{algorithmic}[1]
+		\REQUIRE 有向图 $G(V, E)$; 边的权值函数 $w(e)$，其中 $e\in E$
+		\ENSURE 聚类树 $\mathcal{T}(K, E)$ 其中 $K \subseteq 2^{V}$ 表示节点集
+    而 $E$ 表示边的集合
+		\STATE initialize tree $\mathcal{T}$ with $V$ as root node, $\{j\}(j \in V)$ as leaf node and no stem node
+		\STATE \texttt{Split}($G, V$)
+		\FUNCTION{\texttt{Split}($\widetilde{G}, \widetilde{V}$)}
+		\STATE $w$ is the summation of all edge weights of $\widetilde{G}$ 
+		\STATE $\gamma' = \frac{w}{\abs{V(\widetilde{G})}-1}$ where $V(\widetilde{G})$ is the node set of graph $\widetilde{G}$ \label{alg:gamma_apostrophe}
+		\STATE $(\tilde{h}, P') = \texttt{DT}(\widetilde{G}, \gamma')$ where $\P'$ is the minimizer of $h(\gamma')$ in equation \eqref{eq:hPLambda} and $\tilde{h}$ is the corresponding minimal value  \label{line:DT}
+		\IF{$\tilde{h} = - \gamma'$}
+		\STATE add edge weight $\gamma'$ in $\mathcal{T}$ starting from $\widetilde{V}$ to its children
+		\ELSE
+		\FOR{$S$ in $P'$ and $\abs{S}>1$}
+		\STATE make each children of $\widetilde{V}$ in $\mathcal{T}$ have new parent $S$		
+		\STATE make the parent of $S$ be $\widetilde{V}$
+		\STATE \texttt{Split}($\widetilde{G}[S], S$) where $\widetilde{G}[S]$ is the subgraph of $\widetilde{G}$ restricted on $S$ \label{line:SplitDown}
+		\STATE contract $S$ to a single node in $\widetilde{G}$ % graph \widetilde{G} is modified
+		\ENDFOR 
+		\STATE \texttt{Split}($\widetilde{G}, \widetilde{V}$)		\label{line:SplitUp}
+		\ENDIF
+		\ENDFUNCTION
+	\end{algorithmic}
+\end{algorithm}
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
 
