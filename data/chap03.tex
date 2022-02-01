@@ -176,6 +176,7 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = \epsilon^2 \sum_{C \in \P} f(C)+ o(\ep
 的系数，该系数即与式\eqref{eq:IP}中的$f[\P]$一样，
 也在我们求解等价的优化问题式\eqref{eq:hlambda}中出现过。
 \section{与数据聚类问题的联系}
+\label{sec:data_clustering}
 社群发现是输入一张图获得节点所属的类别，而
 数据聚类的任务与社群发现相同，但其输入是一个数据矩阵，
 其中行数是数据的个数而
@@ -250,7 +251,7 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 在本节中，我们首先介绍我们对PSP算法的改进，并在一定
 的假设下证明其理论复杂度，最后比较求解图分割的三种不同实现下
 的算法效率。
-
+\subsection{HPSP算法}
 我们改进的PSP算法仍将使用
 算法 \ref{alg:psp} 中提到的
 \texttt{DT} 子函数。
@@ -279,7 +280,7 @@ $C_i(i=1,\dots, t)$
 英文首字母\footnote{hierarchical}，
 其描述在算法\ref{alg:psp_i_simplified}中给出。
 
-\begin{algorithm}
+\begin{algorithm}[!ht]
 	\caption{改进的求解主分割序列的算法}\label{alg:psp_i_simplified}
 	\begin{algorithmic}[1]
 		\REQUIRE 有向图 $G(V, E)$; 边的权值函数 $w(e)$，其中 $e\in E$
@@ -327,11 +328,74 @@ $C_i(i=1,\dots, t)$
 \end{figure}
 
 \begin{example}
-	We use a simple example to explain Algorithm \ref{alg:psp_i_simplified}. Consider a graph $G(V, E)$ with $V=\{1,2,3,4\}, E=\{(1,2),(1,3),(2,3),(1,4),(2,4)\}$. The weight values are $w_{13}=2, w_{12}=5, w_{23}=2, w_{14}=1, w_{24}=1$. The graph is illustrated
-	in Fig. \ref{fig:alg_eg} (a). Initially, the hierarchical tree is shown in Fig. \ref{fig:alg_eg} (b). Computing $\gamma' = \frac{11}{4-1}, \tilde{h} = -\frac{16}{3} < -\gamma' $ and $\P' = \{\{1,2,3\},\{4\}\}$ from line \ref {alg:DT} in Algorithm \ref{alg:psp_i_simplified} we get the hierarchical tree shown in Fig. \ref{fig:alg_eg} (c).
+	我们用一个简单的例子来说明
+  算法 \ref{alg:psp_i_simplified}。
+  考虑图 $G(V, E)$，有 $V=\{1,2,3,4\}, E=\{(1,2),(1,3),(2,3),(1,4),(2,4)\}$。
+  边的权值为 $w_{13}=2, w_{12}=5, w_{23}=2, w_{14}=1, w_{24}=1$。
+	图 \ref{fig:alg_eg} (a) 中画出了 $G$
+  的结构。
+  最初的聚类树结构如图 \ref{fig:alg_eg} (b)
+  所示。
+  根据 
+  算法 \ref{alg:psp_i_simplified} 的
+  第\ref {alg:gamma_apostrophe}行，
+  我们计算 $\gamma' = \frac{11}{4-1}, \tilde{h} = -\frac{16}{3} < -\gamma' $
+  且 $\P' = \{\{1,2,3\},\{4\}\}$，
+  于是我们得到如图\ref{fig:alg_eg} (c) 所示
+  的聚类树结构。
 	
-	Then we run PSP for the subgraph $G[\{1,2,3\}]$, $\gamma' = \frac{9}{2}, \tilde{h} = -5 < -\gamma'$ and $\P= \{\{1,2\},\{3\}\}$ we get the tree shown in Fig. \ref{fig:alg_eg} (d). Other computation gives the edge weight of $\mathcal{T}$ shown in Fig. \ref{fig:alg_eg} (d).
+	然后我们在 子图 $G[\{1,2,3\}]$ 上运行 PSP 算法，
+  $\gamma' = \frac{9}{2}, \tilde{h} = -5 < -\gamma'$
+  并且 $\P= \{\{1,2\},\{3\}\}$。 
+  于是我们得到了最终的聚类树结构。
+  其余的计算给出了聚类树剩余的边的权值，如
+  图 \ref{fig:alg_eg} (d) 所示。
 \end{example}	
+\subsection{不同PSP算法的效率比较}
+在本节中，我们将比较 HPSP 算法和PSP算法
+（算法\ref{alg:psp}）
+以及基于参数最大流改进方法\cite{kolmogorov}
+的运行效率。我们使用两种不同的数据集，图的边具有不同的
+稠密程度。
+
+第一个数据集叫做 Gaussian-blobs，
+类似\ref{sec:data_clustering}
+节的 Gaussian 数据集，它也是由
+4个相同大小的高斯块组成，但我们可以改变
+每个块的样本数量。由于我们使用式\ref{eq:rbf_kernel}
+计算图中边的权值，边的数量满足 $|E|=\Theta(|V|^2)$，
+$\Theta$ 表示具有相同的量阶。
+The second dataset is a two-level graph with $s^3$ nodes. The dataset with $s=4$ is the same with that used in Section \ref{subsec:cd}.
+We can construct a graph from the first dataset and the edge weight is computed with the rbf kernel. The characteristics of these two datasets are summarized in
+Table \ref{tab:alg_compare}.
+\begin{table}[!ht]
+\centering
+\begin{tabular}{ccc}
+\hline
+name & weight type & density \\
+\hline
+Gaussian-blobs & int & $|E|=O(|V|^2)$\\
+Two-level graph & float & $|E|=O(|V|^{3/2})$\\
+\hline
+\end{tabular}
+\caption{Dataset properties used in algorithm speed comparison} \label{tab:alg_compare}
+\end{table}
+We use CPU times to measure the time complexity of the algorithms. By varying the number of nodes, we can get the experiment results, shown in Figure \ref{fig:esc}.
+As can be seen, our implementation is much faster than previous ones.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{2019-08-26-gaussian.pdf}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{2019-09-19-two_level.pdf}
+	\end{subfigure}
+	\caption{Empirical speed comparison of different PSP algorithms}\label{fig:esc}
+\end{figure}
+
+We notice that parametric flow based PSP \citep{kolmogorov}  does not perform well in practice. This may be related with the extra cost to construct intermediate graph structures and maintain concurrent threads, whose time overhead can not be neglectable in implementation.
+
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
 
 \section{代码实现}
