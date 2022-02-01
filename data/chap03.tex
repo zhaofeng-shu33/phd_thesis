@@ -247,6 +247,24 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 \ref{fig:4p} 中的 $\lambda=0.42$
 和图\ref{fig:3c} 中的 $\lambda=0.0$。
 
+\section{社群的层次发现算法}
+\label{subsec:cd}
+尽管在发现社群的单层结构方面
+有很多算法取得了成功，自动发现
+复杂网络中的社群层次结构仍是一个困难的问题。
+In this subsection we use experiments to demonstrate that GBIC
+can achieve success to recover the hierarchical structure of a two-level graph upon properly defined ``edge weight''.
+
+To apply GBIC on community detection problems, we can not treat each edge with equal weight otherwise it is very possible to obtain only trivial clustering results due to Proposition \ref{prop:triangle}. Inspired by Proposition \ref{prop:reweight}, we use the following weighting scheme:
+
+\begin{equation}\label{eq:wij_scheme}
+    w_{ij} = 1 + \abs{\{k | (i,k),(j,k) \in E \}} \textrm{ for } (i,j) \in E
+\end{equation}
+This weight assignment scheme for $w_{ij}$ is the number of one and two hop paths between $i$ and $j$. For edges in a complete graph, it is equivalent to take $r=n$ in the model problem of Proposition \ref{prop:reweight}. Then approximately it needs
+at least $\frac{n^2}{2}$ edges to make the two subgraphs unrecoverable.
+Beyond the theoretical analysis of two community model, now we consider a more complex structure and empirically justify the weighting scheme of Equation 
+\eqref{eq:wij_scheme}.
+
 \section{基于图分割的社群发现算法及其改进}
 在本节中，我们首先介绍我们对PSP算法的改进，并在一定
 的假设下证明其理论复杂度，最后比较求解图分割的三种不同实现下
@@ -363,9 +381,9 @@ $C_i(i=1,\dots, t)$
 节的 Gaussian 数据集，它也是由
 4个相同大小的高斯块组成，但我们可以改变
 每个块的样本数量。由于我们使用式\ref{eq:rbf_kernel}
-计算图中边的权值，边的数量满足 $|E|=\Theta(|V|^2)$，
-$\Theta$ 表示具有相同的量阶。
+计算图中边的权值，边的数量满足 $|E|=\Theta(|V|^2)$。
 The second dataset is a two-level graph with $s^3$ nodes. The dataset with $s=4$ is the same with that used in Section \ref{subsec:cd}.
+
 We can construct a graph from the first dataset and the edge weight is computed with the rbf kernel. The characteristics of these two datasets are summarized in
 Table \ref{tab:alg_compare}.
 \begin{table}[!ht]
