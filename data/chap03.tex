@@ -252,18 +252,61 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 尽管在发现社群的单层结构方面
 有很多算法取得了成功，自动发现
 复杂网络中的社群层次结构仍是一个困难的问题。
-In this subsection we use experiments to demonstrate that GBIC
-can achieve success to recover the hierarchical structure of a two-level graph upon properly defined ``edge weight''.
+在本节中，我们用实验来证明PSP算法
+在恰当定义“边的权重”后，可以成功恢复两层图的层次结构。
 
-To apply GBIC on community detection problems, we can not treat each edge with equal weight otherwise it is very possible to obtain only trivial clustering results due to Proposition \ref{prop:triangle}. Inspired by Proposition \ref{prop:reweight}, we use the following weighting scheme:
-
+对于一个无权图，如果我们简单地把
+所有边的权值赋成1，
+我们只能得到平凡的聚类树，也即聚类树
+只有根节点和叶节点。这个论断可以从如下
+定理中得到：
+\begin{theorem}\label{thm:triangle}
+  在图$G$中，对于没有边相连的两个节点 $w_{ij}=0$。
+  并且对于任意三元组$i,j,k \in V$ 权值满足三角不等式 
+  $w_{ij} + w_{jk} \geq w_{ki}$，
+  则该图的聚类树是平凡的。
+\end{theorem}
+  
+我们通过实验发现使用下述的方法对无权图进行重新
+赋权可以达到较理想的效果：
 \begin{equation}\label{eq:wij_scheme}
     w_{ij} = 1 + \abs{\{k | (i,k),(j,k) \in E \}} \textrm{ for } (i,j) \in E
 \end{equation}
-This weight assignment scheme for $w_{ij}$ is the number of one and two hop paths between $i$ and $j$. For edges in a complete graph, it is equivalent to take $r=n$ in the model problem of Proposition \ref{prop:reweight}. Then approximately it needs
-at least $\frac{n^2}{2}$ edges to make the two subgraphs unrecoverable.
-Beyond the theoretical analysis of two community model, now we consider a more complex structure and empirically justify the weighting scheme of Equation 
-\eqref{eq:wij_scheme}.
+式 \ref{eq:wij_scheme} 对$w_{ij}$
+的赋权方法是计算从$i$到$j$不超过两跳的路径数量。
+
+下面我们在一个具有两层结构的图上验证我们的
+赋权方法。该数据集在文献
+\cite{RN22} 中用于研究动态网络的同步行为，
+其结构如图 \ref{fig:c1} 所示。 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{two_level.pdf}
+		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14,$ $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$.}\label{fig:c1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{tree_info-clustering.pdf}
+		\caption{聚类树结构，可用PSP算法完全恢复出来。每个叶节点仍包含16个子节点未画出。}
+    \label{fig:c2}
+	\end{subfigure}
+	\caption{具有两层结构的图示意}
+\end{figure}
+
+该两层结构的图在宏观层面它包含有 4个 社群，
+而每一个中等规模的社群在微观层面又包含4个小社群，
+每个小社群有16个节点。
+我们用 $z_{\mathrm{in}_1}$ 表示
+在小社群内部每个节点连接的边的平均数量；
+用 $z_{\mathrm{in}_2}$ 表示
+每个大社群内部的中等规模社群之间相互连接的边的平均数量；
+用 $z_{\mathrm{out}}$ 表示
+不同大社群之间相互连接的边的平均数量。
+通过变化参数设定 $\{z_{\mathrm{in}_1}, z_{\mathrm{in}_2}, z_{\mathrm{out}} \}$
+我们能得到不同疏密程度的图。
+
+To compare the deduced hierarchical tree structure with the ground truth, we use the normalized Robinson-Foulds distance as the metric. It describes the distance between two trees with different topology and falls within $[0,1]$. We compare the RF distance of graph-based info-clustering with that of GN (Girvan-Newman algorithm) and BHCD (a Bayesian Hierarchical method in \cite{RN23}). The result is shown in Fig. \ref{fig:cdr}. As can be seen from Fig.\ref{fig:cdr}, in either case, graph-based info-clustering can produce more similar tree structures than that of the ground truth.
 
 \section{基于图分割的社群发现算法及其改进}
 在本节中，我们首先介绍我们对PSP算法的改进，并在一定
