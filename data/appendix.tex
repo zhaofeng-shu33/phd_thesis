@@ -143,34 +143,41 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 & = \frac{1}{2} \sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_F^2 + o(\epsilon^2)
 \end{align*}
 \end{proof}
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\linewidth]{example-image-a.pdf}
-  \caption{附录中的图片示例}
-  \label{fig:appendix-figure}
-\end{figure}
 
 
-\subsection{表格}
 
-附录中的表格示例（表~\ref{tab:appendix-table}）。
-
-\begin{table}
-  \centering
-  \caption{附录中的表格示例}
-  \begin{tabular}{ll}
-    \toprule
-    文件名          & 描述                         \\
-    \midrule
-    thuthesis.dtx   & 模板的源文件，包括文档和注释 \\
-    thuthesis.cls   & 模板文件                     \\
-    thuthesis-*.bst & BibTeX 参考文献表样式文件    \\
-    thuthesis-*.bbx & BibLaTeX 参考文献表样式文件  \\
-    thuthesis-*.cbx & BibLaTeX 引用样式文件        \\
-    \bottomrule
-  \end{tabular}
-  \label{tab:appendix-table}
-\end{table}
+\section{定理\ref{thm:triangle} 的证明}
+首先我们证明如下引理：
+\begin{lemma}\label{thm:trival}
+  分割 $\P_k = \{\{1\},\{2\},\dots,\{\abs{V}\}\}$ 
+  使得 $\frac{f[\P]}{\abs{\P}-1}$
+  最小 当且仅当 条件\eqref{eq:GF} 成立。
+  \begin{equation}\label{eq:GF}
+  \frac{f[\P]}{\abs{\P}-1} \geq \frac{f[\P_k]}{\abs{V}-1} \textrm{ for any } \P \in \Pi'
+  \end{equation}
+  \end{lemma}
+  \begin{proof}
+  由\citet{narayanan} 的定理3可知，
+  $h(\lambda)$ 是分段线性函数，
+  $h(\lambda)$ 的第一段
+  是 $ - \lambda $ 且 
+  最后一段是 $ f[\P_k] - \abs{V} \lambda$。
+  它们的交点是
+  $(\lambda_{+}, -\lambda_{+})$，
+  其中
+  $\lambda_{+} = \frac{f[\P_k]}{\abs{V}-1}$。
+  因为 $\frac{f[\P]}{\abs{\P}-1} \geq \lambda_{+} \iff f[\P] - \abs{\P}\lambda_{+} \geq - \lambda_{+}$，
+  方程 \eqref{eq:GF}
+  相当于说 $h(\lambda)$ 在 $\lambda = \lambda_{+}$
+  的最小值点是
+  $\{V\}$ 或
+  $\{\{1\},\{2\},\dots,\{\abs{V}\}\}$
+  并且 $h(\lambda)$ 只有两段。
+  从几何的观点来看，$\min\frac{f[\P]}{\abs{\P}-1}$
+  是 $h(\lambda)$ 第一个分界点，
+  该分界点与$h(\lambda)$最后一个分界点
+  相等 当且仅当 \eqref{eq:GF} 成立。
+  \end{proof}
 
 
 \section{数据集}
@@ -190,3 +197,8 @@ r &= 0.1 \times i + 0.01(2u-1), i = 1, 2, 3\\
 
 Gaussian-blob 数据集与 Gaussian 数据集
 的区别在于每类$n$个数据点，其中$n=[1,2,3,4,5]*100$。
+
+Two-level graph 数据集中取参数
+$z_{\mathrm{in}_1}=s^2-2,
+z_{\mathrm{in}_2}=s-1,
+z_{\mathrm{out}}=1$，其中$s=[3,4,5,6,7]$。

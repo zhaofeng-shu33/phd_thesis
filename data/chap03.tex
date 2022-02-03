@@ -428,23 +428,11 @@ $C_i(i=1,\dots, t)$
 第二个数据集，two-level graph，类似 \ref{subsec:cd}节
 的具有两层社群结构的图，一共有 $s^3$ 节点。
 \ref{subsec:cd}节 相当于 $s=4$ 的情形。
-We can construct a graph from the first dataset and the edge weight is computed with the rbf kernel. The characteristics of these two datasets are summarized in
-Table \ref{tab:alg_compare}.
-\begin{table}[!ht]
-\centering
-\begin{tabular}{ccc}
-\hline
-name & weight type & density \\
-\hline
-Gaussian-blobs & int & $|E|=O(|V|^2)$\\
-Two-level graph & float & $|E|=O(|V|^{3/2})$\\
-\hline
-\end{tabular}
-\caption{Dataset properties used in algorithm speed comparison} \label{tab:alg_compare}
-\end{table}
-We use CPU times to measure the time complexity of the algorithms. By varying the number of nodes, we can get the experiment results, shown in Figure \ref{fig:esc}.
-As can be seen, our implementation is much faster than previous ones.
 
+我们使用CPU时间来衡量算法的时间复杂度。
+通过改变节点的数量，
+我们可以得到如图\ref{fig:esc}所示的实验结果，
+可以看出，我们的实现比以前的实现要快得多。
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.45\textwidth}
@@ -453,10 +441,17 @@ As can be seen, our implementation is much faster than previous ones.
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{2019-09-19-two_level.pdf}
 	\end{subfigure}
-	\caption{Empirical speed comparison of different PSP algorithms}\label{fig:esc}
+	\caption{
+  不同PSP实现的速度比较}\label{fig:esc}
 \end{figure}
 
-We notice that parametric flow based PSP \citep{kolmogorov}  does not perform well in practice. This may be related with the extra cost to construct intermediate graph structures and maintain concurrent threads, whose time overhead can not be neglectable in implementation.
+另外我们注意到，
+基于参数化最大流的
+算法\citep{kolmogorov}在实践中表现不佳。
+这可能与计算过程中构造中间图结构
+和维护并发线程的额外成本有关。在实际实现中，
+并发线程的创建和销毁的时间开销是不可忽略的，而这一部分
+在复杂度理论分析中考虑。
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
 
