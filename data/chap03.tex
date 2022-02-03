@@ -425,8 +425,9 @@ $C_i(i=1,\dots, t)$
 4个相同大小的高斯块组成，但我们可以改变
 每个块的样本数量。由于我们使用式\ref{eq:rbf_kernel}
 计算图中边的权值，边的数量满足 $|E|=\Theta(|V|^2)$。
-The second dataset is a two-level graph with $s^3$ nodes. The dataset with $s=4$ is the same with that used in Section \ref{subsec:cd}.
-
+第二个数据集，two-level graph，类似 \ref{subsec:cd}节
+的具有两层社群结构的图，一共有 $s^3$ 节点。
+\ref{subsec:cd}节 相当于 $s=4$ 的情形。
 We can construct a graph from the first dataset and the edge weight is computed with the rbf kernel. The characteristics of these two datasets are summarized in
 Table \ref{tab:alg_compare}.
 \begin{table}[!ht]
