@@ -178,7 +178,59 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
   该分界点与$h(\lambda)$最后一个分界点
   相等 当且仅当 \eqref{eq:GF} 成立。
   \end{proof}
-
+  \begin{proof}[定理\ref{thm:triangle} 的证明]
+    我们将使用归纳法证明对于任意的分割$\P \in \Pi$，
+    式\eqref{eq:GF} 成立。
+    \begin{equation}\label{eq:GF}
+    f[\P] \geq \frac{\abs{\P}-1}{\abs{V}-1} \sum_{(i,j) \in E} w_{ij}
+    \end{equation}
+    
+    然后由引理 \ref{thm:trival}
+    即可得证。
+    
+    设 $n=\abs{V}$。
+    若 $\abs{\P}=n$，
+    易得式 \eqref{eq:GF} 取等号。
+    
+    假设 式\eqref{eq:GF} 对 任意
+    $\abs{\P} \geq k+1(k\geq 2)$成立，
+    下面我们讨论 $\P=\{C_1, \dots, C_k\}$
+    的情形。
+    因为$\P$是非平凡的分割，
+    因此存在某个$\abs{C_i}\geq 2$。
+    不妨设$\abs{C_1}=n_1\geq 2$，
+    构造$\P$的一个细分$\P'$如下：
+    $\P_{C_1} = \{\{i\}| i \in C_1\}, \P'=\P_{C_1} \cup \P \backslash \{C_1\}$。
+    则我们有 $\abs{\P'} = k+n_1-1$。
+    对$\P'$运用 式\eqref{eq:GF} 有
+    \begin{align}\label{eq:PPrelation}
+    f[\P'] &
+    \geq \frac{k+n_1 -2}{n-1}\sum_{(i,j) \in E} w_{ij} \\
+    f[\P] & =f[P'] - \sum_{(i,j) \in E(C_1)} w_{ij}
+    \end{align}
+    对任意$k \not\in C_1$运用三角不等式
+    $w_{ij} \leq w_{ik} + w_{jk}$，
+    并关于所有 $i, j \in C_1, i\neq j$求和，
+    我们有
+    $$
+    \sum_{(i,j) \in E(C_1)} w_{ij} \leq \sum_{(i,j) \in E(C_1)} (w_{ik} + w_{jk}) = (n_1-1)\sum_{i\in C_1} w_{ik}
+    $$
+    再将上式对所有 $k \not\in C_1$ 求和
+    $$
+    (n - n_1) \sum_{(i,j) \in E(C_1)} w_{ij} \leq (n_1 - 1) \sum_{i \in C_1, k \not\in C_1} w_{ik}
+    $$
+    另外，注意到
+    \begin{align*}
+    \sum_{(i,j) \in E} w_{ij}  & \geq \sum_{(i,j) \in E(C_1)} w_{ij} + \sum_{i\in C_1, k\not\in C_1} w_{ik} \\
+    (n_1 - 1)\sum_{(i,j) \in E} w_{ij}  & \geq (n_1 -1 )\sum_{(i,j) \in E(C_1)} w_{ij} + (n_1-1)\sum_{i\in C_1, k\not\in C_1} w_{ik} \\
+    & \geq (n_1 -1 )\sum_{(i,j) \in E(C_1)} w_{ij} + (n - n_1) \sum_{(i,j) \in E(C_1)} w_{ij}\\
+    & = (n-1) \sum_{(i,j) \in E(C_1)} w_{ij}
+    \end{align*}
+   因此我们得到 $\sum_{(i,j) \in E(C_1)} w_{ij} \leq \frac{n_1-1}{n-1}\sum_{(i,j) \in E} w_{ij}$。
+   从式 \eqref{eq:PPrelation} 可得
+    $f[\P] \geq \frac{k-1}{n-1}\sum_{(i,j) \in E} w_{ij}$。
+    因此，结论对 $\abs{\P}=k$ 成立。
+    \end{proof}
 
 \section{数据集}
 Gaussian 数据集是用\texttt{scikit-learn}
