@@ -260,7 +260,7 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 我们通过5轮交叉验证的方式选取各算法的超参数，
 表\ref{tab:clustering_dataset}给出了在一定优化空间内
 各算法最优的表现，
-其对应的超参数详见附表1。
+其对应的超参数详见附表\ref{tab:clustering_alg_hyperparameter}。
 
 从表\ref{tab:clustering_dataset}
 可以看出，
@@ -520,6 +520,16 @@ $C_i(i=1,\dots, t)$
 在复杂度理论分析中考虑。
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
+Outlier Detection is the identification of abnormal data (called outliers) which differs from the majority of the data (called inliers) \citep{grubbs1969procedures}.
+To apply our GBIC method to this problem, we consider the case when we are required to detect outliers in a multi-class dataset and we are required to
+extract a partition $\{C_1, \dots, C_K, \{x_1\}, \dots, \{x_M\}\}$ from the PSP where $K$ is the number of clusters and $M$ is the number of outliers.
+In reality it is often the case that we do not know the value of $K, M$.
+If both $K$ and $M$ are small, using the notation of Equation \eqref{eq:PSP_structure}, an empirical and reasonable way to deal with this situation is to find a partition
+$\P_{k-r}$ from  $\{\P_k, \P_{k-1}, \dots, \P_0\}$ which satisfies
+\begin{align*}
+& \min_{r\in Z^+} r \\
+s.t.\, & (r+1)\abs{\P_{k-r}} < n
+\end{align*}
 
 \section{代码实现}
 尽管最大流算法包比较多，但我们尚未发现

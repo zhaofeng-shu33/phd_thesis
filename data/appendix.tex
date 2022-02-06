@@ -256,3 +256,59 @@ Two-level graph 数据集中取参数
 $z_{\mathrm{in}_1}=s^2-2,
 z_{\mathrm{in}_2}=s-1,
 z_{\mathrm{out}}=1$，其中$s=[3,4,5,6,7]$。
+
+\section{算法超参数}
+\subsection{聚类算法}
+除信息聚类算法外，我们使用 scikit-learn 算法包提供
+的接口，各算法的超参数如表\ref{tab:clustering_alg_hyperparameter}
+所示。
+系统聚类法（AgglomerativeClustering）统一使用欧式距离，
+谱聚类(SpectralClustering)
+统一使用 k近邻（8）计算相似度矩阵，括号中的数字表示
+邻居节点的数量。
+近邻传播和信息聚类的相似度矩阵因数据集而异。
+这里，我们允许信息聚类取rbf和k近邻
+两种相似度度量的复合，即它们数值的相乘。
+表中 rbf 度量和 laplacian 度量
+后面括号中的参数 $\gamma$的含义与
+式 \ref{eq:rbf_kernel} 相同。
+针对系统聚类和信息聚类两个层次聚类算法，
+为获得非层次聚类结果，需要指定相应的超参
+从聚类树中抽取局部的聚类结果，这里为方便
+起见，我们给出抽取后的类别数作为派生的超参。
+
+\begin{table}[!ht]
+  \centering
+\begin{tabular}{|l|r|r|r|r|r|r|}
+  \hline
+   聚类算法  &   参数名称 & Gaussian &   Circle &   Iris &   Glass &   Libras \\
+  \hline
+   \multirow{2}{*}{系统聚类法}  &  linkage     &   complete&     single &   average
+   & ward &   complete \\
+   \cline{2-7}
+   & 类别数 & 4 & 3 & 3 & 7 & 15 \\
+   \hline
+   \multirow{3}{*}{近邻传播}  &    affinity & euclidean &  k近邻(16)
+   &  k近邻(10)
+   & euclidean &   euclidean \\
+   \cline{2-7}
+   & preference & -50 & 50 & 50 &
+   -50 & -50\\
+   \cline{2-7}
+   & 衰减系数 & 0.5 & 0.8 & 0.5 & 0.8 & 0.5 \\
+   \hline
+   \multirow{2}{*}{信息聚类}  & 
+   \multirow{2}{*}{affinity}      &       rbf(0.4) &    rbf(0.01)&  laplacian(8) & k近邻(14) &   rbf(0.2) \\
+   & & &  k近邻(16)  & && k近邻(4)\\
+   \cline{2-7}
+   & 类别数 & 4 & 3 & 3 & 42 & 38\\
+   \hline
+   k-平均算法     &     类别数    &
+   4 &    3 &  3 &   6 &    15 \\
+   \hline
+   谱聚类   &    类别数 & 4 &   3 &    3 &   6 &    15 \\
+  \hline
+\end{tabular}
+\caption{聚类算法超参数}\label{tab:clustering_alg_hyperparameter}
+\end{table}
+
