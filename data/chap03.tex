@@ -520,16 +520,76 @@ $C_i(i=1,\dots, t)$
 在复杂度理论分析中考虑。
 
 \section{基于图分割的社群发现算法在异常值检测领域的应用}
-Outlier Detection is the identification of abnormal data (called outliers) which differs from the majority of the data (called inliers) \citep{grubbs1969procedures}.
-To apply our GBIC method to this problem, we consider the case when we are required to detect outliers in a multi-class dataset and we are required to
-extract a partition $\{C_1, \dots, C_K, \{x_1\}, \dots, \{x_M\}\}$ from the PSP where $K$ is the number of clusters and $M$ is the number of outliers.
-In reality it is often the case that we do not know the value of $K, M$.
-If both $K$ and $M$ are small, using the notation of Equation \eqref{eq:PSP_structure}, an empirical and reasonable way to deal with this situation is to find a partition
-$\P_{k-r}$ from  $\{\P_k, \P_{k-1}, \dots, \P_0\}$ which satisfies
-\begin{align*}
+异常值检测是对异常数据（称为异常值点）的识别，
+这些异常数据不同于其他多数数据（称为正常值点）
+\citep{grubbs1969procedures}。
+在本节中,我们考虑将信息聚类算法用到异常值检测领域。
+
+首先我们在理论层面探讨异常值检测背景下信息聚类的应用。
+假设一个简单的情形，所有正常值点属于同一类别，
+假设集合$B$达到式\eqref{eq:largest_threshold}中的
+最大值，
+我们认为$B$中的元素是正常值点，而$V\backslash B$ 是异常值点。
+
+我们这里探讨的问题是, 假设有一个新的点$i'$加入到
+现有的图 $G$ 中，如何判断它是正常值点还是异常值点。 
+事实上，对于加入$i'$的图来说，
+我们可以用PSP算法计算一个新的最大临界值
+$\gamma'_N$，
+并把它与 $\gamma_N$作比较。 由式\eqref{eq:largest_threshold}易得
+$\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作用是使得
+多变量互信息的最大值增大了，说明$i'$与图$G$结合得更紧密，是正常值点，否则为异常值点。
+实际上，我们不需要重新计算$\gamma'_N$就可以做出相同的判断，这个理论保证由下面的
+定理给出
+\begin{theorem}\label{thm:main_N}
+  假设 $B$ 关于图$G$ 达到式\eqref{eq:largest_threshold}中的
+  最大值，$\gamma_N, \gamma'_N$ 分别是图$G$加入新的点$i'$前、后的最大临界值，则有
+\begin{equation}
+\gamma'_N > \gamma_N \iff  \sum_{i \in B} w_{ii'} > \gamma_N 
+\end{equation}
+\end{theorem}
+定理 \ref{thm:main_N} 给出了一种划分正常值点边界的方法，
+假设图$G$的第$i$个点
+对应一个高维空间的向量$x_i$，新加入的点对应的向量是$x$，
+边的权值由rbf核给出，则边界曲线的方程为：
+\begin{equation}\label{eq:sum_exp_gamma_N}
+  \sum_{j \in B} \exp(-\gamma \norm{x - x_j}^2)= \gamma_N
+\end{equation}
+
+
+然后我们在算法层面进行考虑，假设在一个多分类问题中存在若干异常值点，
+我们的目标是获得数据的一个分割，其形式为
+$\{C_1, \dots, C_K, \{x_1\}, \dots, \{x_M\}\}$。
+这里 $K$ 表示类别数 而 $M$ 表示异常值点的个数。
+这两个参数在实际问题中通常是未知的，这里我们也做此假定，
+我们使用的方法是基于 PSP 算法来获得该形式与$K, M$的值。
+
+如果 $K$ 和 $M$ 较小, 使用式 \eqref{eq:PSP_structure}
+的记法, 处理这种情况的一种经验性但合理的方法是找到一种划分。
+$\P_{k-r}$ from  $\{\P_k, \P_{k-1}, \dots, \P_0\}$ 使得$K,M$都比较小。
+对于此多目标优化问题，我们需要一个折中方案，即通过枚举法$r=1,2,\dots$ 求解下面的优化问题
+\begin{align}\label{eq:outlier_detection_proposal}
 & \min_{r\in Z^+} r \\
-s.t.\, & (r+1)\abs{\P_{k-r}} < n
-\end{align*}
+s.t.\, & f(r):=(r+1)\abs{\P_{k-r}} < n
+\end{align}
+在式\eqref{eq:outlier_detection_proposal}中，我们注意到函数
+$f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，可知优化问题有解。
+
+然后我们用 $\P_{k-r}$ 中元素个数大于1的集合来标记各类别中的正常值点，
+元素个数小于1的集合为异常值点的集合。
+
+如果需要预测新的观测值是否是异常值点, 
+我们使用类似于式\eqref{eq:sum_exp_gamma_N}给出的边界方程判决规则。
+假设 $\lambda_{k-r}$ 是$\P_{k-r}, \P_{k-r+1}$ 两个分割对应的
+分界值并且图$G$边的权值是使用 rbf 核 来构建的，
+那么边界曲线方程可以写成下面的形式：
+\begin{equation}
+\sum_{j \in C_i} \exp(-\lambda \norm{x - x_j}^2)= \lambda_{k-r}, \text{ 其中 } C_i \in \P_{k-r} \text{且}  \abs{C_i} > 1
+\end{equation}
+注意到 $C_i$ 是其中一个类别，
+并且 一共有 $K$ 个 边界曲线。
+如果新的观测值落在所有这些边界曲线的外部，
+那么我们将其归类为异常值点。
 
 \section{代码实现}
 尽管最大流算法包比较多，但我们尚未发现

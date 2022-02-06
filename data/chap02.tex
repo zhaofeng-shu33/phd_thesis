@@ -64,7 +64,7 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 \lambda_k$ 是递增的数列，而 $h_{\P}(\lambda)=f[\P]-|\P|\lambda$。
 对于分割 $\P_0, \dots, \P_k$ 来说，
 它们也有一个序关系。我们称分割 $P$ 是 $Q$ 的一个细分，
-如果 $\forall C \in P, \exists C' \in Q, s.t. C\subset C'$，
+如果 $\forall C \in P, \exists C' \in Q, s.t.\, C\subset C'$，
 并记为 $P \preceq Q$。基于细分的此种定义，我们有：
 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 其中 $\P_0=\{V\}$ 而 $\P_k=\cup_{i=1}^n \{ i\}$。
@@ -384,6 +384,11 @@ $I(Z_V)=0.9$。
 把各临界值$\lambda_i$ 标到聚类树上即如图
 \ref{fig:threshold_a}所示。
 \end{example}
+最后，我们再介绍一个多变量互信息的性质，它将在我们后面社群中的异常值点的检测工作中
+用到。这个性质给出了最大的临界值 $\lambda_k$ 的多变量互信息表达式\cite{agg_ic}：
+\begin{equation}\label{eq:largest_threshold}
+\lambda_k = \max_{A\subseteq V} I(Z_A)
+\end{equation}
 
 \section{参数化的最大流算法}
 最大流算法用于解决网络流中从一点到另一点的最优运输路径的问题。
