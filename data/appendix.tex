@@ -233,7 +233,57 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
     $f[\P] \geq \frac{k-1}{n-1}\sum_{(i,j) \in E} w_{ij}$。
     因此，结论对 $\abs{\P}=k$ 成立。
     \end{proof}
-
+\section{定理\ref{thm:main_N}的证明}
+    \begin{proof}[定理\ref{thm:main_N}的证明]
+      我们首先做出如下的符号约定：
+      $w(C) = \displaystyle\sum_{(i,j) \in E(C)} w_{ij},$
+      $w(A, C) = \displaystyle\sum_{\substack{i \in A, j \in C \\ (i,j) \in E(V')}} (w_{ij}+w_{ji})$ and
+      $\P_C = \{\{i \}| i \in C \}$。
+      假设 $\gamma_N = I(Z_B)$，
+      由式 \eqref{eq:largest_threshold} 可得
+      $\gamma_N =\frac{f[\P_B]} {\abs{B} -1}$。
+      因为 $V' = B \cup \{i'\}$，我们有
+      $f[\P_{V'}] = f[\P_B] + \sum_{i \in B}w_{ii'}$。
+      
+      若 $ \sum_{i \in B} w_{ij} > \gamma_N$， 我们可得
+      $$
+      \gamma'_N \geq I_{\P_{V'}}(Z_{V'}) = \frac{(\abs{B}-1)\gamma_N
+      + \sum_{i \in B}w_{ii'}}{\abs{B}} > \gamma_N
+      $$
+      
+      另一方面， 假设 
+      $\gamma'_N = I(Z_K) > \gamma_N$。 则 $K$ 必包含 $i'$。
+      若 $K=V'$， 则结论成立。
+      否则， 假设 $K = \{i'\} \cup B', B=B'\cup J, J\neq \emptyset$，
+      则我们有
+      \begin{equation}\label{eq:gammaNF}
+      \gamma_N = \frac{w(J,B') + w(J) + w(B')}{ \abs{B'} + \abs{J} - 1 }
+      \end{equation}
+      因为 $I(Z_K) = I_{\P_K}(Z_K)$ 是最大的，
+      我们有 $I_{\P_K}(Z_K) > I_{\P_{V'}}(Z_{V'})$ 且
+      $I_{\P_K}(Z_K) \geq I_{\P_{B'}}(Z_{B'})$。
+      \begin{align*}
+      \frac{w(\{i'\}, B') + w(B')}{\abs{B'}} >& \frac{w(B') + w(J, B') + w(J) + w(\{i'\}, B') + w(\{i'\}, J)}{\abs{B'} + \abs{J}}  \\
+      \frac{w(\{i'\}, B') + w(B')}{\abs{B'}} \geq & \frac{w(B')}{\abs{B'} - 1}
+      \end{align*}
+      于是可得
+      \begin{align}
+      \abs{J} \left(w(\{i'\}, B') + w(B') \right) > &
+      \abs{B'} \left(w(J, B') + w(J) + w(\{i'\}, J) \right)
+      \label{eq:target}
+      \\
+      (\abs{B'} - 1)  w(\{i'\}, B') \geq & w(B') \label{eq:convert}
+      \end{align}
+      将 式\eqref{eq:convert} 代入 式\eqref{eq:target} 可得
+      \begin{equation}\label{eq:summation}
+      \abs{J} w(\{i'\}, B') > w(J, B') + w(J) + w(\{i'\}, J)
+      \end{equation}
+      结合 式\eqref{eq:gammaNF}，
+      将 式\eqref{eq:convert} 与 式\eqref{eq:summation} 相加我们可得
+      $w(\{i'\}, B') > \gamma_N$。
+      所以 $\sum_{j \in B}w_{ii'} > \gamma_N $ 成立。
+    \end{proof}
+  
 \section{数据集}
 Gaussian 数据集是用\texttt{scikit-learn}
 \cite{scikit-learn}
