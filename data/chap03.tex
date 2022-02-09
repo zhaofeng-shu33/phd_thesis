@@ -603,8 +603,11 @@ $\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作
   \sum_{j \in B} \exp(-\gamma \norm{x - x_j}^2)= \gamma_N
 \end{equation}
 
-
-然后我们在算法层面进行考虑，假设在一个多分类问题中存在若干异常值点，
+上述讨论假设了所有正常值点同属一个类别，
+在实际应用中可能具有局限性。
+下面我们在算法层面进行考虑，提出一个将信息
+聚类的方法应用到异常值检测领域的方案。
+假设在一个多分类问题中存在若干异常值点，
 我们的目标是获得数据的一个分割，其形式为
 $\{C_1, \dots, C_K, \{x_1\}, \dots, \{x_M\}\}$。
 这里 $K$ 表示类别数 而 $M$ 表示异常值点的个数。
@@ -630,13 +633,77 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，可知优化问题有解。
 假设 $\lambda_{k-r}$ 是$\P_{k-r}, \P_{k-r+1}$ 两个分割对应的
 分界值并且图$G$边的权值是使用 rbf 核 来构建的，
 那么边界曲线方程可以写成下面的形式：
-\begin{equation}
+\begin{equation}\label{eq:boundary_curve_multiple}
 \sum_{j \in C_i} \exp(-\lambda \norm{x - x_j}^2)= \lambda_{k-r}, \text{ 其中 } C_i \in \P_{k-r} \text{且}  \abs{C_i} > 1
 \end{equation}
 注意到 $C_i$ 是其中一个类别，
 并且 一共有 $K$ 个 边界曲线。
 如果新的观测值落在所有这些边界曲线的外部，
 那么我们将其归类为异常值点。
+
+
+我们准备了三个人工数据集来验证我们提出的异常值检测算法。
+第一个数据集是一个高斯斑点，其中一些噪声点均匀分布在一个正方形中。
+第二个数据集是我们将 $(0,0)$ 这个点加入到
+\ref{sec:data_clustering} 节所描述的有4个类别的
+Gaussian 数据集里。
+最后一个数据集是两个错开的半圆形状(或月牙形状)，
+并且其周围分布着一些
+噪点。
+构造相似图的权值我们采用 rbf 核，其 异常值检测
+效果如图 \ref{fig:boundary} 所示。
+从前三幅图可以看出，由式\eqref{eq:boundary_curve_multiple}
+给出的边界曲线近似于正常值点的闭包曲线。
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\textwidth]{outlier_boundary_illustration.pdf}
+	\caption{在人工生成的数据集上
+  检测边界曲线的形状}
+  \label{fig:boundary}
+\end{figure}
+
+另外我们也
+在图 \ref{fig:boundary}.(d) 画出了椭圆包络(elliptic envelope \citep{rousseeuw1999fast} )方法的决策边界曲线。
+由于后一种方法假设内部数据分布在凸区域，因此决策边界是椭圆形状，
+因此不能很好地反映真实数据的分布。
+
+下面我们针对不同的数据集比较本节提出的信息检测方法和其他常用的
+异常值检测算法的性能。
+我们使用 5 个数据集: Gaussian-blob, Moon， Lymphography, Glass 和 Ionosphere。 
+前两个数据集如前所述是
+人工生成的。
+后三个数据集来自于
+机器学习标准数据集
+\cite{Dua:2019}。
+我们对比的方法包括
+局部异常因子(local outlier factor \citep{Breunig}), 孤立森林（isolation forest \citep{if}）, 
+椭圆包络  和
+一类支持向量机 （one class SVM \citep{svm}）。 
+我们使用TPR和TNR来衡量检测的整体性能。
+正常值点被视为正样本。
+TPR衡量的是正样本集合中正确检测的百分比，
+而TNR衡量的是异常值点中正确检测的百分比。
+通常而言，一种检测方法很难在这两个指标上都获得高分。
+我们设法最大化TNR，同时控制每种方法的TPR$\geq 90\%$。
+每个方法的超参数和相似度度量都经过了调优，TNR的最佳结果如表\ref{tab:odm}所示。我们可以看到，信息检测在 GaussianBlob，Moon 和
+Lymphography 数据集上表现最好，与局部异常因子效果差不多，
+但在 Glass 和  Ionosphere 两个数据集上性能有待提升。
+\begin{table}
+  \begin{adjustbox}{width=\columnwidth,center}
+\begin{tabular}{cccccc}
+  \hline
+         TPR/TNR        &  GaussianBlob   &      Moon       &  Lymphography  &     Glass     &  Ionosphere   \\
+  \hline
+      信息检测    & 100\%/100\% & 97.4\%/100\%  & 97.9\%/100\% & 91.2\%/11.1\% & 90.7\%/48.4\% \\
+      局部异常因子 & 100\%/100\% & 100\%/100\% & 98.6\%/83.3\%  & 96.6\%/22.2\% & 90.2\%/82.5\% \\
+   孤立森林   & 100\%/100\% &  96.7\%/77.8\%  & 99.3\%/100\% & 89.8\%/11.1\% & 80.4\%/65.1\% \\
+    椭圆包络   & 100\%/100\% &  91.3\%/42.2\%  & 93.0\%/83.3\%  & 94.6\%/0.0\%  & 93.3\%/88.1\% \\
+     一类支持向量机     &  98.8\%/91.1\%  &  93.0\%/55.6\%  & 93.0\%/66.7\%  & 91.7\%/22.2\% & 83.1\%/69.0\% \\
+  \hline
+  \end{tabular}
+\end{adjustbox}
+\caption{不同异常值检测的算法比较}\label{tab:odm}
+\end{table}
 
 \section{代码实现}
 尽管最大流算法包比较多，但我们尚未发现
