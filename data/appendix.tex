@@ -235,7 +235,57 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
     \end{proof}
 \section{定理 \ref{thm:alg_complexity} 的证明}
 \begin{proof}[定理 \ref{thm:alg_complexity} 的证明]
-a
+  令
+  $\mu_i = \frac{n_i}{n} \leq \frac{1}{2}$。
+  下面我们使用归纳法证明
+  $T(n) = O(n^4)$。
+  更具体地，我们将证明 
+  $T(n) \leq q C n^4$， 其中 $ q = \frac{16}{5}$。
+  $T(3)$ 是一个常数，我们取$C$使得 $T(3)= q C\times 3^4$。
+  下面假设
+	$T(m) \leq qC m^4$
+  对所有 $m \leq n-1$。
+  然后 对于 $T(n)$，
+	我们首先证明下式成立：
+	\begin{equation}\label{eq:outerI}
+	\sum_{i=1}^k T(n_i) \leq 10 T(\frac{n}{2})
+	\end{equation}
+	因为 $\sum_{i=1}^k T(n_i) \leq qC n^4\sum_{i=1}^k u_i^4$ 并且
+  从式 \eqref{eq:Tn} 中可得
+  $10 T(\frac{n}{2}) \geq 10Cn^4 (\frac{1}{2})^4$ 
+	\begin{equation}\label{eq:innerI}
+       q\sum_{i=1}^k u_i^4 \leq 10 (\frac{1}{2})^4 
+	\end{equation}
+	所以我们有 \eqref{eq:innerI} $\Rightarrow$ \eqref{eq:outerI}。
+  由定理 \ref{thm:alg_complexity} 条件，我们不妨假设
+  $u_1\leq u_2 \leq \dots \leq u_k \leq \frac{1}{2}$
+  且 $\sum_{i=1}^k u_i = 1$。
+  因此，我们有
+  $u_1 \leq \frac{1}{k}, u_2 \leq \frac{1}{k-1}, \dots, u_{k-1} \leq \frac{1}{2}$。
+	根据
+  \begin{equation}\label{eq:outerOne}
+	 q[2(\frac{1}{2})^4 + \sum_{i=3}^k (\frac{1}{i})^4] \leq 10 (\frac{1}{2})^4
+	\end{equation}
+	我们有 \eqref{eq:outerOne} $\Rightarrow$ \eqref{eq:innerI}。
+  并且代入$q=\frac{16}{5}$，
+  \eqref{eq:outerOne} 等价于
+	$\sum_{i=3}^k (\frac{1}{i})^4 \leq \frac{9}{8}(\frac{1}{2})^4$
+	\begin{align*}
+		\sum_{i=3}^k (\frac{1}{i})^4 & < \frac{1}{9}\sum_{i=3}^k \left(\frac{1}{i}
+    \right)^2 \\
+		& < \frac{1}{9}\sum_{i=3}^k \frac{1}{i(i-1)} \\
+		& < \frac{1}{18}
+    < \frac{9}{8}\left(\frac{1}{2}
+    \right)^4
+	\end{align*}
+	因此，
+  式 \eqref{eq:outerI} 成立。然后
+  由 式\eqref{eq:Tn} 和 $T(k) \leq T(\frac{n}{2})$ 可得
+	\begin{align}
+		T(n)  & \leq Cn^4 + 11T\left(\frac{n}{2} \right) \\
+		& \leq C n^4 + 11 q C \left(\frac{n}{2}\right)^4
+    = \frac{16}{5} C n^4
+	\end{align}
 \end{proof}
 \section{定理\ref{thm:main_N}的证明}
     \begin{proof}[定理\ref{thm:main_N}的证明]
