@@ -488,22 +488,42 @@ $C_i(i=1,\dots, t)$
 的时间复杂度是 $O(n^4)$， 而 PSP算法（\ref{alg:psp}）的 
 时间复杂度是 $O(n^5)$ \citep{pin}。
 
-我们使用 $T(n)$ to represent the time complexity of \texttt{Split} when the graph has $n$ nodes.
-From Algorithm \ref{alg:psp_i_simplified}, the recursive relationship for $T(n)$ is
+我们使用 $T(n)$ 来代表 
+\texttt{Split} 函数调用的
+时间复杂度。
+从算法 \ref{alg:psp_i_simplified} 中可知，
+$T(n)$ 的递推关系式为
 \begin{equation}\label{eq:Tn}
-T(n) = \max \{ C n^4 + \sum_{i=1}^k T(n_i) + T(k)\delta_{k<n} | \sum_{i=1}^k n_i = n, n_i \in \mathbb{Z}_{+} \}
-\end{equation}	
-In \eqref{eq:Tn}, $Cn^4$ is the time complexity of \texttt{DT}. $\delta_{k<n} = 1$ when $k<n$, otherwise $\delta_{k<n}=0$. We have the following proposition:
-\begin{proposition}\label{prop:alg_complexity}
-	 If $n_i \leq \frac{n}{2}, \textrm{ for } i=1,\dots,k$ and $ k \leq \frac{n}{2}$  hold in equation \eqref{eq:Tn}, then $T(n) = O(n^4)$.
-\end{proposition}
+T(n) = \max \{ C n^4 + \sum_{i=1}^k T(n_i) +
+T(k)\delta_{k<n} |
+\sum_{i=1}^k n_i = n, n_i \in \mathbb{Z}_{+} \}
+\end{equation}
+在 式\eqref{eq:Tn} 中，
+$Cn^4$ 代表 \texttt{DT} 的时间复杂度。
+$\delta_{k<n} = 1$ 是 指示函数，当满足条件 $k<n$时取值为1，
+否则 $\delta_{k<n}=0$。
+针对 $T(n)$，我们有如下定理：
+\begin{theorem}\label{thm:alg_complexity}
+	 若 $n_i \leq \frac{n}{2}, \textrm{ for } i=1,\dots,k$ 并且
+   $ k \leq \frac{n}{2}$  在式 \eqref{eq:Tn} 中成立， 
+   则 $T(n) = O(n^4)$.
+\end{theorem}
 
-The condition in Proposition \ref{prop:alg_complexity} restricts the shape of the clustering tree. For each non-leaf node, its children and the number of samples in each children are limited. However, the limitation is not so strict and
-many near-balanced trees satisfied the condition. Therefore, we can say that under this mild condition of Proposition \ref{prop:alg_complexity},
-our HPSP has time complexity $O(n^4)$, which is one order of magnitude faster than $O(n^5)$ of Algorithm \ref{alg:psp}.
+定理 \ref{thm:alg_complexity} 所要求的条件
+限制了聚类树的结构。
+它指出，若对于每个非叶节点，其后代数都不超过 $\frac{n}{2}$，则HPSP
+算法的时间复杂度是  $O(n^4)$。
+该条件适用于很多聚类树的情形，即使有个别节点不满足其假设，$T(n) = O(n^4)$也成立。
+我们在保证有相同计算结果的前提下，
+提出的HPSP 的时间复杂度的结果要比
+PSP算法 \ref{alg:psp} 的$O(n^5)$ 的结果快一个数量级。
 
-If the worst case scenario is considered, that is, the depth of the hierarchical tree is of order $O(n)$. Then it is inevitable to invoke \texttt{DT} $O(n)$ times.
-In this scenario, the complexity bound for $T(n)$ is $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$, which is $5$ times faster than $Cn^5$ of Algorithm \ref{alg:psp}.
+即使是最坏的情况，也即，聚类树的深度达到了 $O(n)$ 的数量级。
+则\texttt{DT} 不可避免地要调 用 $O(n)$ 次。
+在这种情形下，
+$T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$，
+其比 算法 \ref{alg:psp} 的结果
+快 $5$ 倍。
 
 \subsection{不同PSP算法的效率比较}
 在本节中，我们将比较 HPSP 算法和PSP算法
