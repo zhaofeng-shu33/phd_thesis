@@ -669,12 +669,12 @@ Gaussian 数据集里。
 
 下面我们针对不同的数据集比较本节提出的信息检测方法和其他常用的
 异常值检测算法的性能。
-我们使用 5 个数据集: Gaussian-blob, Moon， Lymphography, Glass 和 Ionosphere。 
+我们使用 5 个数据集: Gaussian-blob, Moon， Lymphography
+\cite{lazarevic2005feature}, Glass 和 Ionosphere \cite{keller2012hics}。 
 前两个数据集如前所述是
 人工生成的。
-后三个数据集来自于
-机器学习标准数据集
-\cite{Dua:2019}。
+后三个数据集在异常值检测算法比较的文章中大量使用
+\cite{campos2016evaluation}。
 我们对比的方法包括
 局部异常因子(local outlier factor \citep{Breunig}), 孤立森林（isolation forest \citep{if}）, 
 椭圆包络  和
@@ -736,6 +736,5 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
   print(cv)
   print(pl)
   \end{lstlisting}
-\section{实验结果}
 
 

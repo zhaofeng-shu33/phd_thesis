@@ -339,6 +339,8 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
     \end{proof}
   
 \section{数据集}
+
+\subsection{数据聚类数据集}
 Gaussian 数据集是用\texttt{scikit-learn}
 \cite{scikit-learn}
 的 make\_blobs 函数生成，每类25个数据点，共4类。
@@ -353,6 +355,7 @@ r &= 0.1 \times i + 0.01(2u-1), i = 1, 2, 3\\
 \end{align*}
 其中 $u,v$ 是 $[0,1]$ 间的随机数，彼此独立。
 
+\subsection{PSP算法性能比较所用数据集}
 Gaussian-blob 数据集与 Gaussian 数据集
 的区别在于每类$n$个数据点，其中$n=[1,2,3,4,5]*100$。
 
@@ -360,6 +363,27 @@ Two-level graph 数据集中取参数
 $z_{\mathrm{in}_1}=s^2-2,
 z_{\mathrm{in}_2}=s-1,
 z_{\mathrm{out}}=1$，其中$s=[3,4,5,6,7]$。
+\subsection{异常值检测所用数据集}
+GaussianBlob 数据集 共有 300 个点，
+其中 有 15\% 的点采样自 $[-6,6]\times [-6,6]$
+内的均匀分布，为异常值点。其余的点采样自标准差为0.5，
+中心在原点的 二维高斯分布， 为正常值点。
+
+Moon 数据集类似 GaussianBlob 数据集， 共有 345 个点，
+其中 有45 个点采样自 $[-6,6]\times [-6,6]$，经过个别点的坐标修正
+后视为异常值点，
+其余的点用 scikit-learn 的 make\_moons 函数生成，并做适当的
+伸缩变换后视为正常值点。
+
+Lymphography 数据集共148个数据点，
+分成4类，因为第1和第4类总共有6个数据点，被视为异常值点，
+其余的点为正常值点。
+
+Glass 数据集在数据聚类中用到过，这里因为其第6个类别的点数量最少，
+视其为整体的异常值点，而其他数据点为正常值点。
+
+Ionosphere 数据集经常预处理后共 351个数据点，特征的维度为32，
+其中 126个为异常值点。
 
 \section{算法超参数}
 \subsection{聚类算法}
@@ -416,4 +440,39 @@ z_{\mathrm{out}}=1$，其中$s=[3,4,5,6,7]$。
   \end{adjustbox}
 \caption{聚类算法超参数}\label{tab:clustering_alg_hyperparameter}
 \end{table}
+\subsection{社群的层次发现算法}
+
+\subsection{异常值检测算法}
+
+\begin{table}[!ht]
+  \begin{adjustbox}{width=\columnwidth,center}
+  \begin{tabular}{|l|r|r|r|r|r|r|}
+  \hline
+   异常值检测算法  &   参数名称 &
+   GaussianBlob &  Moon &  Lymphography &   Glass &   Ionosphere \\
+  \hline
+   \multirow{2}{*}{信息聚类}  &  linkage     &   complete&     single &   average
+   & ward &   complete \\
+   \cline{2-7}
+   & 类别数 & 4 & 3 & 3 & 7 & 15 \\
+   \hline
+   \multirow{2}{*}{局部异常因子}  &  
+   affinity & euclidean &  k近邻(16)
+   &  k近邻(10)
+   & euclidean &   euclidean \\
+   \cline{2-7}
+   & 衰减系数 & 0.5 & 0.8 & 0.5 & 0.8 & 0.5 \\
+   \hline
+   \multirow{2}{*}{一类支持向量机}  & 
+   affinity      &       rbf(0.4) &    rbf(0.01)
+   &  laplacian(8) 
+   & k近邻(14) &   rbf(0.2) \\
+   \cline{2-7}
+   & 类别数 & 4 & 3 & 3 & 42 & 38\\
+  \hline
+  \end{tabular}
+\end{adjustbox}
+\caption{异常值检测算法超参数}\label{tab:outlier_detection_alg_hyperparameter}
+\end{table}
+
 
