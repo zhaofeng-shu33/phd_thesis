@@ -1,8 +1,8 @@
 % !TeX root = ../thuthesis-example.tex
 
 \chapter{信息聚类理论与算法}
-数据聚类方法与社群发现方法有着天然的联系。
-
+在本章中，我们将围绕着基于图分割的信息聚类算法，研究它的理论性质、
+实现算法和在各领域的应用。
 \section{社群发现场景下的多变量互信息理论}
 在这一节中，我们首先把\ref{sec:local_geometry}节介绍
 的弱独立的概念推广到多个随机变量弱独立，
@@ -284,6 +284,38 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 \end{tabular}
 \caption{聚类算法效果比较}\label{tab:clustering_dataset}
 \end{table}
+
+尽管如此， 信息聚类算法在数据的层次聚类上具有明显的优势，
+下面我们通过一个实际问题的例子来说明。
+
+为了比较不同的层次聚类方法，最好直接比较聚类树。
+为此，
+我们使用来自\citet{khan2001classification}的基因表达数据集。
+由于我们不知道数据的真实聚类树的结构，
+我们可以采用分割特征的方法，
+分别在两个具有部分特征的数据集上应用聚类算法，
+并比较得到的聚类树的相似程度。
+这样做的另一个好处是我们还可以测试每种聚类方法的稳定性。
+
+我们将信息聚类算法与基于平均距离度量的层次聚类法、贝叶斯玫瑰树算法
+\cite{blundell2011discovering}
+进行了比较。
+树的相似性度量是 Robinson-Foulds 距离，
+它是将一棵树转换为另一棵树的步骤数
+（一个步骤指添加或删除一条边）
+\citep{day1985optimal}。
+针对不同数据样本数量的实验
+结果如图\ref{fig:shc}所示。
+可以看出，对于经典的层次聚类方法，
+其在不同特征子空间的树的结构相差最大，稳定性较差。
+当$n$较大时，信息聚类和贝叶斯玫瑰算法稳定性相当。
+但当$n$较小时，信息聚类表现最好。
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=6cm]{plot_results.pdf}
+\caption{Comparison of the stability of hierarchical clustering method}\label{fig:shc}
+\end{figure}
 
 \section{社群的层次发现算法}
 \label{subsec:cd}
@@ -603,8 +635,11 @@ $\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作
   \sum_{j \in B} \exp(-\gamma \norm{x - x_j}^2)= \gamma_N
 \end{equation}
 
-
-然后我们在算法层面进行考虑，假设在一个多分类问题中存在若干异常值点，
+上述讨论假设了所有正常值点同属一个类别，
+在实际应用中可能具有局限性。
+下面我们在算法层面进行考虑，提出一个将信息
+聚类的方法应用到异常值检测领域的方案。
+假设在一个多分类问题中存在若干异常值点，
 我们的目标是获得数据的一个分割，其形式为
 $\{C_1, \dots, C_K, \{x_1\}, \dots, \{x_M\}\}$。
 这里 $K$ 表示类别数 而 $M$ 表示异常值点的个数。
@@ -630,13 +665,77 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，可知优化问题有解。
 假设 $\lambda_{k-r}$ 是$\P_{k-r}, \P_{k-r+1}$ 两个分割对应的
 分界值并且图$G$边的权值是使用 rbf 核 来构建的，
 那么边界曲线方程可以写成下面的形式：
-\begin{equation}
+\begin{equation}\label{eq:boundary_curve_multiple}
 \sum_{j \in C_i} \exp(-\lambda \norm{x - x_j}^2)= \lambda_{k-r}, \textrm{ 其中 } \, C_i \in \P_{k-r} \textrm{且}\,  \abs{C_i} > 1
 \end{equation}
 注意到 $C_i$ 是其中一个类别，
 并且 一共有 $K$ 个 边界曲线。
 如果新的观测值落在所有这些边界曲线的外部，
 那么我们将其归类为异常值点。
+
+
+我们准备了三个人工数据集来验证我们提出的异常值检测算法。
+第一个数据集是一个高斯斑点，其中一些噪声点均匀分布在一个正方形中。
+第二个数据集是我们将 $(0,0)$ 这个点加入到
+\ref{sec:data_clustering} 节所描述的有4个类别的
+Gaussian 数据集里。
+最后一个数据集是两个错开的半圆形状(或月牙形状)，
+并且其周围分布着一些
+噪点。
+构造相似图的权值我们采用 rbf 核，其 异常值检测
+效果如图 \ref{fig:boundary} 所示。
+从前三幅图可以看出，由式\eqref{eq:boundary_curve_multiple}
+给出的边界曲线近似于正常值点的闭包曲线。
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\textwidth]{outlier_boundary_illustration.pdf}
+	\caption{在人工生成的数据集上
+  检测边界曲线的形状}
+  \label{fig:boundary}
+\end{figure}
+
+另外我们也
+在图 \ref{fig:boundary}.(d) 画出了椭圆包络(elliptic envelope \citep{rousseeuw1999fast} )方法的决策边界曲线。
+由于后一种方法假设内部数据分布在凸区域，因此决策边界是椭圆形状，
+因此不能很好地反映真实数据的分布。
+
+下面我们针对不同的数据集比较本节提出的信息检测方法和其他常用的
+异常值检测算法的性能。
+我们使用 5 个数据集: Gaussian-blob, Moon， Lymphography
+\cite{lazarevic2005feature}, Glass 和 Ionosphere \cite{keller2012hics}。 
+前两个数据集如前所述是
+人工生成的。
+后三个数据集在异常值检测算法比较的文章中大量使用
+\cite{campos2016evaluation}。
+我们对比的方法包括
+局部异常因子(local outlier factor \citep{Breunig}), 孤立森林（isolation forest \citep{if}）, 
+椭圆包络  和
+一类支持向量机 （one class SVM \citep{svm}）。 
+我们使用TPR和TNR来衡量检测的整体性能。
+正常值点被视为正样本。
+TPR衡量的是正样本集合中正确检测的百分比，
+而TNR衡量的是异常值点中正确检测的百分比。
+通常而言，一种检测方法很难在这两个指标上都获得高分。
+我们设法最大化TNR，同时控制每种方法的TPR$\geq 90\%$。
+每个方法的超参数和相似度度量都经过了调优，TNR的最佳结果如表\ref{tab:odm}所示。我们可以看到，信息检测在 GaussianBlob，Moon 和
+Lymphography 数据集上表现最好，与局部异常因子效果差不多，
+但在 Glass 和  Ionosphere 两个数据集上性能有待提升。
+\begin{table}
+  \begin{adjustbox}{width=\columnwidth,center}
+\begin{tabular}{cccccc}
+  \hline
+         TPR/TNR        &  GaussianBlob   &      Moon       &  Lymphography  &     Glass     &  Ionosphere   \\
+  \hline
+      信息检测    & 100\%/100\% & 97.4\%/100\%  & 97.9\%/100\% & 91.2\%/11.1\% & 90.7\%/48.4\% \\
+      局部异常因子 & 100\%/100\% & 100\%/100\% & 98.6\%/83.3\%  & 96.6\%/22.2\% & 90.2\%/82.5\% \\
+   孤立森林   & 100\%/100\% &  96.7\%/77.8\%  & 99.3\%/100\% & 89.8\%/11.1\% & 80.4\%/65.1\% \\
+    椭圆包络   & 100\%/100\% &  91.3\%/42.2\%  & 93.0\%/83.3\%  & 94.6\%/0.0\%  & 93.3\%/88.1\% \\
+     一类支持向量机     &  98.8\%/91.1\%  &  93.0\%/55.6\%  & 93.0\%/66.7\%  & 91.7\%/22.2\% & 83.1\%/69.0\% \\
+  \hline
+  \end{tabular}
+\end{adjustbox}
+\caption{不同异常值检测的算法比较}\label{tab:odm}
+\end{table}
 
 \section{代码实现}
 尽管最大流算法包比较多，但我们尚未发现
@@ -669,6 +768,5 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
   print(cv)
   print(pl)
   \end{lstlisting}
-\section{实验结果}
 
 
