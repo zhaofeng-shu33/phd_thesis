@@ -441,34 +441,41 @@ Ionosphere 数据集经常预处理后共 351个数据点，特征的维度为32
 \caption{聚类算法超参数}\label{tab:clustering_alg_hyperparameter}
 \end{table}
 \subsection{社群的层次发现算法}
-
+针对社群的层次发现场景，信息聚类和 GN 算法均是不含
+超参的。
+BHCD 算法的超参数较多，
+我们取 $\delta=0.2, \lambda=0.85$，其他参数取自文章\citet{RN23}
+中的默认值。
 \subsection{异常值检测算法}
+除信息检测算法外，我们使用 scikit-learn 算法包提供
+的接口，除接口默认的参数外，各算法的超参数如表\ref{tab:outlier_detection_alg_hyperparameter}
+所示。信息检测算法根据式\ref{eq:outlier_detection_proposal}介绍的规则自动判断异常值点的数量，
+其他算法则根据已知的异常值点的数量对异常值进行检测。
 
 \begin{table}[!ht]
   \begin{adjustbox}{width=\columnwidth,center}
-  \begin{tabular}{|l|r|r|r|r|r|r|}
+  \begin{tabular}{|l|c|c|c|c|c|c|}
   \hline
    异常值检测算法  &   参数名称 &
    GaussianBlob &  Moon &  Lymphography &   Glass &   Ionosphere \\
   \hline
-   \multirow{2}{*}{信息聚类}  &  linkage     &   complete&     single &   average
-   & ward &   complete \\
+   \multirow{2}{*}{信息聚类}  & affinity
+   & rbf & rbf & laplacian
+   & rbf & rbf \\
    \cline{2-7}
-   & 类别数 & 4 & 3 & 3 & 7 & 15 \\
+   & $\gamma$ & 0.5 & 0.8 & 0.1 & 0.05 & 0.29 \\
    \hline
-   \multirow{2}{*}{局部异常因子}  &  
-   affinity & euclidean &  k近邻(16)
-   &  k近邻(10)
-   & euclidean &   euclidean \\
-   \cline{2-7}
-   & 衰减系数 & 0.5 & 0.8 & 0.5 & 0.8 & 0.5 \\
+   局部异常因子  &  
+   邻居数量 & 20 &  10
+   &  60
+   & 2 &   9 \\
    \hline
    \multirow{2}{*}{一类支持向量机}  & 
-   affinity      &       rbf(0.4) &    rbf(0.01)
-   &  laplacian(8) 
-   & k近邻(14) &   rbf(0.2) \\
+   affinity & rbf &  rbf
+   & rbf
+   & rbf & rbf \\
    \cline{2-7}
-   & 类别数 & 4 & 3 & 3 & 42 & 38\\
+   & $\gamma$ & 0.1 & 0.1 & 0.1 & 0.1 & 0.4\\
   \hline
   \end{tabular}
 \end{adjustbox}

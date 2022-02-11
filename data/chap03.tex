@@ -1,8 +1,8 @@
 % !TeX root = ../thuthesis-example.tex
 
 \chapter{信息聚类理论与算法}
-数据聚类方法与社群发现方法有着天然的联系。
-
+在本章中，我们将围绕着基于图分割的信息聚类算法，研究它的理论性质、
+实现算法和在各领域的应用。
 \section{社群发现场景下的多变量互信息理论}
 在这一节中，我们首先把\ref{sec:local_geometry}节介绍
 的弱独立的概念推广到多个随机变量弱独立，
@@ -284,6 +284,38 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 \end{tabular}
 \caption{聚类算法效果比较}\label{tab:clustering_dataset}
 \end{table}
+
+尽管如此， 信息聚类算法在数据的层次聚类上具有明显的优势，
+下面我们通过一个实际问题的例子来说明。
+
+为了比较不同的层次聚类方法，最好直接比较聚类树。
+为此，
+我们使用来自\citet{khan2001classification}的基因表达数据集。
+由于我们不知道数据的真实聚类树的结构，
+我们可以采用分割特征的方法，
+分别在两个具有部分特征的数据集上应用聚类算法，
+并比较得到的聚类树的相似程度。
+这样做的另一个好处是我们还可以测试每种聚类方法的稳定性。
+
+我们将信息聚类算法与基于平均距离度量的层次聚类法、贝叶斯玫瑰树算法
+\cite{blundell2011discovering}
+进行了比较。
+树的相似性度量是 Robinson-Foulds 距离，
+它是将一棵树转换为另一棵树的步骤数
+（一个步骤指添加或删除一条边）
+\citep{day1985optimal}。
+针对不同数据样本数量的实验
+结果如图\ref{fig:shc}所示。
+可以看出，对于经典的层次聚类方法，
+其在不同特征子空间的树的结构相差最大，稳定性较差。
+当$n$较大时，信息聚类和贝叶斯玫瑰算法稳定性相当。
+但当$n$较小时，信息聚类表现最好。
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=6cm]{plot_results.pdf}
+\caption{Comparison of the stability of hierarchical clustering method}\label{fig:shc}
+\end{figure}
 
 \section{社群的层次发现算法}
 \label{subsec:cd}
