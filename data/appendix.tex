@@ -387,6 +387,7 @@ Ionosphere 数据集经常预处理后共 351个数据点，特征的维度为32
 
 \section{算法超参数}
 \subsection{聚类算法}
+在表\ref{tab:clustering_dataset}对应的实验中，
 除信息聚类算法外，我们使用 scikit-learn 算法包提供
 的接口，各算法的超参数如表\ref{tab:clustering_alg_hyperparameter}
 所示。
@@ -440,6 +441,11 @@ Ionosphere 数据集经常预处理后共 351个数据点，特征的维度为32
   \end{adjustbox}
 \caption{聚类算法超参数}\label{tab:clustering_alg_hyperparameter}
 \end{table}
+
+另外，在图\ref{fig:shc}对应的实验中。系统聚类法我们使用 scipy 算法包中的 linkage 来完成。
+对于贝叶斯玫瑰树算法，我们
+%参考了xxx的开源实现，
+采用的超参为。
 \subsection{社群的层次发现算法}
 针对社群的层次发现场景，信息聚类和 GN 算法均是不含
 超参的。

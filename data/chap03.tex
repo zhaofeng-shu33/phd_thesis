@@ -291,6 +291,8 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 为了比较不同的层次聚类方法，最好直接比较聚类树。
 为此，
 我们使用来自\citet{khan2001classification}的基因表达数据集。
+该数据集共有6000多条基因数据，训练集的特征维度是64，
+测试集是25。这里我们只使用前300条基因的数据。
 由于我们不知道数据的真实聚类树的结构，
 我们可以采用分割特征的方法，
 分别在两个具有部分特征的数据集上应用聚类算法，
@@ -314,7 +316,7 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=6cm]{plot_results.pdf}
+\includegraphics[width=8cm]{plot_results.pdf}
 \caption{不同层次聚类算法稳定性的比较}\label{fig:shc}
 \end{figure}
 
