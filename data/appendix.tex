@@ -443,9 +443,12 @@ Ionosphere 数据集经常预处理后共 351个数据点，特征的维度为32
 \end{table}
 
 另外，在图\ref{fig:shc}对应的实验中。系统聚类法我们使用 scipy 算法包中的 linkage 来完成。
-对于贝叶斯玫瑰树算法，我们
+对于贝叶斯玫瑰树算法，
 %参考了xxx的开源实现，
-采用的超参为。
+混合比例取 $\alpha=0.5$且先验分布是
+正态逆威沙特 （Normal-inverse-Wishart）分布。
+%(a mixing proportion)
+
 \subsection{社群的层次发现算法}
 针对社群的层次发现场景，信息聚类和 GN 算法均是不含
 超参的。

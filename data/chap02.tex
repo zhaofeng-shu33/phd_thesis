@@ -508,3 +508,29 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
 从而印证
 了弱独立情形下互信息的表达式。
 \end{example}
+     
+\section{随机块模型}
+我们首先定义一些常用的符号。随机图仍用符号$G$表示，
+其节点集 $V=\{1,\dots, n\}$ 简写成 $[n]$。
+每个节点的标签为 $X_i$，从 $W= \{1, \omega, \dots, \omega^{k-1}\}$中取值。
+为方便后续讨论，这里我们给$W$赋予群的结构，让它成为一个阶为$k$的循环群，
+即$\omega^k=1$。
+$W^n$ 表示 $W$的$n$次笛卡尔积。 
+
+下面给出有$k$个社群的对称的随机块模型\footnote{
+英文全称为 Symmetric Stochastic Block Model，
+缩写为 SSBM}
+的定义, 
+	\begin{definition}[有$k$ 个社群的 SSBM]\label{def:SSBM}
+	令 $0\leq q<p\leq 1$, $V=[n]$ 且
+  $X=(X_1,\dots,X_n)\in W^n$。 对任意的 $u\in W$，
+  $X$ 满足约束
+  $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$。
+	如果下面两个条件满足，
+  则称随机图 $G$ 是通过 $\SSBM(n,k,p,q)$ 模型产生的。 
+	\begin{enumerate}
+	\item 若 $X_i=X_j$， $G$ 在 节点 $i$ 和节点 $j$之间存在边的概率是 $p$； 
+ 若 $X_i \neq X_j$，  在 节点 $i$ 和节点 $j$之间存在边的概率是 $q$。
+	\item 每条边的存在与否相互独立。
+	\end{enumerate}
+\end{definition}
