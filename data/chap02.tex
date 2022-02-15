@@ -620,7 +620,7 @@ $i$个节点的度(degree)。
 		\caption{$T<T_c$, spins align}
 	\end{subfigure}
   \caption{}\label{fig:ising_two_configurations}
-\end{figure}
+\end{figure}    
 
 在统计物理学中，伊辛模型指的是
 可以处于两种状态的自旋磁子的集合。如图
@@ -672,7 +672,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 归一化常数。
 
 伊辛模型除了定义在正方形网格上外，还可以推广到一般的图 $G(V, E)$ 上。
-此时伊辛模型的能量函数为
+对于没有外场的情形，伊辛模型的能量函数为
 \begin{equation}\label{eq:hamiltonian}
 	H(\sigma) = -\sum_{\{i,j\} \in E(G)} \sigma_i \cdot \sigma_j
 \end{equation}
@@ -681,7 +681,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 
 \begin{example}
   表 \ref{tab:particles_3} 给出了一个含有3个粒子的系统，其共有8种微观态，
-  但根据式\ref{eq:hamiltonian}， 其在宏观能量的表现了只有$H=-3$或 $H=1$两种组合。
+  但根据式\eqref{eq:hamiltonian}， 其在宏观能量的表现了只有$H=-3$或 $H=1$两种组合。
 \begin{table}
   \centering
 \begin{tabular}{ccc}
@@ -700,5 +700,48 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 \end{table}
 \end{example}
 
+有学者\cite{ye2020exact}
+指出，\eqref{eq:hamiltonian} 式所描述的
+伊辛模型不存在相变现象，因为式\eqref{eq:canonical_ensemble}
+给出的分布聚集在 $\sigma=\pm \mathbf{1}_n$ 附近，
+这里 $\mathbf{1}_n$ 表示长度为 $n$ 的全1的向量。
+为此，可以采用下述修正模型，将没有边相连的粒子之间的
+作用力考虑进来。
+\begin{equation}\label{eq:ising_modified}
+  H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{\{i,j\}\not\in E(G)}
+  \bar{\sigma}_i  \bar{\sigma}_j
+	- \sum_{\{i,j\}\in E(G)}
+  \bar{\sigma}_i  \bar{\sigma}_j
+\end{equation}
+这里引入了一个新的参数 $\gamma > 0$。因为该工作研究的是
+由随机块模型 $\SSBM(n,2,p,q)$产生的图上定义的伊辛模型，
+式\eqref{eq:ising_modified} 出现的系统
+$\frac{\log n}{n}$ 主要是为了与其研究场景 $p,q=O(\log n / n)$
+相对应。
 
 \section{大偏差理论与聚集不等式}
+本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
+
+\begin{lemma}[马尔可夫不等式]
+  设 $X$ 是非负型随机变量，则对于非负实数$a$有。
+  \begin{equation}
+    \Pr(X\geq a) \leq {1 \over a} \E[X]   
+  \end{equation}
+   若$X$ 不一定非负，$a$ 是任意实数，可先取$e$指数再运用Markov不等式，
+   即有
+   \begin{equation}\label{eq:chernoff_bound}
+    \Pr(X\geq a) = \Pr(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]
+   \end{equation}
+   式\eqref{eq:chernoff_bound}也被称为 Chernoff 界。
+\end{lemma}
+
+\begin{lemma}[切比雪夫不等式]
+  对于随机变量 $X$， 正实数$a$，我们有
+  \begin{equation}
+    \Pr(\abs{X-\E[X]} \geq a) \leq {1 \over a^2} \Var[X]
+  \end{equation}
+\end{lemma}
+
+% to do: add large deviation theory and hypothesis testing
+
+\section{随机块模型的精确恢复问题}
