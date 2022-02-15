@@ -609,5 +609,96 @@ $i$个节点的度(degree)。
 
 
 \section{Ising 模型}
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.7\textwidth]{Tlarge.pdf}
+		\caption{$T>T_c$, random spins}
+	\end{subfigure}~
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.7\textwidth]{Tsmall.pdf}
+		\caption{$T<T_c$, spins align}
+	\end{subfigure}
+  \caption{}\label{fig:ising_two_configurations}
+\end{figure}
+
+在统计物理学中，伊辛模型指的是
+可以处于两种状态的自旋磁子的集合。如图
+\ref{fig:ising_two_configurations} 所示，
+当外界温度$T$
+大于临界温度 $T_c$ 时，
+各自旋磁子处于杂乱无章的状态，其总的磁化强度接近0。
+但当外界温度$T$
+小于临界温度 $T_c$ 时，
+各自旋磁子的状态则变得方向一致。
+这里，我们称这种方向一致的现象叫自发磁化。
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{square-lattice.png}
+		\caption{正方形网格}\label{fig:square_lattice}
+	\end{subfigure}~
+	\begin{subfigure}{0.53\textwidth}
+		\includegraphics[width=\textwidth]{monte-carlo-ising-6.png}
+		\caption{$M$随温度变化情况}
+	\end{subfigure}
+  \caption{}
+\end{figure}
+
+下面我们介绍Ising模型一些常用的概念，
+如图\ref{fig:square_lattice}所示，
+在一个正方形网格中的格点上分布着磁子，一共有$N$个。
+$\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁子的状态，
+总的磁化强度为 $M = \frac{1}{N} \sum_{i=1}^N \sigma_i$。
+理论研究时先考虑有限的正方形网格， 再取 $N\to \infty$。
+由于磁子之间的磁力作用和受外场的影响，存在着磁化强度的相变现象，即
+\begin{enumerate}
+		\item $T< T_c$, $M>0$, 发生自发磁化。
+		\item $T> T_c$, $M=0$, 无自发磁化。
+\end{enumerate}
+图\ref{fig:square_lattice}中给出了自发磁化的仿真实验结果，其中临界温度用
+红竖线标出。
+
+对于自发磁化现象可以通过统计力学中的正则系踪（Canonical ensemble）
+理论进行解释。该理论
+假设粒子的分布为
+\begin{equation}\label{eq:canonical_ensemble}
+P(\sigma = \bar{\sigma}) = \frac{1}{Z} \exp(-\beta H(\bar{\sigma}))
+\end{equation}
+其中$\sigma \in \{\pm 1\}^n$ 表示粒子的状态，
+$H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的总能量，$\beta$是与温度成反比的参数，
+也叫逆温度（inverse temperature），$Z$是配分函数，是概率分布的
+归一化常数。
+
+伊辛模型除了定义在正方形网格上外，还可以推广到一般的图 $G(V, E)$ 上。
+此时伊辛模型的能量函数为
+\begin{equation}\label{eq:hamiltonian}
+	H(\sigma) = -\sum_{\{i,j\} \in E(G)} \sigma_i \cdot \sigma_j
+\end{equation}
+在微观层面上，概率越大或能量越低的状态越有可能出现；在宏观层面则表现为
+磁化强度$M$的变化。
+
+\begin{example}
+  表 \ref{tab:particles_3} 给出了一个含有3个粒子的系统，其共有8种微观态，
+  但根据式\ref{eq:hamiltonian}， 其在宏观能量的表现了只有$H=-3$或 $H=1$两种组合。
+\begin{table}
+  \centering
+\begin{tabular}{ccc}
+		No & Micro state & Macro state ($H$) \\
+		1 & $\uparrow\uparrow\uparrow$ & -3 \\
+		2 & $\uparrow\uparrow\downarrow$ & 1 \\
+		3 & $\uparrow\downarrow\uparrow$ & 1 \\
+		4 & $\downarrow\uparrow\uparrow$ & 1 \\
+		5 & $\uparrow\downarrow\downarrow$ & 1    \\
+6 & $\downarrow\uparrow\downarrow$ & 1 \\
+7 & $\downarrow\downarrow\uparrow$ & 1 \\
+8 & $\downarrow\downarrow\downarrow$ & -3 \\
+\end{tabular}
+\caption{一个含有3个粒子的系统的微观状态与宏观能量}
+\label{tab:particles_3}
+\end{table}
+\end{example}
+
 
 \section{大偏差理论与聚集不等式}
