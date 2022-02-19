@@ -540,6 +540,10 @@ $W^n$ 表示 $W$的$n$次笛卡尔积。
 	\end{enumerate}
 \end{definition}
 
+在定义 \ref{def:SSBM} 中，注意到 $p>q$，
+说明同社群之间的节点有边相连的概率更大，而
+属于不同社群的节点之间有边相连的概率较小。
+
 为进一步解释随机块模型，
 我们定义随机变量 $Z_{ij}:=\bf{1}[\{i,j\} \in E(G)]$，
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
@@ -738,11 +742,19 @@ $\frac{\log n}{n}$ 主要是为了与其研究场景 $p,q=O(\log n / n)$
     \STATE $\bar{\sigma} \leftarrow \bar{\sigma}'$
     \ELSE
     \STATE 以概率 $\exp(-\beta \Delta H)$ 
-    使得 $\bar{\sigma} \leftarrow -\bar{\sigma}'$ 
+    使得 $\bar{\sigma} \leftarrow \bar{\sigma}'$，
+    否则保持原状。 
     \ENDIF
     \STATE 重复步骤 2-8 直到收敛。
 \end{algorithmic}  
 \end{algorithm}
+
+以上讨论的伊辛模型中粒子均只有$\{\pm 1\}$两个状态，
+每个粒子的状态数可以扩展到多个，即 玻茨模型\cite{potts1952some}。
+类似式\ref{eq:hamiltonian}，标准玻茨模型的汉密尔顿能量公式为：
+\begin{equation}
+  H(\sigma) = -\sum_{(i,j) \in E(G)}\delta(\sigma_i, \sigma_j)
+\end{equation}
 
 \section{大偏差理论与聚集不等式}
 本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
@@ -827,3 +839,9 @@ $P_e(\hat{X}) \to 0$。
 对于随机算法, $\hat{X} \in S_k(X)$ 发生的概率 应该理解
 为 $\sum_{G \in \cG_n} P_G(G) P_{\hat{X}|G}(\hat{X} \in S_k(X))$。 
 对于确定的图，这个概率是 $P_G(\hat{X} \in S_k(X))$。
+
+在定义\ref{def:SSBMR}中，精确恢复也称强恢复。强恢复是相对于弱恢复
+而言的，前者要求所有节点都要分对，而后者只要求分对节点的比率收敛到1即可。
+关于这两种恢复条件近年来涌现大量相关的研究工作，
+因为我们的工作只涉及强恢复，
+下面对一些和强恢复有关的重要结论进行逐一介绍。
