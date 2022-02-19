@@ -715,9 +715,34 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 \end{equation}
 这里引入了一个新的参数 $\gamma > 0$。因为该工作研究的是
 由随机块模型 $\SSBM(n,2,p,q)$产生的图上定义的伊辛模型，
-式\eqref{eq:ising_modified} 出现的系统
+式\eqref{eq:ising_modified} 出现的系数
 $\frac{\log n}{n}$ 主要是为了与其研究场景 $p,q=O(\log n / n)$
 相对应。
+
+梅特罗波利斯（Metropolis）算法\cite{metropolis1953equation}
+用于产生伊辛模型的样本。此外，该算法的变体“模拟退火”
+\cite{pincus1970monte} 也是优化领域常用的随机算法。
+其算法从系统一个随机的状态出发每次改变其中一个粒子
+的状态并按一定的概率接受改变或保持原来的状态。
+给定形如式\eqref{eq:ising_modified}
+的能量函数，算法\ref{alg:Metropolis}
+给出了梅特罗波利斯算法的步骤。
+
+\begin{algorithm}
+  \caption{梅特罗波利斯算法}\label{alg:Metropolis}
+  \begin{algorithmic}[1]
+    \STATE 随机初始化 $\bar{\sigma}$
+    \STATE 随机选一个粒子进行状态翻转，新的系统状态记为 $\bar{\sigma}'$ 
+    \STATE 计算能量差 $\Delta H= H(\bar{\sigma}') - H(\bar{\sigma})$
+    \IF{$\Delta H < 0$}
+    \STATE $\bar{\sigma} \leftarrow \bar{\sigma}'$
+    \ELSE
+    \STATE 以概率 $\exp(-\beta \Delta H)$ 
+    使得 $\bar{\sigma} \leftarrow -\bar{\sigma}'$ 
+    \ENDIF
+    \STATE 重复步骤 2-8 直到收敛。
+\end{algorithmic}  
+\end{algorithm}
 
 \section{大偏差理论与聚集不等式}
 本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
@@ -776,7 +801,7 @@ $S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
 
 给定 随机块模型，精确恢复问题可以正式定义如下:
 \begin{definition}[SBM 中的精确恢复] \label{def:SSBMR}
-给定节点标签 $X$, 随机图 $G$ 从 $\SSBM(n,k,p,q)$ 模型中采样。
+给定节点标签 $X$, 随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
 一个社群发现算法$\hat{X}$ 相当于从已知的$G$中估计$X$，也被称做$X$
 的估计量。称该算法
 可精确恢复$X$，如果
