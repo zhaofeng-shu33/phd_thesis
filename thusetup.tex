@@ -120,9 +120,10 @@
 }
 
 % 可以使用 nomencl 生成符号和缩略语说明
-% \usepackage{nomencl}
-% \makenomenclature
+%\usepackage{nomencl}
 
+%\makenomenclature
+%\renewcommand{\nomname}{主要符号对照表}
 % 表格加脚注
 \usepackage{threeparttable}
 
@@ -184,5 +185,6 @@
 \input{code-style.tex}
 \usepackage{adjustbox}
 \usepackage{glossaries}
+\newglossary[nlg]{notation}{not}{ntn}{主要符号对照表}
 % hyperref 宏包在最后调用
 \usepackage{hyperref}

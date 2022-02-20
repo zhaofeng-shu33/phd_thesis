@@ -583,9 +583,13 @@ P_G(G):=P_G(Z = z| X) = p^{\sum_{X_i = X_j} z_{ij}}q^{\sum_{X_i \neq X_j} z_{ij}
   \min \sum_{(i,j) \in E} (1-\delta(x_i, x_j))
 \end{equation}
 这里，示性函数 $\delta(x,y)$ 定义为：
-当 $x=y$ 时，
-$\delta(x,y) = 1 $；
-当 $x\neq y$，$\delta(x,y)=0$。
+\glsdesc{not:deltaxy}。
+\newglossaryentry{not:deltaxy}
+{
+  type=notation,
+  name={$\delta(x,y)$},
+  description={当 $x=y$ 时，$\delta(x,y) = 1$； 当 $x\neq y$，$\delta(x,y)=0$}
+}
 
 当$k=2$时，式\eqref{eq:minimum_k_cut} 即为 植入性分割模型，
 是图论中经典的NP难的二分问题之一。
