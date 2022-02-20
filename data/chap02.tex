@@ -850,3 +850,33 @@ $P_e(\hat{X}) \to 0$。
 关于这两种恢复条件近年来涌现大量相关的研究工作，
 因为我们的工作只涉及强恢复，
 下面对一些和强恢复有关的重要结论进行逐一介绍。
+
+设$a>b>0$，针对两个社群（$k=2$）且$p=\A,q=\B$的情形。
+Abbe \cite{abbe2015exact} 和 Mossel
+\cite{mossel2016} 分别独立的研究发现了最大似然算法
+精确恢复误差的变化规律。
+因为最大似然算法相当于理论最优的估计量，他们的成果可总结为如下定理：
+\begin{theorem}\label{thm:sbm2_phase_transition}
+设 $P_e=P(\hat{X} \neq \pm X)$: 当 $n \to \infty$，
+对于 $\SSBM(n,2,\A, \B)$ 模型，
+有如下两种情形：
+	\begin{enumerate}
+		\item $\sqrt{a} - \sqrt{b} > \sqrt{2}$时,
+    $P_e \to 0$, 存在算法满足精确恢复的要求;
+		\item $\sqrt{a} - \sqrt{b} < \sqrt{2}$时,
+    $P_e \to 1$, 没有算法可实现精确恢复。
+	\end{enumerate}
+\end{theorem}
+定理\ref{thm:sbm2_phase_transition} 揭示了
+具有2个社群结构的SBM模型在精确恢复度量下的相变规律，
+该结论很快被Abbe 推广到$k>2$的情形，由定理
+\ref{thm:sbmk_phase_transition} 给出。
+该结果可以视为一般的SBM
+精确恢复条件的一个特例。
+
+\begin{theorem}\label{thm:sbmk_phase_transition}
+  对于 $\SSBM(n,k,\A, \B)$ 模型，
+  $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 时精确恢复可实现，
+  $\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
+ 没有算法可实现精确恢复。
+\end{theorem}
