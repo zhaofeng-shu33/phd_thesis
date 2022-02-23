@@ -521,22 +521,35 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
      
 \section{随机块模型}\label{sec:sbm}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
-
-\gls{sbm}（SBM）是社群发现问题中最常用的统计模型之一
+\newacronym{acr:sbm}{SBM}{Stochastic Block Model}
+\gls{sbm}（\gls{acr:sbm}）是社群发现问题中最常用的统计模型之一
 \cite{holland1983stochastic, abbe2017community}。
 它提供了一个基准人工数据集来评估不同的社群检测算法
 并启发了许多社群检测任务算法的设计 \cite{fortunato2010community}。
 
 我们首先定义一些常用的符号。随机图仍用符号$G$表示，
 其节点集 $V=\{1,\dots, n\}$ 简写成 $[n]$。
-每个节点的标签为 $X_i$，从 $W= \{1, \omega, \dots, \omega^{k-1}\}$中取值。
+每个节点的标签为 $X_i$，
+\newglossaryentry{not:W}
+{
+  type=notation,
+  name={\ensuremath{W}},
+  description={循环群，即$\{1, \omega, \dots, \omega^{k-1}\}$，$k=2$时$\omega=-1$}
+}
+从 \gls{not:W} $= \{1, \omega, \dots, \omega^{k-1}\}$中取值。
 为方便后续讨论，这里我们给$W$赋予群的结构，让它成为一个阶为$k$的循环群，
 即$\omega^k=1$。
-$W^n$ 表示 $W$的$n$次笛卡尔积。 
+\newglossaryentry{not:Wn}
+{
+  type=notation,
+  name={\ensuremath{W^n}},
+  description={$W$的$n$次笛卡尔积}
+}
+\gls{not:Wn} 表示 \glsdesc{not:Wn}。 
 
-下面给出有$k$个社群的对称的随机块模型\footnote{
-英文全称为 Symmetric Stochastic Block Model，
-缩写为 SSBM}
+\newacronym{acr:ssbm}{SSBM}{Symetric Stochastic Block Model}
+下面给出有$k$个社群的对称的随机块模型
+（\gls{acr:ssbm}）
 的定义, 
 	\begin{definition}[有$k$ 个社群的 SSBM]\label{def:SSBM}
 	令 $0\leq q<p\leq 1$, $V=[n]$ 且
@@ -767,10 +780,16 @@ $\frac{\log n}{n}$ 主要是为了与其研究场景 $p,q=O(\log n / n)$
 
 以上讨论的伊辛模型中粒子均只有$\{\pm 1\}$两个状态，
 每个粒子的状态数可以扩展到多个，即 玻茨模型\cite{potts1952some}。
-类似式\ref{eq:hamiltonian}，标准玻茨模型的汉密尔顿能量公式为：
-\begin{equation}
+类似式\eqref{eq:hamiltonian}，标准玻茨模型的汉密尔顿能量公式为：
+\begin{equation}\label{eq:Hsigma_multiple_state}
   H(\sigma) = -\sum_{(i,j) \in E(G)}\delta(\sigma_i, \sigma_j)
 \end{equation}
+需要注意的是，在状态数$k=2$的情形
+式\eqref{eq:Hsigma_multiple_state} 
+与式\eqref{eq:hamiltonian}
+并不严格等价。
+从$\delta(\sigma_i, \sigma_j) = \frac{\sigma_i \sigma_j + 1}{2}$
+可以看出，它们之间差了一个伸缩变换。
 
 \section{大偏差理论与聚集不等式}
 本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
@@ -797,7 +816,7 @@ $\frac{\log n}{n}$ 主要是为了与其研究场景 $p,q=O(\log n / n)$
 
 % to do: add large deviation theory and hypothesis testing
 
-\section{随机块模型的精确恢复问题}
+\section{随机块模型的精确恢复问题}\label{sec:exact_recovery}
 随机块模型的精确恢复是指某社群发现算法用在随机块模型上可以将
 每个节点的类别都正确地分出来。因为随机块模型具有随机性，
 这里正确的分出来是指当图的节点数目趋于无穷大时，以概率1正确。
@@ -811,8 +830,14 @@ $f$ 是 定义在 $W$ 上的置换函数
 对于任意 $\sigma \in W^n$，
 定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
 此外，我们定义两个$W^n$中的向量的距离为
-$\Dist(\sigma, \sigma')
-=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$,
+\newglossaryentry{not:dist}
+{
+  type=notation,
+  name={$\Dist(\sigma, \sigma')$},
+  description={两个$W^n$中的向量的距离，即$|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$}
+}
+\gls{not:dist}
+$=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$,
 其中 $\sigma,\sigma'\in W^n
 $。
 \begin{example}
@@ -898,4 +923,51 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
 将\ref{sec:sbm} 节 介绍的 SBM 模型与 \ref{sec:ising} 节介绍的 Ising 模型
-复合起来可得到 \gls{sibm}（\gls{acr:sibm}）。
+复合起来可得到 \gls{sibm}（\gls{acr:sibm}）\cite{ye2020exact}。
+该模型首先由 SBM 生成随机图，
+再由随机图上定义的 Ising 模型多次生成节点的状态。
+SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实状态。
+该复合模型可用于模拟两党制国家政治选举前的多次民意调查，
+生成随机图依据的节点真实状态即为选民
+的政治倾向。下面对SIBM的研究结果进行简要介绍。
+
+在\citet{ye2020exact} 的研究工作中，由 $\SSBM(n,2,\A, \B)$
+生成随机图，采用 \eqref{eq:ising_modified} 定义的能量函数
+独立生成 Ising 模型的样本 $m$ 次，记为
+$\SIBM(n, \A, \B, \gamma, \beta, m)$。
+类似 \ref{sec:exact_recovery}节
+针对SBM的精确恢复，
+同样在 SIBM 上也可以定义精确恢复为：
+\begin{definition}
+  设 $(\sigma^{(1)}, \dots, \sigma^{(m)})$
+  由 $\SIBM(n, \A, \B, \gamma, \beta, m)$ 生成。
+  称该 SIBM 可精确恢复，如果存在算法$\hat{X}$以
+  $(\sigma^{(1)}, \dots, \sigma^{(m)})$ 为输入，
+  满足 $\lim_{n\to \infty}P(\hat{X}=\pm X) = 1$。 
+\end{definition}
+
+类似 SBM，SIBM 也存在相变现象，可总结为如下的定理。
+\begin{theorem}
+  设 $\sqrt{a} - \sqrt{b} > \sqrt{2}$ 且 $\gamma, \beta > 0$,
+  定义临界量 $\beta^*, m^*$ 为：
+  \begin{equation}
+    \beta^* :=  \frac{1}{2} \log \frac{a+b-2 - \sqrt{(a+b-2)^2-4ab}}{2b}
+    \, \textrm{ 和 } \,
+    m^* := 2\left\lfloor\frac{\beta^*}{\beta} \right\rfloor + 1
+  \end{equation}
+  针对 $\SIBM(n, \A, \B, \gamma, \beta, m)$ 模型，我们有
+  \begin{enumerate}
+    \item 若 $\gamma > b, m \geq m^*$，SIBM 可精确恢复；
+    \item 若 $\gamma >b, m < m^*$，当$n\to \infty$ 时，所有SIBM 恢复算法的成功率趋近于零；
+    \item 若 $ \gamma < b\beta, n = O(\log^{1/4}(n))$，SIBM无法精确恢复，特别地，对于$m$是不随$n$
+    增长的常数时 SIBM 无法精确恢复；
+    \item 若 $m=1, \beta > \beta^*$，则 $P(\sigma^{(1)}=\pm X) = 1-o(1)$
+    \item 若 $m=1, \beta \leq \beta^*$，则
+    $P(\Dist(\sigma^{(1)}, \pm X) =
+    \Theta(n^{g(\beta)}))=1-o(1)$。
+  \end{enumerate}
+  这里， $g(\beta)$ 函数定义为
+  \begin{equation}
+    g(\beta):= \frac{be^{2\beta} + a e^{-2\beta}}{2} - \frac{a+b}{2} +1
+  \end{equation}
+\end{theorem}
