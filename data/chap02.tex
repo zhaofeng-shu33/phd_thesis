@@ -519,7 +519,7 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
 了弱独立情形下互信息的表达式。
 \end{example}
      
-\section{随机块模型}
+\section{随机块模型}\label{sec:sbm}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
 
 \gls{sbm}（SBM）是社群发现问题中最常用的统计模型之一
@@ -628,7 +628,7 @@ $i$个节点的度(degree)。
 的社群发现问题 \cite{clauset2004finding}。
 
 
-\section{Ising 模型}
+\section{Ising 模型}\label{sec:ising}
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -882,7 +882,8 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \end{theorem}
 定理\ref{thm:sbm2_phase_transition} 揭示了
 具有2个社群结构的SBM模型在精确恢复度量下的相变规律，
-该结论很快被Abbe 推广到$k>2$的情形，由定理
+该结论很快被Abbe 推广到$k>2$的情形
+\cite{abbe2015community}，由定理
 \ref{thm:sbmk_phase_transition} 给出。
 该结果可以视为一般的SBM
 精确恢复条件的一个特例。
@@ -893,3 +894,8 @@ Abbe \cite{abbe2015exact} 和 Mossel
   $\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
  没有算法可实现精确恢复。
 \end{theorem}
+\section{SIBM 模型}
+\newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
+\newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
+将\ref{sec:sbm} 节 介绍的 SBM 模型与 \ref{sec:ising} 节介绍的 Ising 模型
+复合起来可得到 \gls{sibm}（\gls{acr:sibm}）。
