@@ -12,8 +12,8 @@
 每个节点由两状态变成了多状态。由于我们的研究重点并非
 从随机块-玻茨模型的多个样本恢复节点的原始标签，而是利用
 玻茨模型对随机块模型进行社群发现，因此我们首先给出
-定义在随机块模型生成的图上的玻茨模型：
-\begin{definition}
+由随机块模型生成的图上定义的玻茨模型：
+\begin{definition}\label{def:ising}
 	给定从$\SSBM(n,k,\A,\B)$ 中生成的随机图 $G$，
     定义在$G$上的玻茨模型（$k$个状态的伊辛模型）带有两个参数 $\gamma,\beta>0$，
 	并且是关于状态向量$\sigma\in W^n$ 的概率分布
@@ -31,27 +31,66 @@
     $Z_G(\gamma,\beta)$ 是该分布的归一化常数。
 \end{definition}
 
-In physics, $\beta$ refers to the inverse temperature and $Z_G(\gamma, \beta)$ is called the partition function.
-The Hamiltonian energy $H(\bar{\sigma})$ consists of two terms: the repelling interaction between nodes without edge connection
-and the attracting interaction between nodes with edge connection. The~parameter $\gamma$ indicates the ratio of the strength of these two
-interactions. The~term $\frac{\log n}{n}$ is added to balance the two interactions because there are only $O(\frac{\log n}{n})$
-connecting edges for each node.
-The probability of each state is proportional to $\exp(-\beta H(\bar{\sigma}))$, and~the state with the largest
-probability corresponds to that with the lowest~energy.
+式\eqref{eq:isingma}中
+各符号的含义同式\eqref{eq:canonical_ensemble}。
+而表示汉密尔顿能量的式\eqref{eq:energy}
+则是式\eqref{eq:ising_modified}的推广。
+当  $k=2$ 时 式 \eqref{eq:energy}
+在评注\ref{rem:equivalence_H_energy}的意义下
+退化成 式 \eqref{eq:ising_modified}。 
 
-The classical definition of the Ising model is specified by $H(\sigma)=-\sum_{(i,j)\in E(G)} \sigma_i \cdot \sigma_j$ for
-$\sigma_i = \pm 1$.
-There are two main differences between Definition \ref{def:ising} and the classical one. Firstly, we add a repelling term
-between nodes without an edge connection. This makes these nodes have a larger probability to take different labels.
-Secondly, we allow the state at each node to take $k$ values from $W$ instead of the two values $\pm 1$.
-When $\gamma = 0$ and $k=2$,\linebreak Definition \ref{def:ising}
-is reduced to the classical definition of the Ising model up to a scaling~factor.
+这里的能量函数$H(\bar{\sigma})$ 同样有两部分组成:
+没有边相连的节点之间排斥力的势能和
+有边相连的节点之间吸引力的势能。
+$\gamma$ 参数衡量了两种势能之间的比率而
+$\frac{\log n}{n}$ 则是对由于边的数量不均匀造成两种势能量阶不同的修正项，
+因为两节点间有边相连的概率仅为 $O(\frac{\log n}{n})$。
 
-Definition \ref{def:ising} gives a stochastic estimator $\hat{X}^*$ for $X$: $\hat{X}^*$ is one sample generated from the Ising model, which is denoted as
-$\hat{X}^* \sim \textrm{Ising}(\gamma, \beta)$.
-The exact recovery error probability for $\hat{X}^*$ can be written as $P_e(\hat{X}^*) := \sum_{G \in \cG_n} P_G(G) P_{\sigma | G}(S^c_k(X))$. From~this expression we can see that the error probability is determined
-by two parameters $(\gamma, \beta)$. When these parameters take proper values, $ P_e(\hat{X}^*)\to 0$, and the exact recovery of the SBM is achievable. On~the contrary, $P_e(\hat{X}^*) \to 1$ if $(\gamma, \beta)$ takes other values.
-These two cases are summarized in the following theorem:
+定义 \ref{def:ising} 实际上给出了一个估计$X$的随机算法 $\hat{X}^*$。
+这里，$\hat{X}^*$ 表示产生于玻茨模型的一个样本，
+记作$\hat{X}^* \sim \textrm{Potts}_G(\gamma, \beta)$。
+沿用评注\ref{rem:metric_exact_recovery} 中的记号，
+使用$\hat{X}^*$估计$X$在精确恢复度量下的错误概率
+记为 $P_e(\hat{X}^*) := \sum_{G \in \cG_n} P_G(G) P_{\sigma | G}(S^c_k(X))$。
+类似定理\ref{thm:sibm_phase_trans}中关于 SIBM 模型的讨论，
+玻茨模型的两个参数$(\gamma, \beta)$ 的取值
+对$P_e(\hat{X}^*)$
+也有着决定性的作用。
+当它们取合适的值时， 
+$ P_e(\hat{X}^*)\to 0$，
+随机块模型的精确恢复可以实现。
+反之，如果 $(\gamma, \beta)$ 取其他值时，
+$P_e(\hat{X}^*) \to 1$。
+这两种情况可总结为如下的定理：
+
+\begin{theorem}\label{thm:phase_transition}
+	定义函数 $g(\beta)$ 和 $ \tilde{g}(\beta)$ 如下:
+	\begin{equation}
+	g(\beta) = \frac{be^{\beta} + a e^{-\beta}}{k} - \frac{a+b}{k} +1
+	\end{equation}
+	且
+	\begin{equation}
+	\tilde{g}(\beta) = \begin{cases}
+	g(\beta) & \beta \leq \bar{\beta} = \frac{1}{2}\log \frac{a}{b} \\
+	g(\bar{\beta}) = 1 - \frac{(\sqrt{a} - \sqrt{b})^2}{k} & \beta > \bar{\beta}
+	\end{cases}
+	\end{equation}
+	其中
+	$\bar{\beta} =  \displaystyle\arg\min_{\beta > 0} g(\beta)$。
+	令 $\beta^*$ 定义成
+	\begin{equation}\label{eq:beta_star}
+	\beta^* = \log\left(\frac{a + b - k - \sqrt{(a + b - k)^2 - 4 a b)}}{2  b}\right)
+	\end{equation}
+	可以验证 $\beta^*$ 是方程 $g(\beta) = 0$ 的解 并且满足  $\beta^* < \bar{\beta}$。
+	则取决于 $(\gamma, \beta)$ 如何取值，对于给定的 $\epsilon > 0$， 
+	$G\sim \SSBM(n, k, \A, \B)$， $\hat{X}^* \sim \textrm{Potts}_G(\gamma, \beta)$，
+	当 $n$ 充分大时, 我们有：
+	\begin{enumerate}
+	\item 当 $\gamma > b$ 且 $\beta > \beta^*$ 时，$P_e(\hat{X}^*) \leq n^{\tilde{g}(\beta)/2 + \epsilon}$;
+	\item 当 $\gamma > b$ 且 $\beta < \beta^*$ 时，$P_a(\hat{X}^*) \leq (1+o(1))\max\{n^{g(\bar{\beta})}, n^{-g(\beta) + \epsilon}\}$;
+	\item 当 $\gamma < b$ 时，对于任意给定的 $C>0$	均有 $P_a(\hat{X}^*) \leq \exp(-C n)$。
+	\end{enumerate}
+\end{theorem}
 
 \section{参数估计}
 
