@@ -64,9 +64,10 @@ $P_e(\hat{X}^*) \to 1$。
 这两种情况可总结为如下的定理：
 
 \begin{theorem}\label{thm:phase_transition}
+	假设 $\sqrt{a} - \sqrt{b} > \sqrt{k}$，
 	定义函数 $g(\beta)$ 和 $ \tilde{g}(\beta)$ 如下:
 	\begin{equation}
-	g(\beta) = \frac{be^{\beta} + a e^{-\beta}}{k} - \frac{a+b}{k} +1
+		g(\beta) = \frac{be^{\beta} + a e^{-\beta}}{k} - \frac{a+b}{k} +1
 	\end{equation}
 	且
 	\begin{equation}
@@ -106,8 +107,24 @@ $P_e(\hat{X}^*) \to 1$。
 			恢复仅在区域 I 可实现。}\label{fig:pt}
 	\end{subfigure}
 	\caption{定理 \ref{thm:phase_transition}
-	的图示}\label{fig1}
+	的图示}\label{fig:phase_transition_theorem_illustration}
 \end{figure}
+
+与式\eqref{eq:beta_star_sibm}的情形类似，注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$保证了
+式\eqref{eq:beta_star}中的根号下的项非负。
+这个条件来自于定理\ref{thm:sbmk_phase_transition}，
+保证了随机块模型本身精确恢复可实现。
+
+
+通过简单的计算可知，对于 $\beta> \beta^*$ 我们有
+$\tilde{g}(\beta) < 0$ 而 对于 $\beta < \beta^*$有
+$g(\beta)>0$。
+另外，由 $\sqrt{a} - \sqrt{b} > \sqrt{k}$可知
+$g(\bar{\beta}) < 0$。 The~illustration of $g(\beta), \tilde{g}(\beta)$ is shown in Figure~\ref{fig1}a.
+Therefore, for~sufficiently small $\epsilon$ and as $n \to \infty$, the~upper bounds in Theorem \ref{thm:phase_transition} all converge to $0$ at least
+in polynomial speed.
+Therefore, Theorem \ref{thm:phase_transition} establishes the sharp phase transition property of the Ising model, which is illustrated
+in Figure~\ref{fig1}b.
 
 \section{参数估计}
 
