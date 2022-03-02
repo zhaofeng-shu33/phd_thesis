@@ -919,10 +919,10 @@ Abbe \cite{abbe2015exact} 和 Mossel
   $\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
  没有算法可实现精确恢复。
 \end{theorem}
-\section{SIBM 模型}
+\section{SIBM 模型}\label{sec:sibm_model}
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
-将\ref{sec:sbm} 节 介绍的 SBM 模型与 \ref{sec:ising} 节介绍的 Ising 模型
+将\ref{sec:sbm} 节 介绍的随机块模型与 \ref{sec:ising} 节介绍的 Ising 模型
 复合起来可得到 \gls{sibm}（\gls{acr:sibm}）\cite{ye2020exact}。
 该模型首先由 SBM 生成随机图，
 再由随机图上定义的 Ising 模型多次生成节点的状态。
@@ -938,7 +938,7 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 类似 \ref{sec:exact_recovery}节
 针对SBM的精确恢复，
 同样在 SIBM 上也可以定义精确恢复为：
-\begin{definition}
+\begin{definition}\label{def:sibm_exact_recovery}
   设 $(\sigma^{(1)}, \dots, \sigma^{(m)})$
   由 $\SIBM(n, \A, \B, \gamma, \beta, m)$ 生成。
   称该 SIBM 可精确恢复，如果存在算法$\hat{X}$以
@@ -947,22 +947,22 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 \end{definition}
 
 类似 SBM，SIBM 也存在相变现象，可总结为如下的定理。
-\begin{theorem}
+\begin{theorem}\label{thm:sibm_phase_trans}
   设 $\sqrt{a} - \sqrt{b} > \sqrt{2}$ 且 $\gamma, \beta > 0$,
   定义临界量 $\beta^*, m^*$ 为：
-  \begin{equation}
+  \begin{equation}\label{eq:beta_star_sibm}
     \beta^* :=  \frac{1}{2} \log \frac{a+b-2 - \sqrt{(a+b-2)^2-4ab}}{2b}
     \, \textrm{ 和 } \,
     m^* := 2\left\lfloor\frac{\beta^*}{\beta} \right\rfloor + 1
   \end{equation}
   针对 $\SIBM(n, \A, \B, \gamma, \beta, m)$ 模型，我们有
   \begin{enumerate}
-    \item 若 $\gamma > b, m \geq m^*$，SIBM 可精确恢复；
-    \item 若 $\gamma >b, m < m^*$，当$n\to \infty$ 时，所有SIBM 恢复算法的成功率趋近于零；
-    \item 若 $ \gamma < b\beta, n = O(\log^{1/4}(n))$，SIBM无法精确恢复，特别地，对于$m$是不随$n$
+    \item\label{enu:m_larger} 若 $\gamma > b, m \geq m^*$，SIBM 可精确恢复；
+    \item\label{enu:m_smaller} 若 $\gamma >b, m < m^*-2$，当$n\to \infty$ 时，所有SIBM 恢复算法的成功率趋近于零；
+    \item\label{enu:gamma_b} 若 $ \gamma < b$， 则 $ m = O(\log^{1/4}(n))$，故 SIBM无法精确恢复，特别地，对于$m$是不随$n$
     增长的常数时 SIBM 无法精确恢复；
-    \item 若 $m=1, \beta > \beta^*$，则 $P(\sigma^{(1)}=\pm X) = 1-o(1)$
-    \item 若 $m=1, \beta \leq \beta^*$，则
+    \item\label{enu:beta_larger}  若 $\gamma>b, m=1, \beta > \beta^*$，则 $P(\sigma^{(1)}=\pm X) = 1-o(1)$
+    \item\label{enu:beta_smaller}  若 $\gamma>b, m=1, \beta \leq \beta^*$，则
     $P(\Dist(\sigma^{(1)}, \pm X) =
     \Theta(n^{g(\beta)}))=1-o(1)$。
   \end{enumerate}
@@ -971,3 +971,25 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
     g(\beta):= \frac{be^{2\beta} + a e^{-2\beta}}{2} - \frac{a+b}{2} +1
   \end{equation}
 \end{theorem}
+在定理 \ref{thm:sibm_phase_trans} 中，
+注意到 $\sqrt{a} - \sqrt{b} > \sqrt{2}$ 的条件保证了
+式\ref{eq:beta_star_sibm} 中根号下的项非负。
+另外定理\ref{thm:sibm_phase_trans} 中\ref{enu:beta_larger}、\ref{enu:beta_smaller}
+两点讨论的是从随机图中产生一个样本的情况，
+说明了$\beta^*$ 是一个临界值点。当$\beta>\beta^*$ 时，
+使用 伊辛模型（可看作社群发现的随机算法）产生的样本恢复随机块模型各节点的真实标签
+可实现精确恢复（参见定义\ref{def:SSBMR}）。
+而当$\beta\leq \beta^*$ 时， 伊辛样本与真实标签的距离是随$n$增长的，
+说明精确恢复不可实现。
+
+\citet{ye2020exact} 的工作中关注的重点是对采样数量$m$的相变现象的讨论，
+在采多个样本的情况下，定理\ref{thm:sibm_phase_trans} 中\ref{enu:m_larger}、\ref{enu:m_smaller}
+两点说明存在一个相对于定义\ref{def:sibm_exact_recovery}给出的精确恢复的临界值$m^*$。
+最后，定理\ref{thm:sibm_phase_trans} 中
+的第\ref{enu:gamma_b}点
+说明$\gamma>b$
+是精确恢复的前提。
+如果$\gamma<b$，则
+伊辛模型产生的样本
+相比于$\pm X$的位置
+会以更大的概率聚集在$\pm \bm{1}$。

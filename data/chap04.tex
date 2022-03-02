@@ -3,6 +3,55 @@
 \chapter{随机块模型的精确恢复问题}
 
 
+\section{随机块-玻茨模型}
+类似于\ref{sec:sibm_model}节
+介绍的SIBM模型，我们将
+随机块模型
+与 \ref{sec:ising} 节介绍的 玻茨模型
+复合起来可得到随机块-玻茨模型。该模型可以看成是SIBM模型的推广，
+每个节点由两状态变成了多状态。由于我们的研究重点并非
+从随机块-玻茨模型的多个样本恢复节点的原始标签，而是利用
+玻茨模型对随机块模型进行社群发现，因此我们首先给出
+定义在随机块模型生成的图上的玻茨模型：
+\begin{definition}
+	给定从$\SSBM(n,k,\A,\B)$ 中生成的随机图 $G$，
+    定义在$G$上的玻茨模型（$k$个状态的伊辛模型）带有两个参数 $\gamma,\beta>0$，
+	并且是关于状态向量$\sigma\in W^n$ 的概率分布
+。该分布的概率质量函数为
+\begin{align} \label{eq:isingma}
+	P_{\sigma|G}(\sigma=\bar{\sigma})=\frac{\exp(-\beta H(\bar{\sigma}))}{Z_G(\gamma,\beta)}
+	\end{align}
+其中能量函数$H(\bar{\sigma})$的定义是
+\begin{equation}\label{eq:energy}
+	H(\bar{\sigma}) := \gamma \frac{\log n}{n} \sum_{\{i,j\}\not\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	- \sum_{\{i,j\}\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	\end{equation}
+	
+	$P_{\sigma|G}$ 中的下标表示该分布依赖于$G$，
+    $Z_G(\gamma,\beta)$ 是该分布的归一化常数。
+\end{definition}
+
+In physics, $\beta$ refers to the inverse temperature and $Z_G(\gamma, \beta)$ is called the partition function.
+The Hamiltonian energy $H(\bar{\sigma})$ consists of two terms: the repelling interaction between nodes without edge connection
+and the attracting interaction between nodes with edge connection. The~parameter $\gamma$ indicates the ratio of the strength of these two
+interactions. The~term $\frac{\log n}{n}$ is added to balance the two interactions because there are only $O(\frac{\log n}{n})$
+connecting edges for each node.
+The probability of each state is proportional to $\exp(-\beta H(\bar{\sigma}))$, and~the state with the largest
+probability corresponds to that with the lowest~energy.
+
+The classical definition of the Ising model is specified by $H(\sigma)=-\sum_{(i,j)\in E(G)} \sigma_i \cdot \sigma_j$ for
+$\sigma_i = \pm 1$.
+There are two main differences between Definition \ref{def:ising} and the classical one. Firstly, we add a repelling term
+between nodes without an edge connection. This makes these nodes have a larger probability to take different labels.
+Secondly, we allow the state at each node to take $k$ values from $W$ instead of the two values $\pm 1$.
+When $\gamma = 0$ and $k=2$,\linebreak Definition \ref{def:ising}
+is reduced to the classical definition of the Ising model up to a scaling~factor.
+
+Definition \ref{def:ising} gives a stochastic estimator $\hat{X}^*$ for $X$: $\hat{X}^*$ is one sample generated from the Ising model, which is denoted as
+$\hat{X}^* \sim \textrm{Ising}(\gamma, \beta)$.
+The exact recovery error probability for $\hat{X}^*$ can be written as $P_e(\hat{X}^*) := \sum_{G \in \cG_n} P_G(G) P_{\sigma | G}(S^c_k(X))$. From~this expression we can see that the error probability is determined
+by two parameters $(\gamma, \beta)$. When these parameters take proper values, $ P_e(\hat{X}^*)\to 0$, and the exact recovery of the SBM is achievable. On~the contrary, $P_e(\hat{X}^*) \to 1$ if $(\gamma, \beta)$ takes other values.
+These two cases are summarized in the following theorem:
 
 \section{参数估计}
 
