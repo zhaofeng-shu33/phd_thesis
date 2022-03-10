@@ -492,29 +492,66 @@ BHCD 算法的超参数较多，
 \end{table}
 
 
-\section{Proof of Theorem \ref{thm:phase_transition}}
+\section{定理\ref{thm:phase_transition}的证明}
 \label{sec:appendix_theorem_proof_phase_trans}
 
-\begin{proof}[Proof of Lemma \ref{lem:lemmaDiff}]
-	First we rewrite the energy term in \eqref{eq:energy} as:
+\begin{proof}[引理 \ref{lem:lemmaDiff}的证明]
+	首先我们将
+  \eqref{eq:energy} 式改写成
 	\begin{equation*}
 	H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{i < j} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	- (1 + \gamma\frac{\log n}{n}) \sum_{ \{i, j\} \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	\end{equation*}
 	
-	Then calculating the energy difference term by:
-	\begin{align*}
-	H(\bar{\sigma}') - H(\bar{\sigma}) &= (1 + \gamma\frac{\log n}{n}) \\
-	&\cdot \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
+	接着我们逐步计算能量差：
+  \begin{align*}
+	H(\bar{\sigma}') - H(\bar{\sigma}) =& 
+  \left(1 + \gamma\frac{\log n}{n}
+  \right)
+  \cdot \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
 	\delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i)) \\
 	&+ \gamma \frac{\log n}{n}\sum_{i\neq r}
 	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
 	\delta( \bar{\sigma}_r, \bar{\sigma}_i) ) \\
-	& = (1 + \gamma\frac{\log n}{n})\sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i) \\
+	 =& \left(
+     1 + \gamma\frac{\log n}{n}
+     \right)
+   \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i) \\
 	&+ \gamma \frac{\log n}{n}\sum_{i=1}^n
 	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
 	\delta( \bar{\sigma}_r, \bar{\sigma}_i) +1) \\
-	&= (1+\gamma \frac{\log n}{n})\sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)\\
+	=& \left(1+\gamma \frac{\log n}{n}
+  \right)
+  \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)\\
 	&+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1)
 	\end{align*}
 \end{proof}
+
+在开始定理\ref{thm:phase_transition}的技术证明之前，我们需要介绍一些额外的
+符号。
+当 $\bar{\sigma}'$ 与 $X$ 仅在位置 $r$
+上不同时， 在引理 \ref{lem:lemmaDiff}
+中取$\bar{\sigma}=X$，
+结合条件  $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$，
+有 $m(\omega^s \cdot \bar{\sigma}_r)
+=m(\bar{\sigma}_r)$，
+进而：
+\begin{equation}\label{eq:energy_diff}
+H(\bar{\sigma}') - H(\bar{\sigma}) = (1+\gamma \frac{\log n}{n})(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
+\end{equation}
+其中 $A^s_r$ 定义成
+$A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
+因为$G$中各边的存在与否是独立的，
+对于 $s\neq 0$
+我们有 $A^s_r \sim \textrm{Binomial}(\frac{n}{k}, \B ) $，
+而 $A^0_r \sim \textrm{Binomial}(\frac{n}{k}-1, \A )$。
+
+% Some additional notation is needed for the proof.
+For the general case, we can write:
+\begin{equation}\label{eq:Hgeneral}
+H(\bar{\sigma}) - H(X)=
+(1 + \gamma \frac{ \log n}{n})[A_{\bar{\sigma}} - B_{\bar{\sigma}}] + \gamma\frac{ \log n}{n} N_{\bar{\sigma}}
+\end{equation}
+in which we use $A_{\bar{\sigma}}$ or $B_{\bar{\sigma}}$ to represent the binomial random variable with parameter $\A$ or $\B$,
+respectively, and $N_{\bar{\sigma}}$ is a deterministic positive number depending on $\bar{\sigma}$ but irrelevant with the graph structure.
+The following lemma gives the expression of $A_{\bar{\sigma}}, B_{\bar{\sigma}}$ and $N_{\bar{\sigma}}$:
