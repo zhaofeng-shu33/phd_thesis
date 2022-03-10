@@ -183,18 +183,27 @@ D(\sigma, \sigma') := \{ \sigma = \arg\min_{f \in S_k} \Dist(f(\sigma), \sigma')
 = \exp(-\beta(H(\bar{\sigma}') - H(\bar{\sigma})))
 \end{equation}
 
-Additionally, since the graph is sparse and every node has $O(\log n)$ neighbors, from Equation~\eqref{eq:DeltaH} the computational cost (time complexity) for the energy difference
-is also $O(\log n)$. 
+另外， 我们注意到 因为图的边的数量是稀疏的，每个节点
+平均有 $O(\log n)$ 个相连的邻居节点。
+按照式 \eqref{eq:DeltaH} 
+计算能量差的时间复杂度也是 $O(\log n)$。
 
-When $H(\bar{\sigma}') > H(\bar{\sigma})$, we can expect $P_{\sigma | G}(\sigma = \bar{\sigma}')$ is far less than 
-$P_{\sigma | G}(\sigma = \bar{\sigma})$.
-Roughly speaking, if~ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $ converges to zero,
-we can expect the probability of all other states differing from $S_k(X)$ converges to zero.
-On the contrary, if~$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $ tends to infinity,
-then  $P_{\sigma}(S_k(X))$ converges to zero. This illustrates the idea behind
-the proof of
-Theorem \ref{thm:phase_transition}.
-The~rigorous proof can be found in Section~\ref{sec:pm}.
+当 $H(\bar{\sigma}') > H(\bar{\sigma})$ 时， 
+由式\eqref{eq:Pratio} 可得
+$P_{\sigma | G}(\sigma = \bar{\sigma}')$
+小于
+$P_{\sigma | G}(\sigma = \bar{\sigma})$。
+粗略而言， 如果
+$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
+收敛到零，
+我们可以预期，与$S_k（X）$不同的所有其他状态的概率收敛到零。
+与之相反， 如果
+$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
+趋于无穷大，
+则 $P_{\sigma}(S_k(X))$ 趋于零。
+此种分析展示了证明定理 \ref{thm:phase_transition}的
+主要思路。
+严格的证明参见附录 \ref{sec:appendix_theorem_proof_phase_trans}。
 
 \section{参数估计}
 

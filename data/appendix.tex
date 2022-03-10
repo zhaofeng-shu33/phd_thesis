@@ -492,3 +492,29 @@ BHCD 算法的超参数较多，
 \end{table}
 
 
+\section{Proof of Theorem \ref{thm:phase_transition}}
+\label{sec:appendix_theorem_proof_phase_trans}
+
+\begin{proof}[Proof of Lemma \ref{lem:lemmaDiff}]
+	First we rewrite the energy term in \eqref{eq:energy} as:
+	\begin{equation*}
+	H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{i < j} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	- (1 + \gamma\frac{\log n}{n}) \sum_{ \{i, j\} \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	\end{equation*}
+	
+	Then calculating the energy difference term by:
+	\begin{align*}
+	H(\bar{\sigma}') - H(\bar{\sigma}) &= (1 + \gamma\frac{\log n}{n}) \\
+	&\cdot \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
+	\delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i)) \\
+	&+ \gamma \frac{\log n}{n}\sum_{i\neq r}
+	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
+	\delta( \bar{\sigma}_r, \bar{\sigma}_i) ) \\
+	& = (1 + \gamma\frac{\log n}{n})\sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i) \\
+	&+ \gamma \frac{\log n}{n}\sum_{i=1}^n
+	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
+	\delta( \bar{\sigma}_r, \bar{\sigma}_i) +1) \\
+	&= (1+\gamma \frac{\log n}{n})\sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)\\
+	&+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1)
+	\end{align*}
+\end{proof}
