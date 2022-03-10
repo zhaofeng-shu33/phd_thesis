@@ -3,7 +3,7 @@
 \chapter{随机块模型的精确恢复问题}
 
 
-\section{随机块-玻茨模型}
+\section{基于玻茨模型的算法}
 类似于\ref{sec:sibm_model}节
 介绍的SIBM模型，我们将
 随机块模型
@@ -96,7 +96,8 @@ $P_e(\hat{X}^*) \to 1$。
 \begin{figure}[H]
 	\begin{subfigure}{0.43\textwidth}
 		\includegraphics[width=\textwidth]{g-16-4-2.pdf}
-		\caption{当 $a=16,b=4,k=2$时，$g(\beta),\tilde{g}(\beta)$}\label{fig:g}
+		\caption{当 $a=16,b=4,k=2$时，$g(\beta)$和
+		$\tilde{g}(\beta)$的函数图像}\label{fig:g}
 	\end{subfigure}~
 	\begin{subfigure}{0.55\textwidth}
 		\includegraphics[width=\textwidth]{phase_trans.pdf}
@@ -107,7 +108,8 @@ $P_e(\hat{X}^*) \to 1$。
 			恢复仅在区域 I 可实现。}\label{fig:pt}
 	\end{subfigure}
 	\caption{定理 \ref{thm:phase_transition}
-	的图示}\label{fig:phase_transition_theorem_illustration}
+	的图示}
+	\label{fig:phase_transition_theorem_illustration}
 \end{figure}
 
 与式\eqref{eq:beta_star_sibm}的情形类似，注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$保证了
@@ -119,12 +121,80 @@ $P_e(\hat{X}^*) \to 1$。
 通过简单的计算可知，对于 $\beta> \beta^*$ 我们有
 $\tilde{g}(\beta) < 0$ 而 对于 $\beta < \beta^*$有
 $g(\beta)>0$。
-另外，由 $\sqrt{a} - \sqrt{b} > \sqrt{k}$可知
-$g(\bar{\beta}) < 0$。 The~illustration of $g(\beta), \tilde{g}(\beta)$ is shown in Figure~\ref{fig1}a.
-Therefore, for~sufficiently small $\epsilon$ and as $n \to \infty$, the~upper bounds in Theorem \ref{thm:phase_transition} all converge to $0$ at least
-in polynomial speed.
-Therefore, Theorem \ref{thm:phase_transition} establishes the sharp phase transition property of the Ising model, which is illustrated
-in Figure~\ref{fig1}b.
+另外，由 $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 可知
+$g(\bar{\beta}) < 0$。
+$g(\beta), \tilde{g}(\beta)$ 的图像
+如图 \ref{fig:phase_transition_theorem_illustration}a 所示。
+因此, 对于充分小的
+$\epsilon$ 并且当 $n \to \infty$，
+定理\ref{thm:phase_transition} 中给出的上界
+均至少以多项式的速度趋向于 $0$。
+从而定理\ref{thm:phase_transition} 
+刻划了
+玻茨模型的相变性质。
+如图\ref{fig:phase_transition_theorem_illustration}b所示
+， 对于玻茨模型， 只有参数$(\beta, b)$落在区域I时，
+随机块模型的精确
+恢复才能实现。
+
+定理\ref{thm:phase_transition}
+也可以从$\sigma$的边缘分布的角度理解。
+玻茨模型取到某个特定状态$\bar{\sigma}$的概率为
+ $\sigma: P_{\sigma}(\sigma =\bar{\sigma})
+=\sum_{G \in \cG_n}P_G(G)P_{\sigma |G}(\sigma=\bar{\sigma})$.
+我们用符号 $D(\sigma, \sigma')$
+表示
+$\sigma$ 相比于它的所有置换其本身离 $\sigma'$ 最近
+这个事件。
+也即
+\begin{equation}
+D(\sigma, \sigma') := \{ \sigma = \arg\min_{f \in S_k} \Dist(f(\sigma), \sigma')  \}
+\end{equation}
+
+则 定理 \ref{thm:phase_transition} 
+对边缘分布 $P_{\sigma}$ 蕴含着如下的论断
+：
+\begin{corollary}\label{cor:phase4}
+假设 $\gamma > b$， 取决于 $\beta$ 的取值我们有
+\begin{enumerate}
+	\item 当 $\beta > \beta^*$时，$P_{\sigma}(\sigma = X | D(\sigma, X))  = 1-o(1)$；
+	\item 当 $\beta < \beta^*$时，$P_{\sigma}(\sigma = X | D(\sigma, X))  = o(1)$。
+\end{enumerate}
+\end{corollary}
+
+下面我们简单阐述下 定理 \ref{thm:phase_transition} 证明的思路。
+该思路主要通过对翻转一个状态的前后能量差的分析来估计概率的主项。
+下面的引理总结了翻转一个状态汉密尔顿能量的变化:
+\begin{lemma}\label{lem:lemmaDiff}
+	假设 $\bar{\sigma}'$ 仅在第$r$个位置上与 $\bar{\sigma}$ 不同，
+	差别为 $\bar{\sigma}'_r = \omega^s \cdot \bar{\sigma}_r$。
+	则 $\bar{\sigma}'$ 和 $\bar{\sigma}$ 的能量差为
+\begin{align}
+	H(\bar{\sigma}') - H(\bar{\sigma}) &= (1+\gamma \frac{\log n}{n})\sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)
+	\notag \\
+	&+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1) \label{eq:DeltaH}
+	\end{align}
+	上式中 $m(\omega^j) := |\{i \in [n] | \bar{\sigma}_i = \omega^j | \}$, $N_r(G):=\{j | (r, j) \in E(G) \}$ 且 $J_s(x, y) = \delta(x, y) - \delta(\omega_s \cdot x, y)$.
+\end{lemma}
+引理 \ref{lem:lemmaDiff} 提供了用以比较两个相邻状态的    概率
+的方法，即：
+\begin{equation}\label{eq:Pratio}
+\frac{P_{\sigma |G } (\sigma = \bar{\sigma}')}{P_{\sigma |G } (\sigma = \bar{\sigma})}
+= \exp(-\beta(H(\bar{\sigma}') - H(\bar{\sigma})))
+\end{equation}
+
+Additionally, since the graph is sparse and every node has $O(\log n)$ neighbors, from Equation~\eqref{eq:DeltaH} the computational cost (time complexity) for the energy difference
+is also $O(\log n)$. 
+
+When $H(\bar{\sigma}') > H(\bar{\sigma})$, we can expect $P_{\sigma | G}(\sigma = \bar{\sigma}')$ is far less than 
+$P_{\sigma | G}(\sigma = \bar{\sigma})$.
+Roughly speaking, if~ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $ converges to zero,
+we can expect the probability of all other states differing from $S_k(X)$ converges to zero.
+On the contrary, if~$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $ tends to infinity,
+then  $P_{\sigma}(S_k(X))$ converges to zero. This illustrates the idea behind
+the proof of
+Theorem \ref{thm:phase_transition}.
+The~rigorous proof can be found in Section~\ref{sec:pm}.
 
 \section{参数估计}
 
