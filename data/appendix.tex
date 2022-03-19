@@ -547,11 +547,70 @@ $A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot 
 而 $A^0_r \sim \textrm{Binomial}(\frac{n}{k}-1, \A )$。
 
 % Some additional notation is needed for the proof.
-For the general case, we can write:
+对于一般的情形，我们可以将能量差写成:
 \begin{equation}\label{eq:Hgeneral}
 H(\bar{\sigma}) - H(X)=
 (1 + \gamma \frac{ \log n}{n})[A_{\bar{\sigma}} - B_{\bar{\sigma}}] + \gamma\frac{ \log n}{n} N_{\bar{\sigma}}
 \end{equation}
-in which we use $A_{\bar{\sigma}}$ or $B_{\bar{\sigma}}$ to represent the binomial random variable with parameter $\A$ or $\B$,
-respectively, and $N_{\bar{\sigma}}$ is a deterministic positive number depending on $\bar{\sigma}$ but irrelevant with the graph structure.
-The following lemma gives the expression of $A_{\bar{\sigma}}, B_{\bar{\sigma}}$ and $N_{\bar{\sigma}}$:
+在上式中 我们使用
+$A_{\bar{\sigma}}$ 或
+$B_{\bar{\sigma}}$ 来表示
+服从参数分别为 $\A$ 或 $\B$ 的二项分布的随机变量，并且
+$N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非随机的正整数。
+引理\ref{lem:minus} 给出了 $A_{\bar{\sigma}}, B_{\bar{\sigma}}$ 和 $N_{\bar{\sigma}}$
+的表达式:
+
+\begin{lemma}\label{lem:minus}
+	对于 $\SSBM(n,k,p,q)$,
+  我们假设 $\bar{\sigma}$ 
+  在总共$|\cI|:=\Dist(\bar{\sigma}, X)$ 
+  个坐标位置上不同于真值标签向量
+  $X$。
+	对于 $i\neq j$，令 $I_{ij} = |\{r\in [n] | X_r = w^i, \sigma_r = w^j \}$
+  且 $I_{ii} = 0$。
+  我们进一步将行和表示为 $I_i = \sum_{j=0}^{k-1} I_{ij}$ 并且
+	列和为 $I'_i = \sum_{j=0}^{k-1} I_{ji}$。
+	则
+\begin{align}
+	N_{\bar{\sigma}} &= \frac{1}{2}\sum_{i=0}^{k-1} (I_i - I_i')^2 \label{eq:N_w} \\
+	B_{\bar{\sigma}} & \sim \textrm{Binomial}(\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}) , q)\\
+	A_{\bar{\sigma}} & \sim \textrm{Binomial}(\frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij}), p) \label{eq:A_w}
+	\end{align}
+\end{lemma}
+\begin{proof}
+  由式\eqref{eq:isingma}、\eqref{eq:energy}可得
+	\begin{align*}
+  \log P_{\sigma|G}(\sigma=\bar{\sigma})
+  & = 
+  \beta(1 + \frac{\gamma \log n}{n}) \sum_{\{i,j\} \in E(G)}  \delta(\bar{\sigma}_i, \bar{\sigma}_j)  
+	- \beta\frac{\gamma \log n}{n} \sum_{1\leq i<j \leq n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)  - \log Z_G(\gamma, \beta)\\
+  & = 
+  \beta(1 + \frac{\gamma \log n}{n}) \sum_{\bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}
+	- \beta\frac{\gamma \log n}{n} \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1  - \log Z_G(\gamma, \beta)
+  \end{align*}
+	where $Z_{ij}$ is Bernoulli random variable which takes value 1 if there is an edge between $i$ and $j$.
+	For $\sigma = X$, we have
+	\begin{align*}
+	\sum_{X_i = X_j} Z_{ij} &= \sum_{X_i = X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} + \sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij} \\
+	\sum_{X_i = X_j} 1 &= \frac{1}{2} \sum_{i=0}^{k-1} \frac{n}{k} ( \frac{n}{k} - 1 )
+	\end{align*}
+	For $\sigma = \bar{\sigma}$, we have
+	\begin{align*}
+	\sum_{\bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} &= \sum_{X_i = X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} + \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} \\
+	\sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1 &= \frac{1}{2} \sum_{i=0}^{k-1} (I'_i + \frac{n}{k} - I_i) ( I'_i + \frac{n}{k} - I_i - 1)
+	\end{align*}
+	The term $|\{r\in [n] | X_r = \omega^i \}| = \frac{n}{k}$,
+	$|\{r\in [n] | X_r = \omega^i, \sigma_r \neq \omega^i \}| = I_i$,
+	$|\{r\in [n] | X_r \neq \omega^i, \sigma_r = \omega^i \}| = I'_i$.
+	Therefore,  $|\{r\in [n] | \sigma_r = \omega^i \}| = I'_i + \frac{n}{k} - I_i $.
+	Therefore, we get
+	$N_{\bar{\sigma}} = \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1  -\sum_{X_i = X_j} 1 = \frac{1}{2}\sum_{i=0}^{k-1} (I_i - I_i')^2 $.
+	On the other hand, we show that $B_{\bar{\sigma}} - A_{\bar{\sigma}} = \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} - \sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$.
+	for $Z_{ij}$ in the sum $\sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}$, $Z_{ij} \sim \textrm{Bernoulli}(q)$ and
+	$\sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} 1 = \sum_{i=0}^{k-1}[(\frac{n}{k} - I_i) I_i' + \frac{1}{2} \sum_{j=0}^{k-1} I_{ji}(I'_i - I_{ji}) ]
+	=\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}) $;
+	for $Z_{ij}$ in the sum $\sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$, $Z_{ij} \sim \textrm{Bernoulli}(p)$ and
+	$\sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} 1
+	= \sum_{i=0}^{k-1}[(\frac{n}{k} - I_i) I_i + \frac{1}{2} \sum_{j=0}^{k-1} I_{ij}(I_i - I_{ij}) ] 
+	= \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij})$.
+\end{proof}
