@@ -543,8 +543,11 @@ H(\bar{\sigma}') - H(\bar{\sigma}) = (1+\gamma \frac{\log n}{n})(A^0_r - A^s_r) 
 $A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
 因为$G$中各边的存在与否是独立的，
 对于 $s\neq 0$
-我们有 $A^s_r \sim \textrm{Binomial}(\frac{n}{k}, \B ) $，
-而 $A^0_r \sim \textrm{Binomial}(\frac{n}{k}-1, \A )$。
+我们有 $A^s_r \sim \textrm{Binomial}\left(
+  \frac{n}{k}, \B \right) $，
+而 $A^0_r \sim \textrm{Binomial}
+\left(
+  \frac{n}{k}-1, \A \right)$。
 
 % Some additional notation is needed for the proof.
 对于一般的情形，我们可以将能量差写成:
@@ -566,51 +569,138 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   在总共$|\cI|:=\Dist(\bar{\sigma}, X)$ 
   个坐标位置上不同于真值标签向量
   $X$。
-	对于 $i\neq j$，令 $I_{ij} = |\{r\in [n] | X_r = w^i, \sigma_r = w^j \}$
+	对于 $i\neq j$，令 $I_{ij} = \Big|\{r\in [n] \big| X_r = w^i, \sigma_r = w^j \}\Big|$
   且 $I_{ii} = 0$。
-  我们进一步将行和表示为 $I_i = \sum_{j=0}^{k-1} I_{ij}$ 并且
-	列和为 $I'_i = \sum_{j=0}^{k-1} I_{ji}$。
+  我们进一步将行和$I_i$
+  和列和$I'_i$分别表示为：
+  \begin{align}
+  I_i &= \frac{n}{k} -
+  \Big|\{r\in [n] \big| X_r = w^i, \sigma_r=w^i \}\Big|
+  =
+  \sum_{j=0}^{k-1} I_{ij} \label{eq:I_i_horizontal} \\
+  I'_i &=
+  \Big|\{r\in [n] \big| X_r \neq w^i,
+  \sigma_r=w^i \}\Big|
+  =\sum_{j=0}^{k-1} I_{ji}\label{eq:I_prime_i_vertical}
+  \end{align}
 	则
 \begin{align}
 	N_{\bar{\sigma}} &= \frac{1}{2}\sum_{i=0}^{k-1} (I_i - I_i')^2 \label{eq:N_w} \\
-	B_{\bar{\sigma}} & \sim \textrm{Binomial}(\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}) , q)\\
-	A_{\bar{\sigma}} & \sim \textrm{Binomial}(\frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij}), p) \label{eq:A_w}
+	B_{\bar{\sigma}} & \sim \textrm{Binomial}(\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}) , q)
+  \label{eq:B_w}\\
+	A_{\bar{\sigma}} &
+  \sim \textrm{Binomial}(\frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}
+   (I^2_i + \sum_{j=0}^{k-1} I^2_{ij}), p) \label{eq:A_w}
 	\end{align}
 \end{lemma}
 \begin{proof}
   由式\eqref{eq:isingma}、\eqref{eq:energy}可得
-	\begin{align*}
+	\begin{align}
   \log P_{\sigma|G}(\sigma=\bar{\sigma})
   & = 
   \beta(1 + \frac{\gamma \log n}{n}) \sum_{\{i,j\} \in E(G)}  \delta(\bar{\sigma}_i, \bar{\sigma}_j)  
-	- \beta\frac{\gamma \log n}{n} \sum_{1\leq i<j \leq n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)  - \log Z_G(\gamma, \beta)\\
+	- \beta\frac{\gamma \log n}{n} \sum_{1\leq i<j \leq n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)  - \log Z_G(\gamma, \beta)
+  \notag\\
   & = 
   \beta(1 + \frac{\gamma \log n}{n}) \sum_{\bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}
-	- \beta\frac{\gamma \log n}{n} \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1  - \log Z_G(\gamma, \beta)
-  \end{align*}
-	where $Z_{ij}$ is Bernoulli random variable which takes value 1 if there is an edge between $i$ and $j$.
-	For $\sigma = X$, we have
-	\begin{align*}
-	\sum_{X_i = X_j} Z_{ij} &= \sum_{X_i = X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} + \sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij} \\
-	\sum_{X_i = X_j} 1 &= \frac{1}{2} \sum_{i=0}^{k-1} \frac{n}{k} ( \frac{n}{k} - 1 )
-	\end{align*}
-	For $\sigma = \bar{\sigma}$, we have
-	\begin{align*}
-	\sum_{\bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} &= \sum_{X_i = X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} + \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} \\
+	- \beta\frac{\gamma \log n}{n}
+  \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1 
+  - \log Z_G(\gamma, \beta)
+  \label{eq:log_P_sigma_G_bar_sigma}
+  \end{align}
+	其中 $Z_{ij}$ 服从伯努利分布，
+  $P(Z_{ij}=1)$ 等于节点$i$与节点$j$之间有边相边的概率。
+	对于 $\sigma = X$， 我们有
+	\begin{align}
+	\sum_{X_i = X_j} Z_{ij} &
+  = \sum_{X_i = X_j, \bar{\sigma}_i = \bar{\sigma}_j}
+  Z_{ij} + \sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j}
+  Z_{ij}
+  \label{eq:split_zij_tmp_X_ij}\\
+	\sum_{X_i = X_j} 1 &= \frac{1}{2} \sum_{i=0}^{k-1} \frac{n}{k} 
+  \left( \frac{n}{k} - 1 
+  \right)\label{eq:split_one_tmp_X_ij}
+	\end{align}
+	对于 $\sigma = \bar{\sigma}$，我们有
+	\begin{align}
+	\sum_{\bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} &= \sum_{X_i = X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} + \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} 
+  \label{eq:split_zij_tmp_sigma_ij}\\
 	\sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1 &= \frac{1}{2} \sum_{i=0}^{k-1} (I'_i + \frac{n}{k} - I_i) ( I'_i + \frac{n}{k} - I_i - 1)
-	\end{align*}
-	The term $|\{r\in [n] | X_r = \omega^i \}| = \frac{n}{k}$,
-	$|\{r\in [n] | X_r = \omega^i, \sigma_r \neq \omega^i \}| = I_i$,
-	$|\{r\in [n] | X_r \neq \omega^i, \sigma_r = \omega^i \}| = I'_i$.
-	Therefore,  $|\{r\in [n] | \sigma_r = \omega^i \}| = I'_i + \frac{n}{k} - I_i $.
-	Therefore, we get
-	$N_{\bar{\sigma}} = \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1  -\sum_{X_i = X_j} 1 = \frac{1}{2}\sum_{i=0}^{k-1} (I_i - I_i')^2 $.
-	On the other hand, we show that $B_{\bar{\sigma}} - A_{\bar{\sigma}} = \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} - \sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$.
-	for $Z_{ij}$ in the sum $\sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}$, $Z_{ij} \sim \textrm{Bernoulli}(q)$ and
-	$\sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} 1 = \sum_{i=0}^{k-1}[(\frac{n}{k} - I_i) I_i' + \frac{1}{2} \sum_{j=0}^{k-1} I_{ji}(I'_i - I_{ji}) ]
-	=\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}) $;
-	for $Z_{ij}$ in the sum $\sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$, $Z_{ij} \sim \textrm{Bernoulli}(p)$ and
+  \label{eq:split_one_tmp_sigma_ij}
+	\end{align}
+  其中，式 \eqref{eq:split_one_tmp_sigma_ij} 是根据式
+  \eqref{eq:I_i_horizontal}和 \eqref{eq:I_prime_i_vertical}
+  而来。
+	注意到
+  $
+  \Big|\{r\in [n] \big| X_r = w^i, \sigma_r=w^i \}\Big|
+  =\frac{n}{k} - I_i$和
+	$|\{r\in [n] | X_r \neq \omega^i, \sigma_r = \omega^i \}| = I'_i$，
+	我们因此有  $|\{r\in [n] | \sigma_r = \omega^i \}| = I'_i + \frac{n}{k} - I_i $。
+  类比式\eqref{eq:split_one_tmp_X_ij}从而得到
+  式\eqref{eq:split_one_tmp_sigma_ij}。
+
+  由式\eqref{eq:Pratio} 我们得到
+  \begin{equation}
+    \frac{P_{\sigma |G } (\sigma = \bar{\sigma})}
+    {P_{\sigma |G } (\sigma = X)}
+    = \exp(-\beta(H(\bar{\sigma})
+    - H(X)))
+  \end{equation}
+  结合式\eqref{eq:log_P_sigma_G_bar_sigma}
+  可得
+  \begin{equation}\label{eq:Hgeneral_tmp_derived}
+    H(\bar{\sigma}) - H(X)=
+    -\left(1 + \gamma \frac{ \log n}{n}
+    \right)
+    \left[
+      \sum_{\bar{\sigma}_i = \bar{\sigma}_j}Z_{ij} - \sum_{X_i = X_j}Z_{ij}
+      \right]
+    + \gamma\frac{ \log n}{n}
+    \left[\sum_{\bar{\sigma}_i = \bar{\sigma}_j}1 - \sum_{X_i = X_j}1
+    \right]
+    \end{equation}
+  将式\eqref{eq:Hgeneral_tmp_derived} 与式\eqref{eq:Hgeneral}
+  对比可得：
+  \begin{align}
+    B_{\bar{\sigma}} - A_{\bar{\sigma}} &=
+    \sum_{\bar{\sigma}_i = \bar{\sigma}_j}Z_{ij}
+    - \sum_{X_i = X_j}Z_{ij}
+    \label{eq:B_bar_A_bar_lem_minus}\\
+    N_{\bar{\sigma}} &=
+    \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1  -\sum_{X_i = X_j} 1
+    \label{eq:N_bar_sigma_lem_minus}
+  \end{align}
+  由式\eqref{eq:split_one_tmp_X_ij},
+  \eqref{eq:split_one_tmp_sigma_ij}, 
+  \eqref{eq:N_bar_sigma_lem_minus} 可得
+  $N_{\bar{\sigma}} = \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1  -\sum_{X_i = X_j} 1 = \frac{1}{2}\sum_{i=0}^{k-1} (I_i - I_i')^2 $，
+  即式 \eqref{eq:N_w}。
+	另一方面，由式\eqref{eq:B_bar_A_bar_lem_minus},
+  \eqref{eq:split_zij_tmp_X_ij}, 
+  \eqref{eq:split_zij_tmp_sigma_ij}
+  可得 $B_{\bar{\sigma}} - A_{\bar{\sigma}} = \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} - \sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$。
+	对于在求和式 $\sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}$
+  中出现的 $Z_{ij}$， $Z_{ij} \sim \textrm{Bernoulli}(q)$
+  并且我们有
+  \begin{align}
+  \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} 1 
+  &= \sum_{i=0}^{k-1}[(\frac{n}{k} - I_i) I_i' + \frac{1}{2} \sum_{j=0}^{k-1} I_{ji}(I'_i - I_{ji}) ] 
+  \label{eq:x_i_neq_x_j_bar_sigma_i_eq_bar_sigma_j_0}\\
+	&=\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}) 
+  \label{eq:x_i_neq_x_j_bar_sigma_i_eq_bar_sigma_j_1}
+  \end{align}
+  在式\eqref{eq:x_i_neq_x_j_bar_sigma_i_eq_bar_sigma_j_0}
+  最外层的求和中，首先遍历的是$X_i=1, \omega, \dots, \omega^{k-1}$。  
+  而式\eqref{eq:split_one_tmp_sigma_ij}
+  利用了
+  $|\cI| = \sum_{i=0}^{k-1} I'_i$。
+  类似的，
+  对于在求和式 $\sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$
+  中出现的 $Z_{ij}$， $Z_{ij} \sim \textrm{Bernoulli}(p)$。
 	$\sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} 1
 	= \sum_{i=0}^{k-1}[(\frac{n}{k} - I_i) I_i + \frac{1}{2} \sum_{j=0}^{k-1} I_{ij}(I_i - I_{ij}) ] 
-	= \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij})$.
+	= \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij})$。
+  从而式\eqref{eq:B_w}、\eqref{eq:A_w} 得证。
 \end{proof}
+
