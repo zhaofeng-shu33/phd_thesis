@@ -704,3 +704,21 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   从而式\eqref{eq:B_w}、\eqref{eq:A_w} 得证。
 \end{proof}
 
+从上面可以看到引理 \ref{lem:minus} 的证明并没有很多技巧性，主要涉及一些计数
+的技巧。
+当 $|\cI|$ 相比与 $n$ 很小时
+我们有如下的引理， 该引理是 \citet{ye2020exact} 中 陈述 6 的拓展。 
+
+\begin{lemma}
+  \label{lem:enhanced_fb}
+	For $t\in [\frac{1}{k}(b-a), 0]$
+	and $ |\cI| \le n/\sqrt{\log n}$
+\begin{equation} \label{eq:upmpt}
+	\begin{aligned}
+	& P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)  \\
+	\le & \exp\Big(|\cI|\log n
+	\Big(f_{\beta}(t) - \beta t -1	+ O(\frac{1}{\sqrt{\log n}}) \Big)\Big)
+	\end{aligned}
+	\end{equation}
+	where $f_{\beta}(t) = \min_{s\geq 0} (g(s) - st) + \beta t \leq \tilde{g}(\beta) $.
+\end{lemma}
