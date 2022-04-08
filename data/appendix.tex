@@ -711,20 +711,72 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 
 \begin{lemma}
   \label{lem:enhanced_fb}
-	对于 $t\in [\frac{1}{k}(b-a), 0]$
-	和 $ |\cI| \le n/\sqrt{\log n}$，我们有
+	对于 $t\in [\frac{1}{k}(b-a), 0], 0<\delta <1$
+	和 $ |\cI| \le n/\log^{\delta} n$，我们有
 \begin{equation} \label{eq:upmpt}
 	\begin{aligned}
 	& P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)  \\
 	\le & \exp\Big(|\cI|\log n
 	\left(
-    f_{\beta}(t) - \beta t -1	+ O((\log n)^{-1/2}) \right)\Big)
+    f_{\beta}(t) - \beta t -1	+ O((\log n)^{-\delta}) \right)\Big)
 	\end{aligned}
 	\end{equation}
-	其中 $f_{\beta}(t) = \min_{s\geq 0} (g(s) - st) + \beta t \leq \tilde{g}(\beta) $。
+	其中 $f_{\beta}(t) := \min_{s\geq 0} (g(s) - st) + \beta t \leq \tilde{g}(\beta) $。
   函数$g(\beta), \tilde{g}(\beta)$
   的定义分别参见
   \eqref{eq:g_beta_main_article}
   和
   \eqref{eq:g_tilde_beta_main_article}。
 \end{lemma}
+
+\begin{proof}
+	由定义可知，
+  $A_{\bar{\sigma}}\sim \Binom(N_{A_{\bar{\sigma}}},\frac{a\log n}{n})$
+  且
+	$B_{\bar{\sigma}}\sim\Binom(N_{B_{\bar{\sigma}}},\frac{b\log n}{n})$,
+  并且二者彼此独立。
+  由 (\ref{eq:N_w}-\ref{eq:A_w})可知，$N_{B_{\bar{\sigma}}} - N_{A_{\bar{\sigma}}}
+  = N_{\bar{\sigma}}$。
+  对于$s>0$，
+  $B_{\bar{\sigma}}-A_{\bar{\sigma}}$ 的矩生成函数可以展开成
+	\begin{align*}
+	 \mathbb{E}[e^{s(B_{\bar{\sigma}}-A_{\bar{\sigma}})}] 
+	& =\Big(1-\frac{b\log n}{n}+\frac{b\log n}{n} e^s \Big)^{|B_{\bar{\sigma}}|}
+	\Big(1-\frac{a\log n}{n}+\frac{a\log n}{n} e^{-s} \Big)^{|A_{\bar{\sigma}}|}  \\
+	& = \exp\left(\frac{\log n}{n}\left(N_{B_{\bar{\sigma}}}
+  (be^s - b) + N_{A_{\bar{\sigma}}}(ae^{-s}-a) + N_{B_{\bar{\sigma}}}
+  O \left(\frac{\log n}{n} \right) \right) \right)
+	\end{align*}
+	由\eqref{eq:A_w}
+  和\eqref{eq:B_w}
+  注意到$k$是个常数，
+  当
+  $|\cI| \le n/\log^{\delta}(n)$ 时
+	我们能估计
+  $N_{B_{\bar{\sigma}}}$和$N_{A_{\bar{\sigma}}}$
+  的阶数。它们分别是
+  $N_{A_{\bar{\sigma}}} = \frac{n}{k}|\cI| + O(|\cI|^2)$，
+	 $N_{B_{\bar{\sigma}}} = \frac{n}{k}|\cI| + O(|\cI|^2)$。
+	\begin{align*}
+	\mathbb{E}[e^{s(B_{\bar{\sigma}}-A_{\bar{\sigma}})}]
+   \le&
+	\exp(\frac{\log n}{n}\Big((\frac{n}{k}|\cI| + O(|\cI|^2))(be^s - b) +(\frac{n}{k} |\cI| + O(|\cI|^2))(ae^{-s}-a) \\
+  &+ \frac{n}{k}|\cI|O(\frac{\log n}{n}) \Big))\\
+	=
+  & \exp\Big(\frac{|\cI| \log n}{k}(a e^{-s}+b e^s-a-b +
+	O(\log^{-\delta}(n))) \Big),
+	\end{align*}
+	最后一个等式来自于
+  $ |\cI| \le n/\log^{\delta}(n)$这个假设。
+	由切尔诺夫不等式（参见 \eqref{eq:chernoff_bound}），
+  对于 $s>0$，我们有
+	\begin{align*} 
+	& P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)\le
+	\frac{\mathbb{E}[e^{s(B_{\bar{\sigma}}-A_{\bar{\sigma}})}]}{e^{st |\cI|  \log n}}  \\
+	\le & \exp\Big(\frac{|\cI|\log n}{k} \big(a e^{-s}+b e^s -kst -a-b
+	+ O(\log^{-\delta}(n)) \big)\Big)  .
+	\end{align*}
+	上式右端对$s\geq 0$取最小值即有
+  \eqref{eq:upmpt}。  
+	\end{proof}
+
