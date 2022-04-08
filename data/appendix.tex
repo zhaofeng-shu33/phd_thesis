@@ -711,14 +711,20 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 
 \begin{lemma}
   \label{lem:enhanced_fb}
-	For $t\in [\frac{1}{k}(b-a), 0]$
-	and $ |\cI| \le n/\sqrt{\log n}$
+	对于 $t\in [\frac{1}{k}(b-a), 0]$
+	和 $ |\cI| \le n/\sqrt{\log n}$，我们有
 \begin{equation} \label{eq:upmpt}
 	\begin{aligned}
 	& P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)  \\
 	\le & \exp\Big(|\cI|\log n
-	\Big(f_{\beta}(t) - \beta t -1	+ O(\frac{1}{\sqrt{\log n}}) \Big)\Big)
+	\left(
+    f_{\beta}(t) - \beta t -1	+ O((\log n)^{-1/2}) \right)\Big)
 	\end{aligned}
 	\end{equation}
-	where $f_{\beta}(t) = \min_{s\geq 0} (g(s) - st) + \beta t \leq \tilde{g}(\beta) $.
+	其中 $f_{\beta}(t) = \min_{s\geq 0} (g(s) - st) + \beta t \leq \tilde{g}(\beta) $。
+  函数$g(\beta), \tilde{g}(\beta)$
+  的定义分别参见
+  \eqref{eq:g_beta_main_article}
+  和
+  \eqref{eq:g_tilde_beta_main_article}。
 \end{lemma}
