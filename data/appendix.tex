@@ -847,29 +847,59 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
     但这样一来 $(i, j)$ 二元组满足 条件 2，
     又与 $\bar{\sigma}$ 不满足如上两个条件的假设相矛盾。
     
-    Under condition 1, we can get a lower bound on $|A_{\bar{\sigma}}|$ from Equation \eqref{eq:A_w}. Let $I'_{ij} = I_{ij}$ for $i\neq j$ and
-    $I'_{ii} = \frac{n}{k} - I_i$. Then we can simplify $|A_{\bar{\sigma}}|$ as:
+    在条件1的假设下，我们能获得 $N_{A_{\bar{\sigma}}}$的一个下界。
+    为方便估计该下界，我们首先改写\eqref{eq:A_w}式。
+    对于 $i\neq j$ ，令 $I'_{ij} = I_{ij}$，
+    而 $I'_{ii} = \frac{n}{k} - I_i$。
+    则我们有：
     \begin{align*}
-    N_{A_{\bar{\sigma}}} &= \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij}) \\
-    &= \frac{n^2}{2k} - \frac{1}{2} \sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}
-    \end{align*}
+    N_{A_{\bar{\sigma}}} &=
+    \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}
+    (I^2_i + \sum_{j=0}^{k-1} I^2_{ij}) \\
+    &=
+    \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}
+    ((\frac{n^2}{k^2} - 2\frac{n}{k} I'_{ii}) +
+    \sum_{j=0}^{k-1} I'^2_{ij}) \\
+    &=
+    \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}
+    ((\frac{n^2}{k^2} - 2\frac{n}{k} (\frac{n}{k} - I_i)))
+    - \frac{1}{2}\sum_{i=0}^{k-1}\sum_{j=0}^{k-1} I'^2_{ij} \\
+    &= \frac{n^2}{2k} - \frac{1}{2}
+    \sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}
+   \end{align*}
     
-    We further have $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + (\frac{n}{k} - I_{ij})^2 + I^2_{ij}$ where
-    $I_{ij}$ satisfies condition 1. Therefore, $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + (\frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2
-    + (\frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{k} - \frac{2n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$.
-    As a result,
+    在求和式中 $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}$
+    的每一项 $\sum_{j=0}^{k-1} I'^2_{ij}$ 其满足 $\sum_{j=0}^{k-1}
+    I'_{ij} = \frac{n}{k}$，当某个$I'_{ii}$取$\frac{n}{k}$
+    而其余的项为零时$\sum_{j=0}^{k-1} I'^2_{ij}$
+    最大。但由于条件1成立，有某一行不能取
+    这种极端值，所以 $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}$中
+    共有 $(k-1)$行求和得$ (k-1)\frac{n^2}{k^2}$
+    而其中一行则必须保留$I'_{ij}, I'_{ii}$ 这两个非零项。
+    因此 $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}
+    \leq (k-1)\frac{n^2}{k^2} + (\frac{n}{k} - I_{ij})^2 + I^2_{ij}$。
+    而这里的
+    $I_{ij}$ 满足条件1。
+    进一步的， $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + (\frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2
+    + (\frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{k} - \frac{2n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$。
+    从而我们得到
   \begin{equation}\label{eq:Asigma}
     A_{\bar{\sigma}} \geq \frac{n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))
     \end{equation}
     
     
-    Under condition 2, we can get a lower bound on $N_{\bar{\sigma}}$. Since
-    $\Dist(\bar{\sigma}, X') - \Dist(\bar{\sigma}, X) \geq 0$, from~\eqref{eq:distsmall} we have
-    $I_{ij} + I_{ji} + I_{i} + I_j \leq \frac{2n}{k} $.
-    Since $I_i \geq I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$,
-    we have\linebreak $I_j \leq \frac{2}{k(k-1)}\frac{n}{\sqrt{\log n} }$.
-    Now consider $I'_j - I_j \geq  \frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n} }$.
-    From \eqref{eq:N_w}:\linebreak $N_{\bar{\sigma}} \geq \frac{1}{2}(\frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{2k^2}(1+o(1))$.
+    在条件2的假设下, 我们能得到
+    $N_{\bar{\sigma}}$的一个下界。
+    因为
+    $\Dist(\bar{\sigma}, X') - \Dist(\bar{\sigma}, X) \geq 0$，
+     由 \eqref{eq:distsmall} 式 我们有
+    $I_{ij} + I_{ji} + I_{i} + I_j \leq \frac{2n}{k} $。
+    又因为 $I_i \geq I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$,
+    从而$I_j $ 满足
+    $I_j \leq \frac{2}{k(k-1)}\frac{n}{\sqrt{\log n} }$。
+    进一步有 $I'_j - I_j \geq I_{ij} - I_j \geq  \frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n} }$。
+    由 \eqref{eq:N_w}
+    式 $N_{\bar{\sigma}} \geq \frac{1}{2}(\frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{2k^2}(1+o(1))$.
     
     Now we use the Chernoff inequality to bound Equation \eqref{eq:BwA}; we can omit $\frac{\gamma \log n}{n}$ on the left-hand side since it is far smaller than $1$.
     Let $Z \sim \textrm{Bernoulli}(\A), Z' \sim \textrm{Bernoulli}(\B)$, then:
