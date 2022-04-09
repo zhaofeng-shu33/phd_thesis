@@ -722,6 +722,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	\end{aligned}
 	\end{equation}
 	其中 $f_{\beta}(t) := \min_{s\geq 0} (g(s) - st) + \beta t \leq \tilde{g}(\beta) $。
+  $P_G$中的下标$G$表示图$G$是由SSBM模型随机生成的。
   函数$g(\beta), \tilde{g}(\beta)$
   的定义分别参见
   \eqref{eq:g_beta_main_article}
@@ -730,6 +731,10 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 \end{lemma}
 
 \begin{proof}
+  由$f_{\beta}(t)$函数的定义，
+  \eqref{eq:upmpt}式中
+  $f_{\beta}(t) - \beta t$ 与$\beta$无关而只与
+  $t$有关。
 	由定义可知，
   $A_{\bar{\sigma}}\sim \Binom(N_{A_{\bar{\sigma}}},\frac{a\log n}{n})$
   且
@@ -780,3 +785,107 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   \eqref{eq:upmpt}。  
 	\end{proof}
 
+  对应于定理 \ref{thm:phase_transition} 的三种情况，我们需要使用如下三个非平凡的引理来辅助证明。
+
+  \begin{lemma}\label{lem:sigmaX}
+    令 $\gamma > b$， 且 $\bar{\sigma}$ 满足 $\Dist(\bar{\sigma}, X) \geq \frac{n}{\sqrt{\log n}}$
+    和 $D(\bar{\sigma}, X)$
+    （参见\eqref{eq:D_sigma_sigma_prime}）
+    两个条件。
+    事件
+    $P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = X)$
+    发生的概率小于 $\exp(-\tau(\gamma,\beta) n \sqrt{\log  n} )$,
+    其中 $C$ 是任意事先给定的常数而 
+    $\tau(\gamma,\beta)$
+   是某个依赖于$\gamma$ 和 $\beta$的函数。
+  \end{lemma}
+  \begin{proof}
+    我们把 事件 $P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = X)$
+    记为 $\widetilde{D}(\bar{\sigma}, C)$。
+    由 \eqref{eq:Hgeneral} 式, $\widetilde{D}(\bar{\sigma}, C)$
+    等价于：
+  \begin{equation}\label{eq:BwA}
+    (1 + \frac{\gamma \log n}{n})[B_{\bar{\sigma}} - A_{\bar{\sigma}}] >  \frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta} n
+    \end{equation}
+    
+    我们声称$\bar{\sigma}$  必须满足以下两个条件中的至少一个。
+    \begin{enumerate}
+      \item $\exists i\neq j$ s.t. $\frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}} \leq I_{ij} \leq \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$
+      \item $\exists i \neq j$ s.t. $I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$ and $I_{ji} < \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$
+    \end{enumerate}
+    $I_{ij}$的定义参见引理
+    \ref{lem:minus}。
+    如果上面两个条件均不成立，则由条件1，对 $0 \leq i,j\leq k-1$，
+    我们有
+    $I_{ij} < \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$
+    或者 $I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$。
+    
+    因为 $\sum_{i,j} I_{ij} = |\cI| \geq \frac{n}{\sqrt{\log n}}$，
+    存在 $i,j$ 使得
+    $I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$.
+    对于这一对确定的 $i,j$，不妨先假设 $I_{ji} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$，
+    下面我们将推出一对矛盾说明该假设不成立。
+    取 $X'$ 为在$X$ 的基础上交换$w^i$ 和 $w^j$ 位置的向量，
+    然后我们考虑
+  \begin{align}
+     \Dist(\bar{\sigma}, X') & - \Dist(\bar{\sigma}, X)= |\{ r \in [n]|X_r=w^i, \bar{\sigma}_r \neq w^j \}| \notag\\
+    &+ |\{ r \in [n]|X_r=w^j, \bar{\sigma}_r \neq w^i \}| \notag\\
+    &-|\{ r \in [n]|X_r=w^i, \bar{\sigma}_r \neq w^i \}| \notag\\
+    &- |\{ r \in [n]|X_r=w^j, \bar{\sigma}_r \neq w^j \}| \notag\\
+    & = \frac{n}{k} - I_{ij} +  \frac{n}{k} - I_{ji} - I_i - I_j\label{eq:distsmall} \\
+    & < \frac{2}{k(k-1)}\frac{n}{\sqrt{\log n}} - I_i - I_j < 0\notag
+    \end{align}
+    这和 $\bar{\sigma}$ 离 $X$ 最近的条件矛盾。
+    因此
+    $I_{ji} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$
+    不成立，由条件1
+    则有  $I_{ji} < \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$。
+    但这样一来 $(i, j)$ 二元组满足 条件 2，
+    又与 $\bar{\sigma}$ 不满足如上两个条件的假设相矛盾。
+    
+    Under condition 1, we can get a lower bound on $|A_{\bar{\sigma}}|$ from Equation \eqref{eq:A_w}. Let $I'_{ij} = I_{ij}$ for $i\neq j$ and
+    $I'_{ii} = \frac{n}{k} - I_i$. Then we can simplify $|A_{\bar{\sigma}}|$ as:
+    \begin{align*}
+    |A_{\bar{\sigma}}| &= \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij}) \\
+    &= \frac{n^2}{2k} - \frac{1}{2} \sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}
+    \end{align*}
+    
+    We further have $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + (\frac{n}{k} - I_{ij})^2 + I^2_{ij}$ where
+    $I_{ij}$ satisfies condition 1. Therefore, $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + (\frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2
+    + (\frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{k} - \frac{2n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$.
+    As a result,
+  \begin{equation}\label{eq:Asigma}
+    A_{\bar{\sigma}} \geq \frac{n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))
+    \end{equation}
+    
+    
+    Under condition 2, we can get a lower bound on $N_{\bar{\sigma}}$. Since
+    $\Dist(\bar{\sigma}, X') - \Dist(\bar{\sigma}, X) \geq 0$, from~\eqref{eq:distsmall} we have
+    $I_{ij} + I_{ji} + I_{i} + I_j \leq \frac{2n}{k} $.
+    Since $I_i \geq I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$,
+    we have\linebreak $I_j \leq \frac{2}{k(k-1)}\frac{n}{\sqrt{\log n} }$.
+    Now consider $I'_j - I_j \geq  \frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n} }$.
+    From \eqref{eq:N_w}:\linebreak $N_{\bar{\sigma}} \geq \frac{1}{2}(\frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{2k^2}(1+o(1))$.
+    
+    Now we use the Chernoff inequality to bound Equation \eqref{eq:BwA}; we can omit $\frac{\gamma \log n}{n}$ on the left-hand side since it is far smaller than $1$.
+    Let $Z \sim \textrm{Bernoulli}(\A), Z' \sim \textrm{Bernoulli}(\B)$, then:
+    \begin{align*}
+    &P_G(\widetilde{D}(\bar{\sigma}, C))
+    \leq (\mathbb{E}[\exp(sZ)])^{|B_{\bar{\sigma}}|}(\mathbb{E}[\exp(-sZ')])^{|A_{\bar{\sigma}}|}\\
+    &\cdot \exp(-s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)) \\
+    & \leq \exp\Big(|B_{\bar{\sigma}}|\frac{b\log n}{n}(e^s -1) + |A_{\bar{\sigma}}|\frac{a\log n}{n} (e^{-s} - 1) \\
+    &-s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)\Big) 
+    \end{align*}
+    
+    Using $|B_{\bar{\sigma}}| = N_{\bar{\sigma}} + |A_{\bar{\sigma}}|$ we can further simplify the exponential term as:
+    $$
+    \frac{\log n}{n} [|A_{\bar{\sigma}}|(b(e^s -1)+ a(e^{-s} - 1)) +
+    N_{\bar{\sigma}} (b(e^s - 1)-\gamma s)]  + s \frac{C}{\beta}n
+    $$
+    
+    Now we investigate the function $g_1(s) = b(e^s -1)+ a(e^{-s} - 1)$ and\linebreak $g_2(s) = b(e^s - 1)-\gamma s$.
+    Both functions take zero values at $s=0$ and\linebreak $g_1'(s) = (be^s - ae^{-s}), g_2'(s) = be^s -\gamma$.
+    Therefore, $g_1'(0) = b-a<0, g_2'(0) = b - \gamma < 0$ and we can choose $s^*>0$ such that $g_1(s^*) < 0,g_2(s^*) < 0$.
+    To compensate the influence of the term $sCn/\beta$ we only need to make sure that the order of $\frac{\log n}{n} \min\{|A_{\bar{\sigma}}|, N_{\bar{\sigma}}\}$ is larger than $n$.
+    This requirement is satisfied since either $|A_{\bar{\sigma}}|\geq \frac{n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$ or $N_{\bar{\sigma}} \geq \frac{n^2}{2k^2}(1+o(1))$.
+  \end{proof}
