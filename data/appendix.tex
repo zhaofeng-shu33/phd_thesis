@@ -789,7 +789,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   \eqref{eq:upmpt}。  
 	\end{proof}
 
-  对应于定理 \ref{thm:phase_transition} 的三种情况，我们需要使用如下三个非平凡的引理来辅助证明。
+  对应于定理 \ref{thm:phase_transition} 的三种情况，我们需要使用若干个非平凡的引理来辅助证明。
 
   \begin{lemma}\label{lem:sigmaX}
     令 $\gamma > b$， 且 $\bar{\sigma}$ 满足 $\Dist(\bar{\sigma}, X) \geq \frac{n}{\sqrt{\log n}}$
@@ -934,4 +934,149 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
     由于   $N_{A_{\bar{\sigma}}}\geq \frac{n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$ 或 $N_{\bar{\sigma}} \geq \frac{n^2}{2k^2}(1+o(1))$
     有一个成立，
     这一要求可以得到了满足。
+  \end{proof}
+
+\begin{lemma}\label{prop:small}
+  若 $\gamma>b$, $\beta>\beta^\ast$，
+  对于 $1\leq r \leq \frac{n}{\sqrt{\log n}}$
+  和 $\forall \epsilon > 0$，
+  存在集合 $\cG^{(r)}$ 使得:
+\begin{equation}\label{eq:Gr}
+  P_G(\cG^{(r)}_n) \ge 1 - n^{r(\tilde{g}(\beta)/2 + \epsilon)}
+  \end{equation}
+  并且对于任意 $G\in\cG^{(r)}_n$，有
+\begin{equation}\label{eq:psigmaX}
+  \frac{P_{\sigma|G}(\Dist(\sigma, X)=r | D(\sigma, X))}
+  {P_{\sigma|G}(\sigma=X | D(\sigma, X))} <
+  n^{r \tilde{g}(\beta) /2}
+  \end{equation}
+  
+  对于 $r> \frac{n}{\sqrt{\log n}}$, 存在集合 $\cG^{(r)}$ 使得：
+\begin{equation}\label{eq:Gr1}
+  P(G\in\cG^{(r)}_n) \ge 1 - e^{-n}
+  \end{equation}
+  并且对于任意 $G\in\cG^{(r)}_n$，有
+\begin{equation}\label{eq:psigmaX1}
+  \frac{P_{\sigma|G}(\Dist(\sigma, X)=r | D(\sigma, X))}
+  {P_{\sigma|G}(\sigma=X | D(\sigma, X))} <
+  e^{-n}
+  \end{equation}
+\end{lemma}
+\begin{proof}
+  我们将讨论分为两种情况： $r\leq \frac{n}{\sqrt{\log n}}$
+  和 $r > \frac{n}{\sqrt{\log n}}$。
+  
+  当 $r\leq \frac{n}{\sqrt{\log n}}$ 时，
+  通过使用 关于 $\Dist$
+  的三角不等式，
+  我们可以证明 
+  $\Dist(\sigma, X) = r$ 蕴含
+  $D(\sigma, X)$。
+   对于 $f \in S_k \backslash \{ \textrm{id} \}$，
+   其中
+   $\textrm{id}$ 是恒等映射，
+   我们有：
+  $$
+  \frac{2n}{k} \leq \Dist(f(X), X) \leq \Dist(\sigma, f(X)) + \Dist(\sigma, X)
+  $$
+  
+  因此，
+  $\Dist(\sigma, f(X)) \geq \frac{2n}{k} - \frac{n}{\sqrt{\log n}} \geq \Dist(\sigma, X)$。
+  从而我们得到
+  \eqref{eq:psigmaX} 式 等价于：
+  \begin{equation}\label{eq:psigmaX2}
+  \frac{P_{\sigma|G}(\Dist(\sigma, X)=r)}
+  {P_{\sigma|G}(\sigma=X)} <
+  n^{r \tilde{g}(\beta) /2}
+  \end{equation}
+  
+  上式左边可以写为：
+  \begin{align*}
+  \frac{P_{\sigma|G}(\Dist(\sigma, X)=r)}
+  {P_{\sigma|G}(\sigma=X)}  &= \sum_{\Dist(\bar{\sigma}, X)=r}\exp(-\beta(H(\bar{\sigma})-H(X)))\\
+  \textrm{ by \eqref{eq:Hgeneral} } &\leq \sum_{\Dist(\bar{\sigma}, X)=r}\exp(\beta_n(B_{\bar{\sigma}}-A_{\bar{\sigma}}))
+  \end{align*}
+  其中 $\beta_n = \beta(1+\gamma\frac{\log n}{n})$。
+  
+  定义
+  $\Xi_n(r): = \sum_{\Dist(\bar{\sigma}, X)=r}\exp(\beta_n(B_{\bar{\sigma}}-A_{\bar{\sigma}}))$，
+  我们只需证明：
+  \begin{equation}
+  P_{G}(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2}) \leq  n^{r (\tilde{g}(\beta) /2 + \epsilon)}
+  \end{equation}
+  
+  定义 事件 $\Lambda_n(G,r):=\{B_{\bar{\sigma}} -A_{\bar{\sigma}} < 0, \forall \bar{\sigma}\, s.t. \Dist(\bar{\sigma}, X)=r\}$，
+  然后我们采用下面的方式进行处理
+  \begin{align*}
+  P_{G}(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2}) \leq
+  P_G(\Lambda_n(G,r)^c)
+  + P_G\left(
+    \Xi_n(r) \geq n^{r \tilde{g}(\beta) /2} |\Lambda_n(G,r) 
+    \right)
+  \end{align*}
+  
+  对于第一项, 因为
+  $|\{ \bar{\sigma} | \Dist(\bar{\sigma}, X) = r \}| \leq (k-1)^r n^r$，
+  由 引理 \ref{lem:enhanced_fb} 可得
+  $P_G(\Lambda_n(G,r)^c) \leq (k-1)^r n^{rg(\bar{\beta})} \leq n^{r (\tilde{g}(\beta) /2 + \epsilon/2)}$。
+
+  对于第二项，我们使用马尔可夫不等式:
+  \begin{align*}
+  P_G(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2} |\Lambda_n(G,r) )
+  \leq \mathbb{E}[\Xi_n(r)|\Lambda_n(G,r)]n^{-r \tilde{g}(\beta) /2} 
+  \end{align*}
+  
+  而上式中的条件期望可以做如下估计：
+  \begin{align*}
+  &\mathbb{E}[\Xi_n(r)|\Lambda_n(G,r)]=
+  \sum_{\Dist(\bar{\sigma}, X) = r}\sum_{tr\log n = -\infty }^{-1} 
+   P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=tr\log n)\exp(\beta_n tr \log n) \\
+  & \leq (k-1)^r n^{r+r\beta_n(b-a)/k} +
+  \sum_{\Dist(\bar{\sigma}, X) = r}\sum_{tr\log n = r\frac{b-a}{k}\log n }^{-1} 
+   P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=tr\log n)\exp(\beta_n tr \log n)
+  \end{align*}
+  $1+\beta_n(b-a)/k = f_{\beta_n}(\frac{b-a}{k}) < \tilde{g}(\beta_n)$，
+  因此，
+  $(k-1)^r n^{r+r\beta_n (b-a)/k}n^{-r \tilde{g}(\beta) /2} \leq$
+   $n^{r (\tilde{g}(\beta) /2 + \epsilon/2)} $。
+  使用 引理 \ref{lem:enhanced_fb}， 我们有：
+  \begin{align*}
+  P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=tr\log n)\exp(\beta_n rt \log n) \leq 
+  n^{r(f_{\beta_n}(t)-1 + O(\frac{1}{\sqrt{\log n}}))}
+  \end{align*}
+  
+  因为 $\beta_n \to \beta$, $\forall \epsilon$，
+  当 $n$ 充分大时
+  我们有 $\tilde{g}(\beta_n) \leq \tilde{g}(\beta) + \epsilon /2$。
+  因此，
+  \begin{align*}
+  &n^{-r \tilde{g}(\beta) /2}\sum_{\Dist(\bar{\sigma}, X) = r}\sum_{\substack{tr\log n = \\ r(b-a)/k\log n} }^{-1}
+  P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=t\log n)\exp(\beta_n rt \log n) \\
+  & \leq  (k-1)^r r\frac{b-a}{k} ( \log n )
+  n^{r(\tilde{g}(\beta_n) - \tilde{g}(\beta)/2)}\\
+  & \leq  n^{r(\tilde{g}(\beta)/2 + \epsilon/2)} O(\log n) (k-1)^r
+  \end{align*}
+  
+  结合上面的式子， 我们可以得到：
+  \begin{align*}
+  P_{G}(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2}) &\leq  n^{r(\tilde{g}(\beta)/2 + \epsilon/2)} O(\log n) (k-1)^r\\
+  &\leq n^{r(\tilde{g}(\beta)/2 + \epsilon)}
+  \end{align*}
+  
+  当 $r>\frac{n}{\sqrt{\log n}}$时，
+  由引理 \ref{lem:sigmaX}，
+  我们选取充分大的常数  $C>1$
+  使得 $k^n\exp(-Cn) < e^{-n}$：
+  \begin{align*}
+  &\frac{P_{\sigma|G}(\Dist(\sigma, X)=r | D(\sigma, X))}
+  {P_{\sigma|G}(\sigma=X | D(\sigma, X))} = 
+  \sum_{\substack{D(\bar{\sigma}, X) \\ 
+  \Dist(\bar{\sigma}, X)=r}} \frac{P_{\sigma | G}(\sigma = \bar{\sigma}) }{P_{\sigma | X}(\sigma = X)} > \exp(-n)\\
+  &\Rightarrow \exists \bar{\sigma},
+  \frac{P_{\sigma | G}(\sigma = \bar{\sigma}) }{P_{\sigma | X}(\sigma = X)} > k^{-n}\exp(-n)
+  \Rightarrow \exists \bar{\sigma},
+  \frac{P_{\sigma | G}(\sigma = \bar{\sigma}) }{P_{\sigma | X}(\sigma = X)} > \exp(-Cn)\\
+  \end{align*}
+  最后一个事件发生的概率小于 $k^ne^{-\tau(\gamma, \beta) n\sqrt{\log n}}<e^{-n}$。
+  因此,   \eqref{eq:psigmaX1} 式成立。
   \end{proof}

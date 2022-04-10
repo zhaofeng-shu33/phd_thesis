@@ -809,12 +809,13 @@ $\frac{\log n}{n}$
 \section{大偏差理论与聚集不等式}
 本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
 
+\newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov Inequality}}
 \begin{lemma}[马尔可夫不等式]
   设 $X$ 是非负型随机变量，则对于非负实数$a$有。
   \begin{equation}
     \Pr(X\geq a) \leq {1 \over a} \E[X]   
   \end{equation}
-   若$X$ 不一定非负，$a$ 是任意实数，可先取$e$指数再运用Markov不等式，
+   若$X$ 不一定非负，$a$ 是任意实数，可先取$e$指数再运用马尔可夫不等式，
    即有
    \begin{equation}\label{eq:chernoff_bound}
     \Pr(X\geq a) = \Pr(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]
