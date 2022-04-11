@@ -1080,3 +1080,23 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   最后一个事件发生的概率小于 $k^ne^{-\tau(\gamma, \beta) n\sqrt{\log n}}<e^{-n}$。
   因此,   \eqref{eq:psigmaX1} 式成立。
   \end{proof}
+
+  如果 $\gamma > b$ 且 $\beta < \beta^*$，则我们有如下的引理：
+ \begin{lemma}\label{lem:7}
+	若 $\gamma > b$ 且 $\beta < \beta^*$，
+  则存在集合 $\cG^{(1)}_n$ 使得
+	$P_G(\cG^{(1)}_n) \geq 1-n^{g(\bar{\beta})}$
+	并且：
+ \begin{align}
+	\mathbb{E}\left[
+    \sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) | G \in \   cG^{(1)}_n\right] &= (1+o(1))n^{g(\beta_n)} \\
+	\Var \left[
+    \sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) | G \in \cG^{(1)}_n
+    \right] &\leq (1+o(1)) n^{g(2\beta_n)} 
+	\end{align}
+\end{lemma}
+引理 \ref{lem:7} 是 \citet{ye2020exact} 文中陈述 10 
+的拓展，并且可以用几乎一样的技巧证明。
+因此我们在这里省略引理\ref{lem:7}的证明。
+% This line can be changed if more detailed
+% proofs are better
