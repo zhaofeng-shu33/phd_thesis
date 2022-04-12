@@ -996,7 +996,10 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   {P_{\sigma|G}(\sigma=X)}  &= \sum_{\Dist(\bar{\sigma}, X)=r}\exp(-\beta(H(\bar{\sigma})-H(X)))\\
   \textrm{ by \eqref{eq:Hgeneral} } &\leq \sum_{\Dist(\bar{\sigma}, X)=r}\exp(\beta_n(B_{\bar{\sigma}}-A_{\bar{\sigma}}))
   \end{align*}
-  其中 $\beta_n = \beta(1+\gamma\frac{\log n}{n})$。
+  其中 
+  \begin{equation}\label{eq:beta_n_def}
+  \beta_n = \beta(1+\gamma\frac{\log n}{n})
+  \end{equation}
   
   定义
   $\Xi_n(r): = \sum_{\Dist(\bar{\sigma}, X)=r}\exp(\beta_n(B_{\bar{\sigma}}-A_{\bar{\sigma}}))$，
@@ -1092,7 +1095,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
     \sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) | G \in \   cG^{(1)}_n\right] &= (1+o(1))n^{g(\beta_n)} \\
 	\Var \left[
     \sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) | G \in \cG^{(1)}_n
-    \right] &\leq (1+o(1)) n^{g(2\beta_n)} 
+    \right] &\leq n^{g(\beta_n)}
 	\end{align}
 \end{lemma}
 引理 \ref{lem:7} 是 \citet{ye2020exact} 文中陈述 10 
@@ -1100,3 +1103,52 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 因此我们在这里省略引理\ref{lem:7}的证明。
 % This line can be changed if more detailed
 % proofs are better
+
+\begin{lemma}\label{prop:large2}
+	若 $\gamma > b$ 且 $\beta < \beta^*$，
+ 存在一个集合 $\cG'_n$ 使得:
+\begin{equation}
+	P_G(\cG'_n) \geq 1 - (1+o(1))\max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}
+	\end{equation}
+	并且对任意 $G \in \cG'_n$,
+\begin{equation}\label{eq:diff1g}
+	\frac{P_{\sigma|G}(\Dist(\sigma, X)=1 | D(\sigma, X))}
+	{P_{\sigma|G}(\sigma=X | D(\sigma, X))} \geq (k-1+o(1))n^{g(\beta_n)}
+	\end{equation}
+  其中 $\beta_n$ 在\eqref{eq:beta_n_def}式 中定义。
+\end{lemma}
+
+\begin{proof}
+根据\eqref{eq:energy_diff} 式，
+\eqref{eq:diff1g}式的左边可以写成:
+\begin{equation}\label{eq:knd}
+	\frac{P_{\sigma|G}(\Dist(\sigma, X)=1)}
+{P_{\sigma|G}(\sigma=X)}= (1+o(1))\sum_{s=1}^{k-1}\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0))
+\end{equation}
+
+令 $\cG^{(1)}_n$ 定义成 引理\ref{lem:7} 所示的形式
+并且 $\cG^{(2)}_n: = \{|\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) -\linebreak (1+o(1))n^{g(\beta_n)}  | \leq n^{g(\beta_n) - \epsilon / 2} \}$.
+
+使用切比雪夫不等式, 我们有：
+\begin{equation*}
+  P_G(G \not\in \cG^{(2)}_n \Big\vert  G \in \cG^{(1)}_n) \leq n^{- g(\beta_n) + \epsilon}
+  \end{equation*}
+  
+  令 $\cG'_n = \cG^{(1)}_n \cap \cG^{(2)}_n$:
+  \begin{align*}
+  P_G(G \in \cG'_n) &= P_G(\cG^{(1)}_n) P_G(G \in \cG_n^{(2)} | G \in \cG_n^{(1)}) \\
+  & \geq (1-n^{ - g(\beta_n) + \epsilon})(1-n^{g(\bar{\beta})}) \\
+  &= 1-(1+o(1))\max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}
+  \end{align*}
+  则对任意的 $G\in\cG'_n$,
+  \begin{equation*}
+  \sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) = (1+o(1)) n^{g(\beta_n)}
+  \end{equation*}
+  
+  因此，
+  由\eqref{eq:knd} 式我们可得：
+  \begin{equation*}
+    \frac{P_{\sigma|G}(\Dist(\sigma, X)=1)}
+  {P_{\sigma|G}(\sigma=X)} \geq (k-1+o(1)) n^{g(\beta_n)}
+  \end{equation*}
+\end{proof}
