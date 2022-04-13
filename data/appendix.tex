@@ -537,7 +537,7 @@ BHCD 算法的超参数较多，
 =m(\bar{\sigma}_r)$，
 进而：
 \begin{equation}\label{eq:energy_diff}
-H(\bar{\sigma}') - H(\bar{\sigma}) = (1+\gamma \frac{\log n}{n})(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
+H(\bar{\sigma}') - H(X) = (1+\gamma \frac{\log n}{n})(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
 \end{equation}
 其中 $A^s_r$ 定义成
 $A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
@@ -1151,4 +1151,98 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
     \frac{P_{\sigma|G}(\Dist(\sigma, X)=1)}
   {P_{\sigma|G}(\sigma=X)} \geq (k-1+o(1)) n^{g(\beta_n)}
   \end{equation*}
+\end{proof}
+
+\newglossaryentry{not:all_one_vector_n}
+{
+  type=notation,
+  name={\ensuremath{\mathbf{1}_n}},
+  description={长度为 $n$的全1的向量}
+}
+
+
+令 $\Lambda := \{ \omega^j  \cdot \mathbf{1}_n | j=0, \dots,k-1\}$
+其中 \gls{not:all_one_vector_n} 是 \glsdesc{not:all_one_vector_n} %confirm.
+则我们有如下的引理：
+ \begin{lemma}\label{lem:small}
+	假设 $\gamma < b $ 且 $\bar{\sigma}$
+  满足 
+  $\Dist(\bar{\sigma}, \mathbf{1}_n) \geq \frac{n}{\sqrt{\log  n}}$
+	且 $D(\bar{\sigma}, \mathbf{1}_n)$.
+	则事件
+	$P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = \mathbf{1}_n)$
+	发生的概率 小于 $\exp(-\tau(\gamma,\beta) n \sqrt{\log  n} )$，
+  其中 $C$ 是任意事先给定的常数，
+  $\tau(\gamma,\beta)$ 是某个依赖于$\gamma$和$\beta$的函数。
+\end{lemma}
+引理\ref{lem:small}和引理\ref{lem:sigmaX} 具有某种对称性，但其证明不同，
+引理\ref{lem:small}的证明如下。
+\begin{proof}
+	令 $n_r = |\{\bar{\sigma}_i = w^r | i\in [n] \}|$。
+  因为 $\arg\,\min_{\sigma'\in \Lambda} \Dist(\bar{\sigma}, \sigma') = \mathbf{1}_n$，
+  我们有 $n_0 \geq n_r$ 对 $r=1, \dots, k-1$成立 
+  。
+	Without loss of generality,
+	we suppose \mbox{$n_0 \geq n_1 \dots \geq n_{k-1}$}.
+	Define $N_{\bar{\sigma}} = \frac{1}{2}(n(n-1) - \sum_{r=0}^{k-1} n_r(n_r-1))
+	=\frac{1}{2}(n^2 - \sum_{r=0}^{k-1} n_r^2)$.
+	Denote the event\linebreak $P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = \mathbf{1}_n)$ as $D'(\bar{\sigma}, C)$,
+	which can be transformed as:
+\begin{align}
+	(1 + \frac{\gamma \log n}{n})
+	\left( \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} Z_{ij} +
+	\sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} Z_{ij} \right)\notag\\
+	\leq \frac{\gamma \log n}{n} N_{\bar{\sigma}} + \frac{C}{\beta} n\label{eq:small}
+	\end{align}
+		
+	Firstly we estimate the order of $N_{\bar{\sigma}}$, and obviously $N_{\bar{\sigma}} \leq \frac{1}{2} n^2$.
+	Using the conclusion in Appendix A of~\cite{chen2016information}, we have:
+\begin{equation}
+	\sum_{r=0}^{k-1} n_r^2 \leq
+	\begin{cases}
+	n n_0 & n_0 \leq \frac{n}{2} \\
+	n^2 - 2n_0(n-n_0) & n_0 > \frac{n}{2}
+	\end{cases}
+	\end{equation}
+	
+	By assumption of $\Dist(\bar{\sigma}, \mathbf{1}_n) \geq \frac{n}{\sqrt{\log n}}$, we have $n_0 \leq n - \frac{n}{\sqrt{\log n}}$
+	and $n_0 \geq \frac{n}{k}$ follows from $n_0 \geq n_r$.
+	When $n_0 > \frac{n}{2}$,
+	we have $N_{\bar{\sigma}} \geq n_0 (n - n_0) \geq \frac{n^2}{\sqrt{\log n}}(1+o(1))$.
+	The second inequality is achieved if $n_0 = n - \frac{n}{\sqrt{\log n}}$.
+	When $n_0 < \frac{n}{2}$,
+	$N_{\bar{\sigma}} \geq \frac{n^2 - nn_0}{2} \geq \frac{n^2}{4}$ and the second inequality is achieved when $n_0 = \frac{n}{2}$.
+	Thus generally we have $\frac{n^2}{\sqrt{\log n}}(1+o(1)) \leq N_{\bar{\sigma}} \leq \frac{n^2}{2}$.
+	
+	Since $\frac{C}{\beta} n = o(\frac{\log n}{n} N_{\bar{\sigma}})$ we can rewrite Equation \eqref{eq:small} as:
+\begin{equation}
+	\left( \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i = X_j}} -Z_{ij}
+	+ \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i \neq X_j}} -Z_{ij} \right)\geq -\gamma\frac{\log n N_{\bar{\sigma}}}{n}(1+o(1))
+	\end{equation}
+	
+	Let $N_1 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} 1$
+	and $N_2 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} 1 = N_{\bar{\sigma}} - N_1$.
+	
+	Using the Chernoff inequality we have:
+	\begin{align*}
+	P_G(D'(\bar{\sigma}, C))&
+	\leq (\mathbb{E}[\exp(-s Z )])^{N_1} (\mathbb{E}[\exp(-s Z' )])^{N_2} \\
+	&\cdot \exp(\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))) \\
+	&= \exp \Big( \frac{\log n}{n}(1+o(1))(e^{-s}-1)(aN_1 + bN_2) \\
+	&+\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))\Big)
+	\end{align*}
+	
+	Since $s > 0$ and $a>b$, we further have:
+	\begin{align*}
+	P_G(D'(\bar{\sigma}, C))
+	& \leq \exp( \frac{N_{\bar{\sigma}}\log n }{n}(b(e^{-s}-1)+ \gamma s + o(1))) 
+	\end{align*}
+	
+	Let $h_b(x) = x - b -x\log \frac{x}{b}$, which satisfies $h_b(x) < 0$ for $0<x<b$,
+	and take $s=-\log\frac{\gamma}{b} > 0$, using 
+	$N_{\bar{\sigma}} \geq \frac{n^2}{\sqrt{\log n}}$ we have:
+	\begin{align*}
+	P_G(D'(\bar{\sigma}, C))&\leq \exp( N_{\bar{\sigma}} \frac{\log n}{n} h_b(\gamma)(1+o(1))) \\
+	& \leq \exp (h_b(\gamma) n \sqrt{\log n} (1+o(1)))
+	\end{align*}
 \end{proof}
