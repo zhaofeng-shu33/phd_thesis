@@ -801,7 +801,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
     发生的概率小于 $\exp(-\tau(\gamma,\beta) n \sqrt{\log  n} )$,
     其中 $C$ 是任意事先给定的常数而 
     $\tau(\gamma,\beta)$
-   是某个依赖于$\gamma$ 和 $\beta$的函数。
+   是某个依赖于$\gamma$ 和 $\beta$的取值为正值的函数。
   \end{lemma}
   \begin{proof}
     我们把 事件 $P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = X)$
@@ -1173,7 +1173,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	$P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = \mathbf{1}_n)$
 	发生的概率 小于 $\exp(-\tau(\gamma,\beta) n \sqrt{\log  n} )$，
   其中 $C$ 是任意事先给定的常数，
-  $\tau(\gamma,\beta)$ 是某个依赖于$\gamma$和$\beta$的函数。
+  $\tau(\gamma,\beta)$ 是某个依赖于$\gamma$和$\beta$的取值为正值的函数。
 \end{lemma}
 引理\ref{lem:small}和引理\ref{lem:sigmaX} 具有某种对称性，但其证明不同，
 引理\ref{lem:small}的证明如下。
@@ -1182,21 +1182,25 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   因为 $\arg\,\min_{\sigma'\in \Lambda} \Dist(\bar{\sigma}, \sigma') = \mathbf{1}_n$，
   我们有 $n_0 \geq n_r$ 对 $r=1, \dots, k-1$成立 
   。
-	Without loss of generality,
-	we suppose \mbox{$n_0 \geq n_1 \dots \geq n_{k-1}$}.
-	Define $N_{\bar{\sigma}} = \frac{1}{2}(n(n-1) - \sum_{r=0}^{k-1} n_r(n_r-1))
-	=\frac{1}{2}(n^2 - \sum_{r=0}^{k-1} n_r^2)$.
-	Denote the event\linebreak $P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = \mathbf{1}_n)$ as $D'(\bar{\sigma}, C)$,
-	which can be transformed as:
+	不失一般性 我们假设 \mbox{$n_0 \geq n_1 \dots \geq n_{k-1}$}。
+	定义
+  $N_{\bar{\sigma}} = \frac{1}{2}(n(n-1) - \sum_{r=0}^{k-1} n_r(n_r-1))
+	=\frac{1}{2}(n^2 - \sum_{r=0}^{k-1} n_r^2)$。
+	简记事件
+  $P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = \mathbf{1}_n)$ 为
+  $D'(\bar{\sigma}, C)$,
+	该不等式等价于：
 \begin{align}
 	(1 + \frac{\gamma \log n}{n})
 	\left( \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} Z_{ij} +
 	\sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} Z_{ij} \right)\notag\\
 	\leq \frac{\gamma \log n}{n} N_{\bar{\sigma}} + \frac{C}{\beta} n\label{eq:small}
-	\end{align}
+\end{align}
 		
-	Firstly we estimate the order of $N_{\bar{\sigma}}$, and obviously $N_{\bar{\sigma}} \leq \frac{1}{2} n^2$.
-	Using the conclusion in Appendix A of~\cite{chen2016information}, we have:
+	首先，我们估计 $N_{\bar{\sigma}}$的阶数，
+  显而易见 $N_{\bar{\sigma}} \leq \frac{1}{2} n^2$。
+	其次，使用 \citet{chen2016information} 附录 A 中的结论，
+  我们有：
 \begin{equation}
 	\sum_{r=0}^{k-1} n_r^2 \leq
 	\begin{cases}
@@ -1205,42 +1209,49 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	\end{cases}
 	\end{equation}
 	
-	By assumption of $\Dist(\bar{\sigma}, \mathbf{1}_n) \geq \frac{n}{\sqrt{\log n}}$, we have $n_0 \leq n - \frac{n}{\sqrt{\log n}}$
-	and $n_0 \geq \frac{n}{k}$ follows from $n_0 \geq n_r$.
-	When $n_0 > \frac{n}{2}$,
-	we have $N_{\bar{\sigma}} \geq n_0 (n - n_0) \geq \frac{n^2}{\sqrt{\log n}}(1+o(1))$.
-	The second inequality is achieved if $n_0 = n - \frac{n}{\sqrt{\log n}}$.
-	When $n_0 < \frac{n}{2}$,
-	$N_{\bar{\sigma}} \geq \frac{n^2 - nn_0}{2} \geq \frac{n^2}{4}$ and the second inequality is achieved when $n_0 = \frac{n}{2}$.
-	Thus generally we have $\frac{n^2}{\sqrt{\log n}}(1+o(1)) \leq N_{\bar{\sigma}} \leq \frac{n^2}{2}$.
+	由$\Dist(\bar{\sigma}, \mathbf{1}_n) \geq \frac{n}{\sqrt{\log n}}$
+  的假设，
+  我们有 $n_0 \leq n - \frac{n}{\sqrt{\log n}}$
+	并且从 $n_0 \geq n_r$ 推出 $n_0 \geq \frac{n}{k}$。
+	当 $n_0 > \frac{n}{2}$ 时，
+	我们有
+  $N_{\bar{\sigma}} \geq n_0 (n - n_0) \geq \frac{n^2}{\sqrt{\log n}}(1+o(1))$.
+	当 $n_0 = n - \frac{n}{\sqrt{\log n}}$时，第二个不等式可达。
+  当 $n_0 < \frac{n}{2}$ 时，
+	$N_{\bar{\sigma}} \geq \frac{n^2 - nn_0}{2} \geq \frac{n^2}{4}$，
+  并且当 $n_0 = \frac{n}{2}$时，
+  第二个不等式成立。
+	因此一般地我们有 $\frac{n^2}{\sqrt{\log n}}(1+o(1)) \leq N_{\bar{\sigma}} \leq \frac{n^2}{2}$。
 	
-	Since $\frac{C}{\beta} n = o(\frac{\log n}{n} N_{\bar{\sigma}})$ we can rewrite Equation \eqref{eq:small} as:
+	因为 $\frac{C}{\beta} n = o(\frac{\log n}{n} N_{\bar{\sigma}})$，
+  我们可以将  \eqref{eq:small} 式写成：
 \begin{equation}
 	\left( \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i = X_j}} -Z_{ij}
 	+ \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i \neq X_j}} -Z_{ij} \right)\geq -\gamma\frac{\log n N_{\bar{\sigma}}}{n}(1+o(1))
 	\end{equation}
 	
-	Let $N_1 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} 1$
-	and $N_2 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} 1 = N_{\bar{\sigma}} - N_1$.
+	令 $N_1 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} 1$
+	且 $N_2 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} 1 = N_{\bar{\sigma}} - N_1$。
 	
-	Using the Chernoff inequality we have:
+	应用 切尔诺夫不等式 我们有：
 	\begin{align*}
 	P_G(D'(\bar{\sigma}, C))&
-	\leq (\mathbb{E}[\exp(-s Z )])^{N_1} (\mathbb{E}[\exp(-s Z' )])^{N_2} \\
-	&\cdot \exp(\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))) \\
-	&= \exp \Big( \frac{\log n}{n}(1+o(1))(e^{-s}-1)(aN_1 + bN_2) \\
-	&+\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))\Big)
+	\leq (\mathbb{E}[\exp(-s Z )])^{N_1} (\mathbb{E}[\exp(-s Z' )])^{N_2} \cdot \exp(\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))) \\
+	&= \exp \Big( \frac{\log n}{n}(1+o(1))(e^{-s}-1)(aN_1 + bN_2) 
+	+\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))\Big)
 	\end{align*}
 	
-	Since $s > 0$ and $a>b$, we further have:
+	因为 $s > 0$ 且 $a>b$，
+  我们进一步有：
 	\begin{align*}
 	P_G(D'(\bar{\sigma}, C))
 	& \leq \exp( \frac{N_{\bar{\sigma}}\log n }{n}(b(e^{-s}-1)+ \gamma s + o(1))) 
 	\end{align*}
 	
-	Let $h_b(x) = x - b -x\log \frac{x}{b}$, which satisfies $h_b(x) < 0$ for $0<x<b$,
-	and take $s=-\log\frac{\gamma}{b} > 0$, using 
-	$N_{\bar{\sigma}} \geq \frac{n^2}{\sqrt{\log n}}$ we have:
+	令 $h_b(x) = x - b -x\log \frac{x}{b}$，
+  对于 $0<x<b$，该函数满足  $h_b(x) < 0$，
+	取 $s=-\log\frac{\gamma}{b} > 0$，使用
+	$N_{\bar{\sigma}} \geq \frac{n^2}{\sqrt{\log n}}$ 我们有：
 	\begin{align*}
 	P_G(D'(\bar{\sigma}, C))&\leq \exp( N_{\bar{\sigma}} \frac{\log n}{n} h_b(\gamma)(1+o(1))) \\
 	& \leq \exp (h_b(\gamma) n \sqrt{\log n} (1+o(1)))
