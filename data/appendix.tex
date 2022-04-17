@@ -1257,3 +1257,62 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	& \leq \exp (h_b(\gamma) n \sqrt{\log n} (1+o(1)))
 	\end{align*}
 \end{proof}
+
+\begin{proof}[定理 \ref{thm:phase_transition} 的证明]
+	(1) 因为 $P_{\sigma}(\sigma \not \in S_k(X)) = \sum_{f\in S_k} P_{\sigma}(\sigma \neq f(X) | D(\sigma, f(X))) P_{\sigma}(D(\sigma, f(X)))$
+  \footnote{$P_{\sigma}$中的下标 $\sigma$ 表示图$G$是随机的}，
+	我们只需证明 $P_{\sigma}(\sigma \neq X | D(\sigma, X)) \leq  n^{\tilde{g}(\beta)/2 + \epsilon}$。
+	由 \mbox{引理 \ref{prop:small}}， 我们能 $\cG_n^{(r)}$ for $r=1,\dots, n$.
+	令 $\cG'_n = \cap_{r=1}^n \cG_n^{(r)}$ 
+  并且在 \eqref{eq:Gr} 式中选取 $\frac{\epsilon}{2}$；
+  由 \eqref{eq:Gr} 和 \eqref{eq:Gr1} 式，我们有：
+	\begin{align*}
+	P_G(\cG'^c_n) &= P_G(\cup_{r=1}^n (\cG_n^{(r)})^c) \\
+	&\leq \sum_{r=1}^{n/\sqrt{\log n } } n^{r(\tilde{g}(\beta)/2 + \epsilon/2)}  + n e^{-n} \\
+	& \leq \frac{1}{2} n^{\tilde{g}(\beta)/2 + \epsilon}
+	\end{align*}
+	其中最后一个不等式估计用了等比数列的求和。
+
+	另一方面， 对于每个 $G \in \cG'_n$，
+  由 \eqref{eq:psigmaX} 和 \eqref{eq:psigmaX1} 式，
+	我们有：
+	\begin{align*}
+	\frac{P_{\sigma | G}(\sigma \neq X | D(\sigma, X))}{1-P_{\sigma | G}(\sigma \neq X | D(\sigma, X))} &= \frac{P_{\sigma | G}(\sigma \neq X | D(\sigma, X))}{P_{\sigma|G}(\sigma=X | D(\sigma, X))} \\
+	&< \sum_{r=1}^{n/\sqrt{\log n }}  n^{r\tilde{g}(\beta)/2} + n e^{-n}
+	\end{align*}
+	从中我们可以得到估计式 $P_{\sigma | G}(\sigma \neq X | D(\sigma, X))\leq \frac{1}{2}n^{\tilde{g}(\beta)/2 + \epsilon}$。
+	最后我们有： 
+	\begin{align*}
+	P_{\sigma}(\sigma \neq X|D(\sigma, X)) &= \sum_{G\in \cG'_n} P_G(G)P_{\sigma |G}(\sigma \neq X | D(\sigma, X)) \\
+	+ P_G(\cG'^c_n)
+	& \leq n^{\tilde{g}(\beta)/2 + \epsilon}.
+	\end{align*}
+	
+	(2) When $\beta < \beta^*$, using Lemma \ref{prop:large2}, for~every $G \in \cG'_n$
+	we can obtain:
+	$$
+	\frac{1-P_{\sigma | G}(\sigma=X | D(\sigma, X))}{P_{\sigma | G}(\sigma=X | D(\sigma, X))}\geq (k-1+o(1))n^{g(\beta_n)}
+	$$
+	
+	We then have:
+	$$
+	P_{\sigma | G}(\sigma=X| D(\sigma, X)) \leq \left(\frac{1}{k-1}+o(1) \right) n^{-g(\beta_n)}
+	$$
+	
+	Then:
+	\begin{align*}
+	&P_{\sigma}(\sigma=X| D(\sigma, X))  \leq  P(\cG'^c_n) \\
+	&+ \sum_{G\in \cG'_n}P_G(G) P_{\sigma|G}(\sigma=X| D(\sigma, X)) \\
+	& \leq (\frac{1}{k-1}+o(1))n^{-g(\beta_n)} + (1+o(1)) \max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}\\
+	& \leq (1+o(1)) \max\{n^{g(\bar{\beta})}, n^{-g(\beta) + \epsilon}  \}
+	\end{align*}
+	
+	(3) When $\gamma < b$, for~any $f\in S_k$, we have $\Dist(f(X), \Lambda) = \frac{(k-1)n}{k} > \frac{n}{\sqrt{\log n}}$.
+	Therefore, using Lemma \ref{lem:small}, we can find a graph $\cG'_n$ such that $P_C(\cG'_n) \leq \exp(-nC)$
+	and for any $G\not \in \cG'_n$, $P_{\sigma |G}(\sigma = f(X)) \leq \exp(-Cn)$. Therefore,
+	\begin{align*}
+	P_a(\hat{X}^*) \leq P_G(\cG'_n) + k! \exp(-Cn) = (1+k!)\exp(-Cn)
+	\end{align*}
+	
+	The conclusion of $P_a(\hat{X}^*) \leq \exp(-Cn)$ follows since $C$ can take any positive value.
+\end{proof}
