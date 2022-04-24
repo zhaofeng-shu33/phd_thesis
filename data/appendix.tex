@@ -1161,7 +1161,11 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 }
 
 
-令 $\Lambda := \{ \omega^j  \cdot \mathbf{1}_n | j=0, \dots,k-1\}$
+令
+\begin{equation}\label{eq:Big_Lambda}
+  \Lambda := \{ \omega^j  \cdot \mathbf{1}_n | j=0, \dots,k-1\}   
+\end{equation}
+
 其中 \gls{not:all_one_vector_n} 是 \glsdesc{not:all_one_vector_n} %confirm.
 则我们有如下的引理：
  \begin{lemma}\label{lem:small}
@@ -1288,31 +1292,43 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	& \leq n^{\tilde{g}(\beta)/2 + \epsilon}.
 	\end{align*}
 	
-	(2) When $\beta < \beta^*$, using Lemma \ref{prop:large2}, for~every $G \in \cG'_n$
-	we can obtain:
+	(2) 当 $\beta < \beta^*$，
+  由引理 \ref{prop:large2} 可知，对于任意的 $G \in \cG'_n$
+	我们有
 	$$
 	\frac{1-P_{\sigma | G}(\sigma=X | D(\sigma, X))}{P_{\sigma | G}(\sigma=X | D(\sigma, X))}\geq (k-1+o(1))n^{g(\beta_n)}
 	$$
 	
-	We then have:
+	进而得到：
 	$$
 	P_{\sigma | G}(\sigma=X| D(\sigma, X)) \leq \left(\frac{1}{k-1}+o(1) \right) n^{-g(\beta_n)}
 	$$
 	
-	Then:
+	因此:
 	\begin{align*}
 	&P_{\sigma}(\sigma=X| D(\sigma, X))  \leq  P(\cG'^c_n) \\
 	&+ \sum_{G\in \cG'_n}P_G(G) P_{\sigma|G}(\sigma=X| D(\sigma, X)) \\
-	& \leq (\frac{1}{k-1}+o(1))n^{-g(\beta_n)} + (1+o(1)) \max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}\\
+	& \leq \left(
+    \frac{1}{k-1}+o(1) \right)
+    n^{-g(\beta_n)} + (1+o(1)) \max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}\\
 	& \leq (1+o(1)) \max\{n^{g(\bar{\beta})}, n^{-g(\beta) + \epsilon}  \}
 	\end{align*}
 	
-	(3) When $\gamma < b$, for~any $f\in S_k$, we have $\Dist(f(X), \Lambda) = \frac{(k-1)n}{k} > \frac{n}{\sqrt{\log n}}$.
-	Therefore, using Lemma \ref{lem:small}, we can find a graph $\cG'_n$ such that $P_C(\cG'_n) \leq \exp(-nC)$
-	and for any $G\not \in \cG'_n$, $P_{\sigma |G}(\sigma = f(X)) \leq \exp(-Cn)$. Therefore,
+	(3) 当 $\gamma < b$，
+  对于任意的 $f\in S_k$，
+  我们有
+  $\Dist(f(X), \Lambda) = \frac{(k-1)n}{k} > \frac{n}{\sqrt{\log n}}$，
+  其中 $\Lambda$ 在\eqref{eq:Big_Lambda}式中定义。
+	因此，由引理 \ref{lem:small}，
+  我们可以找到一个图的集合 $\cG'_n$
+  使得 $P_G(\cG'_n) \leq \exp(-nC)$
+	并且对 $G\not \in \cG'_n$, $P_{\sigma |G}(\sigma = f(X)) \leq \exp(-Cn)$。
+  因此
 	\begin{align*}
 	P_a(\hat{X}^*) \leq P_G(\cG'_n) + k! \exp(-Cn) = (1+k!)\exp(-Cn)
 	\end{align*}
-	
-	The conclusion of $P_a(\hat{X}^*) \leq \exp(-Cn)$ follows since $C$ can take any positive value.
+	因为 $C$
+  可取任意正数，
+	故$P_a(\hat{X}^*) \leq \exp(-Cn)$
+  的结论成立。
 \end{proof}
