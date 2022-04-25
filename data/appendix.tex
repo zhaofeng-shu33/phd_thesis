@@ -1349,6 +1349,67 @@ $H(\bar{\sigma}) $ 等价于极小化
 
 另外，由 \eqref{eq:GmL} 式，
 对数似然函数可写成
+\begin{align*}
+  \log P_G(Z=z|X=\sigma)
+  &= \log p \sum_{\sigma_i = \sigma_j} z_{ij}
+  +\log q \sum_{\sigma_i \neq \sigma_j}z_{ij}\\
+  &+\log (1-p) \sum_{\sigma_i = \sigma_j}(1-z_{ij})
+  +\log (1-q) \sum_{\sigma_i \neq \sigma_j}(1-z_{ij})\\
+  &= \log p \sum_{\{i,j\}\in E(G)}
+  \delta(\sigma_i, \sigma_j)
+  +\log q \sum_{\{i,j\}\in E(G)}(1-\delta(\sigma_i, \sigma_j))\\
+  &+\log (1-p) \sum_{\{i,j\}\not\in E(G)}
+  \delta(\sigma_i, \sigma_j)
+  +\log (1-q) \sum_{\{i,j\}\not\in E(G)}
+  (1-\delta(\sigma_i, \sigma_j))\\
+  &=\log \frac{a}{b} \sum_{\{i,j\}\in E(G)}
+  \delta(\sigma_i, \sigma_j) + (\log(1-p)-\log(1-q))
+  \sum_{\{i,j\}\not \in E(G)}
+  \delta(\sigma_i, \sigma_j)+ C
+\end{align*}
+从而得到\eqref{eq:PG_energy}式。
+
+定理 \ref{thm:error_rate}的证明依赖下述引理：
+\begin{lemma}[\citet{abbe2015exact} 引理8]\label{lem:mZW}
+	令 $m$ 为一个比 $n$大的正整数，
+	$Z_1, \dots, Z_m$
+  是独立同分布的 Bernoulli($\B$)，
+   $W_1, \dots, W_m$ 是 i.i.d Bernoulli($\A$) ，
+  并且与 $Z_1, \dots, Z_m$独立，
+	则我们有：
 \begin{equation}
-  \log P_G(Z)
-\end{equation}
+	P(\sum_{i=1}^m (Z_i  - W_i) \geq 0) \leq \exp(-\frac{m \log n}{n}(\sqrt{a} - \sqrt{b})^2)
+	\end{equation}
+\end{lemma}
+\begin{proof}[Proof of Theorem \ref{thm:error_rate}]
+
+	Let $P_F^{(r)}$ denote the probability when there is $\sigma$ satisfying\linebreak $\Dist(\sigma, X) = r$ and $H(\sigma) < H(X)$.
+	
+	From Equation \eqref{eq:energy_diff}, when $\sigma$ differs from $X$ only by one coordinate, from~Lemma \ref{lem:mZW} the probability for $H(\sigma) < H(X)$ is
+	bounded by $P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$. Therefore, $P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$.
+	Using Lemma \ref{lem:enhanced_fb}, we can get $P_F^{(r)} \leq (k-1)^r n^{rg(\bar{\beta})}$ for $ r \leq \frac{n}{\sqrt{\log n}}$.
+	For $ r \geq \frac{n}{\sqrt{\log n}}$, choosing $C=0$ in Lemma \ref{lem:sigmaX} we can get $\sum_{r\geq \frac{n}{\sqrt{\log n}}}P_F^{(r)} \leq e^{-n}$.
+	That is, the~dominant term is $\sum_{r\leq \frac{n}{\sqrt{\log n}}}P_F^{(r)}$ since the other part decreases exponentially fast.
+	Therefore, the~upper bound for error rate of $\hat{X}'$ is:
+	\begin{align*}
+	P_F = & \sum_{r=1}^n P_F^{(r)} \leq (1+o(1)) \sum_{r=1}^{\infty} (k-1)^r n^{rg(\bar{\beta})}\\
+	\leq & (1+o(1))\frac{(k-1) n^{g(\bar{\beta})}}{1-(k-1) n^{g(\bar{\beta})}} = (k-1+o(1))n^{g(\bar{\beta})}
+	\end{align*}
+	
+When $\sigma \in W^*$, since $|\{r\in [n] | \sigma_r = \omega^i \}| = I'_i + \frac{n}{k} - I_i $, we have $I'_i = I_i$.
+From \mbox{Lemma \ref{lem:minus}}, we can see  $|B_{\bar{\sigma}}| = |A_{\bar{\sigma}}|$
+and $N_{\bar{\sigma}} = 0$. Then from Equation \eqref{eq:Hgeneral}, $H(\bar{\sigma}) < H(X)$ is equivalent with $B_{\bar{\sigma}} > A_{\bar{\sigma}}$.
+
+Therefore, when $ \Dist(\bar{\sigma}, X) \geq \frac{n}{\sqrt{\log n} }$ and $D(\sigma, X)$,
+from Equation \eqref{eq:Asigma}, we have\linebreak $A_{\bar{\sigma}} \geq \frac{n^2}{k^2(k-1)\sqrt{\log n} } (1+o(1))$.
+We use Lemma \ref{lem:mZW} by letting $m=|A_{\bar{\sigma}}|$ when $m \geq \frac{n}{ \sqrt{\log n}}$; the~error term is bounded
+by $\sum_{r\geq \frac{n}{ \sqrt{\log n}}} P_F^{(r)} \leq \sum_{r\geq \frac{n}{ \sqrt{\log n}}} (k-1)^r \exp(-\frac{(\sqrt{a} - \sqrt{b})^2}{k^2(k-1)} n \sqrt{\log n}))
+\leq \exp(-n)$, which decreases exponentially fast.
+For $m < \frac{n}{ \sqrt{\log n}}$, we can use Lemma \ref{lem:enhanced_fb} directly 
+by considering $\sum_{r=2}^{\frac{n}{ \sqrt{\log n}}} P_F^{(r)}$. The~summation starts from $r=2$ since $\sigma \in W^*$.
+Therefore,
+\begin{align*}
+P_F = & \sum_{r=2}^n P_F^{(r)} \leq (1+o(1)) \sum_{r=2}^{\infty} (k-1)^r n^{rg(\bar{\beta})}\\
+\leq & ((k-1)^2+o(1))n^{2g(\bar{\beta})}.
+\end{align*}
+\end{proof}

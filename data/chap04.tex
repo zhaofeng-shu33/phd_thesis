@@ -297,17 +297,20 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 通过最大化对数似然函数可得到最大似然估计量。
 由 \eqref{eq:GmL} 式，该似然函数可以进一步写成:
 \begin{equation}\label{eq:PG_energy}
-	\log P_G(Z|X=\sigma) = -\log\frac{a}{b} \cdot H(\sigma) + C
+	\log P_G(Z=z|X=\sigma) = -\log\frac{a}{b} \cdot H(\sigma) + C
 \end{equation}
 
 这里 在$H(\sigma)$ 的表达式中 参数 $\gamma$ 的取值满足
 \begin{equation}\label{eq:special_gamma_ML}
-	\gamma \frac{\log n}{n} = \frac{1}{\log(a/b)}(\log (1-\B) - \log (1-\A))	 
+	\gamma \frac{\log n}{n} = \frac{1}{\log(a/b)}
+	\left(\log (1-\B) - \log (1-\A) \right)	 
 \end{equation}
 
 而 $C$ 是一个和 $\sigma$ 无关的常数。
 当 $n$ 充分大时，我们有 $\gamma \to \gamma_{ML} := \frac{a-b}{\log(a/b)}$。   
-That is, the  maximum likelihood estimator is equivalent to $\hat{X}'$ when $\gamma = \gamma_{ML}$ asymptotically.
+也即，
+当 $\gamma = \gamma_{ML}$时，
+最大似然估计量 渐近等价于 $\hat{X}'$。
 
 这里我们顺便得到了最大似然算法和最小割问题在有$W^*$约束
 下的等价性，这个等价性不需要渐近的条件也成立。
@@ -321,21 +324,32 @@ $\sum_{1<i<j<n} \delta(\sigma_i, \sigma_j)$
 $-\sum_{ \{i,j\} \in E} \delta(\sigma_i, \sigma_j)$，
 其与 \eqref{eq:minimum_k_cut}式只相差一个常数。
 
-The maximum modularity estimator is obtained by maximizing the modularity of a graph~\cite{clauset2004finding}, which is defined by:
-See \ref{eq:Q}
 
-For the $i$-th node, $d_i$ is its degree and $C_i$ is its community belonging. $A$ is the adjacency matrix.
-Up to a scaling factor, the~modularity $Q$ can be re-written using the label vector $\sigma$~as:
+最大模块度估计量通过最大化 \ref{eq:Q}式而得到。
+忽略常数项，关于标签向量 $\sigma$的模块度 $Q$
+可以写成：
 \begin{align}
-Q(\sigma) = &-\sum_{\{i,j\} \not\in E(G) } \frac{d_i d_j}{2 |E|}\delta(\sigma_i,\sigma_j) \notag \\
-&+ \sum_{\{i,j\} \in E(G) } (1 - \frac{d_i d_j}{2 |E|}) \delta(\sigma_i,\sigma_j)  \label{eq:Qtransform}
+Q(\sigma) = -\sum_{\{i,j\} \not\in E(G) } \frac{d_i d_j}{2 |E|}\delta(\sigma_i,\sigma_j) 
++ \sum_{\{i,j\} \in E(G) } (1 - \frac{d_i d_j}{2 |E|}) \delta(\sigma_i,\sigma_j)  \label{eq:Qtransform}
 \end{align}
 
-From \eqref{eq:Qtransform}, we can see that $Q(\sigma) \to -H(\sigma)$ with $\gamma = \gamma_{MQ} = \frac{a+b}{2}$ as $n\to \infty$.
-Indeed, we have $d_i \sim \frac{(a+b)\log n}{2}, |E| \sim \frac{1}{2}n d_i$. Therefore, we have $\frac{d_id_j}{2|E|} \to \gamma_{MQ} \frac{\log n}{n} $. That is, the maximum modularity estimator is equivalent with $\hat{X}'$ when $\gamma = \gamma_{MQ}$ asymptotically.
+当$n$充分大时，平均意义上我们有 $d_i \sim  \frac{(a+(k-1)b)\log n}{k}, |E| \sim \frac{1}{2}n d_i$。
+因此，我们有
+$\frac{d_id_j}{2|E|} \to \gamma_{MQ} \frac{\log n}{n} $。
+从 \eqref{eq:Qtransform}式我们可以看到，
+当 $\gamma = \gamma_{MQ} = \frac{a+(k-1)b}{k}$ 且 $n\to \infty$时，
+$Q(\sigma) \to -H(\sigma)$。
+也即，当$\gamma = \gamma_{MQ}$ 时，
+最大模块度估计量渐近等价于
+$\hat{X}'$ 。
 
 
-Using $a>b$ and the inequality $x-1>\log x > 2 \frac{x-1}{x+1}$ for $x>1$ we can verify that $\gamma_{MQ} > \gamma_{ML} > b$. That is, both the maximum likelihood and the maximum modularity estimator satisfy the exact recovery conditions $\gamma > b $ in Theorem \ref{thm:error_rate}.
+通过$a>b$和 当$x>1$时的不等式 
+ $x-1>\log x $，我们可以验证
+  $\gamma_{MQ} >b$ 且  $\gamma_{ML} > b$。
+  这说明 了
+  最大似然估计和最大模块度估计都满足
+  定理\ref{thm:error_rate}所述的精确恢复条件 $\gamma > b $。
 
 \section{参数估计}
 
