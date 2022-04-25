@@ -236,7 +236,7 @@ $\beta > \beta^*$，
 $W^*:= \{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n}{k}, s=0,\dots, k-1 \}$
 上。
 当 $\sigma \in W^*$ 时， 最小化 $H(\sigma)$ 等价于：
-\begin{equation}
+\begin{equation}\label{eq:hatX_double_prime}
 \hat{X}'' := \arg\min_{\sigma \in W^*} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)
 \end{equation}
 其中最小值是不同社群之间的最小分割。
@@ -288,20 +288,38 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 精确恢复。
 
 
-Estimator $\hat{X}'$ has one parameter, $\gamma$. When $\gamma$ takes different values, $\hat{X}'$
-is equivalent with maximum likelihood or maximum modularity in the asymptotic case. The~following analysis shows
-their relationship~intuitively.
+估计量 $\hat{X}'$ 有一个参数 $\gamma$。
+当 $\gamma$ 取特定的值时， $\hat{X}'$在渐近情形下
+可以等价于 最大似然估计或最大模块度估计。
+以下分析从直观地角度说明了
+这种联系。
 
-The maximum likelihood estimator is obtained by maximizing the log-likelihood function.
-From \eqref{eq:GmL}, this function can be written as:
-$$
-\log P_G(Z|X=\sigma) = -\log\frac{a}{b} \cdot H(\sigma) + C
-$$
-where the parameter $\gamma$ in $H(\sigma)$ satisfies \mbox{$\gamma \frac{\log n}{n} = \frac{1}{\log(a/b)}(\log (1-\A) - \log (1-\B))$} 
-and $C$ is a constant irrelevant with $\sigma$.
-When $n$ is sufficiently large, we have  \mbox{$\gamma \to \gamma_{ML} := \frac{a-b}{\log(a/b)}$}.
+通过最大化对数似然函数可得到最大似然估计量。
+由 \eqref{eq:GmL} 式，该似然函数可以进一步写成:
+\begin{equation}\label{eq:PG_energy}
+	\log P_G(Z|X=\sigma) = -\log\frac{a}{b} \cdot H(\sigma) + C
+\end{equation}
+
+这里 在$H(\sigma)$ 的表达式中 参数 $\gamma$ 的取值满足
+\begin{equation}\label{eq:special_gamma_ML}
+	\gamma \frac{\log n}{n} = \frac{1}{\log(a/b)}(\log (1-\B) - \log (1-\A))	 
+\end{equation}
+
+而 $C$ 是一个和 $\sigma$ 无关的常数。
+当 $n$ 充分大时，我们有 $\gamma \to \gamma_{ML} := \frac{a-b}{\log(a/b)}$。   
 That is, the  maximum likelihood estimator is equivalent to $\hat{X}'$ when $\gamma = \gamma_{ML}$ asymptotically.
 
+这里我们顺便得到了最大似然算法和最小割问题在有$W^*$约束
+下的等价性，这个等价性不需要渐近的条件也成立。
+因为最大似然算法首先等价于极小化能量$H(\sigma)$，
+$\gamma$从\eqref{eq:special_gamma_ML}式中取值。其次，
+由\eqref{eq:hatX_double_prime}式，极小化能量$H(\sigma)$
+等价于$\min \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)$
+因为在$W^*$的约束下，
+$\sum_{1<i<j<n} \delta(\sigma_i, \sigma_j)$
+是一个常数，\eqref{eq:hatX_double_prime}式又等价于
+$-\sum_{ \{i,j\} \in E} \delta(\sigma_i, \sigma_j)$，
+其与 \eqref{eq:minimum_k_cut}式只相差一个常数。
 
 The maximum modularity estimator is obtained by maximizing the modularity of a graph~\cite{clauset2004finding}, which is defined by:
 See \ref{eq:Q}

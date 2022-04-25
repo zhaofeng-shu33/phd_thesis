@@ -589,8 +589,10 @@ q & \textrm{ if }  X_i \neq X_j
 这里 每一个 $Z_{ij}$ 是相互独立的。
 $Z$ 的分布函数可以写为：
 \begin{align}
-P_G(G):=P_G(Z = z| X) = p^{\sum_{X_i = X_j} z_{ij}}q^{\sum_{X_i \neq X_j} z_{ij}}
-\cdot (1-p)^{\sum_{X_i = X_j} (1-z_{ij})}(1-q)^{\sum_{X_i \neq X_j} (1-z_{ij})} \label{eq:GmL}
+P_G(G):=P_G(Z = z| X=x) &= p^{\sum_{x_i = x_j}
+z_{ij}}q^{\sum_{x_i \neq x_j} z_{ij}} \notag\\
+&\cdot (1-p)^{\sum_{x_i = x_j} (1-z_{ij})}
+(1-q)^{\sum_{x_i \neq x_j} (1-z_{ij})} \label{eq:GmL}
 \end{align}
 若 参数 $p, q$ 已知，
 通过求
@@ -617,7 +619,7 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$.
 的优化问题--$k$类的最小割问题。
 其形式为：
 \begin{equation}\label{eq:minimum_k_cut}
-  \min \sum_{(i,j) \in E} (1-\delta(x_i, x_j))
+  \min \sum_{ \{i,j\} \in E} (1-\delta(x_i, x_j))
 \end{equation}
 这里，示性函数 $\delta(x,y)$ 定义为：
 \glsdesc{not:deltaxy}。

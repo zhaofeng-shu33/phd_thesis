@@ -1332,3 +1332,23 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	故$P_a(\hat{X}^*) \leq \exp(-Cn)$
   的结论成立。
 \end{proof}
+\section{定理\ref{thm:error_rate} 的证明}
+在本节我们首先给出获得\eqref{eq:hatX_double_prime}
+和\eqref{eq:PG_energy}式 的推导过程。
+
+由能量函数的表达式\eqref{eq:energy}，
+我们有：
+\begin{equation}
+	H(\bar{\sigma}) := (\gamma \frac{\log n}{n} + 1)\sum_{\{i,j\}\not\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	- \sum_{1<i<j<n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+\end{equation}
+注意到$\sum_{1<i<j<n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)=\frac{k}{2}\frac{n}{k}(\frac{n}{k}-1)$
+是一个与$\bar{sigma}$ 无关的常数。因此极小化
+$H(\bar{\sigma}) $ 等价于极小化
+\eqref{eq:hatX_double_prime}式。
+
+另外，由 \eqref{eq:GmL} 式，
+对数似然函数可写成
+\begin{equation}
+  \log P_G(Z)
+\end{equation}
