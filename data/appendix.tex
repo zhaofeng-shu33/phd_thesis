@@ -731,7 +731,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   的定义分别参见
   \eqref{eq:g_beta_main_article}
   和
-  \eqref{eq:g_tilde_beta_main_article}。
+  \eqref{eq:g_tilde_beta_main_article} 式。
 \end{lemma}
 
 \begin{proof}
@@ -1370,7 +1370,7 @@ $H(\bar{\sigma}) $ 等价于极小化
 从而得到\eqref{eq:PG_energy}式。
 
 定理 \ref{thm:error_rate}的证明依赖下述引理：
-\begin{lemma}[\citet{abbe2015exact} 引理8]\label{lem:mZW}
+\begin{lemma}\label{lem:mZW}
 	令 $m$ 为一个比 $n$大的正整数，
 	$Z_1, \dots, Z_m$
   是独立同分布的 Bernoulli($\B$)，
@@ -1381,12 +1381,31 @@ $H(\bar{\sigma}) $ 等价于极小化
 	P(\sum_{i=1}^m (Z_i  - W_i) \geq 0) \leq \exp(-\frac{m \log n}{n}(\sqrt{a} - \sqrt{b})^2)
 	\end{equation}
 \end{lemma}
+引理 \ref{lem:mZW} 的证明与引理\ref{lem:enhanced_fb}
+的证明类似，均为先计算
+$\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
+=\exp(m \log(1-\B + \B e^s) + m \log(1-\A + \A e^{-s}))$。这里
+我们直接用 $\log(1+x)\leq x$的不等式进行放缩，
+可以避免出现量阶的估计项。即
+$\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
+\leq \exp(m(1-\B + \B e^s - \A + \A e^{-s}))$。
+再取$s$使得 $be^s=ae^{-s}$
+最后再应用切尔诺夫不等式引理\ref{lem:mZW}即可得证。
+
 \begin{proof}[Proof of Theorem \ref{thm:error_rate}]
 
-	Let $P_F^{(r)}$ denote the probability when there is $\sigma$ satisfying\linebreak $\Dist(\sigma, X) = r$ and $H(\sigma) < H(X)$.
+	令 $P_F^{(r)}$ 表示
+  下述事件发生的概率：
+  存在 $\sigma$ 同时满足
+  $\Dist(\sigma, X) = r$ 且
+  $H(\sigma) < H(X)$。
 	
-	From Equation \eqref{eq:energy_diff}, when $\sigma$ differs from $X$ only by one coordinate, from~Lemma \ref{lem:mZW} the probability for $H(\sigma) < H(X)$ is
-	bounded by $P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$. Therefore, $P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$.
+	由 \eqref{eq:energy_diff} 式，当
+  $\sigma$ 与 $X$ 仅在一个坐标上不同时，
+  由 引理 \ref{lem:mZW}，
+  $H(\sigma) < H(X)$ 发生的概率为
+	$P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$。
+  因此，$P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$。
 	Using Lemma \ref{lem:enhanced_fb}, we can get $P_F^{(r)} \leq (k-1)^r n^{rg(\bar{\beta})}$ for $ r \leq \frac{n}{\sqrt{\log n}}$.
 	For $ r \geq \frac{n}{\sqrt{\log n}}$, choosing $C=0$ in Lemma \ref{lem:sigmaX} we can get $\sum_{r\geq \frac{n}{\sqrt{\log n}}}P_F^{(r)} \leq e^{-n}$.
 	That is, the~dominant term is $\sum_{r\leq \frac{n}{\sqrt{\log n}}}P_F^{(r)}$ since the other part decreases exponentially fast.
