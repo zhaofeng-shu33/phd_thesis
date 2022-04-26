@@ -640,7 +640,11 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   \Big|\{r\in [n] \big| X_r = w^i, \sigma_r=w^i \}\Big|
   =\frac{n}{k} - I_i$和
 	$|\{r\in [n] | X_r \neq \omega^i, \sigma_r = \omega^i \}| = I'_i$，
-	我们因此有  $|\{r\in [n] | \sigma_r = \omega^i \}| = I'_i + \frac{n}{k} - I_i $。
+	我们因此有  
+  \begin{equation}\label{eq:number_of_sigma_r_equal_omega_i}
+    |\{r\in [n] | \sigma_r = \omega^i \}|
+    = I'_i + \frac{n}{k} - I_i
+  \end{equation}
   类比式\eqref{eq:split_one_tmp_X_ij}从而得到
   式\eqref{eq:split_one_tmp_sigma_ij}。
 
@@ -1371,7 +1375,7 @@ $H(\bar{\sigma}) $ 等价于极小化
 
 定理 \ref{thm:error_rate}的证明依赖下述引理：
 \begin{lemma}\label{lem:mZW}
-	令 $m$ 为一个比 $n$大的正整数，
+	令 $m$ 为一正整数，
 	$Z_1, \dots, Z_m$
   是独立同分布的 Bernoulli($\B$)，
    $W_1, \dots, W_m$ 是 i.i.d Bernoulli($\A$) ，
@@ -1389,7 +1393,7 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 可以避免出现量阶的估计项。即
 $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 \leq \exp(m(1-\B + \B e^s - \A + \A e^{-s}))$。
-再取$s$使得 $be^s=ae^{-s}$
+再取$s$使得 $be^s=ae^{-s}$。
 最后再应用切尔诺夫不等式引理\ref{lem:mZW}即可得证。
 
 \begin{proof}[Proof of Theorem \ref{thm:error_rate}]
@@ -1406,18 +1410,31 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
   $H(\sigma) < H(X)$ 发生的概率为
 	$P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$。
   因此，$P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$。
-	Using Lemma \ref{lem:enhanced_fb}, we can get $P_F^{(r)} \leq (k-1)^r n^{rg(\bar{\beta})}$ for $ r \leq \frac{n}{\sqrt{\log n}}$.
-	For $ r \geq \frac{n}{\sqrt{\log n}}$, choosing $C=0$ in Lemma \ref{lem:sigmaX} we can get $\sum_{r\geq \frac{n}{\sqrt{\log n}}}P_F^{(r)} \leq e^{-n}$.
-	That is, the~dominant term is $\sum_{r\leq \frac{n}{\sqrt{\log n}}}P_F^{(r)}$ since the other part decreases exponentially fast.
-	Therefore, the~upper bound for error rate of $\hat{X}'$ is:
-	\begin{align*}
+	我们由 $H(\bar{\sigma}) < H(X)$ 可推出 $A_{\bar{\sigma}} < B_{\bar{\sigma}}$，进而由引理 \ref{lem:enhanced_fb}
+  可得，
+  对于 $ r \leq \frac{n}{\sqrt{\log n}}$
+  我们有
+  $P_F^{(r)} \leq (k-1)^r n^{rg(\bar{\beta})}$。
+	对于
+  $ r \geq \frac{n}{\sqrt{\log n}}$， 在引理
+  \ref{lem:sigmaX} 中取 $C=0$，我们可得
+  $\sum_{r\geq \frac{n}{\sqrt{\log n}}}P_F^{(r)} \leq e^{-n}$。
+	$\sum_{r\leq \frac{n}{\sqrt{\log n}}}P_F^{(r)}$有一个多项式的量阶上界，
+  而其他部分的上界是指数衰减的，因此
+  关于$\hat{X}'$ 总的误差上界可以写成：
+  \begin{align*}
 	P_F = & \sum_{r=1}^n P_F^{(r)} \leq (1+o(1)) \sum_{r=1}^{\infty} (k-1)^r n^{rg(\bar{\beta})}\\
 	\leq & (1+o(1))\frac{(k-1) n^{g(\bar{\beta})}}{1-(k-1) n^{g(\bar{\beta})}} = (k-1+o(1))n^{g(\bar{\beta})}
-	\end{align*}
+	\end{align*}   
 	
-When $\sigma \in W^*$, since $|\{r\in [n] | \sigma_r = \omega^i \}| = I'_i + \frac{n}{k} - I_i $, we have $I'_i = I_i$.
-From \mbox{Lemma \ref{lem:minus}}, we can see  $|B_{\bar{\sigma}}| = |A_{\bar{\sigma}}|$
-and $N_{\bar{\sigma}} = 0$. Then from Equation \eqref{eq:Hgeneral}, $H(\bar{\sigma}) < H(X)$ is equivalent with $B_{\bar{\sigma}} > A_{\bar{\sigma}}$.
+当 $\sigma \in W^*$, 由\eqref{eq:number_of_sigma_r_equal_omega_i}式
+ 我们有 $I'_i = I_i$。
+由 引理\ref{lem:minus}可得
+$|B_{\bar{\sigma}}| = |A_{\bar{\sigma}}|$
+且 $N_{\bar{\sigma}} = 0$。
+由 \eqref{eq:Hgeneral}式，
+$H(\bar{\sigma}) < H(X)$ 等价于
+$B_{\bar{\sigma}} > A_{\bar{\sigma}}$。
 
 Therefore, when $ \Dist(\bar{\sigma}, X) \geq \frac{n}{\sqrt{\log n} }$ and $D(\sigma, X)$,
 from Equation \eqref{eq:Asigma}, we have\linebreak $A_{\bar{\sigma}} \geq \frac{n^2}{k^2(k-1)\sqrt{\log n} } (1+o(1))$.
@@ -1429,6 +1446,6 @@ by considering $\sum_{r=2}^{\frac{n}{ \sqrt{\log n}}} P_F^{(r)}$. The~summation 
 Therefore,
 \begin{align*}
 P_F = & \sum_{r=2}^n P_F^{(r)} \leq (1+o(1)) \sum_{r=2}^{\infty} (k-1)^r n^{rg(\bar{\beta})}\\
-\leq & ((k-1)^2+o(1))n^{2g(\bar{\beta})}.
+\leq & ((k-1)^2+o(1))n^{2g(\bar{\beta})}
 \end{align*}
 \end{proof}

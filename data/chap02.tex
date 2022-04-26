@@ -491,7 +491,13 @@ I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsi
 \end{equation}
 在式\eqref{eq:Ixy}中， $\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y)$
 一项可以写成 $\norm{B}_F^2$。这里 $B$表示$\mathcal{X} \times \mathcal{Y}$的矩阵，
-$F$表示矩阵的Frobenius范数。
+\newglossaryentry{not:norm_f}
+{
+  type=notation,
+  name={$||\cdot||_F$},
+  description={矩阵的Frobenius范数}
+}
+$F$表示 \glsdesc{not:norm_f}。
 Equation \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
 $I(X;Y)$可用$\frac{1}{2} \norm{B}_F^2$
 近似，其阶数为 $O(\epsilon^2)$。
@@ -574,9 +580,15 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
 给定节点的标签向量 $X$, 
 $Z_{ij}$ 服从 伯努利分布，
-其期望值为
+\newglossaryentry{not:expectation}
+{
+  type=notation,
+  name={$\E[\cdot]$},
+  description={数学期望}
+}
+其 \glsdesc{not:expectation}值为
 \begin{equation}
-\mathbb{E}[Z_{ij}] =
+\E[Z_{ij}] =
 \begin{cases}
 p & \textrm{ if } X_i = X_j \\ 
 q & \textrm{ if }  X_i \neq X_j
@@ -813,8 +825,8 @@ $\frac{\log n}{n}$
 本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
 
 \newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov Inequality}}
-\begin{lemma}[马尔可夫不等式]
-  设 $X$ 是非负型随机变量，则对于非负实数$a$有。
+\begin{lemma}[马尔可夫不等式] 
+  设 $X$ 是非负型随机变量，则对于非负实数$a$有：
   \begin{equation}
     \Pr(X\geq a) \leq {1 \over a} \E[X]   
   \end{equation}
