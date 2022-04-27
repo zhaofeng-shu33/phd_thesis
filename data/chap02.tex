@@ -780,6 +780,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 $\frac{\log n}{n}$
 主要是为了与其研究场景 $p,q=O(\frac{\log n}{n})$
 相对应。
+\newglossaryentry{metropolis}{name=梅特罗波利斯算法, description={Metropolis algorithm}}
 
 梅特罗波利斯（Metropolis）算法\cite{metropolis1953equation}
 用于产生伊辛模型的样本。此外，该算法的变体“模拟退火”
@@ -788,7 +789,7 @@ $\frac{\log n}{n}$
 的状态并按一定的概率接受改变或保持原来的状态。
 给定形如式\eqref{eq:ising_modified}
 的能量函数，算法\ref{alg:Metropolis}
-给出了梅特罗波利斯算法的步骤。
+给出了\gls{metropolis} 的步骤。
 
 \begin{algorithm}
   \caption{梅特罗波利斯算法}\label{alg:Metropolis}
@@ -825,7 +826,7 @@ $\frac{\log n}{n}$
 本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
 
 \newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov Inequality}}
-\begin{lemma}[马尔可夫不等式] 
+\begin{lemma}[\gls{markov_ieq}] 
   设 $X$ 是非负型随机变量，则对于非负实数$a$有：
   \begin{equation}
     \Pr(X\geq a) \leq {1 \over a} \E[X]   
@@ -842,7 +843,7 @@ $\frac{\log n}{n}$
 \end{lemma}
 \newglossaryentry{chebyshev_ieq}{name=切比雪夫不等式, 
 description={Chebyshev's Inequality}}
-\begin{lemma}[切比雪夫不等式]
+\begin{lemma}[\gls{chebyshev_ieq}]
   对于随机变量 $X$， 正实数$a$，我们有
   \begin{equation}
     \Pr(\abs{X-\E[X]} \geq a) \leq {1 \over a^2} \Var[X]

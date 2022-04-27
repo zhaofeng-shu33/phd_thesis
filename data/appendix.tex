@@ -1410,7 +1410,7 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
   $H(\sigma) < H(X)$ 发生的概率为
 	$P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$。
   因此，$P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$。
-	我们由 $H(\bar{\sigma}) < H(X)$ 可推出 $A_{\bar{\sigma}} < B_{\bar{\sigma}}$，进而由引理 \ref{lem:enhanced_fb}
+	我们由 $H(\sigma) < H(X)$ 可推出 $A_{\sigma} < B_{\sigma}$，进而由引理 \ref{lem:enhanced_fb}
   可得，
   对于 $ r \leq \frac{n}{\sqrt{\log n}}$
   我们有
@@ -1430,20 +1430,33 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 当 $\sigma \in W^*$, 由\eqref{eq:number_of_sigma_r_equal_omega_i}式
  我们有 $I'_i = I_i$。
 由 引理\ref{lem:minus}可得
-$|B_{\bar{\sigma}}| = |A_{\bar{\sigma}}|$
-且 $N_{\bar{\sigma}} = 0$。
+$N_{B_{\sigma}} = 
+N_{A_{\sigma}}$
+且 $N_{\sigma} = 0$。
 由 \eqref{eq:Hgeneral}式，
-$H(\bar{\sigma}) < H(X)$ 等价于
-$B_{\bar{\sigma}} > A_{\bar{\sigma}}$。
+$H(\sigma) < H(X)$ 等价于
+$B_{\sigma} > A_{\sigma}$。
 
-Therefore, when $ \Dist(\bar{\sigma}, X) \geq \frac{n}{\sqrt{\log n} }$ and $D(\sigma, X)$,
-from Equation \eqref{eq:Asigma}, we have\linebreak $A_{\bar{\sigma}} \geq \frac{n^2}{k^2(k-1)\sqrt{\log n} } (1+o(1))$.
-We use Lemma \ref{lem:mZW} by letting $m=|A_{\bar{\sigma}}|$ when $m \geq \frac{n}{ \sqrt{\log n}}$; the~error term is bounded
-by $\sum_{r\geq \frac{n}{ \sqrt{\log n}}} P_F^{(r)} \leq \sum_{r\geq \frac{n}{ \sqrt{\log n}}} (k-1)^r \exp(-\frac{(\sqrt{a} - \sqrt{b})^2}{k^2(k-1)} n \sqrt{\log n}))
-\leq \exp(-n)$, which decreases exponentially fast.
-For $m < \frac{n}{ \sqrt{\log n}}$, we can use Lemma \ref{lem:enhanced_fb} directly 
-by considering $\sum_{r=2}^{\frac{n}{ \sqrt{\log n}}} P_F^{(r)}$. The~summation starts from $r=2$ since $\sigma \in W^*$.
-Therefore,
+因此，
+当 $ \Dist(\sigma, X) \geq \frac{n}{\sqrt{\log n} }$ 且 $D(\sigma, X)$
+时，
+在引理 \ref{lem:sigmaX}
+的证明中，条件2不会被满足，否则会推出$N_{\sigma}$
+的一个非零下界，与  $N_{\sigma} = 0$矛盾。
+所以条件1被满足，
+由 \eqref{eq:Asigma}式，
+我们有 $A_{\sigma} \geq \frac{n^2}{k^2(k-1)\sqrt{\log n} } (1+o(1))$。
+当 $m \geq \frac{n}{ \sqrt{\log n}}$ ，
+在 引理\ref{lem:mZW} 中 取
+$m=N_{A_{\sigma}}$;
+误差项的上界为 $\sum_{r\geq \frac{n}{ \sqrt{\log n}}} P_F^{(r)} \leq \sum_{r\geq \frac{n}{ \sqrt{\log n}}} (k-1)^r \exp(-\frac{(\sqrt{a} - \sqrt{b})^2}{k^2(k-1)} n \sqrt{\log n}))
+\leq \exp(-n)$，这是指数衰减的项。
+对于 $m < \frac{n}{ \sqrt{\log n}}$，
+我们可以直接使用引理 \ref{lem:enhanced_fb}  
+来估计 $\sum_{r=2}^{\frac{n}{ \sqrt{\log n}}} P_F^{(r)}$
+的上界。
+因为 $\sigma \in W^*$，这里的求和项是从 $r=2$ 开始。
+因此，我们有
 \begin{align*}
 P_F = & \sum_{r=2}^n P_F^{(r)} \leq (1+o(1)) \sum_{r=2}^{\infty} (k-1)^r n^{rg(\bar{\beta})}\\
 \leq & ((k-1)^2+o(1))n^{2g(\bar{\beta})}
