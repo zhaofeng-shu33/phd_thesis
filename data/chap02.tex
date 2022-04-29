@@ -954,10 +954,14 @@ Abbe \cite{abbe2015exact} 和 Mossel
 精确恢复条件的一个特例。
 
 \begin{theorem}\label{thm:sbmk_phase_transition}
-  对于 $\SSBM(n,k,\A, \B)$ 模型，
-  $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 时精确恢复可实现，
-  $\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
- 没有算法可实现精确恢复。
+  对于 $\SSBM(n,k,\A, \B)$ 模型，当条件
+  \begin{equation}\label{eq:abk}
+    \sqrt{a} - \sqrt{b} > \sqrt{k}
+  \end{equation}   
+  满足时，
+  精确恢复可实现，
+  而当$\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
+  没有算法可实现精确恢复。
 \end{theorem}
 \section{SIBM 模型}\label{sec:sibm_model}
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}

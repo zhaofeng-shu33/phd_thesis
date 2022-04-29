@@ -2,16 +2,25 @@
 
 \chapter{随机块模型的精确恢复问题}
 
+在本章的研究中，我们的研究对象是
+定义\ref{def:SSBM}中的
+$\SSBM(n,k,\A, \B)$，
+我们假设  \eqref{eq:abk} 总是成立，
+首先研究如何估计模型的参数 $a,b$，
+进而研究玻茨模型及其衍生算法的精确恢复误差。
 
 \section{参数估计}
 
-
-In the following, we assume \eqref{eq:abk} always hold,
-and before diving into the exact recovery problem, we first consider the inference problem for SBM.
-Suppose $k$ is known, and~we want to estimate $a,b$ from the graph $G$.
-We offer a simple method
-by counting the number of edges $T_1$ and the number of triangles $T_2$ of $G$, and~the estimators $\hat{a}, \hat{b}$ are
-obtained by solving the following equation systems:
+本节中，我们考虑 $\SSBM(n,k,\A, \B)$ 模型的参数估计
+问题。
+假设 $k$ 已知，
+我们想从图 $G$ 中估计
+$a$ 和 $b$。
+我们提出的方法如下，首先
+数出$G$中 边的数量 $T_1$ 
+和 三角形的数量
+$T_2$，然后通过解下述非线性方程得到
+估计量 $\hat{a}, \hat{b}$：
 \begin{align}
 \frac{x+(k-1)y}{2k} & = \frac{T_1}{n\log n} \label{eq:e_1}\\
 \frac{1}{k^2}
@@ -38,7 +47,8 @@ of $\hat{a} \to a$ and $\hat{b} \to b$ was~verified.
 \begin{figure}[ht!]
 	\centering
 		\includegraphics[width=0.6\textwidth]{estimator-error-2020-12-20.pdf}
-		\caption{Estimation error of $\hat{a}, \hat{b}$ with respect to $n$.}\label{fig:estimator}
+		\caption{ $\hat{a}, \hat{b}$ 的估计误差随
+		$n$ 的变化规律 }\label{fig:estimator}
 \end{figure}
 
 \section{基于玻茨模型的社群发现算法}
