@@ -424,7 +424,7 @@ $k^n$的速率指数增大。
 也需事先确定。
 \begin{algorithm}[H]
 	\caption{针对玻茨模型的梅特罗波利斯算法} \label{alg:m}
-	输入： 图 $G$， 参数 $\beta$ $\gamma$ \\
+	输入： 图 $G$， 参数 $\beta$、$\gamma$ \\
 	输出： $\hat{X} = \bar{\sigma}$
 	\begin{algorithmic}[1]
 		\STATE 随机初始化 $\bar{\sigma} \in W^n$ %\vskip 0.5em
@@ -457,12 +457,15 @@ $N=O(n\log n)$ 即可得到估计得比较好的样本\cite{mcmc}。
 下面我们通过实验验证 定理 \ref{thm:phase_transition} 中的 $\gamma > b$的情形。
 我们选取了 $n=9000, k=2$，
 通过蒙特卡罗采样的方法，我们可以得到准确率的经验计算公式为
-$P_a = \frac{1}{m_1m_2}\sum_{i=1}^{m_1} \sum_{j=1}^{m_2} \mathbf{1}[\hat{X}^* = \pm X]$。
+$P_a(\hat{X}^*) = \frac{1}{m_1m_2}\sum_{i=1}^{m_1} \sum_{j=1}^{m_2} \mathbf{1}[\hat{X}^* = \pm X]$。
 在这个公式中，
 $m_1$ 是 由 SBM 模型产生的随机图的次数，而
 $m_2$ 是 对于一个特定的图，由算法\ref{alg:m} 生成的连续样本的数量。
-我们选取 $m_1=2100,m_2=6000$, which is fairly large and can achieve a good approximation of $P_a(\hat{X}^*)$ by the law of large numbers.
-The result is shown in Figure~\ref{fig:erh}.
+我们选取 $m_1=2100,m_2=6000$。这样的取值已相当大，
+且由大数定律
+可达到 $P_a(\hat{X}^*)$ 的好的估计。
+$P_a(\hat{X}^*)$ 随 $\beta$的变化在 图 \ref{fig:erh}
+中给出。
 
 \begin{figure}[ht!]
 	\centering
@@ -471,9 +474,20 @@ The result is shown in Figure~\ref{fig:erh}.
 \end{figure}
 
 
-The vertical red line ($\beta=\beta^* = 0.198$), computed from \eqref{eq:beta_star}, represents the phase transition threshold. The~point $(0.199,\frac{1}{2})$ in the figure
-can be regarded as the empirical phase transition threshold, whose first coordinate is close to $\beta^*$.
-The green line $(\beta, n^{g(\beta)/2})$ is the theoretical lower bound of accuracy for $\beta>\beta^*$, and the purple line
-$(\beta, n^{-g(\beta)})$ is the theoretical upper bound of accuracy for $\beta < \beta^*$. It can be expected that
-as $n$ becomes larger, the~empirical accuracy curve (blue line in the figure) will approach the step function, which jumps from
-0 to 1 at $\beta=\beta^*$.
+竖线 ($\beta=\beta^* \approx 0.198$)，
+是 从 \eqref{eq:beta_star} 式计算得到的， 
+代表了相变的临界值。
+图 \ref{fig:erh}中的坐标点 $(0.199,\frac{1}{2})$
+可视为通过实验估计出的
+相变点，它的横坐标接近
+$\beta^*$。
+绿线 $(\beta, n^{g(\beta)/2})$ 
+表示当 $\beta>\beta^*$ 时准确率的理论下界，
+而紫线
+$(\beta, n^{-g(\beta)})$ 
+表示当 $\beta<\beta^*$ 时准确率的理论上界。
+仿真实验得到的相变曲线（蓝线）恰好介于此两线之间。
+当 $n$ 变得更大时，可预见
+相变曲线 将接近阶跃函数，该函数的值在
+$\beta=\beta^*$ 处
+从 0 跳变到 1。
