@@ -579,7 +579,8 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
 我们定义随机变量 $Z_{ij}:=\bf{1}[\{i,j\} \in E(G)]$，
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
 给定节点的标签向量 $X$, 
-$Z_{ij}$ 服从 伯努利分布，
+\newglossaryentry{Bernoulli_distribution}{name=伯努利分布, description={Bernoulli distribution}}
+$Z_{ij}$ 服从 \gls{Bernoulli_distribution}，
 \newglossaryentry{not:expectation}
 {
   type=notation,
@@ -829,12 +830,12 @@ $\frac{\log n}{n}$
 \begin{lemma}[\gls{markov_ieq}] 
   设 $X$ 是非负型随机变量，则对于非负实数$a$有：
   \begin{equation}
-    \Pr(X\geq a) \leq {1 \over a} \E[X]   
+    P(X\geq a) \leq {1 \over a} \E[X]   
   \end{equation}
    若$X$ 不一定非负，$a$ 是任意实数，可先取$e$指数再运用马尔可夫不等式，
    即有
    \begin{equation}\label{eq:chernoff_bound}
-    \Pr(X\geq a) = \Pr(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]
+    P(X\geq a) = P(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]
    \end{equation}
    对任意的$t>0$成立。
    \newglossaryentry{chernoff}{name=切尔诺夫不等式, description={Chernoff Inequality}}
@@ -844,10 +845,17 @@ $\frac{\log n}{n}$
 \newglossaryentry{chebyshev_ieq}{name=切比雪夫不等式, 
 description={Chebyshev's Inequality}}
 \begin{lemma}[\gls{chebyshev_ieq}]
+  \newglossaryentry{not:variance}
+{
+  type=notation,
+  name={$\Var[\cdot]$},
+  description={方差}
+}
   对于随机变量 $X$， 正实数$a$，我们有
   \begin{equation}
-    \Pr(\abs{X-\E[X]} \geq a) \leq {1 \over a^2} \Var[X]
+    P(\abs{X-\E[X]} \geq a) \leq {1 \over a^2} \Var[X]
   \end{equation}
+  这里，$\Var[X]$表示随机变量$X$的\glsdesc{not:variance}。
 \end{lemma}
 
 % to do: add large deviation theory and hypothesis testing
