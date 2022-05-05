@@ -516,7 +516,8 @@ BHCD 算法的超参数较多，
     参数 为 $p$ 的伯努利随机变量。
     \newacronym{acr:iid}{i.i.d.}{Independent and identically distributed}
     则 $N_E
-    = \sum_{i,j} X_{ij}$, $X_{ij}$ 是 i.i.d. 的随机变量。
+    = \sum_{i,j} X_{ij}$, $X_{ij}$ 是 \gls{acr:iid}
+    的随机变量。
 	$\mathbb{E}[N_E] = \frac{n(n-1)}{2}p = \frac{(n-1)\log n}{2}a$ 
   且  $\Var[N_E] = \frac{n(n-1)}{2} p(1-p) < a\frac{(n-1)\log n}{2}$。
 	则由切比雪夫不等式，
@@ -559,12 +560,14 @@ BHCD 算法的超参数较多，
 	    
 	从而得到 $\frac{T}{\log^3 n} \xrightarrow{p} \frac{a^3}{6}$。
 \end{proof}
-The convergence of $N_E$ in the Erdős–Rényi %define if appropriate.
-graph can be extended directly to the SBM since the existence of each edge is independent.
-However, for $T$, it is a little tricky since the existences of each triangle are mutually dependent. The~following two lemmas
-give the formula for the variance of inter-community triangles in the SBM.
+因为每条边的生成是独立的，埃尔德什-雷尼模型中的
+$N_E$ 的收敛性 %define if appropriate.
+可以直接拓展到
+随机块模型。
+但是对于三角形的数量$T$，因为每个三角形存在与否并不独立，事情变得棘手。
+下面的两个引理给出了随机块模型中的三角形个数的方差的公式。
 \begin{lemma}\label{lem:SBM_tr_counting_cross}
-	Consider a two-community SBM $(2n, p, q)$ and count the number of triangles $T$, which has a node in $S_1$ and an edge in $S_2$.
+	Consider $\SSBM(2n, 2, p, q)$ and count the number of triangles $T$, which has a node in $S_1$ and an edge in $S_2$.
 Then the variance of $T$ is:
 \begin{align}
 \Var[T] & = \frac{n^2(n-1)}{2}q^2p + n^2(n-1)(n-2)p^2q^3 \notag \\
@@ -572,7 +575,7 @@ Then the variance of $T$ is:
 \end{align}
 \end{lemma}
 \begin{lemma}\label{lem:SBM_tr_counting_3}
-	Consider a three-community SBM$(3n, p, q)$ and count the number of triangles $T$, which has a node in $S_1$, one node in $S_2$, and one node in $S_3$.
+	Consider $\SSBM(3n, 3, p, q)$ and count the number of triangles $T$, which has a node in $S_1$, one node in $S_2$, and one node in $S_3$.
 	Then the variance of $T$ is:
 	\begin{equation*}\label{eq:SBM_tr_counting_three}
 	\Var[T] = n^3 q^3  + 3n^3(n-1) q^4  + 3 n^3 (n-1)^2 q^5 - n^3(3n^2-3n+1)q^6
@@ -580,7 +583,7 @@ Then the variance of $T$ is:
 \end{lemma}
 The proof of the above two lemmas uses some counting techniques and is similar to that in~\cite{holland1977method}, and~we omit it here.
 \begin{lemma}\label{lem:sbmV}
-	For a SBM$(n, k, p, q)$ where $p=\frac{a\log n}{n}, q = \frac{b\log n}{n}$. The~number of triangles is $T$.
+	For a $\SSBM(n, k, p, q)$ where $p=\frac{a\log n}{n}, q = \frac{b\log n}{n}$. The~number of triangles is $T$.
 	Then $\frac{T}{(\log n)^3}$ converges to $\frac{1}{k^2}(\frac{a^3}{6} + \frac{k-1}{2}ab^2 + (k-1)(k-2)\frac{b^3}{6} )$ in probability as $n \to \infty$.
 \end{lemma}
 \begin{proof}
