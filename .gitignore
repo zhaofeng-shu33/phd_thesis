@@ -13,3 +13,4 @@ thuthesis-example.pdf
 *.fdb_latexmk
 *.out
 build
+.DS_Store

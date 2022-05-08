@@ -567,13 +567,42 @@ $N_E$ 的收敛性 %define if appropriate.
 但是对于三角形的数量$T$，因为每个三角形存在与否并不独立，事情变得棘手。
 下面的两个引理给出了随机块模型中的三角形个数的方差的公式。
 \begin{lemma}\label{lem:SBM_tr_counting_cross}
-	Consider $\SSBM(2n, 2, p, q)$ and count the number of triangles $T$, which has a node in $S_1$ and an edge in $S_2$.
-Then the variance of $T$ is:
+	考虑 $\SSBM(2n, 2, p, q)$。它有两个
+  社群，记为 $S_1$ 和 $S_2$。
+    计算三角形的个数 $T$, 并且这些三角形
+    有一个顶点在  $S_1$ 中，
+    该顶点对应的边在 $S_2$中。
+   则 $T$ 的方差为：
 \begin{align}
-\Var[T] & = \frac{n^2(n-1)}{2}q^2p + n^2(n-1)(n-2)p^2q^3 \notag \\
-& + \frac{n^2(n-1)^2}{2}q^4p - \frac{n^2(n-1)(3n-4)}{2}q^4 p^2 \label{eq:SBM_tr_counting_cross}
+\Var[T]  = \frac{n^2(n-1)}{2}q^2p + n^2(n-1)(n-2)p^2q^3 
+ + \frac{n^2(n-1)^2}{2}q^4p - \frac{n^2(n-1)(3n-4)}{2}q^4 p^2 \label{eq:SBM_tr_counting_cross}
 \end{align}
 \end{lemma}
+\begin{proof}
+	$T=\sum_{i,j,k} Y_{ijk}$ where the summation is over $i \in S_1$ and $j,k \in S_2$. Therefore, $E[T] = n\binom{n}{2}pq^2$
+	To compute the variance of $T$ we need to compute $\E[T^2] = \sum_{i,j,k}\sum_{i',j',k'} Y_{ijk}Y_{i'j'k'}$.
+	There are 6 cases for $\E[Y_{ijk}Y_{i'j'k'}]$
+	\begin{enumerate}
+		\item $\{i,j,k\} = \{i',j',k'\}$ then $E[Y_{ijk}Y_{i'j'k'}] = pq^2$.
+		There are $n\binom{n}{2}$ such terms in the double sum.
+		\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 1 element in common and the element $\in S_1$, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$.
+		There are $6n\binom{n}{4}$ such terms in the double sum. ($\binom{4}{2}=6$)
+		\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 1 element in common and the element $\in S_2$, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$.
+		There are $12\binom{n}{2}\binom{n}{3}$ such terms in the double sum.
+		\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 2 elements in common and the two elements are both $\in S_2$, then $E[Y_{ijk}Y_{i'j'k'}] = pq^4$.
+There are $2\binom{n}{2}\binom{n}{2}$ such terms in the double sum.
+\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 2 elements in common and one is in $S_1$, the other is in $S_2$, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^3$.
+There are $6n\binom{n}{3}$ such terms in the double sum.
+\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have 0 element in common, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$.
+There are $12\binom{n}{2}\binom{n}{4}$ such terms in the double sum.
+	\end{enumerate}
+To verify we have covered all cases, note that the sum adds up to $(n\binom{n}{2})^2$:
+% Mathematica Code:
+% Simplify[n^2 (n-1)/2 + 12 Binomial[n,2] Binomial[n,3] + 6 n Binomial[n,4] + Binomial[n,4] Binomial[n,2]*12 + 6 n Binomial[n,3]+ 2 Binomial[n,2]^2]
+$$
+n\binom{n}{2} + 6n\binom{n}{4} + 12\binom{n}{2} \binom{n}{3} + 2(\binom{n}{2})^2 + 6n\binom{n}{3} + 12\binom{n}{2}\binom{n}{4} = \left(n\binom{n}{2}\right)^2
+$$
+\end{proof}
 \begin{lemma}\label{lem:SBM_tr_counting_3}
 	Consider $\SSBM(3n, 3, p, q)$ and count the number of triangles $T$, which has a node in $S_1$, one node in $S_2$, and one node in $S_3$.
 	Then the variance of $T$ is:
