@@ -574,70 +574,124 @@ $N_E$ 的收敛性 %define if appropriate.
     该顶点对应的边在 $S_2$中。
    则 $T$ 的方差为：
 \begin{align}
-\Var[T]  = \frac{n^2(n-1)}{2}q^2p + n^2(n-1)(n-2)p^2q^3 
- + \frac{n^2(n-1)^2}{2}q^4p - \frac{n^2(n-1)(3n-4)}{2}q^4 p^2 \label{eq:SBM_tr_counting_cross}
+\Var[T]  = \frac{n^2(n-1)}{2}pq^2 + n^2(n-1)(n-2)p^2q^3 
+ + \frac{n^2(n-1)^2}{2}pq^4 - \frac{n^2(n-1)(3n-4)}{2} p^2 q^4
+ \label{eq:SBM_tr_counting_cross}
 \end{align}
 \end{lemma}
 \begin{proof}
-	$T=\sum_{i,j,k} Y_{ijk}$ where the summation is over $i \in S_1$ and $j,k \in S_2$. Therefore, $E[T] = n\binom{n}{2}pq^2$
-	To compute the variance of $T$ we need to compute $\E[T^2] = \sum_{i,j,k}\sum_{i',j',k'} Y_{ijk}Y_{i'j'k'}$.
-	There are 6 cases for $\E[Y_{ijk}Y_{i'j'k'}]$
+	由定义， $T=\sum_{i,j,k} Y_{ijk}$，
+  其中 $i,j,k$三个点之间两两有边相连时 $Y_{ijk}$ 取值为1，否则为0。
+  这里的求和是
+  针对 所有 的 $i \in S_1$ 和 $j,k \in S_2$。
+  因此， $\E[T] = n\binom{n}{2}pq^2$。
+	为计算 $T$ 我们需要求出 $\E[T^2] = \sum_{i,j,k}\sum_{i',j',k'} Y_{ijk}Y_{i'j'k'}$。
+	根据三元组 $(i,j,k)$ 和 $(i',j',k')$ 重合的情况
+  $\E[Y_{ijk}Y_{i'j'k'}]$的值一共有6种不同的情形：
 	\begin{enumerate}
-		\item $\{i,j,k\} = \{i',j',k'\}$ then $E[Y_{ijk}Y_{i'j'k'}] = pq^2$.
-		There are $n\binom{n}{2}$ such terms in the double sum.
-		\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 1 element in common and the element $\in S_1$, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$.
-		There are $6n\binom{n}{4}$ such terms in the double sum. ($\binom{4}{2}=6$)
-		\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 1 element in common and the element $\in S_2$, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$.
-		There are $12\binom{n}{2}\binom{n}{3}$ such terms in the double sum.
-		\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 2 elements in common and the two elements are both $\in S_2$, then $E[Y_{ijk}Y_{i'j'k'}] = pq^4$.
-There are $2\binom{n}{2}\binom{n}{2}$ such terms in the double sum.
-\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have exactly 2 elements in common and one is in $S_1$, the other is in $S_2$, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^3$.
-There are $6n\binom{n}{3}$ such terms in the double sum.
-\item If $\{i,j,k\}$ and $\{i',j',k'\}$ have 0 element in common, then $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$.
-There are $12\binom{n}{2}\binom{n}{4}$ such terms in the double sum.
+		\item $\{i,j,k\} = \{i',j',k'\}$，则 $E[Y_{ijk}Y_{i'j'k'}] = pq^2$。
+		在 $\E[T^2]$的求和式中共有 $n\binom{n}{2}$ 
+     项。以下五种情形均需考虑$\E[T^2]$ 中出现的2倍的系数。
+		\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 只有
+    一个共同的元素
+    并且这个元素在 $ S_1$ 中， 则 $\E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$。
+		在 $\E[T^2]$的求和式中共有 $6n\binom{n}{4}$ 项 （$\binom{4}{2}=6$ ）。
+		\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 只有一个共同的元素
+    并且这个元素 在 $ S_2$ 中，则
+    $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$。在 $\E[T^2]$的求和式
+		中共有 $12\binom{n}{2}\binom{n}{3}$ 项。
+		\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 恰有 2  个 共同的元素
+    并且这两个元素均在 $S_2$ 中，
+    则 $E[Y_{ijk}Y_{i'j'k'}] = pq^4$。
+    在 $\E[T^2]$的求和式
+		中共有  $2\binom{n}{2}\binom{n}{2}$ 项。
+\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 恰有2  个 共同的元素
+且一个在 $S_1$ 中，另一个在 $S_2$ 中，则 $E[Y_{ijk}Y_{i'j'k'}] = p^2q^3$。
+在 $\E[T^2]$的求和式
+		中共有 $6n\binom{n}{3}$ 项。
+\item  若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 没有共同的元素，
+ 则 $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$。
+ 在 $\E[T^2]$的求和式中共有 $12\binom{n}{2}\binom{n}{4}$ 
+ 项。
 	\end{enumerate}
-To verify we have covered all cases, note that the sum adds up to $(n\binom{n}{2})^2$:
+通过下面的求和式可以验证我们已经遍历了所有的情形：
 % Mathematica Code:
 % Simplify[n^2 (n-1)/2 + 12 Binomial[n,2] Binomial[n,3] + 6 n Binomial[n,4] + Binomial[n,4] Binomial[n,2]*12 + 6 n Binomial[n,3]+ 2 Binomial[n,2]^2]
-$$
-n\binom{n}{2} + 6n\binom{n}{4} + 12\binom{n}{2} \binom{n}{3} + 2(\binom{n}{2})^2 + 6n\binom{n}{3} + 12\binom{n}{2}\binom{n}{4} = \left(n\binom{n}{2}\right)^2
-$$
+\begin{equation}\label{eq:ver_nn2}
+  n\binom{n}{2} + 6n\binom{n}{4} + 12\binom{n}{2} \binom{n}{3} + 2\binom{n}{2}^2 + 6n\binom{n}{3} + 12\binom{n}{2}\binom{n}{4} = \left(n\binom{n}{2}\right)^2  
+\end{equation}
+\eqref{eq:ver_nn2}式右端中出现的$n\binom{n}{2}$ 是$\E[T] $ 中求和式的项数。
 \end{proof}
 \begin{lemma}\label{lem:SBM_tr_counting_3}
-	Consider $\SSBM(3n, 3, p, q)$ and count the number of triangles $T$, which has a node in $S_1$, one node in $S_2$, and one node in $S_3$.
-	Then the variance of $T$ is:
+	考虑 $\SSBM(3n, 3, p, q)$。它有3个社群，记为
+  $S_1,S_2$ 和 $S_3$。
+  计算三角形的个数 $T$，
+  并且这些三角形 有一个顶点在$S_1$中，有一个顶点在 $S_2$中，
+  有一个顶点在 $S_3$ 中。
+	则 $T$ 的方差为：
 	\begin{equation*}\label{eq:SBM_tr_counting_three}
 	\Var[T] = n^3 q^3  + 3n^3(n-1) q^4  + 3 n^3 (n-1)^2 q^5 - n^3(3n^2-3n+1)q^6
 	\end{equation*}
 \end{lemma}
-The proof of the above two lemmas uses some counting techniques and is similar to that in~\cite{holland1977method}, and~we omit it here.
+
+\begin{proof}
+	与引理 \ref{lem:SBM_tr_counting_cross} 的证明类似，
+	$\E[T] = n^3 q^3$，对于$\E[T^2]$求和式中的项共如下4种情形：
+	\begin{enumerate}
+	\item 若 $\{i,j,k\} = \{i',j',k'\}$， 则 $E[Y_{ijk}Y_{i'j'k'}] = q^3$。
+	$\E[T^2]$中 共有 $n^3$ 项。
+	\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 有一个共同的元素, 则 $E[Y_{ijk}Y_{i'j'k'}] = q^5$。
+	$\E[T^2]$中 共有 $12n\binom{n}{2}^2$ 项。
+	\item 若 $\{i,j,k\}$ and $\{i',j',k'\}$ 有两个共同的元素, 则 $E[Y_{ijk}Y_{i'j'k'}] = q^4$。
+	$\E[T^2]$中 共有 $6\binom{n}{2}n^2$ 项。
+	\item If $\{i,j,k\}$ and $\{i',j',k'\}$ 没有共同的元素, 则  $E[Y_{ijk}Y_{i'j'k'}] = q^6$。
+	$\E[T^2]$中 共有 $8\binom{n}{2}^3$ 项。
+\end{enumerate}	
+通过下面的求和式可以验证我们已经遍历了所有的情形：
+$$
+6\binom{n}{2}n^2  + 8\binom{n}{2}^3 + 12n\binom{n}{2}^2 +  n^3 = n^6
+$$
+\end{proof}
 \begin{lemma}\label{lem:sbmV}
-	For a $\SSBM(n, k, p, q)$ where $p=\frac{a\log n}{n}, q = \frac{b\log n}{n}$. The~number of triangles is $T$.
-	Then $\frac{T}{(\log n)^3}$ converges to $\frac{1}{k^2}(\frac{a^3}{6} + \frac{k-1}{2}ab^2 + (k-1)(k-2)\frac{b^3}{6} )$ in probability as $n \to \infty$.
+ 对于 $\SSBM(n, k, p, q)$，其中 $p=\frac{a\log n}{n}, q = \frac{b\log n}{n}$。
+ 三角形的数量为 $T$。
+	则 $\frac{T}{(\log n)^3}$ 依概率收敛到 $\frac{1}{k^2}(\frac{a^3}{6} + \frac{k-1}{2}ab^2 + (k-1)(k-2)\frac{b^3}{6} )$。
 \end{lemma}
 \begin{proof}
-	We split $T$ into three parts: the~first is the number of triangles within community $i$, $T_i$. There are $k$ terms of $T_i$.
-	The second is the number of triangles that have one node in community $i$ and one edge in community $j$, $T_{ij}$. There are $k(k-1)$ terms of $T_{ij}$. The~third is the number of triangles that have one node in community $i$, one node in community $j$ and one node in community $k$.
+ 我们将 $T$ 分成三部分：
+ 第一部分是每个社群内部的三角形，记社群$i$里有$T_i$个三角形，则共有$k$个$T_i$的项。
+ 第二部分包括有一个点在第i个社群内部，它所对的边在第$j$个社群里的那些三角形，记为 $T_{ij}$。
+ 共有 $k(k-1)$ 个 $T_{ij}$ 的项。第三部分包括三个顶点分别在$i,j,k$三个不同社群的三角形，共有
+ $\binom{n}{3}$ 项。
 	
-	We only need to show that:
+	我们只需证明：
 \begin{align}
-	\frac{T_i}{\log ^3 n} &\to \frac{(a/k)^3}{6} \\
-	\frac{T_{ij}}{\log^3 n}& \to \frac{1}{2}(a/k)(b/k)^2\\
-	\frac{T_{ijk}}{\log^3 n} & \to (b/k)^3
+	\frac{T_i}{\log ^3 n} &\xrightarrow{p} \frac{(a/k)^3}{6} \\
+	\frac{T_{ij}}{\log^3 n}& \xrightarrow{p}\frac{1}{2}(a/k)(b/k)^2\\
+	\frac{T_{ijk}}{\log^3 n} & \xrightarrow{p} (b/k)^3
 	\end{align}
 	
-	The convergence of $\frac{T_i}{\log ^3 n}$ comes from Lemma \ref{lem:ER_tr_counting}.
-	For $T_{ij}$ we use the conclusion from Lemma \ref{lem:SBM_tr_counting_cross}.
-	We replace $n$ with $n/k$, $p=a\frac{\log n}{n}$, and $q=b\frac{\log n}{n}$ in Equation \eqref{eq:SBM_tr_counting_cross}.\linebreak
-	$\Var[T_{ij}] \sim \frac{ab^2}{2k^3} \log^3 n$. Since the expectation of $\frac{T_{ij}}{\log^3 n}$ is $(n/k)\binom{n/k}{2}pq^2/(\log^3 n)
-	=\frac{n-1}{2n}\frac{ab^2}{k^3}$, by~Chebyshev's inequality we can show that:
+	$\frac{T_i}{\log ^3 n}$ 的收敛性可以直接从引理
+  \ref{lem:ER_tr_counting} 中得到。这里，我们视$p=\frac{(a/k) (
+    \log (n/k) + \log k)}{(n/k)}$，因为 $\log k$ 相比于其前一项量阶更小，
+    可以忽略不计。
+	对于 $T_{ij}$， 我们使用 
+  引理 \ref{lem:SBM_tr_counting_cross} 的结果。
+	在 \eqref{eq:SBM_tr_counting_cross} 式中
+  我们用 $n/k$ 代替 $n$， 取 $p=a\frac{\log n}{n}$ 且 $q=b\frac{\log n}{n}$。
+	$\Var[T_{ij}] \sim \frac{ab^2}{2k^3} \log^3 n$。
+  因为 $\frac{T_{ij}}{\log^3 n}$ 的期望值是
+  $(n/k)\binom{n/k}{2}pq^2/(\log^3 n)
+	=\frac{n-1}{2n}\frac{ab^2}{k^3}$， 由切比雪夫不等式
+  可得：
 	\begin{align*}
-	P( \Big|\frac{T_{ij}}{\log^3 n} - \frac{n-1}{2n}\frac{ab^2}{k^3} \Big| > \epsilon) &\leq \frac{\Var[T_{ij} / \log^3 n]}{\epsilon^2} \\
+	P \left( \Big|\frac{T_{ij}}{\log^3 n} - \frac{n-1}{2n}\frac{ab^2}{k^3} \Big| > \epsilon
+  \right) &\leq \frac{\Var[T_{ij} / \log^3 n]}{\epsilon^2} \\
 	& = \frac{1}{\epsilon^2}
-	O(\frac{1}{\log^3 n})
+	O \left( \frac{1}{\log^3 n} \right)
 	\end{align*}
 	
-	Therefore, $\frac{T_{ij}}{\log^3 n} $ converges to $\frac{1}{2}(a/k)(b/k)^2$.
+	因此， $\frac{T_{ij}}{\log^3 n} $ 依概率收敛到 $\frac{1}{2}(a/k)(b/k)^2$。
 	
 	To prove $\frac{T_{ijk}}{\log^3 n}\to (b/k)^3$, from~Lemma \ref{lem:SBM_tr_counting_3} we can get $\Var[T_{ijk}] = O(\log^5 n)$:
 	$$
