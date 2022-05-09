@@ -693,24 +693,35 @@ $$
 	
 	因此， $\frac{T_{ij}}{\log^3 n} $ 依概率收敛到 $\frac{1}{2}(a/k)(b/k)^2$。
 	
-	To prove $\frac{T_{ijk}}{\log^3 n}\to (b/k)^3$, from~Lemma \ref{lem:SBM_tr_counting_3} we can get $\Var[T_{ijk}] = O(\log^5 n)$:
+	为证明
+  $\frac{T_{ijk}}{\log^3 n}\to (b/k)^3$，
+  从 引理 \ref{lem:SBM_tr_counting_3} 中
+  可得 $\Var[T_{ijk}] = O(\log^5 n)$:
 	$$
-	P( \Big|\frac{T_{ijk}}{\log^3 n} -\frac{b^3}{k^3} \Big| > \epsilon) \leq \frac{\Var[T_{ijk} / \log^3 n]}{\epsilon^2} = \frac{1}{\epsilon^2}
-	O(\frac{1}{\log n})
+	P \left( \Big|\frac{T_{ijk}}{\log^3 n} -\frac{b^3}{k^3} \Big| > \epsilon
+  \right) \leq \frac{\Var[T_{ijk} / \log^3 n]}{\epsilon^2} = \frac{1}{\epsilon^2}
+	O \left(\frac{1}{\log n} \right)
 	$$
 \end{proof}
-\begin{proof}[Proof of Theorem \ref{thm:ab12}]
-	Let $e^*_1 = \frac{a+(k-1)b}{2k}$, $k^2 e^*_2 = \frac{a^3}{6} + \frac{k-1}{2}ab^2 + (k-1)(k-2)\frac{b^3}{6}$
-	and\linebreak $e_1 = \frac{T_1}{n\log n}, e_2 = \frac{T_2}{\log^3 n}$.
-	From Lemma \ref{lem:ER_tr_counting}, $e_1 \to e^*_1$.
-	From Lemma \ref{lem:sbmV}, $e_2 \to e^*_2$ as $n\to \infty$.
-	Using $x=2ke_1 - (k-1)y$, we can get:
-\begin{equation}
+\begin{proof}[定理 \ref{thm:ab12} 的证明]
+	令 $e^*_1 = \frac{a+(k-1)b}{2k}$, $k^2 e^*_2 = \frac{a^3}{6} + \frac{k-1}{2}ab^2 + (k-1)(k-2)\frac{b^3}{6}$
+	且 $e_1 = \frac{T_1}{n\log n}, e_2 = \frac{T_2}{\log^3 n}$。
+	由 引理
+  \ref{lem:ER_tr_counting}， $e_1 \to e^*_1$。
+	由 引理 \ref{lem:sbmV}， 当 $n\to \infty$ 时，
+  $e_2 \to e^*_2$。
+	通过变量替换 $x=2ke_1 - (k-1)y$ 消元，我们可将
+  方程组 (\ref{eq:e_1}, \ref{eq:e_2})
+  化简为如下的非线性方程：
+\begin{equation}\label{eq:gy_y3}
 g(y): = (k-1)(y^3 - 6 e_1 y^2 + 12 e_1^2 y) + 6 e_2 - 8 k e_1^3 = 0
 \end{equation}
 
-This equation has a unique real root since $g(y)$ is increasing on\linebreak $\mathbb{R}$:  $g'(y) = 3(k-1)(y-2e_1)^2 \geq 0 $.
-Next we show that the root lies within $(0, 2e_1)$.
+$g'(y) = 3(k-1)(y-2e_1)^2 \geq 0 $，
+$g(y)$ $\mathbb{R}$上的是增函数，
+因此方程\eqref{eq:gy_y3} 最多有一个实根。
+下面我们证明\eqref{eq:gy_y3}式有一个实根
+在 区间 $(0, 2e_1)$ 内。
 \begin{align*}
 &\lim_{n\to \infty}g(0) =  6e^*_2 - 8k(e^*_1)^3 =-\frac{3}{k^2}(k-1)(k-2)ab^2 \\
 &-\frac{3(k-1)}{k^2}a^2b - \frac{k-1}{k^2} ((k-2)-(k-1)^2)b^3 < 0 \\
@@ -718,7 +729,10 @@ Next we show that the root lies within $(0, 2e_1)$.
 % verified with sympy
 \end{align*}
 
-Therefore, we can get a unique solution $y$ within $(0, 2e_1)$. Since $(a,b)$ is a solution for the equation array, by~the continuous property of $g(y)$, $\hat{b} \to b$ and $\hat{a} \to a$ follows.
+因此，\eqref{eq:gy_y3}式有一个实根，由 $g(y)$的连续性，当$n\to \infty $ 时，该实根收敛到 $b$。
+从而我们得到方程组 (\ref{eq:e_1}, \ref{eq:e_2})有唯一解 $\hat{a},\hat{b}$，
+且
+$\hat{b} \to b$， $\hat{a} \to a$。
 \end{proof}
 
 \section{定理\ref{thm:phase_transition}的证明}
