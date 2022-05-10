@@ -6,7 +6,7 @@
 \newglossaryentry{cd}{name=社群发现, description={Community Detection}}
 
 \gls{cd}（community detection）虽然没有严格的数学定义，但公认的做法是
-\newglossaryentry{graph}{name=图, description={Graph}}
+\newglossaryentry{graph}{name=图, description={graph}}
 将现实世界的社群建模成\gls{graph}(graph)结构，在图结构上进行社群发现。社群根据其属性
 是否随时间变化可分为静态社群和动态社群，本文研究的是静态社群，它可以用
 静态图来建模，以下简称图。
@@ -265,7 +265,15 @@ $x(A)$ 定义为 $\sum_{i \in A} x_i$。
 \begin{equation}\label{eq:mutual_info}
   I(X;Y) = D(P_{XY} ||P_XP_Y)
 \end{equation}
-其中 $P_X, P_Y$分别表示边缘分布，而$P_{XY}$
+\newglossaryentry{not:kl_dev}
+{
+  type=notation,
+  name={$D(P_X||P_Y)$},
+  description={分布$P_X$ 和 $P_Y$之间的 KL 散度}
+}
+其中 $P_X, P_Y$分别表示边缘分布，$D(P_X||P_Y)$
+表示 \glsdesc{not:kl_dev}。
+而$P_{XY}$
 表示两个随机变量的联合分布。有多种方法可将互信息
 的概念推广到两个及以上的随机变量，
 其中华人学者陈聪提出了一种推广 \cite{ska} 具有多种好的性质，
@@ -1045,3 +1053,83 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 伊辛模型产生的样本
 相比于$\pm X$的位置
 会以更大的概率聚集在$\pm \bm{1}$。
+
+\section{型方法与 Sanov 定理}
+\newglossaryentry{type}{name=型, description={type}}
+在信息论中，我们首先假定所有的元素均从字母集$\mathcal{X}$
+中选取。
+某个长度为$n$序列$x$的 \gls{type} 是表示
+各字符在该序列中出现的比例，用符号$P_x$表示，
+所有的$P_x$组成集合$\P_n$。比如考虑字母集
+$\mathcal{X}=\{1,2,3\}$。对于$11321$
+它的型可以用三元组 $(\frac{3}{5}, 
+\frac{1}{5}, \frac{1}{5})$ 表示。注意到
+一个型对应着一个离散分布的概率质量函数。
+
+假设 长度为$n$序列$x=(x_1,\dots, x_n)$中每个元素 都是 i.i.d. 服从分布 $Q(x)$，
+则它的联合分布的概率质量函数可以记为$Q^n(x)=\prod_{i=1}^n x_i$。
+对于任意长度为$n$的序列$x$，我们仍沿用上述关于$Q(x)$的定义。
+为衡量$Q$和另一个不包括$Q$的概率分布的集合 $E$ 之间的距离，我们引入如下的记号：
+$Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
+这里 $P_x$ 是 $x$的型。
+
+下面介绍 Sanov 定理：
+\begin{theorem}
+  设 $X_1, \dots, X_n$ i.i.d. 服从分布 $Q(x)$，
+  若 $E$ 表示概率分布的集合，且$E$的闭包是其自身。
+  则
+  \begin{equation}
+  \frac{1}{(n+1)^{|\mathcal{X}|}} e^{-n D(P^*||Q)}
+  \leq Q^n(E) \leq (n+1)^{|\mathcal{X}|} e^{-n D(P^*||Q)}
+  \end{equation}
+  其中
+  \begin{equation}
+    P^* = \arg\min_{P\in E} D(P||Q)
+  \end{equation}
+  极限情形下有：
+  \begin{equation}
+    \lim_{n\to \infty} \frac{1}{n} \log Q^n(E) = -D(P^*||Q)
+  \end{equation}
+\end{theorem}
+\section{假设检验与 切尔诺夫信息}
+在假设检验的问题中，我们要确定 i.i.d. 采样的样本
+$X_1, \dots, X_n$ 服从
+$P_1$ 还是 $P_2$ 分布。为此，考虑两个假设：
+$H_1: Q=P_1$ 和 $H_2: Q=P_2$。
+决策变量$\widehat{H}$ 的值域为 $\{P_1, P_2\}$。
+在做决策的时候可能会产生两类错误，它们的概率
+分别是 $\alpha_n=P(\widehat{H}=H_2|H_1)$
+以及 $\beta_n=P(\widehat{H}=H_1|H_2)$。
+这里下标 $n$表明错误概率随采样数量$n$而变化。
+假设$P_1, P_2$的先验概率分别是 $\pi_1$ 和 $\pi_2$，
+则总误差概率为：$P_e^{(n)} = \pi_1 \alpha_n
++ \pi_2 \beta_n$。
+
+\newglossaryentry{error_exponent}{name=误差指数, description={error exponent}}
+$P_e^{(n)}$ 和决策变量$\widehat{H}$的选取有关。
+切尔诺夫信息指出了在渐近情形下 $P_e^{(n)}$ 所能达到的
+最小值，更精确的说，最大的误差指数。因为
+在这种情形下 $P_e^{(n)}$ 以 $\exp(-n D^*)$ 的速率指数衰减。
+我们把$D^*$叫做 \gls{error_exponent}。
+$D^*$的数学定义为：
+\begin{equation}
+ D^* = \lim_{n\to \infty} -\frac{1}{n} \min_{\widehat{H}}
+ P^{(n)}_e
+\end{equation}
+关于 $D^*$ 我们有如下定理：
+\begin{theorem}
+  最大误差指数 $D^*$ 满足
+  \begin{equation}\label{eq:D_star_lambda_star}
+    D^* = D(P_{\lambda^*} || P_1) = D(P_{\lambda^*}|| P_2)
+  \end{equation}
+  而 $P_{\lambda}$ 定义为
+  \begin{equation}
+    P_{\lambda}(x) = \frac{P^{\lambda}_1 (x) P^{1-\lambda}_2 (x)}
+    {\sum_{a \in \mathcal{X}} P^{\lambda}_1 (a) P^{1-\lambda}_2 (a)}
+  \end{equation}
+  $\lambda^*$ 的取值使得  \eqref{eq:D_star_lambda_star} 式成立。
+\end{theorem}
+
+
+
+
