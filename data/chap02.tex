@@ -1116,10 +1116,11 @@ $D^*$的数学定义为：
  D^* = \lim_{n\to \infty} -\frac{1}{n} \min_{\widehat{H}}
  P^{(n)}_e
 \end{equation}
-关于 $D^*$ 我们有如下定理\footnote{关于此定理可参考教科书 \citet{cover1999elements}
-11.9 }：
+关于 $D^*$ 我们有如下定理\footnote{关于此定理可参考\citet{cover1999elements}的教科书
+11.9 节}：
 \begin{theorem}
-  最大误差指数 $D^*$，也称切尔诺夫信息， 满足
+  \newglossaryentry{chernoff_information}{name=切尔诺夫信息, description={Chernoff Information}}
+  最大误差指数 $D^*$，也称\gls{chernoff_information}， 满足
   \begin{equation}\label{eq:D_star_lambda_star}
     D^* = D(P_{\lambda^*} || P_1) = D(P_{\lambda^*}|| P_2)
   \end{equation}
