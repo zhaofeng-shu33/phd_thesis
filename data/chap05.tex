@@ -9,7 +9,11 @@
 SSBM 模型的推广。这里我们在2个社群的随机块模型的
 基础上引入额外信息。
 除了图 $Z$ 和节点标签 $X$ 外，
-第 $i$  个节点 ($1\leq i \leq n$) 还含有 $m=\lceil \gamma \log n \rceil $ 个相关的数据样本 $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。若 $X_i=1$
+第 $i$  个节点 ($1\leq i \leq n$) 
+还含有 $m=\lceil \gamma \log n \rceil $ 个相关的数据样本 
+$Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。
+这里，我们要求 $\gamma$ 是一个正整数。
+若 $X_i=1$
 这些样本 i.i.d. 采样自分布 $P_0$，若  $X_i=-1$ 则采样自 $P_1$。
 注意到 给定 标签 $X_i$，
 对于 $i\in\{1,\ldots,n\}$，数据样本 $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$ 与 $\{Z_{i,j}\}_{1\le i<j\le n}$ 独立。
@@ -38,4 +42,39 @@ SSBM 模型的推广。这里我们在2个社群的随机块模型的
  $n,m,p, q, P_0$ 和 $P_1$ 这些参数，因此我们把 SBMSI 写成 $\SBMSI(n,m,p,q,P_0,P_1)$ 的形式。
  给定由 $\SBMSI(n,m,p,q,P_0,P_1)$ 生成的图$Z$和数据$Y$, 我们的目标是恢复 出$X$。
  
-\section{误差误差速率}
+ 在有额外信息的条件下，
+ 我们仍使用能否精确恢复这一指标来衡量
+ 社群发现的可行性。与定义\ref{def:SSBMR}类似，
+ 若存在以$Z,Y$为输入变量的算法 $\hat{X}=\hat{X}(Z,Y)$
+ 使得当$n$增大时，
+ 错误概率
+ $P_e:=P(\hat{Y} \neq Y)$ 趋向于 $0$，则称
+ 精确恢复可实现。
+
+ \citet{abbe2015community}一文的3.2小节指出了一般SBM模型的精确恢复条件与多维泊松分布的关系。
+在$k=2$的情形，我们要用到2维泊松分布，因此这里对其做一个简单的介绍。
+有多种方式推广一维的泊松分布，这里我们使用的是如下定义：
+
+\begin{definition}
+    称 $(X,Y)$ 服从参数为 $(\lambda, \mu)$ 的 泊松分布，
+    如果其概率质量函数为：
+    \begin{equation}
+        P(X=k, Y=j) = \frac{\lambda^k \mu^j}{k! j!}
+        e^{-\lambda - \mu}, k,j=0,1,\dots
+    \end{equation}
+    记为 $(X,Y) \sim \Pois(\lambda, \mu)$。
+\end{definition}
+
+有了2维泊松分布的定义式，我们下面给出
+SBMSI 模型精确恢复的条件：
+\begin{theorem}\label{thm:Pe}
+    定义$I_+$ 为联合分布 $\textrm{Pois}(\frac{a}{2},\frac{b}{2})\times \underbrace{P_0 \times \dots \times P_0}_{\gamma}$
+    与 $\textrm{Pois}(\frac{b}{2}, \frac{a}{2})\times \underbrace{P_1 \times \dots \times P_1}_{\gamma}$ 
+    之间的切尔诺夫信息。    
+    对于 $\SBMSI(n,m,p=a\frac{\log n}{n},q=b\frac{\log n}{n},P_0,P_1)$，
+    如果 $I_+>1$，则精确恢复可实现；
+    如果 $I_+ < 1$，
+    则错误概率 $P_e$ 趋近于 $1$，精确恢复不可实现。
+\end{theorem}
+
+\section{误差衰减速率}
