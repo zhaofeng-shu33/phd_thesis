@@ -42,6 +42,23 @@ $$
 + \gamma D(P_{\lambda^*} || P_0)
 \end{align*}
 即\eqref{equation:I+} 式。
-$\lambda*$ 可由\eqref{eq:C_P_1_P_2_another} 式
+$\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
 进行计算。目标函数为：
+\begin{align*}
+&\log\left(\sum_{k=0}^{+\infty} \left(\frac{c^k\exp(-c)}{k!}
+\right)^{1-\lambda}
+\left(\frac{d^k\exp(-d)}{k!} \right)^{\lambda}
+\right) \\
+& + \log\left(\sum_{k=0}^{+\infty} \left(\frac{c^k\exp(-c)}{k!}
+\right)^{\lambda}
+\left(\frac{d^k\exp(-d)}{k!} \right)^{1-\lambda}
+\right)+
+\gamma\log(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
+)\\
+& = c^{1-\lambda} d^{\lambda} 
++ d^{\lambda} c^{1-\lambda} -c -d +
+\gamma\log(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
+)
+\end{align*}
+极小化上式即等价于\eqref{eq:lambda}式。
 \end{proof}
