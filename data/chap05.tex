@@ -88,8 +88,8 @@ explicitly as follows
 \begin{align}\label{equation:I+}
     I_+ &=\frac{\lambda^* }{2} (a^{1-\lambda^* }b^{\lambda^* } -
     b^{1-\lambda^* }a^{\lambda^* })\log\frac{b}{a}+\frac{a+b}{2}\notag \\
-    &-\frac{1}{2}(a^{1-\lambda}b^{\lambda} +
-    b^{1-\lambda^* }a^{\lambda^* })+\gamma D_{\mathrm{KL}}(p_{\lambda^* }||p_0) 
+    &-\frac{1}{2}(a^{1-\lambda^*}b^{\lambda^*} +
+    b^{1-\lambda^* }a^{\lambda^* })+\gamma D(p_{\lambda^* }||p_0) 
 	\end{align}
 	其中
 	\begin{equation}\label{eq:lambda}
@@ -99,10 +99,7 @@ explicitly as follows
     \right)
     \right]
 \end{equation}
-而类似 \eqref{eq:P_lambda_x} 式 $p_{\lambda}$ 定义为
-\begin{equation}\label{eq:p12}
-p_{\lambda}= \frac{p_0^{1-\lambda}(x)p_1^{\lambda}(x)}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}.
-\end{equation}
+$P_{\lambda}$ 由\eqref{eq:P_lambda_x} 式定义。
 \end{lemma}
 
 \section{误差衰减速率}

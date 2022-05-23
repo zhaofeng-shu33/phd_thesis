@@ -1,2 +1,47 @@
 \chapter{第 \ref{chap:sbmsi} 章补充内容}
 \section{引理\ref{lem:I_plus_expression} 的证明}
+在证明引理
+\ref{lem:I_plus_expression}  之前，
+我们先列举泊松分布的一个重要的性质。
+\begin{lemma}\label{lem:poisson_property}
+假设 $P_0 \sim \Pois(c)$, $P_1 \sim \Pois(d)$.
+且 $P_{\lambda}$ 定义成
+$$
+P_{\lambda}(x) = \frac{P_0^{1-\lambda}(x) P_1^{\lambda} (x)}
+{\sum_{x \in \mathcal{X}}P_0^{1-\lambda}(x) P_1^{\lambda} (x)}
+$$
+则我们有
+\begin{enumerate}
+    \item $P_{\lambda} \sim \Pois(c^{1-\lambda} d^{\lambda})$
+    \item $D_{\mathrm{KL}}(P_{\lambda}||P_0) = 
+    \lambda c^{1-\lambda}d^{\lambda}\log(\frac{d}{c}) + c-c^{1-\lambda}d^{\lambda}$
+    \item $D_{\mathrm{KL}}(P_{\lambda}||P_1) = (1-\lambda)
+    c^{1-\lambda}d^{\lambda}\log(\frac{c}{d})
+    + d-c^{1-\lambda}d^{\lambda}$
+\end{enumerate}
+\end{lemma}
+上面的第2、3条性质可由两个泊松分布的KL散度
+公式导出。
+\begin{proof}[引理\ref{lem:I_plus_expression} 的证明]
+由 切尔诺夫信息的定义 \eqref{eq:D_star_lambda_star} 式
+可得：
+$$
+I_+ = D(P_{\lambda^*} || \Pois(\frac{a}{2}))
++ D(P_{1-\lambda^*} || \Pois(\frac{b}{2}))
++ \gamma D(P_{\lambda^*} || P_0)
+$$
+在引理\ref{lem:poisson_property}
+中取$c=\frac{a}{2}, d=\frac{b}{2}$
+并应用第2、3条性质可得
+\begin{align*}
+    I_+ = \left[\lambda^* c^{1-\lambda^*}d^{\lambda^*}
+    \log(\frac{d}{c})+ c-c^{1-\lambda^*}d^{\lambda^*}
+    \right]
++ \left[\lambda^* c^{\lambda^*}d^{1-\lambda^*}\log(\frac{c}{d})
++ d - c^{\lambda^*}d^{1-\lambda^*}\right]
++ \gamma D(P_{\lambda^*} || P_0)
+\end{align*}
+即\eqref{equation:I+} 式。
+$\lambda*$ 可由\eqref{eq:C_P_1_P_2_another} 式
+进行计算。目标函数为：
+\end{proof}
