@@ -1149,6 +1149,21 @@ $D^*$的数学定义为：
   \right)
 \end{equation}
 
+当我们求 $D(P_{\lambda} || P_1)
++ D(P_{\lambda} || P_2)$的最小值时，
+该目标函数在$\lambda=\frac{1}{2}$
+处一阶导数为零而二阶导数为正，因此最小值
+在$\lambda=\frac{1}{2}$取到，该最小值
+即为阶数为$\frac{1}{2}$的 \gls{renyi_divergence}。
+\newglossaryentry{renyi_divergence}{name=雷尼散度, description={Rényi divergence}}
+记为：
+\begin{equation}
+  D_{1/2}(P_1 || P_2) =
+  -2\log(\sum_{x \in \mathcal{X}}
+  \sqrt{P_1(x)P_2(x)} )
+\end{equation}
 
+该散度在一些刻画SBM模型变体的误差衰减
+速率时常常用到 \cite{zhang2016}。
 
 

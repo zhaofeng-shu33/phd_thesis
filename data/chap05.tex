@@ -4,6 +4,7 @@
 的定义。然后研究它的精确恢复的条件以及实现其精确恢复的半正定规划算法。
 
 \section{精确恢复条件}
+\label{sec:sbmsi_exact_recovery_condtion}
 \newacronym{acr:sbmsi}{SBMSI}{Stochastic Block Model with side information}
 带有额外信息的随机块模型（\gls{acr:sbmsi}）
 是 \ref{sec:sbm} 节介绍的
@@ -100,7 +101,33 @@ SBMSI 模型精确恢复的条件：
 而 $P_{\lambda}$ 由\eqref{eq:P_lambda_x} 式定义。
 \end{lemma}
 
+
+
+下面我们给出 SBMSI 模型的精确恢复条件
+	
+\begin{theorem}\label{thm:Pe}
+    对于 $\SBMSI(n,m,p=a\frac{\log n}{n},q=b\frac{\log n}{n},P_0,P_1)$，若条件
+    \begin{equation}\label{eq:positive_condition}
+        I_+ > 1,
+    \end{equation}
+    满足，则模型精确可恢复；
+    反之，若 $I_+ < 1$,  错误概率 $P_e$ 趋向于 $1$。
+\end{theorem}
+相比于 \citet{abbe17sideinfo} 中定理4的结论，
+这里我们限制了类别数为2等条件但允许采样数量为
+$\lceil \gamma \log n \rceil $。
+
 当 $\gamma=0$ 时，由\eqref{eq:lambda}式 可得 $\lambda^*=\frac{1}{2}$，
 则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。
+由定理\ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
+时可精确恢复。定理\ref{thm:Pe}退化到
+定理\ref{thm:sbm2_phase_transition}。
+
 
 \section{误差衰减速率}
+在\ref{sec:sbmsi_exact_recovery_condtion}节的基础上，
+我们讨论一种更强的要求，即恢复算法将SSBM各社群大小相等的条件考虑在内。
+类似定理\ref{thm:error_rate}，
+在这种情况下，我们可以得到恢复算法更快的误差衰减速率。
+
+首先我们定义
