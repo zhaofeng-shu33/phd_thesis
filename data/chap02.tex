@@ -609,18 +609,24 @@ q & \textrm{ if }  X_i \neq X_j
 随机变量 $Z:=\{Z_{ij}, 1\leq i<j\leq n\}$ 完全确定。
 这里 每一个 $Z_{ij}$ 是相互独立的。
 $Z$ 的分布函数可以写为：
-\begin{align}
-P_G(G):=P_G(Z = z| X=x) &= p^{\sum_{x_i = x_j}
-z_{ij}}q^{\sum_{x_i \neq x_j} z_{ij}} \notag\\
-&\cdot (1-p)^{\sum_{x_i = x_j} (1-z_{ij})}
-(1-q)^{\sum_{x_i \neq x_j} (1-z_{ij})} \label{eq:GmL}
+\begin{align}\label{eq:mle_sibm}
+P_G(G)&:=P_G(Z = z| X=x) \\
+&= p^{\sum_{x_i = x_j}
+z_{ij}}q^{\sum_{x_i \neq x_j} z_{ij}} 
+\cdot (1-p)^{\sum_{x_i = x_j} (1-z_{ij})}
+(1-q)^{\sum_{x_i \neq x_j} (1-z_{ij})}
+\label{eq:GmL}
 \end{align}
+\newglossaryentry{mle}
+{name=最大似然估计,
+description={Maximum likelihood estimation}}
 若 参数 $p, q$ 已知，
 通过求
 式\eqref{eq:GmL} 的最大值
-我们可以获得节点标签的估计$\hat{X}$，此即社群发现的最大似然算法
-\footnote{Maximum Likelihood, 缩写为 ML}。
-
+我们可以获得节点标签的估计$\hat{X}$，此即利用
+\gls{mle}
+%\footnote{Maximum Likelihood, 缩写为 ML}。
+做社群发现。
 \newglossaryentry{not:cGn}
 {
   type=notation,
@@ -632,8 +638,9 @@ z_{ij}}q^{\sum_{x_i \neq x_j} z_{ij}} \notag\\
 \glsdesc{not:cGn}。
 由概率分布的归一化的性质可得，
 $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$.
+\newacronym{acr:ml}{ML}{Maximum Likelihood}
 
-不加说明的情况下，ML 算法 是无约束的。但在
+不加说明的情况下，\gls{acr:ml} 算法 是无约束的。但在
 定义\ref{def:SSBM} 的假设下，
 还有一个额外的约束，即 $X$ 每一类的标签数量是严格相等的。
 在这个约束下最大化式\eqref{eq:GmL} 我们可以得到一个等价
@@ -1159,8 +1166,8 @@ $D^*$的数学定义为：
 记为：
 \begin{equation}
   D_{1/2}(P_1 || P_2) =
-  -2\log(\sum_{x \in \mathcal{X}}
-  \sqrt{P_1(x)P_2(x)} )
+  -2\log \left(\sum_{x \in \mathcal{X}}
+  \sqrt{P_1(x)P_2(x)} \right)
 \end{equation}
 
 该散度在一些刻画SBM模型变体的误差衰减

@@ -25,7 +25,8 @@ $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。
     &P(y=\{y^i_{j}\}_{1\le i\le n,1\le j\le m},z=\{z_{i,j}\}_{1\le i<j\le n}| (x_1,\ldots,x_n)) \nonumber\\
     &= \prod_{1\le i,j\le n}P(z_{i,j}|x_i,x_j)\prod_{i=1}^n \prod_{j=1}^m P(y^i_j|x_i), 
 \end{align}
-其中 
+其中$\prod_{1\le i,j\le n}P(z_{i,j}|x_i,x_j)$ 可写成
+\eqref{eq:mle_sibm} 式的形式。对于$P(z_{i,j}|x_i,x_j)$，其具体定义为
 \begin{equation*}
     P  (z_{i,j}=1|x_i,x_j) = \begin{cases}
         p & \text{if } x_i = x_j \\
@@ -58,7 +59,7 @@ $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。
 有多种方式推广一维的泊松分布，这里我们使用的是如下定义：
 
 \begin{definition}
-    称 $(X,Y)$ 服从参数为 $(\lambda, \mu)$ 的 泊松分布，
+    称 $(X,Y)$ 服从参数为 $(\lambda, \mu)$ 的二维泊松分布，
     如果其概率质量函数为：
     \begin{equation}
         P(X=k, Y=j) = \frac{\lambda^k \mu^j}{k! j!}
@@ -128,6 +129,45 @@ $\lceil \gamma \log n \rceil $。
 在\ref{sec:sbmsi_exact_recovery_condtion}节的基础上，
 我们讨论一种更强的要求，即恢复算法将SSBM各社群大小相等的条件考虑在内。
 类似定理\ref{thm:error_rate}，
-在这种情况下，我们可以得到恢复算法更快的误差衰减速率。
+在这种情况下，利用带约束的最大似然估计，我们可以得到恢复算法更快的误差衰减速率。
+%{eq:mle_sibm}
 
-首先我们定义
+具体而言，在\eqref{eq:lh}式中极小化$x_i$可得到如下优化问题：
+\begin{align}
+    \hat{X} &= \arg\max_x\ P(y,z|X=x) \notag \\
+    \textrm{s.t.} \ & x_i \in \{\pm 1\}, \sum_{i=1}^n x_i=0 \label{eq:mle}
+\end{align}
+类似\eqref{eq:hatX_double_prime}式，
+由\eqref{eq:mle}给出的估计量 $\hat{X}$，
+是在有约束的参数空间的最大似然估计量。
+如果我们修改定义\ref{def:SSBM}中真实标签$X$的生成方式，
+使得$X_1, \dots, X_n$ i.i.d. $\sim \textrm{Bernoulli}(\frac{1}{2})$，
+则只能使用不带约束的 ML 估计量进行社群发现。
+
+当SSBM 的 $p,q$ 参数以 $O(\frac{ \log n}{n})$
+的速率衰减时，我们有如下定理：
+\begin{theorem}\label{thm:Pe_new}
+    令
+    $\gamma = \frac{ m}{\log n}$
+    为一常数。
+    若
+    $p = a \log n /n$ 且 $q = b \log n / n$, 使用最大似然估计量 \eqref{eq:mle}
+    进行社群发现，
+    若
+    \begin{equation}\label{eq:positive_condition_new}
+    \gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2 > 0
+    \end{equation}
+    则精确恢复的误差的上界为：
+    \begin{equation}\label{eq:PeMain}
+    P_e \leq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right) }
+    \end{equation}
+    如果下述条件满足，
+    \begin{align}
+    (\sqrt{a}-\sqrt{b})^2-2 
+    > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2\label{eq:oneC}
+    \end{align}
+    则精确恢复的误差的下界为：
+    \begin{equation}\label{eq:PeMainL}
+    P_e \geq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right)}
+    \end{equation}
+\end{theorem}
