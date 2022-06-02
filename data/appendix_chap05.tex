@@ -64,9 +64,12 @@ $\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
 \end{proof}
 
 \section{定理 \ref{thm:Pe_new} 的证明}
-\begin{proof}[定理\ref{thm:Pe_new} 的证明]
 
-  
+在开始定理\ref{thm:Pe_new} 的正式证明之前，
+我们先推导
+最大似然算法无法精确恢复社群结构这一事件
+对应的不等式。
+
 对于
 某个特定的节点标签
 $x^*$,
@@ -109,21 +112,92 @@ $x^*$，则
     $P_0(P_1)$，
     且有 $z_{i} \sim \Bern(p), z'_{i} \sim \Bern(q)$。
     
-    We denote the event described by \eqref{eq:ein} as $A_k$,
-    and each $F_k$ can be regarded as the union of $\binom{n/2}{k}^2$ events
-    of $A_k$ for different node indexes.
+    我们把 \eqref{eq:ein} 式所描述的事件
+    叫做 $A_k$，
+    则每个 $F_k$ 
+    可看成
+     $\binom{n/2}{k}^2$ 个
+    对应不同节点标签的
+    $A_k$ 事件的并集。
     
-    To obtain an upper bound of $P(A_k)$, we further define several empirical distributions as follows:
-    \begin{align*}
-    P(\widetilde{X}_j = u) &= \frac{1}{km} \sum_{i=1}^{km} \mathbf{1}[x_{ji} = u] \textrm{ for } u \in \mathcal{X}, j=1,2 \\
-    P(\widetilde{Z} = u) &= \frac{1}{k(n-2k)}\sum_{i=1}^{k(n-2k)} \mathbf{1}[z_i = u], u \in \{0, 1\}
-    \end{align*}
-    and $\widetilde{Z}'$ is defined similarly. Then
-    \eqref{eq:ein} is transformed as
+    为
+    获得 $P(A_k)$
+    的上界， 
+    我们首先定义如下经验分布：
     \begin{align}
-    &m\left[\sum_{x\in \mathcal{X}}P_{\widetilde{X}_1}(x)\log\frac{p_1(x)}{p_0(x)}
-    +\sum_{x\in \mathcal{X}}P_{\widetilde{X}_2}(x)\log\frac{p_0(x)}{p_1(x)}\right] +(n-2k)\notag \\
+    P(\widetilde{Y}_j = u) &=
+    \frac{1}{km} \sum_{i=1}^{km}
+    \mathbf{1}[y_{ji} = u] \textrm{ for } u \in \mathcal{Y}, j=1,2 
+    \notag \\
+    P(\widetilde{Z} = u) &= \frac{1}{k(n-2k)}\sum_{i=1}^{k(n-2k)} \mathbf{1}[z_i = u], u \in \{0, 1\}
+    \label{eq:zu}
+    \end{align}
+     $\widetilde{Z}'$ 
+     的定义类似 \eqref{eq:zu}。
+ 则
+    \eqref{eq:ein} 式可化为：
+    \begin{align}
+    &m\left[\sum_{y\in \mathcal{Y}}
+    P_{\widetilde{Y}_1}(y)\log\frac{P_1(y)}
+    {P_0(y)}
+    +\sum_{y\in \mathcal{Y}}
+    P_{\widetilde{Y}_2}(y)\log\frac{P_0(y)}
+    {P_1(y)}
+    \right] +(n-2k)\notag \\
     &\left[\sum_{z\in\{0,1\}} P_{\widetilde{Z}}(z) \log \frac{p_{B_q}(z)}{p_{B_p}(z)}
     + \sum_{z\in\{0,1\}} P_{\widetilde{Z}'}(z) \log \frac{p_{B_p}(z)}{p_{B_q}(z)}\right] \geq 0 \label{eq:mnk}
     \end{align}
+    此外，为证明 \eqref{eq:PeMainL} 给出的
+    下界，我们还需要如下两个引理。
+    \begin{lemma}\label{lem:single_lower}
+        对于 
+         在 \eqref{eq:ein}式中给出的事件 $A_1$ 
+          （取 $k=1$），
+        我们有如下的不等式估计
+        \begin{equation}\label{eq:pa1}
+        P(A_1) \geq \exp(-(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a}-\sqrt{b})^2 + o(1))\log n )
+        \end{equation}
+        \end{lemma}
+        \begin{proof}[引理\ref{lem:single_lower}的证明] 
+当 $k=1$ 时，
+不等式 \eqref{eq:ein} 可写成
+$\sum_{i=1}^{n-2} (z'_i - z_i)
+\geq \epsilon$
+其中
+\begin{align*}
+\epsilon := &\frac{m}{\log a/b}\cdot 
+\Bigl[D(P_{\widetilde{Y}_{1}} || P_1) 
+- D(P_{\widetilde{Y}_{1}} || P_0) \\
+&+D(P_{\widetilde{Y}_{2}} || P_0) -
+D(P_{\widetilde{Y}_{2}} || P_1)\Bigr],
+\end{align*}
+令 $P_{\widetilde{Y}^{*}_1}$
+和 $P_{\widetilde{Y}^{*}_2}$
+取相同的分布
+$P(Y=y)=\frac{\sqrt{P_0(y)P_1(y)}}
+{ \sum_{y\in \mathcal{Y}}
+\sqrt{P_0(y) P_1(y)}} $，
+从而使得 $\epsilon =0$。
+对于这组特殊选取的
+$P_{\widetilde{Y}^{*}_1}$
+和 $P_{\widetilde{Y}^{*}_2}$,
+我们使用 Sanov 定理可得
+\begin{align*}
+&P(A_1)
+\geq\frac{1}
+{(m+1)^{2|\mathcal{Y}|}}
+\exp \left(-m(D(P_{\widetilde{Y}^*_1} || P_0)
++ D(P_{\widetilde{Y}^*_2} || P_1))
+\right)
+\cdot P\left(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0\right)\\
+& = \exp(-\log n (\gamma D_{1/2}(P_0||P_1)+o(1))) P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0).
+\end{align*}
+由 \citet{abbe2015exact}
+中的引理 4,
+$P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)$ 下界为
+ $n^{-(\sqrt{a} - \sqrt{b})^2 + o(1)}$。
+因此得到 \eqref{eq:pa1} 式。
+        \end{proof}
+\begin{proof}[定理\ref{thm:Pe_new} 的证明]
+xxx
 \end{proof}
