@@ -62,3 +62,68 @@ $\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
 \end{align*}
 极小化上式即等价于\eqref{eq:lambda}式。
 \end{proof}
+
+\section{定理 \ref{thm:Pe_new} 的证明}
+\begin{proof}[定理\ref{thm:Pe_new} 的证明]
+
+  
+对于
+某个特定的节点标签
+$x^*$,
+若
+\eqref{eq:mle} 式中的 ML 算法
+无法精确恢复 
+$x^*$，则
+存在 $x\neq x^*$ 使得 $P(y,z|x) > P(y,z|x^*)$。
+令 $F_k$ 表示在 $x$ 和 $x^*$ 之间有 $k$ 个不同的对
+这个事件，即：
+    \begin{equation}\label{eq:Fk}
+    F_k:=\{\exists y \in \{\pm 1\}^n |
+    \Dist(x, x^*)=2k,
+    P(y,z|x) > 
+    P(y,z|x^*) \}
+    \end{equation}
+    由于
+    $x$ 要 满足约束
+    $\sum_{i=1}^n x_i=0$,
+    $\Dist(x, x^*)$
+    只能取偶数值。
+    在
+    $P(y,z|x) > P(y,z|x^*)$
+    两边同时取
+    对数
+    ， 并利用
+    \eqref{eq:lh} 式，
+    可得如下等价不等式：
+    \begin{equation}\label{eq:ein}
+    \sum_{i=1}^{km}
+    \left(\log \frac{P_1(y_{1i})}
+    {P_0(y_{1i})}
+    + \log \frac{P_0(y_{2i})}
+    {P_1(y_{2i})}
+    \right)
+    \geq \log \frac{p(1-q)}{q(1-p)} \sum_{i=1}^{k(n-2k)}(z_{i} - z'_{i})
+    \end{equation}
+    
+    其中 $y_{1i}(y_{2i})$ 分别采样自
+    $P_0(P_1)$，
+    且有 $z_{i} \sim \Bern(p), z'_{i} \sim \Bern(q)$。
+    
+    We denote the event described by \eqref{eq:ein} as $A_k$,
+    and each $F_k$ can be regarded as the union of $\binom{n/2}{k}^2$ events
+    of $A_k$ for different node indexes.
+    
+    To obtain an upper bound of $P(A_k)$, we further define several empirical distributions as follows:
+    \begin{align*}
+    P(\widetilde{X}_j = u) &= \frac{1}{km} \sum_{i=1}^{km} \mathbf{1}[x_{ji} = u] \textrm{ for } u \in \mathcal{X}, j=1,2 \\
+    P(\widetilde{Z} = u) &= \frac{1}{k(n-2k)}\sum_{i=1}^{k(n-2k)} \mathbf{1}[z_i = u], u \in \{0, 1\}
+    \end{align*}
+    and $\widetilde{Z}'$ is defined similarly. Then
+    \eqref{eq:ein} is transformed as
+    \begin{align}
+    &m\left[\sum_{x\in \mathcal{X}}P_{\widetilde{X}_1}(x)\log\frac{p_1(x)}{p_0(x)}
+    +\sum_{x\in \mathcal{X}}P_{\widetilde{X}_2}(x)\log\frac{p_0(x)}{p_1(x)}\right] +(n-2k)\notag \\
+    &\left[\sum_{z\in\{0,1\}} P_{\widetilde{Z}}(z) \log \frac{p_{B_q}(z)}{p_{B_p}(z)}
+    + \sum_{z\in\{0,1\}} P_{\widetilde{Z}'}(z) \log \frac{p_{B_p}(z)}{p_{B_q}(z)}\right] \geq 0 \label{eq:mnk}
+    \end{align}
+\end{proof}
