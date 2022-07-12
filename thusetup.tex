@@ -184,7 +184,10 @@
 \input{math_symbols.tex}
 \input{code-style.tex}
 \usepackage{adjustbox}
+
+% hyperref 宏包在倒数第二个位置调用，在 glossaries
+% 之前
+\usepackage{hyperref}
+
 \usepackage[acronyms]{glossaries}
 \newglossary[nlg]{notation}{not}{ntn}{主要符号对照表}
-% hyperref 宏包在最后调用
-\usepackage{hyperref}
