@@ -238,5 +238,79 @@ $P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)$ 下界为
 \end{proof}
     
 \begin{proof}[定理\ref{thm:Pe_new} 的证明]
-xxx
+
+以下我们使用切尔诺夫不等式来给出 $P(A_k)$
+的上界，即我们证明：
+$$
+P(A_k) \leq n^{-k\theta^*_k} 
+\,\textrm{ 其中 }\, \theta^*_k=\gamma D_{1/2}(P_0||P_1)
++\left(1-\frac{2k}{n} \right)\left(\sqrt{a}-\sqrt{b}
+\right)^2
+$$
+由 $A_k$ 的定义式 \eqref{eq:ein} 我们有
+\begin{align*}
+P(A_k) &\leq \mathbb{E}
+\left[\exp \left( s\sum_{i=1}^{km}
+\left( \log \frac{P_1(y_{1i})}
+    {P_0(y_{1i})}
++ \log \frac{P_0(y_{2i})}
+    {P_1(y_{2i})} \right)
+\right)\right]\cdot \mathbb{E}
+\left[\exp\left(s\log \frac{a}{b}\sum_{i=1}^{k(n-2k)} (z'_i - z_i )\right)
+\right] \\
+& \stackrel{(a)}{=}
+\left(\sum_{x\in \mathcal{X}}
+P_0^{1-s}(x)P_1^{s}(x)\right)^{km}
+\left(\sum_{x\in \mathcal{X}} P_1^{1-s}(x) P_0^{s}(x)
+\right)^{km}\\
+&   \cdot \exp\left(
+    k\log n \left(1-\frac{2k}{n} \right)
+    (-a-b+a^sb^{1-s}+b^sa^{1-s} +o(1)) 
+    \right)
+\end{align*}
+其中 $(a)$ 由各样本相互独立可得。 取 $s=\frac{1}{2}$，
+则我们有
+$P(A_k) \leq  n^{-k(\theta^*_k+o(1))}$.
+
+当 $k \geq \frac{n}{\sqrt{\log n}}$ 时，
+由引理\ref{lem:sigmaX},
+$P(F_k)$ 指数衰减。
+对于 $2\leq k < \frac{n}{\sqrt{\log n}}$
+的情形，
+错误概率通过如下的方式进行分析：
+由布尔不等式,
+我们可以给出 $P(F_k)$ 的上界为
+\begin{equation}\label{eq:FAk}
+P(F_k) \leq \binom{n/2}{k}^2 P(A_k)
+\end{equation}
+and by $\binom{n}{k} \leq (\frac{ne}{k})^k$,
+我们可以进一步 向上放缩 $P(F_k)$ 为
+\begin{align*}
+P(F_k) & \leq \left(\frac{ne}{2k}\right)^{2k} P(A_k) 
+\leq \exp(k(2\log(ne/2k)-\theta_k^* \log n) + o(1))
+\end{align*}
+\begin{align*}
+&P_e \leq P(F_1)+(1+o(1))\sum_{k=2}^{\frac{n}{\sqrt{\log n}}} P(F_k) \leq (1+o(1))\\
+& \cdot \sum_{k=2}^{\frac{n}{\sqrt{\log n}}}
+\exp(k(-\mu \log n + \frac{2k}{n} \log n(\sqrt{a} - \sqrt{b})^2 - 2\log 2k + 2))
+\end{align*}
+where $\mu$ is defined as
+\begin{equation}\label{eq:mu_def}
+	\mu = (\sqrt{a} - \sqrt{b})^2-2 + \gamma D_{1/2}(p_0||p_1) > 0	
+\end{equation}
+For $P(F_1)$, we
+have $P(F_1)\leq (n/2)^2
+P(A_1)\leq \frac{1}{4}n^{-\mu+o(1)}$.
+For $2\leq k \leq \frac{n}{\sqrt{\log n}}$, using the inequality
+$$
+\frac{2k}{n}(\sqrt{a} - \sqrt{b})^2\log n -2\log2k+2\leq  C\sqrt{\log n}
+$$
+we can obtain
+\begin{align*}
+P_e &\leq \frac{1}{4}n^{-\mu + o(1)} +(1+o(1)) \sum_{k=2}^{\frac{n}{\sqrt{\log n}}} \exp(k((-\mu + o(1)) \log n )) \\
+& =\frac{1}{4}n^{-\mu + o(1)}+(1+o(1)) \frac{n^{-\mu + o(1)}}{1-n^{-\mu + o(1)}} \\
+&= (\frac{1}{4}+o(1))n^{-\mu + o(1)}
+\end{align*}
+Therefore, \eqref{eq:PeMain} is established.
+
 \end{proof}
