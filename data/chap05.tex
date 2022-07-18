@@ -155,12 +155,12 @@ $\lceil \gamma \log n \rceil $。
     进行社群发现，
     若
     \begin{equation}\label{eq:positive_condition_new}
-    \gamma D_{1/2}(p_0||p_1) +
+    \gamma D_{1/2}(P_0||P_1) +
      (\sqrt{a} - \sqrt{b})^2-2 > 0
     \end{equation}
     则精确恢复的误差的上界为：
     \begin{equation}\label{eq:PeMain}
-    P_e \leq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right) }
+    P_e \leq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right) }
     \end{equation}
     如果下述条件满足，
     \begin{align}
@@ -169,13 +169,13 @@ $\lceil \gamma \log n \rceil $。
     \end{align}
     则精确恢复的误差的下界为：
     \begin{equation}\label{eq:PeMainL}
-    P_e \geq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right)}
+    P_e \geq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right)}
     \end{equation}
 \end{theorem}
 
 由定理 \ref{thm:Pe_new}
 可看出，误差界的幂次有两项组成，
-一项 $\gamma D_{1/2}(p_0||p_1) $ 
+一项 $\gamma D_{1/2}(P_0||P_1) $ 
 和雷尼散度（在\eqref{eq:renyi_divergence} 定义）
 有关，另一项 $ (\sqrt{a} - \sqrt{b})^2-2 $
 和 SSBM 的精确恢复条件有关。
@@ -183,14 +183,14 @@ $\lceil \gamma \log n \rceil $。
 定理
 \ref{thm:Pe_new} 告诉我们
 额外信息  $Y$  增大了 误差 $P_e$ 的衰减速率，
-增大的程度可用信息量 $\gamma D_{1/2}(p_0||p_1)$ 
+增大的程度可用信息量 $\gamma D_{1/2}(P_0||P_1)$ 
 来刻画。
 若额外的参数条件 \eqref{eq:oneC}式满足，
 \eqref{eq:positive_condition_new} 式也满足，此时
 误差衰减速率为：
 $$
 -\lim_{n\to \infty} \frac{\log P_e}{\log n}
-= \gamma D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2-2
+= \gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2
 $$
 此外，当 $P_0=P_1$ 时，
 定理 \ref{thm:Pe_new} 

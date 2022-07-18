@@ -287,30 +287,31 @@ and by $\binom{n}{k} \leq (\frac{ne}{k})^k$,
 我们可以进一步 向上放缩 $P(F_k)$ 为
 \begin{align*}
 P(F_k) & \leq \left(\frac{ne}{2k}\right)^{2k} P(A_k) 
-\leq \exp(k(2\log(ne/2k)-\theta_k^* \log n) + o(1))
+\leq \exp(k(2\log(\frac{ne}{2k})-\theta_k^* \log n) + o(1))
 \end{align*}
 \begin{align*}
-&P_e \leq P(F_1)+(1+o(1))\sum_{k=2}^{\frac{n}{\sqrt{\log n}}} P(F_k) \leq (1+o(1))\\
-& \cdot \sum_{k=2}^{\frac{n}{\sqrt{\log n}}}
-\exp(k(-\mu \log n + \frac{2k}{n} \log n(\sqrt{a} - \sqrt{b})^2 - 2\log 2k + 2))
+P_e &\leq P(F_1)+(1+o(1))\sum_{k=2}^{\frac{n}{\sqrt{\log n}}} P(F_k) \\
+& \leq (1+o(1))\cdot \sum_{k=2}^{\frac{n}{\sqrt{\log n}}}
+\exp\left(k(-\mu \log n + \frac{2k}{n} \log n(\sqrt{a} - \sqrt{b})^2 - 2\log 2k + 2)
+\right)
 \end{align*}
-where $\mu$ is defined as
+其中 $\mu$ 定义为
 \begin{equation}\label{eq:mu_def}
 	\mu = (\sqrt{a} - \sqrt{b})^2-2 + \gamma D_{1/2}(p_0||p_1) > 0	
 \end{equation}
-For $P(F_1)$, we
-have $P(F_1)\leq (n/2)^2
-P(A_1)\leq \frac{1}{4}n^{-\mu+o(1)}$.
-For $2\leq k \leq \frac{n}{\sqrt{\log n}}$, using the inequality
+对于 $P(F_1)$， 我们有 $P(F_1)\leq (n/2)^2
+P(A_1)\leq \frac{1}{4}n^{-\mu+o(1)}$。
+对于 $2\leq k \leq \frac{n}{\sqrt{\log n}}$，
+使用不等式
 $$
 \frac{2k}{n}(\sqrt{a} - \sqrt{b})^2\log n -2\log2k+2\leq  C\sqrt{\log n}
 $$
-we can obtain
+我们可以得到
 \begin{align*}
 P_e &\leq \frac{1}{4}n^{-\mu + o(1)} +(1+o(1)) \sum_{k=2}^{\frac{n}{\sqrt{\log n}}} \exp(k((-\mu + o(1)) \log n )) \\
 & =\frac{1}{4}n^{-\mu + o(1)}+(1+o(1)) \frac{n^{-\mu + o(1)}}{1-n^{-\mu + o(1)}} \\
 &= (\frac{1}{4}+o(1))n^{-\mu + o(1)}
 \end{align*}
-Therefore, \eqref{eq:PeMain} is established.
+因此， \eqref{eq:PeMain} 成立。
 
 \end{proof}
