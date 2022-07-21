@@ -259,9 +259,9 @@ P(A_k) &\leq \mathbb{E}
 \left[\exp\left(s\log \frac{a}{b}\sum_{i=1}^{k(n-2k)} (z'_i - z_i )\right)
 \right] \\
 & \stackrel{(a)}{=}
-\left(\sum_{x\in \mathcal{X}}
-P_0^{1-s}(x)P_1^{s}(x)\right)^{km}
-\left(\sum_{x\in \mathcal{X}} P_1^{1-s}(x) P_0^{s}(x)
+\left(\sum_{y\in \mathcal{Y}}
+P_0^{1-s}(y)P_1^{s}(y)\right)^{km}
+\left(\sum_{y\in \mathcal{Y}} P_1^{1-s}(y) P_0^{s}(y)
 \right)^{km}\\
 &   \cdot \exp\left(
     k\log n \left(1-\frac{2k}{n} \right)
@@ -373,32 +373,38 @@ $\sum_{(i,j,r,s) \in S_1} P(A_{ij} \cap A_{rs})
 \leq n^{-2\mu +o(1)}$，因为$\mu > 0$，
 其阶数比 $n^{-\mu+o(1)}$ 小。
 
-Another case happens when $|\{i,j,r,s\}|=3$. Under such case, without loss of generality we can assume $i=r, y^{(1)}_i = y^{(2)}_r = 1$.
-For the case $y^{(1)}_i = y^{(2)}_r = -1$, we only need to exchange
-$p_0$ and $p_1$, and the following analysis is still valid.
-Then
+另一种情形是 $|\{i,j,r,s\}|=3$。
+在这种情形下，
+不失一般性我们假设 $i=r, x^{(1)}_i = x^{(2)}_r = 1$。
+对于 $x^{(1)}_i = x^{(2)}_r = -1$ 的情形，
+我们只需交换
+$P_0$ 和 $P_1$ 的位置，
+如下的分析仍旧成立。
+可以推出
 \begin{align}
-A_{ijrs}: &\, 2\sum_{i=1}^m  \log \frac{p_1(x_{1i})}{p_0(x_{2i})}
-+ \sum_{i=1}^{2m} \log \frac{p_0(x_{2i})}{p_1(x_{2i})} \\
+A_{ijrs}: &\, 2\sum_{i=1}^m  \log \frac{P_1(y_{1i})}{P_0(y_{1i})}
++ \sum_{i=1}^{2m} \log \frac{P_0(y_{2i})}{P_1(y_{2i})} \\
 & +\log\frac{a}{b}\left(
 \sum_{i=1}^{n} (z'_i - z_i) + 2\sum_{i=n+1}^{3n/2} (z'_i - z_i)\right)  \geq 0\notag
 \end{align}
-Using Chernoff's inequality, we can write an upper bound of $P(A_{ijrs})$ as
+由 切尔诺夫不等式，
+$P(A_{ijrs})$ 的上界可以写成
 \begin{align*}
 &P(A_{ijrs}) \leq
-\left(\sum_{x\in \mathcal{X}} p_0^{1-2s}p_1^{2s}\right)^m
-\left(\sum_{x\in \mathcal{X}} p_1^{1-s}p_0^{s}\right)^{2m} \\
+\left(\sum_{y\in \mathcal{Y}}
+P_0^{1-2s}(y) P_1^{2s}(y)\right)^m
+\left(\sum_{y\in \mathcal{Y}} P_1^{1-s}(y)P_0^{s}(y)\right)^{2m} \\
 & \cdot\exp\Bigl(\log n (-\frac{3}{2}(a+b)+a\exp(-s\log \frac{a}{b})+b\exp(s\log \frac{a}{b}) \\
 &+ \frac{a}{2}\exp(-2s\log \frac{a}{b})+\frac{b}{2}\exp(2s\log \frac{a}{b})+o(1))\Bigr)
 \end{align*}
-Let $s=\frac{1}{3}$. We then have
+令 $s=\frac{1}{3}$，则我们有
 \begin{align*}
-P(A_{ijrs})&\leq  (\sum_{x\in \mathcal{X}} p_0^{1/3}(x)p_1^{2/3}(x))^{3m}\\
-& \cdot \exp(\frac{3}{2}\log n (-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}+o(1))) \\
-&\leq   \exp(-\log n(\gamma D_{1/2}(p_1 || p_0) \\
-&+ \frac{3}{2} (a+b-a^{1/3}b^{2/3}-a^{2/3}b^{1/3})+o(1)))
+P(A_{ijrs})&\leq  \left(\sum_{y\in \mathcal{Y}}
+P_0^{1/3}(y) P_1^{2/3}(y) \right)^{3m} \cdot \exp(\frac{3}{2}\log n (-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}+o(1))) \\
+&\leq   \exp(-\log n(\gamma D_{1/2}(p_1 || p_0) + \frac{3}{2} (a+b-a^{1/3}b^{2/3}-a^{2/3}b^{1/3})+o(1)))
 \end{align*}
-where the last inequality follows from Lemma \ref{lem:p0p1}.
+其中 最后一个不等式由 引理 \ref{lem:p0p1}
+得出。
 It then follows that
 $$
 P(A_{ijrs}) \leq n^{-\mu'/2-1-(\gamma  D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2) + o(1)}
