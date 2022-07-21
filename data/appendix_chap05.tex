@@ -336,33 +336,42 @@ x_i^*=-x_j^*
 	\sum_{(i,j)\in S} P(A_{ij})
 	- \sum_{(i,j) \neq (r,s)} P(A_{ij} \cap A_{rs})		
 \end{equation}
-To get the lower bound of
-$P(\cup_{(i,j)\in S} A_{ij})$ by
-\eqref{eq:bonf},
-we need a lower bound for $\sum_{(i,j)\in S} P(A_{ij})$
-and an upper bound for
-$\sum_{(i,j) \neq (r,s)} P(A_{ij} \cap A_{rs})$.
-We first deal with $P(A_{ij})$.
-Notice that the single event $A_{ij}$
-is equivalent with $A_1$.
-By Lemma \ref{lem:single_lower},
-$P(A_{ij})$ is lower bounded by
-$n^{-\gamma D_{1/2}(p_0 || p_1)-(\sqrt{a} - \sqrt{b})^2 +o(1)}$.
-Since $|S|=(n/2)^2$, the term $\sum_{(i,j) \in S} P(A_{ij})$ is of order $\frac{1}{4}n^{-\mu+o(1)}$.
-Next we give the upper bound of $P(A_{ij} \cap A_{rs})$ according to two cases.
+为根据 \eqref{eq:bonf}
+得到
+$P(\cup_{(i,j)\in S} A_{ij})$
+的下界，
+我们需要得到 $\sum_{(i,j)\in S} P(A_{ij})$
+的下界 和
+$\sum_{(i,j) \neq (r,s)} P(A_{ij} \cap A_{rs})$
+的上界。
+我们首先 处理 $P(A_{ij})$ 的情况。
+注意到 单个事件 $A_{ij}$
+等价于 $A_1$。
+由 引理 \ref{lem:single_lower},
+$P(A_{ij})$ 的下界是
+$n^{-\gamma D_{1/2}(p_0 || p_1)-(\sqrt{a} - \sqrt{b})^2 +o(1)}$。
+因为
+$|S|=(n/2)^2$，
+项 $\sum_{(i,j) \in S} P(A_{ij})$ 的 阶数是 
+$\frac{1}{4}n^{-\mu+o(1)}$。
+下面 我们根据两种情况 给出 $P(A_{ij} \cap A_{rs})$ 的上界。
 
-First is the case when $|\{i,j,r,s\}|=4$. Then $A_{ij} \cap A_{rs}$ implies the event
-$A_{ijrs}: p(x,z|y^{(1)})p(x,z|y^{(2)}) > p^2(x,z|y^*)$ where
-$y^{(1)}$ differs from $y^*$ at position $(i,j)$ and $y^{(2)}$ differs from $y^*$
-at position $(r,s)$.
-After taking the logarithm on both sides and simplification,
-the inequality representation for the event $A_{ijrs}$ is the same with $A_2$.
-Therefore, $P(A_{ij} \cap A_{rs}) \leq n^{-2(\theta^*_2 + o(1))} $. The number of elements
-in the set $S_1:=\{(i,j,r,s)| i<j, r<s, |\{i,j,r,s\}|=4\}$ is $\binom{n}{4} \leq n^4$.
-Therefore, the probability sum
+首先是  $|\{i,j,r,s\}|=4$
+的情形。 则 $A_{ij} \cap A_{rs}$ 蕴含事件
+$A_{ijrs}: P(y,z|x^{(1)})P(y,z|x^{(2)}) > P^2(y,z|x^*)$，
+其中 $x^{(1)}$ 在 $(i,j)$ 两个位置与 $x^*$ 不同
+而 $x^{(2)}$ 在 $(r,s)$ 与 $x^*$
+不同。
+取对数并化简后，
+$A_{ijrs}$ 的不等式表达
+与 $A_2$ 一致。
+因此， $P(A_{ij} \cap A_{rs}) \leq n^{-2(\theta^*_2 + o(1))} $。
+集合 $S_1:=\{(i,j,r,s)| i<j, r<s, |\{i,j,r,s\}|=4\}$
+的元素个数是 $\binom{n}{4} \leq n^4$.
+因此，概率和
 $\sum_{(i,j,r,s) \in S_1} P(A_{ij} \cap A_{rs})
-\leq n^{-2\mu +o(1)}$,
-which has smaller order than $n^{-\mu+o(1)}$ since $\mu > 0$.
+\leq n^{-2\mu +o(1)}$，因为$\mu > 0$，
+其阶数比 $n^{-\mu+o(1)}$ 小。
 
 Another case happens when $|\{i,j,r,s\}|=3$. Under such case, without loss of generality we can assume $i=r, y^{(1)}_i = y^{(2)}_r = 1$.
 For the case $y^{(1)}_i = y^{(2)}_r = -1$, we only need to exchange
@@ -403,7 +412,7 @@ P(A_{ij}\cap A_{rs}) \leq n^{-\mu'/2-\mu+o(1)}$,
 which has smaller order than $n^{-\mu+o(1)}$.
 
 Based on the above discussion, 
-$\sum_{(i,j,r,s)\in S_2} P(A_{ij} \cap A_{rs})\leq n^{-2\mu + o(1)}
+$\sum_{(i,j,r,s)\in S} P(A_{ij} \cap A_{rs})\leq n^{-2\mu + o(1)}
 + n^{-\mu - \mu'/2} = o(1) n^{-\mu + o(1)}$.
 Then we conclude that 
 \begin{align*}
