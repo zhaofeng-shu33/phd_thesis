@@ -115,7 +115,7 @@ SBMSI 模型精确恢复的条件：
     反之，若 $I_+ < 1$,  错误概率 $P_e$ 趋向于 $1$。
 \end{theorem}
 相比于 \citet{abbe17sideinfo} 中定理4的结论，
-这里我们限制了类别数为2等条件但允许采样数量为
+这里我们限制了类别数为2等条件，但允许采样数量为
 $\lceil \gamma \log n \rceil $。
 
 当 $\gamma=0$ 时，由\eqref{eq:lambda}式 可得 $\lambda^*=\frac{1}{2}$，
@@ -144,6 +144,8 @@ $\lceil \gamma \log n \rceil $。
 使得$X_1, \dots, X_n$ i.i.d. $\sim \textrm{Bernoulli}(\frac{1}{2})$，
 则只能使用不带约束的 ML 估计量进行社群发现。
 
+根据 SBMSI 中的 SSBM 的模型参数 $p,q$ 随 $n$的变化规律，我们下面分两种情况讨论。
+\subsection{稀疏的 SSBM }
 当SSBM 的 $p,q$ 参数以 $O(\frac{ \log n}{n})$
 的速率衰减时，我们有如下定理：
 \begin{theorem}\label{thm:Pe_new}
@@ -151,7 +153,8 @@ $\lceil \gamma \log n \rceil $。
     $\gamma = \frac{ m}{\log n}$
     为一常数。
     若
-    $p = a \log n /n$ 且 $q = b \log n / n$, 使用最大似然估计量 \eqref{eq:mle}
+    $p = \frac{a \log n }{n} $ 且 $q = 
+    \frac{b \log n } {n}$, 使用最大似然估计量 \eqref{eq:mle}
     进行社群发现，
     若
     \begin{equation}\label{eq:positive_condition_new}
@@ -211,3 +214,38 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 相比于定理\ref{thm:error_rate}中的第2条，
 这里我们推导出了误差下界的表达式 \eqref{eq:PeMainL}，
 因而得到了紧的误差误差速率 \eqref{eq:cor}。
+\subsection{稠密的 SSBM}
+当 SSBM 的 $p,q$ 参数是常数时，我们有如下定理：
+\begin{theorem}\label{thm:constant}
+	令 $\gamma = \frac{m}{n}$ 为一常数。
+    若 $p,q$ 为常数，使用最大似然估计量 \eqref{eq:mle}
+    进行社群发现，
+	精确恢复的误差指数
+    为
+	\begin{equation}
+	-\lim_{n\to \infty} \frac{1}{n}\log P_e = 
+     \gamma D_{1/2}(P_0 || P_1) + D_{1/2}(\Bern(p)||\Bern(q))
+	\end{equation} 
+\end{theorem}
+
+由定理 \ref{thm:constant} 可知，精确恢复误差指数下降。
+当 $\gamma=0$ 时，定理 \ref{thm:constant} 指出
+$D_{1/2}(\Bern(p)||\Bern(q))$
+是精确恢复的误差指数。
+因为
+Since weak recovery differs from exact recovery by a polynomial factor, $D_{1/2}(\Bern(p)||\Bern(q))$ is also the exponent for weak recovery, which has been obtained
+in \cite{zhang2016}.
+Besides, assuming $\gamma$ is an integer,
+the error exponent can be regarded as the Rényi divergence
+between the joint distribution
+$\underbrace{P_0\times \dots \times P_0}_{\gamma} \times \Bern(p)$
+and $\underbrace{P_1\times \dots \times P_1}_{\gamma} \times \Bern(q)$.
+By independent conditions,
+we can decompose this
+divergence in the summation form.
+Furthermore, the result of Theorem \ref{thm:constant}
+requires $m$ and $n$ have the same order.
+When $m=o(n)$,
+the edge information takes dominate effects;
+when $m=\omega(n)$,
+the side information dominates and the edge information is negligible.
