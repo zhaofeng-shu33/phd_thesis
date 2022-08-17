@@ -228,6 +228,12 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
     进行社群发现，
 	精确恢复的误差指数
     为
+    \newglossaryentry{not:bern}
+{
+  type=notation,
+  name={$\Bern(p)$},
+  description={参数为$p$的伯努利分布}
+}
 	\begin{equation}\label{eq:dense_error_exponent}
 	-\lim_{n\to \infty} \frac{1}{n}\log P_e = 
      \gamma D_{1/2}(P_0 || P_1) + D_{1/2}(\Bern(p)||\Bern(q))
@@ -260,3 +266,9 @@ $m$ 和 $n$ 量阶相同。
 而当 $m=\omega(n)$时，
 每个节点的额外信息占
 主导地位，此时所研究的问题变成$n$个独立的假设检验问题。
+\newglossaryentry{not:small_omega}
+{
+  type=notation,
+  name={$f(n)=\omega(g(n))$},
+  description={$\lim_{n\to \infty} \frac{f(n)}{g(n)} = +\infty$}
+}
