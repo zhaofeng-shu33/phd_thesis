@@ -146,6 +146,12 @@ $\lceil \gamma \log n \rceil $。
 
 根据 SBMSI 中的 SSBM 的模型参数 $p,q$ 随 $n$的变化规律，我们下面分两种情况讨论。
 \subsection{稀疏的 SSBM }
+\newglossaryentry{not:big_o}
+{
+  type=notation,
+  name={$f(n)=O(g(n))$},
+  description={大O符号，表示存在常数$C$和正整数$N$，使得$f(n)\leq C g(n)$ 对于$n\geq N$均成立}
+}
 当SSBM 的 $p,q$ 参数以 $O(\frac{ \log n}{n})$
 的速率衰减时，我们有如下定理：
 \begin{theorem}\label{thm:Pe_new}
@@ -222,7 +228,7 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
     进行社群发现，
 	精确恢复的误差指数
     为
-	\begin{equation}
+	\begin{equation}\label{eq:dense_error_exponent}
 	-\lim_{n\to \infty} \frac{1}{n}\log P_e = 
      \gamma D_{1/2}(P_0 || P_1) + D_{1/2}(\Bern(p)||\Bern(q))
 	\end{equation} 
@@ -233,19 +239,24 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 $D_{1/2}(\Bern(p)||\Bern(q))$
 是精确恢复的误差指数。
 因为
-Since weak recovery differs from exact recovery by a polynomial factor, $D_{1/2}(\Bern(p)||\Bern(q))$ is also the exponent for weak recovery, which has been obtained
-in \cite{zhang2016}.
-Besides, assuming $\gamma$ is an integer,
-the error exponent can be regarded as the Rényi divergence
-between the joint distribution
+弱恢复与强恢复相差一个多项式的数量级，
+$D_{1/2}(\Bern(p)||\Bern(q))$ 也是弱恢复的误差指数
+\cite{zhang2016}。
+除此之外， 假设 $\gamma$ 为整数，
+误差指数可视为 
+联合分布
 $\underbrace{P_0\times \dots \times P_0}_{\gamma} \times \Bern(p)$
-and $\underbrace{P_1\times \dots \times P_1}_{\gamma} \times \Bern(q)$.
-By independent conditions,
-we can decompose this
-divergence in the summation form.
-Furthermore, the result of Theorem \ref{thm:constant}
-requires $m$ and $n$ have the same order.
-When $m=o(n)$,
-the edge information takes dominate effects;
-when $m=\omega(n)$,
-the side information dominates and the edge information is negligible.
+和 $\underbrace{P_1\times \dots \times P_1}_{\gamma} \times \Bern(q)$
+之间的雷尼散度。
+由独立性条件，
+我们可以把这一散度分解成如\eqref{eq:dense_error_exponent}
+所示的两项求和的形式。
+进一步的， 定理 \ref{thm:constant}
+的结果要求
+$m$ 和 $n$ 量阶相同。
+当 $m=o(n)$ 时，
+图中边的信息占主导
+地位；
+而当 $m=\omega(n)$时，
+每个节点的额外信息占
+主导地位，此时所研究的问题变成$n$个独立的假设检验问题。

@@ -1023,12 +1023,18 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
     m^* := 2\left\lfloor\frac{\beta^*}{\beta} \right\rfloor + 1
   \end{equation}
   针对 $\SIBM(n, \A, \B, \gamma, \beta, m)$ 模型，我们有
+  \newglossaryentry{not:small_o}
+{
+  type=notation,
+  name={$o(1)$},
+  description={无穷小量}
+}
   \begin{enumerate}
     \item\label{enu:m_larger} 若 $\gamma > b, m \geq m^*$，SIBM 可精确恢复；
     \item\label{enu:m_smaller} 若 $\gamma >b, m < m^*-2$，当$n\to \infty$ 时，所有SIBM 恢复算法的成功率趋近于零；
     \item\label{enu:gamma_b} 若 $ \gamma < b$， 则 $ m = O(\log^{1/4}(n))$，故 SIBM无法精确恢复，特别地，对于$m$是不随$n$
     增长的常数时 SIBM 无法精确恢复；
-    \item\label{enu:beta_larger}  若 $\gamma>b, m=1, \beta > \beta^*$，则 $P(\sigma^{(1)}=\pm X) = 1-o(1)$
+    \item\label{enu:beta_larger}  若 $\gamma>b, m=1, \beta > \beta^*$，则 $P(\sigma^{(1)}=\pm X) = 1-$\gls{not:small_o}；
     \item\label{enu:beta_smaller}  若 $\gamma>b, m=1, \beta \leq \beta^*$，则
     $P(\Dist(\sigma^{(1)}, \pm X) =
     \Theta(n^{g(\beta)}))=1-o(1)$。
