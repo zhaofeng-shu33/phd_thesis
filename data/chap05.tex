@@ -274,3 +274,29 @@ $m$ 和 $n$ 量阶相同。
 }
 
 \section{实现精确恢复的SDP算法}
+本节我们给出实现关于SBMSI的精确恢复的SDP算法。
+
+给定节点标签$X$，
+令 $S_1(X)$ 和 $S_2(X)$ 分别表示 标签为1和-1的节点集。
+根据 式 \eqref{eq:lh}，
+ $(Y,Z)$ 的对数似然函数 为
+\begin{align}\label{eq:loglh}
+    &\sum^m_{j=1}[\sum_{i\in S_1(X)} \log P_0(Y^i_{j})+\sum_{i\in S_2(X)} \log P_1(Y^i_{j})]\nonumber\\
+    &+\sum_{i,j\in S_1(X),i<j}[z_{i,j}\log p+(1-z_{i,j})\log (1-p)]\nonumber\\
+    &+\sum_{i,j\in S_2(X),i<j}[z_{i,j}\log p+(1-z_{i,j})\log (1-p)]
+    \nonumber\\
+    &+\sum_{i\in S_1(X),j\in S_2(X)}[z_{i,j}\log q+(1-z_{i,j})\log (1-q)].
+\end{align}
+It can be verified that maximizing \eqref{eq:loglh} over $Y\in\{\pm 1\}^n$ is equivalent to solving the following optimization problem
+\begin{align}
+    \max_{v}\, & h^T v + \frac{1}{4}v^T B v \notag \\
+    s.t.\, & \mathbf{1}_n^T v = 0 \text{ and } v_i \in \{\pm 1 \} \label{eq:matrix_mle}
+\end{align}
+where $h$ is an n-dimensional vector with entry $h_i = \frac{1}{\log \frac{p(1-q)}{q(1-p)}}\sum_{j=1}^m \log \frac{P_0(x^i_{j})}{P_1(x^i_{j})}$ for $i\in\{1,\ldots,n\}$ and the $n\times n $ matrix $B$ is defined as
+\begin{equation}
+    B_{ij} = \begin{cases}
+        1, & \text{if $i$ is connected to $j$}, \\
+        -1,& \text{otherwise.}
+    \end{cases}
+\end{equation}  
+for $i,j\in\{1,\ldots,n\}$.
