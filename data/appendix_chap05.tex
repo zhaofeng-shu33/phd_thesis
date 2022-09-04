@@ -62,7 +62,32 @@ $\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
 \end{align*}
 极小化上式即等价于\eqref{eq:lambda}式。
 \end{proof}
-
+\section{定理 \ref{thm:I_plus_relation} 的证明}
+	\begin{lemma}\label{lem:p0p12}
+        设 $P_{\widetilde{Y}}$ 是定义在字母集
+        $\mathcal{Y}$ 上的分布函数。
+		对于 $\SBMSI(n,m,p,q,P_0,P_1)$，定义
+        $I_1, I_2$ 如下
+		\begin{align}
+			I_1 &=\min_{P_{\widetilde{Y}}} \gamma D(P_{\widetilde{Y}}|| P_0)+ \frac{1}{2} g(a,b, 2\epsilon),
+            \text{ 其中}\nonumber\\
+			\epsilon &= \gamma \frac{D(P_{\widetilde{Y}} || P_1) - D(P_{\widetilde{Y}} || P_0) }{\log \frac{a}{b}}\label{eq:I1}\\
+	   g(a,b,\epsilon) &\triangleq a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
+       \label{equation:g}
+		\end{align}
+        函数 $g(a,b,\epsilon)$ 的等价形式亦可参见 \citet{abbe2015exact} 中的 式 (43)
+        。而 $I_2$ 的定义通过交换 $P_0, P_1$ 的位置得到：
+		\begin{align}
+			I_2 & = \min_{P_{\widetilde{Y}}} \gamma D(P_{\widetilde{Y}}|| P_1)+ \frac{1}{2} g(a,b, 2\epsilon),
+            \text{ 其中}\nonumber\\
+			\epsilon &= \gamma \frac{D(P_{\widetilde{Y}} || P_0) - D(P_{\widetilde{Y}} || P_1) }{\log \frac{a}{b}}
+            \label{eq:I2}
+		\end{align}
+ 		则我们有 $I_1=I_2=I_+$. 
+    \end{lemma}
+    \begin{proof}
+        By computing the Karush–Kuhn–Tucker (KKT) conditions, we have the following lemma. %the proof of which can be found at the end of Section \ref{s:sdp}.  
+    \end{proof}
 \section{定理 \ref{thm:Pe_new} 的证明}
 
 在开始定理\ref{thm:Pe_new} 的正式证明之前，

@@ -17,6 +17,7 @@ $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。
 这里，我们要求 $\gamma$ 是一个正整数。
 若 $X_i=1$
 这些样本 i.i.d. 采样自分布 $P_0$，若  $X_i=-1$ 则采样自 $P_1$。
+这里假设 $P_0, P_1$ 两个分布函数均为定义在字母集$\mathcal{Y}$上的离散分布。
 注意到 给定 标签 $X_i$，
 对于 $i\in\{1,\ldots,n\}$，数据样本 $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$ 与 $\{Z_{i,j}\}_{1\le i<j\le n}$ 独立。
  因此，在标签 $X$ 给定的情况下，
@@ -74,11 +75,16 @@ SBMSI 模型精确恢复的条件：
     定义$I_+$ 为联合分布 $\textrm{Pois}(\frac{a}{2},\frac{b}{2})\times \underbrace{P_0 \times \dots \times P_0}_{\gamma}$
     与 $\textrm{Pois}(\frac{b}{2}, \frac{a}{2})\times \underbrace{P_1 \times \dots \times P_1}_{\gamma}$ 
     之间的切尔诺夫信息。    
-    对于 $\SBMSI(n,m,p=a\frac{\log n}{n},q=b\frac{\log n}{n},P_0,P_1)$，
+    对于 $\SBMSI(n,m=\lceil \gamma \log n \rceil, p=a\frac{\log n}{n},q=b\frac{\log n}{n},P_0,P_1)$，
     如果 $I_+>1$，则精确恢复可实现；
     如果 $I_+ < 1$，
     则错误概率 $P_e$ 趋近于 $1$，精确恢复不可实现。
 \end{theorem}
+
+相比于 \citet{abbe17sideinfo} 中定理4的结论，
+这里我们限制了类别数为2等条件，但允许采样数量 $m$ 为
+$\lceil \log n \rceil $ 的整数倍。
+
 对于一般的情形，SBMSI 模型精确恢复的 临界值 $I_+$ 并没有
 显示表达式，但我们可以从切尔诺夫信息的定义出发得到 $I_+$ 的简化表达式，
 由下述引理 \ref{lem:I_plus_expression} 给出。
@@ -104,19 +110,6 @@ SBMSI 模型精确恢复的条件：
 
 
 
-下面我们给出 SBMSI 模型的精确恢复条件
-	
-\begin{theorem}\label{thm:Pe}
-    对于 $\SBMSI(n,m,p=a\frac{\log n}{n},q=b\frac{\log n}{n},P_0,P_1)$，若条件
-    \begin{equation}\label{eq:positive_condition}
-        I_+ > 1,
-    \end{equation}
-    满足，则模型精确可恢复；
-    反之，若 $I_+ < 1$,  错误概率 $P_e$ 趋向于 $1$。
-\end{theorem}
-相比于 \citet{abbe17sideinfo} 中定理4的结论，
-这里我们限制了类别数为2等条件，但允许采样数量为
-$\lceil \gamma \log n \rceil $。
 
 当 $\gamma=0$ 时，由\eqref{eq:lambda}式 可得 $\lambda^*=\frac{1}{2}$，
 则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。
@@ -220,6 +213,25 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 相比于定理\ref{thm:error_rate}中的第2条，
 这里我们推导出了误差下界的表达式 \eqref{eq:PeMainL}，
 因而得到了紧的误差误差速率 \eqref{eq:cor}。
+
+下面我们讨论本节的误差衰减速率项
+$\gamma D_{1/2}(P_0||P_1) +
+(\sqrt{a} - \sqrt{b})^2$与上一节
+精确恢复条件中的$I^+$ 的关系。我们有
+如下定理
+\begin{theorem}\label{thm:I_plus_relation}
+    设$I_+$ 在 式 \eqref{equation:I+}
+    中定义，则
+    \begin{equation}
+        I_+ \geq \frac{1}{2}
+        (\sqrt{a} - \sqrt{b})^2 +
+        \frac{\gamma}{2} D_{1/2}(P_0||P_1)
+    \end{equation}
+\end{theorem}
+	由定理\ref{thm:I_plus_relation}
+    可知，随着  $\gamma$ 的增大, 即每个节点额外采样数量的增多， $I_+$
+    的下界增大。因此，更多的样本有助于满足精确恢复的条件 $I_+>1$。 
+
 \subsection{稠密的 SSBM}
 当 SSBM 的 $p,q$ 参数是常数时，我们有如下定理：
 \begin{theorem}\label{thm:constant}
@@ -276,27 +288,49 @@ $m$ 和 $n$ 量阶相同。
 \section{实现精确恢复的SDP算法}
 本节我们给出实现关于SBMSI的精确恢复的SDP算法。
 
-给定节点标签$X$，
-令 $S_1(X)$ 和 $S_2(X)$ 分别表示 标签为1和-1的节点集。
-根据 式 \eqref{eq:lh}，
- $(Y,Z)$ 的对数似然函数 为
-\begin{align}\label{eq:loglh}
-    &\sum^m_{j=1}[\sum_{i\in S_1(X)} \log P_0(Y^i_{j})+\sum_{i\in S_2(X)} \log P_1(Y^i_{j})]\nonumber\\
-    &+\sum_{i,j\in S_1(X),i<j}[z_{i,j}\log p+(1-z_{i,j})\log (1-p)]\nonumber\\
-    &+\sum_{i,j\in S_2(X),i<j}[z_{i,j}\log p+(1-z_{i,j})\log (1-p)]
-    \nonumber\\
-    &+\sum_{i\in S_1(X),j\in S_2(X)}[z_{i,j}\log q+(1-z_{i,j})\log (1-q)].
-\end{align}
-It can be verified that maximizing \eqref{eq:loglh} over $Y\in\{\pm 1\}^n$ is equivalent to solving the following optimization problem
+%给定节点标签$X$，
+%令 $S_1(X)$ 和 $S_2(X)$ 分别表示 标签为1和-1的节点集。
+可以验证， 在 $X\in\{\pm 1\}^n$ 的取值范围内
+极大化 关于
+$(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化问题
 \begin{align}
     \max_{v}\, & h^T v + \frac{1}{4}v^T B v \notag \\
-    s.t.\, & \mathbf{1}_n^T v = 0 \text{ and } v_i \in \{\pm 1 \} \label{eq:matrix_mle}
+    \textrm{s.t. }\, & \mathbf{1}_n^T v = 0 \text{ 且 } v_i \in \{\pm 1 \} \label{eq:matrix_mle}
 \end{align}
-where $h$ is an n-dimensional vector with entry $h_i = \frac{1}{\log \frac{p(1-q)}{q(1-p)}}\sum_{j=1}^m \log \frac{P_0(x^i_{j})}{P_1(x^i_{j})}$ for $i\in\{1,\ldots,n\}$ and the $n\times n $ matrix $B$ is defined as
-\begin{equation}
-    B_{ij} = \begin{cases}
-        1, & \text{if $i$ is connected to $j$}, \\
-        -1,& \text{otherwise.}
-    \end{cases}
-\end{equation}  
-for $i,j\in\{1,\ldots,n\}$.
+其中 $h$ 是 n 长的向量，第i个元素为$h_i = \frac{1}{\log \frac{p(1-q)}{q(1-p)}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
+而  $n\times n $ 的矩阵 $B$ 在 式\eqref{eq:def_B_sdp} 中定义。
+
+令 $x^*$ 是 \eqref{eq:matrix_mle} 的最优值，
+且 $V^*=(1,x^*)(1,x^*)^T$， 
+其中 $(1,x^*)$ 是一个
+将 $1$ 和 $x^*$ 连接起来的
+$(n+1)$ 维的向量。
+	则 式\eqref{eq:matrix_mle} 中目标函数的
+    最优值等于 $\frac{1}{2} \langle \widetilde{B}, V^* \rangle$, 其中
+	\begin{equation}\label{eq:B_lambda_def}
+		\widetilde{B} = \begin{pmatrix} 0 & h^T  \\ h  & \frac{1}{2}B \end{pmatrix}.
+	\end{equation}
+	我们将证明 $V^*$ 是如下问题的唯一最优解：
+	\begin{align}
+		\max_V\, \langle \tilde{B}, V \rangle  &\notag\\
+		\textrm{ s.t. }\, V_{ii} &= 1, \notag\\
+		V &\succeq 0, \notag\\
+\sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in\{1,\ldots,n+1\}. \label{eq:sdp}
+	\end{align}
+	注意到在 式\eqref{eq:sdp} 的最后一行
+    我们用了 $n+1$ 个约束条件 来描述标签 平衡的条件。 这些约束条件在证明$V^*$是式\eqref{eq:sdp}唯一的最优解时起到关键作用。
+    该结论可总结为下述定理。
+	%When $m=0$ and $\kappa=1$,
+	%the SDP is exactly the one Abbe considered in \cite{abbe2015exact}.
+	%When $m=0$ and $\kappa=\frac{a-b}{\log a/b}\frac{\log n}{n}$, the SDP is
+	%the same as the one in Theorem 3 of \cite{Hajek16}.
+	% The theoretical guarantee for the relaxation form in \eqref{eq:sdp} is summarized
+	% in the following theorem:
+	\begin{theorem}\label{thm:sdp}
+        设 $\hat{V}$ 是优化问题 \eqref{eq:sdp} 的解，
+        $x^*$ 是真实的标签向量。
+		若 $I_+ > 1$, 则
+        $\lim_{n\to\infty} P(\hat{V}=V^*)=1$，其中
+		$V^*=(1,x^*)(1,x^*)^T$。
+	\end{theorem}
+    该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现原社群的精确恢复。
