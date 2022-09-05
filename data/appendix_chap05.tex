@@ -5,11 +5,9 @@
 我们先列举泊松分布的一个重要的性质。
 \begin{lemma}\label{lem:poisson_property}
 假设 $P_0 \sim \Pois(c)$, $P_1 \sim \Pois(d)$.
-且 $P_{\lambda}$ 定义成
-$$
-P_{\lambda}(x) = \frac{P_0^{1-\lambda}(x) P_1^{\lambda} (x)}
-{\sum_{x \in \mathcal{X}}P_0^{1-\lambda}(x) P_1^{\lambda} (x)}
-$$
+且 $P_{\lambda}$ 由 式\eqref{eq:P_lambda_0_1}
+给出。
+
 则我们有
 \begin{enumerate}
     \item $P_{\lambda} \sim \Pois(c^{1-\lambda} d^{\lambda})$
@@ -89,35 +87,42 @@ $\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
         我们只需证明 $I_1=I_+$ 成立即可。
 另一半 $I_2=I_+$ 可由 $I_+$ 的定义对称性导出。
 
-We use Lagrange multiplier to solve \eqref{eq:I1}.
-Let
+我们用 拉格朗日乘子法 来求解 \eqref{eq:I1}。
+令
 \begin{align*}
-L(p_{\widetilde{X}_1},\epsilon, \lambda)
-=\gamma D(p_{\widetilde{X}_1}|| p_0)+ \frac{1}{2} g(a,b, 2\epsilon)
+L(P_{\widetilde{Y}},\epsilon, \lambda)
+=\gamma D(P_{\widetilde{Y}}|| P_0)+
+\frac{1}{2} g(a,b, 2\epsilon)
 - \lambda(\epsilon \log\frac{a}{b}-\gamma
-D(p_{\widetilde{X}_1} || P_1) + \gamma D(p_{\widetilde{X}_1} || P_0))
+D(P_{\widetilde{Y}} || P_1) + \gamma D(P_{\widetilde{Y}} || P_0))
 \end{align*}
-It is equivalent to minimize
+对于给定的 $\epsilon$，极小化 $L(P_{\widetilde{Y}},\epsilon, \lambda)$
+相当于极小化
 $(1-\lambda)D(P_{\widetilde{Y}} || P_0) +
-\lambda D(P_{\widetilde{Y}} || P_1) $, from
-which we get $P_{\widetilde{Y}}(x) = p_{\lambda}(x)$.
-From $\frac{\partial L(p_{\widetilde{X}_1},\epsilon, \lambda)}{\partial \epsilon}=0$ and taking \eqref{eq:p12}
-into \eqref{eq:I1}, we get
+\lambda D(P_{\widetilde{Y}} || P_1) $。通过类似
+\citep{cover1999elements} 中 式(11.199) 中求导的方式，
+我们得到 $P_{\widetilde{Y}}(y) = P_{\lambda}(y)$，
+其中 $P_{\lambda}(y)$ 定义见式\eqref{eq:P_lambda_0_1}。
+另一方面，由 $\frac{\partial L(P_{\widetilde{Y}},\epsilon, \lambda)}{\partial \epsilon}=0$
+并将 式\eqref{eq:P_lambda_0_1}
+代入到 式\eqref{eq:I1}， 我们得到
 \begin{align*}
     \lambda \log \frac{a}{b}
     & = \log \frac{\epsilon + \sqrt{\epsilon^2+ab}}{b} \\
     \epsilon \log \frac{a}{b}
-    & = \gamma\frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_0(x)}{p_1(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+    & = \gamma\frac{\sum_{Y \in \mathcal{Y}}P_0^{1-\lambda}(y) P_1^{\lambda} (y)
+    \log \frac{P_0(y)}{P_1(y)}}{\sum_{y \in \mathcal{Y}}
+    P_0^{1-\lambda}(y) P_1^{\lambda} (y)}
 \end{align*}
 After cancelling $\epsilon$
 from the above two equations, we can get a single equation
 for $\lambda$:
 \begin{align*}
-    &\frac{\log\frac{a}{b}}{2}
+    \frac{\log\frac{a}{b}}{2}
     (a^{\lambda} b^{1-\lambda}
     -a^{1-\lambda} b^{\lambda})
-    + \gamma \frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_1(x)}{p_0(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}\\
-    &=0
+    + \gamma \frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_1(x)}{p_0(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+    =0
 \end{align*}
 which is the derivative of \eqref{eq:lambda}.
 Then by simple computation we have
