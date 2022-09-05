@@ -1,4 +1,5 @@
 \chapter{第 \ref{chap:sbmsi} 章补充内容}
+		
 \section{引理\ref{lem:I_plus_expression} 的证明}
 在证明引理
 \ref{lem:I_plus_expression}  之前，
@@ -114,19 +115,43 @@ $(1-\lambda)D(P_{\widetilde{Y}} || P_0) +
     \log \frac{P_0(y)}{P_1(y)}}{\sum_{y \in \mathcal{Y}}
     P_0^{1-\lambda}(y) P_1^{\lambda} (y)}
 \end{align*}
-After cancelling $\epsilon$
-from the above two equations, we can get a single equation
-for $\lambda$:
+上述两式消掉 $\epsilon$ 后，我们可以得到关于
+$\lambda$ 的方程：
 \begin{align*}
     \frac{\log\frac{a}{b}}{2}
     (a^{\lambda} b^{1-\lambda}
     -a^{1-\lambda} b^{\lambda})
-    + \gamma \frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_1(x)}{p_0(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+    + \gamma \frac{\sum_{y \in \mathcal{Y}}
+    P_0^{1-\lambda}(y) P_1^{\lambda}(y)
+    \log \frac{P_1(y)}{P_0(y)}}
+    {\sum_{y \in \mathcal{Y}}p_0^{1-\lambda}(y)
+    P_1^{\lambda} (y)}
     =0
 \end{align*}
-which is the derivative of \eqref{eq:lambda}.
-Then by simple computation we have
-$I_+ = I_1$. 
+上式恰等价于 \eqref{eq:lambda} 式中目标函数对 $\lambda$求导后整个式子等于零。
+因此$P_{\widetilde{Y}}=P_{\lambda^*}(\lambda)$。
+代入$I_1$ 的表达式中化简后我们可得
+$I_1 = I_+$。
+\end{proof}
+\begin{proof}[定理 \ref{thm:I_plus_relation} 的证明]
+    由引理 \ref{lem:p0p12}，
+    我们只需证明 $I_1 \geq \frac{1}{2}[\gamma D_{1/2}(P_0||P_1)
+    + (\sqrt{a} - \sqrt{b})^2]$。
+    由于定义在 式\eqref{equation:g} 中的 $g(a,b,\epsilon)$ 是关于 $\epsilon$
+    的凸函数，则我们有
+    \begin{equation}\label{eq:g_linear}
+            g(a,b,\epsilon) \geq g(a,b,0) + g'(a,b,0)\epsilon = (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}\log \frac{a}{b}. 
+        \end{equation}
+        则由引理 \ref{lem:p0p12}，
+        \begin{align*}
+            I_1 \geq \min_{P_{\widetilde{Y}}}
+            \frac{1}{2}(\sqrt{a}-\sqrt{b})^2+\gamma
+            \frac{D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)}{2} \\
+            = \frac{1}{2}((\sqrt{a}-\sqrt{b})^2+\gamma D_{1/2}(P_0||P_1))
+        \end{align*}
+        关于 $D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)$
+        的最小值在给出雷尼散度定义式 \eqref{eq:renyi_divergence}
+        时讨论过。
 \end{proof}
 \section{定理 \ref{thm:Pe_new} 的证明}
 
@@ -519,8 +544,8 @@ $-\frac{1}{kn}\log P(A_k) \to \theta^*_k$。
 \end{align*}
 通过拉格朗日乘子法求解上述优化问题，我们可得
 \begin{align*}
-p_{\widetilde{Y}_1}(x) = c_1 p_0^{1-\lambda}(y)p_1^{\lambda}(y)\quad &
-p_{\widetilde{Y}_2}(x) = c_2 p_1^{1-\lambda}(y)p_0^{\lambda}(y) \\
+p_{\widetilde{Y}_1}(x) = c_1 P_0^{1-\lambda}(y)P_1^{\lambda}(y)\quad &
+p_{\widetilde{Y}_2}(x) = c_2 P_1^{1-\lambda}(y)P_0^{\lambda}(y) \\
 p_{\widetilde{Z}}(z) = c_3 p_{B_p}^{1-\lambda}(x)p_{B_q}^{\lambda}(z)\quad &
 p_{\widetilde{Z}'}(z) = c_4 p_{B_q}^{1-\lambda}(x)p_{B_p}^{\lambda}(z)
 \end{align*}
@@ -529,7 +554,7 @@ p_{\widetilde{Z}'}(z) = c_4 p_{B_q}^{1-\lambda}(x)p_{B_p}^{\lambda}(z)
 系数 $\lambda$ 的选取 要使得式\eqref{eq:mnk}
 变成等式约束，从而有 $\lambda=\frac{1}{2}$。
 因此， $\theta^*_k = \gamma D_{1/2}(P_0 || P_1) + (1-\frac{2k}{n}) D_{1/2}(\Bern(p)||\Bern(q))$。
-记 $C_1=\gamma D_{1/2}(p_0 || p_1)$和
+记 $C_1=\gamma D_{1/2}(P_0 || P_1)$和
 $C_2=D_{1/2}(\Bern(p)||\Bern(q))$，
 则对于较大的 $n$， $P(A_k) \leq \exp(-knC_1-k(n-2k) C_2)
 $ 。
@@ -553,4 +578,56 @@ P_e \leq \frac{n}{4}\exp(-nf(1)) = \exp(-n (C_1+C_2+o(1)))
 $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
 定理 \ref{thm:constant} 证毕。
 \end{proof}
+\section{定理 \ref{thm:sdp} 的证明}
+
+\section{定理 \ref{thm:Pe} 的证明}
+当 $I_+ > 1$ 时精确恢复的可实现性可由 定理\ref{thm:sdp} 给出的关于 SDP算法可实现精确恢复的论断证明。
+此处我们证明当 $I_+ < 1$ 时  %Most parts of the arguments follow a similar manner to those in \cite{abbe2015exact}.
+精确恢复的不可实现性。
+令 $S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
+对于 节点 $i$ 和节点集 $S\subset [n]$，
+令 $E(i,S)$ 表示图$G$中连接$i$和$S$中的节点的边的数量。
+采用和 \cite{abbe2015exact} 中第五节关于下界的讨论 类似的方法
+我们可以得到，当 $I_1<1$时，存在大小为 $\frac{n}{\log^3 n}$  的 子集合
+    $H_1\subset S_1$ 和 节点 $i_1\in H_1$，使得下式以接近于1的概率成立：
+\begin{align}
+    \sum_{j=1}^{m} \log \frac{P_1(y^{i_1}_{j})}{P_0(y^{i_1}_{j})}
+    \ge \log \frac{p(1-q)}{q(1-p)}\Big(\frac{\log n}{\log\log n}+1
+    +E(i_1, S_1 \backslash H_1) - E(i_1, S_2) \Big) \label{eq:G1}
+\end{align}
+这里条件中出现的 $I_1$ 在 式 \eqref{eq:I1} 中定义。
+对称地， 若在 式\eqref{eq:I2} 中定义的$I_2$满足  $I_2<1$的条件，
+则存在大小为 $\frac{n}{\log^3 n}$  的集合
+    $H_2\subset S_2$ 和 节点 $i_2\in H_2$ 使得下式以接近于1的概率成立：
+    \begin{align}
+        \sum_{j=1}^{m} \log \frac{P_0(y^{i_2}_{j})}{P_1(y^{i_2}_{j})}
+        \ge \log \frac{p(1-q)}{q(1-p)}\Big(\frac{\log n}{\log\log n}+1
+        +E(i_2, S_2 \backslash H_2) - E(i_2, S_1) \Big) \label{eq:G2}
+    \end{align}	
+将 式\eqref{eq:G1} 与 式\eqref{eq:G2} 相加可得：
+\begin{align}
+    \sum_{j=1}^{m} \log \frac{P_1(y^{i_1}_{j})}{P_0(y^{i_1}_{j})}
+    +\sum_{j=1}^{m} \log \frac{P_0(y^{i_2}_{j})}{P_1(y^{i_2}_{j})}
+    &\ge \log \frac{p(1-q)}{q(1-p)}\Big(2\frac{\log n}{\log\log n}+2+E(i_1, S_1 \backslash H_1) \nonumber\\
+    &+ E(i_2, S_2 \backslash H_2)- E(i_1, S_2 ) - E(i_2, S_1 )\Big) \label{eq:G1ij}
+\end{align}	
+    注意到 若 \eqref{eq:G1ij} 成立，考虑到 $\frac{\log n}{\log \log n} > E(i_1, H_1)$ 
+    以接近1的概率成立，则有
+\begin{align}
+    \sum_{j=1}^{m} \log \frac{P_1(y^{i_1}_{j})}{P_0(y^{i_1}_{j})}
+    +\sum_{j=1}^{m} \log \frac{P_0(y^{i_2}_{j})}{P_1(y^{i_2}_{j})}
+    \ge &\log \frac{p(1-q)}{q(1-p)}(E(i_1, S_1 \backslash \{i_1\}) + E(i_2, S_2 \backslash \{i_2\})\nonumber\\
+    &- E(i_1, S_2 \backslash \{i_2\}) - E(i_2, S_1 \backslash \{i_1\})) \label{eq:F1ij}.
+\end{align}
+因此， 在 $I_1<1$ 和 $I_2<1$的条件下，以接近1的概率 式\eqref{eq:F1ij} 成立。
+根据 引理\ref{lem:p0p12}，
+该条件即为 $I_+<1$。
+又根据 式 \eqref{eq:lh} 和 $X$ 是均匀分布的假设，
+式 \eqref{eq:F1ij} 等价于在式 \eqref{eq:lh} 中定义的 似然函数
+$P(Y,Z|(X_1,\ldots,X_n),X_{i_1}=-1,X_{i_2}=1)$
+比似然函数
+$P(Y,Z|(X_1,\ldots,X_n),X_{i_1}=1,X_{i_2}=-1)$
+大。
+这导致了最大似然算法无法实现精确恢复。
+因此，我们得出结论，当 $I_+<1$时，随着 $n$的增大，精确恢复失败的概率接近1。
 
