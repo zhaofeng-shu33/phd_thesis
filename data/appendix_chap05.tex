@@ -86,8 +86,43 @@ $\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
  		则我们有 $I_1=I_2=I_+$. 
     \end{lemma}
     \begin{proof}
-        By computing the Karush–Kuhn–Tucker (KKT) conditions, we have the following lemma. %the proof of which can be found at the end of Section \ref{s:sdp}.  
-    \end{proof}
+        我们只需证明 $I_1=I_+$ 成立即可。
+另一半 $I_2=I_+$ 可由 $I_+$ 的定义对称性导出。
+
+We use Lagrange multiplier to solve \eqref{eq:I1}.
+Let
+\begin{align*}
+L(p_{\widetilde{X}_1},\epsilon, \lambda)
+=\gamma D(p_{\widetilde{X}_1}|| p_0)+ \frac{1}{2} g(a,b, 2\epsilon)
+- \lambda(\epsilon \log\frac{a}{b}-\gamma
+D(p_{\widetilde{X}_1} || P_1) + \gamma D(p_{\widetilde{X}_1} || P_0))
+\end{align*}
+It is equivalent to minimize
+$(1-\lambda)D(P_{\widetilde{Y}} || P_0) +
+\lambda D(P_{\widetilde{Y}} || P_1) $, from
+which we get $P_{\widetilde{Y}}(x) = p_{\lambda}(x)$.
+From $\frac{\partial L(p_{\widetilde{X}_1},\epsilon, \lambda)}{\partial \epsilon}=0$ and taking \eqref{eq:p12}
+into \eqref{eq:I1}, we get
+\begin{align*}
+    \lambda \log \frac{a}{b}
+    & = \log \frac{\epsilon + \sqrt{\epsilon^2+ab}}{b} \\
+    \epsilon \log \frac{a}{b}
+    & = \gamma\frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_0(x)}{p_1(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}
+\end{align*}
+After cancelling $\epsilon$
+from the above two equations, we can get a single equation
+for $\lambda$:
+\begin{align*}
+    &\frac{\log\frac{a}{b}}{2}
+    (a^{\lambda} b^{1-\lambda}
+    -a^{1-\lambda} b^{\lambda})
+    + \gamma \frac{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)\log \frac{p_1(x)}{p_0(x)}}{\sum_{x \in \mathcal{X}}p_0^{1-\lambda}(x) p_1^{\lambda} (x)}\\
+    &=0
+\end{align*}
+which is the derivative of \eqref{eq:lambda}.
+Then by simple computation we have
+$I_+ = I_1$. 
+\end{proof}
 \section{定理 \ref{thm:Pe_new} 的证明}
 
 在开始定理\ref{thm:Pe_new} 的正式证明之前，
