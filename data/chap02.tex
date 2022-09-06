@@ -1230,9 +1230,17 @@ $xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
   name={$J_n$},
   description={元素全为1的$n\times n$的矩阵}
 }
-其中 $J_n=\mathbf{1}_n\mathbf{1}_n^T$，
+其中 $J_n=\mathbf{1}_n\mathbf{1}_n^T$
 是 \glsdesc{not:matrix_all_one}。
-令 $B=2A- J_n$，则
+令 $B=2A + I_n - J_n$，
+\newglossaryentry{not:identity_matrix}
+{
+  type=notation,
+  name={$I_n$},
+  description={$n\times n$的单位矩阵}
+}
+$I_n$ 是 \glsdesc{not:identity_matrix}，
+则
 优化的目标函数还可写成 $ \langle B, Y \rangle $，
 其中 $B$的定义为
 \begin{equation}\label{eq:def_B_sdp}

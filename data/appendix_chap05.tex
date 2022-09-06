@@ -579,6 +579,7 @@ $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
 定理 \ref{thm:constant} 证毕。
 \end{proof}
 \section{定理 \ref{thm:sdp} 的证明}
+\label{sec:thm_sdp_proof}
 考虑 式\eqref{eq:sdp} 的对偶问题
 \begin{align}
     \min_{a_1, \dots, a_{n+1}}\, &\sum_{i=1}^{n+1} a_i \nonumber\\
@@ -607,103 +608,109 @@ $(1,g)(1,g)^T$ 是 \eqref{eq:sdp} 的唯一最优解
     \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})(1,g)=0$，即$(1,g)$是矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 特征值为0对应的特征向量。
     \item[(d)]  矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 第二小的特征值 大于零。 
 \end{enumerate}
-Condition (a) holds by definition. It suffices to choose $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$ that satisfies conditions (b), (c) and (d).
-Let $\mu=\frac{1}{n}\mathbf{1}_n^T h$ and $\lambda = -\frac{\mu}{n}$. Specify $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ as follows
-$$\lambda_1=\mu+\lambda, \text{ and }\lambda_{i+1}=g_i\lambda + \lambda,~i\in\{1,\ldots,n\}$$
-Then, from condition (c) we have that
+代入验证可知条件 (a) 满足。下面我们构造  $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$  满足条件 (c)。
+令 $\mu=\frac{1}{n}\mathbf{1}_n^T h$ 且
+$\lambda = -\frac{\mu}{n}$。 先以如下方式取定 $(\lambda_1,\ldots,\lambda_{n+1})$
+$$
+\lambda_1=\mu+\lambda, \text{  }\lambda_{i+1}=g_i\lambda + \lambda,~i\in\{1,\ldots,n\}
+$$
+则根据 条件 (c) 解出 $(a_1, \dots, a_{n+1})$ 为
 \begin{align}
     a_1 &= h^T g \nonumber\\
     a_{i+1} & = (h_i -\lambda)g_i  + \frac{1}{2}\diag\{Bgg^T\}_i, i = 1, \dots, n
 \end{align}
-It can be verified that $\sum_{i=1}^{n+1} a_i = 2h^Tg +\frac{1}{2} g^T B g$, and hence condition (b) holds.
-Hence it suffices to prove that
+可以验证 $\sum_{i=1}^{n+1} a_i = 2h^Tg +\frac{1}{2} g^T B g$，
+从而 条件 (b) 满足。
+接下来只需证明
 \begin{align}
     &\diag(\{a_1, \dots, a_{n+1}\}) + \Xi - \widetilde{B} \nonumber\\
     =& \begin{pmatrix} h^T g & -h^T +(\mu + \lambda)\mathbf{1}_n^T \\
         -h+(\mu + \lambda )\mathbf{1}_n & \Xi_n \end{pmatrix}
     \succeq 0, 
 \end{align}
-where
+其中
 \begin{align}\label{eq:Xi_n}
     \Xi_n =\diag(hg^T + Agg^T -\lambda \mathbf{1}_ng^T)
     + (\frac{1}{2} +2\lambda) J_n  - A + 2\lambda \Xi'
 \end{align}
-\newglossaryentry{not:identity_matrix}
-{
-  type=notation,
-  name={$I_n$},
-  description={$n\times n$的单位矩阵}
-}
-$I_n$ 是 \glsdesc{not:identity_matrix}。
-The matrix $A=(B+J_n-I_n)/2$ is the adjacency matrix of the graph.
-The matrix $\Xi'$ is given by $\Xi'_{ij}=g_i + g_j$.
 
-In the following we show that $\Xi_n$ is positive definite. Then according to condition (c) and the
-Cauchy's Interlacing Theorem \cite{hwang}, condition (d) holds.
-Then, the proof is done.
+矩阵 $A=(B+J_n-I_n)/2$ 是图的邻接矩阵，
+而矩阵 $\Xi'$ 由 $\Xi'_{ij}=g_i + g_j$ 给出。
 
-We show that $x^T \Xi_n x>0$ for any vector $x \in \mathbb{R}^n$ satisfying $\norm{x}=1$. Decompose $x$ as $x=\frac{\beta}{\sqrt{n}} g
-+ \sqrt{1-\beta^2} g^{\perp}$, where $g^Tg^{\perp}=0, \beta \in [0,1]$, and $\norm{g^{\perp}}=1$. Then, we have that 
-\begin{align}
-    x^T \Xi_n x = \frac{\beta^2}{n} g^T \Xi_n g  &
+接下来我们证明 $\Xi_n$ 是正定矩阵。
+若此结论成立，根据
+\newglossaryentry{cauchy_interlace}
+{name=柯西交错定理,
+description={Cauchy's Interlacing Theorem}}
+\gls{cauchy_interlace} \cite{hwang}，
+条件 (d) 成立。
+从而完成证明。
+
+我们只需说明 $x^T \Xi_n x>0$ 对 任意 满足 $\norm{x}=1$ 的 $x \in \mathbb{R}^n$ 成立。
+，我们可以将 给定的 $x$ 分解成 $x=\frac{\beta}{\sqrt{n}} g
++ \sqrt{1-\beta^2} g^{\perp}$， 其中 $g^Tg^{\perp}=0, \beta \in [0,1]$，
+且 $\norm{g^{\perp}}=1$。则我们有 
+\begin{align}\label{eq:xax}
+    x^T \Xi_n x = \frac{\beta^2}{n} g^T \Xi_n g  
     +		\frac{\beta}{\sqrt{n}}\sqrt{1-\beta^2} g^T \Xi_n g^{\perp}
-    \nonumber\\\label{eq:xax}
-    &+
-    (1-\beta^2)(g^{\perp})^T \Xi_n g^{\perp}. 
+    +
+    (1-\beta^2)(g^{\perp})^T \Xi_n g^{\perp}
 \end{align}
-In the next we derive lower bounds to the three terms in the right hand side of \eqref{eq:xax}.
-For the first term, we have that
+接下来我们考察 式\eqref{eq:xax} 右端3项
+的下界。
+对于第一项，我们有
 \begin{align*}
     g^T \Xi_n g = g^T(h -\lambda \mathbf{1}_n)   = g^T h
 \end{align*}
-Since $\mathbb{E}[g^T h]$ is a positive number of order $O(n\log n)$ ,
-by Sanov's theorem or Chernoff bound, the probability 
-$P(g^T h < 0)$ decreases exponentially in $n$. Hence, with high probability, the first term $g^T \Xi_n g$ is positive.
+因为 $\sum_{y \in \mathcal{Y}} \sqrt{P_0(y)P_1(y)} < 1$，
+由 切尔诺夫不等式， 
+$P(g^T h < 0) \leq (\sum_{y \in \mathcal{Y}} \sqrt{P_0(y)P_1(y)})^{mn}$
+随 $n$ 的增大指数衰减。
+因此，以接近1的概率，第一项 $g^T \Xi_n g$ 为正。
 
-For the second term, let $\tilde{h}=\Xi_n g
-=(n-1)\lambda\mathbf{1}_n+h$, then
-$g^T \Xi_n g^{\perp} = \tilde{h}^T g^{\perp} \geq -\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$, where the  norm $\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$ satisfies
+对于第二项，令  $\tilde{h}=\Xi_n g
+=(n-1)\lambda\mathbf{1}_n+h$，则
+$g^T \Xi_n g^{\perp} = \tilde{h}^T g^{\perp} \geq -\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$，
+其中 模长 $\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$ 满足
 \begin{align*}
     \norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}^2
-    =\norm{\tilde{h}}^2 - \frac{1}{n}(\tilde{h}^Tg)^2.
+    =\norm{\tilde{h}}^2 - \frac{1}{n}(\tilde{h}^Tg)^2
 \end{align*}
-Let $\hat{g}_1 = \frac{1}{2}(g + \mathbf{1}_n)$ and $\hat{g}_2 = \frac{1}{2}(-g +\mathbf{1}_n)$.
-Using the fact that $\tilde{h}^T\mathbf{1}_n=\mu$, we have 
-\begin{align*} 
-    &\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2\\
+令 $\hat{g}_1 = \frac{1}{2}(g + \mathbf{1}_n)$ 且
+$\hat{g}_2 = \frac{1}{2}(-g +\mathbf{1}_n)$。
+由 $\tilde{h}^T\mathbf{1}_n=\mu$，我们有
+\begin{align*}
+    \frac{\norm{\tilde{h}}^2}{n} - \left(\frac{1}{n}\tilde{h}^Tg \right)^2
     &=\frac{\norm{\tilde{h}}^2}{n} - 2\frac{(\tilde{h}^T \hat{g}_1)^2}{n^2} - 2\frac{(\tilde{h}^T \hat{g}_2)^2}{n^2} + \frac{(\tilde{h}^T\mathbf{1}_n)^2}{n^2} \\
     &=2\frac{ \sum_{i<j,i,j\in S_1} (\tilde{h}_i - \tilde{h}_j)^2 + \sum_{i<j,i,j\in S_2} (\tilde{h}_i - \tilde{h}_j)^2 }{n^2}+ \frac{\mu^2}{n^2}\\
     & = I_1 + I_2 + \frac{\mu^2}{n^2}.
 \end{align*}
-where $I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^T \hat{g}_j)^2}{n^2}$ for $j\in\{1,2\}$,  and $S_1$ and $S_2$ denotes the sets of nodes with label $1$ and
-$-1$, respectively. Denote $\mathbb{E}[h_i]=m D_j, \Var[h_i]=m \bar{D}_j, \mathbb{E}[h_i^2]=\Var[h_i]+\mathbb{E}^2[h_i]=m \bar{D}_j+m^2 D^2_j, \Var[h_i^2] \leq m^4 \bar{C}_j$ for $i\in S_j$ and $j\in\{1,2\}$. Then
-$D_j, C_j,j\in\{1,2\}$ are constants.
-Using Chebyshev's inequality, we have that
+其中 对于 $j\in\{1,2\}$
+$I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^T \hat{g}_j)^2}{n^2}$， 
+$S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
+对于 $i\in S_j$ 和 $j\in\{1,2\}$
+记 $\mathbb{E}[h_i]=m D_j, \Var[h_i]=m \bar{D}_j, \mathbb{E}[h_i^2]=\Var[h_i]+\mathbb{E}^2[h_i]=m \bar{D}_j+m^2 D^2_j, \Var[h_i^2] \leq m^4 \bar{C}_j$，
+易得
+$D_j, C_j,j\in\{1,2\}$ 是常数。
+由切比雪夫不等式，对于 $j\in\{1,2\}$
+我们有
 \begin{align*}
-    P(\Big| \frac{\sum_{i\in S_j} h_i^2}{n} - \frac{1}{2}(m \bar{D}_j + m^2D_j^2) \Big| \geq \log n) & \leq \frac{m^4 \bar{C}_j}{2n\log^2 n} \\
-    P(\Big| \frac{h^T \hat{g}_j}{n} - \frac{m}{2}D_j\Big| \geq \log^{-1} n) & \leq \frac{m \log^{2} n\bar{D}_j}{2n}
+    P\left(\Big| \frac{\sum_{i\in S_j} h_i^2}{n} - \frac{1}{2}(m \bar{D}_j + m^2D_j^2) \Big| \geq \log n \right)
+    & \leq \frac{\bar{C}_j m^4}{2n\log^2 n} \\
+    P\left(\Big| \frac{h^T \hat{g}_j}{n} - \frac{m}{2}D_j\Big| \geq \log^{-1} n \right)
+    & \leq \frac{\bar{D}_j m \log^{2} n}{2n}
 \end{align*}
-for $j\in\{1,2\}$. Hence, with probability $1-n^{-1-o(1)}$, 
+因此，对于 $j\in\{1,2\}$ 下式以概率 $1-n^{-1-o(1)}$ 成立。
 \begin{align*}
-    I_j \leq& \frac{1}{2}m\bar{D}_j + \frac{1}{2}m^2 D_j^2 + \log n - 2(\frac{1}{2}m D_j - \log^{-1} n)^2 \\
-    =& O(\log n)
+    I_j \leq \frac{1}{2}m\bar{D}_j + \frac{1}{2}m^2 D_j^2 + \log n - 2(\frac{1}{2}m D_j - \log^{-1} n)^2 = O(\log n)
 \end{align*}
-for $j\in\{1,2\}$.
-Therefore, we have that
+从而我们得到式\eqref{eq:xax}第二项的一个下界
 $$
 \frac{1}{\sqrt{n}} g^T \Xi_n g^{\perp} \geq -\sqrt{\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2} = O(\sqrt{\log n})
 $$
-
-
-
-
-
-
-
-
 For the last term $(g^{\perp})^T \Xi_n g^{\perp}$, by \eqref{eq:Xi_n} and the fact that $(g^{\perp})^Tg=0$, we have that
 \begin{align*}
-    &(g^{\perp})^T \Xi_n g^{\perp} \\
+    (g^{\perp})^T \Xi_n g^{\perp} 
     =& (g^{\perp})^T \diag( -\lambda \mathbf{1}_ng^T+hg^T + Agg^T) g^{\perp} + p \\
     &+ \frac{1}{2}(1-p-q+2\lambda)(g^{\perp})^TJ_n g^{\perp}
     -(g^{\perp})^T(A-\mathbb{E}[A])g^{\perp},
@@ -744,7 +751,7 @@ Similarly, the probability that an $i$ satisfying $g_i=-1$ violates \eqref{eq:no
 当 $I_+ > 1$ 时精确恢复的可实现性可由 定理\ref{thm:sdp} 给出的关于 SDP算法可实现精确恢复的论断证明。
 此处我们证明当 $I_+ < 1$ 时  %Most parts of the arguments follow a similar manner to those in \cite{abbe2015exact}.
 精确恢复的不可实现性。
-令 $S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
+同\ref{sec:thm_sdp_proof}节，$S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
 对于 节点 $i$ 和节点集 $S\subset [n]$，
 令 $E(i,S)$ 表示图$G$中连接$i$和$S$中的节点的边的数量。
 采用和 \cite{abbe2015exact} 中第五节关于下界的讨论 类似的方法
