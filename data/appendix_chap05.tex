@@ -579,6 +579,156 @@ $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
 定理 \ref{thm:constant} 证毕。
 \end{proof}
 \section{定理 \ref{thm:sdp} 的证明}
+考虑 式\eqref{eq:sdp} 的对偶问题
+\begin{align}
+    \min_{a_1, \dots, a_{n+1}}\, &\sum_{i=1}^{n+1} a_i \nonumber\\
+    \label{eq:dual}
+    s.t. &\, \diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B} \succeq 0, 
+\end{align}
+其中 $(n+1)\times (n+1)$ 维的对称矩阵
+$\Xi$ 定义成 
+\begin{equation}
+    \Xi_{ij} = \begin{cases}
+        \lambda_1, & i=1\text{ or }j=1 \text{, and }i\ne j\\
+        \lambda_i + \lambda_j, & i, j\in\{2,\ldots,n+1\}
+    \end{cases},
+\end{equation}
+$\lambda_i$ 是只出现在约束条件中的优化的变量。
+假设 $g=(1,\ldots,1,-1,\ldots,-1)$ 是节点真实的标签，
+也即
+the first and second half of the nodes are labeled by $1$ and $-1$, respectively. As similarly mentioned in \cite{abbe2015exact},
+the optimality and uniqueness of the solution $(1,g)(1,g)^T$ to \eqref{eq:sdp} is guaranteed by the following conditions: 
+\begin{enumerate}
+    \item[(a)] $(1,g)(1,g)^T$ is a feasible solution to the primal problem \eqref{eq:matrix_mle}.
+    \item[(b)] There exists a feasible solution $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ to \eqref{eq:dual}, such that $\sum_{i=1}^{n+1} a_i=Tr((1,g)(1,g)^T\widetilde{B})$.
+    \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})(1,g)=0$.
+    \item[(d)] The second smallest eigenvalue of $\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B}$ is greater than $0$. 
+\end{enumerate}
+Condition (a) holds by definition. It suffices to choose $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$ that satisfies conditions (b), (c) and (d).
+Let $\mu=\frac{1}{n}\mathbf{1}_n^T h$ and $\lambda = -\mu/n$. Specify $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ as follows
+$$\lambda_1=\mu+\lambda, \text{ and }\lambda_{i+1}=g_i\lambda + \lambda,~i\in\{1,\ldots,n\}$$
+Then, from condition (c) we have that
+\begin{align}
+    a_1 &= h^T g \nonumber\\
+    a_{i+1} & = (h_i -\lambda)g_i  + \frac{1}{2}\diag\{Bgg^T\}_i, i = 1, \dots, n
+\end{align}
+It can be verified that $\sum_{i=1}^{n+1} a_i = 2h^Tg +\frac{1}{2} g^T B g$, and hence condition (b) holds.
+Hence it suffices to prove that
+\begin{align}
+    &\diag(\{a_1, \dots, a_{n+1}\}) + \Xi - \widetilde{B} \nonumber\\
+    =& \begin{pmatrix} h^T g & -h^T +(\mu + \lambda)\mathbf{1}_n^T \\
+        -h+(\mu + \lambda )\mathbf{1}_n & \Xi_n \end{pmatrix}
+    \succeq 0, 
+\end{align}
+where
+\begin{align}\label{eq:Xi_n}
+    \Xi_n =&\diag(hg^T + Agg^T -\lambda \mathbf{1}_ng^T)  \nonumber\\
+    &+ (\frac{1}{2} +2\lambda) J_n  - A + 2\lambda \Xi',
+\end{align}
+$\mathbf{1}_n$ is the all 1's vector, $J_n$ is the all 1's matrix, and $I_n$ is the identity matrix. The matrix $A=(B+J_n-I_n)/2$ is the adjacency matrix of the graph.
+The matrix $\Xi'$ is given by $\Xi'_{ij}=g_i + g_j$.
+
+In the following we show that $\Xi_n$ is positive definite. Then according to condition (c) and the
+Cauchy's Interlacing Theorem \cite{hwang}, condition (d) holds.
+Then, the proof is done.
+
+We show that $x^T \Xi_n x>0$ for any vector $x \in \mathbb{R}^n$ satisfying $\norm{x}=1$. Decompose $x$ as $x=\frac{\beta}{\sqrt{n}} g
++ \sqrt{1-\beta^2} g^{\perp}$, where $g^Tg^{\perp}=0, \beta \in [0,1]$, and $\norm{g^{\perp}}=1$. Then, we have that 
+\begin{align}
+    x^T \Xi_n x = \frac{\beta^2}{n} g^T \Xi_n g  &
+    +		\frac{\beta}{\sqrt{n}}\sqrt{1-\beta^2} g^T \Xi_n g^{\perp}
+    \nonumber\\\label{eq:xax}
+    &+
+    (1-\beta^2)(g^{\perp})^T \Xi_n g^{\perp}. 
+\end{align}
+In the next we derive lower bounds to the three terms in the right hand side of \eqref{eq:xax}.
+For the first term, we have that
+\begin{align*}
+    g^T \Xi_n g = g^T(h -\lambda \mathbf{1}_n)   = g^T h
+\end{align*}
+Since $\mathbb{E}[g^T h]$ is a positive number of order $O(n\log n)$ ,
+by Sanov's theorem or Chernoff bound, the probability 
+$P(g^T h < 0)$ decreases exponentially in $n$. Hence, with high probability, the first term $g^T \Xi_n g$ is positive.
+
+For the second term, let $\tilde{h}=\Xi_n g
+=(n-1)\lambda\mathbf{1}_n+h$, then
+$g^T \Xi_n g^{\perp} = \tilde{h}^T g^{\perp} \geq -\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$, where the  norm $\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$ satisfies
+\begin{align*}
+    \norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}^2
+    =\norm{\tilde{h}}^2 - \frac{1}{n}(\tilde{h}^Tg)^2.
+\end{align*}
+Let $\hat{g}_1 = \frac{1}{2}(g + \mathbf{1}_n)$ and $\hat{g}_2 = \frac{1}{2}(-g +\mathbf{1}_n)$.
+Using the fact that $\tilde{h}^T\mathbf{1}_n=\mu$, we have 
+\begin{align*} 
+    &\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2\\
+    &=\frac{\norm{\tilde{h}}^2}{n} - 2\frac{(\tilde{h}^T \hat{g}_1)^2}{n^2} - 2\frac{(\tilde{h}^T \hat{g}_2)^2}{n^2} + \frac{(\tilde{h}^T\mathbf{1}_n)^2}{n^2} \\
+    &=2\frac{ \sum_{i<j,i,j\in S_1} (\tilde{h}_i - \tilde{h}_j)^2 + \sum_{i<j,i,j\in S_2} (\tilde{h}_i - \tilde{h}_j)^2 }{n^2}+ \frac{\mu^2}{n^2}\\
+    & = I_1 + I_2 + \frac{\mu^2}{n^2}.
+\end{align*}
+where $I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^T \hat{g}_j)^2}{n^2}$ for $j\in\{1,2\}$,  and $S_1$ and $S_2$ denotes the sets of nodes with label $1$ and
+$-1$, respectively. Denote $\mathbb{E}[h_i]=m D_j, \Var[h_i]=m \bar{D}_j, \mathbb{E}[h_i^2]=\Var[h_i]+\mathbb{E}^2[h_i]=m \bar{D}_j+m^2 D^2_j, \Var[h_i^2] \leq m^4 \bar{C}_j$ for $i\in S_j$ and $j\in\{1,2\}$. Then
+$D_j, C_j,j\in\{1,2\}$ are constants.
+Using Chebyshev's inequality, we have that
+\begin{align*}
+    P(\Big| \frac{\sum_{i\in S_j} h_i^2}{n} - \frac{1}{2}(m \bar{D}_j + m^2D_j^2) \Big| \geq \log n) & \leq \frac{m^4 \bar{C}_j}{2n\log^2 n} \\
+    P(\Big| \frac{h^T \hat{g}_j}{n} - \frac{m}{2}D_j\Big| \geq \log^{-1} n) & \leq \frac{m \log^{2} n\bar{D}_j}{2n}
+\end{align*}
+for $j\in\{1,2\}$. Hence, with probability $1-n^{-1-o(1)}$, 
+\begin{align*}
+    I_j \leq& \frac{1}{2}m\bar{D}_j + \frac{1}{2}m^2 D_j^2 + \log n - 2(\frac{1}{2}m D_j - \log^{-1} n)^2 \\
+    =& O(\log n)
+\end{align*}
+for $j\in\{1,2\}$.
+Therefore, we have that
+$$
+\frac{1}{\sqrt{n}} g^T \Xi_n g^{\perp} \geq -\sqrt{\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2} = O(\sqrt{\log n})
+$$
+
+
+
+
+
+
+
+
+For the last term $(g^{\perp})^T \Xi_n g^{\perp}$, by \eqref{eq:Xi_n} and the fact that $(g^{\perp})^Tg=0$, we have that
+\begin{align*}
+    &(g^{\perp})^T \Xi_n g^{\perp} \\
+    =& (g^{\perp})^T \diag( -\lambda \mathbf{1}_ng^T+hg^T + Agg^T) g^{\perp} + p \\
+    &+ \frac{1}{2}(1-p-q+2\lambda)(g^{\perp})^TJ_n g^{\perp}
+    -(g^{\perp})^T(A-\mathbb{E}[A])g^{\perp},
+\end{align*}
+where we use the fact that $\mathbb{E}[A] = \frac{p-q}{2}gg^T + \frac{p+q}{2}J_n - pI_n$. Note that $p,q,$ and $\lambda$ are $o(1)$ terms and that $(g^{\perp})^TJ_n g^{\perp}\ge 0$. 
+By Theorem 5.2 of \cite{lei2015consistency},
+with probability $1-n^{-r}$, $\lambda_{\max}(A-\mathbb{E}[A]) \leq c\sqrt{\log n}$ for some positive constant $r$ and $c$. Hence, we have that
+\begin{align}\label{eq:lastterm}
+    (g^{\perp})^T \Xi_n g^{\perp} \geq \min_i\{(-\lambda + h_i) g_i+\lambda + g_i (Ag)_i \} - c \sqrt{\log n}
+\end{align}
+% The error probability is then bounded by
+% \begin{align*}
+% P(\Xi_{ii} \leq c\sqrt{\log n}, \forall 1\leq i \leq n)
+% \end{align*}
+We now show that with high probability,
+\begin{align}\label{eq:nodei}
+    (-\lambda + h_i) g_i+\lambda + g_i (Ag)_i  - c \sqrt{\log n}\ge 0
+\end{align}
+for $i\in\{1,\ldots,n\}$. For $g_i=1$,
+the term $g_i(Ag)_i$ can be written as 
+$Z_1-Z_2$, where $Z_1\sim \Binom(\frac{n}{2}-1,\frac{a\log n}{n})$
+and $Z_2\sim \Binom(\frac{n}{2},\frac{b\log n}{n})$ 
+follow binomial distributions. The term $h_i=m \frac{D(P_{\widetilde{X}_i} || P_1) - D(P_{\widetilde{X}_i} || P_0) }{\log a /b}$, where $P_{\widetilde{X}_i}$ is the empirical distribution of samples $\{X^i_j\}^m_{j=1}$ at node $i$. Then, we have the following lemma, which is a slight generalization of Lemma 8 in \cite{abbe2015exact} and can be proved using Chernoff bound.
+\begin{lemma}\label{lem:zxt}
+    Suppose $m > n, Z \sim \Binom(m, \frac{b\log n}{n}), X\sim \Binom(m, \frac{a\log n}{n})$.
+    For $ t \geq \frac{m}{n}(b - a)$, we have
+    \begin{align}\label{eq:estimation}
+        &P(Z - X \geq t \log n) \nonumber\\
+        \leq &\exp(-\frac{m}{n}\log n \cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
+    \end{align}
+    where $g(a,b,\epsilon)$ is defined in \eqref{equation:g}.
+\end{lemma}
+According to Lemma \ref{lem:zxt} and Sanov's theorem, if $g_i=1$, the probability that \eqref{eq:nodei} does not hold is upper bounded by
+$n^{-I_1 + o(1)}$ for any $i$, where $I_1$ is defined in \eqref{eq:I1}. By the union bound, the probability that there exists an $i$ that violates \eqref{eq:nodei} is at most $n^{-I_1+1 + o(1)}$, which fades to zero as $I_1=I_+>1$. 
+Similarly, the probability that an $i$ satisfying $g_i=-1$ violates \eqref{eq:nodei} decays if $I_2=I_+>1$. Therefore, with high probability, $(g^{\perp})^T \Xi_n g^{\perp}\ge0$ when $I_+>1$, and Theorem \ref{thm:sdp} holds. 
 
 \section{定理 \ref{thm:Pe} 的证明}
 当 $I_+ > 1$ 时精确恢复的可实现性可由 定理\ref{thm:sdp} 给出的关于 SDP算法可实现精确恢复的论断证明。
