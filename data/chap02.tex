@@ -1222,10 +1222,17 @@ $xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
 \begin{align}\label{eq:opt_A_Y_1}
   \max_Y\, & \langle A, Y \rangle  \notag \\
   \textrm{s.t. } & Y_{ii} = 1, i \in [n] \notag \\
-  & \langle Y, \mathbf{1}\mathbf{1}^T \rangle  = 0
+  & \langle Y, J_n \rangle  = 0
 \end{align}
-
-令 $B=2A- \mathbf{1}\mathbf{1}^T$，则
+\newglossaryentry{not:matrix_all_one}
+{
+  type=notation,
+  name={$J_n$},
+  description={元素全为1的$n\times n$的矩阵}
+}
+其中 $J_n=\mathbf{1}_n\mathbf{1}_n^T$，
+是 \glsdesc{not:matrix_all_one}。
+令 $B=2A- J_n$，则
 优化的目标函数还可写成 $ \langle B, Y \rangle $，
 其中 $B$的定义为
 \begin{equation}\label{eq:def_B_sdp}

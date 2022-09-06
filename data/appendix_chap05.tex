@@ -596,16 +596,19 @@ $\Xi$ 定义成
 $\lambda_i$ 是只出现在约束条件中的优化的变量。
 假设 $g=(1,\ldots,1,-1,\ldots,-1)$ 是节点真实的标签，
 也即
-the first and second half of the nodes are labeled by $1$ and $-1$, respectively. As similarly mentioned in \cite{abbe2015exact},
-the optimality and uniqueness of the solution $(1,g)(1,g)^T$ to \eqref{eq:sdp} is guaranteed by the following conditions: 
+前一半和后一半的标签分别是  $1$ 和 $-1$。
+与 \citet{abbe2015exact} 中采用的方法类似，
+$(1,g)(1,g)^T$ 是 \eqref{eq:sdp} 的唯一最优解
+ 被如下条件所保证：
 \begin{enumerate}
-    \item[(a)] $(1,g)(1,g)^T$ is a feasible solution to the primal problem \eqref{eq:matrix_mle}.
-    \item[(b)] There exists a feasible solution $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ to \eqref{eq:dual}, such that $\sum_{i=1}^{n+1} a_i=Tr((1,g)(1,g)^T\widetilde{B})$.
-    \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})(1,g)=0$.
-    \item[(d)] The second smallest eigenvalue of $\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B}$ is greater than $0$. 
+    \item[(a)] $(1,g)(1,g)^T$ 是 原问题 \eqref{eq:matrix_mle} 的可行解。
+    \item[(b)] 存在 \eqref{eq:dual} 的可行解 $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ 使得
+    $\sum_{i=1}^{n+1} a_i=\langle(1,g)(1,g)^T,\widetilde{B} \rangle$。
+    \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})(1,g)=0$，即$(1,g)$是矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 特征值为0对应的特征向量。
+    \item[(d)]  矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 第二小的特征值 大于零。 
 \end{enumerate}
 Condition (a) holds by definition. It suffices to choose $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$ that satisfies conditions (b), (c) and (d).
-Let $\mu=\frac{1}{n}\mathbf{1}_n^T h$ and $\lambda = -\mu/n$. Specify $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ as follows
+Let $\mu=\frac{1}{n}\mathbf{1}_n^T h$ and $\lambda = -\frac{\mu}{n}$. Specify $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ as follows
 $$\lambda_1=\mu+\lambda, \text{ and }\lambda_{i+1}=g_i\lambda + \lambda,~i\in\{1,\ldots,n\}$$
 Then, from condition (c) we have that
 \begin{align}
@@ -622,10 +625,17 @@ Hence it suffices to prove that
 \end{align}
 where
 \begin{align}\label{eq:Xi_n}
-    \Xi_n =&\diag(hg^T + Agg^T -\lambda \mathbf{1}_ng^T)  \nonumber\\
-    &+ (\frac{1}{2} +2\lambda) J_n  - A + 2\lambda \Xi',
+    \Xi_n =\diag(hg^T + Agg^T -\lambda \mathbf{1}_ng^T)
+    + (\frac{1}{2} +2\lambda) J_n  - A + 2\lambda \Xi'
 \end{align}
-$\mathbf{1}_n$ is the all 1's vector, $J_n$ is the all 1's matrix, and $I_n$ is the identity matrix. The matrix $A=(B+J_n-I_n)/2$ is the adjacency matrix of the graph.
+\newglossaryentry{not:identity_matrix}
+{
+  type=notation,
+  name={$I_n$},
+  description={$n\times n$的单位矩阵}
+}
+$I_n$ 是 \glsdesc{not:identity_matrix}。
+The matrix $A=(B+J_n-I_n)/2$ is the adjacency matrix of the graph.
 The matrix $\Xi'$ is given by $\Xi'_{ij}=g_i + g_j$.
 
 In the following we show that $\Xi_n$ is positive definite. Then according to condition (c) and the
