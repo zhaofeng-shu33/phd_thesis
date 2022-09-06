@@ -443,7 +443,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   \eqref{eq:split_zij_tmp_sigma_ij}
   可得 $B_{\bar{\sigma}} - A_{\bar{\sigma}} = \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij} - \sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$。
 	对于在求和式 $\sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}$
-  中出现的 $Z_{ij}$， $Z_{ij} \sim \textrm{Bernoulli}(q)$
+  中出现的 $Z_{ij}$， $Z_{ij} \sim \Bern(q)$
   并且我们有
   \begin{align}
   \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} 1 
@@ -459,7 +459,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   $|\cI| = \sum_{i=0}^{k-1} I'_i$。
   类似的，
   对于在求和式 $\sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} Z_{ij}$
-  中出现的 $Z_{ij}$， $Z_{ij} \sim \textrm{Bernoulli}(p)$。
+  中出现的 $Z_{ij}$， $Z_{ij} \sim \Bern(p)$。
 	$\sum_{X_i = X_j, \bar{\sigma}_i \neq \bar{\sigma}_j} 1
 	= \sum_{i=0}^{k-1}[(\frac{n}{k} - I_i) I_i + \frac{1}{2} \sum_{j=0}^{k-1} I_{ij}(I_i - I_{ij}) ] 
 	= \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}  (I^2_i + \sum_{j=0}^{k-1} I^2_{ij})$。
@@ -663,7 +663,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
      切尔诺夫不等式给出\eqref{eq:BwA}式描述的事件发生概率的上界。
      在分析中我们可以省略不等号左边的 $\frac{\gamma \log n}{n}$ 一项
      ，因为其远小于$1$。
-    令 $Z \sim \textrm{Bernoulli}(\A), Z' \sim \textrm{Bernoulli}(\B)$，则:
+    令 $Z \sim \Bern(\A), Z' \sim \Bern(\B)$，则:
     \begin{align*}
     &P_G(\widetilde{D}(\bar{\sigma}, C))
     \leq (\mathbb{E}[\exp(sZ')])^{N_{B_{\bar{\sigma}}}}
