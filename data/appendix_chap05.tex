@@ -75,7 +75,8 @@ $\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
        \label{equation:g}
 		\end{align}
         函数 $g(a,b,\epsilon)$ 的等价形式亦可参见 \citet{abbe2015exact} 中的 式 (43)
-        。而 $I_2$ 的定义通过交换 $P_0, P_1$ 的位置得到：
+        。易验证 $g(a,b,t)=-[f_{\beta}(t)-\beta t -1]$，其中 $f_{\beta}(t)$ 在 引理\ref{lem:enhanced_fb}中定义。
+        而 $I_2$ 的定义通过交换 $P_0, P_1$ 的位置得到：
 		\begin{align}
 			I_2 & = \min_{P_{\widetilde{Y}}} \gamma D(P_{\widetilde{Y}}|| P_1)+ \frac{1}{2} g(a,b, 2\epsilon),
             \text{ 其中}\nonumber\\
@@ -708,15 +709,18 @@ $D_j, C_j,j\in\{1,2\}$ 是常数。
 $$
 \frac{1}{\sqrt{n}} g^T \Xi_n g^{\perp} \geq -\sqrt{\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2} = O(\sqrt{\log n})
 $$
-For the last term $(g^{\perp})^T \Xi_n g^{\perp}$, by \eqref{eq:Xi_n} and the fact that $(g^{\perp})^Tg=0$, we have that
+对于最后一项 $(g^{\perp})^T \Xi_n g^{\perp}$，
+由 式\eqref{eq:Xi_n} 和 $(g^{\perp})^Tg=0$，我们有
 \begin{align*}
     (g^{\perp})^T \Xi_n g^{\perp} 
     =& (g^{\perp})^T \diag( -\lambda \mathbf{1}_ng^T+hg^T + Agg^T) g^{\perp} + p \\
-    &+ \frac{1}{2}(1-p-q+2\lambda)(g^{\perp})^TJ_n g^{\perp}
+    +& \frac{1}{2}(1-p-q+2\lambda)(g^{\perp})^TJ_n g^{\perp}
     -(g^{\perp})^T(A-\mathbb{E}[A])g^{\perp},
 \end{align*}
-where we use the fact that $\mathbb{E}[A] = \frac{p-q}{2}gg^T + \frac{p+q}{2}J_n - pI_n$. Note that $p,q,$ and $\lambda$ are $o(1)$ terms and that $(g^{\perp})^TJ_n g^{\perp}\ge 0$. 
-By Theorem 5.2 of \cite{lei2015consistency},
+在推导上式中我们用到了 $\mathbb{E}[A] = \frac{p-q}{2}gg^T + \frac{p+q}{2}J_n - pI_n$。
+注意到 $p,q,$ 以及 $\lambda$ 都是 $o(1)$ 并且
+$(g^{\perp})^TJ_n g^{\perp}\ge 0$。
+By Theorem 5.2 of \citet{lei2015consistency},
 with probability $1-n^{-r}$, $\lambda_{\max}(A-\mathbb{E}[A]) \leq c\sqrt{\log n}$ for some positive constant $r$ and $c$. Hence, we have that
 \begin{align}\label{eq:lastterm}
     (g^{\perp})^T \Xi_n g^{\perp} \geq \min_i\{(-\lambda + h_i) g_i+\lambda + g_i (Ag)_i \} - c \sqrt{\log n}
