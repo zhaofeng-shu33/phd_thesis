@@ -537,18 +537,19 @@ $P(A_k)$ 可用 Sanov 定理来估计。
 $-\frac{1}{kn}\log P(A_k) \to \theta^*_k$。
 这里$\theta^*_k$ 定义为
 \begin{align*}
-\theta^*_k =& \min_{\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}'} \gamma (D(p_{\widetilde{Y}_1}||P_0) + D(p_{\widetilde{Y}_2}||P_1))
+\theta^*_k =& \min_{\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}'}
+\gamma (D(P_{\widetilde{Y}_1}||P_0) + D(P_{\widetilde{Y}_2}||P_1))
 + (1-\frac{2k}{n})
-(D(p_{\widetilde{Z}}||\Bern(p)) + D(p_{\widetilde{Z}'}||\Bern(q)))  \\
-\textrm{s.t.} \, & (\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}')
+(D(P_{\widetilde{Z}}||\Bern(p)) + D(P_{\widetilde{Z}'}||\Bern(q)))  \\
+\textrm{s.t. } \, & (\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}')
 \textrm{ 满足 } \eqref{eq:mnk}
 \end{align*}
 通过拉格朗日乘子法求解上述优化问题，我们可得
 \begin{align*}
-p_{\widetilde{Y}_1}(x) = c_1 P_0^{1-\lambda}(y)P_1^{\lambda}(y)\quad &
-p_{\widetilde{Y}_2}(x) = c_2 P_1^{1-\lambda}(y)P_0^{\lambda}(y) \\
-p_{\widetilde{Z}}(z) = c_3 p_{B_p}^{1-\lambda}(x)p_{B_q}^{\lambda}(z)\quad &
-p_{\widetilde{Z}'}(z) = c_4 p_{B_q}^{1-\lambda}(x)p_{B_p}^{\lambda}(z)
+P_{\widetilde{Y}_1}(x) = c_1 P_0^{1-\lambda}(y)P_1^{\lambda}(y)\quad &
+P_{\widetilde{Y}_2}(x) = c_2 P_1^{1-\lambda}(y)P_0^{\lambda}(y) \\
+P_{\widetilde{Z}}(z) = c_3 P_{B_p}^{1-\lambda}(x)P_{B_q}^{\lambda}(z)\quad &
+P_{\widetilde{Z}'}(z) = c_4 P_{B_q}^{1-\lambda}(x)P_{B_p}^{\lambda}(z)
 \end{align*}
 其中$B_p, B_q$如式\eqref{eq:mnk}中的那样定义
 而  $c_1, \dots, c_4$ 是这些分布的 归一化系数 。
@@ -581,6 +582,29 @@ $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
 \end{proof}
 \section{定理 \ref{thm:sdp} 的证明}
 \label{sec:thm_sdp_proof}
+
+下述引理是
+\citet{abbe2015exact}
+中引理 8 的推广：
+\begin{lemma}\label{lem:zxt}
+    Suppose $m > n, Z \sim \Binom(m, \frac{b\log n}{n}), X\sim \Binom(m, \frac{a\log n}{n})$.
+    For $ t \geq \frac{m}{n}(b - a)$, we have
+    \begin{align}\label{eq:estimation}
+        P(Z - X \geq t \log n) \leq \exp(-\frac{m}{n}\log n \cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
+    \end{align}
+    其中 $g(a,b,\epsilon)$ 在 式\eqref{equation:g} 中定义.
+\end{lemma}
+\begin{proof}
+    沿用引理 \ref{lem:enhanced_fb} 的证明，
+在 式\eqref{eq:exp_s_B_A_sigma}
+中取  $N_{A_{\bar{\sigma}}}
+=N_{B_{\bar{\sigma}}}=m, |\cI|=1$，利用
+切尔诺夫不等式我们有
+\begin{equation*}
+    P(Z - X \geq t \log n) \leq \exp(-\frac{m}{n}\log n (a+b-ae^{-s}-be^s+\frac{n}{m}ts + O(\frac{\log n}{n})))
+\end{equation*}
+对上式右端
+\end{proof}
 考虑 式\eqref{eq:sdp} 的对偶问题
 \begin{align}
     \min_{a_1, \dots, a_{n+1}}\, &\sum_{i=1}^{n+1} a_i \nonumber\\
@@ -720,8 +744,11 @@ $$
 在推导上式中我们用到了 $\mathbb{E}[A] = \frac{p-q}{2}gg^T + \frac{p+q}{2}J_n - pI_n$。
 注意到 $p,q,$ 以及 $\lambda$ 都是 $o(1)$ 并且
 $(g^{\perp})^TJ_n g^{\perp}\ge 0$。
-By Theorem 5.2 of \citet{lei2015consistency},
-with probability $1-n^{-r}$, $\lambda_{\max}(A-\mathbb{E}[A]) \leq c\sqrt{\log n}$ for some positive constant $r$ and $c$. Hence, we have that
+由 \citet{lei2015consistency} 中的定理 5.2，
+以概率 $1-n^{-r}$, 存在
+常数 $r$ and $c$，使得不等式 $\lambda_{\max}(A-\mathbb{E}[A]) \leq c\sqrt{\log n}$
+成立。这里$\lambda_{\max}$ 表示矩阵的最大特征值。
+因此，我们有
 \begin{align}\label{eq:lastterm}
     (g^{\perp})^T \Xi_n g^{\perp} \geq \min_i\{(-\lambda + h_i) g_i+\lambda + g_i (Ag)_i \} - c \sqrt{\log n}
 \end{align}
@@ -729,24 +756,19 @@ with probability $1-n^{-r}$, $\lambda_{\max}(A-\mathbb{E}[A]) \leq c\sqrt{\log n
 % \begin{align*}
 % P(\Xi_{ii} \leq c\sqrt{\log n}, \forall 1\leq i \leq n)
 % \end{align*}
-We now show that with high probability,
+下面我们估计下式对于 $i\in\{1,\ldots,n\}$ 均成立的概率
 \begin{align}\label{eq:nodei}
     (-\lambda + h_i) g_i+\lambda + g_i (Ag)_i  - c \sqrt{\log n}\ge 0
 \end{align}
-for $i\in\{1,\ldots,n\}$. For $g_i=1$,
-the term $g_i(Ag)_i$ can be written as 
-$Z_1-Z_2$, where $Z_1\sim \Binom(\frac{n}{2}-1,\frac{a\log n}{n})$
-and $Z_2\sim \Binom(\frac{n}{2},\frac{b\log n}{n})$ 
-follow binomial distributions. The term $h_i=m \frac{D(P_{\widetilde{X}_i} || P_1) - D(P_{\widetilde{X}_i} || P_0) }{\log a /b}$, where $P_{\widetilde{X}_i}$ is the empirical distribution of samples $\{X^i_j\}^m_{j=1}$ at node $i$. Then, we have the following lemma, which is a slight generalization of Lemma 8 in \cite{abbe2015exact} and can be proved using Chernoff bound.
-\begin{lemma}\label{lem:zxt}
-    Suppose $m > n, Z \sim \Binom(m, \frac{b\log n}{n}), X\sim \Binom(m, \frac{a\log n}{n})$.
-    For $ t \geq \frac{m}{n}(b - a)$, we have
-    \begin{align}\label{eq:estimation}
-        &P(Z - X \geq t \log n) \nonumber\\
-        \leq &\exp(-\frac{m}{n}\log n \cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
-    \end{align}
-    where $g(a,b,\epsilon)$ is defined in \eqref{equation:g}.
-\end{lemma}
+对于 $g_i=1$，
+the term $g_i(Ag)_i$ 可以写成两个独立的二项分布的差的形式：
+$A_r^0-A_r^1$，其中 定义见 式\eqref{eq:energy_diff} 而取 $k=2$。
+$h_i$ 可以写成 $h_i=m \frac{D(P_{\widetilde{Y}_i} || P_1) - D(P_{\widetilde{Y}_i} || P_0) }{\log (a /b)}$
+的形式，
+其中 $P_{\widetilde{Y}_i}$ 是
+样本 $\{Y^i_j\}^m_{j=1}$ 在节点 $i$ 处的经验分布。
+Then, we have 
+类似定理\ref{thm:constant}的证明开始时使用的方法，
 According to Lemma \ref{lem:zxt} and Sanov's theorem, if $g_i=1$, the probability that \eqref{eq:nodei} does not hold is upper bounded by
 $n^{-I_1 + o(1)}$ for any $i$, where $I_1$ is defined in \eqref{eq:I1}. By the union bound, the probability that there exists an $i$ that violates \eqref{eq:nodei} is at most $n^{-I_1+1 + o(1)}$, which fades to zero as $I_1=I_+>1$. 
 Similarly, the probability that an $i$ satisfying $g_i=-1$ violates \eqref{eq:nodei} decays if $I_2=I_+>1$. Therefore, with high probability, $(g^{\perp})^T \Xi_n g^{\perp}\ge0$ when $I_+>1$, and Theorem \ref{thm:sdp} holds. 
