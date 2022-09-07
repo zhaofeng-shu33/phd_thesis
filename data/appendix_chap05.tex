@@ -587,8 +587,8 @@ $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
 \citet{abbe2015exact}
 中引理 8 的推广：
 \begin{lemma}\label{lem:zxt}
-    Suppose $m > n, Z \sim \Binom(m, \frac{b\log n}{n}), X\sim \Binom(m, \frac{a\log n}{n})$.
-    For $ t \geq \frac{m}{n}(b - a)$, we have
+    假设 $m > n, Z \sim \Binom(m, \frac{b\log n}{n}), X\sim \Binom(m, \frac{a\log n}{n})$。
+    对于 $ t \geq \frac{m}{n}(b - a)$, 我们有
     \begin{align}\label{eq:estimation}
         P(Z - X \geq t \log n) \leq \exp(-\frac{m}{n}\log n \cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
     \end{align}
@@ -598,12 +598,15 @@ $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
     沿用引理 \ref{lem:enhanced_fb} 的证明，
 在 式\eqref{eq:exp_s_B_A_sigma}
 中取  $N_{A_{\bar{\sigma}}}
-=N_{B_{\bar{\sigma}}}=m, |\cI|=1$，利用
+=N_{B_{\bar{\sigma}}}=m$，利用
 切尔诺夫不等式我们有
 \begin{equation*}
     P(Z - X \geq t \log n) \leq \exp(-\frac{m}{n}\log n (a+b-ae^{-s}-be^s+\frac{n}{m}ts + O(\frac{\log n}{n})))
 \end{equation*}
-对上式右端
+其中 $s \geq 0$。
+由 $g(a,b,\epsilon) = 
+\max_{s \geq 0} (a+b-a e^{-s} - b e^s + \epsilon s)$
+可得 式 \eqref{eq:estimation}。
 \end{proof}
 考虑 式\eqref{eq:sdp} 的对偶问题
 \begin{align}
@@ -767,11 +770,22 @@ $h_i$ 可以写成 $h_i=m \frac{D(P_{\widetilde{Y}_i} || P_1) - D(P_{\widetilde{
 的形式，
 其中 $P_{\widetilde{Y}_i}$ 是
 样本 $\{Y^i_j\}^m_{j=1}$ 在节点 $i$ 处的经验分布。
-Then, we have 
-类似定理\ref{thm:constant}的证明开始时使用的方法，
-According to Lemma \ref{lem:zxt} and Sanov's theorem, if $g_i=1$, the probability that \eqref{eq:nodei} does not hold is upper bounded by
-$n^{-I_1 + o(1)}$ for any $i$, where $I_1$ is defined in \eqref{eq:I1}. By the union bound, the probability that there exists an $i$ that violates \eqref{eq:nodei} is at most $n^{-I_1+1 + o(1)}$, which fades to zero as $I_1=I_+>1$. 
-Similarly, the probability that an $i$ satisfying $g_i=-1$ violates \eqref{eq:nodei} decays if $I_2=I_+>1$. Therefore, with high probability, $(g^{\perp})^T \Xi_n g^{\perp}\ge0$ when $I_+>1$, and Theorem \ref{thm:sdp} holds. 
+类似定理\ref{thm:constant}的证明开始时
+使用的方法，
+根据 引理 \ref{lem:zxt} 和  Sanov 定理，
+对于使得 $g_i=1$ 的 $i$， 
+式\eqref{eq:nodei} 不成立的概率
+的上界为
+$n^{-I_1 + o(1)}$，
+其中 $I_1$ 在 式 \eqref{eq:I1} 中定义。
+类似地，
+对于 满足 $g_i=-1$ 的  $i$
+式 \eqref{eq:nodei} 不成立的概率上界为 
+$n^{-I_2 + o(1)}$。
+由引理 \ref{lem:p0p12}，$I_1=I_2=I_+>1$，
+以及布尔不等式，  存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
+由条件 $I_+>1$，$n^{-I_+ + 1 + o(1)}$ 随$n$的增大 衰减到 $0$。
+ 因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得 定理 \ref{thm:sdp}。 
 
 \section{定理 \ref{thm:Pe} 的证明}
 当 $I_+ > 1$ 时精确恢复的可实现性可由 定理\ref{thm:sdp} 给出的关于 SDP算法可实现精确恢复的论断证明。

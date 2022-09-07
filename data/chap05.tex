@@ -339,3 +339,21 @@ $(n+1)$ 维的向量。
 		$V^*=(1,x^*)(1,x^*)^T$。
 	\end{theorem}
     该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现原社群的精确恢复。
+
+    图 \ref{fig:my_label} 展示了 SDP算法
+    针对 带有额外信息的随机块模型 实现精确恢复的成功率。
+    成功率是指 对每一组参数的若干次重复实验中，我们计算算法
+    实现精确恢复的比率。
+    我们固定 $n=300$， 对每一组参数$(a,b)$，尝试次数是 20。
+    每个节点的额外采样数量为 $m=10$，
+    $P_0,P_1$ 两个分布分别为 $\Bern(0.2)$ 和 $\Bern(0.8)$。
+    蓝线表示 对应着分界线 $\sqrt{a}-\sqrt{b}=\sqrt{2}$，令式\eqref{eq:cor}
+    为零即可得到。红线对应着有额外信息的分界线 $I_+ = 1$.
+    由图可见使用SDP恢复的分界线 与红线 $I_+ = 1$ 对应，从而验证了定理
+    \ref{thm:sdp} 中的结论。
+    \begin{figure}[!ht]
+        \centering
+        \includegraphics[width=0.8\textwidth]{new_results.pdf}
+        \caption{有无额外信息的分界线与SDP算法恢复性能的比较}
+        \label{fig:my_label}
+    \end{figure}
