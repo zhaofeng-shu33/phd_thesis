@@ -12,9 +12,9 @@
 则我们有
 \begin{enumerate}
     \item $P_{\lambda} \sim \Pois(c^{1-\lambda} d^{\lambda})$
-    \item $D_{\mathrm{KL}}(P_{\lambda}||P_0) = 
+    \item $D(P_{\lambda}||P_0) = 
     \lambda c^{1-\lambda}d^{\lambda}\log(\frac{d}{c}) + c-c^{1-\lambda}d^{\lambda}$
-    \item $D_{\mathrm{KL}}(P_{\lambda}||P_1) = (1-\lambda)
+    \item $D(P_{\lambda}||P_1) = (1-\lambda)
     c^{1-\lambda}d^{\lambda}\log(\frac{c}{d})
     + d-c^{1-\lambda}d^{\lambda}$
 \end{enumerate}
@@ -25,13 +25,13 @@
 由 切尔诺夫信息的定义 \eqref{eq:D_star_lambda_star} 式
 可得：
 $$
-I_+ = D(P_{\lambda^*} || \Pois(\frac{a}{2}))
-+ D(P_{1-\lambda^*} || \Pois(\frac{b}{2}))
+I_+ = D(\hat{P}_{\lambda^*} || \Pois(\frac{a}{2}))
++ D(\hat{P}_{1-\lambda^*} || \Pois(\frac{b}{2}))
 + \gamma D(P_{\lambda^*} || P_0)
 $$
-在引理\ref{lem:poisson_property}
-中取$c=\frac{a}{2}, d=\frac{b}{2}$
-并应用第2、3条性质可得
+其中 $\hat{P}_{\lambda^*}$由引理\ref{lem:poisson_property}
+第一条性质确定，而我们取$c=\frac{a}{2}, d=\frac{b}{2}$。
+继续应用引理\ref{lem:poisson_property}第2、3条性质可得
 \begin{align*}
     I_+ = \left[\lambda^* c^{1-\lambda^*}d^{\lambda^*}
     \log(\frac{d}{c})+ c-c^{1-\lambda^*}d^{\lambda^*}
