@@ -3,11 +3,11 @@
 \chapter{背景知识}
 
 \section{社群发现}\label{sec:community_detection}
-\newglossaryentry{cd}{name=社群发现, description={Community Detection}}
+\newglossaryentry{cd}{name=社群发现, description={Community detection}}
 
-\gls{cd}（community detection）虽然没有严格的数学定义，但公认的做法是
+\gls{cd}(\glsdesc{cd}) 虽然没有严格的数学定义，但公认的做法是
 \newglossaryentry{graph}{name=图, description={graph}}
-将现实世界的社群建模成\gls{graph}(graph)结构，在图结构上进行社群发现。社群根据其属性
+将现实世界的社群建模成\gls{graph}(\glsdesc{graph})结构，在图结构上进行社群发现。社群根据其属性
 是否随时间变化可分为静态社群和动态社群，本文研究的是静态社群，它可以用
 静态图来建模，以下简称图。
 一个图结构$G$ 由节点集 $V$ 和边的集合 $E$ 组成，可记为 $G(V,E)$。
@@ -466,7 +466,7 @@ KL散度可用于度量两种不同概率分布
 局部信息几何刻画了KL散度的近似表达式。
 我们以离散分布为例，给出分布之间距离的接近的
 形式化定义。
-$P_0$ 表示一概率质量函数 (PMF)，
+$P_0$ 表示一概率质量函数 (Probability mass function)，
 其定义域为字母集$\mathcal{X}$，
 $\epsilon$表示一无穷小量。
 \begin{definition}\label{def:eps_neighborhood}
@@ -488,7 +488,7 @@ D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
 \begin{definition}\label{def:weak_indepedent}
 我们称 $X$ 和 $Y$ 是 $\epsilon$-\textbf{弱独立}的，
 如果 对于任何 $x \in \mathcal{X}$，
-$Y$关于$X$的条件 PMF 
+$Y$关于$X$的条件分布
 $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内。
 \end{definition}
 在弱独立的假设下, 由 $D(P_{XY}||P_XP_Y)$ 所定义的互信息$I(X;Y)$, 
@@ -707,7 +707,7 @@ $i$个节点的\gls{degree}(\glsdesc{degree})，$x_i$ 表示第$i$
   \caption{}\label{fig:ising_two_configurations}
 \end{figure}   
 
-在统计物理学中，伊辛模型指的是
+在统计物理学中，伊辛模型(Ising model)指的是
 可以处于两种状态的自旋磁子的集合。如图
 \ref{fig:ising_two_configurations} 所示，
 当外界温度$T$
@@ -731,7 +731,7 @@ $i$个节点的\gls{degree}(\glsdesc{degree})，$x_i$ 表示第$i$
   \caption{}
 \end{figure}
 
-下面我们介绍Ising模型一些常用的概念，
+下面我们介绍伊辛模型一些常用的概念，
 如图\ref{fig:square_lattice}所示，
 在一个正方形网格中的格点上分布着磁子，一共有$N$个。
 $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁子的状态，

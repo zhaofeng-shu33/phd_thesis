@@ -631,12 +631,15 @@ $(1,g)(1,g)^T$ 是 \eqref{eq:sdp} 的唯一最优解
  被如下条件所保证：
 \begin{enumerate}
     \item[(a)] $(1,g)(1,g)^T$ 是 原问题 \eqref{eq:matrix_mle} 的可行解。
-    \item[(b)] 存在 \eqref{eq:dual} 的可行解 $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ 使得
-    $\sum_{i=1}^{n+1} a_i=\langle(1,g)(1,g)^T,\widetilde{B} \rangle$。
+    \item[(b)] 存在 \eqref{eq:dual} 的可行解 $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ 
     \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})(1,g)=0$，即$(1,g)$是矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 特征值为0对应的特征向量。
     \item[(d)]  矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 第二小的特征值 大于零。 
 \end{enumerate}
-代入验证可知条件 (a) 满足。下面我们构造  $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$  满足条件 (c)。
+由对偶互补条件，可知(a-d) 保证了 
+$\sum_{i=1}^{n+1} a_i=\langle(1,g)(1,g)^T,\widetilde{B} \rangle$，
+即原问题和对偶问题最优值相等。
+
+首先直接将$(1,g)(1,g)^T$代入验证可知条件 (a) 满足。下面我们构造  $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$  满足条件 (c)。
 令 $\mu=\frac{1}{n}\mathbf{1}_n^T h$ 且
 $\lambda = -\frac{\mu}{n}$。 先以如下方式取定 $(\lambda_1,\ldots,\lambda_{n+1})$
 $$
@@ -647,8 +650,6 @@ $$
     a_1 &= h^T g \nonumber\\
     a_{i+1} & = (h_i -\lambda)g_i  + \frac{1}{2}\diag\{Bgg^T\}_i, i = 1, \dots, n
 \end{align}
-可以验证 $\sum_{i=1}^{n+1} a_i = 2h^Tg +\frac{1}{2} g^T B g$，
-从而 条件 (b) 满足。
 接下来只需证明
 \begin{align}
     &\diag(\{a_1, \dots, a_{n+1}\}) + \Xi - \widetilde{B} \nonumber\\
