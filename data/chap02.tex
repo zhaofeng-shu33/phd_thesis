@@ -277,8 +277,9 @@ $x(A)$ 定义为 $\sum_{i \in A} x_i$。
 表示两个随机变量的联合分布。有多种方法可将互信息
 的概念推广到两个及以上的随机变量，
 其中华人学者陈聪提出了一种推广 \cite{ska} 具有多种好的性质，
-且涵盖了图结构的情形，我们把他的推广叫做多变量互信息，英文全称是
-Multivariate Mutual Information (MMI)。
+\newglossaryentry{mmi}{name=多变量互信息, description={Multivariate mutual information}}
+\newacronym{acr:mmi}{MMI}{Multivariate mutual information}
+且涵盖了图结构的情形，我们把他的推广叫做 \gls{mmi} (\gls{acr:mmi})。
 
 下面我们对MMI做简要的介绍。定义$V$是随机变量
 的序号集合，$C$是 $V$的子集，$Z_C=\{Z_i | i \in C\}$
@@ -532,7 +533,7 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
 从而印证
 了弱独立情形下互信息的表达式。
 \end{example}
-     
+
 \section{随机块模型}\label{sec:sbm}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
 \newacronym{acr:sbm}{SBM}{Stochastic Block Model}
@@ -707,7 +708,8 @@ $i$个节点的\gls{degree}(\glsdesc{degree})，$x_i$ 表示第$i$
   \caption{}\label{fig:ising_two_configurations}
 \end{figure}   
 
-在统计物理学中，伊辛模型(Ising model)指的是
+\newglossaryentry{ising}{name=伊辛模型, description={Ising model}}
+在统计物理学中，\gls{ising}(\glsdesc{ising})指的是
 可以处于两种状态的自旋磁子的集合。如图
 \ref{fig:ising_two_configurations} 所示，
 当外界温度$T$
@@ -1004,10 +1006,10 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \section{SIBM 模型}\label{sec:sibm_model}
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
-将\ref{sec:sbm} 节 介绍的随机块模型与 \ref{sec:ising} 节介绍的 Ising 模型
+将\ref{sec:sbm} 节 介绍的随机块模型与 \ref{sec:ising} 节介绍的 伊辛模型
 复合起来可得到 \gls{sibm}（\gls{acr:sibm}）\cite{ye2020exact}。
 该模型首先由 SBM 生成随机图，
-再由随机图上定义的 Ising 模型多次生成节点的状态。
+再由随机图上定义的 伊辛模型多次生成节点的状态。
 SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实状态。
 该复合模型可用于模拟两党制国家政治选举前的多次民意调查，
 生成随机图依据的节点真实状态即为选民
@@ -1015,7 +1017,7 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
 
 在\citet{ye2020exact} 的研究工作中，由 $\SSBM(n,2,\A, \B)$
 生成随机图，采用 \eqref{eq:ising_modified} 定义的能量函数
-独立生成 Ising 模型的样本 $m$ 次，记为
+独立生成 伊辛模型的样本 $m$ 次，记为
 $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 类似 \ref{sec:exact_recovery}节
 针对SBM的精确恢复，
@@ -1083,7 +1085,7 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 会以更大的概率聚集在$\pm \bm{1}$。
 
 \section{型方法与 Sanov 定理}
-\newglossaryentry{type}{name=型, description={type}}
+\newglossaryentry{type}{name=型, description={Type}}
 在信息论中，我们首先假定所有的元素均从字母集$\mathcal{X}$
 中选取。
 某个长度为$n$序列$x$的 \gls{type} 是表示
@@ -1200,7 +1202,8 @@ $D^*$的数学定义为：
 可以先将最大似然方法获得的目标函数
 写成整数优化的问题形式，
 \newacronym{acr:sdp}{SDP}{Semi-definite programming}
-再转化成半正定规划（\gls{acr:sdp}）的优化问题进行求解。
+\newglossaryentry{sdp}{name=半正定规划, description={Semi-definite programming}}
+再转化成半正定规划 (\gls{acr:sdp}) 的优化问题进行求解。
 
 在 式\eqref{eq:minimum_k_cut} 中
 取 $\delta(y_i, y_j) = \frac{1+y_iy_j}{2}$，
