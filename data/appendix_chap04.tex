@@ -476,12 +476,10 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	对于 $t\in [\frac{1}{k}(b-a), 0], 0<\delta <1$
 	和 $ |\cI| \le n/\log^{\delta} n$，我们有
 \begin{equation} \label{eq:upmpt}
-	\begin{aligned}
-	& P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)  \\
-	\le & \exp\Big(|\cI|\log n
+	P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n) 
+	\le  \exp\Big(|\cI|\log n
 	\left(
     f_{\beta}(t) - \beta t -1	+ O((\log n)^{-\delta}) \right)\Big)
-	\end{aligned}
 	\end{equation}
 	其中 $f_{\beta}(t) := \min_{s\geq 0} (g(s) - st) + \beta t \leq \tilde{g}(\beta) $。
   $P_G$中的下标$G$表示图$G$是由SSBM模型随机生成的。
@@ -491,6 +489,57 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   和
   \eqref{eq:g_tilde_beta_main_article} 式。
 \end{lemma}
+在证明引理 \ref{lem:enhanced_fb} 前，我们先看
+一下$|\cI|=1, N_{\bar{\sigma}}=0$ 的特例情况。
+此时$A_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \A),
+B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$.
+而 式 \eqref{eq:upmpt} 化为
+\begin{equation}
+  P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n) 
+	\le  \exp\Big(-\log n
+	\left(
+   \frac{1}{k} g(a,b,kt) + O((\log n)^{-\delta}) \right)\Big)
+\end{equation}
+其中 函数 $g(a,b,\epsilon)$ 定义为
+\begin{equation}  \label{equation:g}
+  g(a,b,\epsilon) \triangleq a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
+\end{equation}
+其等价形式亦可参见 \citet{abbe2015exact} 中的 式 (43)
+。
+易验证 $\frac{g(a,b,kt)}{k}=-[f_{\beta}(t)-\beta t -1]$。
+我们也可利用大偏差理论中的 Gärtner Ellis 定理
+来获得 $g(a,b,\epsilon)$。
+
+此处我们给出 Gärtner Ellis 定理的一个简化形式，其完整表述可参见
+\cite{dembo2009large}。
+令 $S_n$ 为随机变量的序列，
+$\gamma_n >0, \lim_{n\to \infty}\gamma_n \to 0$.
+$\Lambda_n(t)=\log \E[\exp(t S_n)]$ 代表 $S_n$ 的对数矩生成函数 (log-MGF)。
+假设对于任意的 $t$，
+$\Lambda(t) =\lim_{n\to \infty} \frac{1}{\gamma_n}\Lambda_n(\gamma_n t)$
+存在。 令 $\Lambda^*$ 是 $\Lambda$ 的共轭函数。
+则对于任意 紧集 $\Gamma \subset \mathbb{R}$，
+我们有
+\begin{equation}
+\lim_{n\to \infty} \frac{1}{\gamma_n}\log P(S_n \in \Gamma) = -\inf_{s \in \Gamma} \Lambda^*(s)
+\end{equation}
+
+我们取 $\gamma_n= \log n$ 且 $\gamma_n S_n = \sum_{i=1}^n Y_i$，$Y_i=Z_i - W_i$，
+$Z_i, Z_n$ 是 i.i.d. $\Bern(\B)$ 而 $W_1, \dots, W_n$ 是 i.i.d. $\Bern(\A)$。
+$Y_i$ 的概率质量函数为 $[(1-q)p, qp+(1-p)(1-q), q(1-p)]$，对应 $[-1,0,1]$ 三个取值。
+首先我们计算得到 
+$\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
+=-a-b+be^t  + ae^{-t}$. 由 $\Lambda^*(s) = \sup_{t\in\mathbb{R}} st - \Lambda(t)$，
+我们进一步得到 $\Lambda^*(s) = g(a,b,s)$。
+
+在我们的问题中， $\Gamma=[t, +\infty)$ 而 $k$ 取 1。
+考虑到 $\Lambda^*(s)$  是$[0,+\infty)$ 上的增函数，
+我们有
+\begin{equation}
+  \lim_{n\to \infty} \frac{1}{\log n} P(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t \log n)
+  = g(a,b,t)
+\end{equation}
+特别地，当$t=0$ 时， $g(a,b, 0) = (\sqrt{a} - \sqrt{b})^2$。
 
 \begin{proof}
   由$f_{\beta}(t)$函数的定义，
@@ -1132,7 +1181,7 @@ $H(\bar{\sigma}) $ 等价于极小化
 \begin{lemma}\label{lem:mZW}
 	令 $m$ 为一正整数，
 	$Z_1, \dots, Z_m$
-  是独立同分布的 $\Bern(\B)$，
+  是 i.i.d. 的 $\Bern(\B)$，
   $W_1, \dots, W_m$ 是 i.i.d. $\Bern(\A)$，
   并且与 $Z_1, \dots, Z_m$独立，
 	则我们有：
