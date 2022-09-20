@@ -140,15 +140,16 @@ $I_1 = I_+$。
             g(a,b,\epsilon) \geq g(a,b,0) + g'(a,b,0)\epsilon = (\sqrt{a} - \sqrt{b})^2 + \frac{\epsilon}{2}\log \frac{a}{b}. 
         \end{equation}
         则由引理 \ref{lem:p0p12}，
-        \begin{align*}
+        \begin{align}
             I_1 \geq \min_{P_{\widetilde{Y}}}
             \frac{1}{2}(\sqrt{a}-\sqrt{b})^2+\gamma
             \frac{D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)}{2} \\
             = \frac{1}{2}((\sqrt{a}-\sqrt{b})^2+\gamma D_{1/2}(P_0||P_1))
-        \end{align*}
-        关于 $D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)$
-        的最小值在给出雷尼散度定义式 \eqref{eq:renyi_divergence}
-        时讨论过。
+            \label{eq:I_1_ab_equal_renyi}
+        \end{align}
+        不难验证，$D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)$
+        的最小值是雷尼散度$D_{1/2}(P_0||P_1)$，从而
+        式\eqref{eq:I_1_ab_equal_renyi} 成立。
 \end{proof}
 \section{定理 \ref{thm:Pe_new} 的证明}
 

@@ -1180,23 +1180,31 @@ $D^*$的数学定义为：
   \right)
 \end{equation}
 
-当我们求 $D(P_{\lambda} || P_1)
-+ D(P_{\lambda} || P_2)$的最小值时，
+当我们考虑联合分布 $P_1 \times P_2$
+和 $P_2 \times P_1$ 之间的切尔诺夫信息量时，
+由式 \eqref{eq:C_P_1_P_2_another}
+\begin{align*}
+  C(P_1 \times P_2||P_2 \times P_1) 
+  = -\min_{\lambda \in [0,1]}
+  \left(\log \sum_{x\in \mathcal{X}}
+  P_1^{1-\lambda}(x) P_2^{\lambda}(x) 
+  +\log \sum_{y\in \mathcal{X}}
+  P_2^{1-\lambda}(y) P_1^{\lambda}(y) 
+  \right)
+  \end{align*}
 该目标函数在$\lambda=\frac{1}{2}$
 处一阶导数为零而二阶导数为正，因此最小值
-在$\lambda=\frac{1}{2}$取到，该最小值
+在$\lambda=\frac{1}{2}$取到。该最小值
 即为阶数为$\frac{1}{2}$的 \gls{renyi_divergence}。
 \newglossaryentry{renyi_divergence}{name=雷尼散度, description={Rényi divergence}}
 记为：
 \begin{equation}\label{eq:renyi_divergence}
-  D_{1/2}(P_1 || P_2) =
+  D_{1/2}(P_1 || P_2) = C(P_1 \times P_2||P_2 \times P_1)=
   -2\log \left(\sum_{x \in \mathcal{X}}
   \sqrt{P_1(x)P_2(x)} \right)
 \end{equation}
 
-由式 \eqref{eq:C_P_1_P_2_another} 可验证，雷尼散度是
-联合分布$P_1\times P_2$ 和 $P_2\times P_1$ 之间的切尔诺夫信息量，
-其在一些刻画SBM模型变体的误差衰减
+雷尼散度在刻画一些SBM模型变体的误差衰减
 速率时常常用到 \cite{zhang2016}。
 
 
