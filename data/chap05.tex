@@ -317,7 +317,7 @@ $(n+1)$ 维的向量。
 	\end{equation}
 	我们将证明 $V^*$ 是如下问题的唯一最优解：
 	\begin{align}
-		\max_V\, \langle \tilde{B}, V \rangle  &\notag\\
+		\max_V\, \langle \widetilde{B}, V \rangle  &\notag\\
 		\textrm{ s.t. }\, V_{ii} &= 1, \notag\\
 		V &\succeq 0, \notag\\
 \sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in\{1,\ldots,n+1\}. \label{eq:sdp}
@@ -339,6 +339,9 @@ $(n+1)$ 维的向量。
 		$V^*=(1,x^*)(1,x^*)^T$。
 	\end{theorem}
     该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现原社群的精确恢复。
+
+    求解 SDP 问题可用内点法或ADMM 方法，这里我们借鉴 \citet{amini2018semidefinite} 中针对无额外信息设计的SDP-1的算法，给出了求解
+    式 \eqref{thm:sdp} 的ADMM算法实现，详见附录\ref{sec:sdp_admm}。
 
     图 \ref{fig:my_label} 展示了 SDP算法
     针对 带有额外信息的随机块模型 实现精确恢复的成功率。
