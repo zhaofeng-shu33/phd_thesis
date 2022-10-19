@@ -121,7 +121,7 @@ $\lambda$ 的方程：
     + \gamma \frac{\sum_{y \in \mathcal{Y}}
     P_0^{1-\lambda}(y) P_1^{\lambda}(y)
     \log \frac{P_1(y)}{P_0(y)}}
-    {\sum_{y \in \mathcal{Y}}p_0^{1-\lambda}(y)
+    {\sum_{y \in \mathcal{Y}}P_0^{1-\lambda}(y)
     P_1^{\lambda} (y)}
     =0
 \end{align*}
@@ -390,7 +390,7 @@ P_e &\leq P(F_1)+(1+o(1))\sum_{k=2}^{\frac{n}{\sqrt{\log n}}} P(F_k) \\
 \end{align*}
 其中 $\mu$ 定义为
 \begin{equation}\label{eq:mu_def}
-	\mu = (\sqrt{a} - \sqrt{b})^2-2 + \gamma D_{1/2}(p_0||p_1) > 0	
+	\mu = (\sqrt{a} - \sqrt{b})^2-2 + \gamma D_{1/2}(P_0||P_1) > 0	
 \end{equation}
 对于 $P(F_1)$， 我们有 $P(F_1)\leq (n/2)^2
 P(A_1)\leq \frac{1}{4}n^{-\mu+o(1)}$。
@@ -442,7 +442,7 @@ $\sum_{(i,j) \neq (r,s)} P(A_{ij} \cap A_{rs})$
 等价于 $A_1$。
 由 引理 \ref{lem:single_lower},
 $P(A_{ij})$ 的下界是
-$n^{-\gamma D_{1/2}(p_0 || p_1)-(\sqrt{a} - \sqrt{b})^2 +o(1)}$。
+$n^{-\gamma D_{1/2}(P_0 || P_1)-(\sqrt{a} - \sqrt{b})^2 +o(1)}$。
 因为
 $|S|=(n/2)^2$，
 项 $\sum_{(i,j) \in S} P(A_{ij})$ 的 阶数是 
@@ -494,13 +494,13 @@ P_0^{1-2s}(y) P_1^{2s}(y)\right)^m
 \begin{align*}
 P(A_{ijrs})&\leq  \left(\sum_{y\in \mathcal{Y}}
 P_0^{1/3}(y) P_1^{2/3}(y) \right)^{3m} \cdot \exp(\frac{3}{2}\log n (-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}+o(1))) \\
-&\leq   \exp(-\log n(\gamma D_{1/2}(p_1 || p_0) + \frac{3}{2} (a+b-a^{1/3}b^{2/3}-a^{2/3}b^{1/3})+o(1)))
+&\leq   \exp(-\log n(\gamma D_{1/2}(P_1 || P_0) + \frac{3}{2} (a+b-a^{1/3}b^{2/3}-a^{2/3}b^{1/3})+o(1)))
 \end{align*}
 其中 最后一个不等式由 引理 \ref{lem:p0p1}
 得出。
 因此我们有
 $$
-P(A_{ijrs}) \leq n^{-\mu'/2-1-(\gamma  D_{1/2}(p_0||p_1) + (\sqrt{a} - \sqrt{b})^2) + o(1)}
+P(A_{ijrs}) \leq n^{-\mu'/2-1-(\gamma  D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2) + o(1)}
 $$
 其中 $\mu'=(\sqrt{a}-\sqrt{b})^2-2 
 - 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2$。
@@ -579,6 +579,46 @@ $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
 \end{proof}
 \section{定理 \ref{thm:sdp} 的证明}
 \label{sec:thm_sdp_proof}
+在证明定理 \ref{thm:sdp} 之前，我们先给出优化问题式\eqref{eq:matrix_mle}中目标函数表达式的推导过程。
+
+由 式\eqref{eq:lh} 可得似然函数为
+$$
+L=\prod_{i=1}^n \prod_{j=1}^m P_0^{x_i}(y_i^{(j)})P_1^{1-x_i}(y_i^{(j)})
+\prod_{(i,j) \in E} p^{\delta(x_i, x_j)}q^{1-\delta(x_i, x_j)}
+\prod_{(i,j)\not\in E} (1-p)^{\delta(x_i, x_j)}(1-q)^{1-\delta(x_i, x_j)}
+$$
+其中 $x_i \in \{0,1\}$。
+对给定的图$G$，忽略掉常数项， 极大化 $ \log L$ 等价于
+$$
+\max \sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
++\log\frac{p}{q}\sum_{(i,j) \in E} \delta(x_i, x_j)
++\log \frac{1-p}{1-q}\sum_{(i,j)\not\in E} \delta(x_i, x_j)
+$$
+令 $\kappa = -\log\frac{1-p}{1-q} / \log\frac{p}{q} \sim \frac{a-b}{\log a/b}\frac{\log n}{n}$,
+则我们只需考虑
+$$
+\max \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
++\sum_{(i,j) \in E} \delta(x_i, x_j)
+-\kappa\sum_{(i,j)\not\in E} \delta(x_i, x_j)
+$$
+令 $x_i = (v_i+1)/2$，其中 $v_i \in \{\pm 1 \}$。
+则我们有 $\delta(x_i, x_j) = \frac{v_i v_j + 1}{2}$。
+优化问题等价于求解：
+$$
+\max \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m v_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
++\sum_{(i,j) \in E} v_i v_j
+-\kappa\sum_{(i,j)\not\in E} v_i v_j
+$$
+取 $h_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}$
+并
+将上式乘以2再减去常数 $\frac{1}{2}v^T(J_n-I_n)v$ 可得
+$$
+2\sum_{i=1}^n h_iv_i + \sum_{(i,j)\in E} v_i v_j - (2\kappa+1) \sum_{(i,j)\not\in E} v_i v_j
+$$
+
+定义 矩阵 $B$ 为 \eqref{eq:def_B_sdp} 的形式，则
+优化问题 为$2\max h^T v + \frac{1}{4}v^T B v$ (忽略 $\kappa=o(1)$)，
+即为式\eqref{eq:matrix_mle}。
 
 下述引理是
 \citet{abbe2015exact}

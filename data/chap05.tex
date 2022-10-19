@@ -302,7 +302,7 @@ $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化�
     \max_{v}\, & h^T v + \frac{1}{4}v^T B v \notag \\
     \textrm{s.t. }\, & \mathbf{1}_n^T v = 0 \text{ 且 } v_i \in \{\pm 1 \} \label{eq:matrix_mle}
 \end{align}
-其中 $h$ 是 n 长的向量，第i个元素为$h_i = \frac{1}{\log \frac{p(1-q)}{q(1-p)}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
+其中 $h$ 是 n 长的向量，第i个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
 而  $n\times n $ 的矩阵 $B$ 在 式\eqref{eq:def_B_sdp} 中定义。
 
 令 $x^*$ 是 \eqref{eq:matrix_mle} 的最优值，
