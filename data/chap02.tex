@@ -1004,6 +1004,22 @@ Abbe \cite{abbe2015exact} 和 Mossel
   而当$\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
   没有算法可实现精确恢复。
 \end{theorem}
+\begin{remark}
+  定理 \ref{thm:sbmk_phase_transition}
+  给出的结论和 Hellinger 距离有关。
+  对于两个$\R^d$中的向量$u,v$，它们的 Hellinger 距离
+  的平方定义为
+  \begin{equation}
+    H^2(u||v) = \frac{1}{2}
+    \sum_{i=1}^d (\sqrt{u}_i - \sqrt{v}_i)^2
+  \end{equation}
+  定义向量 $P_i= \frac{b\mathbf{1}_k + (a-b)e_k}{k}$。
+  则对于$i\neq j$，
+  $\sqrt{a} - \sqrt{b} > \sqrt{k}$
+  可改写成
+  $H(P_i||P_j)  = \frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}} > 1$。
+\end{remark}
+
 \section{SIBM 模型}\label{sec:sibm_model}
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
