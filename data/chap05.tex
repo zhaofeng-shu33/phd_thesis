@@ -217,7 +217,7 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 \end{corollary}
 相比于定理\ref{thm:error_rate}中的第2条，
 这里我们推导出了误差下界的表达式 \eqref{eq:PeMainL}，
-因而得到了紧的误差误差速率 \eqref{eq:cor}。
+因而得到了紧的误差误差率 \eqref{eq:cor}。
 
 下面我们讨论本节的误差衰减速率项
 $\gamma D_{1/2}(P_0||P_1) +
@@ -363,14 +363,21 @@ $(n+1)$ 维的向量。
 
 \section{本章小结}
 本章研究了带有额外信息的随机块模型（SBMSI）的精确恢复问题。
-具体来说，在给出了 SSBMI 的定义后， we obtain the optimal error rate in the sense of exact recovery for a two-community SBM with side information. Our result
-shows that the detection error can be characterized by Rényi divergence and the parameters of SBM. To control the recovery error within a given level,
-our result shares insight on
-the necessary number of features and nodes.
-Whether the condition \eqref{eq:oneC} for the error rate can be relaxed
-will be considered in the future study.
-其次，
-我们还获得了
-a sharp close-form exact recovery condition for a balanced two-community symmetric SBM with side information.
-该结果 provides insight on the number of node samples to achieve exact recovery. We also proposed a semidefinite programming based algorithm that achieves the threshold with high probability. It will be interesting to see if the SDP algorithm in this paper can be extended to more general cases.
-	
+具体来说，在给出了 SSBMI 的定义后， 
+我们首先针对两社群的情形获得了精确恢复的误差衰减速率。
+该结果
+表明恢复误差可解耦为由额外信息的雷尼散度和
+随机块模型的参数两部分，
+从而可以分别进行优化。
+另一方面，为
+控制恢复误差在给定的允许范围内，
+式\eqref{eq:positive_condition_new}
+给出了图节点数量和额外信息采样数量所需满足的条件。
+而关于为获得误差率所做的假设 \eqref{eq:oneC} 是否可以进一步放宽
+这一问题有待于进一步研究。
+
+其次，基于半正定规划(SDP)的数学模型
+我们还提出了一个实现 SBMSI 精确恢复的算法。
+随着图规模的增大，该算法的恢复误差以多项式的速率收敛到零。
+能否将SDP恢复算法拓展到多个社群的情形（有额外信息）目前是一个有
+研究价值的开放问题。
