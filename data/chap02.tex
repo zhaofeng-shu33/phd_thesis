@@ -1013,11 +1013,15 @@ Abbe \cite{abbe2015exact} 和 Mossel
     H^2(u||v) = \frac{1}{2}
     \sum_{i=1}^d (\sqrt{u}_i - \sqrt{v}_i)^2
   \end{equation}
-  定义向量 $P_i= \frac{b\mathbf{1}_k + (a-b)e_k}{k}$。
-  则对于$i\neq j$，
-  $\sqrt{a} - \sqrt{b} > \sqrt{k}$
+  若定义向量 $u= (\frac{a}{k}, \frac{b}{k})$,
+  $v =  (\frac{b}{k}, \frac{a}{k})$,。
+  则
+  $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 的条件
   可改写成
-  $H(P_i||P_j)  = \frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}} > 1$。
+  $H(u||v) > 1$，其中
+  \begin{equation}\label{eq:Hellinger_abuv}
+    H(u,v)=\frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}}    
+  \end{equation}
 \end{remark}
 
 \section{SIBM 模型}\label{sec:sibm_model}
