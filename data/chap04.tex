@@ -183,16 +183,20 @@ $P_e(\hat{X}^*) \to 1$。
 \end{figure}
 \begin{remark}
 	在式\eqref{eq:g_beta_main_article} 中，我们首次引入了
-	$g(\beta)$ 这个函数，实际上，我们可以用 Hellinger 距离
-	来表示 $g(\beta)$。记
-	沿用 \eqref{eq:Hellinger_abuv} 中关于二维向量$u,v$
-	的记号，那么 
+	$g(\beta)$ 这个函数，实际上，我们可以用 海林格距离
+	来表示 $g(\beta)$。
+	记
+	$u(\beta)=(e^{-\beta}\frac{a}{k}, e^{\beta}\frac{b}{k}),
+	v(\beta)=(e^{\beta}\frac{b}{k}, e^{-\beta}\frac{a}{k})$，
+	则\eqref{eq:Hellinger_abuv} 中关于二维向量$u,v$
+	的记号相当于$u(0),v(0)$，那么 
 	\begin{equation}
-		g(\beta) = H^2(u' || v') - H^2((\frac{b}{k}, \frac{a}{k}), (\frac{a}{k}, \frac{k}{k}))
+		g(\beta) = H^2(u(\beta),v(\beta)) - H^2(u(0),v(0))
 		+ 1
 	\end{equation}
-	上式清楚表明了 $g(\beta)$的最小值在 $u'=v'$处取得，
-
+	由于距离度量的非负性，
+	上式表明 $g(\beta)$的最小值在 $u(\beta)=v(\beta)$处取得，
+	此时 $\beta=\bar{\beta}$。
 \end{remark}
 与式\eqref{eq:beta_star_sibm}的情形类似，注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$保证了
 式\eqref{eq:beta_star}中的根号下的项非负。

@@ -115,13 +115,21 @@ $\lceil \log n \rceil $ 的整数倍。
 
 
 
-
+\begin{remark}
 当 $\gamma=0$ 时，由\eqref{eq:lambda}式 可得 $\lambda^*=\frac{1}{2}$，
 则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。
 由定理\ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
 时可精确恢复。定理\ref{thm:Pe}退化到
 定理\ref{thm:sbm2_phase_transition}。
-
+引理\ref{lem:I_plus_expression}亦可推广到
+$k\geq 2$的情形，此时不难得到
+\begin{equation}
+    C(\Pois(\frac{a}{k}, \frac{b}{k}),\Pois(\frac{b}{k}, \frac{a}{k}) ) = H^2((\frac{a}{k}, \frac{b}{k}),(\frac{b}{k}, \frac{a}{k}))
+    = \frac{1}{k}(\sqrt{a}-\sqrt{b})^2
+\end{equation}
+上式表明了对于特殊的联合泊松分布，
+切尔诺夫信息和 海林格距离的关系。
+\end{remark}
 
 \section{误差衰减速率}
 在\ref{sec:sbmsi_exact_recovery_condtion}节的基础上，

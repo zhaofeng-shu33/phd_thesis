@@ -1004,13 +1004,15 @@ Abbe \cite{abbe2015exact} 和 Mossel
   而当$\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
   没有算法可实现精确恢复。
 \end{theorem}
+\newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
 \begin{remark}
   定理 \ref{thm:sbmk_phase_transition}
-  给出的结论和 Hellinger 距离有关。
-  对于两个$\R^d$中的向量$u,v$，它们的 Hellinger 距离
+  给出的结论和 \gls{hellinger} (\glsdesc{hellinger})有关。
+  对于两个$\R^d$中的向量$u,v$，它们的
+  海林格距离 
   的平方定义为
   \begin{equation}
-    H^2(u||v) = \frac{1}{2}
+    H^2(u,v) = \frac{1}{2}
     \sum_{i=1}^d (\sqrt{u}_i - \sqrt{v}_i)^2
   \end{equation}
   若定义向量 $u= (\frac{a}{k}, \frac{b}{k})$,
@@ -1018,7 +1020,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
   则
   $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 的条件
   可改写成
-  $H(u||v) > 1$，其中
+  $H(u, v) > 1$，其中
   \begin{equation}\label{eq:Hellinger_abuv}
     H(u,v)=\frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}}    
   \end{equation}
