@@ -495,7 +495,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$.
 而 式 \eqref{eq:upmpt} 化为
 \begin{equation}
-  P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n) 
+  P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t  \log n) 
 	\le  \exp\Big(-\log n
 	\left(
    \frac{1}{k} g(a,b,kt) + O((\log n)^{-\delta}) \right)\Big)
@@ -510,8 +510,9 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$.
 我们也可利用大偏差理论中的 Gärtner Ellis 定理
 来获得 $g(a,b,\epsilon)$。
 
-此处我们给出 Gärtner Ellis 定理的一个简化形式，其完整表述可参见
-\cite{dembo2009large}。
+此处我们给出 Gärtner Ellis 定理的一个简化形式，该定理是
+Cramér 定理的推广，其完整表述可参见
+\citet{dembo2009large}。
 令 $S_n$ 为随机变量的序列，
 $\gamma_n >0, \lim_{n\to \infty}\gamma_n \to 0$.
 $\Lambda_n(t)=\log \E[\exp(t S_n)]$ 代表 $S_n$ 的对数矩生成函数 (log-MGF)。
@@ -525,7 +526,7 @@ $\Lambda(t) =\lim_{n\to \infty} \frac{1}{\gamma_n}\Lambda_n(\gamma_n t)$
 \end{equation}
 
 我们取 $\gamma_n= \log n$ 且 $\gamma_n S_n = \sum_{i=1}^n Y_i$，$Y_i=Z_i - W_i$，
-$Z_i, Z_n$ 是 i.i.d. $\Bern(\B)$ 而 $W_1, \dots, W_n$ 是 i.i.d. $\Bern(\A)$。
+$Z_i, \dots, Z_n$ 是 i.i.d. $\Bern(\B)$ 而 $W_1, \dots, W_n$ 是 i.i.d. $\Bern(\A)$。
 $Y_i$ 的概率质量函数为 $[(1-q)p, qp+(1-p)(1-q), q(1-p)]$，对应 $[-1,0,1]$ 三个取值。
 首先我们计算得到 
 $\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
