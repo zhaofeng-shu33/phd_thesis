@@ -507,10 +507,21 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$.
 其等价形式亦可参见 \citet{abbe2015exact} 中的 式 (43)
 。
 易验证 $\frac{g(a,b,kt)}{k}=-[f_{\beta}(t)-\beta t -1]$。
-我们也可利用大偏差理论中的 Gärtner Ellis 定理
-来获得 $g(a,b,\epsilon)$。
+\begin{remark}\label{re:g_beta}
+实际上 $g(a,b,s)$ 和 $g(s)-1$ 互为凸共轭函数。凸共轭函数
+函数的定义如下：
 
-此处我们给出 Gärtner Ellis 定理的一个简化形式，该定理是
+给定定义在$\R$ 上的光滑函数 $\Lambda(s)$，
+它的凸共轭函数定义为
+$\Lambda^*(s) = \sup_{t \in \R} st-\Lambda(t)$。
+$\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。
+
+利用凸共轭函数的概念，
+下面我们引入大偏差理论中的 Gärtner Ellis 定理
+来获得 $g(a,b,\epsilon)$。
+首先我们给出 Gärtner Ellis 定理的一个简化形式。
+
+Gärtner Ellis 定理是
 Cramér 定理的推广，其完整表述可参见
 \citet{dembo2009large}。
 令 $S_n$ 为随机变量的序列，
@@ -521,10 +532,13 @@ $\Lambda(t) =\lim_{n\to \infty} \frac{1}{\gamma_n}\Lambda_n(\gamma_n t)$
 存在。 令 $\Lambda^*$ 是 $\Lambda$ 的共轭函数。
 则对于任意 紧集 $\Gamma \subset \mathbb{R}$，
 我们有
-\begin{equation}
+\begin{equation}\label{eq:gartner_ellis}
 \lim_{n\to \infty} \frac{1}{\gamma_n}\log P(S_n \in \Gamma) = -\inf_{s \in \Gamma} \Lambda^*(s)
 \end{equation}
 
+下面我们应用式 \eqref{eq:gartner_ellis}
+导出 $g(a,b,\epsilon)$ 的
+表达式。
 我们取 $\gamma_n= \log n$ 且 $\gamma_n S_n = \sum_{i=1}^n Y_i$，$Y_i=Z_i - W_i$，
 $Z_i, \dots, Z_n$ 是 i.i.d. $\Bern(\B)$ 而 $W_1, \dots, W_n$ 是 i.i.d. $\Bern(\A)$。
 $Y_i$ 的概率质量函数为 $[(1-q)p, qp+(1-p)(1-q), q(1-p)]$，对应 $[-1,0,1]$ 三个取值。
@@ -541,8 +555,9 @@ $\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
   = g(a,b,t)
 \end{equation}
 特别地，当$t=0$ 时， $g(a,b, 0) = (\sqrt{a} - \sqrt{b})^2$。
+\end{remark}
 
-\begin{proof}
+\begin{proof}[引理 \ref{lem:enhanced_fb} 的证明]
   由$f_{\beta}(t)$函数的定义，
   \eqref{eq:upmpt}式中
   $f_{\beta}(t) - \beta t$ 与$\beta$无关而只与

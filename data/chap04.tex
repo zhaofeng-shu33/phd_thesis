@@ -197,6 +197,8 @@ $P_e(\hat{X}^*) \to 1$。
 	由于距离度量的非负性，
 	上式表明 $g(\beta)$的最小值在 $u(\beta)=v(\beta)$处取得，
 	此时 $\beta=\bar{\beta}$。
+	关于$g(\beta)$函数信息学含义的进一步挖掘，
+	可参见附录\ref{re:g_beta}。
 \end{remark}
 与式\eqref{eq:beta_star_sibm}的情形类似，注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$保证了
 式\eqref{eq:beta_star}中的根号下的项非负。
@@ -271,7 +273,9 @@ D(\sigma, \sigma') := \{ \sigma = \arg\min_{f \in S_k} \Dist(f(\sigma), \sigma')
 	\notag \\
 	&+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1) \label{eq:DeltaH}
 	\end{align}
-	上式中 $m(\omega^j) := |\{i \in [n] | \bar{\sigma}_i = \omega^j | \}$, $N_r(G):=\{j | (r, j) \in E(G) \}$ 且 $J_s(x, y) = \delta(x, y) - \delta(\omega_s \cdot x, y)$.
+	上式中 $m(\omega^j) := |\{i \in [n] | \bar{\sigma}_i = \omega^j | \}$, 
+	$N_r(G):=\{j | (r, j) \in E(G) \}$ 表示节点$r$
+	的邻居节点，而 $J_s(x, y) = \delta(x, y) - \delta(\omega_s \cdot x, y)$.
 \end{lemma}
 引理 \ref{lem:lemmaDiff} 提供了用以比较两个相邻状态的    概率
 的方法，即：
