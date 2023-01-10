@@ -197,8 +197,6 @@ $P_e(\hat{X}^*) \to 1$。
 	由于距离度量的非负性，
 	上式表明 $g(\beta)$的最小值在 $u(\beta)=v(\beta)$处取得，
 	此时 $\beta=\bar{\beta}$。
-	关于$g(\beta)$函数信息学含义的进一步挖掘，
-	可参见附录\ref{re:g_beta}。
 \end{remark}
 与式\eqref{eq:beta_star_sibm}的情形类似，注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$保证了
 式\eqref{eq:beta_star}中的根号下的项非负。
@@ -277,12 +275,41 @@ D(\sigma, \sigma') := \{ \sigma = \arg\min_{f \in S_k} \Dist(f(\sigma), \sigma')
 	$N_r(G):=\{j | (r, j) \in E(G) \}$ 表示节点$r$
 	的邻居节点，而 $J_s(x, y) = \delta(x, y) - \delta(\omega_s \cdot x, y)$.
 \end{lemma}
-引理 \ref{lem:lemmaDiff} 提供了用以比较两个相邻状态的    概率
-的方法，即：
+\begin{remark}\label{re:energy_diff}
+	当 $\bar{\sigma}'$ 与 $X$ 仅在位置 $r$
+	上不同时， 在引理 \ref{lem:lemmaDiff}
+	中取$\bar{\sigma}=X$，
+	结合条件  $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$，
+	有 $m(\omega^s \cdot \bar{\sigma}_r)
+	=m(\bar{\sigma}_r)$，
+	进而：
+	\begin{equation}\label{eq:energy_diff}
+	H(\bar{\sigma}') - H(X) = (1+\gamma \frac{\log n}{n})(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
+	\end{equation}
+	其中 $A^s_r$ 定义成
+	$A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
+	因为$G$中各边的存在与否是独立的，
+	对于 $s\neq 0$
+	我们有 $A^s_r \sim \Binom \left(
+	  \frac{n}{k}, \B \right) $，
+	而 $A^0_r \sim \Binom
+	\left(
+	  \frac{n}{k}-1, \A \right)$。	
+\end{remark}
+考虑到：
 \begin{equation}\label{eq:Pratio}
 \frac{P_{\sigma |G } (\sigma = \bar{\sigma}')}{P_{\sigma |G } (\sigma = \bar{\sigma})}
 = \exp(-\beta(H(\bar{\sigma}') - H(\bar{\sigma})))
 \end{equation}
+因此引理 \ref{lem:lemmaDiff} 提供了用以比较两个相邻状态的    概率
+的方法。当 $n$充分大时，我们注意到式
+\ref{eq:Pratio} 右端化为$\exp(-\beta (A_r^0 - A_r^s))$。
+而如果我们对其取期望，则可以得到 $\E[\exp(-\beta (A_r^0 - A_r^s))] \sim n^{g(\beta)}$，
+也即 $g(\beta)$与两个二项分布差$A_r^0 - A_r^s$的矩生成函数有关。
+关于$g(\beta)$函数在这方面的信息学含义的进一步挖掘，
+可参见附录中注释\ref{re:g_beta}的内容。
+
+
 
 另外， 我们注意到 因为图的边的数量是稀疏的，每个节点
 平均有 $O(\log n)$ 个相连的邻居节点。

@@ -281,30 +281,17 @@ $\hat{b} \to b$， $\hat{a} \to a$。
 \section{定理\ref{thm:phase_transition}的证明}
 \label{sec:appendix_theorem_proof_phase_trans}
 
-在开始定理\ref{thm:phase_transition}的技术证明之前，我们需要介绍一些额外的
+在开始定理\ref{thm:phase_transition}的技术证明之前，
+我们需要介绍一些额外的
 符号。
-当 $\bar{\sigma}'$ 与 $X$ 仅在位置 $r$
-上不同时， 在引理 \ref{lem:lemmaDiff}
-中取$\bar{\sigma}=X$，
-结合条件  $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$，
-有 $m(\omega^s \cdot \bar{\sigma}_r)
-=m(\bar{\sigma}_r)$，
-进而：
-\begin{equation}\label{eq:energy_diff}
-H(\bar{\sigma}') - H(X) = (1+\gamma \frac{\log n}{n})(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
-\end{equation}
-其中 $A^s_r$ 定义成
-$A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
-因为$G$中各边的存在与否是独立的，
-对于 $s\neq 0$
-我们有 $A^s_r \sim \Binom \left(
-  \frac{n}{k}, \B \right) $，
-而 $A^0_r \sim \Binom
-\left(
-  \frac{n}{k}-1, \A \right)$。
 
 % Some additional notation is needed for the proof.
-对于一般的情形，我们可以将能量差写成:
+评注\ref{re:energy_diff}中指出了
+$X$改变一个状态后的能量差表达式。
+对于一般的情形，即改变
+$|\cI|:=\Dist(\bar{\sigma}, X)$
+个位置的状态后，
+我们可以将能量差写成:
 \begin{equation}\label{eq:Hgeneral}
 H(\bar{\sigma}) - H(X)=
 (1 + \gamma \frac{ \log n}{n})[A_{\bar{\sigma}} - B_{\bar{\sigma}}] + \gamma\frac{ \log n}{n} N_{\bar{\sigma}}
@@ -508,7 +495,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$.
 。
 易验证 $\frac{g(a,b,kt)}{k}=-[f_{\beta}(t)-\beta t -1]$。
 \begin{remark}\label{re:g_beta}
-实际上 $g(a,b,s)$ 和 $g(s)-1$ 互为凸共轭函数。凸共轭函数
+实际上 $g(a,b,s)$ 和 $g(s)-1$ 互为凸共轭函数。
+凸共轭函数
 函数的定义如下：
 
 给定定义在$\R$ 上的光滑函数 $\Lambda(s)$，
@@ -518,12 +506,11 @@ $\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。
 
 利用凸共轭函数的概念，
 下面我们引入大偏差理论中的 Gärtner Ellis 定理
-来获得 $g(a,b,\epsilon)$。
-首先我们给出 Gärtner Ellis 定理的一个简化形式。
-
-Gärtner Ellis 定理是
-Cramér 定理的推广，其完整表述可参见
+来获得 $g(a,b,\epsilon)$。Gärtner Ellis 定理是
+Cramér 定理的推广，其一般情形下的表述可参见
 \citet{dembo2009large}。
+我们这里仅给出 Gärtner Ellis 定理的一个特例形式。
+
 令 $S_n$ 为随机变量的序列，
 $\gamma_n >0, \lim_{n\to \infty}\gamma_n \to 0$.
 $\Lambda_n(t)=\log \E[\exp(t S_n)]$ 代表 $S_n$ 的对数矩生成函数 (log-MGF)。
