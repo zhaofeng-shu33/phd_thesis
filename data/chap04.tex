@@ -304,7 +304,10 @@ D(\sigma, \sigma') := \{ \sigma = \arg\min_{f \in S_k} \Dist(f(\sigma), \sigma')
 因此引理 \ref{lem:lemmaDiff} 提供了用以比较两个相邻状态的    概率
 的方法。当 $n$充分大时，我们注意到式
 \ref{eq:Pratio} 右端化为$\exp(-\beta (A_r^0 - A_r^s))$。
-而如果我们对其取期望，则可以得到 $\E[\exp(-\beta (A_r^0 - A_r^s))] \sim n^{g(\beta)}$，
+而如果我们对其取期望，则可以得到
+\begin{equation}\label{eq:expect_A_r_0_s}
+	\E[\exp(-\beta (A_r^0 - A_r^s))] \sim n^{g(\beta)-1}
+\end{equation}
 也即 $g(\beta)$与两个二项分布差$A_r^0 - A_r^s$的矩生成函数有关。
 关于$g(\beta)$函数在这方面的信息学含义的进一步挖掘，
 可参见附录中注释\ref{re:g_beta}的内容。
@@ -330,7 +333,11 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 趋于无穷大，
 则 $P_{\sigma}(S_k(X))$ 趋于零。
 此种分析展示了证明定理 \ref{thm:phase_transition}的
-主要思路。
+主要思路。应用这一思路，由
+\eqref{eq:expect_A_r_0_s}式，
+当$n$充分大时，$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
+的数学期望为 $n^{g(\beta)}$，这也部分说明了
+$g(\beta)$出现在定理\ref{thm:phase_transition}表述中的原因。
 严格的证明参见附录 \ref{sec:appendix_theorem_proof_phase_trans}。
 
 \section{通过能量最小化进行社群发现}\label{sec:em}
