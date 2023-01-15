@@ -426,9 +426,9 @@ GN (Girvan-Newman 算法) 和 BHCD (一种贝叶斯层次聚类算法\cite{RN23}
 仅在子图上进行 \texttt{DT} 的调用，
 从而可以实现计算效率比PSP算法提升一个数量级。
 
-为，我们先定义两个图限制和图收缩(contraction)两个操作。
+为，我们先定义两个图限制(restriction)和图收缩(contraction)两个操作。
 我们称把图$G$限制到集合$C\subseteq V$是指
-考虑$G$的节点集为$C$而边的集合为$(C, \{(i,j) \in E | i,j \in C \})$
+考虑$G$的节点集为$C$而边的集合为$\{(i,j) \in E | i,j \in C \}$
 的子图，
 记为$G[C]$。给定$V$的分割 $\P=(C_1, \dots, C_k)$，
 图根据$P$收缩得到一个新的图，其节点集为
@@ -468,7 +468,8 @@ $G[C_i](i=1,\dots, t)$
     其中 $V(\widetilde{G})$ 是 图$\widetilde{G}$
     的节点集。
     \label{alg:gamma_apostrophe}
-		\STATE $(\tilde{h}, P') = \texttt{DT}(\widetilde{G}, \gamma')$ 其中
+		\STATE $(\tilde{h}, \P')
+    = \texttt{DT}(\widetilde{G}, \gamma')$ 其中
     $\P'$ 是在 式 \eqref{eq:hlambda} 中达到
     最小值 $h(\gamma')$的分割
     并且 $\tilde{h}$ 是对应的最小值。 \label{line:DT}
@@ -481,12 +482,12 @@ $G[C_i](i=1,\dots, t)$
 		\STATE 在聚类树
     $\mathcal{T}$ 中构造新的节点$S$，并修改 $\widetilde{V}$的子节点的父亲节点 为$S$，
     而$S$的父节点为$\widetilde{V}$。
-		\STATE \texttt{Split}($\widetilde{G}[S], S$)
-    其中 $\widetilde{G}[S]$ 是 $\widetilde{G}$ 限制在 $S$
-    上的子图。\label{line:SplitDown}
-		\STATE 在 $\widetilde{G}$ 中将 $S$ 缩成一个节点。 % graph \widetilde{G} is modified
+		\STATE \texttt{Split}($\widetilde{G}[S], S$) \label{line:SplitDown}
+    %其中 $\widetilde{G}[S]$ 是 $\widetilde{G}$ 限制在 $S$
+    %上的子图。
+		%\STATE 在 $\widetilde{G}$ 中将 $S$ 缩成一个节点。 % graph \widetilde{G} is modified
 		\ENDFOR 
-		\STATE \texttt{Split}($\widetilde{G}, \widetilde{V}$)		\label{line:SplitUp}
+		\STATE \texttt{Split}($\widetilde{G}[\P'], \widetilde{V}$)		\label{line:SplitUp}
 		\ENDIF
 		\ENDFUNCTION
 	\end{algorithmic}
