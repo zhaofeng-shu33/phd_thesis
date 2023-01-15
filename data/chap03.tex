@@ -1,6 +1,7 @@
 % !TeX root = ../thuthesis-example.tex
 
 \chapter{基于多变量互信息的社群层次发现算法}\label{chap:info_clustering}
+\section{引言}
 在本章中，我们将围绕着基于图分割的信息聚类算法，研究它的理论性质、
 实现算法和在各领域的应用。
 \section{社群发现场景下的多变量互信息理论}
@@ -559,6 +560,12 @@ PSP算法 \ref{alg:psp} 的$O(n^5)$ 的结果快一个数量级。
 $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$，
 其比 算法 \ref{alg:psp} 的结果
 快 $5$ 倍。
+\subsection{聚类树的数据结构}
+在基于聚合的聚类方法中可以使用带权的并查集(weighted Union-Find set)的方法自底
+向上构造聚类树，在介绍聚合的信息聚类的文章中正是借鉴了这种方法
+\cite{chan2020agglomerative}。 
+但由于我们设计的HPSP算法是
+自底向上和自顶向下的混合，不能照搬并查集的数据结构。
 
 \subsection{不同PSP算法的效率比较}
 在本节中，我们将比较 HPSP 算法和PSP算法
