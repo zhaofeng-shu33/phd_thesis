@@ -426,7 +426,8 @@ GN (Girvan-Newman 算法) 和 BHCD (一种贝叶斯层次聚类算法\cite{RN23}
 仅在子图上进行 \texttt{DT} 的调用，
 从而可以实现计算效率比PSP算法提升一个数量级。
 
-为，我们先定义两个图限制(restriction)和图收缩(contraction)两个操作。
+在给出算法描述之前，我们先定义两个对图的操作：
+图限制(restriction)和图收缩(contraction)。
 我们称把图$G$限制到集合$C\subseteq V$是指
 考虑$G$的节点集为$C$而边的集合为$\{(i,j) \in E | i,j \in C \}$
 的子图，
