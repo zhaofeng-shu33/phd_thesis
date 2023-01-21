@@ -572,7 +572,7 @@ PSP算法 \ref{alg:psp} 的$O(n^5)$ 的结果快一个数量级。
 $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$，
 其比 算法 \ref{alg:psp} 的结果
 快 $5$ 倍。
-\subsection{聚类树的数据结构与算法优化}
+\subsection{聚类树的数据结构}
 在基于聚合的聚类方法中可以使用带权的并查集(weighted Union-Find set)的方法自底
 向上构造聚类树，在介绍聚合的信息聚类的文章中正是借鉴了这种方法
 \cite{chan2020agglomerative}。 
@@ -632,7 +632,7 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
 陈聪曾采用一种类似深度优先搜索的策略在聚合的过程中逐步获取分割
 \cite{chan2020agglomerative}。
 由于我们使用了不同的数据结构来表示聚类树，因此我们在
-获取分割的实现策略上需要另辟蹊径。
+获取分割的实现策略上需要另辟蹊径。见~\ref{alg:get_psp}。
 
 \begin{algorithm}[!ht]
 	\caption{从聚类树获取主分割序列}\label{alg:get_psp}
