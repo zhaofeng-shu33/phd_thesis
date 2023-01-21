@@ -578,12 +578,85 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
 \cite{chan2020agglomerative}。 
 但由于我们设计的HPSP算法是
 自底向上和自顶向下的混合，不能照搬并查集的数据结构。
-在算法流程图\ref{alg:psp_i_simplified} 中，
-我们采用增加新的节点的方式来构造聚类树。
+在算法流程图~\ref{alg:psp_i_simplified} 中，
+我们采用增加新的节点的方式来构造聚类树。但
+用集合表示聚类树的节点较为浪费空间，
+我们采用父节点数组$K$来储存树的结构，而和聚类树边权重相关的数据
+用另一数组$W$储存。使用动态数组的HPSP算法如
+\ref{alg:psp_i_simplified_tree_array} 所示。
 
+\begin{algorithm}[!ht]
+	\caption{聚类树的动态数组实现}\label{alg:psp_i_simplified_tree_array}
+	\begin{algorithmic}[1]
+		\REQUIRE 有向图 $G(V, E)$; $V=[n]$，边的权值函数 $w(e)$，其中 $e\in E$
+		\ENSURE 聚类树 $\mathcal{T}=(K, W)$， $K,W$ 为动态数组，
+    $K[i]$ 表示树中节点$i$的父节点的ID，$W[i]$表示节点$i$到其父节点的权值
+		\STATE 初始化 $n+1$ 长的数组 $\mathcal{T}=[-1, 0, \dots, 0]$
+     和$W$，以及全局变量 $j=n$。
+		\STATE \texttt{Split}($G, 0$)
+		\FUNCTION{\texttt{Split}($G, s$)}
+		\STATE $w$ 是 $G$ 所有边的权值之和。
+		\STATE $\gamma' = \frac{w}{\abs{V(G)}-1}$
+    其中 $V(G)$ 是 图$G$
+    的节点集。
+		\STATE $(\tilde{h}, \P')
+    = \texttt{DT}(G, \gamma')$ 
+		\IF{$\tilde{h} = - \gamma'$}
+		\STATE $W[i]=\gamma'$ for $ i \in V(G)$
+		\ELSE
+		\FOR{$S$ in $P'$ and $\abs{S}>1$}
+		\STATE 
+    append $s$ to $K$ and $j\leftarrow j +1$
+    \STATE $K[i]=j$ for $i\in S$
+		\STATE \texttt{Split}($G[S], j$) 
+   	\ENDFOR 
+    \STATE $G'=$\texttt{contract}$(G,\P')$\label{alg:contract}
+		\STATE \texttt{Split}($G', i$)
+		\ENDIF
+		\ENDFUNCTION
+	\end{algorithmic}
+\end{algorithm}
+
+算法\ref{alg:psp_i_simplified_tree_array}
+保持了图节点ID和聚类树节点ID的一致。
+为实现此目标，我们给 \texttt{Split} 函数增加了
+一个参数用来标记当前所操作的图中所有节点
+对应到聚类树中的节点的父节点ID。
+
+在第~\ref{alg:contract}行的\texttt{contract}函数 是将$G[\P']$的各节点依次重命名为$j-k+1,\dots, j$。
+为了提升算法运行效率，和图限制$G[S]$类似，我们可以避免构建新图的操作，
+而是直接在原图$G$上进行修改。
 
 另外，从构造好的聚类树中获取正确的分割也是
 我们要考虑的问题。
+陈聪曾采用一种类似深度优先搜索的策略在聚合的过程中逐步获取分割
+\cite{chan2020agglomerative}。
+由于我们使用了不同的数据结构来表示聚类树，因此我们在
+获取分割的实现策略上需要另辟蹊径。
+
+\begin{algorithm}[!ht]
+	\caption{从聚类树获取主分割序列}\label{alg:get_psp}
+	\begin{algorithmic}[1]
+		\REQUIRE 聚类树 $\mathcal{T}=(K, W)$
+		\ENSURE 序列 $L=[\lambda_1, \dots, \lambda_k]$
+    和 $\mathcal{Q}=[\P_0, \dots, \P_k]$.
+    \STATE 初始化 $Q\leftarrow \{ \{\{i\}|i\in [n]\} \}, C\leftarrow [n]$ 与哈希字典 $D$
+    \WHILE{$|C|>1$}
+		\STATE $(\P,\gamma, C)$ \leftarrow \texttt{Merge}($C$)
+    \STATE prepend $P$ to $Q$ and append $\gamma$ to $L$
+    \ENDWHILE
+		\FUNCTION{\texttt{Merge}($C$)}
+    \STATE $\gamma = \max_{i\in C} W[i]$
+    \STATE $D[k] = \{ j\in C | P[j] = k, W[j]=\gamma\}$
+    \IF{$ j \in D[k]$ and $j>n$}
+    \STATE $D[k] \leftarrow D[j] \cup D[k]\backslash \{j\}$, 并从$D$中删除键值$j$ 
+    \ENDIF
+    \STATE $C \leftarrow \texttt{key}(D) \cup  \{j\in C | W[j]<\gamma\}$
+    \STATE $\P=\{D[k] | k \in \texttt{key}(D)\} \cup [n]\backslash \cup_{k \in \texttt{key}(D)} D[k]$
+    \RETURN $(\P, \gamma, C)$
+		\ENDFUNCTION
+	\end{algorithmic}
+\end{algorithm}
 
 \subsection{不同PSP算法的效率比较}
 在本节中，我们将比较 HPSP 算法和PSP算法
