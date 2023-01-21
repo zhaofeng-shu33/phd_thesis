@@ -643,17 +643,17 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
     \STATE 初始化 $Q\leftarrow \{ \{\{i\}|i\in [n]\} \}, C\leftarrow [n]$ 与哈希字典 $D$
     \WHILE{$|C|>1$}
 		\STATE $(\P,\gamma, C)$ \leftarrow \texttt{Merge}($C$)
-    \STATE prepend $P$ to $Q$ and append $\gamma$ to $L$
+    \STATE prepend $P$ to $Q$ and prepend $\gamma$ to $L$
     \ENDWHILE
 		\FUNCTION{\texttt{Merge}($C$)}
     \STATE $\gamma = \max_{i\in C} W[i]$
-    \STATE $D[k] = \{ j\in C | P[j] = k, W[j]=\gamma\}$
+    \STATE $D[k] = \{ j\in C | K[j] = k, W[j]=\gamma\}$
     \IF{$ j \in D[k]$ and $j>n$}
     \STATE $D[k] \leftarrow D[j] \cup D[k]\backslash \{j\}$, 并从$D$中删除键值$j$ 
     \ENDIF
-    \STATE $C \leftarrow \texttt{key}(D) \cup  \{j\in C | W[j]<\gamma\}$
-    \STATE $\P=\{D[k] | k \in \texttt{key}(D)\} \cup [n]\backslash \cup_{k \in \texttt{key}(D)} D[k]$
-    \RETURN $(\P, \gamma, C)$
+    \STATE $C' \leftarrow \texttt{key}(D) \cup  \{j\in C | W[j]<\gamma\}$
+    \STATE $\P=\{D[k] | k \in \texttt{key}(D)\} \cup \{\{i\} | i \in [n]\backslash \cup_{k \in \texttt{key}(D)} D[k] \}$
+    \RETURN $(\P, \gamma, C')$
 		\ENDFUNCTION
 	\end{algorithmic}
 \end{algorithm}
