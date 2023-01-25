@@ -628,13 +628,13 @@ HPSP算法~\ref{alg:psp_i_simplified} 的特点重新设计。
 	\end{algorithmic}
 \end{algorithm}
 
-算法\ref{alg:psp_i_simplified_tree_array}
-保持了图节点ID和聚类树节点ID的一致。
-为实现此目标，我们给 \texttt{Split} 函数增加了
-一个参数用来标记当前所操作的图中所有节点
-对应到聚类树中的节点的父节点ID。
+为标记聚类树中每个节点的父节点，
+我们在算法\ref{alg:psp_i_simplified_tree_array}
+的 \texttt{Split} 函数中增加了
+一个参数$s$，$s$是当前所操作的图中所有节点序号最小的，
+对应到聚类树中这些节点的父节点ID。
 
-在第~\ref{alg:contract}行的\texttt{contract}函数 是在图$G$中
+在第\ref{alg:contract}行的\texttt{contract}函数 是在图$G$中
 将$S$中的各节点缩为一个点$j$，边的权值也做相应的调整。
 为了提升算法运行效率，和图限制$G[S]$类似，我们可以避免构建新图的操作，
 而是直接在原图$G$上进行修改。
@@ -671,6 +671,16 @@ HPSP算法~\ref{alg:psp_i_simplified} 的特点重新设计。
 		\ENDFUNCTION
 	\end{algorithmic}
 \end{algorithm}
+
+在算法算法~\ref{alg:get_psp}中，我们
+使用了额外的数组$C$来表示合并后当前
+剩余的节点，字典$D$储存了如何把剩余的节点展开成聚类簇
+的信息。由于\texttt{Merge} 函数最坏调用$n$次，
+而计算$\gamma$的时间复杂度是$O(n)$，其它操作不超过$O(n)$，
+因此整个转换算法的时间复杂度是$O(n^2)$，相比
+定理\ref{thm:alg_complexity}
+中给出的$HPHP$ 的$O(n^4)$的时间复杂度，转换本身的时间开销
+可忽略不计。
 
 \subsection{不同PSP算法的效率比较}
 在本节中，我们将比较 HPSP 算法和PSP算法
