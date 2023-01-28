@@ -27,8 +27,7 @@
 不同的社群发现算法根据自己的标准寻找社群结构，这给一般意义上的比较造成了困难。
 在本节中我们介绍的社群发现算法采用的标准叫做最小化平均误差。
 这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式
-早已有之
-\footnote{与图强度的定义一致 \cite{cunningham1985optimal}}。
+在研究图强度这一概念时已被提出 \cite{cunningham1985optimal}。
 在这里我们采用其最为广泛的形式，即针对带权的有向图的社群发现算法。
 \begin{equation}\label{eq:IP}
   \lambda_1 := \min_{\P \in \Pi'}\frac{ f[\P] }{  \abs{\P} - 1 } 
