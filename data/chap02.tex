@@ -23,7 +23,7 @@
 社群发现算法根据发现的社群是否重叠可分为两类，本文研究的是非重叠的
 社群发现算法，即$V$可以分为互不重叠的若干子集。
 
-\section{最小化平均误差}
+\section{基于最小化平均误差的图分割}
 不同的社群发现算法根据自己的标准寻找社群结构，这给一般意义上的比较造成了困难。
 在本节中我们介绍的社群发现算法采用的标准叫做最小化平均误差。
 这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式
@@ -459,84 +459,6 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 因为其基于参数化最大流，
 我们称之为PMF算法
 \footnote{PMF 是 parametric maximal flow 的缩写}。
-
-\section{局部信息几何}\label{sec:local_geometry}
-局部信息几何的理论是由华人学者郑立中等人提出\cite{huang2019universal}，
-可从理论的层面分析机器学习中的特征提取\cite{huang2017information}、人工神经网络
-\cite{huang2019information}等问题。
-下面对本工作中用到的局部信息几何的内容进行简要的介绍。
-
-KL散度可用于度量两种不同概率分布
-之间的距离。当这两种分布比较接近时，
-局部信息几何刻画了KL散度的近似表达式。
-我们以离散分布为例，给出分布之间距离的接近的
-形式化定义。
-$P_0$ 表示一概率质量函数 (Probability mass function)，
-其定义域为字母集$\mathcal{X}$，
-$\epsilon$表示一无穷小量。
-\begin{definition}\label{def:eps_neighborhood}
-我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，如果
-\begin{equation}\label{eq:P_neighborhood}
-P \in N^{(\epsilon)}(P_0) \iff
-\sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P_0(x)} \leq \epsilon^2
-\end{equation}
-\end{definition}
-式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
-\sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式, 其中 $\phi(x)$
-叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
-对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，我们有
-\begin{equation}\label{eq:approx:ig}
-D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
-\end{equation}
-对于两个弱独立的随机变量，也有类似式\ref{eq:approx:ig}
-的结论。
-\begin{definition}\label{def:weak_indepedent}
-我们称 $X$ 和 $Y$ 是 $\epsilon$-\textbf{弱独立}的，
-如果 对于任何 $x \in \mathcal{X}$，
-$Y$关于$X$的条件分布
-$P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内。
-\end{definition}
-在弱独立的假设下, 由 $D(P_{XY}||P_XP_Y)$ 所定义的互信息$I(X;Y)$, 
-通过对式\eqref{eq:approx:ig}的化简，可以表示为：
-\begin{equation}\label{eq:Ixy}
-I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsilon^2)
-\textrm{ 其中 }  B(x,y)=\frac{P_{X,Y}(x,y) - P_X(x) P_Y(y)}{\sqrt{P_X(x)P_Y(y)}}
-\end{equation}
-在式\eqref{eq:Ixy}中， $\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y)$
-一项可以写成 $\norm{B}_F^2$。这里 $B$表示$\mathcal{X} \times \mathcal{Y}$的矩阵，
-\newglossaryentry{not:norm_f}
-{
-  type=notation,
-  name={$||\cdot||_F$},
-  description={矩阵的Frobenius范数}
-}
-$F$表示 \glsdesc{not:norm_f}。
-Equation \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
-$I(X;Y)$可用$\frac{1}{2} \norm{B}_F^2$
-近似，其阶数为 $O(\epsilon^2)$。
-
-\begin{example}\label{ex:Pweak_1}
-考虑 $P_0=(X_0,Y_0)$是一个两维的随机向量，
-$P_0(x,y)=\frac{1}{4}$ 对于$x,y \in \{0,1\}$。
-不然发现$X_0,Y_0$
-是独立同分布的伯努利随机变量。
-定义 $P(x,y)=\frac{1}{4}(1+\epsilon (-1)^{x+y})$，
-则 $P\in N^{(\epsilon)}(P_0)$，而
-$\phi(x,y) = \frac{(-1)^{x+y}}{2}$
-且有 $||\phi||=1$。
-利用 $\log(1+x) = x - \frac{1}{2}x^2 + o(x^2)$
-不难得到 $D(P_0||P)=\frac{\epsilon^2}{2}
-+o(\epsilon^2)$，从而印证了
-式\eqref{eq:approx:ig}的结论。
-此外，根据定义\ref{def:weak_indepedent}
-我们可以验证$X$与$Y$是弱独立的。
-这里，$X,Y$表示分布$\frac{1}{4}(1+\epsilon (-1)^{x+y})$
-的两个维度。由式\eqref{eq:Ixy}计算出
-$I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
-与从互信息的定义式出发计算得到的结果相同，
-从而印证
-了弱独立情形下互信息的表达式。
-\end{example}
 
 \section{随机块模型}\label{sec:sbm}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
@@ -1029,7 +951,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
   \end{equation}
 \end{remark}
 
-\section{SIBM 模型}\label{sec:sibm_model}
+\subsection{SIBM 模型}\label{sec:sibm_model}
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
 将\ref{sec:sbm} 节 介绍的随机块模型与 \ref{sec:ising} 节介绍的 伊辛模型
@@ -1110,7 +1032,157 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 相比于$\pm X$的位置
 会以更大的概率聚集在$\pm \bm{1}$。
 
-\section{型方法与 Sanov 定理}
+\subsection{半正定规划做社群发现}
+针对随机块模型的社群发现
+可以先将最大似然方法获得的目标函数
+写成整数优化的问题形式，
+\newacronym{acr:sdp}{SDP}{Semi-definite programming}
+\newglossaryentry{sdp}{name=半正定规划, description={Semi-definite programming}}
+再转化成半正定规划 (\gls{acr:sdp}) 的优化问题进行求解。
+
+在 式\eqref{eq:minimum_k_cut} 中
+取 $\delta(y_i, y_j) = \frac{1+y_iy_j}{2}$，
+于是可得到如下
+的优化问题：
+\begin{align}
+  \max_x\, &  x^T A x \notag \\
+  \textrm{s.t. } & x_{i} = 1, i \in [n] \notag \\
+  & \mathbf{1}^T x = 0
+\end{align}
+其中 $A$ 表示图的邻接矩阵。
+$ x^T A x $ 可以看成是 $\langle xx^T, A \rangle $，即矩阵
+\newglossaryentry{not:matrix_inner_product}
+{
+  type=notation,
+  name={$\langle A, B \rangle $},
+  description={矩阵$A$ 和 $B$ 的内积}
+}
+$xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
+半正定的矩阵，若对$Y$秩为1的条件进行松弛，则
+得到如下半正定规划问题：
+\begin{align}\label{eq:opt_A_Y_1}
+  \max_Y\, & \langle A, Y \rangle  \notag \\
+  \textrm{s.t. } & Y_{ii} = 1, i \in [n] \notag \\
+  & \langle Y, J_n \rangle  = 0
+\end{align}
+\newglossaryentry{not:matrix_all_one}
+{
+  type=notation,
+  name={$J_n$},
+  description={元素全为1的$n\times n$的矩阵}
+}
+其中 $J_n=\mathbf{1}_n\mathbf{1}_n^T$
+是 \glsdesc{not:matrix_all_one}。
+令 $B=2A + I_n - J_n$，
+\newglossaryentry{not:identity_matrix}
+{
+  type=notation,
+  name={$I_n$},
+  description={$n\times n$的单位矩阵}
+}
+$I_n$ 是 \glsdesc{not:identity_matrix}，
+则
+优化的目标函数还可写成 $ \langle B, Y \rangle $，
+其中 $B$的定义为
+\begin{equation}\label{eq:def_B_sdp}
+    B_{ij} = \begin{cases}
+        1, & \text{若 $i$ 与 $j$ 相连}, \\
+        -1,& \text{否则}
+    \end{cases}
+\end{equation}  
+
+以上方法可针对一般的图$G$进行求解，
+但对于$\SSBM(n,2, \A, \B)$，
+Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社群发现的
+理论保证。
+\begin{theorem}
+  设 $\hat{Y}$ 是
+  优化问题 \eqref{eq:opt_A_Y_1} 的解, $\sigma$ 是节点的真实标签向量。
+  若 $\sqrt{a} - \sqrt{b}
+  > \sqrt{2}$，
+  则
+  $\lim_{n\to\infty} P(\hat{Y}=\sigma\sigma^T)=1$。
+\end{theorem}
+\section{信息论度量}
+\subsection{局部信息几何}\label{sec:local_geometry}
+局部信息几何的理论是由华人学者郑立中等人提出\cite{huang2019universal}，
+可从理论的层面分析机器学习中的特征提取\cite{huang2017information}、人工神经网络
+\cite{huang2019information}等问题。
+下面对本工作中用到的局部信息几何的内容进行简要的介绍。
+
+KL散度可用于度量两种不同概率分布
+之间的距离。当这两种分布比较接近时，
+局部信息几何刻画了KL散度的近似表达式。
+我们以离散分布为例，给出分布之间距离的接近的
+形式化定义。
+$P_0$ 表示一概率质量函数 (Probability mass function)，
+其定义域为字母集$\mathcal{X}$，
+$\epsilon$表示一无穷小量。
+\begin{definition}\label{def:eps_neighborhood}
+我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，如果
+\begin{equation}\label{eq:P_neighborhood}
+P \in N^{(\epsilon)}(P_0) \iff
+\sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P_0(x)} \leq \epsilon^2
+\end{equation}
+\end{definition}
+式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
+\sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式, 其中 $\phi(x)$
+叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
+对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，我们有
+\begin{equation}\label{eq:approx:ig}
+D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
+\end{equation}
+对于两个弱独立的随机变量，也有类似式\ref{eq:approx:ig}
+的结论。
+\begin{definition}\label{def:weak_indepedent}
+我们称 $X$ 和 $Y$ 是 $\epsilon$-\textbf{弱独立}的，
+如果 对于任何 $x \in \mathcal{X}$，
+$Y$关于$X$的条件分布
+$P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内。
+\end{definition}
+在弱独立的假设下, 由 $D(P_{XY}||P_XP_Y)$ 所定义的互信息$I(X;Y)$, 
+通过对式\eqref{eq:approx:ig}的化简，可以表示为：
+\begin{equation}\label{eq:Ixy}
+I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsilon^2)
+\textrm{ 其中 }  B(x,y)=\frac{P_{X,Y}(x,y) - P_X(x) P_Y(y)}{\sqrt{P_X(x)P_Y(y)}}
+\end{equation}
+在式\eqref{eq:Ixy}中， $\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y)$
+一项可以写成 $\norm{B}_F^2$。这里 $B$表示$\mathcal{X} \times \mathcal{Y}$的矩阵，
+\newglossaryentry{not:norm_f}
+{
+  type=notation,
+  name={$||\cdot||_F$},
+  description={矩阵的Frobenius范数}
+}
+$F$表示 \glsdesc{not:norm_f}。
+Equation \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
+$I(X;Y)$可用$\frac{1}{2} \norm{B}_F^2$
+近似，其阶数为 $O(\epsilon^2)$。
+
+\begin{example}\label{ex:Pweak_1}
+考虑 $P_0=(X_0,Y_0)$是一个两维的随机向量，
+$P_0(x,y)=\frac{1}{4}$ 对于$x,y \in \{0,1\}$。
+不然发现$X_0,Y_0$
+是独立同分布的伯努利随机变量。
+定义 $P(x,y)=\frac{1}{4}(1+\epsilon (-1)^{x+y})$，
+则 $P\in N^{(\epsilon)}(P_0)$，而
+$\phi(x,y) = \frac{(-1)^{x+y}}{2}$
+且有 $||\phi||=1$。
+利用 $\log(1+x) = x - \frac{1}{2}x^2 + o(x^2)$
+不难得到 $D(P_0||P)=\frac{\epsilon^2}{2}
++o(\epsilon^2)$，从而印证了
+式\eqref{eq:approx:ig}的结论。
+此外，根据定义\ref{def:weak_indepedent}
+我们可以验证$X$与$Y$是弱独立的。
+这里，$X,Y$表示分布$\frac{1}{4}(1+\epsilon (-1)^{x+y})$
+的两个维度。由式\eqref{eq:Ixy}计算出
+$I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
+与从互信息的定义式出发计算得到的结果相同，
+从而印证
+了弱独立情形下互信息的表达式。
+\end{example}
+
+\subsection{型方法与 Sanov 定理}
 \newglossaryentry{type}{name=型, description={Type}}
 在信息论中，我们首先假定所有的元素均从字母集$\mathcal{X}$
 中选取。
@@ -1147,7 +1219,7 @@ $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
     \lim_{n\to \infty} \frac{1}{n} \log Q^n(E) = -D(P^*||Q)
   \end{equation}
 \end{theorem}
-\section{假设检验与 切尔诺夫信息}
+\subsection{假设检验与 切尔诺夫信息}
 在假设检验的问题中，我们要确定 i.i.d. 采样的样本
 $X_1, \dots, X_n$ 服从
 $P_1$ 还是 $P_2$ 分布。为此，考虑两个假设：
@@ -1232,75 +1304,3 @@ $D^*$的数学定义为：
 雷尼散度在刻画一些SBM模型变体的误差衰减
 速率时常常用到 \cite{zhang2016}。
 
-
-\section{半正定规划做社群发现}
-针对随机块模型的社群发现
-可以先将最大似然方法获得的目标函数
-写成整数优化的问题形式，
-\newacronym{acr:sdp}{SDP}{Semi-definite programming}
-\newglossaryentry{sdp}{name=半正定规划, description={Semi-definite programming}}
-再转化成半正定规划 (\gls{acr:sdp}) 的优化问题进行求解。
-
-在 式\eqref{eq:minimum_k_cut} 中
-取 $\delta(y_i, y_j) = \frac{1+y_iy_j}{2}$，
-于是可得到如下
-的优化问题：
-\begin{align}
-  \max_x\, &  x^T A x \notag \\
-  \textrm{s.t. } & x_{i} = 1, i \in [n] \notag \\
-  & \mathbf{1}^T x = 0
-\end{align}
-其中 $A$ 表示图的邻接矩阵。
-$ x^T A x $ 可以看成是 $\langle xx^T, A \rangle $，即矩阵
-\newglossaryentry{not:matrix_inner_product}
-{
-  type=notation,
-  name={$\langle A, B \rangle $},
-  description={矩阵$A$ 和 $B$ 的内积}
-}
-$xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
-半正定的矩阵，若对$Y$秩为1的条件进行松弛，则
-得到如下半正定规划问题：
-\begin{align}\label{eq:opt_A_Y_1}
-  \max_Y\, & \langle A, Y \rangle  \notag \\
-  \textrm{s.t. } & Y_{ii} = 1, i \in [n] \notag \\
-  & \langle Y, J_n \rangle  = 0
-\end{align}
-\newglossaryentry{not:matrix_all_one}
-{
-  type=notation,
-  name={$J_n$},
-  description={元素全为1的$n\times n$的矩阵}
-}
-其中 $J_n=\mathbf{1}_n\mathbf{1}_n^T$
-是 \glsdesc{not:matrix_all_one}。
-令 $B=2A + I_n - J_n$，
-\newglossaryentry{not:identity_matrix}
-{
-  type=notation,
-  name={$I_n$},
-  description={$n\times n$的单位矩阵}
-}
-$I_n$ 是 \glsdesc{not:identity_matrix}，
-则
-优化的目标函数还可写成 $ \langle B, Y \rangle $，
-其中 $B$的定义为
-\begin{equation}\label{eq:def_B_sdp}
-    B_{ij} = \begin{cases}
-        1, & \text{若 $i$ 与 $j$ 相连}, \\
-        -1,& \text{否则}
-    \end{cases}
-\end{equation}  
-
-以上方法可针对一般的图$G$进行求解，
-但对于$\SSBM(n,2, \A, \B)$，
-Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社群发现的
-理论保证。
-\begin{theorem}
-  设 $\hat{Y}$ 是
-  优化问题 \eqref{eq:opt_A_Y_1} 的解, $\sigma$ 是节点的真实标签向量。
-  若 $\sqrt{a} - \sqrt{b}
-  > \sqrt{2}$，
-  则
-  $\lim_{n\to\infty} P(\hat{Y}=\sigma\sigma^T)=1$。
-\end{theorem}
