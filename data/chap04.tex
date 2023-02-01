@@ -72,6 +72,7 @@ $(\hat{a}, \hat{b})$，进而计算均方误差
 \end{figure}
 
 \section{基于玻茨模型的社群发现算法}
+\subsection{算法描述}
 类似于\ref{sec:sibm_model}节
 介绍的SIBM模型，我们将
 随机块模型
@@ -117,6 +118,9 @@ $\frac{\log n}{n}$ 则是对由于边的数量不均匀造成两种势能量阶�
 定义 \ref{def:ising} 实际上给出了一个估计$X$的随机算法 $\hat{X}^*$。
 这里，$\hat{X}^*$ 表示产生于玻茨模型的一个样本，
 记作$\hat{X}^* \sim \textrm{Potts}_G(\gamma, \beta)$。
+下面我们首先研究$\hat{X}^*$实现精确恢复的条件及误差上界，
+而关于如何进行玻茨模型的采样我们将在节进行讨论。
+\subsection{误差的渐近性质}
 沿用评注\ref{rem:metric_exact_recovery} 中的记号，
 使用$\hat{X}^*$估计$X$在精确恢复度量下的错误概率
 记为 $P_e(\hat{X}^*) := \sum_{G \in \cG_n} P_G(G) P_{\sigma | G}(S^c_k(X))$。
@@ -183,20 +187,8 @@ $P_e(\hat{X}^*) \to 1$。
 \end{figure}
 \begin{remark}
 	在式\eqref{eq:g_beta_main_article} 中，我们首次引入了
-	$g(\beta)$ 这个函数，实际上，我们可以用 海林格距离
-	来表示 $g(\beta)$。
-	记
-	$u(\beta)=(e^{-\beta}\frac{a}{k}, e^{\beta}\frac{b}{k}),
-	v(\beta)=(e^{\beta}\frac{b}{k}, e^{-\beta}\frac{a}{k})$，
-	则\eqref{eq:Hellinger_abuv} 中关于二维向量$u,v$
-	的记号相当于$u(0),v(0)$，那么 
-	\begin{equation}
-		g(\beta) = H^2(u(\beta),v(\beta)) - H^2(u(0),v(0))
-		+ 1
-	\end{equation}
-	由于距离度量的非负性，
-	上式表明 $g(\beta)$的最小值在 $u(\beta)=v(\beta)$处取得，
-	此时 $\beta=\bar{\beta}$。
+	$g(\beta)$ 这个函数，该函数是由矩生成函数导出的，
+	其信息学含义为速率函数的凸共轭函数，我们具体将在后面的 \ref{sub:rate_function} 小节进行介绍。
 \end{remark}
 与式\eqref{eq:beta_star_sibm}的情形类似，注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$保证了
 式\eqref{eq:beta_star}中的根号下的项非负。
@@ -309,8 +301,6 @@ D(\sigma, \sigma') := \{ \sigma = \arg\min_{f \in S_k} \Dist(f(\sigma), \sigma')
 	\E[\exp(-\beta (A_r^0 - A_r^s))] \sim n^{g(\beta)-1}
 \end{equation}
 也即 $g(\beta)$与两个二项分布差$A_r^0 - A_r^s$的矩生成函数有关。
-关于$g(\beta)$函数在这方面的信息学含义的进一步挖掘，
-可参见附录中注释\ref{re:g_beta}的内容。
 
 
 
@@ -338,8 +328,73 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 当$n$充分大时，$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 的数学期望为 $n^{g(\beta)}$，这也部分说明了
 $g(\beta)$出现在定理\ref{thm:phase_transition}表述中的原因。
-严格的证明参见附录 \ref{sec:appendix_theorem_proof_phase_trans}。
+\subsection{速率函数}\label{sub:rate_function}
+在\eqref{eq:expect_A_r_0_s} 中我们指出了$g(\beta)$与
+二项分布差$A_r^0 - A_r^s$的矩生成函数有关，本节将进一步挖掘
+其信息论的含义。首先，通过切尔诺夫不等式的方法（证明见附录引理\ref{lem:enhanced_fb}），
+我们有
+\begin{equation}\label{eq:introduction_g_a_b_eps}
+  P_G(A_r^s - A_r^0 \ge t  \log n) 
+	\le  \exp\Big(-\log n
+	\left(
+   \frac{1}{k} g(a,b,kt) + O((\log n)^{-\delta}) \right)\Big)
+\end{equation}
+其中 函数 $g(a,b,\epsilon)$ 定义为
+\begin{equation}  \label{equation:g}
+  g(a,b,\epsilon) \triangleq a + b - \sqrt{\epsilon^2 + 4ab} + \epsilon \log \frac{\epsilon + \sqrt{\epsilon^2 + 4ab}}{2b}
+\end{equation}
+其等价形式亦可参见 \citet{abbe2015exact} 中的 式 (43)
+。
+易验证 $\frac{g(a,b,kt)}{k}=-[f_{\beta}(t)-\beta t -1]$。
+\begin{remark}\label{re:g_beta}
+实际上 $g(a,b,s)$ 和 $g(s)-1$ 互为凸共轭函数。
+凸共轭函数
+函数的定义如下：
 
+给定定义在$\R$ 上的光滑函数 $\Lambda(s)$，
+它的凸共轭函数定义为
+$\Lambda^*(s) = \sup_{t \in \R} st-\Lambda(t)$。
+$\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。
+
+利用凸共轭函数的概念，
+下面我们引入大偏差理论中的 Gärtner Ellis 定理
+来获得 $g(a,b,\epsilon)$。Gärtner Ellis 定理是
+Cramér 定理的推广，其一般情形下的表述可参见
+\citet{dembo2009large}。
+我们这里仅给出 Gärtner Ellis 定理的一个特例形式。
+
+令 $S_n$ 为随机变量的序列，
+$\gamma_n >0, \lim_{n\to \infty}\gamma_n \to 0$.
+$\Lambda_n(t)=\log \E[\exp(t S_n)]$ 代表 $S_n$ 的对数矩生成函数 (log-MGF)。
+假设对于任意的 $t$，
+$\Lambda(t) =\lim_{n\to \infty} \frac{1}{\gamma_n}\Lambda_n(\gamma_n t)$
+存在。 令 $\Lambda^*$ 是 $\Lambda$ 的共轭函数。
+则对于任意 紧集 $\Gamma \subset \mathbb{R}$，
+我们有
+\begin{equation}\label{eq:gartner_ellis}
+\lim_{n\to \infty} \frac{1}{\gamma_n}\log P(S_n \in \Gamma) = -\inf_{s \in \Gamma} \Lambda^*(s)
+\end{equation}
+
+下面我们应用式 \eqref{eq:gartner_ellis}
+导出 $g(a,b,\epsilon)$ 的
+表达式。
+我们取 $\gamma_n= \log n$ 且 $\gamma_n S_n = \sum_{i=1}^n Y_i$，$Y_i=Z_i - W_i$，
+$Z_i, \dots, Z_n$ 是 i.i.d. $\Bern(\B)$ 而 $W_1, \dots, W_n$ 是 i.i.d. $\Bern(\A)$。
+$Y_i$ 的概率质量函数为 $[(1-q)p, qp+(1-p)(1-q), q(1-p)]$，对应 $[-1,0,1]$ 三个取值。
+首先我们计算得到 
+$\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
+=-a-b+be^t  + ae^{-t}$. 由 $\Lambda^*(s) = \sup_{t\in\mathbb{R}} st - \Lambda(t)$，
+我们进一步得到 $\Lambda^*(s) = g(a,b,s)$。
+
+在我们的问题中， $\Gamma=[t, +\infty)$ 而 $k$ 取 1。
+考虑到 $\Lambda^*(s)$  是$[0,+\infty)$ 上的增函数，
+我们有
+\begin{equation}
+  \lim_{n\to \infty} \frac{1}{\log n} P(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t \log n)
+  = g(a,b,t)
+\end{equation}
+特别地，当$t=0$ 时， $g(a,b, 0) = (\sqrt{a} - \sqrt{b})^2$。
+\end{remark}
 \section{通过能量最小化进行社群发现}\label{sec:em}
 因为 $\beta^*$ 和 $n$ 无关，
 当 $\gamma>b$ 时，

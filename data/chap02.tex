@@ -930,7 +930,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \end{theorem}
 \newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
 \begin{remark}
-  定理 \ref{thm:sbmk_phase_transition}
+  Abbe 在文章中指出，定理 \ref{thm:sbmk_phase_transition}
   给出的结论和 \gls{hellinger} (\glsdesc{hellinger})有关。
   对于两个$\R^d$中的向量$u,v$，它们的
   海林格距离 
@@ -948,6 +948,8 @@ Abbe \cite{abbe2015exact} 和 Mossel
   \begin{equation}\label{eq:Hellinger_abuv}
     H(u,v)=\frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}}    
   \end{equation}
+  上面介绍的是Abbe 引入的切尔诺夫-海林格距离的定义，
+  但他在文章中使用的距离度量仅是正的测度而不是随机变量间的，该解释略显生硬。
 \end{remark}
 
 \subsection{SIBM 模型}\label{sec:sibm_model}
@@ -1300,6 +1302,12 @@ $D^*$的数学定义为：
   \sqrt{P_1(x)P_2(x)} \right)
 \end{equation}
 
-雷尼散度在刻画一些SBM模型变体的误差衰减
+雷尼散度在刻画一些SBM模型及其变体的误差衰减
 速率时常常用到 \cite{zhang2016}。
-
+比如在两社群的SBM模型中，我们取$P_1=\Pois(\frac{a}{2}),P_2=\Pois(\frac{b}{2})$
+代入式 \eqref{eq:renyi_divergence} 
+得
+\begin{equation}
+  D_{1/2}(\Pois(\frac{a}{2}) || \Pois(\frac{b}{2}))
+  = \frac{1}{2}(\sqrt{a} - \sqrt{b})^2
+\end{equation}
