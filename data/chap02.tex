@@ -1242,11 +1242,12 @@ Sanov 定理仅针对离散型分布给出了计算诸如
 
 \begin{theorem}\label{thm:cramer}
   \newglossaryentry{log_mgf}{name=对数矩生成函数, description={logarithmic moment generating function}}
-令 $X_i$ 为i.i.d. 的随机变量的序列，且$X_1$ 存在 \gls{log_mgf}
-$\Lambda(t)=\log \E[\exp(t X_1)]$ (log-MGF)。
+  \newacronym{acr:log_mgf}{log-MGF}{logarithmic moment generating function}
+  令 $X_i$ 为i.i.d. 的随机变量序列，且$X_1$ 存在 \gls{log_mgf} (\gls{acr:log_mgf})
+$\Lambda(t)=\log \E[\exp(t X_1)]$。
 令 $\Lambda^*(s)= \sup_{t \in \R} st-\Lambda(t)$，则对于所有$s>\E[X_1]$，
 我们有
-\begin{equation}\label{eq:gartner_ellis}
+\begin{equation}\label{eq:cramer}
 \lim_{n\to \infty} \frac{1}{n}\log P( \sum_{i=1}^n X_i \geq  ns) = - \Lambda^*(s)
 \end{equation}
 \end{theorem}
@@ -1254,13 +1255,25 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$ (log-MGF)。
 \newglossaryentry{rate_function}{name=速率函数, description={rate function}}
 我们把$\Lambda^*(s)$叫做 \gls{rate_function}。
 
-另外，定理\ref{thm:cramer}中出现的$\Lambda^*(s)$和$\Lambda(s)$互为凸共轭函数：
+为方便描述，$\Lambda^*(s)$和$\Lambda(s)$的关系，
+我们引入凸共轭函数的概念。
 \begin{definition}
   定义在$\R$ 上的光滑函数 $\Lambda(s)$，
   它的凸共轭函数定义为
   $\Lambda^*(s) = \sup_{t \in \R} st-\Lambda(t)$。
   $\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。    
 \end{definition}
+
+\begin{example}\label{ex:cramer_ldp}
+  若$X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(0,1)$,
+  对于任意正数$\epsilon$，
+  下面我们 用  Cramér 定理 计算 $P(\frac{1}{n} \sum_{i=1}^n X_i > \epsilon)$ 
+  随着$n$增大收敛到零
+  的速率。首先计算标准正态分布的 log-MGF 为 $\Lambda(s)=s^2/2$，
+  其凸共轭$\Lambda^*(s)=\Lambda(s)=s^2/2$。因此
+  由式\eqref{eq:cramer}
+  $\lim_{n\to \infty} \frac{1}{n}\log P( \sum_{i=1}^n X_i \geq  ns) =-s^2/2$。
+  \end{example}
 
 \subsection{雷尼散度与切尔诺夫信息}
 在假设检验的问题中，我们要确定 i.i.d. 采样的样本
@@ -1354,5 +1367,6 @@ $D^*$的数学定义为：
   = \frac{1}{2}(\sqrt{a} - \sqrt{b})^2
 \end{equation}
 
-\subsection{小节}
-以上介绍的三种度量表面看起来关系不大，但它们都可以看做KL散度的某种推广。
+%\subsection{小节}
+以上介绍的三种度量都可以看做KL散度的某种推广，在实际使用中根据所研究
+的问题选取较为方便的度量形式更易获得有启发性的结论。
