@@ -3,7 +3,7 @@
 \chapter{背景知识}
 本章对社群发现的基本概念、可恢复性、与有理论保证的算法进行简要介绍，作为我们研究的
 基础。
-\section{社群发现}\label{sec:community_detection}
+\section{社群发现的数学模型}\label{sec:community_detection}
 \newglossaryentry{cd}{name=社群发现, description={Community detection}}
 
 \gls{cd}(\glsdesc{cd}) 虽然没有严格的数学定义，但公认的做法是
@@ -1105,7 +1105,10 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社群发现的
   $\lim_{n\to\infty} P(\hat{Y}=\sigma\sigma^T)=1$。
 \end{theorem}
 \section{信息论度量}
-\subsection{局部信息几何}\label{sec:local_geometry}
+由于本文要用到多种信息论度量研究
+社群发现问题，下面依次对多变量互信息、速率函数、雷尼散度等相关知识进行简要介绍。
+
+\subsection{多变量互信息与局部信息几何}\label{sec:local_geometry}
 局部信息几何的理论是由华人学者郑立中等人提出\cite{huang2019universal}，
 可从理论的层面分析机器学习中的特征提取\cite{huang2017information}、人工神经网络
 \cite{huang2019information}等问题。
@@ -1183,7 +1186,11 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$
 了弱独立情形下互信息的表达式。
 \end{example}
 
-\subsection{型方法与 Sanov 定理}
+\subsection{速率函数与大偏差原理}
+本小节将首先从型的概念出发，引出针对离散随机变量的大偏差原理：Sanov定理，
+型的概念和Sanov定理将在我们推导拓展随机块模型的最优误差率结论中用到。之后我们会
+介绍大偏差原理的一般形式，即Cramér定理，从而引出速率函数的概念。
+
 \newglossaryentry{type}{name=型, description={Type}}
 在信息论中，我们首先假定所有的元素均从字母集$\mathcal{X}$
 中选取。
@@ -1202,7 +1209,7 @@ $\mathcal{X}=\{1,2,3\}$。对于$11321$
 $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
 这里 $P_x$ 是 $x$的型。
 
-下面介绍 Sanov 定理：
+下面介绍的 Sanov 定理给出了$Q^n(E)$的上下界：
 \begin{theorem}
   设 $X_1, \dots, X_n$ i.i.d. 服从分布 $Q(x)$，
   若 $E$ 表示概率分布的集合，且$E$的闭包是其自身。
@@ -1216,11 +1223,46 @@ $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
     P^* = \arg\min_{P\in E} D(P||Q)
   \end{equation}
   极限情形下有：
-  \begin{equation}
+  \begin{equation}\label{eq:limit_sanov}
     \lim_{n\to \infty} \frac{1}{n} \log Q^n(E) = -D(P^*||Q)
   \end{equation}
 \end{theorem}
-\subsection{假设检验与 切尔诺夫信息}
+\begin{example}\label{ex:sanov_ldp}
+若$X_1, \dots, X_n$ i.i.d. $\sim \Bern(p)$,
+对于任意正数$\epsilon$，
+我们可以用 Sanov 定理估计 $P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$ 随着$n$增大收敛到零
+的速率，其中$\bar{X}$是$X_1,\dots, X_n$的平均值，等于$p$。
+此时集合$E=\{\Bern(q)| q>p+\epsilon\}$。
+而$Q^n(E)=P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$
+因此由式\eqref{eq:limit_sanov}可得 $\lim_{n\to \infty} \frac{1}{n} \log Q^n(E)=-D(\Bern(p+\epsilon)||\Bern(p))$。
+\end{example}
+Sanov 定理仅针对离散型分布给出了计算诸如
+的方法，若将例\ref{ex:sanov_ldp} 中诸$X_i$ 改为高斯分布，
+则可以用Sanov 定理的推广形式 Cramér定理来解决。我们下面先介绍该定理：
+
+\begin{theorem}\label{thm:cramer}
+  \newglossaryentry{log_mgf}{name=对数矩生成函数, description={logarithmic moment generating function}}
+令 $X_i$ 为i.i.d. 的随机变量的序列，且$X_1$ 存在 \gls{log_mgf}
+$\Lambda(t)=\log \E[\exp(t X_1)]$ (log-MGF)。
+令 $\Lambda^*(s)= \sup_{t \in \R} st-\Lambda(t)$，则对于所有$s>\E[X_1]$，
+我们有
+\begin{equation}\label{eq:gartner_ellis}
+\lim_{n\to \infty} \frac{1}{n}\log P( \sum_{i=1}^n X_i \geq  ns) = - \Lambda^*(s)
+\end{equation}
+\end{theorem}
+由于$\Lambda^*(s)$描述了$P( \sum_{i=1}^n X_i \geq  ns)$随$n$增大衰减到零的速率，
+\newglossaryentry{rate_function}{name=速率函数, description={rate function}}
+我们把$\Lambda^*(s)$叫做 \gls{rate_function}。
+
+另外，定理\ref{thm:cramer}中出现的$\Lambda^*(s)$和$\Lambda(s)$互为凸共轭函数：
+\begin{definition}
+  定义在$\R$ 上的光滑函数 $\Lambda(s)$，
+  它的凸共轭函数定义为
+  $\Lambda^*(s) = \sup_{t \in \R} st-\Lambda(t)$。
+  $\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。    
+\end{definition}
+
+\subsection{雷尼散度与切尔诺夫信息}
 在假设检验的问题中，我们要确定 i.i.d. 采样的样本
 $X_1, \dots, X_n$ 服从
 $P_1$ 还是 $P_2$ 分布。为此，考虑两个假设：
@@ -1311,3 +1353,6 @@ $D^*$的数学定义为：
   D_{1/2}(\Pois(\frac{a}{2}) || \Pois(\frac{b}{2}))
   = \frac{1}{2}(\sqrt{a} - \sqrt{b})^2
 \end{equation}
+
+\subsection{小节}
+以上介绍的三种度量表面看起来关系不大，但它们都可以看做KL散度的某种推广。
