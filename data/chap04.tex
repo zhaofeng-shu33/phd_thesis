@@ -15,8 +15,9 @@
 我们称之为基于玻茨模型的社群发现算法（\ref{sec:potts}节），
 在研究这一算法的过程中，我们将展示如何利用速率函数刻画其精确恢复条件
 和误差衰减率等性质。进一步地，我们将研究由玻茨模型
-衍生出的社群发现算法，我们称之为基于能量最小化的社群发现算法（\ref{sec:em}节）。
-
+衍生出的社群发现算法的误差率，我们称该方法为基于能量最小化的社群发现算法（\ref{sec:em}节）。
+上述算法便于理论分析但实际实现需要近似求解的算法，这一点将在
+\ref{sec:ms}小节进行研究，通过该近似算法的实验结果我们将验证$\beta$参数对误差率的影响。
 \section{参数估计}\label{sec:parameter_estimation}
 
 本节中，我们考虑 $\SSBM(n,k,\A, \B)$ 模型的参数估计
@@ -41,7 +42,8 @@ $T_2$，然后通过解下述非线性方程得到
 关于 (\ref{eq:e_1}) 和
 (\ref{eq:e_2}) 的方程组
 有唯一解 $(\hat{a}, \hat{b})$，
-并且该解是参数$(a,b)$的一致估计量。
+\newglossaryentry{consistent_est}{name=一致估计量, description={Consistent estimator}}
+并且该解是参数$(a,b)$的 \gls{consistent_est}。
 也即 $\hat{a}, \hat{b}$ 
 分别依概率收敛到 $a,b$ 。
 \end{theorem}
@@ -64,7 +66,7 @@ $(a,b,k)$ 的组合，对于每一种取值
 \newacronym{acr:mse}{MSE}{Mean Square Error}
 $(\hat{a}, \hat{b})$，进而计算均方误差
  (\gls{acr:mse}) $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
- 这里  $m$ 取 $1000$。
+ 这里  采样次数$m$ 取 $1000$。
  实验结果 如
  图~\ref{fig:estimator} 所示。
  由此可见， 随着 $n$ 的增大，
@@ -74,7 +76,7 @@ $(\hat{a}, \hat{b})$，进而计算均方误差
 
 \begin{figure}[ht!]
 	\centering
-		\includegraphics[width=0.6\textwidth]{estimator-error-2020-12-20.pdf}
+		\includegraphics[width=0.6\textwidth]{estimator-error-2023-02-07.pdf}
 		\caption{ $\hat{a}, \hat{b}$ 的估计误差随
 		$n$ 的变化规律 }\label{fig:estimator}
 \end{figure}
