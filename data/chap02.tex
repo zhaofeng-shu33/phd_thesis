@@ -460,6 +460,12 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 \footnote{PMF 是 parametric maximal flow 的缩写}。
 
 \section{随机块模型}\label{sec:sbm}
+随机块模型是我们研究社群发现问题主要使用的概率统计模型，我们将在
+本小节对其进行简要介绍。与之相关的，我们将介绍随机块模型的精确恢复问题，从而引出误差率的概念；
+此外，我们将对随机块伊辛模型这一工作进行简要介绍，该工作构成了我们第\ref{chap:sibm}章研究的基础。
+最后，我们还介绍了与我们研究有关的两个社群发现算法。
+
+\subsection{随机块模型及其精确恢复问题}\label{sec:exact_recovery}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
 \newacronym{acr:sbm}{SBM}{Stochastic Block Model}
 \gls{sbm}（\gls{acr:sbm}）是社群发现问题中最常用的统计模型之一
@@ -594,32 +600,142 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$.
 当$k=2$时，式\eqref{eq:minimum_k_cut} 即为 \gls{planted}，
 是图论中经典的NP难的二分问题之一。
 
-最后，我们再简单介绍一下社群发现领域常用的最大模块度算法
-\cite{newman2006modularity}。
-\newglossaryentry{modularity}{name=模块度, description={Modularity}}
-\gls{modularity}(\glsdesc{modularity})
-是对网络结构或图结构的一种度量，既能作为评价指标评价
-不同社群发现算法的性能，也能通过近似求解模块度最大值的思路设计算法。
-模板度越高，则节点集内部连接越紧密，而节点集之间连接越稀疏。
 
-给定$n$长的向量$x$，模块度的数学定义为：
-\begin{align}\label{eq:Q}
-  Q(x) &= \frac{1}{2 |E|} \sum_{ij} (A_{ij} - \frac{d_i d_j}{2 |E|}) \delta(x_i, x_j)
-\end{align}
-这里 $A$ 表示图的邻接矩阵，$|E|$表示边的数量，
-而$d_i$表示第
-\newglossaryentry{degree}{name=度, description={Degree}}
-$i$个节点的\gls{degree}(\glsdesc{degree})，$x_i$ 表示第$i$
-个节点所属的社群。
-
-贪心法是用于近似求解式\eqref{eq:Q}
-近似求解最大值的常用算法，其流程类似于系统聚类法，
-即从每个节点各自属于一类出发，通过中间指标最大的方法每次聚合两类，
-使得 $Q$ 不断增大。该思路可经过优化适用于求解大规模网络
-的社群发现问题 \cite{clauset2004finding}。
+随机块模型的精确恢复是指某社群发现算法用在随机块模型上可以将
+每个节点的类别都正确地分出来。因为随机块模型具有随机性，
+这里正确的分出来是指当图的节点数目趋于无穷大时，以概率1正确。
+为给出精确恢复严格的数学定义，需要引入如下置换的符号。
 
 
-\subsection{伊辛模型}\label{sec:ising}
+我们用 $S_k$ 表示 $W$  上所有的置换函数， 
+$f$ 是 定义在 $W$ 上的置换函数
+并且可以通过逐元素作用的方式
+扩展到 $W^n$ 上。
+对于任意 $\sigma \in W^n$，
+定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
+此外，我们定义两个$W^n$中的向量的距离为
+\newglossaryentry{not:dist}
+{
+  type=notation,
+  name={$\Dist(\sigma, \sigma')$},
+  description={两个$W^n$中的向量的距离，即$|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$}
+}
+\gls{not:dist}
+$=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$,
+其中 $\sigma,\sigma'\in W^n
+$。
+\begin{example}
+当 $n=2$ 且 $k=2$ 时，
+$\sigma=(1, \omega) \in W^2$;
+$\omega^0 = 1$; $\omega \cdot \omega = \omega^2 = 1$;
+令 $f$ 是一个$W$上映射，定义为
+$f(1) = \omega$ 且 $f(\omega)=1$,
+则 $f \in S_2$ 且 $f(\sigma) = (\omega, 1)$;
+$\Dist(\sigma, f(\sigma)) = 2$;
+$S_k(\sigma) = \{\sigma, f(\sigma)\}$; 且
+$S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
+=\{(1, 1), (\omega, \omega)\}$。
+\end{example}
+
+给定 随机块模型，精确恢复问题可以正式定义如下:
+\newglossaryentry{exact_recovery}{name=精确恢复, description={Exact Recovery}}
+\begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
+给定节点标签 $X$, 随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
+一个社群发现算法$\hat{X}$ 相当于从已知的$G$中估计$X$，也被称做$X$
+的估计量。称该算法
+可精确恢复$X$，如果
+\begin{equation}\label{eq:Pa_hat_X}
+P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
+\end{equation}
+\end{definition}
+
+在上述定义中, 记号 $\hat{X} \in S_k(X)$ 表示
+我们只能获得相对于真实标签$X$的置换意义下的恢复结果。
+因为没有一个类别的基准，
+这种情况在无监督学习领域比较常见。
+式\eqref{eq:Pa_hat_X}中记号 $P_a(\hat{X})$
+被叫做 估计量 $\hat{X}$ 的
+准确概率。
+\begin{remark}\label{rem:metric_exact_recovery}\,
+  \begin{enumerate}
+    \item 令 $P_e(\hat{X}) = 1 - P_a(\hat{X})$
+    表示错误概率。
+    定义\ref{def:SSBMR} 也可以写成当$n\to \infty$
+    时，
+    $P_e(\hat{X}) \to 0$。
+  \item  此外，我们要指出的是, 对给定的图 $G$, 估计量$\hat{X}$可以是确定性的也
+  可以是随机的。
+  对于随机算法, $\hat{X} \in S_k(X)$ 发生的概率 应该理解
+  为 $\sum_{G \in \cG_n} P_G(G) P_{\hat{X}|G}(\hat{X} \in S_k(X))$。 
+  对于确定的图，这个概率是 $P_G(\hat{X} \in S_k(X))$。  
+  \end{enumerate}
+\end{remark}
+
+在定义\ref{def:SSBMR}中，精确恢复也称强恢复。强恢复是相对于弱恢复
+而言的，前者要求所有节点都要分对，而后者只要求分对节点的比率收敛到1即可。
+关于这两种恢复条件近年来涌现大量相关的研究工作，
+因为我们的工作只涉及强恢复，
+下面对一些和强恢复有关的重要结论进行逐一介绍。
+
+设$a>b>0$，针对两个社群（$k=2$）且$p=\A,q=\B$的情形。
+Abbe \cite{abbe2015exact} 和 Mossel
+\cite{mossel2016} 分别独立的研究发现了最大似然算法
+精确恢复误差的变化规律。
+因为最大似然算法相当于理论最优的估计量，他们的成果可总结为如下定理：
+\begin{theorem}\label{thm:sbm2_phase_transition}
+设 $P_e=P(\hat{X} \neq \pm X)$: 当 $n \to \infty$，
+对于 $\SSBM(n,2,\A, \B)$ 模型，
+有如下两种情形：
+	\begin{enumerate}
+		\item $\sqrt{a} - \sqrt{b} > \sqrt{2}$时,
+    $P_e \to 0$, 存在算法满足精确恢复的要求;
+		\item $\sqrt{a} - \sqrt{b} < \sqrt{2}$时,
+    $P_e \to 1$, 没有算法可实现精确恢复。
+	\end{enumerate}
+\end{theorem}
+定理\ref{thm:sbm2_phase_transition} 揭示了
+具有2个社群结构的SBM模型在精确恢复度量下的相变规律，
+该结论很快被Abbe 推广到$k>2$的情形
+\cite{abbe2015community}，由定理
+\ref{thm:sbmk_phase_transition} 给出。
+该结果可以视为一般的SBM
+精确恢复条件的一个特例。
+
+\begin{theorem}\label{thm:sbmk_phase_transition}
+  对于 $\SSBM(n,k,\A, \B)$ 模型，当条件
+  \begin{equation}\label{eq:abk}
+    \sqrt{a} - \sqrt{b} > \sqrt{k}
+  \end{equation}   
+  满足时，
+  精确恢复可实现，
+  而当$\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
+  没有算法可实现精确恢复。
+\end{theorem}
+\newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
+\begin{remark}
+  Abbe 在文章中指出，定理 \ref{thm:sbmk_phase_transition}
+  给出的结论和 \gls{hellinger} (\glsdesc{hellinger})有关。
+  对于两个$\R^d$中的向量$u,v$，它们的
+  海林格距离 
+  的平方定义为
+  \begin{equation}
+    H^2(u,v) = \frac{1}{2}
+    \sum_{i=1}^d (\sqrt{u_i} - \sqrt{v_i})^2
+  \end{equation}
+  若定义向量 $u= (\frac{a}{k}, \frac{b}{k})$,
+  $v =  (\frac{b}{k}, \frac{a}{k})$,。
+  则
+  $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 的条件
+  可改写成
+  $H(u, v) > 1$，其中
+  \begin{equation}\label{eq:Hellinger_abuv}
+    H(u,v)=\frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}}    
+  \end{equation}
+  上面介绍的是Abbe 引入的切尔诺夫-海林格距离的定义，
+  但他在文章中使用的距离度量仅是正的测度而不是随机变量间的，该解释略显生硬。
+\end{remark}
+
+\subsection{随机块-伊辛模型}\label{sec:ising}
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
@@ -780,182 +896,10 @@ $\frac{\log n}{n}$
 从$\delta(\sigma_i, \sigma_j) = \frac{\sigma_i \sigma_j + 1}{2}$
 可以看出，它们之间差了一个伸缩变换。
 \end{remark}
-\subsection{大偏差理论与聚集不等式}
-本节我们列出我们工作数学证明中用到的概率论中的聚集不等式。
 
-\newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov Inequality}}
-\begin{lemma}[\gls{markov_ieq}] 
-  设 $X$ 是非负型随机变量，则对于非负实数$a$有：
-  \begin{equation}
-    P(X\geq a) \leq {1 \over a} \E[X]   
-  \end{equation}
-   若$X$ 不一定非负，$a$ 是任意实数，可先取$e$指数再运用马尔可夫不等式，
-   即有
-   \begin{equation}\label{eq:chernoff_bound}
-    P(X\geq a) = P(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]
-   \end{equation}
-   对任意的$t>0$成立。
-   \newglossaryentry{chernoff}{name=切尔诺夫不等式, description={Chernoff Inequality}}
-
-   式\eqref{eq:chernoff_bound}也被称为 \gls{chernoff}。
-\end{lemma}
-\newglossaryentry{chebyshev_ieq}{name=切比雪夫不等式, 
-description={Chebyshev's Inequality}}
-\begin{lemma}[\gls{chebyshev_ieq}]
-  \newglossaryentry{not:variance}
-{
-  type=notation,
-  name={$\Var[\cdot]$},
-  description={方差}
-}
-  对于随机变量 $X$， 正实数$a$，我们有
-  \begin{equation}
-    P(\abs{X-\E[X]} \geq a) \leq {1 \over a^2} \Var[X]
-  \end{equation}
-  这里，$\Var[X]$表示随机变量$X$的\glsdesc{not:variance}。
-\end{lemma}
-
-% to do: add large deviation theory and hypothesis testing
-
-\subsection{随机块模型的精确恢复问题}\label{sec:exact_recovery}
-随机块模型的精确恢复是指某社群发现算法用在随机块模型上可以将
-每个节点的类别都正确地分出来。因为随机块模型具有随机性，
-这里正确的分出来是指当图的节点数目趋于无穷大时，以概率1正确。
-为给出精确恢复严格的数学定义，需要引入如下置换的符号。
-
-
-我们用 $S_k$ 表示 $W$  上所有的置换函数， 
-$f$ 是 定义在 $W$ 上的置换函数
-并且可以通过逐元素作用的方式
-扩展到 $W^n$ 上。
-对于任意 $\sigma \in W^n$，
-定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
-此外，我们定义两个$W^n$中的向量的距离为
-\newglossaryentry{not:dist}
-{
-  type=notation,
-  name={$\Dist(\sigma, \sigma')$},
-  description={两个$W^n$中的向量的距离，即$|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$}
-}
-\gls{not:dist}
-$=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$,
-其中 $\sigma,\sigma'\in W^n
-$。
-\begin{example}
-当 $n=2$ 且 $k=2$ 时，
-$\sigma=(1, \omega) \in W^2$;
-$\omega^0 = 1$; $\omega \cdot \omega = \omega^2 = 1$;
-令 $f$ 是一个$W$上映射，定义为
-$f(1) = \omega$ 且 $f(\omega)=1$,
-则 $f \in S_2$ 且 $f(\sigma) = (\omega, 1)$;
-$\Dist(\sigma, f(\sigma)) = 2$;
-$S_k(\sigma) = \{\sigma, f(\sigma)\}$; 且
-$S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
-=\{(1, 1), (\omega, \omega)\}$。
-\end{example}
-
-给定 随机块模型，精确恢复问题可以正式定义如下:
-\newglossaryentry{exact_recovery}{name=精确恢复, description={Exact Recovery}}
-\begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
-给定节点标签 $X$, 随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
-一个社群发现算法$\hat{X}$ 相当于从已知的$G$中估计$X$，也被称做$X$
-的估计量。称该算法
-可精确恢复$X$，如果
-\begin{equation}\label{eq:Pa_hat_X}
-P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
-\end{equation}
-\end{definition}
-
-在上述定义中, 记号 $\hat{X} \in S_k(X)$ 表示
-我们只能获得相对于真实标签$X$的置换意义下的恢复结果。
-因为没有一个类别的基准，
-这种情况在无监督学习领域比较常见。
-式\eqref{eq:Pa_hat_X}中记号 $P_a(\hat{X})$
-被叫做 估计量 $\hat{X}$ 的
-准确概率。
-\begin{remark}\label{rem:metric_exact_recovery}\,
-  \begin{enumerate}
-    \item 令 $P_e(\hat{X}) = 1 - P_a(\hat{X})$
-    表示错误概率。
-    定义\ref{def:SSBMR} 也可以写成当$n\to \infty$
-    时，
-    $P_e(\hat{X}) \to 0$。
-  \item  此外，我们要指出的是, 对给定的图 $G$, 估计量$\hat{X}$可以是确定性的也
-  可以是随机的。
-  对于随机算法, $\hat{X} \in S_k(X)$ 发生的概率 应该理解
-  为 $\sum_{G \in \cG_n} P_G(G) P_{\hat{X}|G}(\hat{X} \in S_k(X))$。 
-  对于确定的图，这个概率是 $P_G(\hat{X} \in S_k(X))$。  
-  \end{enumerate}
-\end{remark}
-
-在定义\ref{def:SSBMR}中，精确恢复也称强恢复。强恢复是相对于弱恢复
-而言的，前者要求所有节点都要分对，而后者只要求分对节点的比率收敛到1即可。
-关于这两种恢复条件近年来涌现大量相关的研究工作，
-因为我们的工作只涉及强恢复，
-下面对一些和强恢复有关的重要结论进行逐一介绍。
-
-设$a>b>0$，针对两个社群（$k=2$）且$p=\A,q=\B$的情形。
-Abbe \cite{abbe2015exact} 和 Mossel
-\cite{mossel2016} 分别独立的研究发现了最大似然算法
-精确恢复误差的变化规律。
-因为最大似然算法相当于理论最优的估计量，他们的成果可总结为如下定理：
-\begin{theorem}\label{thm:sbm2_phase_transition}
-设 $P_e=P(\hat{X} \neq \pm X)$: 当 $n \to \infty$，
-对于 $\SSBM(n,2,\A, \B)$ 模型，
-有如下两种情形：
-	\begin{enumerate}
-		\item $\sqrt{a} - \sqrt{b} > \sqrt{2}$时,
-    $P_e \to 0$, 存在算法满足精确恢复的要求;
-		\item $\sqrt{a} - \sqrt{b} < \sqrt{2}$时,
-    $P_e \to 1$, 没有算法可实现精确恢复。
-	\end{enumerate}
-\end{theorem}
-定理\ref{thm:sbm2_phase_transition} 揭示了
-具有2个社群结构的SBM模型在精确恢复度量下的相变规律，
-该结论很快被Abbe 推广到$k>2$的情形
-\cite{abbe2015community}，由定理
-\ref{thm:sbmk_phase_transition} 给出。
-该结果可以视为一般的SBM
-精确恢复条件的一个特例。
-
-\begin{theorem}\label{thm:sbmk_phase_transition}
-  对于 $\SSBM(n,k,\A, \B)$ 模型，当条件
-  \begin{equation}\label{eq:abk}
-    \sqrt{a} - \sqrt{b} > \sqrt{k}
-  \end{equation}   
-  满足时，
-  精确恢复可实现，
-  而当$\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
-  没有算法可实现精确恢复。
-\end{theorem}
-\newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
-\begin{remark}
-  Abbe 在文章中指出，定理 \ref{thm:sbmk_phase_transition}
-  给出的结论和 \gls{hellinger} (\glsdesc{hellinger})有关。
-  对于两个$\R^d$中的向量$u,v$，它们的
-  海林格距离 
-  的平方定义为
-  \begin{equation}
-    H^2(u,v) = \frac{1}{2}
-    \sum_{i=1}^d (\sqrt{u_i} - \sqrt{v_i})^2
-  \end{equation}
-  若定义向量 $u= (\frac{a}{k}, \frac{b}{k})$,
-  $v =  (\frac{b}{k}, \frac{a}{k})$,。
-  则
-  $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 的条件
-  可改写成
-  $H(u, v) > 1$，其中
-  \begin{equation}\label{eq:Hellinger_abuv}
-    H(u,v)=\frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}}    
-  \end{equation}
-  上面介绍的是Abbe 引入的切尔诺夫-海林格距离的定义，
-  但他在文章中使用的距离度量仅是正的测度而不是随机变量间的，该解释略显生硬。
-\end{remark}
-
-\subsection{SIBM 模型}\label{sec:sibm_model}
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
-将\ref{sec:sbm} 节 介绍的随机块模型与 \ref{sec:ising} 节介绍的 伊辛模型
+将\ref{sec:exact_recovery}小节 介绍的随机块模型与 本小节介绍的 伊辛模型
 复合起来可得到 \gls{sibm}（\gls{acr:sibm}）\cite{ye2020exact}。
 该模型首先由 SBM 生成随机图，
 再由随机图上定义的 伊辛模型多次生成节点的状态。
@@ -1033,7 +977,72 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 相比于$\pm X$的位置
 会以更大的概率聚集在$\pm \bm{1}$。
 
-\subsection{半正定规划做社群发现}
+
+\citet{ye2020exact} 在本工作的技术证明中，用到了马尔可夫不等式和切尔诺夫不等式这两个概率论中常用的聚集不等式。
+由于我们在后面章节的技术证明中也要用到这两个不等式，故在本小节最后列出它们，方便后面引用。
+
+\newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov Inequality}}
+\begin{lemma}[\gls{markov_ieq}] 
+  设 $X$ 是非负型随机变量，则对于非负实数$a$有：
+  \begin{equation}
+    P(X\geq a) \leq {1 \over a} \E[X]   
+  \end{equation}
+   若$X$ 不一定非负，$a$ 是任意实数，可先取$e$指数再运用马尔可夫不等式，
+   即有
+   \begin{equation}\label{eq:chernoff_bound}
+    P(X\geq a) = P(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]
+   \end{equation}
+   对任意的$t>0$成立。
+   \newglossaryentry{chernoff}{name=切尔诺夫不等式, description={Chernoff Inequality}}
+
+   式\eqref{eq:chernoff_bound}也被称为 \gls{chernoff}。
+\end{lemma}
+\newglossaryentry{chebyshev_ieq}{name=切比雪夫不等式, 
+description={Chebyshev's Inequality}}
+\begin{lemma}[\gls{chebyshev_ieq}]
+  \newglossaryentry{not:variance}
+{
+  type=notation,
+  name={$\Var[\cdot]$},
+  description={方差}
+}
+  对于随机变量 $X$， 正实数$a$，我们有
+  \begin{equation}
+    P(\abs{X-\E[X]} \geq a) \leq {1 \over a^2} \Var[X]
+  \end{equation}
+  这里，$\Var[X]$表示随机变量$X$的\glsdesc{not:variance}。
+\end{lemma}
+
+% to do: add large deviation theory and hypothesis testing
+
+
+\subsection{最大模块度算法与基于半正定规划的社群发现算法}
+
+最后，我们再简单介绍一下社群发现领域常用的最大模块度算法
+\cite{newman2006modularity}。
+\newglossaryentry{modularity}{name=模块度, description={Modularity}}
+\gls{modularity}(\glsdesc{modularity})
+是对网络结构或图结构的一种度量，既能作为评价指标评价
+不同社群发现算法的性能，也能通过近似求解模块度最大值的思路设计算法。
+模板度越高，则节点集内部连接越紧密，而节点集之间连接越稀疏。
+
+给定$n$长的向量$x$，模块度的数学定义为：
+\begin{align}\label{eq:Q}
+  Q(x) &= \frac{1}{2 |E|} \sum_{ij} (A_{ij} - \frac{d_i d_j}{2 |E|}) \delta(x_i, x_j)
+\end{align}
+这里 $A$ 表示图的邻接矩阵，$|E|$表示边的数量，
+而$d_i$表示第
+\newglossaryentry{degree}{name=度, description={Degree}}
+$i$个节点的\gls{degree}(\glsdesc{degree})，$x_i$ 表示第$i$
+个节点所属的社群。
+
+贪心法是用于近似求解式\eqref{eq:Q}
+近似求解最大值的常用算法，其流程类似于系统聚类法，
+即从每个节点各自属于一类出发，通过中间指标最大的方法每次聚合两类，
+使得 $Q$ 不断增大。该思路可经过优化适用于求解大规模网络
+的社群发现问题 \cite{clauset2004finding}。
+
+
 针对随机块模型的社群发现
 可以先将最大似然方法获得的目标函数
 写成整数优化的问题形式，
