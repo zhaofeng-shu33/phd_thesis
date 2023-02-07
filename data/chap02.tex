@@ -23,7 +23,7 @@
 社群发现算法根据发现的社群是否重叠可分为两类，本文研究的是非重叠的
 社群发现算法，即$V$可以分为互不重叠的若干子集。
 
-\section{基于最小化平均误差的图分割}
+\section{基于最小化平均误差的图分割算法}
 不同的社群发现算法根据自己的标准寻找社群结构，这给一般意义上的比较造成了困难。
 在本节中我们介绍的社群发现算法采用的标准叫做最小化平均误差。
 这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式
@@ -261,156 +261,6 @@ $x(A)$ 定义为 $\sum_{i \in A} x_i$。
   \beta = x^* + \sum_{x_v > 0, 1\leq v < l} x_v
 \end{equation}
 
-\subsection{信息聚类}\label{sec:info_clustering}
-在信息论领域，互信息提供了两个随机变量之间的
-距离度量。使用 KL 散度的记号，随机变量$X$
-和 $Y$ 之间的互信息定义为：
-\begin{equation}\label{eq:mutual_info}
-  I(X;Y) = D(P_{XY} ||P_XP_Y)
-\end{equation}
-\newglossaryentry{not:kl_dev}
-{
-  type=notation,
-  name={$D(P_X||P_Y)$},
-  description={分布$P_X$ 和 $P_Y$之间的 KL 散度}
-}
-其中 $P_X, P_Y$分别表示边缘分布，$D(P_X||P_Y)$
-表示 \glsdesc{not:kl_dev}。
-而$P_{XY}$
-表示两个随机变量的联合分布。有多种方法可将互信息
-的概念推广到两个及以上的随机变量，
-其中华人学者陈聪提出了一种推广 \cite{ska} 具有多种好的性质，
-\newglossaryentry{mmi}{name=多变量互信息, description={Multivariate mutual information}}
-\newacronym{acr:mmi}{MMI}{Multivariate mutual information}
-且涵盖了图结构的情形，我们把他的推广叫做 \gls{mmi} (\gls{acr:mmi})。
-
-下面我们对MMI做简要的介绍。定义$V$是随机变量
-的序号集合，$C$是 $V$的子集，$Z_C=\{Z_i | i \in C\}$
-表示随机变量序号在 $C$ 中的随机变量 $Z_i$ 的集合。
-$\P$ 表示$V$ 的一个分割，$P_{Z_C}$表示$Z_C$
-的联合分布。$\Pi'(V)$ 是
-除去$\{V\}$外所有$V$的分割的集合。MMI的度量定义为：
-\begin{align}
-  I(Z_V) &:= \min_{\P \in \Pi'(V)} I_{\P}(Z_V)
-  \textrm{ 其中 } \label{eq:IZV}\\  
-  I_{\P}(Z_V) &:= \frac{1}{|\P| - 1}D(P_{Z_V} || \prod_{C\in \P} P_{Z_C}) \label{eq:IPZV}
-\end{align}
-在上面的定义中，如果$Z_V$彼此独立，那么$I(Z_V)=0$，
-反之亦然。
-
-式\eqref{eq:IPZV}给出了特定分割下的多变量互信息，
-也可根据下式把KL散度改写成熵的形式。
-\begin{equation}\label{eq:entropy_expression}
-  D(P_{Z_V} || \prod_{C\in \P} P_{Z_C}) 
-  = \sum_{C \in \P}
-  H(Z_C) - H(Z_V)
-\end{equation}
-对于一般的分布，式\ref{eq:IZV}
-难于计算。陈聪提出了一种特殊的PIN模型\cite{pin}\footnote{PIN 是 pairewise independent network
-的缩写}，
-使得多变量互信息可以用\ref{sec:community_detection}节
-介绍的PSP算法进行计算。
-这里略去PIN模型的数学定义，而是通过下面的例子
-阐发它和图结构的联系。
-\begin{example}\label{ex:mmi}
-  令$V=\{1,2,3\}$，$Z_1=(X_a, X_c)$,
-  $Z_2=(X_a,X_b)$ 且 $Z_3=(X_b,X_c)$。
-  $X_a,X_b,X_c$是独立的随机变量且它们的熵分别为：
-  $H(X_a)=H(X_b)=1, H(X_c)=5$。
-  利用联合熵的公式不难计算出$H(Z_1)=H(X_a)+H(X_c)$以及
-  $H(Z_1, Z_2) = H(X_a) + H(X_b) + H(X_c)$等。
-  若 $\P=\{\{1,2\}, \{3\}\}$，则根据
-  \eqref{eq:entropy_expression}式，
-  $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = H(X_a)
-  +H(X_b)$。我们可以将上面的计算用图\ref{fig:example_directed}
-  进行对应，即把$Z_i$对应到第$i$的节点，
-  $Z_i$与$Z_j$之间的互信息对应到第$i$和第$j$个节点之间
-  边的权值，而KL散度即为不同的类别之间边的权值之和。
-\end{example}
-例\ref{ex:mmi}中虽然只有三个节点，
-但对于一般的情形，PIN模型也是和一个有向图有
-着类似的对应关系。因此，在PIN模型下多变量互信息可以用
-PSP算法进行计算。
-
-基于MMI可以对随机变量进行聚类，聚类簇
-定义为
-\begin{align}
-  C(Z_V) &:= \bigcup_{\gamma \in \R} C_{\gamma}(Z_V)
-  \label{eq:czv}\\
-  C_{\gamma}(Z_V) &:= \textrm{maximal}
-  \{ B \subseteq V \big\vert |B|>1, I(Z_B) > \gamma  \}
-\end{align}
-理论分析表明，基于定义式\ref{eq:czv} 可以得到和
-式\ref{eq:PSP_structure}类似的层次聚类结果。
-即存在一系列的临界值$\lambda_1 < \dots < \lambda_k$和分割
-$\P_k \preceq \dots \preceq \P_0$，使得
-$C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
-且$C_{\lambda_i}(Z_V) = \P_i$。
-
-有两种生成聚类簇的方法 \cite{chan2020agglomerative}，它们均可以通过聚类树
-来描述。聚类树可看成是一系列
-嵌套的分割$\P_i$的另一种描述方式。
-聚类树有一个根节点$V$，
-其所有的叶节点为 $\{j\}$，其他节点均对应着
-一个聚类簇。
-
-\begin{description}
-  \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$, 
-  把 $\P^*$ 中每一个元素作为 $V$ 的子节点。
-  对于每一个子节点$C$，求解$I(Z_C)=I_{\P_C}(Z_C)$
-  并使用分割 $\P_C$ 对子树进一步细分直到子节点变成单元素集为止。
-  \item[自底向上\footnotemark] 假设 $I(Z_C) = \max_{B\subseteq V} I(Z_B)$ 并且 
-  将 $C$ 中所有的元素合并成一个作为聚类树的子节点。对于当前所有子节点，找到MMI
-  最大的集合进行合并直到所有子节点合并成根节点$V$为止。
-  \end{description}
-  \footnotetext{参见\cite{agg_ic}}
-
-  \begin{figure}[!ht]
-    \centering
-    \begin{subfigure}[b]{0.38\linewidth}
-      \centering
-      \includegraphics[width=\textwidth]{top_down.pdf}
-      \caption{}\label{fig:top_down}
-    \end{subfigure}~
-  \begin{subfigure}[b]{0.33\linewidth}
-    \centering
-    \includegraphics[width=\textwidth]{threshold_a.pdf}
-    \caption{}\label{fig:threshold_a}
-  \end{subfigure}~
-  \begin{subfigure}[b]{0.29\linewidth}
-    \centering
-    \includegraphics[width=\textwidth]{threshold_b.pdf}
-    \caption{}\label{fig:threshold_b}
-  \end{subfigure}
-    \caption{聚类树示例}\label{fig:mmi_example}
-  \end{figure}
-自顶向下
-获得聚类树的示意图由图 \ref{fig:top_down} 给出。
-下面我们用一个简单的例子来说明聚类树的结构。
-  \begin{example}\label{ex:mmi_tree}
-考虑图\ref{fig:threshold_b}所示的情形，
-$V=\{1,2,3,4\}$。互信息在图的边上标出，
-比如 $I(Z_1;Z_2)=1, I(Z_1;Z_4)=0$。
-利用定义式\ref{eq:IZV}不难求出
-$I(Z_V)=0.9$。 
-我们可以写出完整的聚类结果：
-\begin{equation*}
-\P = 
-\begin{cases}
-\{\{1,2,3,4\}\} & \lambda < 0.9 \\
-\{\{1,2\},\{3,4\}\} & 0.9 \leq \lambda < 1 \\
-\{\{1\},\{2\},\{3,4\}\} & 1 \leq \lambda < 2\\
-\{\{1\},\{2\},\{3\},\{4\}\} & \lambda \geq 2
-\end{cases}
-\end{equation*}
-把各临界值$\lambda_i$ 标到聚类树上即如图
-\ref{fig:threshold_a}所示。
-\end{example}
-最后，我们再介绍一个多变量互信息的性质，它将在我们后面社群中的异常值点的检测工作中
-用到。这个性质给出了最大的临界值 $\lambda_k$ 的多变量互信息表达式\cite{agg_ic}：
-\begin{equation}\label{eq:largest_threshold}
-\lambda_k = \max_{A\subseteq V} I(Z_A)
-\end{equation}
 
 \subsection{参数化的最大流算法}
 最大流算法用于解决网络流中从一点到另一点的最优运输路径的问题。
@@ -769,7 +619,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 	\end{subfigure}~
 	\begin{subfigure}{0.53\textwidth}
 		\includegraphics[width=\textwidth]{monte-carlo-ising-6.png}
-		\caption{$M$随温度变化情况}
+		\caption{$M$随温度变化情况}\label{fig:square_lattice_b}
 	\end{subfigure}
   \caption{正方形网络上的伊辛模型及其磁化强度的变化}
 \end{figure}
@@ -785,8 +635,11 @@ $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁子的状态，
 		\item $T< T_c$, $M>0$, 发生自发磁化。
 		\item $T> T_c$, $M=0$, 无自发磁化。
 \end{enumerate}
-图\ref{fig:square_lattice}中给出了自发磁化的仿真实验结果，其中临界温度用
-红竖线标出。
+图\ref{fig:square_lattice_b}中给出了自发磁化的仿真实验结果，其中临界温度用
+红竖线标出。从图中可见在临界温度处磁化强度突然降为零，也即
+磁子的自旋方向由完全一致变成两种状态各占一半。我们称临界温度处伊辛模型
+\newglossaryentry{phase_trans}{name=相变, description={Phase transition}}
+的这种变化为相变（\glsdesc{phase_trans}）现象，我们在第\ref{chap:sibm}章也将展示社群发现中也有类似图\ref{fig:square_lattice_b}的相变现象。
 
 对于自发磁化现象可以通过统计力学中的正则系踪（Canonical ensemble）
 理论进行解释。该理论
@@ -796,7 +649,8 @@ P(\sigma = \bar{\sigma}) = \frac{1}{Z} \exp(-\beta H(\bar{\sigma}))
 \end{equation}
 其中$\sigma \in \{\pm 1\}^n$ 表示粒子的状态，
 $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的总能量，$\beta$是与温度成反比的参数，
-也叫逆温度（inverse temperature），$Z$是配分函数，是概率分布的
+\newglossaryentry{inverse_temp}{name=逆温度, description={Thermodynamic beta}}
+也叫逆温度（\glsdesc{inverse_temp}），$Z$是配分函数，是概率分布的
 归一化常数。
 
 伊辛模型除了定义在正方形网格上外，还可以推广到一般的图 $G(V, E)$ 上。
@@ -1118,6 +972,157 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社群发现的
 社群发现问题，下面依次对多变量互信息、速率函数、雷尼散度等相关知识进行简要介绍。
 
 \subsection{多变量互信息与局部信息几何}\label{sec:local_geometry}
+\subsection{信息聚类}\label{sec:info_clustering}
+在信息论领域，互信息提供了两个随机变量之间的
+距离度量。使用 KL 散度的记号，随机变量$X$
+和 $Y$ 之间的互信息定义为：
+\begin{equation}\label{eq:mutual_info}
+  I(X;Y) = D(P_{XY} ||P_XP_Y)
+\end{equation}
+\newglossaryentry{not:kl_dev}
+{
+  type=notation,
+  name={$D(P_X||P_Y)$},
+  description={分布$P_X$ 和 $P_Y$之间的 KL 散度}
+}
+其中 $P_X, P_Y$分别表示边缘分布，$D(P_X||P_Y)$
+表示 \glsdesc{not:kl_dev}。
+而$P_{XY}$
+表示两个随机变量的联合分布。有多种方法可将互信息
+的概念推广到两个及以上的随机变量，
+其中华人学者陈聪提出了一种推广 \cite{ska} 具有多种好的性质，
+\newglossaryentry{mmi}{name=多变量互信息, description={Multivariate mutual information}}
+\newacronym{acr:mmi}{MMI}{Multivariate mutual information}
+且涵盖了图结构的情形，我们把他的推广叫做 \gls{mmi} (\gls{acr:mmi})。
+
+下面我们对MMI做简要的介绍。定义$V$是随机变量
+的序号集合，$C$是 $V$的子集，$Z_C=\{Z_i | i \in C\}$
+表示随机变量序号在 $C$ 中的随机变量 $Z_i$ 的集合。
+$\P$ 表示$V$ 的一个分割，$P_{Z_C}$表示$Z_C$
+的联合分布。$\Pi'(V)$ 是
+除去$\{V\}$外所有$V$的分割的集合。MMI的度量定义为：
+\begin{align}
+  I(Z_V) &:= \min_{\P \in \Pi'(V)} I_{\P}(Z_V)
+  \textrm{ 其中 } \label{eq:IZV}\\  
+  I_{\P}(Z_V) &:= \frac{1}{|\P| - 1}D(P_{Z_V} || \prod_{C\in \P} P_{Z_C}) \label{eq:IPZV}
+\end{align}
+在上面的定义中，如果$Z_V$彼此独立，那么$I(Z_V)=0$，
+反之亦然。
+
+式\eqref{eq:IPZV}给出了特定分割下的多变量互信息，
+也可根据下式把KL散度改写成熵的形式。
+\begin{equation}\label{eq:entropy_expression}
+  D(P_{Z_V} || \prod_{C\in \P} P_{Z_C}) 
+  = \sum_{C \in \P}
+  H(Z_C) - H(Z_V)
+\end{equation}
+对于一般的分布，式\ref{eq:IZV}
+难于计算。陈聪提出了一种特殊的PIN模型\cite{pin}\footnote{PIN 是 pairewise independent network
+的缩写}，
+使得多变量互信息可以用\ref{sec:community_detection}节
+介绍的PSP算法进行计算。
+这里略去PIN模型的数学定义，而是通过下面的例子
+阐发它和图结构的联系。
+\begin{example}\label{ex:mmi}
+  令$V=\{1,2,3\}$，$Z_1=(X_a, X_c)$,
+  $Z_2=(X_a,X_b)$ 且 $Z_3=(X_b,X_c)$。
+  $X_a,X_b,X_c$是独立的随机变量且它们的熵分别为：
+  $H(X_a)=H(X_b)=1, H(X_c)=5$。
+  利用联合熵的公式不难计算出$H(Z_1)=H(X_a)+H(X_c)$以及
+  $H(Z_1, Z_2) = H(X_a) + H(X_b) + H(X_c)$等。
+  若 $\P=\{\{1,2\}, \{3\}\}$，则根据
+  \eqref{eq:entropy_expression}式，
+  $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = H(X_a)
+  +H(X_b)$。我们可以将上面的计算用图\ref{fig:example_directed}
+  进行对应，即把$Z_i$对应到第$i$的节点，
+  $Z_i$与$Z_j$之间的互信息对应到第$i$和第$j$个节点之间
+  边的权值，而KL散度即为不同的类别之间边的权值之和。
+\end{example}
+例\ref{ex:mmi}中虽然只有三个节点，
+但对于一般的情形，PIN模型也是和一个有向图有
+着类似的对应关系。因此，在PIN模型下多变量互信息可以用
+PSP算法进行计算。
+
+基于MMI可以对随机变量进行聚类，聚类簇
+定义为
+\begin{align}
+  C(Z_V) &:= \bigcup_{\gamma \in \R} C_{\gamma}(Z_V)
+  \label{eq:czv}\\
+  C_{\gamma}(Z_V) &:= \textrm{maximal}
+  \{ B \subseteq V \big\vert |B|>1, I(Z_B) > \gamma  \}
+\end{align}
+理论分析表明，基于定义式\ref{eq:czv} 可以得到和
+式\ref{eq:PSP_structure}类似的层次聚类结果。
+即存在一系列的临界值$\lambda_1 < \dots < \lambda_k$和分割
+$\P_k \preceq \dots \preceq \P_0$，使得
+$C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
+且$C_{\lambda_i}(Z_V) = \P_i$。
+
+有两种生成聚类簇的方法 \cite{chan2020agglomerative}，它们均可以通过聚类树
+来描述。聚类树可看成是一系列
+嵌套的分割$\P_i$的另一种描述方式。
+聚类树有一个根节点$V$，
+其所有的叶节点为 $\{j\}$，其他节点均对应着
+一个聚类簇。
+
+\begin{description}
+  \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$, 
+  把 $\P^*$ 中每一个元素作为 $V$ 的子节点。
+  对于每一个子节点$C$，求解$I(Z_C)=I_{\P_C}(Z_C)$
+  并使用分割 $\P_C$ 对子树进一步细分直到子节点变成单元素集为止。
+  \item[自底向上\footnotemark] 假设 $I(Z_C) = \max_{B\subseteq V} I(Z_B)$ 并且 
+  将 $C$ 中所有的元素合并成一个作为聚类树的子节点。对于当前所有子节点，找到MMI
+  最大的集合进行合并直到所有子节点合并成根节点$V$为止。
+  \end{description}
+  \footnotetext{参见\cite{agg_ic}}
+
+  \begin{figure}[!ht]
+    \centering
+    \begin{subfigure}[b]{0.38\linewidth}
+      \centering
+      \includegraphics[width=\textwidth]{top_down.pdf}
+      \caption{}\label{fig:top_down}
+    \end{subfigure}~
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{threshold_a.pdf}
+    \caption{}\label{fig:threshold_a}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.29\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{threshold_b.pdf}
+    \caption{}\label{fig:threshold_b}
+  \end{subfigure}
+    \caption{聚类树示例}\label{fig:mmi_example}
+  \end{figure}
+自顶向下
+获得聚类树的示意图由图 \ref{fig:top_down} 给出。
+下面我们用一个简单的例子来说明聚类树的结构。
+  \begin{example}\label{ex:mmi_tree}
+考虑图\ref{fig:threshold_b}所示的情形，
+$V=\{1,2,3,4\}$。互信息在图的边上标出，
+比如 $I(Z_1;Z_2)=1, I(Z_1;Z_4)=0$。
+利用定义式\ref{eq:IZV}不难求出
+$I(Z_V)=0.9$。 
+我们可以写出完整的聚类结果：
+\begin{equation*}
+\P = 
+\begin{cases}
+\{\{1,2,3,4\}\} & \lambda < 0.9 \\
+\{\{1,2\},\{3,4\}\} & 0.9 \leq \lambda < 1 \\
+\{\{1\},\{2\},\{3,4\}\} & 1 \leq \lambda < 2\\
+\{\{1\},\{2\},\{3\},\{4\}\} & \lambda \geq 2
+\end{cases}
+\end{equation*}
+把各临界值$\lambda_i$ 标到聚类树上即如图
+\ref{fig:threshold_a}所示。
+\end{example}
+最后，我们再介绍一个多变量互信息的性质，它将在我们后面社群中的异常值点的检测工作中
+用到。这个性质给出了最大的临界值 $\lambda_k$ 的多变量互信息表达式\cite{agg_ic}：
+\begin{equation}\label{eq:largest_threshold}
+\lambda_k = \max_{A\subseteq V} I(Z_A)
+\end{equation}
+
 局部信息几何的理论是由华人学者郑立中等人提出\cite{huang2019universal}，
 可从理论的层面分析机器学习中的特征提取\cite{huang2017information}、人工神经网络
 \cite{huang2019information}等问题。
