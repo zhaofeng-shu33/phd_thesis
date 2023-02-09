@@ -182,7 +182,96 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = \epsilon^2 \sum_{C \in \P} f(C)+ o(\ep
 由于$\epsilon$是给定的无穷小量，我们更关心$\epsilon^2$
 的系数，该系数即与式\eqref{eq:IP}中的$f[\P]$一样，
 也在我们求解等价的优化问题式\eqref{eq:hlambda}中出现过。
-\section{与数据聚类问题的联系}
+\section{社群的层次发现算法}
+\label{subsec:cd}
+尽管在发现社群的单层结构方面
+有很多算法取得了成功，自动发现
+复杂网络中的社群层次结构仍是一个困难的问题。
+在本节中，我们用实验来证明PSP算法
+在恰当定义“边的权重”后，可以成功恢复两层图的层次结构。
+
+对于一个无权图，如果我们简单地把
+所有边的权值赋成1，
+我们只能得到平凡的聚类树，也即聚类树
+只有根节点和叶节点。这个论断可以从如下
+定理中得到：
+\begin{theorem}\label{thm:triangle}
+  在图$G$中，对于没有边相连的两个节点 $w_{ij}=0$。
+  并且对于任意三元组$i,j,k \in V$ 权值满足三角不等式 
+  $w_{ij} + w_{jk} \geq w_{ki}$，
+  则该图的聚类树是平凡的。
+\end{theorem}
+  
+我们通过实验发现使用下述的方法对无权图进行重新
+赋权可以达到较理想的效果：
+\begin{equation}\label{eq:wij_scheme}
+    w_{ij} = 1 + \abs{\{k | (i,k),(j,k) \in E \}} \textrm{ for } (i,j) \in E
+\end{equation}
+式 \ref{eq:wij_scheme} 对$w_{ij}$
+的赋权方法是计算从$i$到$j$不超过两跳的路径数量。
+
+下面我们在一个具有两层结构的图上验证我们的
+赋权方法。该数据集在文献
+\cite{RN22} 中用于研究动态网络的同步行为，
+其结构如图 \ref{fig:c1} 所示。 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{two_level.pdf}
+		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14,$ $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$.}\label{fig:c1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{tree_info-clustering.pdf}
+		\caption{聚类树结构，可用PSP算法完全恢复出来。每个叶节点仍包含16个子节点未画出。}
+    \label{fig:c2}
+	\end{subfigure}
+	\caption{具有两层结构的图示意}
+\end{figure}
+
+该两层结构的图在宏观层面它包含有 4个 社群，
+而每一个中等规模的社群在微观层面又包含4个小社群，
+每个小社群有16个节点。
+我们用 $z_{\mathrm{in}_1}$ 表示
+在小社群内部每个节点连接的边的平均数量；
+用 $z_{\mathrm{in}_2}$ 表示
+每个大社群内部的中等规模社群之间相互连接的边的平均数量；
+用 $z_{\mathrm{out}}$ 表示
+不同大社群之间相互连接的边的平均数量。
+通过变化参数设定 $\{z_{\mathrm{in}_1}, z_{\mathrm{in}_2}, z_{\mathrm{out}} \}$
+我们能得到不同疏密程度的图。
+
+为比较通过算法推断出的聚类树的结构和真实聚类树的区别，
+我们使用 归一化的 Robinson-Foulds 距离度量。
+它描述了两个具有不同拓扑结构的树之间的距离，
+其取值在$[0,1]$ 之间。
+我们将基于图的信息聚类算法与
+GN (Girvan-Newman 算法) 和 BHCD (一种贝叶斯层次聚类算法\cite{RN23})。
+比较的结果如图 \ref{fig:cdr} 所示。
+从图 \ref{fig:cdr}中可以看到，在三种不同的参数配置下，
+通过基于图的信息聚类算法相比其他方法 可以获得
+与真实聚类树更相似的聚类树结构。
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=\textwidth]{z_in_1.pdf}
+		\caption{}
+	\end{subfigure}~
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=\textwidth]{z_in_2.pdf}
+		\caption{}
+	\end{subfigure}~
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=\textwidth]{z_o.pdf}
+		\caption{}
+	\end{subfigure}
+	\caption{不同层次社群发现算法的性能比较。
+  更小的距离意味着与真实的聚类树更相似的结构。
+  }\label{fig:cdr}	
+\end{figure}
+
+\subsection{与数据聚类问题的联系}
 \label{sec:data_clustering}
 社群发现是输入一张图获得节点所属的类别，而
 数据聚类的任务与社群发现相同，但其输入是一个数据矩阵，
@@ -327,94 +416,6 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 \caption{不同层次聚类算法稳定性的比较}\label{fig:shc}
 \end{figure}
 
-\section{社群的层次发现算法}
-\label{subsec:cd}
-尽管在发现社群的单层结构方面
-有很多算法取得了成功，自动发现
-复杂网络中的社群层次结构仍是一个困难的问题。
-在本节中，我们用实验来证明PSP算法
-在恰当定义“边的权重”后，可以成功恢复两层图的层次结构。
-
-对于一个无权图，如果我们简单地把
-所有边的权值赋成1，
-我们只能得到平凡的聚类树，也即聚类树
-只有根节点和叶节点。这个论断可以从如下
-定理中得到：
-\begin{theorem}\label{thm:triangle}
-  在图$G$中，对于没有边相连的两个节点 $w_{ij}=0$。
-  并且对于任意三元组$i,j,k \in V$ 权值满足三角不等式 
-  $w_{ij} + w_{jk} \geq w_{ki}$，
-  则该图的聚类树是平凡的。
-\end{theorem}
-  
-我们通过实验发现使用下述的方法对无权图进行重新
-赋权可以达到较理想的效果：
-\begin{equation}\label{eq:wij_scheme}
-    w_{ij} = 1 + \abs{\{k | (i,k),(j,k) \in E \}} \textrm{ for } (i,j) \in E
-\end{equation}
-式 \ref{eq:wij_scheme} 对$w_{ij}$
-的赋权方法是计算从$i$到$j$不超过两跳的路径数量。
-
-下面我们在一个具有两层结构的图上验证我们的
-赋权方法。该数据集在文献
-\cite{RN22} 中用于研究动态网络的同步行为，
-其结构如图 \ref{fig:c1} 所示。 
-
-\begin{figure}
-	\centering
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{two_level.pdf}
-		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14,$ $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$.}\label{fig:c1}
-	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{tree_info-clustering.pdf}
-		\caption{聚类树结构，可用PSP算法完全恢复出来。每个叶节点仍包含16个子节点未画出。}
-    \label{fig:c2}
-	\end{subfigure}
-	\caption{具有两层结构的图示意}
-\end{figure}
-
-该两层结构的图在宏观层面它包含有 4个 社群，
-而每一个中等规模的社群在微观层面又包含4个小社群，
-每个小社群有16个节点。
-我们用 $z_{\mathrm{in}_1}$ 表示
-在小社群内部每个节点连接的边的平均数量；
-用 $z_{\mathrm{in}_2}$ 表示
-每个大社群内部的中等规模社群之间相互连接的边的平均数量；
-用 $z_{\mathrm{out}}$ 表示
-不同大社群之间相互连接的边的平均数量。
-通过变化参数设定 $\{z_{\mathrm{in}_1}, z_{\mathrm{in}_2}, z_{\mathrm{out}} \}$
-我们能得到不同疏密程度的图。
-
-为比较通过算法推断出的聚类树的结构和真实聚类树的区别，
-我们使用 归一化的 Robinson-Foulds 距离度量。
-它描述了两个具有不同拓扑结构的树之间的距离，
-其取值在$[0,1]$ 之间。
-我们将基于图的信息聚类算法与
-GN (Girvan-Newman 算法) 和 BHCD (一种贝叶斯层次聚类算法\cite{RN23})。
-比较的结果如图 \ref{fig:cdr} 所示。
-从图 \ref{fig:cdr}中可以看到，在三种不同的参数配置下，
-通过基于图的信息聚类算法相比其他方法 可以获得
-与真实聚类树更相似的聚类树结构。
-
-\begin{figure}
-	\centering
-	\begin{subfigure}{0.33\textwidth}
-		\includegraphics[width=\textwidth]{z_in_1.pdf}
-		\caption{}
-	\end{subfigure}~
-	\begin{subfigure}{0.33\textwidth}
-		\includegraphics[width=\textwidth]{z_in_2.pdf}
-		\caption{}
-	\end{subfigure}~
-	\begin{subfigure}{0.33\textwidth}
-		\includegraphics[width=\textwidth]{z_o.pdf}
-		\caption{}
-	\end{subfigure}
-	\caption{不同层次社群发现算法的性能比较。
-  更小的距离意味着与真实的聚类树更相似的结构。
-  }\label{fig:cdr}	
-\end{figure}
 
 \section{基于图分割的社群发现算法及其改进}
 在本节中，我们首先介绍我们对PSP算法的改进，并在一定
