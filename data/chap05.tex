@@ -2,15 +2,25 @@
 \label{chap:sbmsi}
 \section{引言}
 在本章中，我们首先引入我们研究的有额外信息的随机块模型
-的定义。然后研究它的精确恢复的条件以及实现其精确恢复的半正定规划算法。
+的定义和精确恢复条件（\ref{sec:sbmsi_exact_recovery_condtion}节）。
+虽然该条件前人已经研究过，这里我们在两社群和情形下给出它的等价表述
+形式（引理\ref{lem:I_plus_expression}），该形式将在我们后面证明
+半正定规划算法可实现精确恢复时用到。在精确恢复条件被保证的前提下，
+我们利用雷尼散度这一度量进一步研究了模型的误差衰减率（\ref{sec:sbmsi_error_decay_rate}节）。
+除此之外，我们证明了实现精确恢复等价于求解某半正定规划问题，
+该问题可通过交替向乘子法进行求解（\ref{sec:sdp_exact}）。
 
 \section{精确恢复条件}
 \label{sec:sbmsi_exact_recovery_condtion}
 \newacronym{acr:sbmsi}{SBMSI}{Stochastic Block Model with side information}
 带有额外信息的随机块模型（\gls{acr:sbmsi}）
 是 \ref{sec:sbm} 节介绍的
-SSBM 模型的推广。这里我们在2个社群的随机块模型的
-基础上引入额外信息，多个社群的情形可以作类似的推广。
+SSBM 模型的推广。为方便讨论又不失一般性，
+这里我们在2个社群的随机块模型的
+基础上引入额外信息。
+由定义 \ref{def:SSBM}，当$k=2$时，
+节点标签$X$满足$X_i \in \{\pm 1\}$
+且 $\sum_{i=1}^n X_i = 0$。
 除了图 $Z$ 和节点标签 $X$ 外，
 第 $i$  个节点 ($1\leq i \leq n$) 
 还含有 $m=\lceil \gamma \log n \rceil $ 个相关的数据样本 
@@ -82,14 +92,15 @@ SBMSI 模型精确恢复的条件：
     则错误概率 $P_e$ 趋近于 $1$，精确恢复不可实现。
 \end{theorem}
 
-相比于 \citet{abbe17sideinfo} 中定理4的结论，
-这里我们限制了类别数为2等条件，但允许采样数量 $m$ 为
-$\lceil \log n \rceil $ 的整数倍。
+定理\ref{thm:Pe} 类似于 \citet{abbe17sideinfo} 中定理4的结论，
+但这里我们限制了类别数为2等条件，同时允许采样数量 $m$ 为
+$\lceil \log n \rceil $ 的整数倍，而 \citet{abbe17sideinfo} 的定理4
+中始终取$\gamma=1$。
 
 对于一般的情形，SBMSI 模型精确恢复的 临界值 $I_+$ 并没有
 显示表达式，但我们可以从切尔诺夫信息的定义出发得到 $I_+$ 的简化表达式，
 由下述引理 \ref{lem:I_plus_expression} 给出。
-该表达式更容易计算，且在定理\ref{thm:Pe}的证明中也会用到。
+该表达式更容易计算，且在后面定理\ref{thm:sdp}的证明中也会用到。
 
 \begin{lemma}\label{lem:I_plus_expression}
 \begin{align}\label{equation:I+}
@@ -118,21 +129,14 @@ $\lceil \log n \rceil $ 的整数倍。
 
 \begin{remark}
 当 $\gamma=0$ 时，由\eqref{eq:lambda}式 可得 $\lambda^*=\frac{1}{2}$，
-则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。
-由定理\ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
+则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。由 式 \eqref{eq:renyi_d12_ab}，
+$I_+$ 也可写成雷尼散度的形式。
+进一步地，由定理\ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
 时可精确恢复。定理\ref{thm:Pe}退化到
 定理\ref{thm:sbm2_phase_transition}。
-引理\ref{lem:I_plus_expression}亦可推广到
-$k\geq 2$的情形，此时不难得到
-\begin{equation}
-    C(\Pois(\frac{a}{k}, \frac{b}{k}),\Pois(\frac{b}{k}, \frac{a}{k}) ) = H^2((\frac{a}{k}, \frac{b}{k}),(\frac{b}{k}, \frac{a}{k}))
-    = \frac{1}{k}(\sqrt{a}-\sqrt{b})^2
-\end{equation}
-上式表明了对于特殊的联合泊松分布，
-切尔诺夫信息和 海林格距离的关系。
 \end{remark}
 
-\section{误差衰减速率}
+\section{误差衰减速率}\label{sec:sbmsi_error_decay_rate}
 在\ref{sec:sbmsi_exact_recovery_condtion}节的基础上，
 我们讨论一种更强的要求，即恢复算法将SSBM各社群大小相等的条件考虑在内。
 类似定理\ref{thm:error_rate}，
@@ -192,7 +196,7 @@ $k\geq 2$的情形，此时不难得到
 由定理 \ref{thm:Pe_new}
 可看出，误差界的幂次有两项组成，
 一项 $\gamma D_{1/2}(P_0||P_1) $ 
-和雷尼散度（在\eqref{eq:renyi_divergence} 定义）
+和雷尼散度（在式\eqref{eq:renyi_divergence} 定义）
 有关，另一项 $ (\sqrt{a} - \sqrt{b})^2-2 $
 和 SSBM 的精确恢复条件有关。
 
@@ -299,7 +303,8 @@ $m$ 和 $n$ 量阶相同。
   description={$\lim_{n\to \infty} \frac{f(n)}{g(n)} = +\infty$}
 }
 
-\section{实现精确恢复的SDP算法}
+\section{实现精确恢复的SDP算法}\label{sec:sdp_exact}
+\subsection{算法描述}
 本节我们给出实现关于SBMSI的精确恢复的SDP算法。
 
 %给定节点标签$X$，
@@ -370,7 +375,7 @@ $(n+1)$ 维的向量。
         \label{fig:my_label}
     \end{figure}
 
-\section{用于求解SIBMI模型 的 SDP算法实现}\label{sec:sdp_admm}
+\subsection{算法实现}\label{sec:sdp_admm}
 虽然半正定规划问题 \ref{eq:sdp} 可以使用一般的SDP优化工具包进行，但针对其特殊形式，
 我们可以提前计算出投影矩阵，
 从而实现算法加速。

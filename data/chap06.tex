@@ -8,8 +8,22 @@
 \section{分析技术评注}
 本文综合运用了多种信息论
 度量研究社群发现问题。
-它们有以下共同特点：
-概率分布之间的距离度量
+它们均是针对
+概率分布的距离度量，可总结为下表
+\begin{table}[!ht]
+    \centering
+  \begin{tabular}{ccp{5cm}}
+    \hline
+     度量名称    &   参数个数 &   本文所处理的分布 \\
+    \hline
+     多变量互信息 &    $\geq 2$ &    弱独立的随机变量  \\
+     速率函数     &    1 &     两个二项分布的差  \\
+     雷尼散度     &    2 &    泊松分布和字母集有限的离散型随机变量（额外信息） \\
+    \hline
+  \end{tabular}
+  \caption{各种信息论度量的对象}\label{tab:info_metric}
+\end{table}
+  
 \section{研究展望}
 本文的研究可在多方面进行拓展。
 
