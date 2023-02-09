@@ -137,285 +137,21 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 因此，定理\ref{thm:DPX}可看成式 \eqref{eq:Ixy} 
 的拓展。
 
-定理 \ref{thm:DPX} 是关于弱独立的随机变量的。
-现在我们把它拓展到针对数据样本。
-给定一 $K$ 个聚类簇的数据集，一共有 $n$ 个样本。
-每个 聚类簇被看成一个随机变量。
-假设第 $i$ 个 聚类簇 $Z_i$ 字母集 为 $\abs{\mathcal{Z}_i}$，
-全局约束是 $\sum_{i=1}^K \abs{\mathcal{Z}_i} = n$。
-假设$Z_1, \dots, Z_K$弱独立，
-由弱独立的定义式 \ref{def:general}， $Z_i$ 和 $Z_j$ $\epsilon$-弱独立 （$i\neq j$）,
-于是我们有
-\begin{equation}\label{eq:phi_w}
-P_{Z_i Z_j}(z_i, z_j) = P_{Z_i}(z_i)P_{Z_j}(z_j) + \epsilon \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} \phi_{Z_i Z_j}(z_i, z_j) + o(\epsilon)
-\end{equation}
-因此，由 \eqref{eq:Ixy}式，
- $\norm{B_{ij}}_F^2 = \epsilon^2 \sum_{z_r \in \mathcal{Z}_i, z_s \in \mathcal{Z}_j} \phi^2_{Z_i Z_j}(z_r, z_s)$ 
- 并且 式 \eqref{eq:PXV} 可以展开成
-\begin{equation}\label{eq:PXV_Data}
-D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) =
-{\epsilon^2\over 2}\sum_{\substack{(i,j) \not\in C\\ C\in \P}}
-\sum_{z_r \in \mathcal{Z}_i, z_s \in \mathcal{Z}_j}  \phi^2_{Z_i Z_j}(z_r, z_s) + o(\epsilon^2)
-\end{equation}
-我们可以把
-$\phi^2_{Z_i Z_j}(z_r, z_s)$ 这一项
-当成一个有$n$个节点的图的
-边的权值。
-图的每一个节点对应一个数据点。
-为简化符号, 令 $w_{rs} = \phi^2_{Z_{d(z_r)}Z_{d(z_s)}}(z_r, z_s)$
-\footnote{当 $d(z_r) = d(z_s)$ 时，
-我们仍可以形式化的定义 $w_{rs}$ 为远大于$\max\{\phi^2_{Z_i Z_j}(z_r, z_s), i\neq j\}$
-的值。}，
-其中，$d(z_r)$ 把节点映射到它所属的随机变量的序号， 定义域 为 $1\leq r,s \leq \abs{V}$。
-我们也可以展开 每个 $Z_i$ 到它的节点集 并且将分割 $\P$
-看成是对节点集的分割。
-假设我们考虑的图 $G(V, E)$ 是有向的
+在式\eqref{eq:PXV}中，$\norm{B_{ij}}_F^2 =O(\epsilon^2)$，
+如果忽略高阶小量 $o(\epsilon^2)$，我们可以建立多变量互信息和图强度的
+联系。每个随机变量$Z_i$对应到图$G$的节点$i$，
+而分割 $\P$
+可看成是对节点集的分割。
+假设我们考虑的图 $G(V, E)$ 是有向的，节点$i$和节点$j$之间边的权值为
+$\norm{B_{ij}}_F^2$。注意到式\eqref{eq:PXV}
 \footnote{有向图的假设可以减少计算量而不失一般性}，
-类似 式 \ref{eq:IP} 我们定义图的入割函数 (in-cut function) $f(C)$ for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
+并且类似 式 \ref{eq:IP} 我们定义图的入割函数 (in-cut function) $f(C)$ for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
 它是所有进入$C$的有向边的权值之和。
-基于上面定义的符号，表示KL散度的式 \eqref{eq:PXV_Data} 可以写成聚类簇之间边的权值之和
-的形式：
+基于上面定义的符号，我们有
 \begin{equation}\label{eq:PXV_Data_Simplified}
-D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = \epsilon^2 \sum_{C \in \P} f(C)+ o(\epsilon^2)
+I(Z_V) = \lambda_1 (1 + o(\epsilon))
 \end{equation}
-从而我们获得了在多变量弱独立条件下数据聚类的表达式。
-由于$\epsilon$是给定的无穷小量，我们更关心$\epsilon^2$
-的系数，该系数即与式\eqref{eq:IP}中的$f[\P]$一样，
-也在我们求解等价的优化问题式\eqref{eq:hlambda}中出现过。
-\section{社群的层次发现算法}
-\label{subsec:cd}
-尽管在发现社群的单层结构方面
-有很多算法取得了成功，自动发现
-复杂网络中的社群层次结构仍是一个困难的问题。
-在本节中，我们用实验来证明PSP算法
-在恰当定义“边的权重”后，可以成功恢复两层图的层次结构。
-
-对于一个无权图，如果我们简单地把
-所有边的权值赋成1，
-我们只能得到平凡的聚类树，也即聚类树
-只有根节点和叶节点。这个论断可以从如下
-定理中得到：
-\begin{theorem}\label{thm:triangle}
-  在图$G$中，对于没有边相连的两个节点 $w_{ij}=0$。
-  并且对于任意三元组$i,j,k \in V$ 权值满足三角不等式 
-  $w_{ij} + w_{jk} \geq w_{ki}$，
-  则该图的聚类树是平凡的。
-\end{theorem}
-  
-我们通过实验发现使用下述的方法对无权图进行重新
-赋权可以达到较理想的效果：
-\begin{equation}\label{eq:wij_scheme}
-    w_{ij} = 1 + \abs{\{k | (i,k),(j,k) \in E \}} \textrm{ for } (i,j) \in E
-\end{equation}
-式 \ref{eq:wij_scheme} 对$w_{ij}$
-的赋权方法是计算从$i$到$j$不超过两跳的路径数量。
-
-下面我们在一个具有两层结构的图上验证我们的
-赋权方法。该数据集在文献
-\cite{RN22} 中用于研究动态网络的同步行为，
-其结构如图 \ref{fig:c1} 所示。 
-
-\begin{figure}
-	\centering
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{two_level.pdf}
-		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14,$ $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$.}\label{fig:c1}
-	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{tree_info-clustering.pdf}
-		\caption{聚类树结构，可用PSP算法完全恢复出来。每个叶节点仍包含16个子节点未画出。}
-    \label{fig:c2}
-	\end{subfigure}
-	\caption{具有两层结构的图示意}
-\end{figure}
-
-该两层结构的图在宏观层面它包含有 4个 社群，
-而每一个中等规模的社群在微观层面又包含4个小社群，
-每个小社群有16个节点。
-我们用 $z_{\mathrm{in}_1}$ 表示
-在小社群内部每个节点连接的边的平均数量；
-用 $z_{\mathrm{in}_2}$ 表示
-每个大社群内部的中等规模社群之间相互连接的边的平均数量；
-用 $z_{\mathrm{out}}$ 表示
-不同大社群之间相互连接的边的平均数量。
-通过变化参数设定 $\{z_{\mathrm{in}_1}, z_{\mathrm{in}_2}, z_{\mathrm{out}} \}$
-我们能得到不同疏密程度的图。
-
-为比较通过算法推断出的聚类树的结构和真实聚类树的区别，
-我们使用 归一化的 Robinson-Foulds 距离度量。
-它描述了两个具有不同拓扑结构的树之间的距离，
-其取值在$[0,1]$ 之间。
-我们将基于图的信息聚类算法与
-GN (Girvan-Newman 算法) 和 BHCD (一种贝叶斯层次聚类算法\cite{RN23})。
-比较的结果如图 \ref{fig:cdr} 所示。
-从图 \ref{fig:cdr}中可以看到，在三种不同的参数配置下，
-通过基于图的信息聚类算法相比其他方法 可以获得
-与真实聚类树更相似的聚类树结构。
-
-\begin{figure}
-	\centering
-	\begin{subfigure}{0.33\textwidth}
-		\includegraphics[width=\textwidth]{z_in_1.pdf}
-		\caption{}
-	\end{subfigure}~
-	\begin{subfigure}{0.33\textwidth}
-		\includegraphics[width=\textwidth]{z_in_2.pdf}
-		\caption{}
-	\end{subfigure}~
-	\begin{subfigure}{0.33\textwidth}
-		\includegraphics[width=\textwidth]{z_o.pdf}
-		\caption{}
-	\end{subfigure}
-	\caption{不同层次社群发现算法的性能比较。
-  更小的距离意味着与真实的聚类树更相似的结构。
-  }\label{fig:cdr}	
-\end{figure}
-
-\subsection{与数据聚类问题的联系}
-\label{sec:data_clustering}
-社群发现是输入一张图获得节点所属的类别，而
-数据聚类的任务与社群发现相同，但其输入是一个数据矩阵，
-其中行数是数据的个数而
-每一行的向量代表该数据的特征。二者可以通过
-输入数据的格式转换来实现算法互通。一般而言，
-从数据矩阵到图的变换是可以通过选取一
-相似度度量$d(\cdot,\cdot)$作用到数据上
-获得图中边的权值，即$w_{ij}=d(x_i, x_j)$。
-在这一节中，
-我们研究的重点是如何用
-\eqref{eq:hlambda} 实现数据聚类的任务。
-在永野清仁的文章中\cite{mac}，已经有用RBF核作为相似度度量的
-尝试，但局限于该相似度度量在小规模真实世界数据集上表
-现不佳，此外相似度度量本身具有一些超参数，也会影响聚类
-效果。我们通过使用交叉验证、网格搜索，及对
-不同相似度度量的枚举，试图寻找特定问题下具有
-较好表现的相似度度量及其超参数。
-
-我们使用5种数据集对基于图分割的数据聚类方法
-进行测试，各数据集的基本情况如表\ref{tab:clustering_dataset}
-所示。
-\begin{table}[!ht]
-  \centering
-  \begin{tabular}{|c|c|c|c|}
-    \toprule
-    名称 & 样本数量 & 类别数量 & 特征维度 \\
-    \midrule
-    Gaussian & 100 & 4 & 2 \\
-    Circle & 300 & 3 & 2 \\
-    Iris & 150 & 3 & 4 \\
-    Glass & 214 & 6 & 9 \\
-    Libras & 360 & 15 & 90 \\
-    \bottomrule
-  \end{tabular}
-  \caption{数据聚类测试数据}\label{tab:clustering_dataset}
-\end{table}
-其中，Gaussian 和 Circle 是人工生成的数据集。
-Iris, Glass 和 Libras 是来自 UCI 机器学习标准数据集
-\cite{Dua:2019}。
-
-首先我们展示在两个人工生成的数据集上的聚类效果，
-Gaussian 数据集的相似度度量取 式\ref{eq:rbf_kernel} 所示的 RBF 核,
-$\gamma=0.6$。
-\begin{equation}\label{eq:rbf_kernel}
-  w_{ij}=\exp(-\gamma ||x_i-x_j||^2)
-\end{equation}
-Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己距离最近的$k$
-个数据点有边相连\footnote{所有边权值均为1}，取$k=7$。
-聚类效果如图 \ref{fig:artificial_dataset_effect} 所示。
-
-\begin{figure}[!ht]
-  \begin{subfigure}[b]{\linewidth}
-  \includegraphics[width=\textwidth]{4part.pdf}
-  \caption{有4个类别的 Gaussian 数据集}
-  \label{fig:4p}
-\end{subfigure}
-\begin{subfigure}[b]{\linewidth}
-  \includegraphics[width=\textwidth]{3circle.pdf}
-  \caption{有3个类别的 Circle 数据集}
-  \label{fig:3c}
-\end{subfigure}
-\caption{人工生成的数据集聚类效果}
-\label{fig:artificial_dataset_effect}
-\end{figure}
-
-从图中可以看到，通过选取适当的阈值 $\lambda$，
-可获得与数据的真实类别十分接近的聚类结果，对应于图
-\ref{fig:4p} 中的 $\lambda=0.42$
-和图\ref{fig:3c} 中的 $\lambda=0.0$。
-
-下面我们在表\ref{tab:clustering_dataset}
-的五个数据集上测试比较不同的聚类算法的性能。
-我们采用ARI\footnote{adjusted rand index，译为调整兰德系数}
-作为衡量指标。该指标介于0到1之间，
-其将聚类算法预测的各数据的类别与真实的类别
-进行对比，数值越大说明聚类效果越好，等于1说明
-两个类别完全一样。我们对比的算法有系统聚类法\cite{slink}、
-近邻传播\cite{frey2007clustering}、k-平均算法
-\cite{lloyd1982least}
-和谱聚类 \cite{shi2000normalized}。
-我们通过5轮交叉验证的方式选取各算法的超参数，
-表\ref{tab:clustering_dataset}给出了在一定优化空间内
-各算法最优的表现，
-其对应的超参数详见附表\ref{tab:clustering_alg_hyperparameter}。
-
-从表\ref{tab:clustering_dataset}
-可以看出，
-信息聚类的方法在 Gaussian, Cirlce, Glass 上表现最好，
-在Iris 和 Libras 数据集上的表现不尽人意。
-这与文献\citep{mac} 中信息聚类在各数据集上均表现最好的实验结果有出入，
-我们由此推测信息聚类可能不适用于真实数据的聚类。
-
-\begin{table}[!ht]
-  \centering
-\begin{tabular}{lrrrrr}
-  \hline
-   ARI  &   Gaussian &   Circle &   Iris &   Glass &   Libras \\
-  \hline
-   系统聚类法         &       1.00 &     1.00 &   0.76 &    0.21 &     0.29 \\
-   近邻传播  &       1.00 &     0.14 &   0.19 &    0.19 &     0.23 \\
-   信息聚类                  &       1.00 &     0.80 &   0.57 &    0.32 &     0.13 \\
-   k-平均算法              &       1.00 &     0.01 &   0.73 &    0.17 &     0.33 \\
-   谱聚类   &       1.00 &     0.60 &   0.76 &    0.14 &     0.37 \\
-  \hline
-\end{tabular}
-\caption{聚类算法效果比较}\label{tab:clustering_dataset}
-\end{table}
-
-尽管如此， 信息聚类算法在数据的层次聚类上具有明显的优势，
-下面我们通过一个实际问题的例子来说明。
-
-为了比较不同的层次聚类方法，最好直接比较聚类树。
-为此，
-我们使用来自\citet{khan2001classification}的基因表达数据集。
-该数据集共有6000多条基因数据，训练集的特征维度是64，
-测试集是25。这里我们只使用前300条基因的数据。
-由于我们不知道数据的真实聚类树的结构，
-我们可以采用分割特征的方法，
-分别在两个具有部分特征的数据集上应用聚类算法，
-并比较得到的聚类树的相似程度。
-这样做的另一个好处是我们还可以测试每种聚类方法的稳定性。
-
-我们将信息聚类算法与基于平均距离度量的系统聚类法、
-贝叶斯玫瑰树算法
-\cite{blundell2011discovering}
-进行了比较。
-树的相似性度量是 Robinson-Foulds 距离，
-它是将一棵树转换为另一棵树的步骤数
-（一个步骤指添加或删除一条边）
-\citep{day1985optimal}。
-针对不同数据样本数量的实验
-结果如图\ref{fig:shc}所示。
-可以看出，对于经典的系统聚类方法，
-其在不同特征子空间的树的结构相差最大，稳定性较差。
-当$n$较大时，信息聚类和贝叶斯玫瑰算法稳定性相当。
-但当$n$较小时，信息聚类表现最好。
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=8cm]{plot_results.pdf}
-\caption{不同层次聚类算法稳定性的比较}\label{fig:shc}
-\end{figure}
-
+从而我们获得了在多变量弱独立条件下多变量互信息和图强度的等价性。
 
 \section{基于图分割的社群发现算法及其改进}
 在本节中，我们首先介绍我们对PSP算法的改进，并在一定
@@ -761,7 +497,244 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 并发线程的创建和销毁的时间开销是不可忽略的，而这一部分
 在复杂度理论分析中考虑。
 
-\section{基于图分割的社群发现算法在异常值检测领域的应用}
+\section{实验结果}
+\subsection{社群的层次发现}
+\label{subsec:cd}
+尽管在发现社群的单层结构方面
+有很多算法取得了成功，自动发现
+复杂网络中的社群层次结构仍是一个困难的问题。
+在本节中，我们用实验来证明PSP算法
+在恰当定义“边的权重”后，可以成功恢复两层图的层次结构。
+
+对于一个无权图，如果我们简单地把
+所有边的权值赋成1，
+我们只能得到平凡的聚类树，也即聚类树
+只有根节点和叶节点。这个论断可以从如下
+定理中得到：
+\begin{theorem}\label{thm:triangle}
+  在图$G$中，对于没有边相连的两个节点 $w_{ij}=0$。
+  并且对于任意三元组$i,j,k \in V$ 权值满足三角不等式 
+  $w_{ij} + w_{jk} \geq w_{ki}$，
+  则该图的聚类树是平凡的。
+\end{theorem}
+  
+我们通过实验发现使用下述的方法对无权图进行重新
+赋权可以达到较理想的效果：
+\begin{equation}\label{eq:wij_scheme}
+    w_{ij} = 1 + \abs{\{k | (i,k),(j,k) \in E \}} \textrm{ for } (i,j) \in E
+\end{equation}
+式 \ref{eq:wij_scheme} 对$w_{ij}$
+的赋权方法是计算从$i$到$j$不超过两跳的路径数量。
+
+下面我们在一个具有两层结构的图上验证我们的
+赋权方法。该数据集在文献
+\cite{RN22} 中用于研究动态网络的同步行为，
+其结构如图 \ref{fig:c1} 所示。 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{two_level.pdf}
+		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14,$ $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$.}\label{fig:c1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth]{tree_info-clustering.pdf}
+		\caption{聚类树结构，可用PSP算法完全恢复出来。每个叶节点仍包含16个子节点未画出。}
+    \label{fig:c2}
+	\end{subfigure}
+	\caption{具有两层结构的图示意}
+\end{figure}
+
+该两层结构的图在宏观层面它包含有 4个 社群，
+而每一个中等规模的社群在微观层面又包含4个小社群，
+每个小社群有16个节点。
+我们用 $z_{\mathrm{in}_1}$ 表示
+在小社群内部每个节点连接的边的平均数量；
+用 $z_{\mathrm{in}_2}$ 表示
+每个大社群内部的中等规模社群之间相互连接的边的平均数量；
+用 $z_{\mathrm{out}}$ 表示
+不同大社群之间相互连接的边的平均数量。
+通过变化参数设定 $\{z_{\mathrm{in}_1}, z_{\mathrm{in}_2}, z_{\mathrm{out}} \}$
+我们能得到不同疏密程度的图。
+
+为比较通过算法推断出的聚类树的结构和真实聚类树的区别，
+我们使用 归一化的 Robinson-Foulds 距离度量。
+它描述了两个具有不同拓扑结构的树之间的距离，
+其取值在$[0,1]$ 之间。
+我们将基于图的信息聚类算法与
+GN (Girvan-Newman 算法) 和 BHCD (一种贝叶斯层次聚类算法\cite{RN23})。
+比较的结果如图 \ref{fig:cdr} 所示。
+从图 \ref{fig:cdr}中可以看到，在三种不同的参数配置下，
+通过基于图的信息聚类算法相比其他方法 可以获得
+与真实聚类树更相似的聚类树结构。
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=\textwidth]{z_in_1.pdf}
+		\caption{}
+	\end{subfigure}~
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=\textwidth]{z_in_2.pdf}
+		\caption{}
+	\end{subfigure}~
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=\textwidth]{z_o.pdf}
+		\caption{}
+	\end{subfigure}
+	\caption{不同层次社群发现算法的性能比较。
+  更小的距离意味着与真实的聚类树更相似的结构。
+  }\label{fig:cdr}	
+\end{figure}
+
+\subsection{数据聚类}
+\label{sec:data_clustering}
+社群发现是输入一张图获得节点所属的类别，而
+数据聚类的任务与社群发现相同，但其输入是一个数据矩阵，
+其中行数是数据的个数而
+每一行的向量代表该数据的特征。二者可以通过
+输入数据的格式转换来实现算法互通。一般而言，
+从数据矩阵到图的变换是可以通过选取一
+相似度度量$d(\cdot,\cdot)$作用到数据上
+获得图中边的权值，即$w_{ij}=d(x_i, x_j)$。
+在这一节中，
+我们研究的重点是如何用
+\eqref{eq:hlambda} 实现数据聚类的任务。
+在永野清仁的文章中\cite{mac}，已经有用RBF核作为相似度度量的
+尝试，但局限于该相似度度量在小规模真实世界数据集上表
+现不佳，此外相似度度量本身具有一些超参数，也会影响聚类
+效果。我们通过使用交叉验证、网格搜索，及对
+不同相似度度量的枚举，试图寻找特定问题下具有
+较好表现的相似度度量及其超参数。
+
+我们使用5种数据集对基于图分割的数据聚类方法
+进行测试，各数据集的基本情况如表\ref{tab:clustering_dataset}
+所示。
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+    \toprule
+    名称 & 样本数量 & 类别数量 & 特征维度 \\
+    \midrule
+    Gaussian & 100 & 4 & 2 \\
+    Circle & 300 & 3 & 2 \\
+    Iris & 150 & 3 & 4 \\
+    Glass & 214 & 6 & 9 \\
+    Libras & 360 & 15 & 90 \\
+    \bottomrule
+  \end{tabular}
+  \caption{数据聚类测试数据}\label{tab:clustering_dataset}
+\end{table}
+其中，Gaussian 和 Circle 是人工生成的数据集。
+Iris, Glass 和 Libras 是来自 UCI 机器学习标准数据集
+\cite{Dua:2019}。
+
+首先我们展示在两个人工生成的数据集上的聚类效果，
+Gaussian 数据集的相似度度量取 式\ref{eq:rbf_kernel} 所示的 RBF 核,
+$\gamma=0.6$。
+\begin{equation}\label{eq:rbf_kernel}
+  w_{ij}=\exp(-\gamma ||x_i-x_j||^2)
+\end{equation}
+Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己距离最近的$k$
+个数据点有边相连\footnote{所有边权值均为1}，取$k=7$。
+聚类效果如图 \ref{fig:artificial_dataset_effect} 所示。
+
+\begin{figure}[!ht]
+  \begin{subfigure}[b]{\linewidth}
+  \includegraphics[width=\textwidth]{4part.pdf}
+  \caption{有4个类别的 Gaussian 数据集}
+  \label{fig:4p}
+\end{subfigure}
+\begin{subfigure}[b]{\linewidth}
+  \includegraphics[width=\textwidth]{3circle.pdf}
+  \caption{有3个类别的 Circle 数据集}
+  \label{fig:3c}
+\end{subfigure}
+\caption{人工生成的数据集聚类效果}
+\label{fig:artificial_dataset_effect}
+\end{figure}
+
+从图中可以看到，通过选取适当的阈值 $\lambda$，
+可获得与数据的真实类别十分接近的聚类结果，对应于图
+\ref{fig:4p} 中的 $\lambda=0.42$
+和图\ref{fig:3c} 中的 $\lambda=0.0$。
+
+下面我们在表\ref{tab:clustering_dataset}
+的五个数据集上测试比较不同的聚类算法的性能。
+我们采用ARI\footnote{adjusted rand index，译为调整兰德系数}
+作为衡量指标。该指标介于0到1之间，
+其将聚类算法预测的各数据的类别与真实的类别
+进行对比，数值越大说明聚类效果越好，等于1说明
+两个类别完全一样。我们对比的算法有系统聚类法\cite{slink}、
+近邻传播\cite{frey2007clustering}、k-平均算法
+\cite{lloyd1982least}
+和谱聚类 \cite{shi2000normalized}。
+我们通过5轮交叉验证的方式选取各算法的超参数，
+表\ref{tab:clustering_dataset}给出了在一定优化空间内
+各算法最优的表现，
+其对应的超参数详见附表\ref{tab:clustering_alg_hyperparameter}。
+
+从表\ref{tab:clustering_dataset}
+可以看出，
+信息聚类的方法在 Gaussian, Cirlce, Glass 上表现最好，
+在Iris 和 Libras 数据集上的表现不尽人意。
+这与文献\citep{mac} 中信息聚类在各数据集上均表现最好的实验结果有出入，
+我们由此推测信息聚类可能不适用于真实数据的聚类。
+
+\begin{table}[!ht]
+  \centering
+\begin{tabular}{lrrrrr}
+  \hline
+   ARI  &   Gaussian &   Circle &   Iris &   Glass &   Libras \\
+  \hline
+   系统聚类法         &       1.00 &     1.00 &   0.76 &    0.21 &     0.29 \\
+   近邻传播  &       1.00 &     0.14 &   0.19 &    0.19 &     0.23 \\
+   信息聚类                  &       1.00 &     0.80 &   0.57 &    0.32 &     0.13 \\
+   k-平均算法              &       1.00 &     0.01 &   0.73 &    0.17 &     0.33 \\
+   谱聚类   &       1.00 &     0.60 &   0.76 &    0.14 &     0.37 \\
+  \hline
+\end{tabular}
+\caption{聚类算法效果比较}\label{tab:clustering_dataset}
+\end{table}
+
+尽管如此， 信息聚类算法在数据的层次聚类上具有明显的优势，
+下面我们通过一个实际问题的例子来说明。
+
+为了比较不同的层次聚类方法，最好直接比较聚类树。
+为此，
+我们使用来自\citet{khan2001classification}的基因表达数据集。
+该数据集共有6000多条基因数据，训练集的特征维度是64，
+测试集是25。这里我们只使用前300条基因的数据。
+由于我们不知道数据的真实聚类树的结构，
+我们可以采用分割特征的方法，
+分别在两个具有部分特征的数据集上应用聚类算法，
+并比较得到的聚类树的相似程度。
+这样做的另一个好处是我们还可以测试每种聚类方法的稳定性。
+
+我们将信息聚类算法与基于平均距离度量的系统聚类法、
+贝叶斯玫瑰树算法
+\cite{blundell2011discovering}
+进行了比较。
+树的相似性度量是 Robinson-Foulds 距离，
+它是将一棵树转换为另一棵树的步骤数
+（一个步骤指添加或删除一条边）
+\citep{day1985optimal}。
+针对不同数据样本数量的实验
+结果如图\ref{fig:shc}所示。
+可以看出，对于经典的系统聚类方法，
+其在不同特征子空间的树的结构相差最大，稳定性较差。
+当$n$较大时，信息聚类和贝叶斯玫瑰算法稳定性相当。
+但当$n$较小时，信息聚类表现最好。
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=8cm]{plot_results.pdf}
+\caption{不同层次聚类算法稳定性的比较}\label{fig:shc}
+\end{figure}
+
+
+
+\section{HPSP算法在异常值检测领域的应用}
 异常值检测是对异常数据（称为异常值点）的识别，
 这些异常数据不同于其他多数数据（称为正常值点）
 \citep{grubbs1969procedures}。
