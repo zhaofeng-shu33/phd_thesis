@@ -20,7 +20,7 @@
   称$Z_1, \dots, Z_n (n\geq 2)$
   是$\epsilon$-弱独立的，如果存在一个随机变量 $U$
   使得
-  $(Z_1, \dots, Z_n)|U$的PMF 在 $(Z_1, \dots, Z_n)$的
+  $(Z_1, \dots, Z_n)|U$的 概率质量函数 在 $(Z_1, \dots, Z_n)$的
   $\sqrt[n]{\epsilon}$邻域内并且
   $Z_1, \dots Z_n$关于
   $U$的条件分布是独立的。
@@ -49,12 +49,12 @@
 
     不难验证$P(X=j, Y=k | U=i)=P(X=j | U=i)
       P(Y=k| U=i)$。此外， $(X, Y)|U=0$
-      的PMF 可以写成向量的形式
+      的概率质量函数 可以写成向量的形式
       $\frac{1}{4}[(1-\sqrt{\epsilon})^2,
       1-\epsilon,
       1-\epsilon,
       (1+\sqrt{\epsilon})^2]$，它在
-      $(X,Y)$的PMF 向量
+      $(X,Y)$的概率质量函数 向量
       $\frac{1}{4}[1+\epsilon, 1-\epsilon, 1-\epsilon, 1+\epsilon]$
       的 $\sqrt{\epsilon}$-邻域内。因此
       $X,Y$是$\epsilon$-弱独立的。
@@ -65,11 +65,11 @@
 定义\ref{def:weak_indepedent}的拓展。
 \begin{theorem}\label{thm:weak_independence_equivalent}
   如果 对于任何 $x \in \mathcal{X}$，
-$Y$关于$X$的条件 PMF 
+$Y$关于$X$的条件概率质量函数
 $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
 一个随机变量 $U$
   使得
-  $(X, Y)|U$的PMF 在 $(X, Y)$的
+  $(X, Y)|U$的概率质量函数在 $(X, Y)$的
   $\sqrt{\epsilon}$邻域内并且
   $X, \dots Y$关于
   $U$的条件分布是独立的。
@@ -682,6 +682,36 @@ HPSP算法~\ref{alg:psp_i_simplified} 的特点重新设计。
 中给出的$HPHP$ 的$O(n^4)$的时间复杂度，转换本身的时间开销
 可忽略不计。
 
+\subsection{代码实现}
+尽管最大流算法包比较多，但我们尚未发现
+求解层次分割（式\eqref{eq:PSP_structure}）的开源实现。
+因此我们使用 C++ 实现了跨平台的PSP算法\ref{alg:psp}
+（内嵌迪尔沃思截断算法\ref{alg:dt}），并且
+我们提供了Python编程语言的接口函数，并在 \url{pypi.org}
+平台上以 pspartition
+的名字发布，以供后面的研究者使用。
+我们的实现使用 CMake 编译，依赖于第三方库 LEMON \cite{dezsHo2011lemon}。 
+LEMON 库在我们的算法包中用于构建所需的图数据结构和最大流算法。
+这里顺便提及的一点是 LEMON 库里使用的
+最大流算法是基于最大标签选择策略的前置推送-标签重贴算法。
+根据文献\citet{ahuja1997computational}的比较，该算法
+的效率比起其他解最大流问题的算法有明显的优势。
+
+在Python的接口函数方面，我们采用了CPython
+跨语言编程的方式，将由 NetworkX \cite{SciPyProceedings_11} 构建的图
+转换成用边表示的图传递到C++中的类构造函数中，
+计算完成后再把C++中的集合转换成Python中的列表
+进行返回。用于求解例 \ref{ex:psp}
+的示例 Python 代码如下。
+\begin{lstlisting}[language=Python]
+  from pspartition import PsPartition
+  a = [[0,1,1], [0,2,5], [1,2,1]] #graph edge list,(i,j,weight)
+  p = PsPartition(3, a) #3 nodes
+  p.run()
+  cv = p.get_critical_values() #[2,5]
+  pl = p.get_partitions()#[[{0,1,2}],[{0,2},{1}],[{0},{1},{2}]]
+\end{lstlisting}
+
 \subsection{不同PSP算法的效率比较}
 在本节中，我们将比较 HPSP 算法和PSP算法
 （算法\ref{alg:psp}）
@@ -868,38 +898,6 @@ Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 \end{adjustbox}
 \caption{不同异常值检测的算法比较}\label{tab:odm}
 \end{table}
-
-\section{代码实现}
-尽管最大流算法包比较多，但我们尚未发现
-求解层次分割（式\eqref{eq:PSP_structure}）的开源实现。
-因此我们使用 C++ 实现了跨平台的PSP算法\ref{alg:psp}
-（内嵌迪尔沃思截断算法\ref{alg:dt}），并且
-我们提供了Python编程语言的接口函数，并在 \url{pypi.org}
-平台上以 pspartition
-的名字发布，以供后面的研究者使用。
-我们的实现使用 CMake 编译，依赖于第三方库 LEMON \cite{dezsHo2011lemon}。 
-LEMON 库在我们的算法包中用于构建所需的图数据结构和最大流算法。
-这里顺便提及的一点是 LEMON 库里使用的
-最大流算法是基于最大标签选择策略的前置推送-标签重贴算法。
-根据文献\citet{ahuja1997computational}的比较，该算法
-的效率比起其他解最大流问题的算法有明显的优势。
-
-在Python的接口函数方面，我们采用了CPython
-跨语言编程的方式，将由 NetworkX \cite{SciPyProceedings_11} 构建的图
-转换成用边表示的图传递到C++中的类构造函数中，
-计算完成后再把C++中的集合转换成Python中的列表
-进行返回。用于求解例 \ref{ex:psp}
-的示例 Python 代码如下。
-\begin{lstlisting}[language=Python]
-  from pspartition import PsPartition
-  a = [[0,1,1], [0,2,5], [1,2,1]] # a graph
-  p = PsPartition(3, a) # 3 nodes
-  p.run()  
-  cv = p.get_critical_values()
-  pl = p.get_partitions()
-  print(cv)
-  print(pl)
-  \end{lstlisting}
 
 \section{本章小结}
 在本章中，

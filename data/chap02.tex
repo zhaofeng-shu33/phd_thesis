@@ -302,12 +302,9 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 在$\lambda_{i-1}$上的计算状态并用于下一步的初始化，
 以及适当地使用并行化的技术，使得计算$k$ 个最大流问题
 的时间复杂度和只计算一个最大流问题近似相等。
-\citet{kolmogorov} 提出一种方法，将求解式\ref{eq:hlambda}
-转化为求解n次参数最大流问题。
-这种方法与算法\ref{alg:dt}的思路不一样，
-因为其基于参数化最大流，
-我们称之为PMF算法
-\footnote{PMF 是 parametric maximal flow 的缩写}。
+\citet{kolmogorov} 基于参数化最大流，将求解式\ref{eq:hlambda}
+转化为求解n次参数最大流问题。该并行算法宣称可达到 $O(n^4)$ 的时间复杂度。
+
 
 \section{随机块模型}\label{sec:sbm}
 随机块模型是我们研究社群发现问题主要使用的概率统计模型，我们将在
@@ -1136,7 +1133,8 @@ KL散度可用于度量两种不同概率分布
 局部信息几何刻画了KL散度的近似表达式。
 我们以离散分布为例，给出分布之间距离的接近的
 形式化定义。
-$P_0$ 表示一概率质量函数 (Probability mass function)，
+\newglossaryentry{pmf}{name=概率质量函数, description={Probability mass function}}
+$P_0$ 表示一\gls{pmf} (Probability mass function)，
 其定义域为字母集$\mathcal{X}$，
 $\epsilon$表示一无穷小量。
 \begin{definition}\label{def:eps_neighborhood}
