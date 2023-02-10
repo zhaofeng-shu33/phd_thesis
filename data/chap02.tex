@@ -23,12 +23,14 @@
 社群发现算法根据发现的社群是否重叠可分为两类，本文研究的是非重叠的
 社群发现算法，即$V$可以分为互不重叠的若干子集。
 
-\section{基于最小化平均误差的图分割算法}
+\section{基于图强度的图分割算法}
 不同的社群发现算法根据自己的标准寻找社群结构，这给一般意义上的比较造成了困难。
-在本节中我们介绍的社群发现算法采用的标准叫做最小化平均误差。
-这个概念最早是日本学者永野清仁于2010年提出\cite{mac}，但其数学形式
-在研究图强度这一概念时已被提出 \cite{cunningham1985optimal}。
-在这里我们采用其最为广泛的形式，即针对带权的有向图来陈述该社群发现算法。
+在本节中我们介绍的社群发现算法采用的度量标准来自网络科学中的图强度。
+\newglossaryentry{graph_strength}{name=图强度, description={Strength of a graph}}
+\gls{graph_strength} 这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}。
+它有一些变体，如日本学者永野清仁于2010年提出的最小化平均误差\cite{mac}。
+图强度可以定义在无权图或有权图上，
+在这里我们针对带权的有向图来介绍这一度量和基于此的图分割算法。
 
 给定有向图$G(V,E)$，其最小化平均误差（或图强度）定义为
 \begin{equation}\label{eq:IP}
@@ -1018,7 +1020,7 @@ $\P$ 表示$V$ 的一个分割，$P_{Z_C}$表示$Z_C$
   = \sum_{C \in \P}
   H(Z_C) - H(Z_V)
 \end{equation}
-对于一般的分布，式\ref{eq:IZV}
+对于一般的分布，式\eqref{eq:IZV}
 难于计算。陈聪提出了一种特殊的PIN模型\cite{pin}\footnote{PIN 是 pairewise independent network
 的缩写}，
 使得多变量互信息可以用\ref{sec:community_detection}节
@@ -1045,7 +1047,7 @@ $\P$ 表示$V$ 的一个分割，$P_{Z_C}$表示$Z_C$
 着类似的对应关系。因此，在PIN模型下多变量互信息可以用
 PSP算法进行计算。
 
-基于MMI可以对随机变量进行聚类，聚类簇
+基于多变量互信息可以对随机变量进行聚类，聚类簇
 定义为
 \begin{align}
   C(Z_V) &:= \bigcup_{\gamma \in \R} C_{\gamma}(Z_V)
@@ -1060,65 +1062,6 @@ $\P_k \preceq \dots \preceq \P_0$，使得
 $C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
 且$C_{\lambda_i}(Z_V) = \P_i$。
 
-有两种生成聚类簇的方法 \cite{chan2020agglomerative}，它们均可以通过聚类树
-来描述。聚类树可看成是一系列
-嵌套的分割$\P_i$的另一种描述方式。
-聚类树有一个根节点$V$，
-其所有的叶节点为 $\{j\}$，其他节点均对应着
-一个聚类簇。
-
-\begin{description}
-  \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$, 
-  把 $\P^*$ 中每一个元素作为 $V$ 的子节点。
-  对于每一个子节点$C$，求解$I(Z_C)=I_{\P_C}(Z_C)$
-  并使用分割 $\P_C$ 对子树进一步细分直到子节点变成单元素集为止。
-  \item[自底向上\footnotemark] 假设 $I(Z_C) = \max_{B\subseteq V} I(Z_B)$ 并且 
-  将 $C$ 中所有的元素合并成一个作为聚类树的子节点。对于当前所有子节点，找到MMI
-  最大的集合进行合并直到所有子节点合并成根节点$V$为止。
-  \end{description}
-  \footnotetext{参见\cite{agg_ic}}
-
-  \begin{figure}[!ht]
-    \centering
-    \begin{subfigure}[b]{0.38\linewidth}
-      \centering
-      \includegraphics[width=\textwidth]{top_down.pdf}
-      \caption{}\label{fig:top_down}
-    \end{subfigure}~
-  \begin{subfigure}[b]{0.33\linewidth}
-    \centering
-    \includegraphics[width=\textwidth]{threshold_a.pdf}
-    \caption{}\label{fig:threshold_a}
-  \end{subfigure}~
-  \begin{subfigure}[b]{0.29\linewidth}
-    \centering
-    \includegraphics[width=\textwidth]{threshold_b.pdf}
-    \caption{}\label{fig:threshold_b}
-  \end{subfigure}
-    \caption{聚类树示例}\label{fig:mmi_example}
-  \end{figure}
-自顶向下
-获得聚类树的示意图由图 \ref{fig:top_down} 给出。
-下面我们用一个简单的例子来说明聚类树的结构。
-  \begin{example}\label{ex:mmi_tree}
-考虑图\ref{fig:threshold_b}所示的情形，
-$V=\{1,2,3,4\}$。互信息在图的边上标出，
-比如 $I(Z_1;Z_2)=1, I(Z_1;Z_4)=0$。
-利用定义式\ref{eq:IZV}不难求出
-$I(Z_V)=0.9$。 
-我们可以写出完整的聚类结果：
-\begin{equation*}
-\P = 
-\begin{cases}
-\{\{1,2,3,4\}\} & \lambda < 0.9 \\
-\{\{1,2\},\{3,4\}\} & 0.9 \leq \lambda < 1 \\
-\{\{1\},\{2\},\{3,4\}\} & 1 \leq \lambda < 2\\
-\{\{1\},\{2\},\{3\},\{4\}\} & \lambda \geq 2
-\end{cases}
-\end{equation*}
-把各临界值$\lambda_i$ 标到聚类树上即如图
-\ref{fig:threshold_a}所示。
-\end{example}
 最后，我们再介绍一个多变量互信息的性质，它将在我们后面社群中的异常值点的检测工作中
 用到。这个性质给出了最大的临界值 $\lambda_k$ 的多变量互信息表达式\cite{agg_ic}：
 \begin{equation}\label{eq:largest_threshold}
