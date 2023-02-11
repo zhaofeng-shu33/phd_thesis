@@ -1,4 +1,5 @@
 \documentclass{ctexart}
+\usepackage{graphicx}
 \begin{document}
 我们把HPSP算法应用到自然语言的层次聚类问题。
 一方面我们通过这个小例子展示HPSP在社群发现实际数据上的效果，
@@ -12,10 +13,16 @@
 我们从Bella提供的数据中选取了67种常用语言，选取的标准是原
 数据集中词汇相似率置信程度高且两两间均有相似率的语言。
 在此基础上我们用 HPSP 算法进行聚类，得到了如下图所示的聚类树。
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/language_tree.pdf}
+    \caption{世界常用语言聚类树示意图}\label{fig:language_tree}
+\end{figure}
+    
+从上图我们可以解读出一些与比较语言学的一致的结论，比如法语、西班牙语、葡萄牙语
+等亲缘关系很近，在上图中亦反映出来。
 
-
-
-\cite{al2017characterization} 用了普通的聚合聚类的方式对10种常用语言进行聚类。
+\cite{al2017characterization} 用了普通的聚合聚类的方式对10种常用语言进行聚类，
 
 
 \bibliographystyle{plain}
