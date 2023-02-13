@@ -668,105 +668,10 @@ GN (Girvan-Newman 算法) 和 BHCD (一种贝叶斯层次聚类算法\cite{RN23}
 在这一节中，
 我们研究的重点是如何用
 \eqref{eq:hlambda} 实现数据聚类的任务。
-在永野清仁的文章中\cite{mac}，已经有用RBF核作为相似度度量的
-尝试，但局限于该相似度度量在小规模真实世界数据集上表
-现不佳，此外相似度度量本身具有一些超参数，也会影响聚类
-效果。我们通过使用交叉验证、网格搜索，及对
-不同相似度度量的枚举，试图寻找特定问题下具有
-较好表现的相似度度量及其超参数。
-
-我们使用5种数据集对基于图分割的数据聚类方法
-进行测试，各数据集的基本情况如表\ref{tab:clustering_dataset}
-所示。
-\begin{table}[!ht]
-  \centering
-  \begin{tabular}{|c|c|c|c|}
-    \toprule
-    名称 & 样本数量 & 类别数量 & 特征维度 \\
-    \midrule
-    Gaussian & 100 & 4 & 2 \\
-    Circle & 300 & 3 & 2 \\
-    Iris & 150 & 3 & 4 \\
-    Glass & 214 & 6 & 9 \\
-    Libras & 360 & 15 & 90 \\
-    \bottomrule
-  \end{tabular}
-  \caption{数据聚类测试数据}\label{tab:clustering_dataset}
-\end{table}
-其中，Gaussian 和 Circle 是人工生成的数据集。
-Iris, Glass 和 Libras 是来自 UCI 机器学习标准数据集
-\cite{Dua:2019}。
-
-首先我们展示在两个人工生成的数据集上的聚类效果，
-Gaussian 数据集的相似度度量取 式\ref{eq:rbf_kernel} 所示的 RBF 核,
-$\gamma=0.6$。
-\begin{equation}\label{eq:rbf_kernel}
-  w_{ij}=\exp(-\gamma ||x_i-x_j||^2)
-\end{equation}
-Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己距离最近的$k$
-个数据点有边相连\footnote{所有边权值均为1}，取$k=7$。
-聚类效果如图 \ref{fig:artificial_dataset_effect} 所示。
-
-\begin{figure}[!ht]
-  \begin{subfigure}[b]{\linewidth}
-  \includegraphics[width=\textwidth]{4part.pdf}
-  \caption{有4个类别的 Gaussian 数据集}
-  \label{fig:4p}
-\end{subfigure}
-\begin{subfigure}[b]{\linewidth}
-  \includegraphics[width=\textwidth]{3circle.pdf}
-  \caption{有3个类别的 Circle 数据集}
-  \label{fig:3c}
-\end{subfigure}
-\caption{人工生成的数据集聚类效果}
-\label{fig:artificial_dataset_effect}
-\end{figure}
-
-从图中可以看到，通过选取适当的阈值 $\lambda$，
-可获得与数据的真实类别十分接近的聚类结果，对应于图
-\ref{fig:4p} 中的 $\lambda=0.42$
-和图\ref{fig:3c} 中的 $\lambda=0.0$。
-
-下面我们在表\ref{tab:clustering_dataset}
-的五个数据集上测试比较不同的聚类算法的性能。
-我们采用ARI\footnote{adjusted rand index，译为调整兰德系数}
-作为衡量指标。该指标介于0到1之间，
-其将聚类算法预测的各数据的类别与真实的类别
-进行对比，数值越大说明聚类效果越好，等于1说明
-两个类别完全一样。我们对比的算法有系统聚类法\cite{slink}、
-近邻传播\cite{frey2007clustering}、k-平均算法
-\cite{lloyd1982least}
-和谱聚类 \cite{shi2000normalized}。
-我们通过5轮交叉验证的方式选取各算法的超参数，
-表\ref{tab:clustering_dataset}给出了在一定优化空间内
-各算法最优的表现，
-其对应的超参数详见附表\ref{tab:clustering_alg_hyperparameter}。
-
-从表\ref{tab:clustering_dataset}
-可以看出，
-信息聚类的方法在 Gaussian, Cirlce, Glass 上表现最好，
-在Iris 和 Libras 数据集上的表现不尽人意。
-这与文献\citep{mac} 中信息聚类在各数据集上均表现最好的实验结果有出入，
-我们由此推测信息聚类可能不适用于真实数据的聚类。
-
-\begin{table}[!ht]
-  \centering
-\begin{tabular}{lrrrrr}
-  \hline
-   ARI  &   Gaussian &   Circle &   Iris &   Glass &   Libras \\
-  \hline
-   系统聚类法         &       1.00 &     1.00 &   0.76 &    0.21 &     0.29 \\
-   近邻传播  &       1.00 &     0.14 &   0.19 &    0.19 &     0.23 \\
-   信息聚类                  &       1.00 &     0.80 &   0.57 &    0.32 &     0.13 \\
-   k-平均算法              &       1.00 &     0.01 &   0.73 &    0.17 &     0.33 \\
-   谱聚类   &       1.00 &     0.60 &   0.76 &    0.14 &     0.37 \\
-  \hline
-\end{tabular}
-\caption{聚类算法效果比较}\label{tab:clustering_dataset}
-\end{table}
-
-尽管如此， 信息聚类算法在数据的层次聚类上具有明显的优势，
-下面我们通过一个实际问题的例子来说明。
+在永野清仁的文章中\cite{mac}，已经有用RBF核作为相似度度量，
+使用类似PSP的算法进行非层次聚类的
+尝试，而本节主要
+针对HPSP算法在层次聚类问题上进行实验。
 
 为了比较不同的层次聚类方法，最好直接比较聚类树。
 为此，
@@ -799,6 +704,42 @@ Circle 数据集的相似度度量通过 k近邻 进行计算，即仅与自己�
 \includegraphics[width=8cm]{plot_results.pdf}
 \caption{不同层次聚类算法稳定性的比较}\label{fig:shc}
 \end{figure}
+
+为展示我们HPSP算法在实际问题中的应用效果，我们考虑一个简单的例子——自然语言的层次聚类问题。
+一方面我们通过这个小例子展示HPSP在社群发现实际数据上的效果，
+另一方面语言的分类对印欧语言研究较多，已有完善的标准。 
+而对其他具体某一地区方言和少数民族语言研究较少，使用
+算法自动聚类对于辅助语言学家在后者发力也有裨益 \cite{nasution2019visualizing}。
+
+我们使用的数据是关于词汇相似率的数据。
+词汇相似率是一个百分比，表示两种语言中有相同词意和书写方式的词汇比例
+\cite{bella2021database}。
+我们从Bella提供的数据中选取了世界66种常用语言，选取的标准是原
+数据集中词汇相似率置信程度高且两两间均有相似率的语言。
+在我们选取的66种语言中，其中一种人造语言（世界语），
+两种古典语言（梵语、拉丁语），其余均为现代语言。
+在此基础上我们用 HPSP 算法进行聚类，得到了如图~\ref{fig:language_tree}所示的聚类树。
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[height=0.9\textheight]{language_tree.pdf}
+    \caption{使用HPSP算法获得的世界常用语言聚类树示意图}\label{fig:language_tree}
+\end{figure}
+
+从上图我们可以解读出一些与比较语言学相一致的结论。
+首先上图包含了一些在同一国家不同地区使用的语言（西班牙、印度、南非），它们在聚类树中位置较近。
+比如西班牙语、加泰罗尼亚语和加利西亚语同属于西班牙，在聚类树中距离很近。
+其次从语言进化的角度，具有相同祖先的语言在聚类树中位置较近。比如法语、西班牙语、葡萄牙语、意大利语、
+罗马尼亚语同由拉丁语演变而来，
+在上图中亦反映出来这五种语言距离很近。
+
+有学者用了普通的聚合聚类的方式对10种常用语言进行聚类 \cite{al2017characterization} 。
+我们在这里指出其结果存在一定的不足，比如荷兰语和德语同属于日尔曼语系，在
+其获得的聚类树中无法体现，而在我们得到的图中荷兰语和德语的亲近性一目了然。
+
+尽管用算法自动生成的语言聚类树相比语言学家给出的语言进化树仍面临缺少
+可解释性和某些方面的准确性，但该方法易拓展到非印欧语系的研究，
+为印欧语言和非印欧语言的比较提供了参考。比如从我们的图中可以看到
+现代汉语、日语、英语三者的相似度大小，尽管三种语言是属于不同语系。
 
 
 
