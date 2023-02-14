@@ -525,10 +525,10 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 稠密程度。
 
 第一个数据集叫做 Gaussian-blobs，
-类似\ref{sec:data_clustering}
-节的 Gaussian 数据集，它也是由
+它是由
 4个相同大小的高斯块组成，但我们可以改变
-每个块的样本数量。由于我们使用式\ref{eq:rbf_kernel}
+每个块的样本数量。我们使用式
+  $w_{ij}=\exp(-\gamma ||x_i-x_j||^2)$
 计算图中边的权值，边的数量满足 $|E|=\Theta(|V|^2)$。
 这里$\Theta$表示$|E|$与$|V|^2$量阶相同。
 \newglossaryentry{not:fntheta}
