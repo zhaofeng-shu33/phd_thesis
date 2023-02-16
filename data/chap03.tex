@@ -537,15 +537,16 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
   description={当$n\to \infty$时，$f(n)$和$g(n)$ 具有相同的量阶。}
 }
 第二个数据集由两层随机块组成，类似 \ref{subsec:cd}节
-的具有两层社群结构的图，一共有 $s^3$ 节点。
+的具有两层社群结构的图，一共有 $s^4$ 节点。
 \ref{subsec:cd}节 相当于 $s=4$ 的情形。
+边的数量满足 $|E|=\Theta(|V|^{\frac{3}{2}})$。
 
 我们使用CPU时间来衡量算法的时间复杂度。
 通过改变节点的数量，
 我们可以得到如图\ref{fig:esc}所示的实验结果，
 对于高斯块数据，在节点数为$400\sim 500$时，
 我们的实现比之前最优的算法要快100倍以上。
-而对于两层的随机块数据，在节点数为1200时，
+而对于两层的随机块数据，在节点数为1296时，
 算法效率提升了约70倍。
 \begin{figure}
 	\centering
@@ -604,7 +605,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-		\includegraphics[width=\textwidth]{two_level.pdf}
+		\includegraphics[width=\textwidth]{two_level-2023-02-16.pdf}
 		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14,$ $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$.}\label{fig:c1}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
