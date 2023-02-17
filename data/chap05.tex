@@ -8,7 +8,7 @@
 半正定规划算法可实现精确恢复时用到。在精确恢复条件被保证的前提下，
 我们利用雷尼散度这一度量进一步研究了模型的误差衰减率（\ref{sec:sbmsi_error_decay_rate}节）。
 除此之外，我们证明了实现精确恢复等价于求解某半正定规划问题，
-该问题可通过交替向乘子法进行求解（\ref{sec:sdp_exact}）。
+该问题可通过交替方向乘子法(ADMM)进行求解（\ref{sec:sdp_exact}）。
 
 \section{精确恢复条件}
 \label{sec:sbmsi_exact_recovery_condtion}
@@ -354,32 +354,13 @@ $(n+1)$ 维的向量。
 	\end{theorem}
     该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现原社群的精确恢复。
 
-    求解 SDP 问题可用内点法或ADMM 方法，这里我们借鉴 \citet{amini2018semidefinite} 中针对无额外信息设计的SDP-1的算法，给出了求解
-    式 \eqref{thm:sdp} 的ADMM算法实现，详见附录\ref{sec:sdp_admm}。
-
-    图 \ref{fig:my_label} 展示了 SDP算法
-    针对 带有额外信息的随机块模型 实现精确恢复的成功率。
-    成功率是指 对每一组参数的若干次重复实验中，我们计算算法
-    实现精确恢复的比率。
-    我们固定 $n=300$， 对每一组参数$(a,b)$，尝试次数是 20。
-    每个节点的额外采样数量为 $m=10$，
-    $P_0,P_1$ 两个分布分别为 $\Bern(0.2)$ 和 $\Bern(0.8)$。
-    蓝线表示 对应着分界线 $\sqrt{a}-\sqrt{b}=\sqrt{2}$，令式\eqref{eq:cor}
-    为零即可得到。红线对应着有额外信息的分界线 $I_+ = 1$.
-    由图可见使用SDP恢复的分界线 与红线 $I_+ = 1$ 对应，从而验证了定理
-    \ref{thm:sdp} 中的结论。
-    \begin{figure}[!ht]
-        \centering
-        \includegraphics[width=0.8\textwidth]{new_results.pdf}
-        \caption{有无额外信息的分界线与SDP算法恢复性能的比较}
-        \label{fig:my_label}
-    \end{figure}
 
 \subsection{算法实现}\label{sec:sdp_admm}
 虽然半正定规划问题 \ref{eq:sdp} 可以使用一般的SDP优化工具包进行，但针对其特殊形式，
 我们可以提前计算出投影矩阵，
 从而实现算法加速。
-以下给出基于ADMM方法的算法实现。
+这里我们借鉴 \citet{amini2018semidefinite} 中针对无额外信息设计的SDP-1的算法，
+给出基于ADMM方法的算法实现。
 为方便讨论，本节假设所有的矩阵都是 $n$维的，而式 \eqref{eq:sdp} 中矩阵的维数是$n+1$，只需作整体替换即可。
 
 求解形如 式\eqref{eq:sdp} 的SDP优化问题可通过如下迭代进行，各矩阵的初始值$X^{(0)},Z^{(0)},U^{(0)}$可取为零矩阵。
@@ -423,6 +404,25 @@ $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
 \end{align*}
 于是我们给出了 投影算子 $\Pi_{A} $ 
 的计算方法。
+
+基于以上方法，我们开展了SDP算法对SBMSI模型精确恢复的仿真实验。
+图 \ref{fig:my_label} 展示了 SDP算法
+针对 带有额外信息的随机块模型 实现精确恢复的成功率。
+成功率是指 对每一组参数的若干次重复实验中，我们计算算法
+实现精确恢复的比率。
+我们固定 $n=300$， 对每一组参数$(a,b)$，尝试次数是 20。
+每个节点的额外采样数量为 $m=10$，
+$P_0,P_1$ 两个分布分别为 $\Bern(0.2)$ 和 $\Bern(0.8)$。
+蓝线表示 对应着分界线 $\sqrt{a}-\sqrt{b}=\sqrt{2}$，令式\eqref{eq:cor}
+为零即可得到。红线对应着有额外信息的分界线 $I_+ = 1$.
+由图可见使用SDP恢复的分界线 与红线 $I_+ = 1$ 对应，从而验证了定理
+\ref{thm:sdp} 中的结论。
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{new_results.pdf}
+    \caption{有无额外信息的分界线与SDP算法恢复性能的比较}
+    \label{fig:my_label}
+\end{figure}
 
 \section{本章小结}
 本章研究了带有额外信息的随机块模型（SBMSI）的精确恢复问题。
