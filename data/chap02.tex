@@ -1237,6 +1237,9 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$。
   \end{example}
 
 \subsection{雷尼散度与切尔诺夫信息}
+雷尼散度\cite{renyi1961measures}通常由雷尼熵导出，但结合我们研究的问题，
+在本节中我们通过假设检验问题中的切尔诺夫信息导出我们需要的雷尼散度的形式。
+
 在假设检验的问题中，我们要确定 i.i.d. 采样的样本
 $X_1, \dots, X_n$ 服从
 $P_1$ 还是 $P_2$ 分布。为此，考虑两个假设：
@@ -1261,9 +1264,8 @@ $D^*$的数学定义为：
  D^* = \lim_{n\to \infty} -\frac{1}{n} \min_{\widehat{H}}
  P^{(n)}_e
 \end{equation}
-关于 $D^*$ 我们有如下定理\footnote{关于此定理可参考\citet{cover1999elements}的教科书
-11.9 节}：
-\begin{theorem}
+关于 $D^*$ 我们有如下定理：
+\begin{theorem}[\cite{cover1999elements}定理11.9.1]
   \newglossaryentry{chernoff_information}{name=切尔诺夫信息, description={Chernoff Information}}
   最大误差指数 $D^*$，也称\gls{chernoff_information}， 满足
   \begin{equation}\label{eq:D_star_lambda_star}
