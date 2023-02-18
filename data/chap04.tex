@@ -3,7 +3,7 @@
 \chapter{基于速率函数的随机块模型精确恢复问题研究}\label{chap:sibm}
 \section{引言}
 本章将利用速率函数这一信息论的度量研究
-具有多个社群结构的随机块模型。具体来说
+具有多个社团结构的随机块模型。具体来说
 我们的研究对象是
 定义\ref{def:SSBM}中的 $\SSBM(n,k,\A, \B)$。
 我们在之前的讨论中指出，当$\sqrt{a}-\sqrt{b}>\sqrt{k}$，即式 \eqref{eq:abk} 成立
@@ -11,11 +11,11 @@
 随机块模型的实例，并没有$a,b$参数的数据，因此
 我们在本章首先研究如何估计模型的参数 $a,b$（\ref{sec:parameter_estimation}节）。
 此外对于其他更高效的恢复算法，其实现精确恢复的算法未必是式 \eqref{eq:abk}。
-本章将研究一个具有额外双参数$\beta,\gamma$ 的社群发现算法，
-我们称之为基于玻茨模型的社群发现算法（\ref{sec:potts}节），
+本章将研究一个具有额外双参数$\beta,\gamma$ 的社团发现算法，
+我们称之为基于玻茨模型的社团发现算法（\ref{sec:potts}节），
 在研究这一算法的过程中，我们将展示如何利用速率函数刻画其精确恢复条件
 和误差衰减率等性质。进一步地，我们将研究由玻茨模型
-衍生出的社群发现算法的误差率，我们称该方法为基于能量最小化的社群发现算法（\ref{sec:em}节）。
+衍生出的社团发现算法的误差率，我们称该方法为基于能量最小化的社团发现算法（\ref{sec:em}节）。
 上述算法便于理论分析但实际实现需要近似求解的算法，这一点将在
 \ref{sec:ms}节进行研究，通过该近似算法的实验结果我们将验证$\beta$参数对误差率的影响。
 \section{参数估计}\label{sec:parameter_estimation}
@@ -81,7 +81,7 @@ $(\hat{a}, \hat{b})$，进而计算均方误差
 		$n$ 的变化规律 }\label{fig:estimator}
 \end{figure}
 
-\section{基于玻茨模型的社群发现算法}\label{sec:potts}
+\section{基于玻茨模型的社团发现算法}\label{sec:potts}
 \subsection{算法描述}
 类似于\ref{sec:ising}节
 介绍的SIBM模型，我们将
@@ -90,7 +90,7 @@ $(\hat{a}, \hat{b})$，进而计算均方误差
 复合起来可得到随机块-玻茨模型。该模型可以看成是SIBM模型的推广，
 每个节点由两状态变成了多状态。由于我们的研究重点并非
 从随机块-玻茨模型的多个样本恢复节点的原始标签，而是利用
-玻茨模型对随机块模型进行社群发现，因此我们首先给出
+玻茨模型对随机块模型进行社团发现，因此我们首先给出
 由随机块模型生成的图上定义的玻茨模型：
 \begin{definition}\label{def:ising}
 	给定从$\SSBM(n,k,\A,\B)$ 中生成的随机图 $G$，
@@ -401,7 +401,7 @@ $\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
 \end{equation}
 特别地，当$t=0$ 时， $g(a,b, 0) = (\sqrt{a} - \sqrt{b})^2$。
 \end{remark}
-\section{基于能量最小化的社群发现算法}\label{sec:em}
+\section{基于能量最小化的社团发现算法}\label{sec:em}
 因为 $\beta^*$ 和 $n$ 无关，
 当 $\gamma>b$ 时，
 我们可以选取一个足够大的 $\beta$ 使得
@@ -427,7 +427,7 @@ $W^*:= \{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n
 \begin{equation}\label{eq:hatX_double_prime}
 \hat{X}'' := \arg\min_{\sigma \in W^*} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)
 \end{equation}
-其中最小值是不同社群之间的最小分割。
+其中最小值是不同社团之间的最小分割。
 
 当 $\hat{X}'' \neq X$ 时，
 我们必须有  $\Dist(\hat{X}'' ,X)\geq 2$
@@ -540,7 +540,7 @@ $\hat{X}'$ 。
   最大似然估计和最大模块度估计都满足
   定理\ref{thm:error_rate}所述的精确恢复条件 $\gamma > b $。
 
-\section{基于梅特罗波利斯采样的社群发现算法}\label{sec:ms}
+\section{基于梅特罗波利斯采样的社团发现算法}\label{sec:ms}
 
 由定理\ref{thm:phase_transition}可知，
 如果我们直接从玻茨模型 \eqref{eq:isingma} 式中采样，那么得到的样本大概率
@@ -565,7 +565,7 @@ $k^n$的速率指数增大。
 进行改写即可得到针对我们的模型和能量表达式 \eqref{eq:energy},
 的算法 \ref{alg:m}。
 算法 \ref{alg:m} 要求
-社群数量 $k$ 和参数 $\beta, \gamma$ 事先给定。
+社团数量 $k$ 和参数 $\beta, \gamma$ 事先给定。
 并且，根据定理\ref{thm:phase_transition}，我们需选取  $\beta>\beta^*, \gamma > b$
 \footnote{ $\beta^*$ 的定义参见式 \eqref{eq:beta_star} }
 。
@@ -621,7 +621,7 @@ $P_a(\hat{X}^*)$ 随 $\beta$的变化在 图 \ref{fig:erh}
 \begin{figure}[ht!]
 	\centering
 		\includegraphics[width=0.6\textwidth]{beta_trans-2020-11-28.pdf}
-		\caption{使用 $\hat{X}^*$ 进行社群发现精确恢复的准确率}\label{fig:erh}
+		\caption{使用 $\hat{X}^*$ 进行社团发现精确恢复的准确率}\label{fig:erh}
 \end{figure}
 
 

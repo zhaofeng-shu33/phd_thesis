@@ -1,31 +1,31 @@
 % !TeX root = ../thuthesis-example.tex
 
 \chapter{背景知识}
-本章对社群发现的基本概念、可恢复性、与有理论保证的算法进行简要介绍，作为我们研究的
+本章对社团发现的基本概念、可恢复性、与有理论保证的算法进行简要介绍，作为我们研究的
 基础。
-\section{社群发现的数学模型}\label{sec:community_detection}
-\newglossaryentry{cd}{name=社群发现, description={Community detection}}
+\section{社团发现的数学模型}\label{sec:community_detection}
+\newglossaryentry{cd}{name=社团发现, description={Community detection}}
 
 \gls{cd}(\glsdesc{cd}) 虽然没有严格的数学定义，但公认的做法是
 \newglossaryentry{graph}{name=图, description={graph}}
-将现实世界的社群建模成\gls{graph}(\glsdesc{graph})结构，在图结构上进行社群发现。社群根据其属性
-是否随时间变化可分为静态社群和动态社群，本文研究的是静态社群，它可以用
+将现实世界的社团建模成\gls{graph}(\glsdesc{graph})结构，在图结构上进行社团发现。社团根据其属性
+是否随时间变化可分为静态社团和动态社团，本文研究的是静态社团，它可以用
 静态图来建模，以下简称图。
 一个图结构$G$ 由节点集 $V$ 和边的集合 $E$ 组成，可记为 $G(V,E)$。
 根据边是否有方向可将图分为有向图和无向图。无向图可以看成是每条边
-有两个方向，从而针对有向图设计的社群发现算法也可以用到无向图上面来。
+有两个方向，从而针对有向图设计的社团发现算法也可以用到无向图上面来。
 此外，根据边是否有权值可将图分为有权图和无权图。有权图中节点 $i$
 和节点 $j$ 之间的权值可以用 $w_{ij}$ 表示。若有权图有方向，
 则 $w_{ij}$ 可以不等于 $w_{ji}$。
 无向图可以看成是每条边
-的权值是1，从而针对有权图设计的社群发现算法也可以用到无权图上面来。
+的权值是1，从而针对有权图设计的社团发现算法也可以用到无权图上面来。
 
-社群发现算法根据发现的社群是否重叠可分为两类，本文研究的是非重叠的
-社群发现算法，即$V$可以分为互不重叠的若干子集。
+社团发现算法根据发现的社团是否重叠可分为两类，本文研究的是非重叠的
+社团发现算法，即$V$可以分为互不重叠的若干子集。
 
 \section{基于图强度的图分割算法}
-不同的社群发现算法根据自己的标准寻找社群结构，这给一般意义上的比较造成了困难。
-在本节中我们介绍的社群发现算法采用的度量标准来自网络科学中的图强度。
+不同的社团发现算法根据自己的标准寻找社团结构，这给一般意义上的比较造成了困难。
+在本节中我们介绍的社团发现算法采用的度量标准来自网络科学中的图强度。
 \newglossaryentry{graph_strength}{name=图强度, description={Strength of a graph}}
 \gls{graph_strength} 这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}。
 它有一些变体，如日本学者永野清仁于2010年提出的最小化平均误差\cite{mac}。
@@ -56,8 +56,8 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 即 $f[\P]=\sum_{C \in \P} f(C)$。有了如上的符号解释，
 式 \eqref{eq:IP} 即不难理解，它表示各分割之间所有边的和对分割总数的平均值。
 
-式 \eqref{eq:IP} 实际给出了一个社群发现的标准，对于扁平化的社群而言，
-最小值$\lambda_1$ 对应的社群为
+式 \eqref{eq:IP} 实际给出了一个社团发现的标准，对于扁平化的社团而言，
+最小值$\lambda_1$ 对应的社团为
 分割$\P^*$的子集。
 
 下面介绍如何求解 $\lambda_1$ 及其对应的分割$\P^*$。永野清仁 \cite{mac} 的研究指出，
@@ -311,18 +311,18 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 
 
 \section{随机块模型}\label{sec:sbm}
-随机块模型是我们研究社群发现问题主要使用的概率统计模型，我们将在
+随机块模型是我们研究社团发现问题主要使用的概率统计模型，我们将在
 本小节对其进行简要介绍。与之相关的，我们将介绍随机块模型的精确恢复问题，从而引出误差率的概念；
 此外，我们将对随机块伊辛模型这一工作进行简要介绍，该工作构成了我们第\ref{chap:sibm}章研究的基础。
-最后，我们还介绍了与我们研究有关的两个社群发现算法。
+最后，我们还介绍了与我们研究有关的两个社团发现算法。
 
 \subsection{随机块模型及其精确恢复问题}\label{sec:exact_recovery}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
 \newacronym{acr:sbm}{SBM}{Stochastic Block Model}
-\gls{sbm}（\gls{acr:sbm}）是社群发现问题中最常用的统计模型之一
+\gls{sbm}（\gls{acr:sbm}）是社团发现问题中最常用的统计模型之一
 \cite{holland1983stochastic, abbe2017community}。
-它提供了一个基准人工数据集来评估不同的社群检测算法
-并启发了许多社群检测任务算法的设计 \cite{fortunato2010community}。
+它提供了一个基准人工数据集来评估不同的社团检测算法
+并启发了许多社团检测任务算法的设计 \cite{fortunato2010community}。
 
 我们首先定义一些常用的符号。随机图仍用符号$G$表示，
 其节点集 $V=\{1,\dots, n\}$ 简写成 \gls{not:n_bracket}。
@@ -351,10 +351,10 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 \gls{not:Wn} 表示 \glsdesc{not:Wn}。 
 
 \newacronym{acr:ssbm}{SSBM}{Symetric Stochastic Block Model}
-下面给出有$k$个社群的对称的随机块模型
+下面给出有$k$个社团的对称的随机块模型
 （\gls{acr:ssbm}）
 的定义, 
-	\begin{definition}[有$k$ 个社群的 SSBM]\label{def:SSBM}
+	\begin{definition}[有$k$ 个社团的 SSBM]\label{def:SSBM}
 	令 $0\leq q<p\leq 1$, $V=[n]$ 且
   $X=(X_1,\dots,X_n)\in W^n$。 对任意的 $u\in W$，
   $X$ 满足约束
@@ -369,8 +369,8 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 \end{definition}
 
 在定义 \ref{def:SSBM} 中，注意到 $p>q$，
-说明同社群之间的节点有边相连的概率更大，而
-属于不同社群的节点之间有边相连的概率较小。
+说明同社团之间的节点有边相连的概率更大，而
+属于不同社团的节点之间有边相连的概率较小。
 
 为进一步解释随机块模型，
 我们定义随机变量 $Z_{ij}:=\bf{1}[\{i,j\} \in E(G)]$，
@@ -415,7 +415,7 @@ description={Maximum likelihood estimation}}
 我们可以获得节点标签的估计$\hat{X}$，此即利用
 \gls{mle}
 %\footnote{Maximum Likelihood, 缩写为 ML}。
-做社群发现。
+做社团发现。
 \newglossaryentry{not:cGn}
 {
   type=notation,
@@ -452,7 +452,7 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$.
 是图论中经典的NP难的二分问题之一。
 
 
-随机块模型的精确恢复是指某社群发现算法用在随机块模型上可以将
+随机块模型的精确恢复是指某社团发现算法用在随机块模型上可以将
 每个节点的类别都正确地分出来。因为随机块模型具有随机性，
 这里正确的分出来是指当图的节点数目趋于无穷大时，以概率1正确。
 为给出精确恢复严格的数学定义，需要引入如下置换的符号。
@@ -492,7 +492,7 @@ $S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
 \newglossaryentry{exact_recovery}{name=精确恢复, description={Exact Recovery}}
 \begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
 给定节点标签 $X$, 随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
-一个社群发现算法$\hat{X}$ 相当于从已知的$G$中估计$X$，也被称做$X$
+一个社团发现算法$\hat{X}$ 相当于从已知的$G$中估计$X$，也被称做$X$
 的估计量。称该算法
 可精确恢复$X$，如果
 \begin{equation}\label{eq:Pa_hat_X}
@@ -528,7 +528,7 @@ P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
 因为我们的工作只涉及强恢复，
 下面对一些和强恢复有关的重要结论进行逐一介绍。
 
-设$a>b>0$，针对两个社群（$k=2$）且$p=\A,q=\B$的情形。
+设$a>b>0$，针对两个社团（$k=2$）且$p=\A,q=\B$的情形。
 Abbe \cite{abbe2015exact} 和 Mossel
 \cite{mossel2016} 分别独立的研究发现了最大似然算法
 精确恢复误差的变化规律。
@@ -545,7 +545,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 	\end{enumerate}
 \end{theorem}
 定理\ref{thm:sbm2_phase_transition} 揭示了
-具有2个社群结构的SBM模型在精确恢复度量下的相变规律，
+具有2个社团结构的SBM模型在精确恢复度量下的相变规律，
 该结论很快被Abbe 推广到$k>2$的情形
 \cite{abbe2015community}，由定理
 \ref{thm:sbmk_phase_transition} 给出。
@@ -640,7 +640,7 @@ $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁子的状态，
 红竖线标出。从图中可见在临界温度处磁化强度突然降为零，也即
 磁子的自旋方向由完全一致变成两种状态各占一半。我们称临界温度处伊辛模型
 \newglossaryentry{phase_trans}{name=相变, description={Phase transition}}
-的这种变化为相变（\glsdesc{phase_trans}）现象，我们在第\ref{chap:sibm}章也将展示社群发现中也有类似图\ref{fig:square_lattice_b}的相变现象。
+的这种变化为相变（\glsdesc{phase_trans}）现象，我们在第\ref{chap:sibm}章也将展示社团发现中也有类似图\ref{fig:square_lattice_b}的相变现象。
 
 对于自发磁化现象可以通过统计力学中的正则系踪（Canonical ensemble）
 理论进行解释。该理论
@@ -815,7 +815,7 @@ $\SIBM(n, \A, \B, \gamma, \beta, m)$。
 另外定理\ref{thm:sibm_phase_trans} 中\ref{enu:beta_larger}、\ref{enu:beta_smaller}
 两点讨论的是从随机图中产生一个样本的情况，
 说明了$\beta^*$ 是一个临界值点。当$\beta>\beta^*$ 时，
-使用 伊辛模型（可看作社群发现的随机算法）产生的样本恢复随机块模型各节点的真实标签
+使用 伊辛模型（可看作社团发现的随机算法）产生的样本恢复随机块模型各节点的真实标签
 可实现精确恢复（参见定义\ref{def:SSBMR}）。
 而当$\beta\leq \beta^*$ 时， 伊辛样本与真实标签的距离是随$n$增长的，
 说明精确恢复不可实现。
@@ -871,14 +871,14 @@ description={Chebyshev's Inequality}}
 % to do: add large deviation theory and hypothesis testing
 
 
-\subsection{最大模块度算法与基于半正定规划的社群发现算法}
+\subsection{最大模块度算法与基于半正定规划的社团发现算法}
 
-最后，我们再简单介绍一下社群发现领域常用的最大模块度算法
+最后，我们再简单介绍一下社团发现领域常用的最大模块度算法
 \cite{newman2006modularity}。
 \newglossaryentry{modularity}{name=模块度, description={Modularity}}
 \gls{modularity}(\glsdesc{modularity})
 是对网络结构或图结构的一种度量，既能作为评价指标评价
-不同社群发现算法的性能，也能通过近似求解模块度最大值的思路设计算法。
+不同社团发现算法的性能，也能通过近似求解模块度最大值的思路设计算法。
 模板度越高，则节点集内部连接越紧密，而节点集之间连接越稀疏。
 
 给定$n$长的向量$x$，模块度的数学定义为：
@@ -889,16 +889,16 @@ description={Chebyshev's Inequality}}
 而$d_i$表示第
 \newglossaryentry{degree}{name=度, description={Degree}}
 $i$个节点的\gls{degree}(\glsdesc{degree})，$x_i$ 表示第$i$
-个节点所属的社群。
+个节点所属的社团。
 
 贪心法是用于近似求解式\eqref{eq:Q}
 近似求解最大值的常用算法，其流程类似于系统聚类法，
 即从每个节点各自属于一类出发，通过中间指标最大的方法每次聚合两类，
 使得 $Q$ 不断增大。该思路可经过优化适用于求解大规模网络
-的社群发现问题 \cite{clauset2004finding}。
+的社团发现问题 \cite{clauset2004finding}。
 
 
-针对随机块模型的社群发现
+针对随机块模型的社团发现
 可以先将最大似然方法获得的目标函数
 写成整数优化的问题形式，
 \newacronym{acr:sdp}{SDP}{Semi-definite programming}
@@ -958,7 +958,7 @@ $I_n$ 是 \glsdesc{not:identity_matrix}，
 
 以上方法可针对一般的图$G$进行求解，
 但对于$\SSBM(n,2, \A, \B)$，
-Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社群发现的
+Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社团发现的
 理论保证。
 \begin{theorem}
   设 $\hat{Y}$ 是
@@ -970,8 +970,8 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社群发现的
 \end{theorem}
 \section{信息论度量}
 由于本文要用到多种信息论度量研究
-社群发现问题，下面依次对多变量互信息、速率函数、雷尼散度等相关知识进行简要介绍。
-另外，由于我们在用多变量互信息研究社群发现算法过程中还用到了局部信息几何相关的知识，
+社团发现问题，下面依次对多变量互信息、速率函数、雷尼散度等相关知识进行简要介绍。
+另外，由于我们在用多变量互信息研究社团发现算法过程中还用到了局部信息几何相关的知识，
 本节也对局部信息几何做一个简要的介绍。
 \subsection{多变量互信息}\label{sec:info_clustering}
 在信息论领域，互信息提供了两个随机变量之间的
@@ -1062,7 +1062,7 @@ $\P_k \preceq \dots \preceq \P_0$，使得
 $C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
 且$C_{\lambda_i}(Z_V) = \P_i$。
 
-最后，我们再介绍一个多变量互信息的性质，它将在我们后面社群中的异常值点的检测工作中
+最后，我们再介绍一个多变量互信息的性质，它将在我们后面社团中的异常值点的检测工作中
 用到。这个性质给出了最大的临界值 $\lambda_k$ 的多变量互信息表达式\cite{agg_ic}：
 \begin{equation}\label{eq:largest_threshold}
 \lambda_k = \max_{A\subseteq V} I(Z_A)
@@ -1322,7 +1322,7 @@ $D^*$的数学定义为：
 
 雷尼散度在刻画一些SBM模型及其变体的误差衰减
 速率时常常用到 \cite{zhang2016}。
-比如在两社群的SBM模型中，我们取$P_1=\Pois(\frac{a}{2}),P_2=\Pois(\frac{b}{2})$
+比如在两社团的SBM模型中，我们取$P_1=\Pois(\frac{a}{2}),P_2=\Pois(\frac{b}{2})$
 代入式 \eqref{eq:renyi_divergence} 
 得
 \begin{equation}\label{eq:renyi_d12_ab}
