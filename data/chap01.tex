@@ -164,7 +164,9 @@ Ising 模型是一种刻划节点状态的概率模型 \cite{ising1925beitrag}�
 \cite{abbe2015recovering}。
 
 \subsection{有辅助信息的随机块模型}
-通过添加辅助信息，基于随机块模型的社团发现能达到更高的准确率。通常辅助信息具有多种形式，
+\newglossaryentry{side_info}{name=辅助信息, description={Side information}}
+通过添加\gls{side_info}，基于随机块模型的社团发现能达到更高的准确率。通常的辅助信息是指节点属性信息\cite{1021723343.nh}，
+其具有多种形式，
 比如部分已知正常标签的节点、全部节点的标签通过一个 BSC 的有噪信道以及根据节点的标签基于不同的分布生成一些观测值\cite{saad2018community}。
 这一部分的研究工作可以应用在社交网络分析中，比如利用用户间的交互关系与
 每一用户自身的属性对用户群体进行划分。
