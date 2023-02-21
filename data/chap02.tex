@@ -431,7 +431,7 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$.
 
 不加说明的情况下，\gls{mle} 算法 是无约束的。但在
 定义\ref{def:SSBM} 的假设下，
-还有一个额外的约束，即 $X$ 每一类的标签数量是严格相等的。
+还有一个辅助的约束，即 $X$ 每一类的标签数量是严格相等的。
 在这个约束下最大化式\eqref{eq:GmL} 我们可以得到一个等价
 的优化问题--$k$类的最小割问题。
 其形式为：
@@ -1232,10 +1232,13 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$。
   随着$n$增大收敛到零
   的速率。首先计算标准正态分布的 log-MGF 为 $\Lambda(s)=s^2/2$，
   其凸共轭$\Lambda^*(s)=\Lambda(s)=s^2/2$。因此
-  由式\eqref{eq:cramer}
+  由式\eqref{eq:cramer}可得
   $\lim_{n\to \infty} \frac{1}{n}\log P( \sum_{i=1}^n X_i \geq  ns) =-s^2/2$。
   \end{example}
-
+\begin{remark}
+  注意到 $s^2/2=D(\mathcal{N}(s, 1) || \mathcal{N}(0,1))$。
+  从某种意义上说，速率函数是KL散度的推广。
+\end{remark}
 \subsection{雷尼散度与切尔诺夫信息}
 雷尼散度\cite{renyi1961measures}通常由雷尼熵导出，但结合我们研究的问题，
 在本节中我们通过假设检验问题中的切尔诺夫信息导出我们需要的雷尼散度的形式。
