@@ -153,7 +153,10 @@ Ising 模型是一种刻划节点状态的概率模型 \cite{ising1925beitrag}�
 基于半正定规划\cite{hajek2016achieving}、
 谱分解\cite{Yun2014} 的方法也被证明具有实现精确恢复的能力。
 而对于这些算法之间关系的探讨也有相关的结果。关于最大似然算法和最大模块度算法的联系之间已有学者进行了研究 \cite{newman2016equivalence}。
-最大模块度算法的优化目标是 NP 难的，最早使用贪心法近似求解 \cite{clauset2004finding}，后来有学者使用模拟退火的方法近似求解 \cite{he2016fast}。此外，还有学者基于非凸优化的方法求解 SBM的社团发现问题\cite{wang2021non}。
+基于最大似然算法的改进算法可用于恢复随机块模型的结构，并且在真实数据集上有良好的效果
+\cite{karrer2011stochastic}。
+最大模块度算法的优化目标是 NP 难的，最早使用贪心法近似求解 \cite{clauset2004finding}，后来有学者使用模拟退火的方法近似求解 \cite{he2016fast}。
+此外，还有学者基于非凸优化的方法求解 SBM的社团发现问题\cite{wang2021non}。
 模拟退火的方法和 梅特罗波利斯 (Metropolis) 采样算法原理一样，只是表述不同，后者常用于 Ising 模型的采样 \cite{metropolis1953equation}，
 而前者是求解黑盒优化问题的启发式算法之一。
 
