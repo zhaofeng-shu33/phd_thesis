@@ -1,17 +1,22 @@
 % !TeX root = ../thuthesis-example.tex
 
 \chapter{背景知识}
-本章对社团发现的基本概念、可恢复性、与有理论保证的算法进行简要介绍，作为我们研究的
-基础。
+本章对社团和信息论度量的相关概念、社团发现算法与
+已有的理论研究成果进行简要介绍，作为我们
+后续研究的基础。
 \section{社团发现的数学模型}\label{sec:community_detection}
 \newglossaryentry{cd}{name=社团发现, description={Community detection}}
 
-\gls{cd}(\glsdesc{cd}) 虽然没有严格的数学定义，但公认的做法是
-\newglossaryentry{graph}{name=图, description={graph}}
-将现实世界的社团建模成\gls{graph}(\glsdesc{graph})结构，在图结构上进行社团发现。社团根据其属性
-是否随时间变化可分为静态社团和动态社团，本文研究的是静态社团，它可以用
-静态图来建模，以下简称图。
-一个图结构$G$ 由节点集 $V$ 和边的集合 $E$ 组成，可记为 $G(V,E)$。
+社团没有严格的数学定义，一般先是
+\newglossaryentry{graph}{name=图, description={Graph}}
+将现实世界的网络建模成\gls{graph}(\glsdesc{graph})结构，社团内部连边
+紧密、不同社团间连边稀疏。\gls{cd}(\glsdesc{cd})，也称社团检测，
+即是在图结构上寻找特定的社团结构。
+%社团根据其属性
+%是否随时间变化可分为静态社团和动态社团，本文研究的是静态社团，
+%它可以用
+%静态图来建模，以下简称图。
+一个图结构$G$ 由节点集 $V$ 和边的集合 $E$ 组成，记为 $G(V,E)$。
 根据边是否有方向可将图分为有向图和无向图。无向图可以看成是每条边
 有两个方向，从而针对有向图设计的社团发现算法也可以用到无向图上面来。
 此外，根据边是否有权值可将图分为有权图和无权图。有权图中节点 $i$
@@ -20,17 +25,21 @@
 无向图可以看成是每条边
 的权值是1，从而针对有权图设计的社团发现算法也可以用到无权图上面来。
 
-社团发现算法根据发现的社团是否重叠可分为两类，本文研究的是非重叠的
-社团发现算法，即$V$可以分为互不重叠的若干子集。
+社团发现算法根据网络是否随时间变化与社团之间是否重叠可进行粗略的分类，
+本文研究的是静态网络中非重叠的社团发现算法，即$G$不随时间变化且
+社团之间不重叠。
+下面，我们首先介绍一个图分割算法，
+可将$V$可以分为互不重叠的若干子集。
 
 \section{基于图强度的图分割算法}
-不同的社团发现算法根据自己的标准寻找社团结构，这给一般意义上的比较造成了困难。
-在本节中我们介绍的社团发现算法采用的度量标准来自网络科学中的图强度。
+根据\citet{Fortunato2010} 对社团发现算法的分类，图分割可用于社团发现，该类别属于20世纪提出的传统算法。
+%不同的社团发现算法根据自己的标准寻找社团结构，这给一般意义上的比较造成了困难。
+在本节中我们介绍的图分割算法采用的度量标准叫做图强度。
 \newglossaryentry{graph_strength}{name=图强度, description={Strength of a graph}}
 \gls{graph_strength} 这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}。
-它有一些变体，如日本学者永野清仁于2010年提出的最小化平均误差\cite{mac}。
+图强度概念的推广包括最小化平均误差\cite{mac}和多变量互信息等，其计算方法具有相似性。
 图强度可以定义在无权图或有权图上，
-在这里我们针对带权的有向图来介绍这一度量和基于此的图分割算法。
+在这里我们针对带权的有向图来介绍这一度量和基于图强度的图分割算法。
 
 给定有向图$G(V,E)$，其最小化平均误差（或图强度）定义为
 \begin{equation}\label{eq:IP}
@@ -126,18 +135,14 @@ $h(\lambda)$ 也是如此。
 而节点2单独分成1类，这符合我们的直觉。
 
 对于一般的图，其节点数目可能很多，此时用枚举法计算
-$h(\lambda)$ 变得不可行。幸运的是，计算
-$h(\lambda)$ 有多项式时间的算法。下面对\cite{mac}中描述的
-方法进行介绍。
-\subsection{主分割序列}
-我们把这一方法称为 PSP 算法
-\footnote{该方法最早由
-印度学者 Narayanan 在 1991 年提出 \cite{narayanan}
-}，
-其中
-PSP 是 principal sequence of partition 的缩写，译为
-主分割序列。
-    
+$h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
+\newacronym{acr:psp}{PSP}{Principal Sequence of Partition}
+\newglossaryentry{psp}{name=主分割序列, description={Principal Sequence of Partition}}
+$h(\lambda)$ 有多项式时间的算法，其中用到了\gls{psp}(\gls{acr:psp})的结构，
+我们把这一算法称为PSP算法。
+由于原文献年代较为久远，作为替代，我们参考\citet{mac}中对PSP算法
+的描述对其进行进一步介绍。
+\subsection{主分割序列}    
 求解 \eqref{eq:PSP_structure} 只需得到在每一个
 分界点处对应的 $\lambda$ 和 分割$\P$ 即可。
 考虑到 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$
@@ -306,7 +311,7 @@ $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
 在$\lambda_{i-1}$上的计算状态并用于下一步的初始化，
 以及适当地使用并行化的技术，使得计算$k$ 个最大流问题
 的时间复杂度和只计算一个最大流问题近似相等。
-\citet{kolmogorov} 基于参数化最大流，将求解式\ref{eq:hlambda}
+\citet{kolmogorov} 基于参数化最大流，将求解式\eqref{eq:hlambda}
 转化为求解n次参数最大流问题。该并行算法宣称可达到 $O(n^4)$ 的时间复杂度。
 
 
