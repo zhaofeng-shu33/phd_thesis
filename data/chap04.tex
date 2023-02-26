@@ -170,9 +170,15 @@ $P_e(\hat{X}^*) \to 1$。
 	则取决于 $(\gamma, \beta)$ 如何取值，对于给定的 $\epsilon > 0$， 
 	$G\sim \SSBM(n, k, \A, \B)$， $\hat{X}^* \sim \textrm{Potts}_G(\gamma, \beta)$，
 	当 $n$ 充分大时, 我们有：
+	\newglossaryentry{not:small_o}
+	{
+	  type=notation,
+	  name={$o(1)$},
+	  description={无穷小量}
+	}
 	\begin{enumerate}
 	\item 当 $\gamma > b$ 且 $\beta > \beta^*$ 时，$P_e(\hat{X}^*) \leq n^{\tilde{g}(\beta)/2 + \epsilon}$;
-	\item 当 $\gamma > b$ 且 $\beta < \beta^*$ 时，$P_a(\hat{X}^*) \leq (1+o(1))\max\{n^{g(\bar{\beta})}, n^{-g(\beta) + \epsilon}\}$;
+	\item 当 $\gamma > b$ 且 $\beta < \beta^*$ 时，$P_a(\hat{X}^*) \leq (1+$\gls{not:small_o}$)\max\{n^{g(\bar{\beta})}, n^{-g(\beta) + \epsilon}\}$;
 	\item 当 $\gamma < b$ 时，对于任意给定的 $C>0$	均有 $P_a(\hat{X}^*) \leq \exp(-C n)$。
 	\end{enumerate}
 \end{theorem}
