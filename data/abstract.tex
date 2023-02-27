@@ -11,20 +11,21 @@
   在消耗大量计算资源的同时算法的性能无法得到保障。有鉴于此，
   本文从信息论度量的角度入手，对社团发现算法进行理论建模和性能优化，在改进已有算法效率的同时，也获得了有理论误差收敛率保证的社团发现算法，为社团发现领域的研究开辟了新的思路。
 
-  论文工作贡献可总结为以下三个部分：
+  论文的工作贡献可总结为以下三个部分：
 
-  首先，我们使用多变量互信息这一度量优化了已有的基于平均损失设计的社团发现算法，使其时间
-  复杂度降低了一个数量级。该优化后的算法不仅可以解决社团的层次化发现问题，通过我们的进一步探索，
-  也可用于解决异常值检测等领域的问题。
+  首先，我们使用多变量互信息这一度量优化了基于图强度的社团发现算法，
+  使其时间复杂度降低了一个数量级。该优化后的算法不仅可以解决社团的层次化发现问题，
+  也可用于数据聚类、异常值检测等领域。
   
   另一方面，基于速率函数，我们针对具有多个社团结构的随机块模型
- 研究了随机采样的玻茨模型算法实现精确恢复的条件及其误差率，得出了基于玻茨模型的算法具有的相变性质。
-  在极限情形下，我们挖掘了该条件与最大似然算法、最大模块度算法以及最小割问题
-  的联系。从而在理论层面上验证了这些算法的有效性。
+ 研究了随机采样的玻茨模型算法实现精确恢复的条件及其误差率，得出了该算法具有的相变性质，
+ 为算法超参的选取提供了理论解释。
+  在极限情形下，我们进一步挖掘了该算法与最大似然算法、最大模块度算法以及最小割问题
+  的联系，从而在理论层面上建立了分析社团发现常用优化指标的统一框架。
   
 
   此外，基于雷尼散度，针对社团发现实际应用中节点存在辅助信息的场景，我们建立了合理的
-  概率统计模型对其开展深入研究。在理论层面上我们导出了该模型的最优误差衰减速率，
+  概率模型对其开展深入研究。在理论层面上我们导出了该模型的最优误差衰减速率，
   而在算法设计层面上我们基于半正定规划设计了可以实现精确恢复的高效算法，
   并通过仿真实验验证了算法的有效性。
 
@@ -39,17 +40,48 @@
 \end{abstract}
 
 \begin{abstract*}
-  An abstract of a dissertation is a summary and extraction of research work and contributions.
-  Included in an abstract should be description of research topic and research objective, brief introduction to methodology and research process, and summary of conclusion and contributions of the research.
-  An abstract should be characterized by independence and clarity and carry identical information with the dissertation.
-  It should be such that the general idea and major contributions of the dissertation are conveyed without reading the dissertation.
+  With the advent of the era of big data, graph-structured data is increasingly used in
+  network science, information science, life science and other fields.
+  Community discovery is an unsupervised learning method for automatically inferring community structure.
+  It has played an important role in describing the property of community and gaining insight into the relationship between different communities.
+  However, the algorithm design and parameter fine-tuning of community discovery are mostly carried out in an empirical way.
+  While consuming a large amount of computing resources,
+  the performance of the algorithm cannot be guaranteed.
+  In view of this,
+  we use information theory measurement to tackle the theoretical modeling and performance optimization of community discovery algorithms.
+  While improving the efficiency of existing algorithms, we obtain community discovery algorithms with theoretical error rate bounds,
+  which opens up new ideas for research in the field of community discovery.
 
-  An abstract should be concise and to the point.
-  It is a misunderstanding to make an abstract an outline of the dissertation and words “the first chapter”, “the second chapter” and the like should be avoided in the abstract.
+  The contribution of this thesis can be summarized in the following three parts:
 
-  Keywords are terms used in a dissertation for indexing, reflecting core information of the dissertation.
-  An abstract may contain a maximum of 5 keywords, with semi-colons used in between to separate one another.
+  Firstly, we optimize a community discovery algorithm based on graph strength using a metric called multivariate mutual information.
+  Compared with existing techniques, we reduce the time complexity of this algorithm by an order of magnitude.
+  The optimized algorithm can not only solve the problem of hierarchical community discovery, but can also be used in data clustering, outlier detection and other fields.
 
+  On the other hand, based on the rate function,
+  we study the conditions and the error rate of a random sampling algorithm based on Potts model
+  for the stochastic block model with multiple community structures.
+  We obtain the phase transition property of the algorithm and provide a theoretical explanation
+  for the choice of hyper-parameters.
+  In the asymptotic case, we further explore the connection between other algorithms including the maximum likelihood algorithm, the maximum modularity algorithm and the minimum cut optimization.
+  In the process we theoretically establish a unified framework for analyzing common object functions for community discovery.
+
+  In addition, based on Rényi divergence,
+  we establish a reasonable probabilistic model
+  to conduct in-depth research on the scenario
+  where the nodes of community have side information.
+  From the perspective of theoretical study,
+  we derive the optimal error decay rate for the stochastic block model with side information.
+  On the algorithm design level,
+  An efficient algorithm is proposed, which can achieve exact recovery based on positive semi-definite programming.
+  The effectiveness of the algorithm is verified through numerical experiments.
+
+  Generally speaking, this paper uses information theory metrics such as multivariate mutual information,
+  rate function, and Rényi divergence to reveal the theoretical
+  optimal recovery rate achievable by the community discovery algorithms,
+  and to guide the algorithm design and optimization process.
+  Our approaches provide theoretical guarantee and salutary guidance
+  for community detection methods in practical scenarios.
   % Use comma as separator when inputting
   \thusetup{
     keywords* = {Community Detection, Info-Clustering, Stochastic Block Model, Exact Recovery, Side Information},
