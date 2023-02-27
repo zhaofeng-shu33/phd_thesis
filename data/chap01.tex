@@ -3,7 +3,8 @@
 \chapter{绪论}
 
 
-\section{选题背景及其意义}
+\section{研究背景及其意义}
+\subsection{社团发现}
 在网络科学中，复杂的网络结构往往存在一定的社团结构 \cite{fortunato2010community} 。社团结构是指
 具有相同特征的节点集合,
 比如社交网络中的圈子、流行病网络中集中爆发的区域。以及在自然界中的群落以及微观世界网络中的大分子
@@ -14,6 +15,12 @@
 小的耦合\cite{topcuoglu2002performance}，在推荐系统设计中划分用户社团以实现精准推荐 \cite{10.1145/2739480.2754670}。
 社团发现的实现离不开特定的算法，而好的社团发现算法
 需要有特定的理论支撑，以便助其在各领域实现广泛应用。
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{background.pdf}
+    \caption{分布式计算中的任务分配\footnote{图片来源于网络：\url{https://medium.com/@wisnu3121/how-distributed-computing-works-3dc0c8bdef10}}}
+\end{figure}
 
 社团发现算法需要适合特定的场景。考虑到有一些问题中社团之间具有复杂的相关关系，从而构成一定的层次结构。如
 在社交网络中根据兴趣对目标人群的划分则有大的尺度和精细的尺度多个维度。普通的社团发现算法无法适应社团的层次
@@ -41,6 +48,7 @@
 比如有相关关系的多个数据源的信息压缩问题
 \cite{abbe17sideinfo}。
 
+\subsection{信息论度量}
 信息论的度量如熵、互信息等最初是在通信领域用于度量编码和信道传输的理论极限，逐渐被
 推广到了机器学习、网络科学等领域。信息论的度量如 KL 散度、互信息等 可以作为社团发现算法的评价指标，
 如归一化的互信息(NMI)\cite{Danon_2005}、变分信息(VI) \cite{2007Comparing}等。

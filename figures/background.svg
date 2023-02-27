@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="149.98656mm"
+   height="87.523788mm"
+   viewBox="0 0 149.98656 87.523788"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="background.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4039843"
+     inkscape:cx="309.4764"
+     inkscape:cy="142.45174"
+     inkscape:window-width="1920"
+     inkscape:window-height="986"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-27.611381,-42.823701)">
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:1.58999, 1.58999;stroke-dashoffset:0"
+       id="path234"
+       cx="47.83873"
+       cy="96.343742"
+       rx="20.121586"
+       ry="10.926953" />
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path234-5"
+       cx="54.676456"
+       cy="94.842194"
+       rx="10.794376"
+       ry="4.9311323" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 43.829499,94.773965 H 31.436277 v 6.529515 l 20.255,-3.2e-4 v -1.532125"
+       id="path1075"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="33.037781"
+       y="102.46641"
+       id="text1180"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178"
+         style="stroke-width:0.128482"
+         x="33.037781"
+         y="102.46641">处理器</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="46.390736"
+       y="99.23777"
+       id="text1180-8"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-0"
+         style="stroke-width:0.128482"
+         x="46.390736"
+         y="99.23777">本地内存</tspan></text>
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:1.58999, 1.58999;stroke-dashoffset:0"
+       id="path234-50"
+       cx="117.95744"
+       cy="65.771263"
+       rx="20.121586"
+       ry="10.926953" />
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path234-5-5"
+       cx="124.79517"
+       cy="64.269714"
+       rx="10.794376"
+       ry="4.9311323" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 113.94821,64.201488 h -12.39322 v 6.529515 l 20.255,-3.2e-4 v -1.532125"
+       id="path1075-7"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="101.05241"
+       y="70.948151"
+       id="text1180-1"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-8"
+         style="stroke-width:0.128482"
+         x="101.05241"
+         y="70.948151">处理器</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="114.40536"
+       y="67.719513"
+       id="text1180-8-1"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-0-8"
+         style="stroke-width:0.128482"
+         x="114.40536"
+         y="67.719513">本地内存</tspan></text>
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:1.58999, 1.58999;stroke-dashoffset:0"
+       id="path234-7"
+       cx="100.43143"
+       cy="119.29157"
+       rx="20.121586"
+       ry="10.926953" />
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path234-5-4"
+       cx="107.26915"
+       cy="117.79002"
+       rx="10.794376"
+       ry="4.9311323" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 96.422197,117.7218 H 84.028975 v 6.52951 l 20.254995,-3.2e-4 v -1.53212"
+       id="path1075-3"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="84.052307"
+       y="126.12415"
+       id="text1180-6"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-00"
+         style="stroke-width:0.128482"
+         x="84.052307"
+         y="126.12415">处理器</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="97.405258"
+       y="122.89551"
+       id="text1180-8-9"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-0-9"
+         style="stroke-width:0.128482"
+         x="97.405258"
+         y="122.89551">本地内存</tspan></text>
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:1.58999, 1.58999;stroke-dashoffset:0"
+       id="path234-8"
+       cx="157.34386"
+       cy="97.43116"
+       rx="20.121586"
+       ry="10.926953" />
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path234-5-51"
+       cx="164.18158"
+       cy="95.929611"
+       rx="10.794376"
+       ry="4.9311323" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 153.33463,95.861386 h -12.39322 v 6.529514 l 20.255,-3.2e-4 v -1.53212"
+       id="path1075-6"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="139.25694"
+       y="103.58747"
+       id="text1180-5"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-4"
+         style="stroke-width:0.128482"
+         x="139.25694"
+         y="103.58747">处理器</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="152.60989"
+       y="100.35883"
+       id="text1180-8-8"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-0-5"
+         style="stroke-width:0.128482"
+         x="152.60989"
+         y="100.35883">本地内存</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:1.58999, 1.58999;stroke-dashoffset:0"
+       id="path234-70"
+       sodipodi:type="arc"
+       sodipodi:cx="53.883839"
+       sodipodi:cy="53.898804"
+       sodipodi:rx="20.121586"
+       sodipodi:ry="10.926953"
+       sodipodi:start="4.4244097"
+       sodipodi:end="3.5988689"
+       sodipodi:arc-type="arc"
+       d="M 48.169,43.421825 A 20.121586,10.926953 0 0 1 71.596276,48.714267 20.121586,10.926953 0 0 1 66.858054,62.250919 20.121586,10.926953 0 0 1 41.488836,62.506424 20.121586,10.926953 0 0 1 35.829577,49.07449"
+       sodipodi:open="true" />
+    <ellipse
+       style="fill:none;stroke:#000000;stroke-width:0.265;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path234-5-9"
+       cx="60.721565"
+       cy="52.397255"
+       rx="10.794376"
+       ry="4.9311323" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264999;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 49.874609,52.329026 H 37.481387 v 6.529515 l 20.255,-3.2e-4 v -1.532125"
+       id="path1075-39"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="38.901493"
+       y="58.708405"
+       id="text1180-82"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-7"
+         style="stroke-width:0.128482"
+         x="38.901493"
+         y="58.708405">处理器</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.42083px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.128482;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="52.254448"
+       y="55.479767"
+       id="text1180-8-93"
+       transform="scale(1.0309357,0.96999259)"><tspan
+         sodipodi:role="line"
+         id="tspan1178-0-98"
+         style="stroke-width:0.128482"
+         x="52.254448"
+         y="55.479767">本地内存</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.91945px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.14721;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="33.499008"
+       y="51.408562"
+       id="text2160"
+       transform="scale(1.1231026,0.89039059)"><tspan
+         sodipodi:role="line"
+         id="tspan2158"
+         style="stroke-width:0.147211"
+         x="33.499008"
+         y="51.408562">计算</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.147211"
+         x="33.499008"
+         y="56.307873"
+         id="tspan2162">节点</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.91945px;font-family:SimSun;-inkscape-font-specification:SimSun;fill:none;stroke:#000000;stroke-width:0.14721;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       x="70.093758"
+       y="89.560699"
+       id="text2160-6"
+       transform="scale(1.1231026,0.8903906)"><tspan
+         sodipodi:role="line"
+         id="tspan2158-6"
+         style="stroke-width:0.147211"
+         x="70.093758"
+         y="89.560699">通信</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.147211"
+         x="70.093758"
+         y="94.460014"
+         id="tspan2268">链路</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.147211"
+         x="70.093758"
+         y="99.359322"
+         id="tspan2162-4" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 53.708754,64.827411 49.374366,85.745557"
+       id="path2164" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 115.61516,76.605648 -7.72651,32.413702"
+       id="path2164-0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 128.05297,75.663391 11.30712,16.960655"
+       id="path2164-0-9"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 72.648155,59.079635 97.5238,63.979376"
+       id="path2164-0-96"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.465;stroke-linejoin:bevel;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 104.87341,73.967325 68.313774,96.204628"
+       id="path2164-0-4"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>
