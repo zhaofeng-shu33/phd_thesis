@@ -75,8 +75,26 @@
 领域也有重要的应用，如假设检验问题中的误差指数、无偏估计的理论下界等。
 
 在社团发现算法发展的第二个阶段，随着统计物理、生物信息学等方法纷纷被引入社团发现中，
-基于信息论度量的方法也不例外。但截止目前，笔者尚未找到这方面系统性的综述文章。
+基于信息论的方法也不例外。但截止目前，笔者尚未找到这方面系统性的综述文章。
 以下是笔者不揣冒昧，试着对这一研究领域进行阶段性总结。
+
+Fig. 1 illustrates our basic framework for identifying communities.
+We envision the process of describing a complex network
+by a simplified summary of its module structure as a communication
+process. The link structure of a complex network is a
+random variable X; a signaler knows the full form of the network
+X and aims to convey much of this information in a reduced
+fashion to a signal receiver. To do so, the signaler encodes
+information about X as some simplified description Y. She sends
+the encoded message through a noiseless communication channel.
+The signal receiver observes the message Y and then
+‘‘decodes’’ this message, using it to make guesses Z about the
+structure of the original network X.
+
+\begin{figure}[!ht]
+    \includegraphics[width=\textwidth]{Rosvall07.pdf}
+    \caption{将社区检测建模为通信过程的基本框架（图源：\inlinecite{rosvall2008mcl}）}
+\end{figure}
 
 在通信领域的问题研究中，信息论度量的成功应用有赖于可设计的概率分布的模型。
 在实际的网络中则缺少这种对分布的先验知识。这给信息论度量在社团发现问题上的应用
@@ -98,8 +116,11 @@
 %而在社团发现的研究中，则是给定输入的随机图模型，研究发现算法的理论极限。在理论极限的基础上，同样类似信道编码
 %领域的研究，在社团发现领域，基于谱分解等方法社团发现算法理论极限的可达性已有相关研究，
 另一方面，若不将网络看作由随机图模型生成，仍可以通过其他方式引入随机性。
-比如通过优化图上的随机游走的最小码长进行社团发现\cite{rosvall2008mcl}。
-该部分的研究内容也为利用社团发现的方法
+比如在通过极大化社团描述量与随机网络的互信息的方法中，采用条件分布是均匀分布的假设。
+\cite{rosvall2007information}。
+再如通过优化图上的随机游走的最小码长进行社团发现，
+概率质量函数由随机游走的频率进行估计\cite{rosvall2008mcl}，
+该研究也为利用社团发现的方法
 进行图上的信息压缩问题提供了思路\cite{abbe17sideinfo}。
 %结合对概念生成模型进行参数估计的方法，进行描述
 %虽然在本世纪初信息论度量开始被用于与网络科学中社团发现问题相关的研究，
@@ -198,8 +219,8 @@
 在\ref{sec:community}节已介绍了社团发现算法三个阶段的发展历程，
 由于在理论研究层面常有工作研究
 社团发现算法发展的第二阶段涌现的算法的理论保证，我们这里着重介绍一下此类算法。
-它们一般是给出一个整数优化问题，通常没有多项式时间的解法，
-但可以通过启发式或松弛为一个数值计算问题的思路近似求解。
+此类算法一般是先给出一个整数优化问题，通常没有多项式时间的解法，
+但可以通过启发式方法或松弛为一个数值优化的问题近似求解。
 优化目标主要有
 模块度的最大值 \cite{newman2006modularity}，汉密尔顿能量最小值
 \cite{reichardt2004potts} 等。
@@ -210,7 +231,7 @@
 模拟退火\cite{massen2005annealing}、
 和遗传算法 \cite{pizzuti2008ga}等。
 利用数值法求解的算法主要有谱分解和半正定规划等。
-此外，在这方面国内也有大量的算法设计的研究\cite{chen2008automata,zhu2009genetic}。
+此外，在算法设计层面也有大量的相关研究在中文学术圈发表\cite{chen2008automata,zhu2009genetic}。
 %应用层面的研究主要集中在生物网络和社交网络方面，通常需要和特征提取等工程步骤结合起来才能实现一次比较有意义的数据挖掘工作。
 
 如同前一节所介绍的, 本课题主要包含层次化发现算法、随机块模型的精确恢复问题及有辅助信息的随机块模型三个方面。
