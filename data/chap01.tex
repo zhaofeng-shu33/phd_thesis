@@ -260,7 +260,8 @@
 %因此，在实际应用中，不适合使用基于贝叶斯的模型来解决具有稳定需求的问题。 
 再如，
 %除了上面提到的分层发现方法外，
-有学者利用信息论度量代替传统层次聚类中的指标 \cite{gokcay2002clustering,mim}，
+有学者利用信息论度量代替传统层次聚类中的指标
+\cite{gokcay2002clustering,aghagolzadeh2007hierarchical}，
 特别地，\citet{chan2016ic}提出的多变量互信息的指标
 %这些数据主要是根据经验得出的，可能无法反映出数据真实的概率模型。
 %在过去的文献中，使用了其他某种信息理论量度 \cite{gokcay2002clustering} 或互信息\cite{mim}
@@ -276,6 +277,10 @@
 %第一个算法由 Narayanan 提出，利用了主分格序列这样一种结构 \cite{narayanan}。
 %后面有人通过参数化最大流的方式加以改进 \cite{pic}。
 
+除了利用数据聚类的算法外，
+直接针对社团发现问题设计层次化发现算法方面也有大量的工作。
+这些算法可分为三类：
+直接估计层次树的结构、聚合式\cite{clauset2004finding}和分裂式\cite{girvan2002community, dasgupta2016cost}。
 
 %异常值检测问题 \cite{grubbs1969procedures} 和聚类分析有着密切的联系，
 \subsection{随机块模型的精确恢复问题}
