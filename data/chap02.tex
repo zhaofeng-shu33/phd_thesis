@@ -606,9 +606,8 @@ Abbe \cite{abbe2015exact} 和 Mossel
   \caption{磁子自旋方向随温度变化示意图}\label{fig:ising_two_configurations}
 \end{figure}   
 
-\newglossaryentry{ising}{name=伊辛模型, description={Ising model}}
-在统计物理学中，\gls{ising}(\glsdesc{ising})指的是
-可以处于两种状态的自旋磁子的集合。如图
+在统计物理学中，伊辛模型指的是
+可以处于两种状态的自旋磁子的集合\cite{ising1925beitrag}。如图
 \ref{fig:ising_two_configurations} 所示，
 当外界温度$T$
 大于临界温度 $T_c$ 时，
@@ -617,6 +616,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 小于临界温度 $T_c$ 时，
 各自旋磁子的状态则变得方向一致。
 这里，我们称这种方向一致的现象叫自发磁化。
+
 
 \begin{figure}
 	\centering
@@ -660,6 +660,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 也叫逆温度（\glsdesc{inverse_temp}），$Z$是配分函数，是概率分布的
 归一化常数。
 
+
 伊辛模型除了定义在正方形网格上外，还可以推广到一般的图 $G(V, E)$ 上。
 对于没有外场的情形，伊辛模型的能量函数为
 \begin{equation}\label{eq:hamiltonian}
@@ -690,6 +691,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 \end{table}
 \end{example}
 
+将伊辛模型视为网络中一种刻划节点状态的概率模型，
 有学者\cite{ye2020exact}
 指出，\eqref{eq:hamiltonian} 式所描述的
 伊辛模型不存在相变现象，因为式\eqref{eq:canonical_ensemble}
@@ -715,6 +717,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 $\frac{\log n}{n}$
 主要是为了与其研究场景 $p,q=O(\frac{\log n}{n})$
 相对应。
+
 \newglossaryentry{metropolis}{name=梅特罗波利斯算法, description={Metropolis algorithm}}
 
 梅特罗波利斯（Metropolis）算法\cite{metropolis1953equation}
@@ -1270,9 +1273,9 @@ $D^*$的数学定义为：
   \sqrt{P_1(x)P_2(x)} \right)
 \end{equation}
 
-雷尼散度在刻画一些SBM模型及其变体的误差衰减
-速率时常常用到 \cite{zhang2016}。
-比如在两社团的SBM模型中，我们取$P_1=\Pois(\frac{a}{2}),P_2=\Pois(\frac{b}{2})$
+雷尼散度在刻画随机块模型模型及其变体（如度修正的随机块模型）的误差衰减
+速率时被用到 \cite{zhang2016, gao2018community}。
+比如在两社团的随机块模型中，我们取$P_1=\Pois(\frac{a}{2}),P_2=\Pois(\frac{b}{2})$
 代入式 \eqref{eq:renyi_divergence} 
 得
 \begin{equation}\label{eq:renyi_d12_ab}
