@@ -279,8 +279,8 @@
 
 除了利用数据聚类的算法外，
 直接针对社团发现问题设计层次化发现算法方面也有大量的工作。
-这些算法可分为三类：
-直接估计层次树的结构、聚合式\cite{clauset2004finding}和分裂式\cite{girvan2002community, dasgupta2016cost}。
+这些算法可分为三类\cite{li2022hierarchical}：
+直接估计层次树的结构\cite{arenas2006synchronization, blundell2013bhcd}、聚合式\cite{clauset2004finding}和分裂式\cite{girvan2002community, dasgupta2016cost}。
 
 %异常值检测问题 \cite{grubbs1969procedures} 和聚类分析有着密切的联系，
 \subsection{随机块模型的精确恢复问题}
@@ -343,9 +343,6 @@ $\sqrt{a} - \sqrt{b} > \sqrt{2}$ \cite{abbe2015exact, mossel2016}。
 %在算法设计层面，利用 对称的 随机块 的结构，基于 ADMM 的迭代策略，有学者提出了 SDP-1的算法 \cite{amini2018semidefinite}。
 
 
-关于 随机块模型 的参数估计问题也有相关的研究工作。在弱恢复的场景下 Mossel 提出了参数 $(a,b)$ 的一个一致估计量
-\cite{mossel2015reconstruction}。对于比弱恢复更稠密的情形，通常可以先恢复节点的标签，再估计模型参数
-\cite{abbe2015recovering}。
 
 \subsection{有辅助信息的随机块模型}
 \newglossaryentry{side_info}{name=辅助信息, description={Side information}}
@@ -379,11 +376,12 @@ $\sqrt{a} - \sqrt{b} > \sqrt{2}$ \cite{abbe2015exact, mossel2016}。
 的。
 
 % \subsection{层次化发现算法}
-基于最小平均分割，研究社团发现
-的层次化发现算法是本工作的一个研究内容。这一部分的研究又可分为理论性质讨论、算法设计研究和算法应用研究三个小部分。
-在理论性质讨论部分，重点研究的是在何种条件下最小平均分割给出非平凡的解以及其他的等价定义等。
-在算法设计研究部分，重点研究的是从算法结构层面改进已有的算法，降低算法的复杂度。
-在算法应用研究层面，重点考虑该方法在异常值检测中的应用。
+首先，我们从普适信息论的视角出发，仅对随机变量的分布做一般
+性假设，利用信息几何的知识探索多变量互信息在社群发现中的应用。
+由于现有的多变量互信息计算方法复杂度过高，限制了其在一般规模的网络上的层次结构发现，
+在理论研究的基础上，我们有针对性地提出了高效算法。
+由于基于多变量互信息的社群层次发现算法尚未有具体应用案例，在本文中也将考虑若干应用场景、
+弥补这方法的不足。
  
 % \subsection{随机块模型的精确恢复问题}
 前一部分的研究中涉及图中的分割的概念，利用分割定义能量函数、进而构造图上的 玻茨模型并利用
