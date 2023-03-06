@@ -2,16 +2,17 @@
 
 \chapter{背景知识}\label{chp:knowledge}
 本章对社团和信息论度量的相关概念、社团发现算法与
-已有的理论研究成果进行简要介绍，作为我们
+相关的理论研究成果进行简要介绍，作为我们
 后续研究的基础。
 \section{社团发现的数学模型}\label{sec:community_detection}
 \newglossaryentry{cd}{name=社团发现, description={Community Detection}}
 
-社团没有严格的数学定义，一般先是
 \newglossaryentry{graph}{name=图, description={Graph}}
-将现实世界的网络建模成\gls{graph}(\glsdesc{graph})结构，社团内部连边
-紧密、不同社团间连边稀疏。\gls{cd}(\glsdesc{cd})，也称社团检测，
-即是在图结构上寻找特定的社团结构。
+在网络中的社团发现中，
+通常将网络建模成\gls{graph}(\glsdesc{graph})结构。
+而社团没有严格的数学定义，
+通常认为社团内部连边紧密、不同社团间连边稀疏。\gls{cd}(\glsdesc{cd})，也称社团检测，
+即是在图结构的数据中上寻找特定的社团结构。
 %社团根据其属性
 %是否随时间变化可分为静态社团和动态社团，本文研究的是静态社团，
 %它可以用
@@ -32,16 +33,18 @@
 可将$V$可以分为互不重叠的若干子集。
 
 \section{基于图强度的图分割算法}
-根据\citet{fortunato2010community} 对社团发现算法的分类，图分割可用于社团发现，该类别属于20世纪提出的传统算法。
+\newglossaryentry{graph_strength}{name=图强度, description={Strength of a graph}}
+根据\citet{fortunato2010community} 对社团发现算法的分类，图分割可用于社团发现，
+该类别属于20世纪末提出的传统算法。
 %不同的社团发现算法根据自己的标准寻找社团结构，这给一般意义上的比较造成了困难。
 在本节中我们介绍的图分割算法采用的度量标准叫做图强度。
-\newglossaryentry{graph_strength}{name=图强度, description={Strength of a graph}}
-\gls{graph_strength} 这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}。
-图强度概念的推广包括最小化平均误差\cite{mac}和多变量互信息等，其计算方法具有相似性。
+\gls{graph_strength}这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}，
+它的推广包括最小化平均误差\cite{mac}和多变量互信息\cite{chan2016ic}等，
+其计算方法具有相似性。
 图强度可以定义在无权图或有权图上，
 在这里我们针对带权的有向图来介绍这一度量和基于图强度的图分割算法。
 
-给定有向图$G(V,E)$，其最小化平均误差（或图强度）定义为
+给定有向图$G(V,E)$，其图强度定义为
 \begin{equation}\label{eq:IP}
   \lambda_1 := \min_{\P \in \Pi'}\frac{ f[\P] }{  \abs{\P} - 1 } 
 \end{equation}
@@ -57,7 +60,7 @@
 $\P$ 表示 \glsdesc{not:partition}。
 $\abs{\mathcal{P}}$ 表示集合 $\P$ 中元素的个数。
 $\Pi$ 是 $V$ 上所有分割的集合而 $\Pi'=\Pi\backslash\{V\}$ 表示 $\Pi$
-除去 $V$本身.
+除去 $V$本身。
 作用在$V$的子集$C$上的函数$f$
 表示$C$和 $C$的补集 $V\backslash C$ 之间边的权值之和，即
 $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
@@ -69,18 +72,18 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 最小值$\lambda_1$ 对应的社团为
 分割$\P^*$的子集。
 
-下面介绍如何求解 $\lambda_1$ 及其对应的分割$\P^*$。永野清仁 \cite{mac} 的研究指出，
-求解 \eqref{eq:IP} 等价于求解下面的组合优化问题
+下面介绍如何求解 $\lambda_1$ 及其对应的分割$\P^*$。实际上，
+求解 \eqref{eq:IP} 等价于求解下面的组合优化问题 \cite{mac}
 \begin{align}\label{eq:hlambda}
   h(\lambda) &= \min_{\P \in \Pi'} f[\P] - \abs{\P} \lambda 
   \end{align}
 其中 $\lambda$ 是一个非负实数。
-式 \eqref{eq:hlambda} 解的结构可以由一系列嵌套的分割
+式 \eqref{eq:hlambda} 中解的结构可以由一系列嵌套的分割
 来描述，即存在正整数$k$，使得式 \eqref{eq:hlambda} 的解
 为：
 \begin{equation}\label{eq:PSP_structure}
   h(\lambda) = \begin{cases} h_{\P_0}(\lambda) & 0\leq \lambda < \lambda_1 \\
-  h_{\P_i}(\lambda) & \lambda_i \leq \lambda < \lambda_{i+1} \textrm{ for } i = 1, \dots, k-1 \\
+  h_{\P_i}(\lambda) & \lambda_i \leq \lambda < \lambda_{i+1} \textrm{ 对于 } i = 1, \dots, k-1 \\
   h_{\P_k}(\lambda) & \lambda \geq \lambda_k
   \end{cases}
 \end{equation}
@@ -89,7 +92,7 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 对于分割 $\P_0, \dots, \P_k$ 来说，
 它们也有一个序关系。我们称分割 $P$ 是 $Q$ 的一个细分，
 如果 $\forall C \in P, \exists C' \in Q, s.t.\, C\subset C'$，
-并记为 $P \preceq Q$。基于细分的此种定义，我们有：
+并记为 $P \preceq Q$。基于细分的此种定义，我们有
 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 其中 $\P_0=\{V\}$ 而 $\P_k=\cup_{i=1}^n \{ i\}$。
 
@@ -108,7 +111,7 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 \end{example}
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{0.5\linewidth}
+  \begin{subfigure}[b]{0.4\linewidth}
   \includegraphics[width=\textwidth]{example_directed.pdf}
   \caption{一个有三个节点的带权有向图}
   \label{fig:example_directed}
@@ -127,31 +130,32 @@ $\P_0=\{ \{1,2,3\} \}, \P_1 = \{\{1,3\}, \{2\} \},
 \P_2 =\{\{1\},\{2\},\{3\} \}$。
 从图\ref{fig:dt} 中可以看到，在这个简单的例子中
 $h(\lambda)$
-是一个分段线性函数，对于一般的图$G$对应的
+是一个分段线性函数。一般的图$G$对应的
 $h(\lambda)$ 也是如此。
 
-因此，基于最小平均分割的方法，\ref{fig:example_directed}
+因此，基于图分割的方法，\ref{fig:example_directed}
 中的图将被 划分成 $\P^*=\P_1$，即节点1和3被分成一类，
 而节点2单独分成1类，这符合我们的直觉。
 
-对于一般的图，其节点数目可能很多，此时用枚举法计算
-$h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
 \newacronym{acr:psp}{PSP}{Principal Sequence of Partition}
 \newglossaryentry{psp}{name=主分割序列, description={Principal Sequence of Partition}}
-$h(\lambda)$ 有多项式时间的算法，其中用到了\gls{psp}(\gls{acr:psp})的结构，
+对于一般的图，其节点数目可能很多，此时用枚举法计算
+$h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
+$h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{acr:psp})的结构，
 我们把这一算法称为PSP算法。
-由于原文献年代较为久远，作为替代，下面我们参考\citet{mac}中对PSP算法
+由于原文献年代较为久远，作为替代，下面我们参考\citet{mac}论文中对PSP算法
 的描述对该算法进行进一步介绍。
-\subsection{主分割序列}    
+%\subsection{主分割序列}    
+
 求解 \eqref{eq:PSP_structure} 只需得到在每一个
 分界点处对应的 $\lambda$ 和 分割$\P$ 即可。
 考虑到 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$
 ，
 我们有 $|\P_0| \leq |\P_1| \dots \leq |\P_k|$，
-即随着 $\lambda $ 的增大，线性函数的斜率逐渐增大。
+即随着 $\lambda $ 的增大，线性函数斜率的绝对值逐渐增大。
 这从图 \ref{fig:dt} 中也可以得到印证。
-利用这一特点，我们基于分治的思想采用算法\ref{alg:psp}
-获得分割序列。
+利用这一特点并基于分治的思想，算法\ref{alg:psp}
+给出了获得主分割序列的步骤。
 
 \renewcommand{\algorithmicrequire}{\textbf{输入：}\unskip}
 \renewcommand{\algorithmicensure}{\textbf{输出：}\unskip}
@@ -188,11 +192,7 @@ $h(\lambda)$ 有多项式时间的算法，其中用到了\gls{psp}(\gls{acr:psp
 \footnotetext{$\mathcal{Q}$
 中按集合的大小排序}
 
-在算法\ref{alg:psp}第\ref{alg:lambda_f}行，
-函数 \texttt{DT} 是用来求解 式\ref{eq:hlambda} 获得最优值
-$\tilde{h}$ 和最优值对应的分割 $P'$。
-
-在算法 \ref{alg:lambda}、\ref{alg:lambda_plus} 行，
+在算法\ref{alg:psp}第 \ref{alg:lambda}、\ref{alg:lambda_plus} 行，
 求解 $(\lambda', h')$ 相当于在二维 $(\lambda, h)$
 平面上计算直线
 $h = f[P] - |P| \lambda $
@@ -210,109 +210,117 @@ $[\lambda', \lambda_P]$
 $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 \texttt{Split} 函数。
 
-如前所述，函数 \texttt{DT}
-（Dilworth truncation，迪尔沃思截断\footnote{采用迪尔沃思截断
-这个名称是沿用了文献\cite{mac}中的称谓}）
-是用于求解式\eqref{eq:hlambda}的算法，它实际上是一种贪心算法，
-由算法\ref{alg:dt} 给出。
-
-\begin{algorithm}
-  \caption{迪尔沃思截断算法}\label{alg:dt}
-  \begin{algorithmic}[1]
-  \REQUIRE 图 $G$ 和 $\lambda$
-  \ENSURE 分割 $\P$ 和 $h$
-  \STATE
-  $V^0 = \emptyset, x $ 是 $n$ 长的向量\footnotemark,
-  $\mathcal{A} = \{\}$
-  \FOR{$l=1, 2, \dots, n$}
-  \STATE $V^l = \{l\} \cup V^{l-1}$
-  \STATE\label{alg:tight} 计算 $x^* = \displaystyle\min_{ A: l \in A \subseteq V^l} f(A)- x(A)$。
-   $T^l$ 是达到此最小值的集合，并且 $x_l \leftarrow x^* - \lambda$。 
-    \STATE $U^l = T^l \cup [\cup \{A | A \in \mathcal{A}, A \cap T^l \neq \emptyset\}] $
-  \STATE $\mathcal{A} = \{U^l\} \cup \{A | A \in \mathcal{A}, A \cap T^l = \emptyset \}$
-  \ENDFOR
-  \STATE $\P^* = \mathcal{A}, h_{\lambda} = x(V)$
-  \end{algorithmic}
-  \end{algorithm}
-\footnotetext{$n$ 是图$G$中节点的个数}
-
-算法\ref{alg:dt}涉及到一种新的运算记号$x(A)$，
-这里 $x$ 表示一个向量而 $A$ 是一个集合
-$x(A)$ 定义为 $\sum_{i \in A} x_i$。
-此外，采用\cite{pin}中的方法，我们可以把\ref{alg:tight} 行中的最优化
-问题转化成有向图上的最大流问题。
-具体而言，
-针对 $\displaystyle\min_{ A: l \in A \subseteq V^l} f(A)- x(A)$，
-我们首先构造一个图$G'$包含节点$V'=\{0, 1, 2, \dots, l\}=\{0\} \cup V^l$。
-节点 $0$ 是相对新加入的，作为最大流算法的源节点。
-而$l$是目标节点。图$G'$中有向边的权值有如下定义：
-\begin{equation}\label{eq:wij_prime}
-  w'_{ij} = \begin{cases}
-    \max\{0, -x_{i}\} & \textrm{ if } i = 0 \\
-    \max\{0, -x_{i}\} + w_{il} & \textrm{ else if } j = l \\
-    w_{ij} & \textrm{ otherwise }
-  \end{cases}
-\end{equation}
-
-按照定义式 \eqref{eq:wij_prime}, 源节点0和目标节点j
-之间的权值为零，即两节点间没有边相连。
-基于定义好的图$G'$和$s=0,t=l$，我们求解如下
-标准的最小割问题：
-\begin{equation}\label{eq:mincut}
-  \beta = \min_{A \subseteq V^l: l\in A }
-  c(V' \backslash A, A)
-\end{equation}
-
-达到式\eqref{eq:mincut}
-最小值的集合即是 $T^l$，并且$x^*$和 $\beta$
-有如下关系式：
-\begin{equation}\label{eq:beta_alpha}
-  \beta = x^* + \sum_{x_v > 0, 1\leq v < l} x_v
-\end{equation}
-
-
-\subsection{参数化的最大流算法}
-最大流算法用于解决网络流中从一点到另一点的最优运输路径的问题。
-其中一类基于前置推送-标签重贴(push-relabel) \cite{Goldberg1988} 的算法
+\newglossaryentry{dt}{name=迪尔沃思截断, description={Dilworth Truncation}}
+在算法\ref{alg:psp}第\ref{alg:lambda_f}行，
+函数DT(\glsdesc{dt})被用来求解式\eqref{eq:hlambda} 获得最优值
+$\tilde{h}$ 和最优值对应的分割 $P'$。
+%该函数 \texttt{DT}
+%
+%是用于求解式\eqref{eq:hlambda}的算法，它实际上是一种贪心算法，
+%由算法\ref{alg:dt} 给出。
+% \begin{algorithm}
+%   \caption{迪尔沃思截断算法}\label{alg:dt}
+%   \begin{algorithmic}[1]
+%   \REQUIRE 图 $G$ 和 $\lambda$
+%   \ENSURE 分割 $\P$ 和 $h$
+%   \STATE
+%   $V^0 = \emptyset, x $ 是 $n$ 长的向量\footnotemark,
+%   $\mathcal{A} = \{\}$
+%   \FOR{$l=1, 2, \dots, n$}
+%   \STATE $V^l = \{l\} \cup V^{l-1}$
+%   \STATE\label{alg:tight} 计算 $x^* = \displaystyle\min_{ A: l \in A \subseteq V^l} f(A)- x(A)$。
+%    $T^l$ 是达到此最小值的集合，并且 $x_l \leftarrow x^* - \lambda$。 
+%     \STATE $U^l = T^l \cup [\cup \{A | A \in \mathcal{A}, A \cap T^l \neq \emptyset\}] $
+%   \STATE $\mathcal{A} = \{U^l\} \cup \{A | A \in \mathcal{A}, A \cap T^l = \emptyset \}$
+%   \ENDFOR
+%   \STATE $\P^* = \mathcal{A}, h_{\lambda} = x(V)$
+%   \end{algorithmic}
+%   \end{algorithm}
+% \footnotetext{$n$ 是图$G$中节点的个数}
+在该函数
+%\ref{alg:dt}
+%涉及到一种新的运算记号$x(A)$，
+%这里 $x$ 表示一个向量而 $A$ 是一个集合
+%$x(A)$ 定义为 $\sum_{i \in A} x_i$。
+%此外，采用\cite{chan2017pin}中的方法，我们可以把\ref{alg:tight} 行中的最优化
+中调用了
+%问题转化成
+求解有向图上的最大流问题的算法。
+% 具体而言，
+% 针对 $\displaystyle\min_{ A: l \in A \subseteq V^l} f(A)- x(A)$，
+% 我们首先构造一个图$G'$包含节点$V'=\{0, 1, 2, \dots, l\}=\{0\} \cup V^l$。
+% 节点 $0$ 是相对新加入的，作为最大流算法的源节点。
+% 而$l$是目标节点。图$G'$中有向边的权值有如下定义：
+% \begin{equation}\label{eq:wij_prime}
+%   w'_{ij} = \begin{cases}
+%     \max\{0, -x_{i}\} & \textrm{ if } i = 0 \\
+%     \max\{0, -x_{i}\} + w_{il} & \textrm{ else if } j = l \\
+%     w_{ij} & \textrm{ otherwise }
+%   \end{cases}
+% \end{equation}
+%
+% 按照定义式 \eqref{eq:wij_prime}, 源节点0和目标节点j
+% 之间的权值为零，即两节点间没有边相连。
+% 基于定义好的图$G'$和$s=0,t=l$，我们求解如下
+% 标准的最小割问题：
+% \begin{equation}\label{eq:mincut}
+%   \beta = \min_{A \subseteq V^l: l\in A }
+%   c(V' \backslash A, A)
+% \end{equation}
+%
+% 达到式\eqref{eq:mincut}
+% 最小值的集合即是 $T^l$，并且$x^*$和 $\beta$
+% 有如下关系式：
+% \begin{equation}\label{eq:beta_alpha}
+%   \beta = x^* + \sum_{x_v > 0, 1\leq v < l} x_v
+% \end{equation}
+%
+%
+%\subsection{参数化的最大流算法}
+%最大流算法用于解决网络流中从一点到另一点的最优运输路径的问题。
+求解最大流问题
+有一类基于前置推送-标签重贴(push-relabel) \cite{Goldberg1988} 的算法
 具有良好的效率。如果要解一系列的最大流问题并且这一系列的问题
 之间有一定的关联性，重复调用最大流算法显然不是最优的选择。
 基于这种考虑，有学者提出了参数化的最大流算法\cite{Gallo1989}用于求解
-具有特殊结构的一系列的最大流问题。下面对参数化的最大流算法
-进行简单的介绍。
-
-首先让我们回顾一下最大流问题。
-考虑一有向图$G(V,E)$。其节点集$V$
-中包含两个特殊的节点：源节点$s$
-和目标节点$t$。对每一对有向边
-$(u,v)$存在一个非负的容量函数
-$c(u,v)$。如果$u,v$之间没有有向边
-定义$c(u,v)=0$。
-最大流问题是求解流量函数
-$f(u,v)$，使得$\sum_{v\in V} f(v,t)$
-最大。流量函数需要满足如下约束
-\begin{align}
-  f(u, v) \leq c(u, v) \textrm{ for } (u, v) \in V \times V \\
-  f(u, v) = -f(v, u) \textrm{ for } (u, v) \in V \times V \\
-  \sum_{v \in V} f(u,v) = 0 \textrm{ for } v\in V\backslash\{s, t\}
-\end{align}
-最大流和形如式\eqref{eq:mincut}所示的最小割问题
-互为对偶问题。因此求解最大流问题的算法也可以
-用于求解最小割问题。
-
-参数化的最大流算法考虑的问题是在最大流问题的
-基础上，假设$c(s,v)$ 
-是关于$\lambda$的增函数
-且$c(v, t)$是$\lambda$的减函数，
-分别记为
-$c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
-对于一系列的$\lambda_1 < \dots < \lambda_k$，
-我们可以得到 $k$ 个最大流问题。参数化的最大流算法
-即基于前置推送-标签重贴算法，通过保留
+具有特殊结构的一系列的最大流问题。
+%下面对参数化的最大流算法
+%进行简单的介绍。
+%
+% 首先让我们回顾一下最大流问题。
+% 考虑一有向图$G(V,E)$。其节点集$V$
+% 中包含两个特殊的节点：源节点$s$
+% 和目标节点$t$。对每一对有向边
+% $(u,v)$存在一个非负的容量函数
+% $c(u,v)$。如果$u,v$之间没有有向边
+% 定义$c(u,v)=0$。
+% 最大流问题是求解流量函数
+% $f(u,v)$，使得$\sum_{v\in V} f(v,t)$
+% 最大。流量函数需要满足如下约束
+% \begin{align}
+%   f(u, v) \leq c(u, v) \textrm{ for } (u, v) \in V \times V \\
+%   f(u, v) = -f(v, u) \textrm{ for } (u, v) \in V \times V \\
+%   \sum_{v \in V} f(u,v) = 0 \textrm{ for } v\in V\backslash\{s, t\}
+% \end{align}
+% 最大流和形如式\eqref{eq:mincut}所示的最小割问题
+% 互为对偶问题。因此求解最大流问题的算法也可以
+% 用于求解最小割问题。
+%
+% 参数化的最大流算法考虑的问题是在最大流问题的
+% 基础上，假设$c(s,v)$ 
+% 是关于$\lambda$的增函数
+% 且$c(v, t)$是$\lambda$的减函数，
+% 分别记为
+% $c_{\lambda}(s,v)$ 和 $c_{\lambda}(v, t)$。
+% 对于一系列的$\lambda_1 < \dots < \lambda_k$，
+% 我们可以得到 $k$ 个最大流问题。
+参数化的最大流算法
+基于前置推送-标签重贴算法，通过保留
 在$\lambda_{i-1}$上的计算状态并用于下一步的初始化，
 以及适当地使用并行化的技术，使得计算$k$ 个最大流问题
 的时间复杂度和只计算一个最大流问题近似相等。
 \citet{kolmogorov} 基于参数化最大流，将求解式\eqref{eq:hlambda}
-转化为求解n次参数最大流问题。该并行算法宣称可达到 $O(n^4)$ 的时间复杂度。
+转化为求解$n$次参数最大流问题。该并行算法宣称可达到 $O(n^4)$ 的时间复杂度。
 
 
 \section{随机块模型}\label{sec:sbm}
