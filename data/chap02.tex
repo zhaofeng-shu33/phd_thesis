@@ -167,8 +167,8 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{a
   \begin{algorithmic}[1]
     \REQUIRE 图$G$
     \ENSURE 序列 $L=[\lambda_1, \dots, \lambda_k]$
-    和 $\mathcal{Q}=[\P_0, \dots, \P_k]$.
-    \STATE \textbf{L}  $\leftarrow []$.
+    和 $\mathcal{Q}=[\P_0, \dots, \P_k]$
+    \STATE \textbf{L}  $\leftarrow []$
     \STATE $Q\leftarrow \{V\}, P \leftarrow \{ \{i \} | i \in V\}$
     %\STATE $\mathbf{PSP}= [Q, P]$
     \STATE \texttt{Split}$(Q,P)$
@@ -180,9 +180,9 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{a
      \STATE\label{alg:lambda_plus} $h' = {1 \over \abs{P} - \abs{Q}}(\abs{P} f(Q) - \abs{Q} f(P))$
      \STATE\label{alg:lambda_f} $(\tilde{h}, P') = \texttt{DT}(G,\lambda')$
      \IF{$\tilde{h} = h'$}
-       \STATE\label{algorithme:terminer} insert $\lambda'$ to $\mathbf{L}$
+       \STATE\label{algorithme:terminer} 将 $\lambda'$ 插入 $\mathbf{L}$
      \ELSE
-       \STATE insert $P'$ to $\mathcal{Q}$
+       \STATE 将 $P'$ 插入 $\mathcal{Q}$
        \STATE\label{algorithme:gauche} \texttt{Split}$(Q, P')$
        \STATE\label{algorithme:droit} \texttt{Split}$(P',P)$
      \ENDIF
@@ -333,11 +333,12 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
 \newacronym{acr:sbm}{SBM}{Stochastic Block Model}
 \gls{sbm}（\gls{acr:sbm}）是社团发现问题中最常用的统计模型之一
-\cite{holland1983stochastic, abbe2017community}。
-它提供了一个基准人工数据集来评估不同的社团检测算法
-并启发了许多社团检测任务算法的设计 \cite{fortunato2010community}。
-
-我们首先定义一些常用的符号。随机图仍用符号$G$表示，
+\cite{holland1983stochastic, abbe2017community}，
+本节介绍我们研究的一类特殊的随机块模型，
+%它提供了一个基准人工数据集来评估不同的社团检测算法
+%并启发了许多社团检测任务算法的设计 \cite{fortunato2010community}。
+%
+为此我们首先定义一些常用的符号。随机图仍用符号$G$表示，
 其节点集 $V=\{1,\dots, n\}$ 简写成 \gls{not:n_bracket}。
 \newglossaryentry{not:n_bracket}
 {
@@ -365,7 +366,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 
 \newacronym{acr:ssbm}{SSBM}{Symetric Stochastic Block Model}
 下面给出有$k$个社团的对称的随机块模型
-（\gls{acr:ssbm}）
+(\gls{acr:ssbm})
 的定义, 
 	\begin{definition}[有$k$ 个社团的 SSBM]\label{def:SSBM}
 	令 $0\leq q<p\leq 1$, $V=[n]$ 且
@@ -382,7 +383,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 \end{definition}
 
 在定义 \ref{def:SSBM} 中，注意到 $p>q$，
-说明同社团之间的节点有边相连的概率更大，而
+说明同一社团之间的节点有边相连的概率更大，而
 属于不同社团的节点之间有边相连的概率较小。
 
 为进一步解释随机块模型，
@@ -439,7 +440,7 @@ description={Maximum likelihood estimation}}
 这里顺便介绍一个后文中会用到的符号 \gls{not:cGn}，它表示
 \glsdesc{not:cGn}。
 由概率分布的归一化的性质可得，
-$P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$.
+$P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$。
 \newacronym{acr:ml}{ML}{Maximum Likelihood}
 
 不加说明的情况下，\gls{mle} 算法 是无约束的。但在
