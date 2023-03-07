@@ -387,18 +387,18 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 属于不同社团的节点之间有边相连的概率较小。
 
 为进一步解释随机块模型，
-我们定义随机变量 $Z_{ij}:=\bf{1}[\{i,j\} \in E(G)]$，
+我们定义随机变量 $Z_{ij}:=\mathbf{1}[\{i,j\} \in E(G)]$，
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
 给定节点的标签向量 $X$, 
 \newglossaryentry{Bernoulli_distribution}{name=伯努利分布, description={Bernoulli distribution}}
-$Z_{ij}$ 服从 \gls{Bernoulli_distribution}，
+$Z_{ij}$ 服从\gls{Bernoulli_distribution}，
 \newglossaryentry{not:expectation}
 {
   type=notation,
   name={$\E[\cdot]$},
   description={数学期望}
 }
-其 \glsdesc{not:expectation}值为
+其\glsdesc{not:expectation}值为
 \begin{equation}
 \E[Z_{ij}] =
 \begin{cases}
@@ -410,7 +410,7 @@ q & \textrm{ if }  X_i \neq X_j
 则 有 $n$ 个节点的随机图 $G$ 
 被 
 随机变量 $Z:=\{Z_{ij}, 1\leq i<j\leq n\}$ 完全确定。
-这里 每一个 $Z_{ij}$ 是相互独立的。
+这里，每一个 $Z_{ij}$ 是相互独立的。
 $Z$ 的分布函数可以写为：
 \begin{align}\label{eq:mle_sibm}
 P_G(G)&:=P_G(Z = z| X=x) \\
@@ -426,10 +426,9 @@ description={Maximum likelihood estimation}}
 若 参数 $p, q$ 已知，
 通过求
 式\eqref{eq:GmL} 的最大值
-我们可以获得节点标签的估计$\hat{X}$，此即利用
-\gls{mle}
+我们可以获得节点标签的估计量$\hat{X}$，此即
+利用\gls{mle}做社团发现。
 %\footnote{Maximum Likelihood, 缩写为 ML}。
-做社团发现。
 \newglossaryentry{not:cGn}
 {
   type=notation,
@@ -443,14 +442,14 @@ description={Maximum likelihood estimation}}
 $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$。
 \newacronym{acr:ml}{ML}{Maximum Likelihood}
 
-不加说明的情况下，\gls{mle} 算法 是无约束的。但在
-定义\ref{def:SSBM} 的假设下，
-还有一个辅助的约束，即 $X$ 每一类的标签数量是严格相等的。
+不加说明的情况下，最大似然估计算法 是无约束的。但在
+定义\ref{def:SSBM}的假设下，
+还有一个额外的约束，即 $X$ 中每一类的标签数量是严格相等的。
 在这个约束下最大化式\eqref{eq:GmL} 我们可以得到一个等价
-的优化问题--$k$类的最小割问题。
+的优化问题——$k$类的最小割问题。
 其形式为：
 \begin{equation}\label{eq:minimum_k_cut}
-  \min \sum_{ \{i,j\} \in E} (1-\delta(x_i, x_j))
+  \min_{x\in W^n} \sum_{ \{i,j\} \in E} (1-\delta(x_i, x_j))
 \end{equation}
 这里，示性函数 $\delta(x,y)$ 定义为：
 \glsdesc{not:deltaxy}。
@@ -462,52 +461,52 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$。
 }
 
 \newglossaryentry{planted}{name=植入性分割模型, description={Planted partition model}}
-当$k=2$时，式\eqref{eq:minimum_k_cut} 即为 \gls{planted}，
+当$k=2$时，式\eqref{eq:minimum_k_cut} 即为\gls{planted}，
 是图论中经典的NP难的二分问题之一。
 
 
 随机块模型的精确恢复是指某社团发现算法用在随机块模型上可以将
 每个节点的类别都正确地分出来。因为随机块模型具有随机性，
-这里正确的分出来是指当图的节点数目趋于无穷大时，以概率1正确。
+这里正确的分出来是指当图的节点数目趋于无穷大时，正确概率收敛到1。
 为给出精确恢复严格的数学定义，需要引入如下置换的符号。
 
-
-我们用 $S_k$ 表示 $W$  上所有的置换函数， 
-$f$ 是 定义在 $W$ 上的置换函数
-并且可以通过逐元素作用的方式
-扩展到 $W^n$ 上。
-对于任意 $\sigma \in W^n$，
-定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
-此外，我们定义两个$W^n$中的向量的距离为
 \newglossaryentry{not:dist}
 {
   type=notation,
   name={$\Dist(\sigma, \sigma')$},
   description={两个$W^n$中的向量的距离，即$|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$}
 }
-\gls{not:dist}
+我们用 $S_k$ 表示 $W$  上所有的置换函数， 
+$f$ 是 定义在 $W$ 上的置换函数
+并且可以通过逐元素作用的方式
+将其定义域扩展到 $W^n$ 上。
+对于任意 $\sigma \in W^n$，
+定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
+此外，我们定义两个$W^n$中的向量的
+距离为\gls{not:dist}
 $=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$,
 其中 $\sigma,\sigma'\in W^n
 $。
 \begin{example}
 当 $n=2$ 且 $k=2$ 时，
-$\sigma=(1, \omega) \in W^2$;
-$\omega^0 = 1$; $\omega \cdot \omega = \omega^2 = 1$;
+取$\sigma=(1, \omega) \in W^2$。
+$\omega$满足
+$\omega^0 = 1$ 且 $\omega \cdot \omega = \omega^2 = 1$。
 令 $f$ 是一个$W$上映射，定义为
 $f(1) = \omega$ 且 $f(\omega)=1$,
-则 $f \in S_2$ 且 $f(\sigma) = (\omega, 1)$;
-$\Dist(\sigma, f(\sigma)) = 2$;
-$S_k(\sigma) = \{\sigma, f(\sigma)\}$; 且
+则 $f \in S_2$ 且 $f(\sigma) = (\omega, 1)$。
+另外我们有 $\Dist(\sigma, f(\sigma)) = 2$，
+$S_k(\sigma) = \{\sigma, f(\sigma)\}$， 且
 $S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
 =\{(1, 1), (\omega, \omega)\}$。
 \end{example}
 
-给定 随机块模型，精确恢复问题可以正式定义如下:
+给定 随机块模型，精确恢复问题的数学定义如下:
 \newglossaryentry{exact_recovery}{name=精确恢复, description={Exact Recovery}}
 \begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
-给定节点标签 $X$, 随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
-一个社团发现算法$\hat{X}$ 相当于从已知的$G$中估计$X$，也被称做$X$
-的估计量。称该算法
+给定节点标签 $X$, 并假设随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
+一个社团发现算法$\hat{X}$ 已知 $G$ 去估计$X$，
+也被称做$X$ 的估计量。我们称该算法
 可精确恢复$X$，如果
 \begin{equation}\label{eq:Pa_hat_X}
 P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
@@ -515,11 +514,11 @@ P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
 \end{definition}
 
 在上述定义中, 记号 $\hat{X} \in S_k(X)$ 表示
-我们只能获得相对于真实标签$X$的置换意义下的恢复结果。
-因为没有一个类别的基准，
+我们只能获得置换意义下相对于真实标签$X$的恢复结果。
+这是因为没有一个类别的基准导致的。
 这种情况在无监督学习领域比较常见。
 式\eqref{eq:Pa_hat_X}中记号 $P_a(\hat{X})$
-被叫做 估计量 $\hat{X}$ 的
+表示 估计量 $\hat{X}$ 的
 准确概率。
 \begin{remark}\label{rem:metric_exact_recovery}\,
   \begin{enumerate}
@@ -530,21 +529,22 @@ P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
     $P_e(\hat{X}) \to 0$。
   \item  此外，我们要指出的是, 对给定的图 $G$, 估计量$\hat{X}$可以是确定性的也
   可以是随机的。
-  对于随机算法, $\hat{X} \in S_k(X)$ 发生的概率 应该理解
-  为 $\sum_{G \in \cG_n} P_G(G) P_{\hat{X}|G}(\hat{X} \in S_k(X))$。 
-  对于确定的图，这个概率是 $P_G(\hat{X} \in S_k(X))$。  
+  一般而言， $\hat{X} \in S_k(X)$ 发生的概率 应该理解
+  对随机图的平均 $\sum_{G \in \cG_n} P_G(G) P_{\hat{X}|G}(\hat{X} \in S_k(X))$。 
+  如果是非随机的图，这个概率是 $P_G(\hat{X} \in S_k(X))$。  
   \end{enumerate}
 \end{remark}
 
-在定义\ref{def:SSBMR}中，精确恢复也称强恢复。强恢复是相对于弱恢复
-而言的，前者要求所有节点都要分对，而后者只要求分对节点的比率收敛到1即可。
-关于这两种恢复条件近年来涌现大量相关的研究工作，
-因为我们的工作只涉及强恢复，
+%在定义\ref{def:SSBMR}中，精确恢复也称强恢复。强恢复是相对于弱恢复
+%而言的，前者要求所有节点都要分对，而后者只要求分对节点的比率收敛到1即可。
+%关于这两种恢复条件近年来涌现大量相关的研究工作，
+%因为我们的工作只涉及强恢复，
+基于定义\ref{def:SSBMR}，
 下面对一些和强恢复有关的重要结论进行逐一介绍。
 
-设$a>b>0$，针对两个社团（$k=2$）且$p=\A,q=\B$的情形。
+设$a>b>0$，针对两个社团（$k=2$）且$p=\A,q=\B$的情形，
 Abbe \cite{abbe2015exact} 和 Mossel
-\cite{mossel2016} 分别独立的研究发现了最大似然算法
+\cite{mossel2016} 分别独立地研究发现了最大似然算法
 精确恢复误差的变化规律。
 因为最大似然算法相当于理论最优的估计量，他们的成果可总结为如下定理：
 \begin{theorem}\label{thm:sbm2_phase_transition}
@@ -559,11 +559,11 @@ Abbe \cite{abbe2015exact} 和 Mossel
 	\end{enumerate}
 \end{theorem}
 定理\ref{thm:sbm2_phase_transition} 揭示了
-具有2个社团结构的SBM模型在精确恢复度量下的相变规律，
+具有2个社团结构的随机块模型在精确恢复度量下的相变规律。
 该结论很快被Abbe 推广到$k>2$的情形
 \cite{abbe2015community}，由定理
 \ref{thm:sbmk_phase_transition} 给出。
-该结果可以视为一般的SBM
+该结果可以视为一般的随机块模型
 精确恢复条件的一个特例。
 
 \begin{theorem}\label{thm:sbmk_phase_transition}
@@ -579,51 +579,53 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
 \begin{remark}
   Abbe 在文章中指出，定理 \ref{thm:sbmk_phase_transition}
-  给出的结论和 \gls{hellinger} (\glsdesc{hellinger})有关。
-  对于两个$\R^d$中的向量$u,v$，它们的
-  海林格距离 
-  的平方定义为
-  \begin{equation}
-    H^2(u,v) = \frac{1}{2}
-    \sum_{i=1}^d (\sqrt{u_i} - \sqrt{v_i})^2
-  \end{equation}
-  若定义向量 $u= (\frac{a}{k}, \frac{b}{k})$,
-  $v =  (\frac{b}{k}, \frac{a}{k})$,。
-  则
-  $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 的条件
-  可改写成
-  $H(u, v) > 1$，其中
-  \begin{equation}\label{eq:Hellinger_abuv}
-    H(u,v)=\frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}}    
-  \end{equation}
-  上面介绍的是Abbe 引入的切尔诺夫-海林格距离的定义，
+  给出的结论和\gls{hellinger}(\glsdesc{hellinger})有关。
+  % 对于两个$\R^d$中的向量$u,v$，它们的
+  % 海林格距离 
+  % 的平方定义为
+  % \begin{equation}
+  %   H^2(u,v) = \frac{1}{2}
+  %   \sum_{i=1}^d (\sqrt{u_i} - \sqrt{v_i})^2
+  % \end{equation}
+  % 若定义向量 $u= (\frac{a}{k}, \frac{b}{k})$,
+  % $v =  (\frac{b}{k}, \frac{a}{k})$,。
+  % 则
+  % $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 的条件
+  % 可改写成
+  % $H(u, v) > 1$，其中
+  % \begin{equation}\label{eq:Hellinger_abuv}
+  %   H(u,v)=\frac{\sqrt{a} - \sqrt{b}}{\sqrt{k}}    
+  % \end{equation}
+  % 上面介绍的是Abbe 引入的切尔诺夫-海林格距离的定义，
   但他在文章中使用的距离度量仅是一般的测度而不是概率测度，
-  该解释略显生硬。
+  其解释略显生硬。
 \end{remark}
 
 \subsection{随机块-伊辛模型}\label{sec:ising}
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=0.7\textwidth]{Tlarge.pdf}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Tlarge.pdf}
 		\caption{$T>T_c$, 自旋方向随机}
 	\end{subfigure}~
 	\begin{subfigure}{0.5\textwidth}
-		\includegraphics[width=0.7\textwidth]{Tsmall.pdf}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Tsmall.pdf}
 		\caption{$T<T_c$, 自旋方向一致}
 	\end{subfigure}
-  \caption{磁子自旋方向随温度变化示意图}\label{fig:ising_two_configurations}
+  \caption{磁偶极矩自旋方向随温度变化示意图}\label{fig:ising_two_configurations}
 \end{figure}   
 
 在统计物理学中，伊辛模型指的是
-可以处于两种状态的自旋磁子的集合\cite{ising1925beitrag}。如图
+可以处于两种自旋状态的磁偶极矩的集合\cite{ising1925beitrag}。如图
 \ref{fig:ising_two_configurations} 所示，
 当外界温度$T$
 大于临界温度 $T_c$ 时，
-各自旋磁子处于杂乱无章的状态，其总的磁化强度接近0。
+各磁偶极矩处于杂乱无章的状态，其总的磁化强度接近0。
 但当外界温度$T$
 小于临界温度 $T_c$ 时，
-各自旋磁子的状态则变得方向一致。
+各磁偶极矩的状态则变得方向一致。
 这里，我们称这种方向一致的现象叫自发磁化。
 
 
@@ -640,22 +642,25 @@ Abbe \cite{abbe2015exact} 和 Mossel
   \caption{正方形网络上的伊辛模型及其磁化强度的变化}
 \end{figure}
 
-下面我们介绍伊辛模型一些常用的概念，
+下面我们介绍伊辛模型中一些常用的概念，
 如图\ref{fig:square_lattice}所示，
-在一个正方形网格中的格点上分布着磁子，一共有$N$个。
-$\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁子的状态，
+在一个正方形网格中的格点上分布着磁偶极矩，一共有$N$个。
+$\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
 总的磁化强度为 $M = \frac{1}{N} \sum_{i=1}^N \sigma_i$。
 理论研究时先考虑有限的正方形网格， 再取 $N\to \infty$。
-由于磁子之间的磁力作用和受外场的影响，存在着磁化强度的相变现象，即
+由于磁偶极矩之间的磁力作用和受外场的影响，存在着磁化强度的相变现象，即
 \begin{enumerate}
 		\item $T< T_c$, $M>0$, 发生自发磁化。
 		\item $T> T_c$, $M=0$, 无自发磁化。
 \end{enumerate}
+
+\newglossaryentry{phase_trans}{name=相变, description={Phase transition}}
 图\ref{fig:square_lattice_b}中给出了自发磁化的仿真实验结果，其中临界温度用
 红竖线标出。从图中可见在临界温度处磁化强度突然降为零，也即
-磁子的自旋方向由完全一致变成两种状态各占一半。我们称临界温度处伊辛模型
-\newglossaryentry{phase_trans}{name=相变, description={Phase transition}}
-的这种变化为相变（\glsdesc{phase_trans}）现象，我们在第\ref{chap:sibm}章也将展示社团发现中也有类似图\ref{fig:square_lattice_b}的相变现象。
+磁偶极矩的自旋方向由完全一致变成两种状态各占一半。我们称临界温度处伊辛模型
+的这种变化为相变（\glsdesc{phase_trans}）现象，
+我们在第\ref{chap:sibm}章也将展示社团发现的精确恢复问题
+中也有类似图\ref{fig:square_lattice_b}的相变现象。
 
 对于自发磁化现象可以通过统计力学中的正则系踪（Canonical ensemble）
 理论进行解释。该理论
@@ -700,18 +705,19 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 \end{table}
 \end{example}
 
-将伊辛模型视为网络中一种刻划节点状态的概率模型，
-有学者\cite{ye2020exact}
-指出，\eqref{eq:hamiltonian} 式所描述的
-伊辛模型不存在相变现象，因为式\eqref{eq:canonical_ensemble}
-给出的分布聚集在 $\sigma=\pm \mathbf{1}_n$ 附近，
-这里 \gls{not:all_one_vector} 表示 \glsdesc{not:all_one_vector}。
 \newglossaryentry{not:all_one_vector}
 {
   type=notation,
   name={\ensuremath{\mathbf{1}_n}},
   description={长度为 $n$ 的全1的向量}
 }
+
+将伊辛模型视为网络中一种刻划节点状态的概率模型，
+有学者\cite{ye2020exact}
+指出，式\eqref{eq:hamiltonian} 所描述的
+伊辛模型不存在相变现象，因为式\eqref{eq:canonical_ensemble}
+给出的分布聚集在 $\sigma=\pm \mathbf{1}_n$ 附近，
+这里 \gls{not:all_one_vector} 表示\glsdesc{not:all_one_vector}。
 为此，可以采用下述修正模型，将没有边相连的粒子之间的
 作用力考虑进来。
 \begin{equation}\label{eq:ising_modified}
@@ -734,13 +740,13 @@ $\frac{\log n}{n}$
 \newglossaryentry{metropolis}{name=梅特罗波利斯算法, description={Metropolis algorithm}}
 
 梅特罗波利斯（Metropolis）算法\cite{metropolis1953equation}
-用于产生伊辛模型的样本。此外，该算法的变体“模拟退火”
+被用于产生伊辛模型的样本。此外，该算法的变体“模拟退火”
 \cite{pincus1970monte} 也是优化领域常用的随机算法。
 其算法从系统一个随机的状态出发每次改变其中一个粒子
 的状态并按一定的概率接受改变或保持原来的状态。
 给定形如式\eqref{eq:ising_modified}
 的能量函数，算法\ref{alg:Metropolis}
-给出了\gls{metropolis} 的步骤。
+给出了\gls{metropolis}的步骤。
 
 \begin{algorithm}
   \caption{梅特罗波利斯算法}\label{alg:Metropolis}
@@ -759,8 +765,8 @@ $\frac{\log n}{n}$
 \end{algorithmic}  
 \end{algorithm}
 
-以上讨论的伊辛模型中粒子均只有$\{\pm 1\}$两个状态，
-每个粒子的状态数可以扩展到多个，即 玻茨模型\cite{potts1952some}。
+以上讨论的伊辛模型中粒子均只有$\{\pm 1\}$两个状态。
+实际上每个粒子的状态数可以扩展到多个，即 玻茨模型\cite{potts1952some}。
 类似式\eqref{eq:hamiltonian}，标准玻茨模型的汉密尔顿能量公式为：
 \begin{equation}\label{eq:Hsigma_multiple_state}
   H(\sigma) = -\sum_{(i,j) \in E(G)}\delta(\sigma_i, \sigma_j)
@@ -770,7 +776,7 @@ $\frac{\log n}{n}$
 式\eqref{eq:Hsigma_multiple_state} 
 与式\eqref{eq:hamiltonian}
 并不严格等价。
-从$\delta(\sigma_i, \sigma_j) = \frac{\sigma_i \sigma_j + 1}{2}$
+从关系式$\delta(\sigma_i, \sigma_j) = \frac{\sigma_i \sigma_j + 1}{2}$
 可以看出，它们之间差了一个伸缩变换。
 \end{remark}
 
@@ -778,7 +784,7 @@ $\frac{\log n}{n}$
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
 将\ref{sec:exact_recovery}小节 介绍的随机块模型与 本小节介绍的 伊辛模型
 复合起来可得到 \gls{sibm}（\gls{acr:sibm}）\cite{ye2020exact}。
-该模型首先由 SBM 生成随机图，
+该模型首先由 随机块模型生成随机图，
 再由随机图上定义的 伊辛模型多次生成节点的状态。
 SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实状态。
 该复合模型可用于模拟两党制国家政治选举前的多次民意调查，
@@ -813,7 +819,7 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
    对任意的$t>0$成立。
    \newglossaryentry{chernoff}{name=切尔诺夫不等式, description={Chernoff Inequality}}
 
-   式\eqref{eq:chernoff_bound}也被称为 \gls{chernoff}。
+   式\eqref{eq:chernoff_bound}也被称为\gls{chernoff}。
 \end{lemma}
 \newglossaryentry{chebyshev_ieq}{name=切比雪夫不等式, 
 description={Chebyshev's Inequality}}
@@ -834,15 +840,17 @@ description={Chebyshev's Inequality}}
 % to do: add large deviation theory and hypothesis testing
 
 
-\subsection{最大模块度算法与基于半正定规划的社团发现算法}
+\subsection{最大模块度算法}
 
 最后，我们再简单介绍一下社团发现领域常用的最大模块度算法
 \cite{newman2006modularity}。
 \newglossaryentry{modularity}{name=模块度, description={Modularity}}
 \gls{modularity}(\glsdesc{modularity})
-是对网络结构或图结构的一种度量，既能作为评价指标评价
-不同社团发现算法的性能，也能通过近似求解模块度最大值的思路设计算法。
-模板度越高，则节点集内部连接越紧密，而节点集之间连接越稀疏。
+是对网络中社团结构强弱程度的一种度量，既能作为评价
+不同社团发现算法的性能指标，也能
+通过近似求解其最大值的思路启发算法设计。
+模板度越高，则社团内部连接越紧密，
+而社团之间连接越稀疏。
 
 给定$n$长的向量$x$，模块度的数学定义为：
 \begin{align}\label{eq:Q}
@@ -855,17 +863,18 @@ $i$个节点的\gls{degree}(\glsdesc{degree})，$x_i$ 表示第$i$
 个节点所属的社团。
 
 贪心法是用于近似求解式\eqref{eq:Q}
-近似求解最大值的常用算法，其流程类似于系统聚类法，
+最大值的常用算法，其流程类似于系统聚类法，
 即从每个节点各自属于一类出发，通过中间指标最大的方法每次聚合两类，
-使得 $Q$ 不断增大。该思路可经过优化适用于求解大规模网络
+使得 $Q$ 不断增大。该思路可经过优化适用于求解大规模网络中
 的社团发现问题 \cite{clauset2004finding}。
 
+\subsection{基于半正定规划的社团发现算法}
+\newacronym{acr:sdp}{SDP}{Semi-definite programming}
+\newglossaryentry{sdp}{name=半正定规划, description={Semi-definite programming}}
 
 针对随机块模型的社团发现
 可以先将最大似然方法获得的目标函数
-写成整数优化的问题形式，
-\newacronym{acr:sdp}{SDP}{Semi-definite programming}
-\newglossaryentry{sdp}{name=半正定规划, description={Semi-definite programming}}
+写成整数优化问题的形式，
 再转化成 \gls{sdp} (\gls{acr:sdp}) 的优化问题进行求解。
 
 在 式\eqref{eq:minimum_k_cut} 中
@@ -900,7 +909,7 @@ $xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
   description={元素全为1的$n\times n$的矩阵}
 }
 其中 $J_n=\mathbf{1}_n\mathbf{1}_n^T$
-是 \glsdesc{not:matrix_all_one}。
+是\glsdesc{not:matrix_all_one}。
 令 $B=2A + I_n - J_n$，
 \newglossaryentry{not:identity_matrix}
 {
@@ -914,14 +923,14 @@ $I_n$ 是 \glsdesc{not:identity_matrix}，
 其中 $B$的定义为
 \begin{equation}\label{eq:def_B_sdp}
     B_{ij} = \begin{cases}
-        1, & \text{若 $i$ 与 $j$ 相连}, \\
+        1, & \text{若 $i$ 与 $j$ 有边相连}, \\
         -1,& \text{否则}
     \end{cases}
 \end{equation}  
 
 以上方法可针对一般的图$G$进行求解，
 但对于$\SSBM(n,2, \A, \B)$，
-Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社团发现的
+Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检测社团的
 理论保证。
 \begin{theorem}
   设 $\hat{Y}$ 是
@@ -949,15 +958,15 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP做社团发现的
   name={$D(P_X||P_Y)$},
   description={分布$P_X$ 和 $P_Y$之间的 KL 散度}
 }
+\newglossaryentry{mmi}{name=多变量互信息, description={Multivariate mutual information}}
+\newacronym{acr:mmi}{MMI}{Multivariate mutual information}
 其中 $P_X, P_Y$分别表示边缘分布，$D(P_X||P_Y)$
 表示 \glsdesc{not:kl_dev}。
 而$P_{XY}$
 表示两个随机变量的联合分布。有多种方法可将互信息
 的概念推广到两个及以上的随机变量，
 其中华人学者陈聪提出了一种推广 \cite{ska} 具有多种好的性质，
-\newglossaryentry{mmi}{name=多变量互信息, description={Multivariate mutual information}}
-\newacronym{acr:mmi}{MMI}{Multivariate mutual information}
-且涵盖了图结构的情形，我们把他的推广叫做 \gls{mmi} (\gls{acr:mmi})。
+且涵盖了图结构的情形，我们把他的推广叫做\gls{mmi} (\gls{acr:mmi})。
 这里我们需要指出，MMI 并不是多个随机变量之间信息量的唯一度量方法，
 比如有学者基于HGR最大相关提出了广义最大相关(generalized maximal correlation)
 也能实现类似的目的 \cite{huang2020information}。
