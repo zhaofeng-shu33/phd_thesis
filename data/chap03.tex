@@ -355,7 +355,7 @@ $G[C_i](i=1,\dots, t)$
 \subsection{时间复杂度分析}
 
 本小节我们分析上小节提出的 HPSP算法 （算法\ref{alg:psp_i_simplified}）的时间复杂度。
-首次说明一些惯用语，我们称图是稠密，
+首次说明一些惯用语，我们称图是稠密的，
 如果它的边的数量是$n^2$的量级，
 也即 $\abs{V} = n, \abs{E} = O(n^2)$。
 对于稠密的图，由于最大流算法中需要多次遍历
@@ -380,25 +380,27 @@ $\delta_{k<n} = 1$ 是 指示函数，当满足条件 $k<n$时取值为1，
 否则 $\delta_{k<n}=0$。
 针对 $T(n)$，我们有如下定理：
 \begin{theorem}\label{thm:alg_complexity}
-	 若 $n_i \leq \frac{n}{2}, \textrm{ for } i=1,\dots,k$ 并且
-   $ k \leq \frac{n}{2}$  在式 \eqref{eq:Tn} 中成立， 
-   则 $T(n) = O(n^4)$.
+  在式 \eqref{eq:Tn} 中，若 $n_i \leq \frac{n}{2}$ 对于 $i=1,\dots,k$ 均成立，并且
+   $ k \leq \frac{n}{2}$， 
+   则 $T(n) = O(n^4)$。
 \end{theorem}
 
-定理\ref{thm:alg_complexity} 所要求的条件
+定理\ref{thm:alg_complexity}所要求的条件
 限制了聚类树的结构。
-它指出，若对于每个非叶节点，其后代数都不超过 $\frac{n}{2}$，则HPSP
+该定理指出，若对于每个非叶节点，其后代数都不超过 $\frac{n}{2}$，则HPSP
 算法的时间复杂度是  $O(n^4)$。
-该条件适用于很多聚类树的情形，即使有个别节点不满足其假设，$T(n) = O(n^4)$也成立。
-我们在保证有相同计算结果的前提下，
+该条件适用于很多情形下的聚类树，
+即使有个别节点不满足其假设，$T(n) = O(n^4)$也成立。
+因此，定理\ref{thm:alg_complexity}表明，我们在保证有相同计算结果的前提下，
 提出的HPSP 的时间复杂度的结果要比
 PSP算法\ref{alg:psp} 的$O(n^5)$ 的结果快一个数量级。
 
-即使是最坏的情况，也即，聚类树的深度达到了 $O(n)$ 的数量级。
-则\texttt{DT} 不可避免地要调 用 $O(n)$ 次。
+在定理\ref{thm:alg_complexity}的条件不满足时，
+考虑最坏的情况，也即聚类树的深度达到了 $O(n)$ 的数量级，
+则 \texttt{DT} 不可避免地要调 用 $O(n)$ 次。
 在这种情形下，
 $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$，
-其比 算法\ref{alg:psp} 的结果
+仍比 算法\ref{alg:psp}的结果
 快 $5$ 倍。
 \subsection{聚类树的数据结构}
 在层次聚类中聚类树一般使用关联矩阵(linkage matrix)构造聚类树
