@@ -12,7 +12,7 @@
 
 \section{社团发现场景下的多变量互信息理论}
 在这一节中，我们首先把\ref{sec:local_geometry}节介绍
-的弱独立的概念推广到多个随机变量弱独立，
+的关于两个随机变量弱独立的概念推广到多个随机变量之间。
 并在多个随机变量弱独立的条件下，对
 \ref{sec:info_clustering}节介绍的多变量互信息
 进行化简。
@@ -754,9 +754,9 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 异常值检测是对异常数据（称为异常值点）的识别，
 这些异常数据不同于其他多数数据（称为正常值点）
 \citep{grubbs1969procedures}。
-在本节中,我们考虑将信息聚类算法用到异常值检测领域。
+在本节中,我们考虑将HPSP算法用到异常值检测领域。
 
-首先我们在理论层面探讨异常值检测背景下信息聚类的应用。
+首先我们在理论层面探讨异常值检测背景下HPSP算法的应用。
 假设一个简单的情形，所有正常值点属于同一类别，
 假设集合$B$达到式\eqref{eq:largest_threshold}中的
 最大值，
@@ -765,7 +765,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 我们这里探讨的问题是, 假设有一个新的点$i'$加入到
 现有的图 $G$ 中，如何判断它是正常值点还是异常值点。 
 事实上，对于加入$i'$的图来说，
-我们可以用PSP算法计算一个新的最大临界值
+我们可以用HPSP算法计算一个新的最大临界值
 $\gamma'_N$，
 并把它与 $\gamma_N$作比较。 由式\eqref{eq:largest_threshold}易得
 $\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作用是使得
@@ -774,7 +774,7 @@ $\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作
 定理给出。
 \begin{theorem}\label{thm:main_N}
   假设 $B$ 关于图$G$ 达到式\eqref{eq:largest_threshold}中的
-  最大值，$\gamma_N, \gamma'_N$ 分别是图$G$加入新的点$i'$前、后的最大临界值，则有
+  最大值，$\gamma_N, \gamma'_N$ 分别是图$G$加入新的点$i'$前后的最大临界值，则有
 \begin{equation}
 \gamma'_N > \gamma_N \iff  \sum_{i \in B} w_{ii'} > \gamma_N 
 \end{equation}
@@ -782,9 +782,9 @@ $\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作
 定理 \ref{thm:main_N} 给出了一种划分正常值点边界的方法，
 假设图$G$的第$i$个点
 对应一个高维空间的向量$x_i$，新加入的点对应的向量是$x$，
-边的权值由rbf核给出，则边界曲线的方程为：
+边的权值由RBF核给出，参数为$\eta$，则边界曲线的方程为：
 \begin{equation}\label{eq:sum_exp_gamma_N}
-  \sum_{j \in B} \exp(-\gamma \norm{x - x_j}^2)= \gamma_N
+  \sum_{j \in B} \exp(-\eta \norm{x - x_j}^2)= \gamma_N
 \end{equation}
 
 上述讨论假设了所有正常值点同属一个类别，
@@ -815,7 +815,7 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，可知优化问题有解。
 如果需要预测新的观测值是否是异常值点, 
 我们使用类似于式\eqref{eq:sum_exp_gamma_N}给出的边界方程判决规则。
 假设 $\lambda_{k-r}$ 是$\P_{k-r}, \P_{k-r+1}$ 两个分割对应的
-分界值并且图$G$边的权值是使用 rbf 核 来构建的，
+分界值并且图$G$边的权值是使用 RBF 核 来构建的，
 那么边界曲线方程可以写成下面的形式：
 \begin{equation}\label{eq:boundary_curve_multiple}
 \sum_{j \in C_i} \exp(-\lambda \norm{x - x_j}^2)= \lambda_{k-r}, \textrm{ 其中 } \, C_i \in \P_{k-r} \textrm{且}\,  \abs{C_i} > 1
@@ -831,10 +831,10 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，可知优化问题有解。
 第二个数据集是我们将 $(0,0)$ 这个点加入到
 \ref{sec:data_clustering} 节所描述的有4个类别的
 高斯数据集里。
-最后一个数据集是两个错开的半圆形状(或月牙形状)，
+最后一个数据集是两个错开的半圆形状（或月牙形状），
 并且其周围分布着一些
 噪点。
-构造相似图的权值我们采用 rbf 核，其 异常值检测
+构造相似图的权值我们采用 RBF 核，其 异常值检测
 效果如图 \ref{fig:boundary} 所示。
 从前三幅图可以看出，由式\eqref{eq:boundary_curve_multiple}
 给出的边界曲线近似于正常值点的闭包曲线。
@@ -847,11 +847,11 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，可知优化问题有解。
 \end{figure}
 
 另外我们也
-在图 \ref{fig:boundary}.(d) 画出了椭圆包络(elliptic envelope \citep{rousseeuw1999fast} )方法的决策边界曲线。
+在图 \ref{fig:boundary}.(d) 画出了椭圆包络\cite{rousseeuw1999fast}(elliptic envelope)方法的决策边界曲线。
 由于后一种方法假设内部数据分布在凸区域，因此决策边界是椭圆形状，
 因此不能很好地反映真实数据的分布。
 
-下面我们针对不同的数据集比较本节提出的信息检测方法和其他常用的
+下面我们针对不同的数据集比较本节提出的异常值检测方法和其他常用的
 异常值检测算法的性能。
 我们使用 5 个数据集: Gaussian-blob, Moon， Lymphography
 \cite{lazarevic2005feature}, Glass 和 Ionosphere \cite{keller2012hics}。 
@@ -869,7 +869,8 @@ TPR衡量的是正样本集合中正确检测的百分比，
 而TNR衡量的是异常值点中正确检测的百分比。
 通常而言，一种检测方法很难在这两个指标上都获得高分。
 我们设法最大化TNR，同时控制每种方法的TPR$\geq 90\%$。
-每个方法的超参数和相似度度量都经过了调优，TNR的最佳结果如表\ref{tab:odm}所示。我们可以看到，信息检测在 GaussianBlob，Moon 和
+每个方法的超参数和相似度度量都经过了调优，TNR的最佳结果如表\ref{tab:odm}所示。我们可以看到，
+基于HPSP算法的异常值检测（信息检测）在 GaussianBlob，Moon 和
 Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 但在 Glass 和  Ionosphere 两个数据集上性能有待提升。
 \begin{table}
@@ -889,8 +890,10 @@ Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 \caption{不同异常值检测算法的比较}\label{tab:odm}
 \end{table}
 
-利用基于诸如局部异常因子 \cite{Breunig} 等方法需要提前知道异常值点的数量、以及需要设置一些超参数的值。
-我们的优势与不足。
+在上面的实验中我们假定已知异常值点的数量，
+而实际上我们本节提出的方法只需给出权值$\eta$即可自动获取类别数和异常值点的数量，
+相比其他诸如基于局部异常因子的方法
+需要提前知道异常值点的数量才能检测具有明显的优势。
 
 \section{本章小结}
 在本章中，

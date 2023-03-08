@@ -1121,24 +1121,25 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$，
 \end{example}
 
 \subsection{速率函数与大偏差原理}
-本小节将首先从型的概念出发，引出针对离散随机变量的大偏差原理 Sanov定理，
-型的概念和Sanov定理将在我们推导拓展随机块模型的最优误差率结论中用到。
+本小节将首先从型的概念出发，引出针对离散随机变量的大偏差原理——Sanov定理。
+型的概念和Sanov定理将在我们推导拓展随机块模型的最优误差率的结论中用到。
 之后我们会
 介绍大偏差原理的一般形式，即Cramér定理，从而引出速率函数的概念。
 
 \newglossaryentry{type}{name=型, description={Type}}
 在信息论中，我们首先假定所有的元素均从字母集$\mathcal{X}$
 中选取。
-某个长度为$n$序列$x$的 \gls{type} 是表示
-各字符在该序列中出现的比例，用符号$P_x$表示，
-所有的$P_x$组成集合$\P_n$。比如考虑字母集
-$\mathcal{X}=\{1,2,3\}$。对于$11321$
+某个长度为$n$的序列$x$的\gls{type}是表示
+其各字符在该序列中出现的比例，用符号$P_x$表示，
+而所有的$P_x$组成集合$\P_n$。比如考虑字母集
+$\mathcal{X}=\{1,2,3\}$，对于$11321$这个序列
 它的型可以用三元组 $(\frac{3}{5}, 
 \frac{1}{5}, \frac{1}{5})$ 表示。注意到
 一个型对应着一个离散分布的概率质量函数。
 
-假设 长度为$n$序列$x=(x_1,\dots, x_n)$中每个元素 都是 i.i.d. 服从分布 $Q(x)$，
-则它的联合分布的概率质量函数可以记为$Q^n(x)=\prod_{i=1}^n x_i$。
+假设 长度为$n$的序列$x=(x_1,\dots, x_n)$中每个元素 都是 i.i.d. 
+服从分布 $Q(x)$，
+则它的联合分布的概率质量函数可以记为$Q^n(x)=\prod_{i=1}^n Q(x_i)$。
 对于任意长度为$n$的序列$x$，我们仍沿用上述关于$Q(x)$的定义。
 为衡量$Q$和另一个不包括$Q$的概率分布的集合 $E$ 之间的距离，我们引入如下的记号：
 $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
@@ -1166,37 +1167,39 @@ $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
 若$X_1, \dots, X_n$ i.i.d. $\sim \Bern(p)$,
 对于任意正数$\epsilon$，
 我们可以用 Sanov 定理估计 $P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$ 随着$n$增大收敛到零
-的速率，其中$\bar{X}$是$X_1,\dots, X_n$的平均值，等于$p$。
-此时集合$E=\{\Bern(q)| q>p+\epsilon\}$。
-而$Q^n(E)=P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$
-因此由式\eqref{eq:limit_sanov}可得 $\lim_{n\to \infty} \frac{1}{n} \log Q^n(E)=-D(\Bern(p+\epsilon)||\Bern(p))$。
+的速率，其中$\bar{X}$是$X_1,\dots, X_n$的样本均值。
+此时集合$E=\{\Bern(q)| q>p+\epsilon\}$，
+而$Q^n(E)=P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$。
+因此由式\eqref{eq:limit_sanov}可得
+$\lim_{n\to \infty} \frac{1}{n} \log Q^n(E)=-D(\Bern(p+\epsilon)||\Bern(p))$。
 \end{example}
-Sanov 定理仅针对离散型分布给出了计算诸如
+Sanov 定理仅针对离散型分布给出了计算诸如$P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$
 的方法，若将例\ref{ex:sanov_ldp} 中诸$X_i$ 改为高斯分布，
 则可以用Sanov 定理的推广形式 Cramér定理来解决。我们下面先介绍该定理：
 
 \begin{theorem}\label{thm:cramer}
   \newglossaryentry{log_mgf}{name=对数矩生成函数, description={logarithmic moment generating function}}
   \newacronym{acr:log_mgf}{log-MGF}{logarithmic moment generating function}
-  令 $X_i$ 为i.i.d. 的随机变量序列，且$X_1$ 存在 \gls{log_mgf} (\gls{acr:log_mgf})
+  令 $X_1, \dots, X_n$ 为 i.i.d. 的随机变量序列，且$X_1$ 存在\gls{log_mgf} (\gls{acr:log_mgf})
 $\Lambda(t)=\log \E[\exp(t X_1)]$。
-令 $\Lambda^*(s)= \sup_{t \in \R} st-\Lambda(t)$，则对于所有$s>\E[X_1]$，
+令 $\Lambda^*(s)= \sup_{t \in \R} (st-\Lambda(t))$，则对于所有$s>\E[X_1]$，
 我们有
 \begin{equation}\label{eq:cramer}
-\lim_{n\to \infty} \frac{1}{n}\log P( \sum_{i=1}^n X_i \geq  ns) = - \Lambda^*(s)
+\lim_{n\to \infty} \frac{1}{n}\log P\left(
+  \sum_{i=1}^n X_i \geq  ns \right) = - \Lambda^*(s)
 \end{equation}
 \end{theorem}
 由于$\Lambda^*(s)$描述了$P( \sum_{i=1}^n X_i \geq  ns)$随$n$增大衰减到零的速率，
 \newglossaryentry{rate_function}{name=速率函数, description={rate function}}
-我们把$\Lambda^*(s)$叫做 \gls{rate_function}。
+我们把$\Lambda^*(s)$叫做\gls{rate_function}。
 
-为方便描述，$\Lambda^*(s)$和$\Lambda(s)$的关系，
+为方便描述$\Lambda^*(s)$和$\Lambda(s)$的关系，
 我们引入凸共轭函数的概念。
 \begin{definition}
-  定义在$\R$ 上的光滑函数 $\Lambda(s)$，
+  对于定义在$\R$ 上的光滑函数 $\Lambda(s)$，
   它的凸共轭函数定义为
-  $\Lambda^*(s) = \sup_{t \in \R} st-\Lambda(t)$。
-  $\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。    
+  $\Lambda^*(s) = \sup_{t \in \R} (st-\Lambda(t))$。
+%  $\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。    
 \end{definition}
 
 \begin{example}\label{ex:cramer_ldp}
@@ -1225,7 +1228,7 @@ $H_1: Q=P_1$ 和 $H_2: Q=P_2$。
 在做决策的时候可能会产生两类错误，它们的概率
 分别是 $\alpha_n=P(\widehat{H}=H_2|H_1)$
 以及 $\beta_n=P(\widehat{H}=H_1|H_2)$。
-这里下标 $n$表明错误概率随采样数量$n$而变化。
+这里下标 $n$表示错误概率随采样数量$n$而变化。
 假设$P_1, P_2$的先验概率分别是 $\pi_1$ 和 $\pi_2$，
 则总误差概率为：$P_e^{(n)} = \pi_1 \alpha_n
 + \pi_2 \beta_n$。
@@ -1233,8 +1236,9 @@ $H_1: Q=P_1$ 和 $H_2: Q=P_2$。
 \newglossaryentry{error_exponent}{name=误差指数, description={error exponent}}
 $P_e^{(n)}$ 和决策变量$\widehat{H}$的选取有关。
 切尔诺夫信息指出了在渐近情形下 $P_e^{(n)}$ 所能达到的
-最小值，更精确的说，最大的误差指数。因为
-在这种情形下 $P_e^{(n)}$ 以 $\exp(-n D^*)$ 的速率指数衰减。
+最小值。
+%更精确的说，最大的误差指数。因为
+在渐近情形下 $P_e^{(n)}$ 以 $\exp(-n D^*)$ 的速率指数衰减。
 我们把$D^*$叫做 \gls{error_exponent}。
 $D^*$的数学定义为：
 \begin{equation}
@@ -1274,8 +1278,8 @@ $D^*$的数学定义为：
 \end{equation}
 
 当我们考虑联合分布 $P_1 \times P_2$
-和 $P_2 \times P_1$ 之间的切尔诺夫信息量时，
-由式 \eqref{eq:C_P_1_P_2_another}
+和 $P_2 \times P_1$ 之间的  切尔诺夫信息量时，
+由式 \eqref{eq:C_P_1_P_2_another}有
 \begin{align*}
   C(P_1 \times P_2||P_2 \times P_1) 
   = -\min_{\lambda \in [0,1]}
@@ -1297,7 +1301,7 @@ $D^*$的数学定义为：
   \sqrt{P_1(x)P_2(x)} \right)
 \end{equation}
 
-雷尼散度在刻画随机块模型模型及其变体（如度修正的随机块模型）的误差衰减
+雷尼散度在刻画随机块模型及其变体（如度修正的随机块模型）的误差衰减
 速率时被用到 \cite{zhang2016, gao2018community}。
 比如在两社团的随机块模型中，我们取$P_1=\Pois(\frac{a}{2}),P_2=\Pois(\frac{b}{2})$
 代入式 \eqref{eq:renyi_divergence} 
