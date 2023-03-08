@@ -84,23 +84,23 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   $U$的条件分布是独立的。
 \end{theorem}
 \begin{proof}
-  由$\epsilon$邻域的定义式\ref{def:eps_neighborhood}，
+  由$\epsilon$邻域的定义\ref{def:eps_neighborhood}，
   $P_{Y|X=x}(y) = P_Y(y) + \sqrt{P_Y(y)}\phi_{Y|X=x}(y)
-  \epsilon$。定义$\phi_{XY}(x,y)=\sqrt{P_X(x)}\phi_{Y|X=x}(y)$
+  \epsilon$。令$\phi_{XY}(x,y)=\sqrt{P_X(x)}\phi_{Y|X=x}(y)$，
   则有
   $P_{XY}(x,y) = P_X(x)P_Y(y) + \sqrt{P_X(x)}\sqrt{P_Y(y)}\phi_{XY}(x,y)
   \epsilon$。
   假设$x\in \mathcal{X}$ 且 $y\in \mathcal{Y}$，
   $\mathcal{X}, \mathcal{Y}$ 均为有限的字母集。
   $\phi_{XY}$ 是 $|\mathcal{X}| \times |\mathcal{Y}|$
-  的矩阵，其秩为 $r$。可以通过$SVG$分解为
+  的矩阵，其秩为 $r$。$\phi_{XY}$可以通过$SVG$分解为
   $\frac{1}{r}\sum_{i=1}^r \phi_i \psi^T_i$，其中$\phi, \psi$
-  分别为长度为$|\mathcal{X}|, |\mathcal{Y}|$的
-  列向量。构造 $U$ 是$\{1, 2, \dots, 2r\}$ 上面的均匀分布。
-  $Z_1, Z_2$ 做如下构造：
+  是长度分别为$|\mathcal{X}|, |\mathcal{Y}|$的
+  列向量。构造 $U$ 是$\{1, 2, \dots, 2r\}$ 上的均匀分布。
+  而$Z_1, Z_2$ 做如下构造：
   \begin{align*}
     P(Z_1=x|U=i) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_{\lceil i/2 \rceil}(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
-    P(Z_2=y|U=i) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_{\lceil i/2 \rceil}(y) \sqrt{\epsilon}, y \in \mathcal{Y}\\
+    P(Z_2=y|U=i) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_{\lceil i/2 \rceil}(y) \sqrt{\epsilon}, y \in \mathcal{Y}
   \end{align*}
   $Z_1 | U$ 与$Z_2 | U$ 独立，因此，
   $Z_1, Z_2$ 的联合分布为：
@@ -110,15 +110,15 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   \sum_{i=1}^{r}\phi_i(x)
   \psi(y) =P(X=x,Y=y)
   \end{align*}
-  因此，$Z_1, Z_2$与$X,Y$具有相同的分布。
+  故$Z_1, Z_2$与$X,Y$具有相同的分布。
   不难验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\sqrt{\epsilon}$邻域内，
   故结论得证。
   \end{proof}
   定理\ref{thm:weak_independence_equivalent}的证明提供了一种生成
   满足弱独立条件的随机变量的方法。即给定均匀分布
   $U$ 在 $n! \times r$个点上取值，
-  并且$Z_i|U$在分布$Z_i$的
-  $\sqrt[n]{\epsilon}$ 邻域内：
+  取 $Z_i|U$在分布$Z_i$的
+  $\sqrt[n]{\epsilon}$ 邻域内，该条件分布为：
   \begin{equation}
     P(Z_j=z|U=i) = P_{Z_j}(z) + 
     (-1)^{i \,\mathrm{mod}\, n!}\sqrt{P_{Z_j(z)}}
@@ -140,7 +140,7 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 其中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
 之间的$B$ 矩阵（参见式\eqref{eq:Ixy}）。
 \end{theorem}
-若$ n = 2$，定理\ref{thm:DPX} 即是用 $B$ 矩阵估计互信息，
+若$ n = 2$，定理\ref{thm:DPX}即是用 $B$ 矩阵估计互信息，
 与 式 \eqref{eq:Ixy} 相同。
 因此，定理\ref{thm:DPX}可看成式 \eqref{eq:Ixy} 
 的拓展。
@@ -150,10 +150,15 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 联系。每个随机变量$Z_i$对应到图$G$的节点$i$，
 而分割 $\P$
 可看成是对节点集的分割。
-假设我们考虑的图 $G(V, E)$ 是有向的，节点$i$和节点$j$之间边的权值为
-$\norm{B_{ij}}_F^2$。注意到式\eqref{eq:PXV}
+假设我们考虑的图 $G(V, E)$ 是有向的
 \footnote{有向图的假设可以减少计算量而不失一般性}，
-并且类似 式 \eqref{eq:IP} 我们定义图的入割函数 (in-cut function) $f(C)$ for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
+节点$i$和节点$j$之间边的权值$w_{ij}$为
+$\norm{B_{ij}}_F^2$。
+类似 式 \eqref{eq:IP}，
+我们定义图的入割函数 (in-cut function) $f(C)$ 
+for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
+注意到式\eqref{eq:PXV}，
+并且
 它是所有进入$C$的有向边的权值之和。
 基于上面定义的符号，我们有
 \begin{equation}\label{eq:PXV_Data_Simplified}
