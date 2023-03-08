@@ -154,32 +154,33 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 \footnote{有向图的假设可以减少计算量而不失一般性}，
 节点$i$和节点$j$之间边的权值$w_{ij}$为
 $\norm{B_{ij}}_F^2$。
-类似 式 \eqref{eq:IP}，
+对于 $C\subseteq V$
 我们定义图的入割函数 (in-cut function) $f(C)$ 
-for $C\subseteq V$ as $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
-注意到式\eqref{eq:PXV}，
-并且
+ 为 $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
 它是所有进入$C$的有向边的权值之和。
-基于上面定义的符号，我们有
+由式\eqref{eq:PXV}
+和 式 \eqref{eq:IP}，
+我们有
 \begin{equation}\label{eq:PXV_Data_Simplified}
 I(Z_V) = \lambda_1 (1 + o(\epsilon))
 \end{equation}
 从而我们获得了在随机变量弱独立条件下多变量互信息和图强度的等价性。
 在\ref{sec:info_clustering}节我们提到的PIN模型下多变量互信息
-也等价于图强度。所不同的是，我们是在对联合分布的特征做了弱独立假设
+也等价于图强度。所不同的是，
+我们是在对联合分布的特征做了弱独立假设
 的条件下得到这一结论，而PIN模型则直接假设每个边缘分布的特征。
 
 \section{基于多变量互信息的社团发现算法及其改进}\label{sec:mmi_community_detection}
 有了上一节的理论建模，在本节中，我们在多变量互信息的研究基础上引入聚类树的概念，
 利用聚类树的结构改进PSP算法，并在一定
 的假设下证明该算法的理论复杂度，
-最后比较求解图分割的三种不同实现下
-的算法效率。需要指出的是，
+最后比较求解主分割序列的三种不同的算法的效率。需要指出的是，
 我们的改进算法HPSP是在不改变PSP计算结果的前提下
 降低算法的时间和空间复杂度。
 \subsection{聚类树}
 
-\citet{chan2020agglomerative} 提到了有两种生成聚类簇的方法，
+\citet{chan2020agglomerative} 提到了有两种生成
+式\eqref{eq:czv}定义的聚类簇的方法，
 这两种方法用本节给出的聚类树结构
 来描述更为方便。聚类树可看成是一系列
 嵌套的分割$\P_i$的另一种描述方式。
@@ -191,12 +192,13 @@ I(Z_V) = \lambda_1 (1 + o(\epsilon))
   \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$, 
   把 $\P^*$ 中每一个元素作为 $V$ 的子节点。
   对于每一个子节点$C$，求解$I(Z_C)=I_{\P_C}(Z_C)$
-  并使用分割 $\P_C$ 对子树进一步细分直到子节点变成单元素集为止。
-  \item[自底向上\footnotemark] 假设 $I(Z_C) = \max_{B\subseteq V} I(Z_B)$ 并且 
-  将 $C$ 中所有的元素合并成一个作为聚类树的子节点。对于当前所有子节点，找到MMI
+  并使用$C$的分割 $\P_C$ 对子树进一步细分直到子节点变成单元素集为止。
+  \item[自底向上] 假设 $I(Z_C) = \max_{B\subseteq V} I(Z_B)$ 并且 
+  将 $C$ 中所有的元素合并成一个，作为聚类树的子节点。对于当前所有子节点，
+  找到多变量互信息
   最大的集合进行合并直到所有子节点合并成根节点$V$为止。
   \end{description}
-  \footnotetext{参见\cite{agg_ic}}
+  %\footnotetext{参见\cite{agg_ic}}
 
   \begin{figure}[!ht]
     \centering
@@ -205,17 +207,17 @@ I(Z_V) = \lambda_1 (1 + o(\epsilon))
       \includegraphics[width=\textwidth]{top_down.pdf}
       \caption{}\label{fig:top_down}
     \end{subfigure}~
-  \begin{subfigure}[b]{0.33\linewidth}
-    \centering
-    \includegraphics[width=\textwidth]{threshold_a.pdf}
-    \caption{}\label{fig:threshold_a}
-  \end{subfigure}~
   \begin{subfigure}[b]{0.29\linewidth}
     \centering
     \includegraphics[width=0.8\textwidth]{threshold_b.pdf}
     \caption{}\label{fig:threshold_b}
+  \end{subfigure}~
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{threshold_a.pdf}
+    \caption{}\label{fig:threshold_a}
   \end{subfigure}
-    \caption{聚类树示例}\label{fig:mmi_example}
+  \caption{聚类树示例}\label{fig:mmi_example}
   \end{figure}
 自顶向下
 获得聚类树的示意图由图\ref{fig:top_down} 给出。
@@ -236,36 +238,36 @@ $I(Z_V)=0.9$。
 \{\{1\},\{2\},\{3\},\{4\}\} & \lambda \geq 2
 \end{cases}
 \end{equation*}
-把各临界值$\lambda_i$ 标到聚类树上即如图
-\ref{fig:threshold_a}所示。
+将各临界值标到聚类树上即得到如图
+\ref{fig:threshold_a}所示的结果。
 \end{example}
 \subsection{HPSP算法}
 我们改进的PSP算法仍将使用
-算法\ref{alg:psp} 中提到的
+算法\ref{alg:psp}中提到的
 \texttt{DT} 子函数。
-在算法\ref{alg:psp} 中，我们观察到
-每次调用 \texttt{DT} 是相互独立的，
+在算法\ref{alg:psp}中，我们观察到
+每次调用 \texttt{DT} 的过程是相互独立的，
 并没有利用到聚类树的 固有性质。
-如果聚类树的嵌套性质可以被考虑进来的话, 
+如果聚类树的嵌套性质被考虑进来的话, 
 我们可以在后面的计算中
 仅在子图上进行 \texttt{DT} 的调用，
-从而可以实现计算效率比PSP算法提升一个数量级。
+从而实现计算效率比PSP算法提升一个数量级。
 
-在给出算法描述之前，我们先定义两个对图的操作：
+在给出改进算法的描述之前，我们先定义两个对图的操作：
 图限制(restriction)和图收缩(contraction)。
 我们称把图$G$限制到集合$C\subseteq V$是指
-考虑$G$的节点集为$C$而边的集合为$\{(i,j) \in E | i,j \in C \}$
+考虑节点集为$C$而边的集合为$\{(i,j) \in E | i,j \in C \}$
 的子图，
 记为$G[C]$。给定$V$的分割 $\P=(C_1, \dots, C_k)$，
 图根据$\P$收缩得到一个新的图，其节点集为
-$\P$，即第$i$个节点对应$C_i$。边的集合为$\{(i,j) \in [k] | w(C_i, C_j) > 0 \}$。
+$[k]$，其中第$i$个节点对应$C_i$。边的集合为$\{(i,j) \in [k] | w(C_i, C_j) > 0 \}$。
 其中$w(C_i, C_j)=\sum_{r \in C_i, s \in C_j} w_{rs} $
-也是新图节点$C_i$和 $C_j$之间的权重。我们把收缩后的图记为
+也是新图节点$i$和 $j$之间的权重。我们把收缩后的图记为
 $G[\P]$。
 
 
 在我们设计的算法中，
-假设我们第一次调用DT后得到了
+假设我们第一次调用 \texttt{DT} 后得到了
 $\P_i = \{C_1, \dots, C_t\}$。
 然后我们 分别对每个
 $G[C_i](i=1,\dots, t)$
@@ -274,7 +276,7 @@ $G[C_i](i=1,\dots, t)$
 对于 $\P_j(j<i)$，
 我们对收缩后的图 $G[\P_i]$ 计算 PSP 分割
 可以得到  $P_j(j<i)$ 的结果。
-我们把我们的改进方法称为 HPSP (hierarchical PSP)，
+我们把如上的改进方法称为 HPSP (Hierarchical PSP)，
 其描述在算法\ref{alg:psp_i_simplified}中给出。
 
 \begin{algorithm}[!ht]
@@ -285,7 +287,7 @@ $G[C_i](i=1,\dots, t)$
     而 $E$ 表示边的集合。
 		\STATE 初始化 树 $\mathcal{T}$：
      $V$ 是根节点，
-     $\{j\}(j \in V)$ 是诸叶节点，
+     $\{j | j \in V\}$ 是诸叶节点，
      无其他节点。
 		\STATE \texttt{Split}($G$)
 		\FUNCTION{\texttt{Split}($G$)}
@@ -407,7 +409,7 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
 自底向上和自顶向下的混合，不能照搬关联矩阵和并查集的数据结构，而是要结合
 HPSP算法~\ref{alg:psp_i_simplified} 的特点重新设计。
 为此，
-我们采用选取代表元素来构造聚类树，比如对于
+我们采用选取代表元素的方法来构造聚类树，比如对于
 聚类树的中间节点$\{1,2\}$选取较小的元素1来代表。
 这样做的另一优势是在存储方面，我们无需为中间节点额外开辟空间。
 我们采用父节点数组$K$来储存树的结构，而和聚类树边权重相关的数据
@@ -490,7 +492,7 @@ HPSP算法~\ref{alg:psp_i_simplified} 的特点重新设计。
 	\end{algorithmic}
 \end{algorithm}
 
-在算法算法~\ref{alg:get_psp}中，我们
+在算法~\ref{alg:get_psp}中，我们
 使用了额外的数组$C$来表示合并后当前
 剩余的节点，字典$D$储存了如何把剩余的节点展开成聚类簇
 的信息。由于\texttt{Merge} 函数最坏调用$n$次，
