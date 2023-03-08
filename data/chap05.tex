@@ -1,6 +1,6 @@
 \chapter{基于雷尼散度的有辅助信息的随机块模型研究}
 \label{chap:sbmsi}
-\section{引言}
+\section{本章引言}
 在本章中，我们首先引入我们研究的有辅助信息的随机块模型
 的定义和精确恢复条件（\ref{sec:sbmsi_exact_recovery_condtion}节）。
 虽然该条件前人已经研究过，这里我们在两社团和情形下给出它的等价表述
@@ -14,11 +14,11 @@
 \label{sec:sbmsi_exact_recovery_condtion}
 \newacronym{acr:sbmsi}{SBMSI}{Stochastic Block Model with side information}
 带有辅助信息的随机块模型（\gls{acr:sbmsi}）
-是 \ref{sec:sbm} 节介绍的
+是\ref{sec:sbm} 节介绍的
 SSBM 模型的推广。为方便讨论又不失一般性，
 这里我们在2个社团的随机块模型的
 基础上引入辅助信息。
-由定义 \ref{def:SSBM}，当$k=2$时，
+由定义\ref{def:SSBM}，当$k=2$时，
 节点标签$X$满足$X_i \in \{\pm 1\}$
 且 $\sum_{i=1}^n X_i = 0$。
 除了图 $Z$ 和节点标签 $X$ 外，
@@ -99,7 +99,7 @@ $\lceil \log n \rceil $ 的整数倍，而 \citet{abbe17sideinfo} 的定理4
 
 对于一般的情形，SBMSI 模型精确恢复的 临界值 $I_+$ 并没有
 显示表达式，但我们可以从切尔诺夫信息的定义出发得到 $I_+$ 的简化表达式，
-由下述引理 \ref{lem:I_plus_expression} 给出。
+由下述引理\ref{lem:I_plus_expression} 给出。
 该表达式更容易计算，且在后面定理\ref{thm:sdp}的证明中也会用到。
 
 \begin{lemma}\label{lem:I_plus_expression}
@@ -193,7 +193,7 @@ $I_+$ 也可写成雷尼散度的形式。
     \end{equation}
 \end{theorem}
 
-由定理 \ref{thm:Pe_new}
+由定理\ref{thm:Pe_new}
 可看出，误差界的幂次有两项组成，
 一项 $\gamma D_{1/2}(P_0||P_1) $ 
 和雷尼散度（在式\eqref{eq:renyi_divergence} 定义）
@@ -213,7 +213,7 @@ $$
 = \gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2
 $$
 此外，当 $P_0=P_1$ 时，
-定理 \ref{thm:Pe_new} 
+定理\ref{thm:Pe_new} 
 给出了用带约束的最大似然算法
 对SSBM 做社团发现
 的误差衰减速率，总结为如下推论：
@@ -270,8 +270,8 @@ $\gamma D_{1/2}(P_0||P_1) +
 	\end{equation} 
 \end{theorem}
 
-由定理 \ref{thm:constant} 可知，精确恢复误差指数下降。
-当 $\gamma=0$ 时，定理 \ref{thm:constant} 指出
+由定理\ref{thm:constant} 可知，精确恢复误差指数下降。
+当 $\gamma=0$ 时，定理\ref{thm:constant} 指出
 $D_{1/2}(\Bern(p)||\Bern(q))$
 是精确恢复的误差指数。
 因为
@@ -287,7 +287,7 @@ $\underbrace{P_0\times \dots \times P_0}_{\gamma} \times \Bern(p)$
 由独立性条件，
 我们可以把这一散度分解成如\eqref{eq:dense_error_exponent}
 所示的两项求和的形式。
-进一步的， 定理 \ref{thm:constant}
+进一步的， 定理\ref{thm:constant}
 的结果要求
 $m$ 和 $n$ 量阶相同。
 当 $m=o(n)$ 时，
@@ -356,7 +356,7 @@ $(n+1)$ 维的向量。
 
 
 \subsection{算法实现}\label{sec:sdp_admm}
-虽然半正定规划问题 \ref{eq:sdp} 可以使用一般的SDP优化工具包进行，但针对其特殊形式，
+虽然半正定规划问题\ref{eq:sdp} 可以使用一般的SDP优化工具包进行，但针对其特殊形式，
 我们可以提前计算出投影矩阵，
 从而实现算法加速。
 这里我们借鉴 \citet{amini2018semidefinite} 中针对无辅助信息设计的SDP-1的算法，
@@ -406,7 +406,7 @@ $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
 的计算方法。
 
 基于以上方法，我们开展了SDP算法对SBMSI模型精确恢复的仿真实验。
-图 \ref{fig:my_label} 展示了 SDP算法
+图\ref{fig:my_label} 展示了 SDP算法
 针对 带有辅助信息的随机块模型 实现精确恢复的成功率。
 成功率是指 对每一组参数的若干次重复实验中，我们计算算法
 实现精确恢复的比率。

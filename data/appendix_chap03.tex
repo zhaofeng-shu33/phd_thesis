@@ -1,5 +1,5 @@
 
-\chapter{第 \ref{chap:info_clustering} 章补充内容}
+\chapter{第\ref{chap:info_clustering} 章补充内容}
 
 %附录是与论文内容密切相关、但编入正文又影响整篇论文编排的条理和逻辑性的资料，例如某些重要的数据表格、计算程序、统计表等，是论文主体的补充内容，可根据需要设置。
 
@@ -29,13 +29,13 @@
 	从而推出 $X$  与 $Z$ 弱独立。
 \end{proof}
 \begin{proof}[定理\ref{thm:DPX}的证明]
-  由多个随机变量弱独立的定义式 \ref{def:general},
+  由多个随机变量弱独立的定义式\ref{def:general},
   我们可以找到 一个在字母集 $\{1, 2,\dots, K\}$上的
   离散分布 $U$, 使得 $Z_1, \dots, Z_n$
   关于 $U$ 条件独立。不失一般性，我们假设
   $(Z_1, \dots, Z_n)$ $\epsilon^n$-弱独立。
   则 $(Z_1, \dots, Z_n)$ 和 $U$ $\epsilon$-弱独立，
-  由引理 \ref{lem:xyz} 可得 $Z_i$
+  由引理\ref{lem:xyz} 可得 $Z_i$
   和 $U$ $\epsilon$-弱独立，也即有 
 \begin{equation}\label{XUk}
 P_{Z_i | U=k}(z) = P_{Z_i} (z) \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} \right)
@@ -184,7 +184,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
     f[\P] \geq \frac{\abs{\P}-1}{\abs{V}-1} \sum_{(i,j) \in E} w_{ij}
     \end{equation}
     
-    然后由引理 \ref{thm:trival}
+    然后由引理\ref{thm:trival}
     即可得证。
     
     设 $n=\abs{V}$。
@@ -232,8 +232,8 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
     $f[\P] \geq \frac{k-1}{n-1}\sum_{(i,j) \in E} w_{ij}$。
     因此，结论对 $\abs{\P}=k$ 成立。
     \end{proof}
-\section{定理 \ref{thm:alg_complexity} 的证明}
-\begin{proof}[定理 \ref{thm:alg_complexity} 的证明]
+\section{定理\ref{thm:alg_complexity} 的证明}
+\begin{proof}[定理\ref{thm:alg_complexity} 的证明]
   令
   $\mu_i = \frac{n_i}{n} \leq \frac{1}{2}$。
   下面我们使用归纳法证明
@@ -256,7 +256,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
        q\sum_{i=1}^k u_i^4 \leq 10 (\frac{1}{2})^4 
 	\end{equation}
 	所以我们有 \eqref{eq:innerI} $\Rightarrow$ \eqref{eq:outerI}。
-  由定理 \ref{thm:alg_complexity} 条件，我们不妨假设
+  由定理\ref{thm:alg_complexity} 条件，我们不妨假设
   $u_1\leq u_2 \leq \dots \leq u_k \leq \frac{1}{2}$
   且 $\sum_{i=1}^k u_i = 1$。
   因此，我们有
