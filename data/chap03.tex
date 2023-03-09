@@ -189,7 +189,7 @@ I(Z_V) = \lambda_1 (1 + o(\epsilon))
 一个聚类簇。
 
 \begin{description}
-  \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$, 
+  \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$，
   把 $\P^*$ 中每一个元素作为 $V$ 的子节点。
   对于每一个子节点$C$，求解$I(Z_C)=I_{\P_C}(Z_C)$
   并使用$C$的分割 $\P_C$ 对子树进一步细分直到子节点变成单元素集为止。
@@ -248,7 +248,7 @@ $I(Z_V)=0.9$。
 在算法\ref{alg:psp}中，我们观察到
 每次调用 \texttt{DT} 的过程是相互独立的，
 并没有利用到聚类树的 固有性质。
-如果聚类树的嵌套性质被考虑进来的话, 
+如果聚类树的嵌套性质被考虑进来的话，
 我们可以在后面的计算中
 仅在子图上进行 \texttt{DT} 的调用，
 从而实现计算效率比PSP算法提升一个数量级。
@@ -325,7 +325,7 @@ $G[C_i](i=1,\dots, t)$
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=10cm]{alg_illustration.pdf}
-	\caption{HPSP 算法求解图(a)的主分割序列，聚类树经(b), (c) 演化到 (d) }\label{fig:alg_eg}
+	\caption{HPSP 算法求解图(a)的主分割序列，聚类树经(b)、 (c) 演化到 (d) }\label{fig:alg_eg}
 \end{figure}
 
 \begin{example}
@@ -488,7 +488,7 @@ HPSP算法\ref{alg:psp_i_simplified}使用静态数组的实现
     \STATE $\gamma = \max_{i\in C} W[i]$
     \STATE $D[k] = \{ j\in C | K[j] = k, W[j]=\gamma\} \cup \{k\} \cup D[k]$
     \FOR{$ j \in D[k]$}
-    \STATE $D[k] \leftarrow D[j] \cup D[k]$, 并从$D$中删除键值$j$。
+    \STATE $D[k] \leftarrow D[j] \cup D[k]$， 并从$D$中删除键值$j$。
     \ENDFOR
     \STATE $C' \leftarrow  \{j\in C | W[j]<\gamma\}$
     \STATE $\P=\{D[k] | k \in \texttt{key}(D)\} \cup \{\{i\} | i \in [n]\backslash \cup_{k \in \texttt{key}(D)} D[k] \}$
@@ -633,7 +633,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 	\centering
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{two_level-2023-02-16.pdf}
-		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14,$ $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$.}\label{fig:c1}
+		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14, z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$。}\label{fig:c1}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{tree_info-clustering.pdf}
@@ -780,7 +780,7 @@ HPSP算法 实现数据的聚类的任务。
 异常值检测是对异常数据（称为异常值点）的识别，
 这些异常数据不同于其他多数数据（称为正常值点）
 \citep{grubbs1969procedures}。
-在本节中,我们考虑将HPSP算法用到异常值检测领域。
+在本节中，我们考虑将HPSP算法用到异常值检测领域。
 
 首先我们在理论层面探讨异常值检测背景下HPSP算法的应用。
 假设一个简单的情形，所有正常值点属于同一类别，
@@ -823,8 +823,8 @@ $\{C_1, \dots, C_K, \{x_1\}, \dots, \{x_M\}\}$。
 我们基于 HPSP 算法来获得$K, M$的值，并同时给出聚类和
 异常值检测的结果。
 
-如果 $K$ 和 $M$ 较小, 使用式 \eqref{eq:PSP_structure}
-的记法, 处理这种情况的一种经验性但合理的方法是从
+如果 $K$ 和 $M$ 较小， 使用式 \eqref{eq:PSP_structure}
+的记法， 处理这种情况的一种经验性但合理的方法是从
 $\{\P_k, \P_{k-1}, \dots, \P_0\}$中找到一个划分
 $\P_{k-r}$，使得$K,M$都比较小。
 对于此多目标优化问题，我们需要一个折中方案，即通过枚举
@@ -839,7 +839,7 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 然后我们用 $\P_{k-r}$ 中元素个数大于1的集合来标记各类别中的正常值点，
 元素个数小于1的集合为异常值点的集合。
 
-如果需要预测新的观测值是否是异常值点, 
+如果需要预测新的观测值是否是异常值点，
 我们使用类似于式\eqref{eq:sum_exp_gamma_N}给出的边界方程判决规则。
 假设 $\lambda_{k-r}$ 是$\P_{k-r}, \P_{k-r+1}$ 两个分割对应的
 分界值并且图$G$边的权值是使用 RBF 核 来构建的，
@@ -854,42 +854,45 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 
 
 我们准备了三个人工数据集来验证我们提出的异常值检测算法。
-第一个数据集是一个高斯斑点，其中一些噪声点均匀分布在一个正方形中。
-第二个数据集是我们将 $(0,0)$ 这个点加入到
-\ref{sec:data_clustering} 节所描述的有4个类别的
-高斯数据集里。
-最后一个数据集是两个错开的半圆形状（或月牙形状），
+第一个数据集是一个高斯斑点，
+其中有一些噪声点均匀分布在一个正方形中。
+第二个数据集是我们将 $(0,0)$ 这个点加入
+到\ref{sec:data_clustering}节所描述的有4个类别的
+高斯斑点里。
+最后一个数据集是两个错开的半月形状，
 并且其周围分布着一些
 噪点。
 构造相似图的权值我们采用 RBF 核，其 异常值检测
-效果如图\ref{fig:boundary} 所示。
+效果如图\ref{fig:boundary}所示。
 从前三幅图可以看出，由式\eqref{eq:boundary_curve_multiple}
 给出的边界曲线近似于正常值点的闭包曲线。
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{outlier_boundary_illustration.pdf}
 	\caption{在人工生成的数据集上
-  检测边界曲线的形状}
+  检测边界的形状}
   \label{fig:boundary}
 \end{figure}
 
 另外我们也
-在图\ref{fig:boundary}.(d) 画出了椭圆包络\cite{rousseeuw1999fast}(elliptic envelope)方法的决策边界曲线。
-由于后一种方法假设内部数据分布在凸区域，因此决策边界是椭圆形状，
-因此不能很好地反映真实数据的分布。
+在图\ref{fig:boundary}(d)画出了椭圆包络\cite{rousseeuw1999fast}(elliptic envelope)方法的决策边界曲线。
+由于后一种方法假设内部数据分布在凸的区域，
+因此决策边界是椭圆形状，
+不能很好地反映真实数据的分布。
 
 下面我们针对不同的数据集比较本节提出的异常值检测方法和其他常用的
 异常值检测算法的性能。
-我们使用 5 个数据集: Gaussian-blob, Moon， Lymphography
-\cite{lazarevic2005feature}, Glass 和 Ionosphere \cite{keller2012hics}。 
+我们使用 5 个数据集: 高斯斑点、 半月型、Lymphography
+\cite{lazarevic2005feature}、 Glass 和 Ionosphere \cite{keller2012hics}。 
 前两个数据集如前所述是
 人工生成的。
 后三个数据集在异常值检测算法比较的文章中大量使用
 \cite{campos2016evaluation}。
 我们对比的方法包括
-局部异常因子(local outlier factor \citep{Breunig}), 孤立森林（isolation forest \citep{if}）, 
+局部异常因子(local outlier factor \citep{Breunig})、
+孤立森林(isolation forest \citep{if})、
 椭圆包络  和
-一类支持向量机 （one class SVM \citep{svm}）。 
+一类支持向量机 (one class SVM \citep{svm})。 
 我们使用TPR和TNR来衡量检测的整体性能。
 正常值点被视为正样本。
 TPR衡量的是正样本集合中正确检测的百分比，
@@ -904,7 +907,7 @@ Lymphography 数据集上表现最好，与局部异常因子效果差不多，
   \begin{adjustbox}{width=\columnwidth,center}
 \begin{tabular}{cccccc}
   \hline
-         TPR/TNR        &  GaussianBlob   &      Moon       &  Lymphography  &     Glass     &  Ionosphere   \\
+         TPR/TNR        &  高斯斑点   &      半月型       &  Lymphography  &     Glass     &  Ionosphere   \\
   \hline
       信息检测    & 100\%/100\% & 97.4\%/100\%  & 97.9\%/100\% & 91.2\%/11.1\% & 90.7\%/48.4\% \\
       局部异常因子 & 100\%/100\% & 100\%/100\% & 98.6\%/83.3\%  & 96.6\%/22.2\% & 90.2\%/82.5\% \\
@@ -933,6 +936,8 @@ Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 并在广泛的数据集上表现良好。
 在有层次结构、类别数未知以及
 含有异常值点的情况下，基于多变量互信息的社团层次化发现算法具有更加明显的优势。
+
+[与前人结果的对比]
 
 本章的研究也存在一些不足之处。首先，尽管我们对HPSP算法进行了性能优化，
 相较于其他启发式算法，其算法复杂性仍较高，应用到较大规模的网络上存在一定的困难。

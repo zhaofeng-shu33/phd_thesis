@@ -367,7 +367,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 \newacronym{acr:ssbm}{SSBM}{Symetric Stochastic Block Model}
 下面给出有$k$个社团的对称的随机块模型
 (\gls{acr:ssbm})
-的定义, 
+的定义： 
 	\begin{definition}[有$k$ 个社团的 SSBM]\label{def:SSBM}
 	令 $0\leq q<p\leq 1$, $V=[n]$ 且
   $X=(X_1,\dots,X_n)\in W^n$。 对任意的 $u\in W$，
@@ -386,12 +386,11 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 说明同一社团之间的节点有边相连的概率更大，而
 属于不同社团的节点之间有边相连的概率较小。
 
+\newglossaryentry{Bernoulli_distribution}{name=伯努利分布, description={Bernoulli distribution}}
 为进一步解释随机块模型，
 我们定义随机变量 $Z_{ij}:=\mathbf{1}[\{i,j\} \in E(G)]$，
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
-给定节点的标签向量 $X$, 
-\newglossaryentry{Bernoulli_distribution}{name=伯努利分布, description={Bernoulli distribution}}
-$Z_{ij}$ 服从\gls{Bernoulli_distribution}，
+给定节点的标签向量 $X$，$Z_{ij}$ 服从\gls{Bernoulli_distribution}，
 \newglossaryentry{not:expectation}
 {
   type=notation,
@@ -483,8 +482,7 @@ $f$ 是 定义在 $W$ 上的置换函数
 对于任意 $\sigma \in W^n$，
 定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
 此外，我们定义两个$W^n$中的向量的
-距离为\gls{not:dist}
-$=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$,
+距离为\gls{not:dist}$=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$，
 其中 $\sigma,\sigma'\in W^n
 $。
 \begin{example}
@@ -493,7 +491,7 @@ $。
 $\omega$满足
 $\omega^0 = 1$ 且 $\omega \cdot \omega = \omega^2 = 1$。
 令 $f$ 是一个$W$上映射，定义为
-$f(1) = \omega$ 且 $f(\omega)=1$,
+$f(1) = \omega$ 且 $f(\omega)=1$，
 则 $f \in S_2$ 且 $f(\sigma) = (\omega, 1)$。
 另外我们有 $\Dist(\sigma, f(\sigma)) = 2$，
 $S_k(\sigma) = \{\sigma, f(\sigma)\}$， 且
@@ -504,7 +502,7 @@ $S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
 给定 随机块模型，精确恢复问题的数学定义如下:
 \newglossaryentry{exact_recovery}{name=精确恢复, description={Exact Recovery}}
 \begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
-给定节点标签 $X$, 并假设随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
+给定节点标签 $X$， 并假设随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
 一个社团发现算法$\hat{X}$ 已知 $G$ 去估计$X$，
 也被称做$X$ 的估计量。我们称该算法
 可精确恢复$X$，如果
@@ -513,7 +511,7 @@ P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
 \end{equation}
 \end{definition}
 
-在上述定义中, 记号 $\hat{X} \in S_k(X)$ 表示
+在上述定义中，记号 $\hat{X} \in S_k(X)$ 表示
 我们只能获得置换意义下相对于真实标签$X$的恢复结果。
 这是因为没有一个类别的基准导致的。
 这种情况在无监督学习领域比较常见。
@@ -527,7 +525,7 @@ P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
     定义\ref{def:SSBMR} 也可以写成当$n\to \infty$
     时，
     $P_e(\hat{X}) \to 0$。
-  \item  此外，我们要指出的是, 对给定的图 $G$, 估计量$\hat{X}$可以是确定性的也
+  \item  此外，我们要指出的是，对给定的图 $G$，估计量$\hat{X}$可以是确定性的也
   可以是随机的。
   一般而言， $\hat{X} \in S_k(X)$ 发生的概率 应该理解
   对随机图的平均 $\sum_{G \in \cG_n} P_G(G) P_{\hat{X}|G}(\hat{X} \in S_k(X))$。 
@@ -552,10 +550,10 @@ Abbe \cite{abbe2015exact} 和 Mossel
 对于 $\SSBM(n,2,\A, \B)$ 模型，
 有如下两种情形：
 	\begin{enumerate}
-		\item $\sqrt{a} - \sqrt{b} > \sqrt{2}$时,
-    $P_e \to 0$, 存在算法满足精确恢复的要求;
-		\item $\sqrt{a} - \sqrt{b} < \sqrt{2}$时,
-    $P_e \to 1$, 没有算法可实现精确恢复。
+		\item $\sqrt{a} - \sqrt{b} > \sqrt{2}$时，
+    $P_e \to 0$， 存在算法满足精确恢复的要求;
+		\item $\sqrt{a} - \sqrt{b} < \sqrt{2}$时，
+    $P_e \to 1$，没有算法可实现精确恢复。
 	\end{enumerate}
 \end{theorem}
 定理\ref{thm:sbm2_phase_transition} 揭示了
@@ -573,7 +571,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
   \end{equation}   
   满足时，
   精确恢复可实现，
-  而当$\sqrt{a} - \sqrt{b} < \sqrt{k}$时,
+  而当$\sqrt{a} - \sqrt{b} < \sqrt{k}$时，
   没有算法可实现精确恢复。
 \end{theorem}
 \newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
@@ -607,12 +605,12 @@ Abbe \cite{abbe2015exact} 和 Mossel
 	\begin{subfigure}{0.5\textwidth}
     \centering
     \includegraphics[width=0.7\textwidth]{Tlarge.pdf}
-		\caption{$T>T_c$, 自旋方向随机}
+		\caption{$T>T_c$， 自旋方向随机}
 	\end{subfigure}~
 	\begin{subfigure}{0.5\textwidth}
     \centering
     \includegraphics[width=0.7\textwidth]{Tsmall.pdf}
-		\caption{$T<T_c$, 自旋方向一致}
+		\caption{$T<T_c$， 自旋方向一致}
 	\end{subfigure}
   \caption{磁偶极矩自旋方向随温度变化示意图}\label{fig:ising_two_configurations}
 \end{figure}   
@@ -650,8 +648,8 @@ $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
 理论研究时先考虑有限的正方形网格， 再取 $N\to \infty$。
 由于磁偶极矩之间的磁力作用和受外场的影响，存在着磁化强度的相变现象，即
 \begin{enumerate}
-		\item $T< T_c$, $M>0$, 发生自发磁化。
-		\item $T> T_c$, $M=0$, 无自发磁化。
+		\item $T< T_c, M>0$， 发生自发磁化。
+		\item $T> T_c, M=0$， 无自发磁化。
 \end{enumerate}
 
 \newglossaryentry{phase_trans}{name=相变, description={Phase transition}}
@@ -934,7 +932,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
 理论保证。
 \begin{theorem}
   设 $\hat{Y}$ 是
-  优化问题 \eqref{eq:opt_A_Y_1} 的解, $\sigma$ 是节点的真实标签向量。
+  优化问题 \eqref{eq:opt_A_Y_1} 的解，$\sigma$ 是节点的真实标签向量。
   若 $\sqrt{a} - \sqrt{b}
   > \sqrt{2}$，
   则
@@ -978,8 +976,8 @@ $P_{Z_C}$表示$Z_C$的联合分布。
 $\P, \Pi'$等符号在\ref{sec:graph_strength}节定义。
 则MMI度量的定义为：
 \begin{align}
-  I(Z_V) &:= \min_{\P \in \Pi'} I_{\P}(Z_V)
-  \textrm{, 其中 } \label{eq:IZV}\\  
+  I(Z_V) &:= \min_{\P \in \Pi'} I_{\P}(Z_V),
+  \textrm{ 其中 } \label{eq:IZV}\\  
   I_{\P}(Z_V) &:= \frac{1}{|\P| - 1}D(P_{Z_V} || \prod_{C\in \P} P_{Z_C}) \label{eq:IPZV}
 \end{align}
 在上面的定义中，如果$Z_V$彼此独立，那么$I(Z_V)=0$，
@@ -1000,7 +998,7 @@ $\P, \Pi'$等符号在\ref{sec:graph_strength}节定义。
 这里略去PIN模型的数学定义，而是通过下面的例子
 阐发它和图结构的联系。
 \begin{example}\label{ex:mmi}
-  令$V=\{1,2,3\}$，$Z_1=(X_a, X_c)$,
+  令$V=\{1,2,3\}$，$Z_1=(X_a, X_c)$，
   $Z_2=(X_a,X_b)$ 且 $Z_3=(X_b,X_c)$。
   $X_a,X_b,X_c$是独立的随机变量且它们的熵分别为：
   $H(X_a)=H(X_b)=1, H(X_c)=5$。
@@ -1064,7 +1062,7 @@ P \in N^{(\epsilon)}(P_0) \iff
 \end{equation}
 \end{definition}
 式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
-\sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式, 其中 $\phi(x)$
+\sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式，其中 $\phi(x)$
 叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
 对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，我们有
 \begin{equation}\label{eq:approx:ig}
@@ -1078,7 +1076,7 @@ D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
 $Y$关于$X$的条件分布
 $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内。
 \end{definition}
-在弱独立的假设下, 由 $D(P_{XY}||P_XP_Y)$ 所定义的互信息$I(X;Y)$, 
+在弱独立的假设下，由 $D(P_{XY}||P_XP_Y)$ 所定义的互信息$I(X;Y)$, 
 通过对式\eqref{eq:approx:ig}的化简，可以表示为：
 \begin{equation}\label{eq:Ixy}
 I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsilon^2)
@@ -1164,7 +1162,7 @@ $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
   \end{equation}
 \end{theorem}
 \begin{example}\label{ex:sanov_ldp}
-若$X_1, \dots, X_n$ i.i.d. $\sim \Bern(p)$,
+若$X_1, \dots, X_n$ i.i.d. $\sim \Bern(p)$，
 对于任意正数$\epsilon$，
 我们可以用 Sanov 定理估计 $P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$ 随着$n$增大收敛到零
 的速率，其中$\bar{X}$是$X_1,\dots, X_n$的样本均值。
@@ -1203,7 +1201,7 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$。
 \end{definition}
 
 \begin{example}\label{ex:cramer_ldp}
-  若$X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(0,1)$,
+  若$X_1, \dots, X_n$ i.i.d. $\sim \mathcal{N}(0,1)$，
   对于任意正数$\epsilon$，
   下面我们 用  Cramér 定理 计算 $P(\frac{1}{n} \sum_{i=1}^n X_i > \epsilon)$ 
   随着$n$增大收敛到零
