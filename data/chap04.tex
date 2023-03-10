@@ -456,7 +456,7 @@ $W^*:= \{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n
 \begin{equation}\label{eq:hatX_double_prime}
 \hat{X}'' := \arg\min_{\sigma \in W^*} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)
 \end{equation}
-其中最小值是不同社团之间的最小分割。
+其最小值是不同社团之间的最小分割。
 
 当 $\hat{X}'' \neq X$ 时，
 我们必须有  $\Dist(\hat{X}'' ,X)\geq 2$
@@ -467,8 +467,8 @@ $W^*:= \{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n
 $\hat{X}'$ 的表达式中出现的额外的参数 $\gamma$ 可视为
 某种整数规划的拉格朗日乘子。
 因此，通过引入惩罚因子项和将搜索空间从$W^*$ 扩大 到$W^n$
-，求解 $\hat{X}'$
-的优化问题 转变为 $\hat{X}''$的优化问题。
+，求解 $\hat{X}''$
+的优化问题 转变为求解 $\hat{X}'$的问题。
 
 当 $\beta > \bar{\beta}$ 时，
 $\tilde{g}(\beta)$ 是一个常数。
@@ -491,12 +491,14 @@ $\tilde{g}(\beta)$ 是一个常数。
 $P_e(\hat{X}'')$ 
 的上界最紧。
 这可以直观地理解为搜索空间缩小的结果。
-定理\ref{thm:error_rate}的证明技术是对于 $\Dist(\bar{\sigma}, X) \geq 1$，考虑事件
+
+定理\ref{thm:error_rate}的证明思路是对于 $\Dist(\bar{\sigma}, X) = 1, 2,\dots$，
+分别考虑事件
 $H(X) > H(\bar{\sigma})$发生的概率。
 \newglossaryentry{bool_ineq}{name=布尔不等式, description={Boole's inequality}}
 然后通过\gls{bool_ineq}， 这些概率可以相加。
 关于估计量 $\hat{X}''$ 误差上界的研究早在\citet{abbe2015exact} 的工作中即有涉及，
-但他只得到了一个比较松的上界 $n^{g(\bar{\beta})/4}$，且仅针对 $k=2$ 的情形。
+但该工作只得到了一个比较松的上界 $n^{g(\bar{\beta})/4}$，且仅针对 $k=2$ 的情形。
 对于一般的情形，
 当条件
 $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 满足时，考虑到
@@ -507,10 +509,10 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 
 
 估计量 $\hat{X}'$ 有一个参数 $\gamma$。
-当 $\gamma$ 取特定的值时， $\hat{X}'$在渐近情形下
-可以等价于 最大似然估计或最大模块度估计。
-以下分析从直观的角度说明了
-这种联系。
+当 $\gamma$ 取特定的值时， 下面我们说明，$\hat{X}'$在渐近情形下
+等价于 最大似然估计或最大模块度估计。
+%以下分析从直观的角度说明了
+%这种联系。
 
 通过最大化对数似然函数可得到最大似然估计量。
 由 \eqref{eq:GmL} 式，该似然函数可以进一步写成:
@@ -530,17 +532,20 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 当 $\gamma = \gamma_{ML}$时，
 最大似然估计量 渐近等价于 $\hat{X}'$。
 
-这里我们顺便得到了最大似然算法和最小割问题在有$W^*$约束
+这里我们顺便得到了最大似然算法和最小割问题在$W^*$约束
 下的等价性，这个等价性不需要渐近的条件也成立。
 因为最大似然算法首先等价于极小化能量$H(\sigma)$，
-$\gamma$从\eqref{eq:special_gamma_ML}式中取值。其次，
-由\eqref{eq:hatX_double_prime}式，极小化能量$H(\sigma)$
-等价于$\min \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)$
-因为在$W^*$的约束下，
+其中参数$\gamma$
+从式\eqref{eq:special_gamma_ML}中取值。
+其次，
+由式\eqref{eq:hatX_double_prime}，
+极小化能量$H(\sigma)$
+等价于$\min \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)$。
+考虑到在$W^*$的约束下，
 $\sum_{1<i<j<n} \delta(\sigma_i, \sigma_j)$
-是一个常数，\eqref{eq:hatX_double_prime}式又等价于
+是一个常数，式\eqref{eq:hatX_double_prime}又等价于
 $-\sum_{ \{i,j\} \in E} \delta(\sigma_i, \sigma_j)$，
-其与 \eqref{eq:minimum_k_cut}式只相差一个常数。
+其与 式\eqref{eq:minimum_k_cut}只相差一个常数。
 
 
 最大模块度估计量通过最大化式\eqref{eq:Q}而得到。
