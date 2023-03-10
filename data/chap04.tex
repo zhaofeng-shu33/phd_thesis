@@ -356,8 +356,8 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 趋于无穷大，
 则 $P_{\sigma}(S_k(X))$ 趋于零。
 此种分析展示了证明定理\ref{thm:phase_transition}的
-主要思路。应用这一思路，由
-\eqref{eq:expect_A_r_0_s}式，
+主要思路。应用这一思路，由式
+\eqref{eq:expect_A_r_0_s}，
 当$n$充分大时，$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 的数学期望为 $n^{g(\beta)}$，
 通过讨论$g(\beta)$的正负可以部分说明
@@ -441,7 +441,7 @@ $\beta > \beta^*$，
 因此
 相比于从玻茨模型中采样的方法，我们可以直接最大化条件概率，以
 找到概率最大值的状态。
-等价地， 我们可以通过最小化 \eqref{eq:energy}式的方式来获得状态的估计量：
+等价地， 我们可以通过最小化 式\eqref{eq:energy}来获得状态的估计量：
 \begin{equation}\label{eq:hatX}
 \hat{X}' := \arg\min_{\bar{\sigma} \in W^n} H(\bar{\sigma})
 \end{equation}
@@ -515,26 +515,26 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 %这种联系。
 
 通过最大化对数似然函数可得到最大似然估计量。
-由 \eqref{eq:GmL} 式，该似然函数可以进一步写成:
+由 式\eqref{eq:GmL} ，该似然函数可以进一步写成:
 \begin{equation}\label{eq:PG_energy}
 	\log P_G(Z=z|X=\sigma) = -\log\frac{a}{b} \cdot H(\sigma) + C
 \end{equation}
 
-这里 在$H(\sigma)$ 的表达式中 参数 $\gamma$ 的取值满足
+上式中$C$ 是一个和 $\sigma$ 无关的常数，
+而 $H(\sigma)$ 由式\eqref{eq:energy}给出，
+其中参数 $\gamma$ 的取值满足
 \begin{equation}\label{eq:special_gamma_ML}
 	\gamma \frac{\log n}{n} = \frac{1}{\log(a/b)}
 	\left(\log \left(1-\B \right) - \log \left(1-\A \right) \right)	 
 \end{equation}
 
-而 $C$ 是一个和 $\sigma$ 无关的常数。
 当 $n$ 充分大时，我们有 $\gamma \to \gamma_{ML} := \frac{a-b}{\log(a/b)}$。   
 也即，
 当 $\gamma = \gamma_{ML}$时，
 最大似然估计量 渐近等价于 $\hat{X}'$。
 
-这里我们顺便得到了最大似然算法和最小割问题在$W^*$约束
-下的等价性，这个等价性不需要渐近的条件也成立。
-因为最大似然算法首先等价于极小化能量$H(\sigma)$，
+由式\eqref{eq:PG_energy}可知，
+最大化似然函数等价于极小化能量$H(\sigma)$，
 其中参数$\gamma$
 从式\eqref{eq:special_gamma_ML}中取值。
 其次，
@@ -546,6 +546,8 @@ $\sum_{1<i<j<n} \delta(\sigma_i, \sigma_j)$
 是一个常数，式\eqref{eq:hatX_double_prime}又等价于
 $-\sum_{ \{i,j\} \in E} \delta(\sigma_i, \sigma_j)$，
 其与 式\eqref{eq:minimum_k_cut}只相差一个常数。
+从而我们得到了最大似然算法和最小割问题在$W^*$约束
+下的等价性，这个等价性不需要$n\to\infty$的渐近性条件也成立。
 
 
 最大模块度估计量通过最大化式\eqref{eq:Q}而得到。
@@ -553,13 +555,13 @@ $-\sum_{ \{i,j\} \in E} \delta(\sigma_i, \sigma_j)$，
 可以写成：
 \begin{align}
 Q(\sigma) = -\sum_{\{i,j\} \not\in E(G) } \frac{d_i d_j}{2 |E|}\delta(\sigma_i,\sigma_j) 
-+ \sum_{\{i,j\} \in E(G) } (1 - \frac{d_i d_j}{2 |E|}) \delta(\sigma_i,\sigma_j)  \label{eq:Qtransform}
++ \sum_{\{i,j\} \in E(G) } \left(1 - \frac{d_i d_j}{2 |E|} \right) \delta(\sigma_i,\sigma_j)  \label{eq:Qtransform}
 \end{align}
 
 当$n$充分大时，平均意义上我们有 $d_i \sim  \frac{(a+(k-1)b)\log n}{k}, |E| \sim \frac{1}{2}n d_i$。
 因此，我们有
 $\frac{d_id_j}{2|E|} \to \gamma_{MQ} \frac{\log n}{n} $。
-从 \eqref{eq:Qtransform}式我们可以看到，
+从式 \eqref{eq:Qtransform}我们可以看到，
 当 $\gamma = \gamma_{MQ} = \frac{a+(k-1)b}{k}$ 且 $n\to \infty$时，
 $Q(\sigma) \to -H(\sigma)$。
 也即，当$\gamma = \gamma_{MQ}$ 时，
@@ -577,39 +579,40 @@ $\hat{X}'$ 。
 \section{基于梅特罗波利斯采样的社团发现算法}\label{sec:ms}
 
 由定理\ref{thm:phase_transition}可知，
-如果我们直接从玻茨模型 \eqref{eq:isingma} 式中采样，那么得到的样本大概率
+如果我们直接从玻茨模型中采样，那么得到的样本大概率
 与$X$一致。
-然而，当$n$非常大时，按照分布\eqref{eq:isingma}式精确采样是困难的，
+然而，当$n$非常大时，按照式\eqref{eq:isingma}给出的分布精确采样是困难的，
 因为状态空间的状态总数随着$n$以
 $k^n$的速率指数增大。
 因此，一定程度的近似是必要的，
-为此我们可以借助\ref{sec:ising}节介绍的梅特罗波利斯算法。 
+为此，我们可以借助\ref{sec:ising}节介绍的梅特罗波利斯算法。 
 经过若干次初始迭代后，梅特罗波利斯算法
 每次产生的样本可视为从玻茨模型 采样的结果。
 这个论断相关的理论研究主要是基于马尔可夫链。
-在某些一般性的条件下，
+在特定的条件下，
 梅特罗波利斯算法生成的样本收敛到
 马尔可夫链的稳态并且该稳态分布即为要近似的分布。
 针对伊辛模型的不同变体，
 之前的许多工作都表明了梅特罗波利斯算法采样的收敛性\cite{diaconis1998we}。
 这里我们假设类似的收敛性结果可以推广到
-形如 \eqref{eq:isingma} 式中描述的玻茨模型。
+形如 式\eqref{eq:isingma} 中描述的玻茨模型。
 
+针对我们研究的模型和能量表达式 \eqref{eq:energy}，
 我们对算法\ref{alg:Metropolis}进行
-改写即可得到针对我们的模型和能量表达式 \eqref{eq:energy},
-的算法\ref{alg:m}。
+改写，得到
+算法\ref{alg:m}。
 算法\ref{alg:m}要求
 社团数量 $k$ 和参数 $\beta, \gamma$ 事先给定。
-并且，根据定理\ref{thm:phase_transition}，我们需选取  $\beta>\beta^*, \gamma > b$
-\footnote{ $\beta^*$ 的定义参见式 \eqref{eq:beta_star} }
+根据定理\ref{thm:phase_transition}，我们需选取  $\beta>\beta^*, \gamma > b$
+%\footnote{ $\beta^*$ 的定义参见式 \eqref{eq:beta_star} }
 。
 这里的 $a, b$
 可以通过 定理\ref{thm:ab12}中提出的估计量$\hat{a},\hat{b}$进行近似。
 此外，算法的迭代次数  $N$
-也需事先确定。
+也须事先确定。
 \begin{algorithm}[H]
 	\caption{针对玻茨模型的梅特罗波利斯算法} \label{alg:m}
-	输入： 图 $G$， 参数 $\beta$、$\gamma$ \\
+	输入： 图 $G$、参数 $\beta,\gamma$ \\
 	输出： $\hat{X} = \bar{\sigma}$
 	\begin{algorithmic}[1]
 		\STATE 随机初始化 $\bar{\sigma} \in W^n$ %\vskip 0.5em
@@ -618,7 +621,7 @@ $k^n$的速率指数增大。
 		随机选取 $s, r$ 并得到新的状态
 		 $\bar{\sigma}'$
 		 %\vskip 0.5em
-		\STATE 通过 \eqref{eq:DeltaH} 计算 $\Delta H(r,s) = H(\bar{\sigma}') - H(\bar{\sigma})$ %\vskip 0.5em
+		\STATE 通过 式\eqref{eq:DeltaH} 计算 $\Delta H(r,s) = H(\bar{\sigma}') - H(\bar{\sigma})$ %\vskip 0.5em
 		\IF{$\Delta H(r,s)<0$}
 		\STATE $\sigma_r \leftarrow w^s \cdot \sigma_r$ %\vskip 0.5em
 		\ELSE
@@ -631,24 +634,24 @@ $k^n$的速率指数增大。
 \end{algorithm}
  由 引理\ref{lem:lemmaDiff}， $\Delta H(r,s)$ 的计算需要 $O(\log n)$ 的时间。
 有研究针对某种特殊的伊辛模型指出
-$N=O(n\log n)$ 即可得到估计得比较好的样本\cite{mcmc}。
+在$N=O(n\log n)$的条件下 即可得到近似的比较好的样本\cite{mcmc}。
 对于我们的模型，由于我们并不清楚 $ N = O(n\log n)$ 是否足够，
 因此我们在数值实验中经验地选取 $N=O(n^2)$。
-则 算法\ref{alg:m}总的时间复杂度为 $O(n^2 \log n)$。
+算法\ref{alg:m}总的时间复杂度为 $O(n^2 \log n)$。
 
 
 
 借助梅特罗波利斯算法，
-下面我们通过实验验证 定理\ref{thm:phase_transition}中的 $\gamma > b$的情形。
+下面我们通过实验验证 定理\ref{thm:phase_transition}中  $\gamma > b$的情形。
 我们选取了 $n=9000, k=2$，
 通过蒙特卡罗采样的方法，我们可以得到准确率的经验计算公式为
 $P_a(\hat{X}^*) = \frac{1}{m_1m_2}\sum_{i=1}^{m_1} \sum_{j=1}^{m_2} \mathbf{1}[\hat{X}^* = \pm X]$。
 在这个公式中，
-$m_1$ 是 由 SBM 模型产生的随机图的次数，而
+$m_1$ 是 由 随机块 模型产生随机图的次数，而
 $m_2$ 是 对于一个特定的图，由算法\ref{alg:m}生成的连续样本的数量。
 我们选取 $m_1=2100,m_2=6000$。这样的取值已相当大，
 且由大数定律
-可达到 $P_a(\hat{X}^*)$ 的好的估计。
+保证 $P_a(\hat{X}^*)$ 是精确恢复概率的好的估计。
 $P_a(\hat{X}^*)$ 随 $\beta$的变化在
 图\ref{fig:erh}中给出。
 
@@ -660,7 +663,7 @@ $P_a(\hat{X}^*)$ 随 $\beta$的变化在
 
 
 竖线 ($\beta=\beta^* \approx 0.198$)，
-是 从 \eqref{eq:beta_star} 式计算得到的， 
+是 从式 \eqref{eq:beta_star} 计算得到的， 
 代表了相变的临界值。
 图\ref{fig:erh}中的坐标点 $(0.199,\frac{1}{2})$
 可视为通过实验估计出的
