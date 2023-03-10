@@ -2,7 +2,7 @@
 \label{chap:sbmsi}
 \section{本章引言}
 在本章中，我们首先引入我们研究的有辅助信息的随机块模型
-的定义和精确恢复条件（\ref{sec:sbmsi_exact_recovery_condtion}节）。
+的定义和精确恢复条件（\ref{sec:sbmsi_exact_recovery_condition}节）。
 虽然该条件前人已经研究过，这里我们在两社团和情形下给出它的等价表述
 形式（引理\ref{lem:I_plus_expression}），该形式将在我们后面证明
 半正定规划算法可实现精确恢复时用到。在精确恢复条件被保证的前提下，
@@ -10,8 +10,15 @@
 除此之外，我们证明了实现精确恢复等价于求解某半正定规划问题，
 该问题可通过交替方向乘子法(ADMM)进行求解（\ref{sec:sdp_exact}）。
 
-\section{精确恢复条件}
-\label{sec:sbmsi_exact_recovery_condtion}
+本章内容的具体安排如下：
+在\ref{sec:sbmsi_exact_recovery_condition}节，我们给出了
+带有辅助信息的随机块模型的精确恢复条件；
+在\ref{sec:sbmsi_error_decay_rate}节，我们研究了算法的最优误差衰减速率，
+在\ref{sec:sdp_exact}节，我们给出了一个能实现精确恢复的SDP算法，并通过实验
+验证了其精确恢复效果。
+第\ref{sec:summary_sbmsi}节对全章进行了总结。
+
+\section{精确恢复条件}\label{sec:sbmsi_exact_recovery_condition}
 \newacronym{acr:sbmsi}{SBMSI}{Stochastic Block Model with side information}
 带有辅助信息的随机块模型（\gls{acr:sbmsi}）
 是\ref{sec:sbm} 节介绍的
@@ -137,7 +144,7 @@ $I_+$ 也可写成雷尼散度的形式。
 \end{remark}
 
 \section{误差衰减速率}\label{sec:sbmsi_error_decay_rate}
-在\ref{sec:sbmsi_exact_recovery_condtion}节的基础上，
+在\ref{sec:sbmsi_exact_recovery_condition}节的基础上，
 我们讨论一种更强的要求，即恢复算法将SSBM各社团大小相等的条件考虑在内。
 类似定理\ref{thm:error_rate}，
 在这种情况下，利用带约束的最大似然估计，我们可以得到恢复算法更快的误差衰减速率。
@@ -424,7 +431,7 @@ $P_0,P_1$ 两个分布分别为 $\Bern(0.2)$ 和 $\Bern(0.8)$。
     \label{fig:my_label}
 \end{figure}
 
-\section{本章小结}
+\section{本章小结}\label{sec:summary_sbmsi}
 本章研究了带有辅助信息的随机块模型（SBMSI）的精确恢复问题。
 具体来说，在给出了 SSBMI 的定义后， 
 我们首先针对两社团的情形获得了精确恢复的误差衰减速率。
