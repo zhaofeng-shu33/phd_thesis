@@ -223,7 +223,7 @@ I(Z_V) = \lambda_1 (1 + o(\epsilon))
   \caption{聚类树示例}\label{fig:mmi_example}
   \end{figure}
 自顶向下
-获得聚类树的示意图由图\ref{fig:top_down} 给出。
+获得聚类树的示意图由图\ref{fig:top_down}给出。
 下面我们用一个简单的例子来说明聚类树的结构。
   \begin{example}\label{ex:mmi_tree}
 考虑图\ref{fig:threshold_b}所示的情形，
@@ -336,9 +336,9 @@ $G[C_i](i=1,\dots, t)$
   算法\ref{alg:psp_i_simplified}。
   考虑图 $G(V, E)$，有 $V=\{1,2,3,4\}, E=\{(1,2),(1,3),(2,3),(1,4),(2,4)\}$。
   边的权值为 $w_{13}=2, w_{12}=5, w_{23}=2, w_{14}=1, w_{24}=1$。
-	图\ref{fig:alg_eg} (a)中画出了 $G$
+	图\ref{fig:alg_eg}(a)中画出了 $G$
   的结构。
-  最初的聚类树结构如图\ref{fig:alg_eg} (b)
+  最初的聚类树结构如图\ref{fig:alg_eg}(b)
   所示。
   根据 
   算法\ref{alg:psp_i_simplified}的
@@ -370,7 +370,7 @@ $G[C_i](i=1,\dots, t)$
 我们使用 $T(n)$ 来代表 
 \texttt{Split} 函数调用的
 时间复杂度。
-从算法\ref{alg:psp_i_simplified} 中可知，
+从算法\ref{alg:psp_i_simplified}中可知，
 $T(n)$ 的递推关系式为
 \begin{equation}\label{eq:Tn}
 T(n) = \max \{ C n^4 + \sum_{i=1}^k T(n_i) +
@@ -396,7 +396,7 @@ $\delta_{k<n} = 1$ 是 指示函数，当满足条件 $k<n$时取值为1，
 即使有个别节点不满足其假设，$T(n) = O(n^4)$也成立。
 因此，定理\ref{thm:alg_complexity}表明，我们在保证有相同计算结果的前提下，
 提出的HPSP 的时间复杂度的结果要比
-PSP算法\ref{alg:psp} 的$O(n^5)$ 的结果快一个数量级。
+PSP算法\ref{alg:psp}的$O(n^5)$ 的结果快一个数量级。
 
 在定理\ref{thm:alg_complexity}的条件不满足时，
 考虑最坏的情况，也即聚类树的深度达到了 $O(n)$ 的数量级，
@@ -808,7 +808,7 @@ $\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作
 \gamma'_N > \gamma_N \iff  \sum_{i \in B} w_{ii'} > \gamma_N 
 \end{equation}
 \end{theorem}
-定理\ref{thm:main_N} 给出了一种划分正常值点边界的方法，
+定理\ref{thm:main_N}给出了一种划分正常值点边界的方法，
 假设图$G$的第$i$个点
 对应一个高维空间的向量$x_i$，新加入的点对应的向量是$x$，
 边的权值由RBF核给出，参数为$\eta$，则检测边界的方程为：

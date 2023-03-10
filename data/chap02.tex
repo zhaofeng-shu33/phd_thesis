@@ -106,7 +106,7 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 下面举一个简单的例子来解释上面的结论。
 \begin{example}\label{ex:psp}
 考虑一个带权的有向图$G(V,E)$，其结构
-如图\ref{fig:example_directed} 所示。
+如图\ref{fig:example_directed}所示。
 试求解该图的主分割序列。
 \end{example}
 \begin{figure}
@@ -125,10 +125,10 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 
 因为
 $G$ 包含的节点只有3个，可以使用枚举法计算对应的 $h(\lambda)$
-函数，其函数图像如图\ref{fig:dt} 所示。其中
+函数，其函数图像如图\ref{fig:dt}所示。其中
 $\P_0=\{ \{1,2,3\} \}, \P_1 = \{\{1,3\}, \{2\} \},
 \P_2 =\{\{1\},\{2\},\{3\} \}$。
-从图\ref{fig:dt} 中可以看到，在这个简单的例子中
+从图\ref{fig:dt}中可以看到，在这个简单的例子中
 $h(\lambda)$
 是一个分段线性函数。一般的图$G$对应的
 $h(\lambda)$ 也是如此。
@@ -153,7 +153,7 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{a
 ，
 我们有 $|\P_0| \leq |\P_1| \dots \leq |\P_k|$，
 即随着 $\lambda $ 的增大，线性函数斜率的绝对值逐渐增大。
-这从图\ref{fig:dt} 中也可以得到印证。
+这从图\ref{fig:dt}中也可以得到印证。
 利用这一特点并基于分治的思想，算法\ref{alg:psp}
 给出了获得主分割序列的步骤。
 
@@ -192,7 +192,7 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{a
 \footnotetext{$\mathcal{Q}$
 中按集合的大小排序}
 
-在算法\ref{alg:psp}第\ref{alg:lambda}、\ref{alg:lambda_plus} 行，
+在算法\ref{alg:psp}第\ref{alg:lambda}、\ref{alg:lambda_plus}行，
 求解 $(\lambda', h')$ 相当于在二维 $(\lambda, h)$
 平面上计算直线
 $h = f[P] - |P| \lambda $
@@ -200,13 +200,13 @@ $h = f[P] - |P| \lambda $
 分界点分别是 $\lambda_P, \lambda_Q$（约定 $\{V\}$ 对应 0，
 $\{\{i\}|i\in V\}$ 对应 $+\infty$），那么根据几何直观
 $\lambda_Q \leq \lambda' \leq \lambda_P$。
-紧接着，\ref{algorithme:gauche} 行的调用对应在
+紧接着，\ref{algorithme:gauche}行的调用对应在
 $[\lambda_Q, \lambda']$
 区间范围内寻找剩余的分界点，而
-\ref{algorithme:droit} 行的调用对应在
+\ref{algorithme:droit}行的调用对应在
 $[\lambda', \lambda_P]$
 区间范围内寻找剩余的分界点。最后，
-\ref{algorithme:terminer} 行表明
+\ref{algorithme:terminer}行表明
 $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 \texttt{Split} 函数。
 
@@ -382,7 +382,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 	\end{enumerate}
 \end{definition}
 
-在定义\ref{def:SSBM} 中，注意到 $p>q$，
+在定义\ref{def:SSBM}中，注意到 $p>q$，
 说明同一社团之间的节点有边相连的概率更大，而
 属于不同社团的节点之间有边相连的概率较小。
 
@@ -522,7 +522,7 @@ P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
   \begin{enumerate}
     \item 令 $P_e(\hat{X}) = 1 - P_a(\hat{X})$
     表示错误概率。
-    定义\ref{def:SSBMR} 也可以写成当$n\to \infty$
+    定义\ref{def:SSBMR}也可以写成当$n\to \infty$
     时，
     $P_e(\hat{X}) \to 0$。
   \item  此外，我们要指出的是，对给定的图 $G$，估计量$\hat{X}$可以是确定性的也
@@ -556,11 +556,11 @@ Abbe \cite{abbe2015exact} 和 Mossel
     $P_e \to 1$，没有算法可实现精确恢复。
 	\end{enumerate}
 \end{theorem}
-定理\ref{thm:sbm2_phase_transition} 揭示了
+定理\ref{thm:sbm2_phase_transition}揭示了
 具有2个社团结构的随机块模型在精确恢复度量下的相变规律。
 该结论很快被Abbe 推广到$k>2$的情形
-\cite{abbe2015community}，由定理
-\ref{thm:sbmk_phase_transition} 给出。
+\cite{abbe2015community}，由
+定理\ref{thm:sbmk_phase_transition}给出。
 该结果可以视为一般的随机块模型
 精确恢复条件的一个特例。
 
@@ -616,8 +616,8 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \end{figure}   
 
 在统计物理学中，伊辛模型指的是
-可以处于两种自旋状态的磁偶极矩的集合\cite{ising1925beitrag}。如图
-\ref{fig:ising_two_configurations} 所示，
+可以处于两种自旋状态的磁偶极矩的集合\cite{ising1925beitrag}。
+如图\ref{fig:ising_two_configurations}所示，
 当外界温度$T$
 大于临界温度 $T_c$ 时，
 各磁偶极矩处于杂乱无章的状态，其总的磁化强度接近0。
@@ -683,7 +683,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 磁化强度$M$的变化。
 
 \begin{example}
-  表\ref{tab:particles_3} 给出了一个含有3个粒子的系统，其共有8种微观态，
+  表\ref{tab:particles_3}给出了一个含有3个粒子的系统，其共有8种微观态，
   但根据式\eqref{eq:hamiltonian}， 其在宏观能量的表现了只有$H=-3$或 $H=1$两种组合。
 \begin{table}
   \centering
@@ -781,7 +781,7 @@ $\frac{\log n}{n}$
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
 将\ref{sec:exact_recovery}小节 介绍的随机块模型与 本小节介绍的 伊辛模型
-复合起来可得到 \gls{sibm}（\gls{acr:sibm}）\cite{ye2020exact}。
+复合起来可得到\gls{sibm}(\gls{acr:sibm})\cite{ye2020exact}。
 该模型首先由 随机块模型生成随机图，
 再由随机图上定义的 伊辛模型多次生成节点的状态。
 SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实状态。
@@ -800,7 +800,7 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
 而我们将在其工作的基础上，将伊辛模型拓展为节点有多个状态的玻茨模型，
 重点研究$m=1$时参数$\beta$的相变现象以及相关的社团发现算法。
 
-\citet{ye2020exact} 在本工作的技术证明中，用到了马尔可夫不等式和切尔诺夫不等式这两个概率论中常用的聚集不等式。
+\citet{ye2020exact} 在其工作的技术证明中，用到了马尔可夫不等式和切尔诺夫不等式这两个概率论中常用的聚集不等式。
 由于我们在后面章节的技术证明中也要用到这两个不等式，故在本小节最后列出它们，方便后面引用。
 
 \newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov Inequality}}
@@ -1172,7 +1172,7 @@ $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
 $\lim_{n\to \infty} \frac{1}{n} \log Q^n(E)=-D(\Bern(p+\epsilon)||\Bern(p))$。
 \end{example}
 Sanov 定理仅针对离散型分布给出了计算诸如$P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$
-的方法，若将例\ref{ex:sanov_ldp} 中诸$X_i$ 改为高斯分布，
+的方法，若将例\ref{ex:sanov_ldp}中诸$X_i$ 改为高斯分布，
 则可以用Sanov 定理的推广形式 Cramér定理来解决。我们下面先介绍该定理：
 
 \begin{theorem}\label{thm:cramer}
