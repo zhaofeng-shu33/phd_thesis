@@ -3,12 +3,12 @@
 \section{本章引言}
 在本章中，我们首先引入我们研究的有辅助信息的随机块模型
 的定义和精确恢复条件。
-虽然该条件前人已经研究过，这里我们在两社团和情形下给出它的等价表述
-形式（引理\ref{lem:I_plus_expression}），该形式将在我们后面证明
-半正定规划算法可实现精确恢复时用到。在精确恢复条件被保证的前提下，
-我们利用雷尼散度这一度量进一步研究了模型的误差衰减率。
-除此之外，我们证明了实现精确恢复等价于求解某半正定规划问题，
-该问题可通过交替方向乘子法(ADMM)进行求解。
+我们在前人研究的基础上，给出两社团的情形下的精确恢复条件。
+在精确恢复条件被保证的前提下，
+我们利用雷尼散度这一度量进一步研究了
+具有不同稀疏程度的模型的误差衰减率。
+除此之外，我们将证明通过求解某半正定规划问题，可实现精确
+恢复的要求，而该等价的优化问题可通过交替方向乘子法(ADMM)进行求解。
 
 本章内容的具体安排如下：
 在\ref{sec:sbmsi_exact_recovery_condition}节，我们给出了
@@ -62,7 +62,7 @@ $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。
  $P(\{x^i_{j}\}_{1\le i\le n,1\le j\le m},\{z_{i,j}\}_{1\le i<j\le n}| y_1,\ldots,y_n)$ 
  的条件分布 依赖于
  $n,m,p, q, P_0$ 和 $P_1$ 这些参数，因此我们把 SBMSI 写成 $\SBMSI(n,m,p,q,P_0,P_1)$ 的形式。
- 给定由 $\SBMSI(n,m,p,q,P_0,P_1)$ 生成的图$Z$和数据$Y$, 我们的目标是恢复 出$X$。
+ 给定由 $\SBMSI(n,m,p,q,P_0,P_1)$ 生成的图$Z$和数据$Y$， 我们的目标是恢复 出$X$。
  
  在有辅助信息的条件下，
  我们仍使用能否精确恢复这一指标来衡量
@@ -133,6 +133,67 @@ $\lceil \log n \rceil $ 的整数倍，而 \citet{abbe17sideinfo} 的定理4
 \end{lemma}
 
 
+%\section{引理\ref{lem:I_plus_expression} 的证明}
+在证明引理
+\ref{lem:I_plus_expression}  之前，
+我们先列举泊松分布的一个重要的性质。
+\begin{lemma}\label{lem:poisson_property}
+假设 $P_0 \sim \Pois(c)$, $P_1 \sim \Pois(d)$.
+且 $P_{\lambda}$ 由 式\eqref{eq:P_lambda_0_1}
+给出。
+
+则我们有
+\begin{enumerate}
+    \item $P_{\lambda} \sim \Pois(c^{1-\lambda} d^{\lambda})$
+    \item $D(P_{\lambda}||P_0) = 
+    \lambda c^{1-\lambda}d^{\lambda}\log(\frac{d}{c}) + c-c^{1-\lambda}d^{\lambda}$
+    \item $D(P_{\lambda}||P_1) = (1-\lambda)
+    c^{1-\lambda}d^{\lambda}\log(\frac{c}{d})
+    + d-c^{1-\lambda}d^{\lambda}$
+\end{enumerate}
+\end{lemma}
+上面的第2、3条性质可由两个泊松分布的KL散度
+公式导出。
+\begin{proof}[引理\ref{lem:I_plus_expression} 的证明]
+由 切尔诺夫信息的定义 \eqref{eq:D_star_lambda_star} 式
+可得：
+$$
+I_+ = D(\hat{P}_{\lambda^*} || \Pois(\frac{a}{2}))
++ D(\hat{P}_{1-\lambda^*} || \Pois(\frac{b}{2}))
++ \gamma D(P_{\lambda^*} || P_0)
+$$
+其中 $\hat{P}_{\lambda^*}$由引理\ref{lem:poisson_property}
+第一条性质确定，而我们取$c=\frac{a}{2}, d=\frac{b}{2}$。
+继续应用引理\ref{lem:poisson_property}第2、3条性质可得
+\begin{align*}
+    I_+ &= \left[\lambda^* c^{1-\lambda^*}d^{\lambda^*}
+    \log(\frac{d}{c})+ c-c^{1-\lambda^*}d^{\lambda^*}
+    \right] \\
+&+ \left[\lambda^* c^{\lambda^*}d^{1-\lambda^*}\log(\frac{c}{d})
++ d - c^{\lambda^*}d^{1-\lambda^*}\right]
++ \gamma D(P_{\lambda^*} || P_0)
+\end{align*}
+即\eqref{equation:I+} 式。
+$\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
+进行计算。目标函数为：
+\begin{align*}
+&\log\left(\sum_{k=0}^{+\infty} \left(\frac{c^k\exp(-c)}{k!}
+\right)^{1-\lambda}
+\left(\frac{d^k\exp(-d)}{k!} \right)^{\lambda}
+\right) \\
+& + \log\left(\sum_{k=0}^{+\infty} \left(\frac{c^k\exp(-c)}{k!}
+\right)^{\lambda}
+\left(\frac{d^k\exp(-d)}{k!} \right)^{1-\lambda}
+\right)+
+\gamma\log(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
+)\\
+& = c^{1-\lambda} d^{\lambda} 
++ d^{\lambda} c^{1-\lambda} -c -d +
+\gamma\log(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
+)
+\end{align*}
+极小化上式即等价于\eqref{eq:lambda}式。
+\end{proof}
 
 \begin{remark}
 当 $\gamma=0$ 时，由\eqref{eq:lambda}式 可得 $\lambda^*=\frac{1}{2}$，
@@ -178,7 +239,7 @@ $I_+$ 也可写成雷尼散度的形式。
     为一常数。
     若
     $p = \frac{a \log n }{n} $ 且 $q = 
-    \frac{b \log n } {n}$, 使用最大似然估计量 \eqref{eq:mle}
+    \frac{b \log n } {n}$，使用最大似然估计量 \eqref{eq:mle}
     进行社团发现，
     若
     \begin{equation}\label{eq:positive_condition_new}
@@ -252,7 +313,7 @@ $\gamma D_{1/2}(P_0||P_1) +
     \end{equation}
 \end{theorem}
 	由定理\ref{thm:I_plus_relation}
-    可知，随着  $\gamma$ 的增大, 即每个节点辅助采样数量的增多， $I_+$
+    可知，随着  $\gamma$ 的增大， 即每个节点辅助采样数量的增多， $I_+$
     的下界增大。因此，更多的样本有助于满足精确恢复的条件 $I_+>1$。 
 
 \subsection{稠密的 SSBM}
