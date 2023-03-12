@@ -144,7 +144,7 @@ $N_E$ 的收敛性 %define if appropriate.
 \end{lemma}
 
 \begin{proof}
-	与引理\ref{lem:SBM_tr_counting_cross}的证明类似，
+	与引理 \ref{lem:SBM_tr_counting_cross} 的证明类似，
 	$\E[T] = n^3 q^3$，对于$\E[T^2]$求和式中的项共如下4种情形：
 	\begin{enumerate}
 	\item 若 $\{i,j,k\} = \{i',j',k'\}$， 则 $E[Y_{ijk}Y_{i'j'k'}] = q^3$。
@@ -185,7 +185,7 @@ $$
     \log (n/k) + \log k)}{(n/k)}$，因为 $\log k$ 相比于其前一项量阶更小，
     可以忽略不计。
 	对于 $T_{ij}$， 我们使用 
-  引理\ref{lem:SBM_tr_counting_cross} 的结果。
+  引理 \ref{lem:SBM_tr_counting_cross}  的结果。
 	在 \eqref{eq:SBM_tr_counting_cross} 式中
   我们用 $n/k$ 代替 $n$， 取 $p=a\frac{\log n}{n}$ 且 $q=b\frac{\log n}{n}$。
 	$\Var[T_{ij}] \sim \frac{ab^2}{2k^3} \log^3 n$。
@@ -216,8 +216,8 @@ $$
 	令 $e^*_1 = \frac{a+(k-1)b}{2k}$, $k^2 e^*_2 = \frac{a^3}{6} + \frac{k-1}{2}ab^2 + (k-1)(k-2)\frac{b^3}{6}$
 	且 $e_1 = \frac{T_1}{n\log n}, e_2 = \frac{T_2}{\log^3 n}$。
 	由 引理
- \ref{lem:ER_tr_counting}， $e_1 \to e^*_1$。
-	由 引理\ref{lem:sbmV}， 当 $n\to \infty$ 时，
+  \ref{lem:ER_tr_counting} ， $e_1 \to e^*_1$。
+	由 引理 \ref{lem:sbmV} ， 当 $n\to \infty$ 时，
   $e_2 \to e^*_2$。
 	通过变量替换 $x=2ke_1 - (k-1)y$ 消元，我们可将
   方程组 (\ref{eq:e_1},\ref{eq:e_2})
@@ -247,15 +247,15 @@ $\hat{b} \to b$， $\hat{a} \to a$。
 
 
 
-\subsection{定理\ref{thm:phase_transition}的证明}
+\subsection{定理 \ref{thm:phase_transition} 的证明}
 \label{sec:appendix_theorem_proof_phase_trans}
 
-在开始定理\ref{thm:phase_transition}的技术证明之前，
+在开始定理 \ref{thm:phase_transition} 的技术证明之前，
 我们需要介绍一些辅助的
 符号。
 
 % Some additional notation is needed for the proof.
-注释\ref{re:energy_diff}中指出了
+注释 \ref{re:energy_diff} 中指出了
 $X$改变一个状态后的能量差表达式。
 对于一般的情形，即改变
 $|\cI|:=\Dist(\bar{\sigma}, X)$
@@ -270,7 +270,7 @@ $A_{\bar{\sigma}}$ 或
 $B_{\bar{\sigma}}$ 来表示
 服从参数分别为 $\A$ 或 $\B$ 的二项分布的随机变量，并且
 $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非随机的正整数。
-引理\ref{lem:minus} 给出了 $A_{\bar{\sigma}}, B_{\bar{\sigma}}$ 和 $N_{\bar{\sigma}}$
+引理 \ref{lem:minus}  给出了 $A_{\bar{\sigma}}, B_{\bar{\sigma}}$ 和 $N_{\bar{\sigma}}$
 的表达式:
 
 \begin{lemma}\label{lem:minus}
@@ -422,7 +422,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   从而式\eqref{eq:B_w}、\eqref{eq:A_w} 得证。
 \end{proof}
 
-从上面可以看到引理\ref{lem:minus}的证明并没有很多技巧性，主要涉及一些计数
+从上面可以看到引理 \ref{lem:minus} 的证明并没有很多技巧性，主要涉及一些计数
 的技巧。
 当 $|\cI|$ 相比与 $n$ 很小时
 我们有如下的引理， 该引理是 \citet{ye2020exact} 中 陈述 6 的拓展。 
@@ -446,14 +446,14 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   \eqref{eq:g_tilde_beta_main_article} 式。
 \end{lemma}
 
-在引理\ref{lem:enhanced_fb} 中，
+在引理 \ref{lem:enhanced_fb}  中，
 取
 $|\cI|=1, N_{\bar{\sigma}}=0$，
 此时$A_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \A),
 B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 即得到 式\eqref{eq:introduction_g_a_b_eps}。
 
-\begin{proof}[引理\ref{lem:enhanced_fb}的证明]
+\begin{proof}[引理 \ref{lem:enhanced_fb} 的证明]
   由$f_{\beta}(t)$函数的定义，
   \eqref{eq:upmpt}式中
   $f_{\beta}(t) - \beta t$ 与$\beta$无关而只与
@@ -463,7 +463,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   且
 	$B_{\bar{\sigma}}\sim\Binom(N_{B_{\bar{\sigma}}},\frac{b\log n}{n})$,
   并且二者彼此独立。
-  由 (\ref{eq:N_w}-\ref{eq:A_w})可知，$N_{B_{\bar{\sigma}}} - N_{A_{\bar{\sigma}}}
+  由 ( \ref{eq:N_w} - \ref{eq:A_w} )可知，$N_{B_{\bar{\sigma}}} - N_{A_{\bar{\sigma}}}
   = N_{\bar{\sigma}}$。
   对于$s>0$，
   $B_{\bar{\sigma}}-A_{\bar{\sigma}}$ 的矩生成函数可以展开成
@@ -509,7 +509,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \eqref{eq:upmpt}。  
 	\end{proof}
 
-  对应于定理\ref{thm:phase_transition} 的三种情况，我们需要使用若干个非平凡的引理来辅助证明。
+  对应于定理 \ref{thm:phase_transition}  的三种情况，我们需要使用若干个非平凡的引理来辅助证明。
 
   \begin{lemma}\label{lem:sigmaX}
     令 $\gamma > b$， 且 $\bar{\sigma}$ 满足 $\Dist(\bar{\sigma}, X) \geq \frac{n}{\sqrt{\log n}}$
@@ -538,7 +538,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
       \item $\exists i \neq j$ s.t. $I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$ and $I_{ji} < \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$
     \end{enumerate}
     $I_{ij}$的定义参见引理
-   \ref{lem:minus}。
+    \ref{lem:minus} 。
     如果上面两个条件均不成立，则由条件1，对 $0 \leq i,j\leq k-1$，
     我们有
     $I_{ij} < \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$
@@ -740,7 +740,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   
   对于第一项, 因为
   $|\{ \bar{\sigma} | \Dist(\bar{\sigma}, X) = r \}| \leq (k-1)^r n^r$，
-  由 引理\ref{lem:enhanced_fb} 可得
+  由 引理 \ref{lem:enhanced_fb}  可得
   $P_G(\Lambda_n(G,r)^c) \leq (k-1)^r n^{rg(\bar{\beta})} \leq n^{r (\tilde{g}(\beta) /2 + \epsilon/2)}$。
 
   对于第二项，我们使用马尔可夫不等式:
@@ -762,7 +762,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   因此，
   $(k-1)^r n^{r+r\beta_n (b-a)/k}n^{-r \tilde{g}(\beta) /2} \leq$
    $n^{r (\tilde{g}(\beta) /2 + \epsilon/2)} $。
-  使用 引理\ref{lem:enhanced_fb}， 我们有：
+  使用 引理 \ref{lem:enhanced_fb} ， 我们有：
   \begin{align*}
   P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=tr\log n)\exp(\beta_n rt \log n) \leq 
   n^{r(f_{\beta_n}(t)-1 + O(\frac{1}{\sqrt{\log n}}))}
@@ -787,7 +787,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \end{align*}
   
   当 $r>\frac{n}{\sqrt{\log n}}$时，
-  由引理\ref{lem:sigmaX}，
+  由引理 \ref{lem:sigmaX} ，
   我们选取充分大的常数  $C>1$
   使得 $k^n\exp(-Cn) < e^{-n}$：
   \begin{align*}
@@ -892,8 +892,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   其中 $C$ 是任意事先给定的常数，
   $\tau(\beta, \gamma)$ 是某个依赖于$\gamma$和$\beta$的取值为正值的函数。
 \end{lemma}
-引理\ref{lem:small}和引理\ref{lem:sigmaX} 具有某种对称性，但其证明不同，
-引理\ref{lem:small}的证明如下。
+引理 \ref{lem:small} 和引理 \ref{lem:sigmaX}  具有某种对称性，但其证明不同，
+引理 \ref{lem:small} 的证明如下。
 \begin{proof}
 	令 $n_r = |\{\bar{\sigma}_i = w^r | i\in [n] \}|$。
   因为 $\arg\,\min_{\sigma'\in \Lambda} \Dist(\bar{\sigma}, \sigma') = \mathbf{1}_n$，
@@ -975,11 +975,11 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	\end{align*}
 \end{proof}
 
-\begin{proof}[定理\ref{thm:phase_transition}的证明]
+\begin{proof}[定理 \ref{thm:phase_transition} 的证明]
 	(1) 因为 $P_{\sigma}(\sigma \not \in S_k(X)) = \sum_{f\in S_k} P_{\sigma}(\sigma \neq f(X) | D(\sigma, f(X))) P_{\sigma}(D(\sigma, f(X)))$
   \footnote{$P_{\sigma}$中的下标 $\sigma$ 表示图$G$是随机的}，
 	我们只需证明 $P_{\sigma}(\sigma \neq X | D(\sigma, X)) \leq  n^{\tilde{g}(\beta)/2 + \epsilon}$。
-	由 \mbox{引理\ref{prop:small}}， 我们能 $\cG_n^{(r)}$ for $r=1,\dots, n$.
+	由 \mbox{引理 \ref{prop:small} }， 我们能 $\cG_n^{(r)}$ for $r=1,\dots, n$.
 	令 $\cG'_n = \cap_{r=1}^n \cG_n^{(r)}$ 
   并且在 \eqref{eq:Gr} 式中选取 $\frac{\epsilon}{2}$；
   由 \eqref{eq:Gr} 和 \eqref{eq:Gr1} 式，我们有：
@@ -1032,7 +1032,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   我们有
   $\Dist(f(X), \Lambda) = \frac{(k-1)n}{k} > \frac{n}{\sqrt{\log n}}$，
   其中 $\Lambda$ 在\eqref{eq:Big_Lambda}式中定义。
-	因此，由引理\ref{lem:small}，
+	因此，由引理 \ref{lem:small} ，
   我们可以找到一个图的集合 $\cG'_n$
   使得 $P_G(\cG'_n) \leq \exp(-nC)$
 	并且对 $G\not \in \cG'_n$, $P_{\sigma |G}(\sigma = f(X)) \leq \exp(-Cn)$。
@@ -1045,7 +1045,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	故$P_a(\hat{X}^*) \leq \exp(-Cn)$
   的结论成立。
 \end{proof}
-\subsection{定理\ref{thm:error_rate}的证明}
+\subsection{定理 \ref{thm:error_rate} 的证明}
 在本节我们首先给出获得\eqref{eq:hatX_double_prime}
 和\eqref{eq:PG_energy}式 的推导过程。
 
@@ -1082,7 +1082,7 @@ $H(\bar{\sigma}) $ 等价于极小化
 \end{align*}
 从而得到\eqref{eq:PG_energy}式。
 
-定理\ref{thm:error_rate}的证明依赖下述引理：
+定理 \ref{thm:error_rate} 的证明依赖下述引理：
 \begin{lemma}\label{lem:mZW}
 	令 $m$ 为一正整数，
 	$Z_1, \dots, Z_m$
@@ -1094,8 +1094,8 @@ $H(\bar{\sigma}) $ 等价于极小化
 	P(\sum_{i=1}^m (Z_i  - W_i) \geq 0) \leq \exp(-\frac{m \log n}{n}(\sqrt{a} - \sqrt{b})^2)
 	\end{equation}
 \end{lemma}
-引理\ref{lem:mZW}的证明与
-引理\ref{lem:enhanced_fb}的证明类似，均为先计算
+引理 \ref{lem:mZW} 的证明与
+引理 \ref{lem:enhanced_fb} 的证明类似，均为先计算
 $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 =\exp(m \log(1-\B + \B e^s) + m \log(1-\A + \A e^{-s}))$。这里
 我们直接用 $\log(1+x)\leq x$的不等式进行放缩，
@@ -1103,9 +1103,9 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 \leq \exp(m(1-\B + \B e^s - \A + \A e^{-s}))$。
 再取$s$使得 $be^s=ae^{-s}$。
-最后再应用切尔诺夫不等式引理\ref{lem:mZW}即可得证。
+最后再应用切尔诺夫不等式引理 \ref{lem:mZW} 即可得证。
 
-\begin{proof}[Proof of Theorem\ref{thm:error_rate}]
+\begin{proof}[Proof of Theorem \ref{thm:error_rate} ]
 
 	令 $P_F^{(r)}$ 表示
   下述事件发生的概率：
@@ -1115,11 +1115,11 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 	
 	由 \eqref{eq:energy_diff} 式，当
   $\sigma$ 与 $X$ 仅在一个坐标上不同时，
-  由 引理\ref{lem:mZW}，
+  由 引理 \ref{lem:mZW} ，
   $H(\sigma) < H(X)$ 发生的概率为
 	$P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$。
   因此，$P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$。
-	我们由 $H(\sigma) < H(X)$ 可推出 $A_{\sigma} < B_{\sigma}$，进而由引理\ref{lem:enhanced_fb}
+	我们由 $H(\sigma) < H(X)$ 可推出 $A_{\sigma} < B_{\sigma}$，进而由引理 \ref{lem:enhanced_fb} 
   可得，
   对于 $ r \leq \frac{n}{\sqrt{\log n}}$
   我们有
@@ -1138,7 +1138,7 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 	
 当 $\sigma \in W^*$, 由\eqref{eq:number_of_sigma_r_equal_omega_i}式
  我们有 $I'_i = I_i$。
-由 引理\ref{lem:minus}可得
+由 引理 \ref{lem:minus} 可得
 $N_{B_{\sigma}} = 
 N_{A_{\sigma}}$
 且 $N_{\sigma} = 0$。
@@ -1149,19 +1149,19 @@ $B_{\sigma} > A_{\sigma}$。
 因此，
 当 $ \Dist(\sigma, X) \geq \frac{n}{\sqrt{\log n} }$ 且 $D(\sigma, X)$
 时，
-在引理\ref{lem:sigmaX}的证明中，
+在引理 \ref{lem:sigmaX} 的证明中，
 条件2不会被满足，否则会推出$N_{\sigma}$
 的一个非零下界，与  $N_{\sigma} = 0$矛盾。
 所以条件1被满足，
 由 \eqref{eq:Asigma}式，
 我们有 $A_{\sigma} \geq \frac{n^2}{k^2(k-1)\sqrt{\log n} } (1+o(1))$。
 当 $m \geq \frac{n}{ \sqrt{\log n}}$ ，
-在 引理\ref{lem:mZW} 中 取
+在 引理 \ref{lem:mZW}  中 取
 $m=N_{A_{\sigma}}$;
 误差项的上界为 $\sum_{r\geq \frac{n}{ \sqrt{\log n}}} P_F^{(r)} \leq \sum_{r\geq \frac{n}{ \sqrt{\log n}}} (k-1)^r \exp(-\frac{(\sqrt{a} - \sqrt{b})^2}{k^2(k-1)} n \sqrt{\log n}))
 \leq \exp(-n)$，这是指数衰减的项。
 对于 $m < \frac{n}{ \sqrt{\log n}}$，
-我们可以直接使用引理\ref{lem:enhanced_fb}  
+我们可以直接使用引理 \ref{lem:enhanced_fb}   
 来估计 $\sum_{r=2}^{\frac{n}{ \sqrt{\log n}}} P_F^{(r)}$
 的上界。
 因为 $\sigma \in W^*$，这里的求和项是从 $r=2$ 开始。

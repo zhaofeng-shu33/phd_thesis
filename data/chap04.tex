@@ -5,7 +5,7 @@
 本章将利用速率函数这一信息论的度量研究
 具有多个社团结构的随机块模型。具体来说，
 我们的研究对象是
-定义\ref{def:SSBM}中的 $\SSBM(n,k,\A, \B)$。
+定义 \ref{def:SSBM} 中的 $\SSBM(n,k,\A, \B)$。
 我们在之前的讨论中指出，当$\sqrt{a}-\sqrt{b}>\sqrt{k}$，即式 \eqref{eq:abk} 成立
 时，存在实现精确恢复的算法，但实际问题中我们得到的是
 随机块模型的实例，并没有$a,b$参数的信息，因此
@@ -132,7 +132,7 @@ $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
 而表示汉密尔顿能量的式\eqref{eq:energy}
 则是式\eqref{eq:ising_modified}的推广。
 当  $k=2$ 时，式 \eqref{eq:energy}
-在注释\ref{rem:equivalence_H_energy}的意义下
+在注释 \ref{rem:equivalence_H_energy} 的意义下
 退化成 式 \eqref{eq:ising_modified}。 
 
 这里的能量函数$H(\bar{\sigma})$ 同样有两部分组成:
@@ -334,7 +334,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 \end{proof}
 \begin{remark}\label{re:energy_diff}
 	当 $\bar{\sigma}'$ 与 $X$ 仅在位置 $r$
-	上不同时， 在引理\ref{lem:lemmaDiff}中
+	上不同时， 在引理 \ref{lem:lemmaDiff} 中
 	取$\bar{\sigma}=X$，
 	结合条件  $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$，
 	有 $m(\omega^s \cdot \bar{\sigma}_r)
@@ -358,7 +358,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 \frac{P_{\sigma |G } (\sigma = \bar{\sigma}')}{P_{\sigma |G } (\sigma = \bar{\sigma})}
 = \exp(-\beta(H(\bar{\sigma}') - H(\bar{\sigma})))
 \end{equation}
-因此引理\ref{lem:lemmaDiff}提供了用以比较两个相邻状态的概率
+因此引理 \ref{lem:lemmaDiff} 提供了用以比较两个相邻状态的概率
 的方法。当 $n$充分大时，我们注意到式
 \eqref{eq:Pratio} 右端化为$\exp(-\beta (A_r^0 - A_r^s))$。
 而如果我们对其取期望，则可以得到
@@ -629,7 +629,7 @@ $k^n$的速率指数增大。
 形如 式\eqref{eq:isingma} 中描述的玻茨模型。
 
 针对我们研究的模型和能量表达式 \eqref{eq:energy}，
-我们对算法\ref{alg:Metropolis}进行
+我们对算法 \ref{alg:Metropolis} 进行
 改写，得到
 算法 \ref{alg:m} 。
 算法 \ref{alg:m} 要求
@@ -648,7 +648,7 @@ $k^n$的速率指数增大。
 	\begin{algorithmic}[1]
 		\STATE 随机初始化 $\bar{\sigma} \in W^n$ %\vskip 0.5em
 		\FOR{$i=1,2,\dots, N$}
-		\STATE 根据引理\ref{lem:lemmaDiff}，
+		\STATE 根据引理 \ref{lem:lemmaDiff} ，
 		随机选取 $s, r$ 并得到新的状态
 		 $\bar{\sigma}'$
 		 %\vskip 0.5em
@@ -663,7 +663,7 @@ $k^n$的速率指数增大。
 		\ENDFOR
 	\end{algorithmic}
 \end{algorithm}
- 由 引理\ref{lem:lemmaDiff}， $\Delta H(r,s)$ 的计算需要 $O(\log n)$ 的时间。
+ 由 引理 \ref{lem:lemmaDiff} ， $\Delta H(r,s)$ 的计算需要 $O(\log n)$ 的时间。
 有研究针对某种特殊的伊辛模型指出
 在$N=O(n\log n)$的条件下 即可得到近似的比较好的样本\cite{mcmc}。
 对于我们的模型，由于我们并不清楚 $ N = O(n\log n)$ 是否足够，

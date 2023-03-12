@@ -25,7 +25,7 @@
 SSBM 模型的推广。为方便讨论又不失一般性，
 这里我们在2个社团的随机块模型的
 基础上引入辅助信息。
-由定义\ref{def:SSBM}，当$k=2$时，
+由定义 \ref{def:SSBM} ，当$k=2$时，
 节点标签$X$满足$X_i \in \{\pm 1\}$
 且 $\sum_{i=1}^n X_i = 0$。
 除了图中边的集合
@@ -71,7 +71,7 @@ $\{Y^{i}_j\}_{1\leq j \leq m}$。
  在有辅助信息$Y$的条件下，
  我们仍使用能否精确恢复这一指标来衡量
  社团发现算法的准确性。
- 与定义\ref{def:SSBMR}类似，
+ 与定义 \ref{def:SSBMR} 类似，
  若存在以$Z,Y$为输入变量的算法 $\hat{X}=\hat{X}(Z,Y)$
  使得当$n$增大时，
  错误概率
@@ -105,7 +105,7 @@ SBMSI 模型精确恢复的条件：
     则错误概率 $P_e$ 趋近于 $1$，精确恢复不可实现。
 \end{theorem}
 
-定理\ref{thm:Pe}类似于文献 \inlinecite{abbe17sideinfo} 中定理4的结论，
+定理 \ref{thm:Pe} 类似于文献 \inlinecite{abbe17sideinfo} 中定理4的结论，
 但这里我们允许采样数量 $m$ 为
 $\lceil \log n \rceil $ 的整数倍，同时
 限制了类别数为2的条件，而 文献 \inlinecite{abbe17sideinfo} 的定理4
@@ -113,7 +113,7 @@ $\lceil \log n \rceil $ 的整数倍，同时
 
 对于一般的情形，SBMSI 模型精确恢复的 临界值 $I_+$ 并没有
 显示表达式，但我们可以从切尔诺夫信息的定义出发得到 $I_+$ 的简化表达式，
-该表达式由下述引理\ref{lem:I_plus_expression}给出，
+该表达式由下述引理 \ref{lem:I_plus_expression} 给出，
 其更容易计算，且在后面定理 \ref{thm:sdp} 的证明中也会用到。
 
 \begin{lemma}\label{lem:I_plus_expression}
@@ -140,9 +140,9 @@ $\lceil \log n \rceil $ 的整数倍，同时
 \end{lemma}
 
 
-%\section{引理\ref{lem:I_plus_expression}的证明}
+%\section{引理 \ref{lem:I_plus_expression} 的证明}
 在证明引理
-\ref{lem:I_plus_expression}  之前，
+ \ref{lem:I_plus_expression}   之前，
 我们先列举泊松分布的一个重要的性质。
 \begin{lemma}\label{lem:poisson_property}
 假设 $P_0 \sim \Pois(c)$, $P_1 \sim \Pois(d)$.
@@ -161,7 +161,7 @@ $\lceil \log n \rceil $ 的整数倍，同时
 \end{lemma}
 上面的第2、3条性质可由两个泊松分布的KL散度
 公式导出。
-\begin{proof}[引理\ref{lem:I_plus_expression}的证明]
+\begin{proof}[引理 \ref{lem:I_plus_expression} 的证明]
 由 切尔诺夫信息的定义式 \eqref{eq:D_star_lambda_star} 
 可得：
 $$
@@ -207,8 +207,8 @@ $\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another}
 当 $\gamma=0$ 时，由式\eqref{eq:lambda} 可得 $\lambda^*=\frac{1}{2}$，
 则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。由 式 \eqref{eq:renyi_d12_ab}，
 $I_+$ 也可写成雷尼散度的形式。
-进一步地，由定理\ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
-时可精确恢复。定理\ref{thm:Pe}退化到
+进一步地，由定理 \ref{thm:Pe} ，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
+时可精确恢复。定理 \ref{thm:Pe} 退化到
 定理\ref{thm:sbm2_phase_transition}。
 \end{remark}
 
@@ -228,7 +228,7 @@ $I_+$ 也可写成雷尼散度的形式。
 类似式\eqref{eq:hatX_double_prime}，
 由式\eqref{eq:mle}给出的估计量 $\hat{X}$，
 是在有约束的参数空间内的最大似然估计量。
-如果我们修改定义\ref{def:SSBM}中真实标签$X$的生成方式，
+如果我们修改定义 \ref{def:SSBM} 中真实标签$X$的生成方式，
 使得$X_1, \dots, X_n$ i.i.d. $\sim \Bern(\frac{1}{2})$，
 则应该使用不带约束的 ML 估计量进行社团发现。
 
@@ -270,7 +270,7 @@ $I_+$ 也可写成雷尼散度的形式。
     \end{equation}
 \end{theorem}
 
-由定理\ref{thm:Pe_new}可看出，
+由定理 \ref{thm:Pe_new} 可看出，
 误差界的幂次有两项组成，
 一项 $\gamma D_{1/2}(P_0||P_1) $ 
 和辅助信息有关，表示成$P_0$和$P_1$的雷尼散度（在式\eqref{eq:renyi_divergence}
@@ -279,7 +279,7 @@ $I_+$ 也可写成雷尼散度的形式。
 和 SSBM 的精确恢复条件有关，根据
 式\eqref{eq:renyi_d12_ab}，也可表示成雷尼散度的形式。
 
-定理\ref{thm:Pe_new}告诉我们
+定理 \ref{thm:Pe_new} 告诉我们
 辅助信息  $Y$  增大了 误差 $P_e$ 的衰减速率，
 增大的程度可用雷尼散度表示的信息量
 $\gamma D_{1/2}(P_0||P_1)$ 
@@ -293,7 +293,7 @@ $$
 = \gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2
 $$
 此外，当 $P_0=P_1$ 时，
-定理\ref{thm:Pe_new}给出了用带约束的最大似然算法
+定理 \ref{thm:Pe_new} 给出了用带约束的最大似然算法
 对SSBM 做社团发现
 的误差衰减速率，总结为如下推论：
 \begin{corollary}\label{cor:sbm}
@@ -325,7 +325,7 @@ $\gamma D_{1/2}(P_0||P_1) +
         \frac{\gamma}{2} D_{1/2}(P_0||P_1)
     \end{equation}
 \end{theorem}
-	由定理\ref{thm:I_plus_relation}
+	由定理 \ref{thm:I_plus_relation} 
     可知，随着  $\gamma$ 的增大， 即每个节点辅助采样数量的增多， $I_+$
     的下界增大。因此，更多的样本有助于满足精确恢复的条件 $I_+>1$。 
 

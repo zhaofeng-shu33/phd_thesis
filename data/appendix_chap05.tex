@@ -1,9 +1,9 @@
 \section{定理证明}
-\subsection{定理\ref{thm:Pe}的证明}
-当 $I_+ > 1$ 时精确恢复的可实现性可由 定理\ref{thm:sdp} 给出的关于 SDP算法可实现精确恢复的论断证明。
+\subsection{定理 \ref{thm:Pe} 的证明}
+当 $I_+ > 1$ 时精确恢复的可实现性可由 定理 \ref{thm:sdp}  给出的关于 SDP算法可实现精确恢复的论断证明。
 此处我们证明当 $I_+ < 1$ 时  %Most parts of the arguments follow a similar manner to those in \cite{abbe2015exact}.
 精确恢复的不可实现性。
-同\ref{sec:thm_sdp_proof}节，$S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
+同 \ref{sec:thm_sdp_proof} 节，$S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
 对于 节点 $i$ 和节点集 $S\subset [n]$，
 令 $E(i,S)$ 表示图$G$中连接$i$和$S$中的节点的边的数量。
 采用和 \cite{abbe2015exact} 中第五节关于下界的讨论 类似的方法
@@ -50,9 +50,9 @@ $P(Y,Z|(X_1,\ldots,X_n),X_{i_1}=1,X_{i_2}=-1)$
 这导致了最大似然算法无法实现精确恢复。
 因此，我们得出结论，当 $I_+<1$时，随着 $n$的增大，精确恢复失败的概率接近1。
 
-\subsection{定理\ref{thm:Pe_new}的证明}
+\subsection{定理 \ref{thm:Pe_new} 的证明}
 
-在开始定理\ref{thm:Pe_new} 的正式证明之前，
+在开始定理 \ref{thm:Pe_new}  的正式证明之前，
 我们先推导
 最大似然算法无法精确恢复社团结构这一事件
 对应的不等式。
@@ -151,7 +151,7 @@ $x^*$，则
         P(A_1) \geq \exp(-(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a}-\sqrt{b})^2 + o(1))\log n )
         \end{equation}
         \end{lemma}
-        \begin{proof}[引理\ref{lem:single_lower}的证明] 
+        \begin{proof}[引理 \ref{lem:single_lower} 的证明] 
 当 $k=1$ 时，
 不等式 \eqref{eq:ein} 可写成
 $\sum_{i=1}^{n-2} (z'_i - z_i)
@@ -224,7 +224,7 @@ $P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)$ 下界为
     \eqref{eq:32}。
 \end{proof}
     
-\begin{proof}[定理\ref{thm:Pe_new}的证明]
+\begin{proof}[定理 \ref{thm:Pe_new} 的证明]
 
 以下我们使用切尔诺夫不等式来给出 $P(A_k)$
 的上界，即我们证明：
@@ -260,7 +260,7 @@ P_0^{1-s}(y)P_1^{s}(y)\right)^{km}
 $P(A_k) \leq  n^{-k(\theta^*_k+o(1))}$.
 
 当 $k \geq \frac{n}{\sqrt{\log n}}$ 时，
-由引理\ref{lem:sigmaX},
+由引理 \ref{lem:sigmaX} ,
 $P(F_k)$ 指数衰减。
 对于 $2\leq k < \frac{n}{\sqrt{\log n}}$
 的情形，
@@ -339,7 +339,7 @@ $\sum_{(i,j) \neq (r,s)} P(A_{ij} \cap A_{rs})$
 我们首先 处理 $P(A_{ij})$ 的情况。
 注意到 单个事件 $A_{ij}$
 等价于 $A_1$。
-由 引理\ref{lem:single_lower},
+由 引理 \ref{lem:single_lower} ,
 $P(A_{ij})$ 的下界是
 $n^{-\gamma D_{1/2}(P_0 || P_1)-(\sqrt{a} - \sqrt{b})^2 +o(1)}$。
 因为
@@ -422,7 +422,7 @@ P_e=P(F) & \geq P(\cup_{(i,j)\in S} A_{ij}) \\
 \end{align*}
 \end{proof}
 
-\subsection{定理\ref{thm:I_plus_relation}的证明}
+\subsection{定理 \ref{thm:I_plus_relation} 的证明}
 	\begin{lemma}\label{lem:p0p12}
         设 $P_{\widetilde{Y}}$ 是定义在字母集
         $\mathcal{Y}$ 上的分布函数。
@@ -491,7 +491,7 @@ $\lambda$ 的方程：
 代入$I_1$ 的表达式中化简后我们可得
 $I_1 = I_+$。
 \end{proof}
-\begin{proof}[定理\ref{thm:I_plus_relation}的证明]
+\begin{proof}[定理 \ref{thm:I_plus_relation} 的证明]
     由引理\ref{lem:p0p12}，
     我们只需证明 $I_1 \geq \frac{1}{2}[\gamma D_{1/2}(P_0||P_1)
     + (\sqrt{a} - \sqrt{b})^2]$。
@@ -513,9 +513,9 @@ $I_1 = I_+$。
         式\eqref{eq:I_1_ab_equal_renyi} 成立。
 \end{proof}
 
-\subsection{定理\ref{thm:constant}的证明}
+\subsection{定理 \ref{thm:constant} 的证明}
 
-\begin{proof}[定理\ref{thm:constant}的证明]
+\begin{proof}[定理 \ref{thm:constant} 的证明]
 $A_k$采用式\eqref{eq:ein}中给出的定义。
 当 $p,q$ 是常数时，
 由式 \eqref{eq:mnk}，
@@ -565,11 +565,11 @@ P_e \leq \frac{n}{4}\exp(-nf(1)) = \exp(-n (C_1+C_2+o(1)))
 另一方面， $P_e \geq P(A_1) = \exp(-n(C_1+C_2+o(1)))$。
 最后，我们有
 $-\frac{1}{n} \lim_{n \to \infty} \log P_e = C_1+C_2$，
-定理\ref{thm:constant} 证毕。
+定理 \ref{thm:constant}  证毕。
 \end{proof}
-\subsection{定理\ref{thm:sdp}的证明}
+\subsection{定理 \ref{thm:sdp} 的证明}
 \label{sec:thm_sdp_proof}
-在证明定理\ref{thm:sdp} 之前，我们先给出优化问题式\eqref{eq:matrix_mle}中目标函数表达式的推导过程。
+在证明定理 \ref{thm:sdp}  之前，我们先给出优化问题式\eqref{eq:matrix_mle}中目标函数表达式的推导过程。
 
 由 式\eqref{eq:lh} 可得似然函数为
 $$
@@ -622,7 +622,7 @@ $$
     其中 $g(a,b,\epsilon)$ 在 式\eqref{equation:g} 中定义.
 \end{lemma}
 \begin{proof}
-    沿用引理\ref{lem:enhanced_fb}的证明，
+    沿用引理 \ref{lem:enhanced_fb} 的证明，
 在 式\eqref{eq:exp_s_B_A_sigma}
 中取  $N_{A_{\bar{\sigma}}}
 =N_{B_{\bar{\sigma}}}=m$，利用
@@ -798,9 +798,9 @@ $h_i$ 可以写成 $h_i=m \frac{D(P_{\widetilde{Y}_i} || P_1) - D(P_{\widetilde{
 的形式，
 其中 $P_{\widetilde{Y}_i}$ 是
 样本 $\{Y^i_j\}^m_{j=1}$ 在节点 $i$ 处的经验分布。
-类似定理\ref{thm:constant}的证明开始时
+类似定理 \ref{thm:constant} 的证明开始时
 使用的方法，
-根据 引理\ref{lem:zxt} 和  Sanov 定理，
+根据 引理 \ref{lem:zxt}  和  Sanov 定理，
 对于使得 $g_i=1$ 的 $i$， 
 式\eqref{eq:nodei} 不成立的概率
 的上界为
@@ -813,6 +813,6 @@ $n^{-I_2 + o(1)}$。
 由引理\ref{lem:p0p12}，$I_1=I_2=I_+>1$，
 以及布尔不等式，  存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
 由条件 $I_+>1$，$n^{-I_+ + 1 + o(1)}$ 随$n$的增大 衰减到 $0$。
- 因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得 定理\ref{thm:sdp}。 
+ 因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得 定理 \ref{thm:sdp} 。 
 
 

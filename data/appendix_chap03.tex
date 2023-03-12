@@ -2,9 +2,9 @@
 \section{定理证明}
 
 %附录是与论文内容密切相关、但编入正文又影响整篇论文编排的条理和逻辑性的资料，例如某些重要的数据表格、计算程序、统计表等，是论文主体的补充内容，可根据需要设置。
-\subsection{定理\ref{thm:weak_independence_equivalent}的证明}
-\begin{proof}[定理\ref{thm:weak_independence_equivalent}的证明]
-  由$\epsilon$邻域的定义\ref{def:eps_neighborhood}，
+\subsection{定理 \ref{thm:weak_independence_equivalent} 的证明}
+\begin{proof}[定理 \ref{thm:weak_independence_equivalent} 的证明]
+  由$\epsilon$邻域的定义 \ref{def:eps_neighborhood} ，
   $P_{Y|X=x}(y) = P_Y(y) + \sqrt{P_Y(y)}\phi_{Y|X=x}(y)
   \epsilon$。令$\phi_{XY}(x,y)=\sqrt{P_X(x)}\phi_{Y|X=x}(y)$，
   则有
@@ -35,14 +35,14 @@
   故结论得证。
   \end{proof}
 
-\subsection{定理\ref{thm:DPX}的证明}
+\subsection{定理 \ref{thm:DPX} 的证明}
 
 \begin{lemma}\label{lem:xyz}
 	若 $(X,Y)$ 与 $Z$ $\epsilon$-弱独立，
   则 $X$ 与 $Z$ $\epsilon$-弱独立。
 \end{lemma}
 \begin{proof}
-	由两随机变量$\epsilon$-弱独立的定义\ref{def:weak_indepedent}，
+	由两随机变量$\epsilon$-弱独立的定义 \ref{def:weak_indepedent} ，
   我们有
 	\begin{equation}\label{eq:pxy_eps}
 	P_{X,Y|Z=z}(x,y) = P_{X,Y}(x,y)\left(1+\epsilon \frac{\phi_z(x,y)}{\sqrt{P_{X,Y}(x,y)}}
@@ -60,14 +60,14 @@
 	$，
 	从而推出 $X$  与 $Z$ 弱独立。
 \end{proof}
-\begin{proof}[定理\ref{thm:DPX}的证明]
-  由多个随机变量弱独立的定义式\ref{def:general}，
+\begin{proof}[定理 \ref{thm:DPX} 的证明]
+  由多个随机变量弱独立的定义式 \ref{def:general} ，
   我们可以找到 一个在字母集 $[K]$上的
   离散分布 $U$， 使得 $Z_1, \dots, Z_n$
   关于 $U$ 条件独立。不失一般性，我们假设
   $(Z_1, \dots, Z_n)$ $\epsilon^n$-弱独立。
   则 $(Z_1, \dots, Z_n)$ 和 $U$ $\epsilon$-弱独立，
-  由引理\ref{lem:xyz} 可得 $Z_i$
+  由引理 \ref{lem:xyz}  可得 $Z_i$
   和 $U$ $\epsilon$-弱独立，也即有 
 \begin{equation}\label{XUk}
 P_{Z_i | U=k}(z) = P_{Z_i} (z) \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} \right)
@@ -177,8 +177,8 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 
 
 
-\subsection{定理\ref{thm:alg_complexity}的证明}
-\begin{proof}[定理\ref{thm:alg_complexity}的证明]
+\subsection{定理 \ref{thm:alg_complexity} 的证明}
+\begin{proof}[定理 \ref{thm:alg_complexity} 的证明]
   令
   $\mu_i = \frac{n_i}{n} \leq \frac{1}{2}$。
   下面我们使用数学归纳法证明
@@ -202,7 +202,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
        q\sum_{i=1}^k u_i^4 \leq 10 \left(\frac{1}{2}\right)^4 
 	\end{equation}
 	我们有 \eqref{eq:innerI} $\Rightarrow$ \eqref{eq:outerI}。
-  由定理\ref{thm:alg_complexity}中的条件，
+  由定理 \ref{thm:alg_complexity} 中的条件，
   我们不妨假设
   $u_1\leq u_2 \leq \dots \leq u_k \leq \frac{1}{2}$
   且 $\sum_{i=1}^k u_i = 1$。
@@ -236,7 +236,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 	\end{align}
 \end{proof}
 
-\subsection{定理\ref{thm:triangle}的证明}
+\subsection{定理 \ref{thm:triangle} 的证明}
 首先我们证明如下引理：
 \begin{lemma}\label{thm:trival}
   分割 $\P_k = \{\{1\},\{2\},\dots,\{\abs{V}\}\}$ 
@@ -248,7 +248,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
   \end{lemma}
   \begin{proof}
   由文献\inlinecite{narayanan}中的定理3可知，
-  $h(\lambda)$ 是分段线性函数，
+  定义在式\eqref{eq:hlambda}中的$h(\lambda)$ 是分段线性函数，
   $h(\lambda)$ 的第一段
   是 $ - \lambda $ 且 
   最后一段是 $ f[\P_k] - \abs{V} \lambda$。
@@ -268,14 +268,14 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
   该分界点与$h(\lambda)$最后一个分界点
   相等 当且仅当 \eqref{eq:GFP} 成立。
   \end{proof}
-  \begin{proof}[定理\ref{thm:triangle}的证明]
+  \begin{proof}[定理 \ref{thm:triangle} 的证明]
     我们将使用归纳法证明对于任意的分割$\P \in \Pi$，
     式\eqref{eq:GF} 成立。
     \begin{equation}\label{eq:GF}
     f[\P] \geq \frac{\abs{\P}-1}{\abs{V}-1} \sum_{(i,j) \in E} w_{ij}
     \end{equation}
     
-    然后由引理\ref{thm:trival}
+    然后由引理 \ref{thm:trival} 
     即可得证。
     
     设 $n=\abs{V}$。
@@ -323,16 +323,16 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
     $f[\P] \geq \frac{k-1}{n-1}\sum_{(i,j) \in E} w_{ij}$。
     因此，结论对 $\abs{\P}=k$ 成立。
     \end{proof}
-\subsection{定理\ref{thm:main_N}的证明}
-    \begin{proof}[定理\ref{thm:main_N}的证明]
-      我们首先做出如下的符号约定：
+\subsection{定理 \ref{thm:main_N} 的证明}
+    \begin{proof}[定理 \ref{thm:main_N} 的证明]
+      设 $V' = B \cup \{i'\}$。我们首先做出如下的符号约定：
       $w(C) = \displaystyle\sum_{(i,j) \in E(C)} w_{ij},$
       $w(A, C) = \displaystyle\sum_{\substack{i \in A, j \in C \\ (i,j) \in E(V')}} (w_{ij}+w_{ji})$ 且
       $\P_C = \{\{i \}| i \in C \}$。
       假设 $\gamma_N = I(Z_B)$，
       由式 \eqref{eq:largest_threshold} 可得
       $\gamma_N =\frac{f[\P_B]} {\abs{B} -1}$。
-      因为 $V' = B \cup \{i'\}$，我们有
+      此外，我们有
       $f[\P_{V'}] = f[\P_B] + \sum_{i \in B}w_{ii'}$。
       
       若 $ \sum_{i \in B} w_{ij} > \gamma_N$， 我们可得
@@ -342,7 +342,8 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
       $$
       
       另一方面， 假设 
-      $\gamma'_N = I(Z_K) > \gamma_N$。 则 $K$ 必包含 $i'$。
+      $\gamma'_N = I(Z_K) > \gamma_N$，
+      则 $K$ 必包含 $i'$。
       若 $K=V'$， 则结论成立。
       否则， 假设 $K = \{i'\} \cup B', B=B'\cup J, J\neq \emptyset$，
       则我们有
