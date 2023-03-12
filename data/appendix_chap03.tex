@@ -16,7 +16,7 @@
   的矩阵，其秩为 $r$。$\phi_{XY}$可以通过奇异值分解的形式写成
   $\frac{1}{r}\sum_{i=1}^r \phi_i \psi^T_i$，其中$\phi, \psi$
   是长度分别为$|\mathcal{X}|, |\mathcal{Y}|$的
-  列向量。构造 $U$ 是$\{1, 2, \dots, 2r\}$ 上的均匀分布。
+  列向量。构造 $U$ 是$[2r]$ 上的均匀分布。
   而$Z_1, Z_2$ 做如下构造：
   \begin{align*}
     P(Z_1=x|U=i) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_{\lceil i/2 \rceil}(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
@@ -31,7 +31,7 @@
   \psi(y) =P(X=x,Y=y)
   \end{align*}
   故$Z_1, Z_2$与$X,Y$具有相同的分布。
-  不难验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\sqrt{\epsilon}$邻域内，
+  从而不难验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\sqrt{\epsilon}$邻域内，
   故结论得证。
   \end{proof}
 
@@ -42,26 +42,27 @@
   则 $X$ 与 $Z$ $\epsilon$-弱独立。
 \end{lemma}
 \begin{proof}
-	由两随机变量$\epsilon$-弱独立的定义式\ref{def:weak_indepedent}，
+	由两随机变量$\epsilon$-弱独立的定义\ref{def:weak_indepedent}，
   我们有
 	\begin{equation}\label{eq:pxy_eps}
 	P_{X,Y|Z=z}(x,y) = P_{X,Y}(x,y)\left(1+\epsilon \frac{\phi_z(x,y)}{\sqrt{P_{X,Y}(x,y)}}
   \right), z \in \mathcal{Z}
 	\end{equation}
-	对式\ref{eq:pxy_eps} 关于 $y\in \mathcal{Y}$ 求和我们有
+	对式\eqref{eq:pxy_eps} 关于 $y\in \mathcal{Y}$ 求和我们有
 	\begin{equation}
 	P_{X|Z=z}(x) = P_X(x)\left(1+\epsilon\frac{\tilde{\phi}_z(x)}{\sqrt{P_X(x)}} \right),
 	\textrm{ 其中 } \tilde{\phi}_z(x) = \frac{\sum_{y\in \mathcal{Y}} \sqrt{P_{X,Y}(x,y) }\phi_z(x,y)}{\sqrt{P_X(x)}}
 	\end{equation}
-	由 柯西不等式，$||\tilde{\phi}_z(x)||^2 \leq \frac{1}{P_X(x)}
+	由 柯西不等式，
+  $||\tilde{\phi}_z(x)||^2 \leq \frac{1}{P_X(x)}
 	\sum_{y\in \mathcal{Y}}(P_{X,Y}(x,y))
 	\sum_{y\in \mathcal{Y}} \phi_z^2(x,y) \leq 1
-	$
+	$，
 	从而推出 $X$  与 $Z$ 弱独立。
 \end{proof}
 \begin{proof}[定理\ref{thm:DPX}的证明]
   由多个随机变量弱独立的定义式\ref{def:general}，
-  我们可以找到 一个在字母集 $\{1, 2,\dots, K\}$上的
+  我们可以找到 一个在字母集 $[K]$上的
   离散分布 $U$， 使得 $Z_1, \dots, Z_n$
   关于 $U$ 条件独立。不失一般性，我们假设
   $(Z_1, \dots, Z_n)$ $\epsilon^n$-弱独立。
@@ -71,7 +72,7 @@
 \begin{equation}\label{XUk}
 P_{Z_i | U=k}(z) = P_{Z_i} (z) \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} \right)
 \end{equation}
-利用条件独立有
+利用条件分布独立有
 \begin{align}
 P_{Z_i, Z_j | U = k}(z_i, z_j)
 =& P_{Z_i | U=k}(z_i)
@@ -91,7 +92,7 @@ P_{Z_j | U=k}(z_j) \notag \\
 P_{Z_i}(z) &= \sum_{k=1}^{K} P_{Z_i | U=k}(z) P_U(u_k) \\
 & =  \sum_{k=1}^{K}P_U(u_k)P_{Z_i} (z)
 \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} 
-\right) \textrm{ from } \eqref{XUk}\\
+\right) \textrm{ 根据 } \eqref{XUk}\\
 \Rightarrow & \sum_{k=1}^{K} P_U(u_k){\phi^{(k, i)}(z) \over \sqrt{P_{Z_i}(z)}} =0,\forall i, z\in \mathcal{Z}
 \end{align*}
 因此 \eqref{eq:XiXj} 化简为
@@ -136,7 +137,7 @@ $$\phi(z_1,\dots, z_n)=
 \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)
 +o(\epsilon^2)$$
 
-由 信息几何的式\eqref{eq:approx:ig} 可得
+由 信息几何的结论，式\eqref{eq:approx:ig} 可得
 \begin{align*}
 D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) & ={1 \over 2} \sum_{z_1,\dots,z_n}\phi^2(z_1,\dots, z_n) \\
 & = {1\over 2}\sum_{z_1,\dots,z_n} (\prod_{i=1}^n  P_{Z_i} (z_i)) \left(\sum_{i\neq j}{B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)^2 +o(\epsilon^2) 
@@ -145,13 +146,12 @@ D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) & ={1 \over 2} \sum_{z_1,\dots,z_n}
 的定义式 \eqref{eq:Ixy}，
 上式可化为对 $\norm{B_{ij}}^2_F$
 的求和(平方和中的交叉项外面再求和得零)。
-因此，对于分割$\P=\{\{i\},i\in V\}$ 我们得到
+因此，对于分割$\P=\{\{i\}|i\in V\}$ 我们得到
 \begin{equation}
 D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) =   {1 \over 2} \sum_{i\neq j} \norm{B_{ij}}^2_F + o(\epsilon^2)
 \end{equation}
-对于任意的分割 $\P$，
-由式\eqref{eq:sep}可得，对于 $C\in \P$，
-我们有
+对于任意的分割 $\P$，$C\in \P$，
+由式\eqref{eq:sep}可得
 \begin{equation}
 P_{Z_C}(z_C) = \prod_{i\in C} P_{Z_i}(z_i)
 \left(1 + \epsilon^2 \sum_{i\neq j,i,j\in C} \frac{B_{ij}(z_i, z_j)}{\sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}}
@@ -166,12 +166,13 @@ P_{Z_C}(z_C) = \prod_{i\in C} P_{Z_i}(z_i)
 所以 $\prod_{C\in \P}P_{Z_C}$ 在 $P_{Z_1}\dots P_{Z_n}$ 的$\epsilon$ 邻域内，
 且 $$\phi_{\P}(z_1,\dots, z_n)=
 \sqrt{P_{Z_1}(z_1)\dots P_{Z_n}(z_n)}\left(\sum_{C\in\P}\sum_{i\neq j,i,j\in C}\frac{B_{ij}(z_i, z_j)}{\sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)}}\right)+o(\epsilon^2)$$
-由  \eqref{eq:approx:ig} 得:
+最后，由  \eqref{eq:approx:ig} 得:
 \begin{align*}
 D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_n}(\phi(z_1,\dots, z_n)-\phi_{\P}(z_1, \dots, z_n))^2 \\
 & = {1\over 2}\sum_{z_1,\dots,z_n} \prod_{i=1}^n  P_{Z_i} (z_i) \left(\sum_{\substack{(i,j) \not\in C\\ C\in \P}} {B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)^2 +o(\epsilon^2) \\
 & = \frac{1}{2} \sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_F^2 + o(\epsilon^2)
 \end{align*}
+从而得到式\eqref{eq:PXV}。
 \end{proof}
 
 
