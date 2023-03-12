@@ -52,7 +52,7 @@
   因为 $X_{ijk}$ 并不独立，
   不能直接用独立同分布的公式计算 $T$ 的方差。
 	由  \citet{holland1977method} 一文可知：
-	% Mordern version: https://stats.stackexchange.com/questions/338267/distribution-and-variance-of-count-of-triangles-in-random-graph
+	% Modern version: https://stats.stackexchange.com/questions/338267/distribution-and-variance-of-count-of-triangles-in-random-graph
 	\begin{align*}
 	\Var[T]  &= \binom{n}{3} p^3 + 12 \binom{n}{4} p^5 + 30 \binom{n}{5} p^6 + 20 \binom{n}{6} p^6
 	 - \binom{n}{3}^2 p^6  \\ 
@@ -503,7 +503,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	& P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)\le
 	\frac{\mathbb{E}[e^{s(B_{\bar{\sigma}}-A_{\bar{\sigma}})}]}{e^{st |\cI|  \log n}}  \\
 	\le & \exp\Big(\frac{|\cI|\log n}{k} \big(a e^{-s}+b e^s -kst -a-b
-	+ O(\log^{-\delta}(n)) \big)\Big)  .
+	+ O(\log^{-\delta}(n)) \big)\Big) 
 	\end{align*}
 	上式右端对$s\geq 0$取最小值即有
   \eqref{eq:upmpt}。  
