@@ -106,7 +106,7 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 下面举一个简单的例子来解释上面的结论。
 \begin{example}\label{ex:psp}
 考虑一个带权的有向图$G(V,E)$，其结构
-如图\ref{fig:example_directed}所示。
+如图 \ref{fig:example_directed} 所示。
 试求解该图的主分割序列。
 \end{example}
 \begin{figure}
@@ -125,10 +125,10 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 
 因为
 $G$ 包含的节点只有3个，可以使用枚举法计算对应的 $h(\lambda)$
-函数，其函数图像如图\ref{fig:dt}所示。其中
+函数，其函数图像如图 \ref{fig:dt} 所示。其中
 $\P_0=\{ \{1,2,3\} \}, \P_1 = \{\{1,3\}, \{2\} \},
 \P_2 =\{\{1\},\{2\},\{3\} \}$。
-从图\ref{fig:dt}中可以看到，在这个简单的例子中
+从图 \ref{fig:dt} 中可以看到，在这个简单的例子中
 $h(\lambda)$
 是一个分段线性函数。一般的图$G$对应的
 $h(\lambda)$ 也是如此。
@@ -153,8 +153,8 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{a
 ，
 我们有 $|\P_0| \leq |\P_1| \dots \leq |\P_k|$，
 即随着 $\lambda $ 的增大，线性函数斜率的绝对值逐渐增大。
-这从图\ref{fig:dt}中也可以得到印证。
-利用这一特点并基于分治的思想，算法\ref{alg:psp}
+这从图 \ref{fig:dt} 中也可以得到印证。
+利用这一特点并基于分治的思想，算法 \ref{alg:psp} 
 给出了获得主分割序列的步骤。
 
 \renewcommand{\algorithmicrequire}{\textbf{输入：}\unskip}
@@ -192,7 +192,7 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{a
 \footnotetext{$\mathcal{Q}$
 中按集合的大小排序}
 
-在算法\ref{alg:psp}第\ref{alg:lambda}、\ref{alg:lambda_plus}行，
+在算法 \ref{alg:psp} 第 \ref{alg:lambda} 、 \ref{alg:lambda_plus} 行，
 求解 $(\lambda', h')$ 相当于在二维 $(\lambda, h)$
 平面上计算直线
 $h = f[P] - |P| \lambda $
@@ -200,24 +200,24 @@ $h = f[P] - |P| \lambda $
 分界点分别是 $\lambda_P, \lambda_Q$（约定 $\{V\}$ 对应 0，
 $\{\{i\}|i\in V\}$ 对应 $+\infty$），那么根据几何直观
 $\lambda_Q \leq \lambda' \leq \lambda_P$。
-紧接着，\ref{algorithme:gauche}行的调用对应在
+紧接着， \ref{algorithme:gauche} 行的调用对应在
 $[\lambda_Q, \lambda']$
 区间范围内寻找剩余的分界点，而
-\ref{algorithme:droit}行的调用对应在
+ \ref{algorithme:droit} 行的调用对应在
 $[\lambda', \lambda_P]$
 区间范围内寻找剩余的分界点。最后，
-\ref{algorithme:terminer}行表明
+ \ref{algorithme:terminer} 行表明
 $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 \texttt{Split} 函数。
 
 \newglossaryentry{dt}{name=迪尔沃思截断, description={Dilworth Truncation}}
-在算法\ref{alg:psp}第\ref{alg:lambda_f}行，
+在算法 \ref{alg:psp} 第 \ref{alg:lambda_f} 行，
 函数 \texttt{DT}(\glsdesc{dt})被用来求解式\eqref{eq:hlambda} 获得最优值
 $\tilde{h}$ 和最优值对应的分割 $P'$。
 %该函数 \texttt{DT}
 %
 %是用于求解式\eqref{eq:hlambda}的算法，它实际上是一种贪心算法，
-%由算法\ref{alg:dt} 给出。
+%由算法 \ref{alg:dt}  给出。
 % \begin{algorithm}
 %   \caption{迪尔沃思截断算法}\label{alg:dt}
 %   \begin{algorithmic}[1]
@@ -238,11 +238,11 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 %   \end{algorithm}
 % \footnotetext{$n$ 是图$G$中节点的个数}
 在该函数
-%\ref{alg:dt}
+% \ref{alg:dt} 
 %涉及到一种新的运算记号$x(A)$，
 %这里 $x$ 表示一个向量而 $A$ 是一个集合
 %$x(A)$ 定义为 $\sum_{i \in A} x_i$。
-%此外，采用\cite{chan2017pin}中的方法，我们可以把\ref{alg:tight} 行中的最优化
+%此外，采用\cite{chan2017pin}中的方法，我们可以把 \ref{alg:tight}  行中的最优化
 中调用了
 %问题转化成
 求解有向图上的最大流问题的算法。
@@ -326,7 +326,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 \section{随机块模型}\label{sec:sbm}
 随机块模型是我们研究社团发现问题主要使用的概率统计模型，我们将在
 本小节对其进行简要介绍。与之相关的，我们将介绍随机块模型的精确恢复问题，从而引出误差率的概念；
-此外，我们将对随机块伊辛模型这一工作进行简要介绍，该工作构成了我们第\ref{chap:sibm}章研究的基础。
+此外，我们将对随机块伊辛模型这一工作进行简要介绍，该工作构成了我们第 \ref{chap:sibm} 章研究的基础。
 最后，我们还介绍了与我们研究有关的两个社团发现算法。
 
 \subsection{随机块模型及其精确恢复问题}\label{sec:exact_recovery}
@@ -560,7 +560,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 具有2个社团结构的随机块模型在精确恢复度量下的相变规律。
 该结论很快被Abbe 推广到$k>2$的情形
 \cite{abbe2015community}，由
-定理\ref{thm:sbmk_phase_transition}给出。
+定理 \ref{thm:sbmk_phase_transition} 给出。
 该结果可以视为一般的随机块模型
 精确恢复条件的一个特例。
 
@@ -576,7 +576,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \end{theorem}
 \newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
 \begin{remark}
-  Abbe 在文章中指出，定理\ref{thm:sbmk_phase_transition}
+  Abbe 在文章中指出，定理 \ref{thm:sbmk_phase_transition} 
   给出的结论和\gls{hellinger}(\glsdesc{hellinger})有关。
   % 对于两个$\R^d$中的向量$u,v$，它们的
   % 海林格距离 
@@ -617,7 +617,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 
 在统计物理学中，伊辛模型指的是
 可以处于两种自旋状态的磁偶极矩的集合\cite{ising1925beitrag}。
-如图\ref{fig:ising_two_configurations}所示，
+如图 \ref{fig:ising_two_configurations} 所示，
 当外界温度$T$
 大于临界温度 $T_c$ 时，
 各磁偶极矩处于杂乱无章的状态，其总的磁化强度接近0。
@@ -641,7 +641,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \end{figure}
 
 下面我们介绍伊辛模型中一些常用的概念，
-如图\ref{fig:square_lattice}所示，
+如图 \ref{fig:square_lattice} 所示，
 在一个正方形网格中的格点上分布着磁偶极矩，一共有$N$个。
 $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
 总的磁化强度为 $M = \frac{1}{N} \sum_{i=1}^N \sigma_i$。
@@ -653,12 +653,12 @@ $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
 \end{enumerate}
 
 \newglossaryentry{phase_trans}{name=相变, description={Phase transition}}
-图\ref{fig:square_lattice_b}中给出了自发磁化的仿真实验结果，其中临界温度用
+图 \ref{fig:square_lattice_b} 中给出了自发磁化的仿真实验结果，其中临界温度用
 红竖线标出。从图中可见在临界温度处磁化强度突然降为零，也即
 磁偶极矩的自旋方向由完全一致变成两种状态各占一半。我们称临界温度处伊辛模型
 的这种变化为相变（\glsdesc{phase_trans}）现象，
-我们在第\ref{chap:sibm}章也将展示社团发现的精确恢复问题
-中也有类似图\ref{fig:square_lattice_b}的相变现象。
+我们在第 \ref{chap:sibm} 章也将展示社团发现的精确恢复问题
+中也有类似图 \ref{fig:square_lattice_b} 的相变现象。
 
 对于自发磁化现象可以通过统计力学中的正则系踪（Canonical ensemble）
 理论进行解释。该理论
@@ -780,7 +780,7 @@ $\frac{\log n}{n}$
 
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
-将\ref{sec:exact_recovery}小节 介绍的随机块模型与 本小节介绍的 伊辛模型
+将 \ref{sec:exact_recovery} 小节 介绍的随机块模型与 本小节介绍的 伊辛模型
 复合起来可得到\gls{sibm}(\gls{acr:sibm})\cite{ye2020exact}。
 该模型首先由 随机块模型生成随机图，
 再由随机图上定义的 伊辛模型多次生成节点的状态。
@@ -973,7 +973,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
 的序号集合，$C$是 $V$的子集，$Z_C=\{Z_i | i \in C\}$
 表示随机变量序号在 $C$ 中的随机变量 $Z_i$ 的集合。
 $P_{Z_C}$表示$Z_C$的联合分布。
-$\P, \Pi'$等符号在\ref{sec:graph_strength}节定义。
+$\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
 则MMI度量的定义为：
 \begin{align}
   I(Z_V) &:= \min_{\P \in \Pi'} I_{\P}(Z_V),
@@ -993,7 +993,7 @@ $\P, \Pi'$等符号在\ref{sec:graph_strength}节定义。
 但对于一般的分布，式\eqref{eq:IZV}
 难于计算。\citet{ska} 又提出了一种特殊的PIN模型
 (pairewise independent network)\cite{chan2017pin}，
-使得多变量互信息可以用\ref{sec:community_detection}节
+使得多变量互信息可以用 \ref{sec:community_detection} 节
 介绍的PSP算法进行计算。
 这里略去PIN模型的数学定义，而是通过下面的例子
 阐发它和图结构的联系。
@@ -1007,12 +1007,12 @@ $\P, \Pi'$等符号在\ref{sec:graph_strength}节定义。
   若 $\P=\{\{1,2\}, \{3\}\}$，则根据
   \eqref{eq:entropy_expression}式，
   $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = H(X_a)
-  +H(X_b)$。我们可以将上面的计算用图\ref{fig:example_directed}
+  +H(X_b)$。我们可以将上面的计算用图 \ref{fig:example_directed} 
   进行对应，即把$Z_i$对应到第$i$的节点，
   $Z_i$与$Z_j$之间的互信息对应到第$i$和第$j$个节点之间
   边的权值，而KL散度即为不同的类别之间边的权值之和。
 \end{example}
-例\ref{ex:mmi}中虽然只有三个节点，
+例 \ref{ex:mmi} 中虽然只有三个节点，
 但对于一般的情形，PIN模型也是和一个有向图有
 着类似的对应关系。因此，在PIN模型下多变量互信息可以用
 PSP算法进行计算。
@@ -1108,7 +1108,7 @@ $\phi(x,y) = \frac{(-1)^{x+y}}{2}$
 不难得到 $D(P_0||P)=\frac{\epsilon^2}{2}
 +o(\epsilon^2)$，从而印证了
 式\eqref{eq:approx:ig}的结论。
-此外，根据定义\ref{def:weak_indepedent}
+此外，根据定义 \ref{def:weak_indepedent} 
 我们可以验证$X$与$Y$是弱独立的。
 这里，$X\times Y$ 服从分布$\frac{1}{4}(1+\epsilon (-1)^{x+y})$。
 由式\eqref{eq:Ixy}可计算出
@@ -1172,7 +1172,7 @@ $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
 $\lim_{n\to \infty} \frac{1}{n} \log Q^n(E)=-D(\Bern(p+\epsilon)||\Bern(p))$。
 \end{example}
 Sanov 定理仅针对离散型分布给出了计算诸如$P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$
-的方法，若将例\ref{ex:sanov_ldp}中诸$X_i$ 改为高斯分布，
+的方法，若将例 \ref{ex:sanov_ldp} 中诸$X_i$ 改为高斯分布，
 则可以用Sanov 定理的推广形式 Cramér定理来解决。我们下面先介绍该定理：
 
 \begin{theorem}\label{thm:cramer}

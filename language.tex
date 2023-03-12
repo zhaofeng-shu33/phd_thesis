@@ -1,5 +1,6 @@
 \documentclass{ctexart}
 \usepackage{graphicx}
+\xeCJKsetup{CJKecglue={}}
 \begin{document}
 我们把HPSP算法应用到自然语言的层次聚类问题。
 一方面我们通过这个小例子展示HPSP在社团发现实际数据上的效果，
@@ -12,7 +13,7 @@
 \cite{bella2021database}。
 我们从Bella提供的数据中选取了世界66种常用语言，选取的标准是原
 数据集中词汇相似率置信程度高且两两间均有相似率的语言。
-在我们选取的66种语言中，其中一种人造语言（世界语），
+在我们选取的~66~种语言中，其中一种人造语言（世界语），
 两种古典语言（梵语、拉丁语），其余均为现代语言。
 在此基础上我们用 HPSP 算法进行聚类，得到了如图~\ref{fig:language_tree}所示的聚类树。
 \begin{figure}[!ht]

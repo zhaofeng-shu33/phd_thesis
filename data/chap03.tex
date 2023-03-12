@@ -2,7 +2,7 @@
 
 \chapter{基于多变量互信息的社团层次化发现算法}\label{chap:info_clustering}
 \section{本章引言}
-在本章中，我们将针对已有的基于图强度的社团发现算法\ref{alg:psp}效率低的问题，通过
+在本章中，我们将针对已有的基于图强度的社团发现算法 \ref{alg:psp} 效率低的问题，通过
 多变量互信息这一度量，引入聚类树的结构，通过结合聚类树的层次特点设计
 新的社团发现算法HPSP。该算法和PSP可以获得相同的层次结构，
 但时间复杂度相比PSP降低一个数量级。
@@ -10,19 +10,19 @@
 聚类树的数据结构以及HPSP算法具体的应用案例。
 
 本章内容的具体安排如下：
-在第\ref{sec:weak_dep_mmi}节，我们介绍了社团发现场景下的多变量互信息理论；
-在第\ref{sec:mmi_community_detection}节，我们基于多变量互信息和已有的
+在第 \ref{sec:weak_dep_mmi} 节，我们介绍了社团发现场景下的多变量互信息理论；
+在第 \ref{sec:mmi_community_detection} 节，我们基于多变量互信息和已有的
 图分割算法，提出了HPSP算法；
-在第\ref{sec:hierarchical_experiment}节，
+在第 \ref{sec:hierarchical_experiment} 节，
 我们展示了HPSP算法在社团层次发现和数据层次聚类上的实验结果；
-在第\ref{sec:outlier}节，我们介绍了HPSP算法在异常值检测领域的应用；
-第\ref{sec:hierarchical_summary}节对全章内容进行总结。
+在第 \ref{sec:outlier} 节，我们介绍了HPSP算法在异常值检测领域的应用；
+第 \ref{sec:hierarchical_summary} 节对全章内容进行总结。
 
 \section{社团发现场景下的多变量互信息理论}\label{sec:weak_dep_mmi}
-在这一节中，我们首先把\ref{sec:local_geometry}节介绍
+在这一节中，我们首先把 \ref{sec:local_geometry} 节介绍
 的关于两个随机变量弱独立的概念推广到多个随机变量之间，
 并在多个随机变量弱独立的条件下，
-对\ref{sec:info_clustering}节介绍的多变量互信息
+对 \ref{sec:info_clustering} 节介绍的多变量互信息
 进行化简。
 \begin{definition}\label{def:general}
   称$Z_1, \dots, Z_n (n\geq 2)$
@@ -68,10 +68,10 @@
       的 $\sqrt{\epsilon}$-邻域内。因此
       $X,Y$是$\epsilon$-弱独立的。
 \end{example}
-例\ref{ex:xy_weak_ext}展示了定义\ref{def:general}和
-定义\ref{def:weak_indepedent}在两变量情形的一个共用的例子。
-事实上，我们可以证明定义\ref{def:general}是
-定义\ref{def:weak_indepedent}的拓展。
+例 \ref{ex:xy_weak_ext} 展示了定义 \ref{def:general} 和
+定义 \ref{def:weak_indepedent} 在两变量情形的一个共用的例子。
+事实上，我们可以证明定义 \ref{def:general} 是
+定义 \ref{def:weak_indepedent} 的拓展。
 \begin{theorem}\label{thm:weak_independence_equivalent}
   如果 对于任何 $x \in \mathcal{X}$，
 $Y$关于$X$的条件概率质量函数
@@ -83,7 +83,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   $X, \dots Y$关于
   $U$的条件分布是独立的。
 \end{theorem}
-  定理\ref{thm:weak_independence_equivalent}的证明提供了一种生成
+  定理 \ref{thm:weak_independence_equivalent} 的证明提供了一种生成
   满足弱独立条件的随机变量的方法。即给定均匀分布
   $U$ 在 $n! \times r$个点上取值，
   取 $Z_i|U$在分布$Z_i$的
@@ -97,7 +97,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   $(Z_1, \dots, Z_n)|U$的分布。
   不难验证通过这种方法构造出来的分布$Z_1, \dots, Z_n$是弱独立的。
 
-与\ref{sec:info_clustering}节介绍的 PIN 模型类似，
+与 \ref{sec:info_clustering} 节介绍的 PIN 模型类似，
 在多个随机变量弱独立的条件下，KL散度的计算可以
 与图结构进行对应。即有如下定理：
 \begin{theorem}\label{thm:DPX}
@@ -134,7 +134,7 @@ $\norm{B_{ij}}_F^2$。
 I(Z_V) = \lambda_1 (1 + o(\epsilon))
 \end{equation}
 从而我们获得了在随机变量弱独立条件下多变量互信息和图强度的等价性。
-在\ref{sec:info_clustering}节我们提到的PIN模型下多变量互信息
+在 \ref{sec:info_clustering} 节我们提到的PIN模型下多变量互信息
 也等价于图强度。所不同的是，
 我们是在对联合分布的特征做了弱独立假设
 的条件下得到这一结论，而PIN模型则直接假设每个边缘分布的特征。
@@ -192,10 +192,10 @@ I(Z_V) = \lambda_1 (1 + o(\epsilon))
   \caption{聚类树示例}\label{fig:mmi_example}
   \end{figure}
 自顶向下
-获得聚类树的示意图由图\ref{fig:top_down}给出。
+获得聚类树的示意图由图 \ref{fig:top_down} 给出。
 下面我们用一个简单的例子来说明聚类树的结构。
   \begin{example}\label{ex:mmi_tree}
-考虑图\ref{fig:threshold_b}所示的情形，
+考虑图 \ref{fig:threshold_b} 所示的情形，
 $V=\{1,2,3,4\}$。互信息在图的边上标出，
 比如 $I(Z_1;Z_2)=1, I(Z_1;Z_4)=0$。
 利用定义\ref{eq:IZV}不难求出
@@ -211,13 +211,13 @@ $I(Z_V)=0.9$。
 \end{cases}
 \end{equation*}
 将各临界值标到聚类树上即得到如图
-\ref{fig:threshold_a}所示的结果。
+ \ref{fig:threshold_a} 所示的结果。
 \end{example}
 \subsection{HPSP算法}
 在我们对PSP算法的改进中，仍将使用
-算法\ref{alg:psp}中提到的
+算法 \ref{alg:psp} 中提到的
 \texttt{DT} 子函数。
-在算法\ref{alg:psp}中，我们观察到
+在算法 \ref{alg:psp} 中，我们观察到
 每次调用 \texttt{DT} 的过程是相互独立的，
 并没有利用到聚类树的 固有性质。
 如果聚类树的嵌套性质被考虑进来的话，
@@ -249,7 +249,7 @@ $G[C_i](i=1,\dots, t)$
 我们对收缩后的图 $G[\P_i]$ 计算 PSP 分割
 可以得到  $P_j(j<i)$ 的结果。
 我们把如上的改进方法称为 HPSP (Hierarchical PSP)，
-其描述在算法\ref{alg:psp_i_simplified}中给出。
+其描述在算法 \ref{alg:psp_i_simplified} 中给出。
 
 \begin{algorithm}[!ht]
 	\caption{改进的求解主分割序列的算法(HPSP算法)}\label{alg:psp_i_simplified}
@@ -302,19 +302,19 @@ $G[C_i](i=1,\dots, t)$
 
 \begin{example}
 	我们用一个简单的例子来说明
-  算法\ref{alg:psp_i_simplified}。
+  算法 \ref{alg:psp_i_simplified} 。
   考虑图 $G(V, E)$，有 $V=\{1,2,3,4\}, E=\{(1,2),(1,3),(2,3),(1,4),(2,4)\}$。
   边的权值为 $w_{13}=2, w_{12}=5, w_{23}=2, w_{14}=1, w_{24}=1$。
-	图\ref{fig:alg_eg}(a)中画出了 $G$
+	图 \ref{fig:alg_eg} (a)中画出了 $G$
   的结构。
-  最初的聚类树结构如图\ref{fig:alg_eg}(b)
+  最初的聚类树结构如图 \ref{fig:alg_eg} (b)
   所示。
   根据 
-  算法\ref{alg:psp_i_simplified}的
-  第\ref{alg:gamma_apostrophe}行，
+  算法 \ref{alg:psp_i_simplified} 的
+  第 \ref{alg:gamma_apostrophe} 行，
   我们计算出 $\gamma' = \frac{11}{4-1}, \tilde{h} = -\frac{16}{3} < -\gamma' $
   且 $\P' = \{\{1,2,3\},\{4\}\}$，
-  于是我们得到如图\ref{fig:alg_eg}(c)所示
+  于是我们得到如图 \ref{fig:alg_eg} (c)所示
   的聚类树结构。
 	
 	然后我们在 子图 $G[\{1,2,3\}]$ 上运用 PSP 算法，
@@ -322,24 +322,24 @@ $G[C_i](i=1,\dots, t)$
   并且 $\P= \{\{1,2\},\{3\}\}$。 
   后面的计算给出了聚类树剩余的边的权值，
   然后我们得到了最终的聚类树结构，如
-  图\ref{fig:alg_eg}(d)所示。
+  图 \ref{fig:alg_eg} (d)所示。
 \end{example}	
 \subsection{时间复杂度分析}
 
-本小节我们分析上小节提出的 HPSP算法 （算法\ref{alg:psp_i_simplified}）的时间复杂度。
+本小节我们分析上小节提出的 HPSP算法 （算法 \ref{alg:psp_i_simplified} ）的时间复杂度。
 首次说明一些惯用语，我们称图是稠密的，
 如果它的边的数量是$n^2$的量级，
 也即 $\abs{V} = n, \abs{E} = O(n^2)$。
 对于稠密的图，由于最大流算法中需要多次遍历
 边，会增大时间开销。一般PSP算法复杂度分析即针对最坏的情形，即稠密的图进行。
-我们已知的结论有 \texttt{DT} 算法（算法\ref{alg:psp}第\ref{alg:lambda_f}行）
+我们已知的结论有 \texttt{DT} 算法（算法 \ref{alg:psp} 第 \ref{alg:lambda_f} 行）
 的时间复杂度是 $O(n^4)$， 而 PSP算法的 
 时间复杂度是 $O(n^5)$ \citep{chan2017pin}。
 
 我们使用 $T(n)$ 来代表 
 \texttt{Split} 函数调用的
 时间复杂度。
-从算法\ref{alg:psp_i_simplified}中可知，
+从算法 \ref{alg:psp_i_simplified} 中可知，
 $T(n)$ 的递推关系式为
 \begin{equation}\label{eq:Tn}
 T(n) = \max \{ C n^4 + \sum_{i=1}^k T(n_i) +
@@ -357,22 +357,22 @@ $\delta_{k<n} = 1$ 是 指示函数，当满足条件 $k<n$时取值为1，
    则 $T(n) = O(n^4)$。
 \end{theorem}
 
-定理\ref{thm:alg_complexity}所要求的条件
+定理 \ref{thm:alg_complexity} 所要求的条件
 限制了聚类树的结构。
 该定理指出，若对于每个非叶节点，其后代数都不超过 $\frac{n}{2}$，则HPSP
 算法的时间复杂度是  $O(n^4)$。
 该条件适用于很多情形下的聚类树，
 即使有个别节点不满足其假设，$T(n) = O(n^4)$也成立。
-因此，定理\ref{thm:alg_complexity}表明，我们在保证有相同计算结果的前提下，
+因此，定理 \ref{thm:alg_complexity} 表明，我们在保证有相同计算结果的前提下，
 提出的HPSP 的时间复杂度的结果要比
-PSP算法\ref{alg:psp}的$O(n^5)$ 的结果快一个数量级。
+PSP算法 \ref{alg:psp} 的$O(n^5)$ 的结果快一个数量级。
 
-在定理\ref{thm:alg_complexity}的条件不满足时，
+在定理 \ref{thm:alg_complexity} 的条件不满足时，
 考虑最坏的情况，也即聚类树的深度达到了 $O(n)$ 的数量级，
 则 \texttt{DT} 不可避免地要调 用 $O(n)$ 次。
 在这种情形下，
 $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$，
-仍比 算法\ref{alg:psp}的结果
+仍比 算法 \ref{alg:psp} 的结果
 快 $5$ 倍。
 \subsection{聚类树的数据结构}
 在层次聚类中一般使用关联矩阵(linkage matrix)构造聚类树
@@ -383,7 +383,7 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
 \cite{chan2020agglomerative}。 
 但由于我们设计的HPSP算法是
 自底向上和自顶向下的混合，不能照搬关联矩阵和并查集的数据结构，而是要结合
-HPSP算法\ref{alg:psp_i_simplified}的特点重新设计。
+HPSP算法 \ref{alg:psp_i_simplified} 的特点重新设计。
 为此，
 我们采用选取代表元素的方法来构造聚类树，比如对于
 聚类树的中间节点$\{1,2\}$选取较小的元素1来代表。
@@ -391,8 +391,8 @@ HPSP算法\ref{alg:psp_i_simplified}的特点重新设计。
 具体而言，我们采用父节点数组$K$来储存树的结构，而和聚类树边权重相关的数据
 用另一数组$W$储存。聚类树的空间复杂度为$2|V|$。
 基于以上数据结构，
-HPSP算法\ref{alg:psp_i_simplified}使用静态数组的实现
-如算法\ref{alg:psp_i_simplified_tree_array}所示。
+HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
+如算法 \ref{alg:psp_i_simplified_tree_array} 所示。
 
 \begin{algorithm}[!ht]
 	\caption{从有向图获取聚类树}\label{alg:psp_i_simplified_tree_array}
@@ -426,11 +426,11 @@ HPSP算法\ref{alg:psp_i_simplified}使用静态数组的实现
 \end{algorithm}
 
 为标记聚类树中每个节点的父节点，
-我们在算法\ref{alg:psp_i_simplified_tree_array}的 \texttt{Split} 函数中增加了
+我们在算法 \ref{alg:psp_i_simplified_tree_array} 的 \texttt{Split} 函数中增加了
 一个参数$s$，$s$是当前所操作的图中所有节点序号最小的，
 对应到聚类树中这些节点的父节点ID。
 
-在第\ref{alg:contract}行的\texttt{contract}函数 是在图$G$中
+在第 \ref{alg:contract} 行的\texttt{contract}函数 是在图$G$中
 将$S$中的各节点缩为一个点$j$，边的权值也做相应的调整。
 为了提升算法运行效率，和图限制$G[S]$类似，我们可以避免构建新图的操作，
 而是直接在原图$G$上进行修改。
@@ -442,7 +442,7 @@ HPSP算法\ref{alg:psp_i_simplified}使用静态数组的实现
 由于我们未存储子节点的信息，因此我们在
 获取分割的实现策略上需要另辟蹊径。
 为此，我们采用自底向上的方法获取全部的分割，
-具体实现见算法\ref{alg:get_psp}。
+具体实现见算法 \ref{alg:get_psp} 。
 
 \begin{algorithm}[!ht]
 	\caption{从聚类树获取主分割序列}\label{alg:get_psp}
@@ -469,20 +469,20 @@ HPSP算法\ref{alg:psp_i_simplified}使用静态数组的实现
 	\end{algorithmic}
 \end{algorithm}
 
-在算法\ref{alg:get_psp}中，我们
+在算法 \ref{alg:get_psp} 中，我们
 使用了额外的数组$C$来表示合并后当前
 剩余的节点，字典$D$储存了如何把剩余的节点展开成聚类簇
 的信息。由于 \texttt{Merge} 函数最坏调用$n$次，
 而计算$\gamma$的时间复杂度是$O(n)$，其它操作不超过$O(n)$，
 因此整个转换算法的时间复杂度是$O(n^2)$，相比
-定理\ref{thm:alg_complexity}中
+定理 \ref{thm:alg_complexity} 中
 给出的HPHP 的$O(n^4)$的时间复杂度，转换本身的时间开销
 可忽略不计。
 
 \subsection{代码实现}
 尽管最大流算法包比较多，但我们尚未发现
 求解层次分割（式\eqref{eq:PSP_structure}）的开源实现。
-因此我们使用 C++ 实现了跨平台的PSP算法\ref{alg:psp}
+因此我们使用 C++ 实现了跨平台的PSP算法 \ref{alg:psp} 
 （内嵌 \texttt{DT} 算法），并且
 我们提供了Python编程语言的接口函数，并在 \url{pypi.org}
 平台上以 pspartition
@@ -498,7 +498,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 跨语言编程的方式，将由 NetworkX \cite{SciPyProceedings_11} 构建的图
 转换成用边表示的图传递到C++中的类构造函数中，
 计算完成后再把C++中的集合转换成Python中的列表
-进行返回。用于求解例\ref{ex:psp}的示例 Python 代码如下。
+进行返回。用于求解例 \ref{ex:psp} 的示例 Python 代码如下。
 \begin{lstlisting}[language=Python]
   from pspartition import PsPartition
   a = [[0,1,1], [0,2,5], [1,2,1]] #graph edge list,(i,j,weight)
@@ -510,7 +510,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 
 \subsection{求解主分割序列算法效率比较}
 在本节中，我们将比较 HPSP 算法和PSP算法
-（算法\ref{alg:psp}）
+（算法 \ref{alg:psp} ）
 以及基于参数最大流改进方法\cite{kolmogorov}
 的运行效率。我们使用两种不同的数据集，图的边具有不同的
 稠密程度。
@@ -532,7 +532,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 
 我们使用CPU时间来衡量算法的时间复杂度。
 通过改变节点的数量，
-我们可以得到如图\ref{fig:esc}所示的实验结果，
+我们可以得到如图 \ref{fig:esc} 所示的实验结果，
 对于高斯斑点数据，在节点数为$400\sim 500$时，
 我们的实现比之前最优的算法要快100倍以上。
 而对于两层的随机块数据，在节点数为1296时，
@@ -635,8 +635,8 @@ $\{z_{\mathrm{in}_1}, z_{\mathrm{in}_2}, z_{\mathrm{out}} \}$，
 我们将HPSP算法与
 格文-纽曼算法\cite{girvan2002community}
 和 BHCD (贝叶斯层次聚类算法\cite{blundell2013bhcd})进行比较，
-比较的结果如图\ref{fig:cdr}所示。
-从图\ref{fig:cdr}中可以看到，在三种不同的参数配置下，
+比较的结果如图 \ref{fig:cdr} 所示。
+从图 \ref{fig:cdr} 中可以看到，在三种不同的参数配置下，
 HPSP算法相比其他方法 可以获得
 与真实聚类树更相似的层次结构。
 
@@ -697,7 +697,7 @@ HPSP算法 实现数据的聚类的任务。
 （一个步骤指添加或删除一条边）
 \citep{day1985optimal}。
 针对不同样本数量的实验
-结果如图\ref{fig:shc}所示。
+结果如图 \ref{fig:shc} 所示。
 从中可以看出，对于经典的系统聚类方法，
 其在不同特征子空间的树的结构相差最大，稳定性较差。
 当$n$较大时，HPSP算法和贝叶斯玫瑰算法稳定性相当。
@@ -722,7 +722,7 @@ HPSP算法 实现数据的聚类的任务。
 数据集中词汇相似率置信程度高且两两间均有相似率的语言。
 在我们选取的66种语言中，其中一种人造语言（世界语），
 两种古典语言（梵语、拉丁语），其余均为现代语言。
-在此基础上我们用 HPSP 算法进行聚类，得到了如图\ref{fig:language_tree}所示的聚类树。
+在此基础上我们用 HPSP 算法进行聚类，得到了如图 \ref{fig:language_tree} 所示的聚类树。
 
 \begin{figure}[!ht]
     \centering
@@ -735,7 +735,7 @@ HPSP算法 实现数据的聚类的任务。
 比如西班牙语、加泰罗尼亚语和加利西亚语同属于西班牙，在聚类树中距离很近。
 其次从语言进化的角度，具有相同祖先的语言在聚类树中位置较近。比如法语、西班牙语、葡萄牙语、意大利语、
 罗马尼亚语同由拉丁语演变而来，
-图\ref{fig:language_tree}中亦反映出来这五种语言距离很近。
+图 \ref{fig:language_tree} 中亦反映出来这五种语言距离很近。
 
 有学者用了普通的聚合聚类的方式对10种常用语言进行聚类 \cite{al2017characterization} 。
 我们在这里指出其结果存在一定的不足，比如荷兰语和德语同属于日尔曼语系，在
@@ -829,13 +829,13 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 第一个数据集是一个高斯斑点，
 其中有一些噪声点均匀分布在一个正方形中。
 第二个数据集是我们将 $(0,0)$ 这个点加入
-到\ref{sec:data_clustering}节所描述的有4个类别的
+到 \ref{sec:data_clustering} 节所描述的有4个类别的
 高斯斑点里。
 最后一个数据集是两个错开的半月形状，
 并且其周围分布着一些
 噪点。
 构造相似图的权值我们采用 RBF 核，其 异常值检测
-效果如图\ref{fig:boundary}所示。
+效果如图 \ref{fig:boundary} 所示。
 从前三幅图可以看出，由式\eqref{eq:boundary_curve_multiple}
 给出的边界曲线近似于正常值点的闭包曲线。
 \begin{figure}[!ht]
@@ -847,7 +847,7 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 \end{figure}
 
 另外我们也
-在图\ref{fig:boundary}(d)画出了椭圆包络\cite{rousseeuw1999fast}(elliptic envelope)方法的决策边界曲线。
+在图 \ref{fig:boundary} (d)画出了椭圆包络\cite{rousseeuw1999fast}(elliptic envelope)方法的决策边界曲线。
 由于后一种方法假设内部数据分布在凸的区域，
 因此决策边界是椭圆形状，
 不能很好地反映真实数据的分布。
@@ -872,7 +872,7 @@ TPR衡量的是正常值点集合中正确检测的百分比，
 通常而言，一种检测方法很难在这两个指标上都获得高分。
 我们设法最大化TNR，同时控制每种方法的TPR$\geq 90\%$。
 每个方法的超参数和相似度度量都经过了调优，
-TNR的最佳结果如表\ref{tab:odm}所示。我们可以看到，
+TNR的最佳结果如表 \ref{tab:odm} 所示。我们可以看到，
 基于HPSP算法的异常值检测（信息检测）在 GaussianBlob、Moon 和
 Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 但在 Glass 和  Ionosphere 两个数据集上性能有待提升。

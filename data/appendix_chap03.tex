@@ -181,41 +181,45 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 \begin{proof}[定理\ref{thm:alg_complexity}的证明]
   令
   $\mu_i = \frac{n_i}{n} \leq \frac{1}{2}$。
-  下面我们使用归纳法证明
+  下面我们使用数学归纳法证明
   $T(n) = O(n^4)$。
   更具体地，我们将证明 
   $T(n) \leq q C n^4$， 其中 $ q = \frac{16}{5}$。
   $T(3)$ 是一个常数，我们取$C$使得 $T(3)= q C\times 3^4$。
   下面假设
 	$T(m) \leq qC m^4$
-  对所有 $m \leq n-1$。
+  对所有 $m \leq n-1$ 成立。
   然后 对于 $T(n)$，
 	我们首先证明下式成立：
 	\begin{equation}\label{eq:outerI}
-	\sum_{i=1}^k T(n_i) \leq 10 T(\frac{n}{2})
+	\sum_{i=1}^k T(n_i) \leq 10 T\left(\frac{n}{2}\right)
 	\end{equation}
 	因为 $\sum_{i=1}^k T(n_i) \leq qC n^4\sum_{i=1}^k u_i^4$ 并且
   从式 \eqref{eq:Tn} 中可得
-  $10 T(\frac{n}{2}) \geq 10Cn^4 (\frac{1}{2})^4$ 
+  $10 T\left(\frac{n}{2}\right) \geq 10Cn^4 
+  \left(\frac{1}{2}\right)^4$。根据
 	\begin{equation}\label{eq:innerI}
-       q\sum_{i=1}^k u_i^4 \leq 10 (\frac{1}{2})^4 
+       q\sum_{i=1}^k u_i^4 \leq 10 \left(\frac{1}{2}\right)^4 
 	\end{equation}
-	所以我们有 \eqref{eq:innerI} $\Rightarrow$ \eqref{eq:outerI}。
-  由定理\ref{thm:alg_complexity} 条件，我们不妨假设
+	我们有 \eqref{eq:innerI} $\Rightarrow$ \eqref{eq:outerI}。
+  由定理\ref{thm:alg_complexity}中的条件，
+  我们不妨假设
   $u_1\leq u_2 \leq \dots \leq u_k \leq \frac{1}{2}$
   且 $\sum_{i=1}^k u_i = 1$。
   因此，我们有
   $u_1 \leq \frac{1}{k}, u_2 \leq \frac{1}{k-1}, \dots, u_{k-1} \leq \frac{1}{2}$。
 	根据
   \begin{equation}\label{eq:outerOne}
-	 q[2(\frac{1}{2})^4 + \sum_{i=3}^k (\frac{1}{i})^4] \leq 10 (\frac{1}{2})^4
+	 q \left[2 \left(\frac{1}{2}\right)^4 + \sum_{i=3}^k \left(\frac{1}{i}\right)^4\right]
+   \leq 10  \left(\frac{1}{2}\right)^4
 	\end{equation}
 	我们有 \eqref{eq:outerOne} $\Rightarrow$ \eqref{eq:innerI}。
   并且代入$q=\frac{16}{5}$，
   \eqref{eq:outerOne} 等价于
-	$\sum_{i=3}^k \left(\frac{1}{i} \right)^4 \leq \frac{9}{8}(\frac{1}{2})^4$
+	$\sum_{i=3}^k \left(\frac{1}{i} \right)^4 \leq \frac{9}{8}\left(\frac{1}{2}\right)^4$。
+  进一步地，
 	\begin{align*}
-		\sum_{i=3}^k (\frac{1}{i})^4 & < \frac{1}{9}\sum_{i=3}^k \left(\frac{1}{i}
+		\sum_{i=3}^k \left(\frac{1}{i} \right)^4 & < \frac{1}{9}\sum_{i=3}^k \left(\frac{1}{i}
     \right)^2 \\
 		& < \frac{1}{9}\sum_{i=3}^k \frac{1}{i(i-1)} \\
 		& < \frac{1}{18}
@@ -224,7 +228,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 	\end{align*}
 	因此，
   式 \eqref{eq:outerI} 成立。然后
-  由 式\eqref{eq:Tn} 和 $T(k) \leq T(\frac{n}{2})$ 可得
+  由 式\eqref{eq:Tn} 和 $T(k) \leq T\left(\frac{n}{2}\right)$ 可得
 	\begin{align}
 		T(n)  & \leq Cn^4 + 11T\left(\frac{n}{2} \right) \\
 		& \leq C n^4 + 11 q C \left(\frac{n}{2}\right)^4
@@ -237,13 +241,13 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 \begin{lemma}\label{thm:trival}
   分割 $\P_k = \{\{1\},\{2\},\dots,\{\abs{V}\}\}$ 
   使得 $\frac{f[\P]}{\abs{\P}-1}$
-  最小 当且仅当 条件\eqref{eq:GFP} 成立。
+  最小 当且仅当 式\eqref{eq:GFP} 成立。
   \begin{equation}\label{eq:GFP}
   \frac{f[\P]}{\abs{\P}-1} \geq \frac{f[\P_k]}{\abs{V}-1} \textrm{ 对于任何 } \P \in \Pi'
   \end{equation}
   \end{lemma}
   \begin{proof}
-  由文献\inlinecite{narayanan}中 的定理3可知，
+  由文献\inlinecite{narayanan}中的定理3可知，
   $h(\lambda)$ 是分段线性函数，
   $h(\lambda)$ 的第一段
   是 $ - \lambda $ 且 
@@ -253,7 +257,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
   其中
   $\lambda_{+} = \frac{f[\P_k]}{\abs{V}-1}$。
   因为 $\frac{f[\P]}{\abs{\P}-1} \geq \lambda_{+} \iff f[\P] - \abs{\P}\lambda_{+} \geq - \lambda_{+}$，
-  方程 \eqref{eq:GFP}
+  式 \eqref{eq:GFP}
   相当于说 $h(\lambda)$ 在 $\lambda = \lambda_{+}$
   的最小值点是
   $\{V\}$ 或

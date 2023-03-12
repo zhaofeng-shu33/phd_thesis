@@ -11,17 +11,17 @@
 恢复的要求，而该等价的优化问题可通过交替方向乘子法(ADMM)进行求解。
 
 本章内容的具体安排如下：
-在\ref{sec:sbmsi_exact_recovery_condition}节，我们给出了
+在 \ref{sec:sbmsi_exact_recovery_condition} 节，我们给出了
 带有辅助信息的随机块模型的精确恢复条件；
-在\ref{sec:sbmsi_error_decay_rate}节，我们研究了算法的最优误差衰减速率，
-在\ref{sec:sdp_exact}节，我们给出了一个能实现精确恢复的SDP算法，并通过实验
+在 \ref{sec:sbmsi_error_decay_rate} 节，我们研究了算法的最优误差衰减速率，
+在 \ref{sec:sdp_exact} 节，我们给出了一个能实现精确恢复的SDP算法，并通过实验
 验证了其精确恢复效果。
-第\ref{sec:summary_sbmsi}节对全章进行了总结。
+第 \ref{sec:summary_sbmsi} 节对全章进行了总结。
 
 \section{精确恢复条件}\label{sec:sbmsi_exact_recovery_condition}
 \newacronym{acr:sbmsi}{SBMSI}{Stochastic Block Model with side information}
 带有辅助信息的随机块模型（\gls{acr:sbmsi}）
-是\ref{sec:sbm}节介绍的
+是 \ref{sec:sbm} 节介绍的
 SSBM 模型的推广。为方便讨论又不失一般性，
 这里我们在2个社团的随机块模型的
 基础上引入辅助信息。
@@ -114,7 +114,7 @@ $\lceil \log n \rceil $ 的整数倍，同时
 对于一般的情形，SBMSI 模型精确恢复的 临界值 $I_+$ 并没有
 显示表达式，但我们可以从切尔诺夫信息的定义出发得到 $I_+$ 的简化表达式，
 该表达式由下述引理\ref{lem:I_plus_expression}给出，
-其更容易计算，且在后面定理\ref{thm:sdp}的证明中也会用到。
+其更容易计算，且在后面定理 \ref{thm:sdp} 的证明中也会用到。
 
 \begin{lemma}\label{lem:I_plus_expression}
 \begin{align}\label{equation:I+}
@@ -170,9 +170,9 @@ I_+ = D(\hat{P}_{\lambda^*} || \Pois(\frac{a}{2}))
 + \gamma D(P_{\lambda^*} || P_0)
 $$
 其中 $\hat{P}_{\lambda^*}$由
-引理\ref{lem:poisson_property}第一条
+引理 \ref{lem:poisson_property} 第一条
 性质确定，而我们取$c=\frac{a}{2}, d=\frac{b}{2}$。
-继续应用引理\ref{lem:poisson_property}第2-3条性质可得
+继续应用引理 \ref{lem:poisson_property} 第2-3条性质可得
 \begin{align*}
     I_+ &= \left[\lambda^* c^{1-\lambda^*}d^{\lambda^*}
     \log(\frac{d}{c})+ c-c^{1-\lambda^*}d^{\lambda^*}
@@ -213,9 +213,9 @@ $I_+$ 也可写成雷尼散度的形式。
 \end{remark}
 
 \section{误差衰减速率}\label{sec:sbmsi_error_decay_rate}
-在\ref{sec:sbmsi_exact_recovery_condition}节的基础上，
+在 \ref{sec:sbmsi_exact_recovery_condition} 节的基础上，
 我们讨论一种更强的要求，即恢复算法将SSBM各社团大小相等的条件考虑在内。
-类似定理\ref{thm:error_rate}，
+类似定理 \ref{thm:error_rate} ，
 在这种情况下，利用带约束的最大似然估计，我们可以得到恢复算法更快的误差衰减速率。
 %{eq:mle_sibm}
 
@@ -307,7 +307,7 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 \end{equation}
 
 \end{corollary}
-相比于定理\ref{thm:error_rate}中的第2条，
+相比于定理 \ref{thm:error_rate} 中的第2条，
 这里我们推导出了误差下界的表达式 \eqref{eq:PeMainL}，
 因而得到了紧的误差率 \eqref{eq:cor}。
 
@@ -349,10 +349,10 @@ $\gamma D_{1/2}(P_0||P_1) +
 	\end{equation} 
 \end{theorem}
 
-由定理\ref{thm:constant}可知，精确恢复误差
+由定理 \ref{thm:constant} 可知，精确恢复误差
 随着$n$的增大
 指数衰减。
-当 $\gamma=0$ 时，定理\ref{thm:constant}指出
+当 $\gamma=0$ 时，定理 \ref{thm:constant} 指出
 $D_{1/2}(\Bern(p)||\Bern(q))$
 是精确恢复的误差指数。
 因为
@@ -368,7 +368,7 @@ $\underbrace{P_0\times \dots \times P_0}_{\gamma} \times \Bern(p)$
 由独立性条件，
 我们可以把这一散度分解成如\eqref{eq:dense_error_exponent}
 所示的两项求和的形式。
-进一步地， 定理\ref{thm:constant}
+进一步地， 定理 \ref{thm:constant} 
 的结果要求
 $m$ 和 $n$ 量阶相同。
 当 $m=o(n)$ 时，
@@ -490,7 +490,7 @@ $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
 的计算方法。
 
 基于以上方法，我们开展了SDP算法对SBMSI模型精确恢复的仿真实验。
-图\ref{fig:my_label}展示了 SDP算法
+图 \ref{fig:my_label} 展示了 SDP算法
 针对 带有辅助信息的随机块模型 实现精确恢复的成功率。
 成功率是指 对每一组参数的若干次重复实验中，我们计算算法
 实现精确恢复的比率。
@@ -499,7 +499,7 @@ $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
 $P_0,P_1$ 两个分布分别为 $\Bern(0.2)$ 和 $\Bern(0.8)$。
 红线对应着有辅助信息的分界线 $I_+ = 1$.
 由图可见，白色区域与灰色区域的分界线与红线 $I_+ = 1$ 大致对应，
-从而验证了定理\ref{thm:sdp}中的结论。
+从而验证了定理 \ref{thm:sdp} 中的结论。
 另外在图中我们还画出了没有辅助信息时精确恢复的分界线，即蓝色的 
 $\sqrt{a}-\sqrt{b}=\sqrt{2}$，取式\eqref{eq:cor}
 的右端项为零即可得到。

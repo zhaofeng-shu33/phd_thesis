@@ -22,14 +22,14 @@
 通过该近似算法的实验结果我们将验证$\beta$参数对误差率的影响。
 
 本章内容的具体安排如下：
-在\ref{sec:parameter_estimation}节，我们首先研究了
+在 \ref{sec:parameter_estimation} 节，我们首先研究了
 随机块模型的超参估计问题；
-在\ref{sec:potts}节，我们研究了基于玻茨模型的社团发现算法
+在 \ref{sec:potts} 节，我们研究了基于玻茨模型的社团发现算法
 的相变现象和恢复误差；接下来，
-在\ref{sec:em}节，我们分析了基于能量最小化的社团发现算法
-的恢复误差；在\ref{sec:ms}节，用梅特罗波利斯采样对
+在 \ref{sec:em} 节，我们分析了基于能量最小化的社团发现算法
+的恢复误差；在 \ref{sec:ms} 节，用梅特罗波利斯采样对
 玻茨模型的相变现象进行了验证；
-第\ref{sec:summary_potts}节对全章进行了总结。
+第 \ref{sec:summary_potts} 节对全章进行了总结。
 \section{参数估计}\label{sec:parameter_estimation}
 
 
@@ -74,7 +74,7 @@ $T_2$进行计数，然后通过求解下述
 此外，对于有限规模的图，定理\ref{thm:ab12}提供的 $a,b$ 的估计可用于
 初始化某些恢复算法的相关参数，
 比如最大似然估计或者我们
-将在\ref{sec:ms}节使用的梅特罗波利斯算法。
+将在 \ref{sec:ms} 节使用的梅特罗波利斯算法。
 
 下面我们通过实验来验证
 定理\ref{thm:ab12}的结果。我们考虑若干组不同的
@@ -86,7 +86,7 @@ $(\hat{a}, \hat{b})$，进而计算
 $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
 这里  采样次数$m$ 取 $1000$。
 实验结果 如
-图\ref{fig:estimator}所示。
+图 \ref{fig:estimator} 所示。
 由此可见， 随着 $n$ 的增大，
 均方误差 以多项式的速率减小。
 从而验证了 $\hat{a}, \hat{b}$ 分别收敛到 $a,b$ 
@@ -101,10 +101,10 @@ $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
 
 \section{基于玻茨模型的社团发现算法}\label{sec:potts}
 \subsection{算法描述}
-类似于\ref{sec:ising}节
+类似于 \ref{sec:ising} 节
 介绍的SIBM模型，我们将
 随机块模型
-与\ref{sec:ising}节介绍的 玻茨模型
+与 \ref{sec:ising} 节介绍的 玻茨模型
 复合起来可得到随机块-玻茨模型。该模型可以看成是SIBM模型的推广，
 每个节点由两状态变成了多状态。由于我们的研究重点并非
 从随机块-玻茨模型的多个样本恢复节点的原始标签，而是利用
@@ -143,13 +143,13 @@ $\gamma$ 是没有边相连的节点间的作用力系数。
 $\frac{\log n}{n}$ 是对由于边的数量不均匀造成两种势能量阶不同的修正项。
 
 
-定义\ref{def:ising}实际上给出了一个估计$X$的随机算法 $\hat{X}^*$。
+定义 \ref{def:ising} 实际上给出了一个估计$X$的随机算法 $\hat{X}^*$。
 这里，$\hat{X}^*$ 表示产生于玻茨模型的一个样本，
 记作$\hat{X}^* \sim \textrm{Potts}_G(\beta, \gamma)$。
 下面我们首先研究$\hat{X}^*$实现精确恢复的条件及误差上界，
 而关于如何进行玻茨模型的采样我们将在后面进行讨论。
 \subsection{误差的渐近性质}
-沿用注释\ref{rem:metric_exact_recovery}中的记号，
+沿用注释 \ref{rem:metric_exact_recovery} 中的记号，
 使用$\hat{X}^*$估计$X$在精确恢复度量下的错误概率
 记为 $P_e(\hat{X}^*) := \sum_{G \in \cG_n} P_G(G) P_{\sigma | G}(S^c_k(X))$。
 类似文献 \inlinecite{ye2020exact} 中关于 SIBM 模型的讨论，
@@ -214,7 +214,7 @@ $P_e(\hat{X}^*) \to 1$。
 			随机块模型的精确
 			恢复仅在区域 I 可实现。}\label{fig:pt}
 	\end{subfigure}
-	\caption{定理\ref{thm:phase_transition}
+	\caption{定理 \ref{thm:phase_transition} 
 	的图示}
 	\label{fig:phase_transition_theorem_illustration}
 \end{figure}
@@ -222,12 +222,12 @@ $P_e(\hat{X}^*) \to 1$。
 	在式\eqref{eq:g_beta_main_article} 中，我们首次引入了
 	$g(\beta)$ 这个函数，该函数是由矩生成函数导出的，
 	其信息学含义为速率函数的凸共轭函数，
-	具体我们将在\ref{sub:rate_function}小节专门讨论。
+	具体我们将在 \ref{sub:rate_function} 小节专门讨论。
 \end{remark}
 %与式\eqref{eq:beta_star_sibm}的情形类似，
 注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$使得
 式\eqref{eq:beta_star}中根号下的项非负。
-这个条件来自于定理\ref{thm:sbmk_phase_transition}，
+这个条件来自于定理 \ref{thm:sbmk_phase_transition} ，
 保证了随机块模型本身精确恢复可实现。
 
 
@@ -238,24 +238,24 @@ $g(\beta)>0$。
 另外，由 $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 可知
 $g(\bar{\beta}) < 0$。
 $g(\beta), \tilde{g}(\beta)$ 的图像
-如图\ref{fig:phase_transition_theorem_illustration}(a)所示。
+如图 \ref{fig:phase_transition_theorem_illustration} (a)所示。
 因此， 对于充分小的
 $\epsilon$ 并且当 $n \to \infty$，
-定理\ref{thm:phase_transition}中给出的上界
+定理 \ref{thm:phase_transition} 中给出的上界
 均至少以多项式的速度趋向于 $0$。
-从而定理\ref{thm:phase_transition}刻划了
+从而定理 \ref{thm:phase_transition} 刻划了
 玻茨模型的相变性质。
-如图\ref{fig:phase_transition_theorem_illustration}(b)所示
+如图 \ref{fig:phase_transition_theorem_illustration} (b)所示
 ， 对于玻茨模型， 只有参数$(\beta, \gamma)$落在区域I时，
 随机块模型的精确
 恢复才能实现。
 
 
 
-定理\ref{thm:phase_transition}中的$k=2$与
+定理 \ref{thm:phase_transition} 中的$k=2$与
 文献\inlinecite{ye2020exact}的定理2中的$m=1$时
 的结论是一致的。此外，
-定理\ref{thm:phase_transition}也
+定理 \ref{thm:phase_transition} 也
 可以从$\sigma$的边缘分布的角度理解。
 玻茨模型取到某个特定状态$\bar{\sigma}$的概率为
  $\sigma: P_{\sigma}(\sigma =\bar{\sigma})
@@ -275,7 +275,7 @@ $\epsilon$ 并且当 $n \to \infty$，
 D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\sigma), \sigma')  \}
 \end{equation}
 
-则 定理\ref{thm:phase_transition}对边缘分布 $P_{\sigma}$ 蕴含着如下的论断
+则 定理 \ref{thm:phase_transition} 对边缘分布 $P_{\sigma}$ 蕴含着如下的论断
 ：
 \begin{corollary}\label{cor:phase4}
 假设 $\gamma > b$， 取决于 $\beta$ 的取值我们有
@@ -285,7 +285,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 \end{enumerate}
 \end{corollary}
 
-下面我们简单阐述下 定理\ref{thm:phase_transition}证明的思路。
+下面我们简单阐述下 定理 \ref{thm:phase_transition} 证明的思路。
 该思路主要通过对翻转一个状态的前后能量差的分析来估计概率的主项。
 下面的引理总结了翻转一个状态前后汉密尔顿能量的变化:
 \begin{lemma}\label{lem:lemmaDiff}
@@ -386,20 +386,20 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 趋于无穷大，
 则 $P_{\sigma}(S_k(X))$ 趋于零。
-此种分析展示了证明定理\ref{thm:phase_transition}的
+此种分析展示了证明定理 \ref{thm:phase_transition} 的
 主要思路。应用这一思路，由式
 \eqref{eq:expect_A_r_0_s}，
 当$n$充分大时，$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 的数学期望为 $n^{g(\beta)}$，
 通过讨论$g(\beta)$的正负可以部分说明
-定理\ref{thm:phase_transition}中的表述。
+定理 \ref{thm:phase_transition} 中的表述。
 \subsection{速率函数}\label{sub:rate_function}
 在\eqref{eq:expect_A_r_0_s} 中我们指出了$g(\beta)$与
 二项分布差$A_r^0 - A_r^s$的矩生成函数有关，本节将进一步挖掘
 其信息论的含义。
 
 首先，通过切尔诺夫不等式的方法
-（证明见附录引理\ref{lem:enhanced_fb}），
+（证明见附录引理 \ref{lem:enhanced_fb} ），
 我们有
 \begin{equation}\label{eq:introduction_g_a_b_eps}
   P_G(A_r^s - A_r^0 \ge t  \log n) 
@@ -416,12 +416,12 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 易验证
 % $\frac{g(a,b,kt)}{k}=-[f_{\beta}(t)-\beta t -1]$。
 %实际上
-$g(a,b,s)$ 和 $g(s)-1$ 互为凸共轭函数（定义\ref{def:convex_conjugate}）。
+$g(a,b,s)$ 和 $g(s)-1$ 互为凸共轭函数（定义 \ref{def:convex_conjugate} ）。
 
 利用凸共轭函数的概念，
 下面我们引入大偏差理论中的 Gärtner Ellis 定理
 来获得 $g(a,b,\epsilon)$。Gärtner Ellis 定理是
-Cramér 定理（定理\ref{thm:cramer}）的推广，
+Cramér 定理（定理 \ref{thm:cramer} ）的推广，
 其一般情形下的表述可参见
 文献\inlinecite{dembo2009large}。
 我们这里仅给出 Gärtner Ellis 定理的一个特例形式。
@@ -465,7 +465,7 @@ $\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
 当 $\gamma>b$ 时，
 我们可以选取一个足够大的 $\beta$ 使得
 $\beta > \beta^*$，
-则 由 定理\ref{thm:phase_transition}，
+则 由 定理 \ref{thm:phase_transition} ，
 当$n$充分大时 $\sigma \in S_k(X)$ 几乎必然发生。
 这蕴含了 $P_{\sigma | G}(\sigma = X)$
 对于几乎所有 从 随机块模型生成的图  $G$来说 取得最大值。
@@ -503,7 +503,7 @@ $\hat{X}'$ 的表达式中出现的额外的参数 $\gamma$ 可视为
 
 当 $\beta > \bar{\beta}$ 时，
 $\tilde{g}(\beta)$ 是一个常数。
-因此，从定理\ref{thm:phase_transition}中我们可以获得的关于
+因此，从定理 \ref{thm:phase_transition} 中我们可以获得的关于
 玻茨模型的估计量 $\hat{X}^*$ 最紧的上界
 是  $n^{g(\bar{\beta})/2}$。
 
@@ -518,12 +518,12 @@ $\tilde{g}(\beta)$ 是一个常数。
 \end{enumerate}
 \end{theorem}
 因为 $g(\bar{\beta})<0$， 我们有大小关系 $n^{2g(\bar{\beta})} < n^{g(\bar{\beta})} < n^{g(\bar{\beta})/2}$。
-从而 定理\ref{thm:error_rate}说明了在三个估计量中，
+从而 定理 \ref{thm:error_rate} 说明了在三个估计量中，
 $P_e(\hat{X}'')$ 
 的上界最紧。
 这可以直观地理解为搜索空间缩小的结果。
 
-定理\ref{thm:error_rate}的证明思路是对于 $\Dist(\bar{\sigma}, X) = 1, 2,\dots$，
+定理 \ref{thm:error_rate} 的证明思路是对于 $\Dist(\bar{\sigma}, X) = 1, 2,\dots$，
 分别考虑事件
 $H(X) > H(\bar{\sigma})$发生的概率。
 \newglossaryentry{bool_ineq}{name=布尔不等式, description={Boole's inequality}}
@@ -534,7 +534,7 @@ $H(X) > H(\bar{\sigma})$发生的概率。
 当条件
 $\sqrt{a} - \sqrt{b} > \sqrt{k}$ 满足时，考虑到
 $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
-定理\ref{thm:error_rate}说明了  $\hat{X}'$ 和 $\hat{X}''$
+定理 \ref{thm:error_rate} 说明了  $\hat{X}'$ 和 $\hat{X}''$
 均可实现
 精确恢复。
 
@@ -605,18 +605,18 @@ $\hat{X}'$ 。
   $\gamma_{MQ} >b$ 且  $\gamma_{ML} > b$。
   这说明 了
   最大似然估计和最大模块度估计都满足
-  定理\ref{thm:error_rate}所述的精确恢复条件 $\gamma > b $。
+  定理 \ref{thm:error_rate} 所述的精确恢复条件 $\gamma > b $。
 
 \section{基于梅特罗波利斯采样的社团发现算法}\label{sec:ms}
 
-由定理\ref{thm:phase_transition}可知，
+由定理 \ref{thm:phase_transition} 可知，
 如果我们直接从玻茨模型中采样，那么得到的样本大概率
 与$X$一致。
 然而，当$n$非常大时，按照式\eqref{eq:isingma}给出的分布精确采样是困难的，
 因为状态空间的状态总数随着$n$以
 $k^n$的速率指数增大。
 因此，一定程度的近似是必要的，
-为此，我们可以借助\ref{sec:ising}节介绍的梅特罗波利斯算法。 
+为此，我们可以借助 \ref{sec:ising} 节介绍的梅特罗波利斯算法。 
 经过若干次初始迭代后，梅特罗波利斯算法
 每次产生的样本可视为从玻茨模型 采样的结果。
 这个论断相关的理论研究主要是基于马尔可夫链。
@@ -631,10 +631,10 @@ $k^n$的速率指数增大。
 针对我们研究的模型和能量表达式 \eqref{eq:energy}，
 我们对算法\ref{alg:Metropolis}进行
 改写，得到
-算法\ref{alg:m}。
-算法\ref{alg:m}要求
+算法 \ref{alg:m} 。
+算法 \ref{alg:m} 要求
 社团数量 $k$ 和参数 $\beta, \gamma$ 事先给定。
-根据定理\ref{thm:phase_transition}，我们需选取  $\beta>\beta^*, \gamma > b$
+根据定理 \ref{thm:phase_transition} ，我们需选取  $\beta>\beta^*, \gamma > b$
 %\footnote{ $\beta^*$ 的定义参见式 \eqref{eq:beta_star} }
 。
 这里的 $a, b$
@@ -668,23 +668,23 @@ $k^n$的速率指数增大。
 在$N=O(n\log n)$的条件下 即可得到近似的比较好的样本\cite{mcmc}。
 对于我们的模型，由于我们并不清楚 $ N = O(n\log n)$ 是否足够，
 因此我们在数值实验中经验地选取 $N=O(n^2)$。
-算法\ref{alg:m}总的时间复杂度为 $O(n^2 \log n)$。
+算法 \ref{alg:m} 总的时间复杂度为 $O(n^2 \log n)$。
 
 
 
 借助梅特罗波利斯算法，
-下面我们通过实验验证 定理\ref{thm:phase_transition}中  $\gamma > b$的情形。
+下面我们通过实验验证 定理 \ref{thm:phase_transition} 中  $\gamma > b$的情形。
 我们选取了 $n=9000, k=2$，
 通过蒙特卡罗采样的方法，我们可以得到准确率的经验计算公式为
 $P_a(\hat{X}^*) = \frac{1}{m_1m_2}\sum_{i=1}^{m_1} \sum_{j=1}^{m_2} \mathbf{1}[\hat{X}^* = \pm X]$。
 在这个公式中，
 $m_1$ 是 由 随机块 模型产生随机图的次数，而
-$m_2$ 是 对于一个特定的图，由算法\ref{alg:m}生成的连续样本的数量。
+$m_2$ 是 对于一个特定的图，由算法 \ref{alg:m} 生成的连续样本的数量。
 我们选取 $m_1=2100,m_2=6000$。这样的取值已相当大，
 且由大数定律
 保证 $P_a(\hat{X}^*)$ 是精确恢复概率的好的估计。
 $P_a(\hat{X}^*)$ 随 $\beta$的变化在
-图\ref{fig:erh}中给出。
+图 \ref{fig:erh} 中给出。
 
 \begin{figure}[ht!]
 	\centering
@@ -696,7 +696,7 @@ $P_a(\hat{X}^*)$ 随 $\beta$的变化在
 竖线 ($\beta=\beta^* \approx 0.198$)，
 是 从式 \eqref{eq:beta_star} 计算得到的， 
 代表了相变的临界值。
-图\ref{fig:erh}中的坐标点 $(0.199,\frac{1}{2})$
+图 \ref{fig:erh} 中的坐标点 $(0.199,\frac{1}{2})$
 可视为通过实验估计出的
 相变点，它的横坐标接近
 $\beta^*$。
@@ -719,7 +719,7 @@ $\beta=\beta^*$ 处
 来推断参数$a,b$，而推断出的参数可用于后续算法设计中。其次，我们分析了
 三个随机块模型节点标签的估计量，它们分别是基于玻茨模型的采样、极小化汉密尔顿能量
 以及极小化带约束的能量函数。
-在定理\ref{thm:phase_transition}和\ref{thm:error_rate}中
+在定理 \ref{thm:phase_transition} 和 \ref{thm:error_rate} 中
 ，我们给出了这三个估计量精确恢复的误差上界，并且研究了它们的误差上界之间的关系。
 本章通过引入$k$状态的伊辛模型，
 开辟了研究随机块模型精确恢复问题的新途径。
@@ -727,7 +727,7 @@ $\beta=\beta^*$ 处
 本部分的研究也存在一些不足之处。首先，针对算法误差的分析仅给出了上界，对于误差下界
 由于尚存在技术性困难而没有相关结论。
 其次，对于采样算法所需的采样次数
-没有好的认识，在精度不变的前提下，算法\ref{alg:m}的时间复杂度存在提升空间。
+没有好的认识，在精度不变的前提下，算法 \ref{alg:m} 的时间复杂度存在提升空间。
 最后，定义汉密尔顿能量函数的方法不止一种，
 实验部分缺少和其他基于统计物理的社团发现方法的
 对比性研究。
