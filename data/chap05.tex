@@ -1,11 +1,11 @@
 \chapter{基于雷尼散度的有辅助信息的随机块模型研究}
 \label{chap:sbmsi}
 \section{本章引言}
-在本章中，我们首先引入我们研究的有辅助信息的随机块模型
-的定义和精确恢复条件。
-我们在前人研究的基础上，给出两社团的情形下的精确恢复条件。
+在本章中，我们首先介绍有辅助信息的随机块模型
+的定义。
+我们在前人研究的基础上，给出两社团情形下的精确恢复条件。
 在精确恢复条件被保证的前提下，
-我们利用雷尼散度这一度量进一步研究了
+我们将利用雷尼散度这一度量进一步研究
 具有不同稀疏程度的模型的误差衰减率。
 除此之外，我们将证明通过求解某半正定规划问题，可实现精确
 恢复的要求，而该等价的优化问题可通过交替方向乘子法(ADMM)进行求解。
@@ -28,24 +28,28 @@ SSBM 模型的推广。为方便讨论又不失一般性，
 由定义\ref{def:SSBM}，当$k=2$时，
 节点标签$X$满足$X_i \in \{\pm 1\}$
 且 $\sum_{i=1}^n X_i = 0$。
-除了图 $Z$ 和节点标签 $X$ 外，
+除了图中边的集合
+$\{Z_{i,j}\}_{1\le i<j\le n}$
+和节点标签 $X$ 外，
 第 $i$  个节点 ($1\leq i \leq n$) 
 还含有 $m=\lceil \gamma \log n \rceil $ 个相关的数据样本 
-$Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。
+$\{Y^{i}_j\}_{1\leq j \leq m}$。
 这里，我们要求 $\gamma$ 是一个正整数。
-若 $X_i=1$
-这些样本 i.i.d. 采样自分布 $P_0$，若  $X_i=-1$ 则采样自 $P_1$。
+若 $X_i=1$，
+这些样本 i.i.d. 采样自分布 $P_0$，
+若 $X_i=-1$，则采样自 $P_1$。
 这里假设 $P_0, P_1$ 两个分布函数均为定义在字母集$\mathcal{Y}$上的离散分布。
 注意到 给定 标签 $X_i$，
-对于 $i\in\{1,\ldots,n\}$，数据样本 $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$ 与 $\{Z_{i,j}\}_{1\le i<j\le n}$ 独立。
+对于 $i\in [n]$，数据样本 $\{Y^{i}_j\}_{1\leq j \leq m}$ 与 $\{Z_{i,j}\}_{1\le i<j\le n}$ 独立。
  因此，在标签 $X$ 给定的情况下，
   $(\{Z_{i,j}\}_{1\le i<j\le n},\{Y^i_{j}\}_{1\le i\le n,1\le j\le m})$ 的联合分布为  
 \begin{align}\label{eq:lh}
     &P(y=\{y^i_{j}\}_{1\le i\le n,1\le j\le m},z=\{z_{i,j}\}_{1\le i<j\le n}| (x_1,\ldots,x_n)) \nonumber\\
-    &= \prod_{1\le i,j\le n}P(z_{i,j}|x_i,x_j)\prod_{i=1}^n \prod_{j=1}^m P(y^i_j|x_i), 
+    &= \prod_{1\le i < j\le n}P(z_{i,j}|x_i,x_j)\prod_{i=1}^n \prod_{j=1}^m P(y^i_j|x_i), 
 \end{align}
 其中$\prod_{1\le i,j\le n}P(z_{i,j}|x_i,x_j)$ 可写成
-\eqref{eq:mle_sibm} 式的形式。对于$P(z_{i,j}|x_i,x_j)$，其具体定义为
+式\eqref{eq:mle_sibm} 的形式。
+对于$P(z_{i,j}|x_i,x_j)$，其具体定义为
 \begin{equation*}
     P  (z_{i,j}=1|x_i,x_j) = \begin{cases}
         p & \text{if } x_i = x_j \\
@@ -59,23 +63,25 @@ $Y^{i}_{j}$, $j\in \{1,\ldots,m\}$。
         P_1(y^i_j) & x_i = -1
     \end{cases}
 \end{equation*}
- $P(\{x^i_{j}\}_{1\le i\le n,1\le j\le m},\{z_{i,j}\}_{1\le i<j\le n}| y_1,\ldots,y_n)$ 
+ $P(\{y^i_{j}\}_{1\le i\le n,1\le j\le m},\{z_{i,j}\}_{1\le i<j\le n}| x_1,\ldots,x_n)$ 
  的条件分布 依赖于
  $n,m,p, q, P_0$ 和 $P_1$ 这些参数，因此我们把 SBMSI 写成 $\SBMSI(n,m,p,q,P_0,P_1)$ 的形式。
- 给定由 $\SBMSI(n,m,p,q,P_0,P_1)$ 生成的图$Z$和数据$Y$， 我们的目标是恢复 出$X$。
+ 给定由 $\SBMSI(n,m,p,q,P_0,P_1)$ 生成的边$Z$和数据$Y$， 我们的目标是恢复 出$X$。
  
- 在有辅助信息的条件下，
+ 在有辅助信息$Y$的条件下，
  我们仍使用能否精确恢复这一指标来衡量
- 社团发现的可行性。与定义\ref{def:SSBMR}类似，
+ 社团发现算法的准确性。
+ 与定义\ref{def:SSBMR}类似，
  若存在以$Z,Y$为输入变量的算法 $\hat{X}=\hat{X}(Z,Y)$
  使得当$n$增大时，
  错误概率
  $P_e:=P(\hat{Y} \neq Y)$ 趋向于 $0$，则称
  精确恢复可实现。
 
- \citet{abbe2015community}一文的3.2小节指出了一般SBM模型的精确恢复条件与多维泊松分布的关系。
+ 文献\inlinecite{abbe2015community}中的3.2小节指出了一般随机块模型
+ 的精确恢复条件与多维泊松分布的关系。
 在$k=2$的情形，我们要用到2维泊松分布，因此这里对其做一个简单的介绍。
-有多种方式推广一维的泊松分布，这里我们使用的是如下定义：
+有多种方式可推广一维的泊松分布，这里我们使用的是如下形式的二维泊松分布：
 
 \begin{definition}
     称 $(X,Y)$ 服从参数为 $(\lambda, \mu)$ 的二维泊松分布，
@@ -100,14 +106,15 @@ SBMSI 模型精确恢复的条件：
 \end{theorem}
 
 定理\ref{thm:Pe}类似于文献 \inlinecite{abbe17sideinfo} 中定理4的结论，
-但这里我们限制了类别数为2等条件，同时允许采样数量 $m$ 为
-$\lceil \log n \rceil $ 的整数倍，而 \citet{abbe17sideinfo} 的定理4
+但这里我们允许采样数量 $m$ 为
+$\lceil \log n \rceil $ 的整数倍，同时
+限制了类别数为2的条件，而 文献 \inlinecite{abbe17sideinfo} 的定理4
 中始终取$\gamma=1$。
 
 对于一般的情形，SBMSI 模型精确恢复的 临界值 $I_+$ 并没有
 显示表达式，但我们可以从切尔诺夫信息的定义出发得到 $I_+$ 的简化表达式，
-由下述引理\ref{lem:I_plus_expression}给出。
-该表达式更容易计算，且在后面定理\ref{thm:sdp}的证明中也会用到。
+该表达式由下述引理\ref{lem:I_plus_expression}给出，
+其更容易计算，且在后面定理\ref{thm:sdp}的证明中也会用到。
 
 \begin{lemma}\label{lem:I_plus_expression}
 \begin{align}\label{equation:I+}
@@ -124,7 +131,7 @@ $\lceil \log n \rceil $ 的整数倍，而 \citet{abbe17sideinfo} 的定理4
     \right)
     \right]
 \end{equation}
-而 $P_{\lambda}$ 类似\eqref{eq:P_lambda_x} 式定义，为
+而 $P_{\lambda}$ 类似式\eqref{eq:P_lambda_x} ，为
 \begin{equation}\label{eq:P_lambda_0_1}
     P_{\lambda}(x) = \frac{P_0^{1-\lambda}(x) P_1^{\lambda} (x)}
     {\sum_{x \in \mathcal{X}}P_0^{1-\lambda}(x) P_1^{\lambda} (x)}        
@@ -155,16 +162,17 @@ $\lceil \log n \rceil $ 的整数倍，而 \citet{abbe17sideinfo} 的定理4
 上面的第2、3条性质可由两个泊松分布的KL散度
 公式导出。
 \begin{proof}[引理\ref{lem:I_plus_expression} 的证明]
-由 切尔诺夫信息的定义 \eqref{eq:D_star_lambda_star} 式
+由 切尔诺夫信息的定义式 \eqref{eq:D_star_lambda_star} 
 可得：
 $$
 I_+ = D(\hat{P}_{\lambda^*} || \Pois(\frac{a}{2}))
 + D(\hat{P}_{1-\lambda^*} || \Pois(\frac{b}{2}))
 + \gamma D(P_{\lambda^*} || P_0)
 $$
-其中 $\hat{P}_{\lambda^*}$由引理\ref{lem:poisson_property}
-第一条性质确定，而我们取$c=\frac{a}{2}, d=\frac{b}{2}$。
-继续应用引理\ref{lem:poisson_property}第2、3条性质可得
+其中 $\hat{P}_{\lambda^*}$由
+引理\ref{lem:poisson_property}第一条
+性质确定，而我们取$c=\frac{a}{2}, d=\frac{b}{2}$。
+继续应用引理\ref{lem:poisson_property}第2-3条性质可得
 \begin{align*}
     I_+ &= \left[\lambda^* c^{1-\lambda^*}d^{\lambda^*}
     \log(\frac{d}{c})+ c-c^{1-\lambda^*}d^{\lambda^*}
@@ -173,8 +181,8 @@ $$
 + d - c^{\lambda^*}d^{1-\lambda^*}\right]
 + \gamma D(P_{\lambda^*} || P_0)
 \end{align*}
-即\eqref{equation:I+} 式。
-$\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
+即得式\eqref{equation:I+} 。
+$\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another} 
 进行计算。目标函数为：
 \begin{align*}
 &\log\left(\sum_{k=0}^{+\infty} \left(\frac{c^k\exp(-c)}{k!}
@@ -192,11 +200,11 @@ $\lambda^*$ 可由\eqref{eq:C_P_1_P_2_another} 式
 \gamma\log(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
 )
 \end{align*}
-极小化上式即等价于\eqref{eq:lambda}式。
+极小化上式即等价于式\eqref{eq:lambda}。
 \end{proof}
 
 \begin{remark}
-当 $\gamma=0$ 时，由\eqref{eq:lambda}式 可得 $\lambda^*=\frac{1}{2}$，
+当 $\gamma=0$ 时，由式\eqref{eq:lambda} 可得 $\lambda^*=\frac{1}{2}$，
 则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。由 式 \eqref{eq:renyi_d12_ab}，
 $I_+$ 也可写成雷尼散度的形式。
 进一步地，由定理\ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
@@ -211,19 +219,20 @@ $I_+$ 也可写成雷尼散度的形式。
 在这种情况下，利用带约束的最大似然估计，我们可以得到恢复算法更快的误差衰减速率。
 %{eq:mle_sibm}
 
-具体而言，在\eqref{eq:lh}式中极小化$x_i$可得到如下优化问题：
+具体而言，在式\eqref{eq:lh}中极小化$x$
+可得到如下的优化问题：
 \begin{align}
     \hat{X} &= \arg\max_x\ P(y,z|X=x) \notag \\
     \textrm{s.t.} \ & x_i \in \{\pm 1\}, \sum_{i=1}^n x_i=0 \label{eq:mle}
 \end{align}
-类似\eqref{eq:hatX_double_prime}式，
-由\eqref{eq:mle}给出的估计量 $\hat{X}$，
-是在有约束的参数空间的最大似然估计量。
+类似式\eqref{eq:hatX_double_prime}，
+由式\eqref{eq:mle}给出的估计量 $\hat{X}$，
+是在有约束的参数空间内的最大似然估计量。
 如果我们修改定义\ref{def:SSBM}中真实标签$X$的生成方式，
-使得$X_1, \dots, X_n$ i.i.d. $\sim \textrm{Bernoulli}(\frac{1}{2})$，
-则只能使用不带约束的 ML 估计量进行社团发现。
+使得$X_1, \dots, X_n$ i.i.d. $\sim \Bern(\frac{1}{2})$，
+则应该使用不带约束的 ML 估计量进行社团发现。
 
-根据 SBMSI 中的 SSBM 的模型参数 $p,q$ 随 $n$的变化规律，我们下面分两种情况讨论。
+根据 SBMSI 中的 随机块模型参数 $p,q$ 随 $n$的变化规律，我们下面分两种情况讨论。
 \subsection{稀疏的 SSBM }
 \newglossaryentry{not:big_o}
 {
@@ -246,7 +255,7 @@ $I_+$ 也可写成雷尼散度的形式。
     \gamma D_{1/2}(P_0||P_1) +
      (\sqrt{a} - \sqrt{b})^2-2 > 0
     \end{equation}
-    则精确恢复的误差的上界为：
+    则精确恢复的误差上界为：
     \begin{equation}\label{eq:PeMain}
     P_e \leq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right) }
     \end{equation}
@@ -255,25 +264,28 @@ $I_+$ 也可写成雷尼散度的形式。
     (\sqrt{a}-\sqrt{b})^2-2 
     > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2\label{eq:oneC}
     \end{align}
-    则精确恢复的误差的下界为：
+    则精确恢复的误差下界为：
     \begin{equation}\label{eq:PeMainL}
     P_e \geq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right)}
     \end{equation}
 \end{theorem}
 
-由定理\ref{thm:Pe_new}
-可看出，误差界的幂次有两项组成，
+由定理\ref{thm:Pe_new}可看出，
+误差界的幂次有两项组成，
 一项 $\gamma D_{1/2}(P_0||P_1) $ 
-和雷尼散度（在式\eqref{eq:renyi_divergence} 定义）
+和雷尼散度（在式\eqref{eq:renyi_divergence}
+中定义）
 有关，另一项 $ (\sqrt{a} - \sqrt{b})^2-2 $
 和 SSBM 的精确恢复条件有关。
 
 定理\ref{thm:Pe_new}告诉我们
 辅助信息  $Y$  增大了 误差 $P_e$ 的衰减速率，
-增大的程度可用信息量 $\gamma D_{1/2}(P_0||P_1)$ 
+增大的程度可用雷尼散度表示的信息量
+$\gamma D_{1/2}(P_0||P_1)$ 
 来刻画。
-若辅助的参数条件 \eqref{eq:oneC}式满足，
-\eqref{eq:positive_condition_new} 式也满足，此时
+若额外的参数条件 \eqref{eq:oneC} 成立，
+可推出 式\eqref{eq:positive_condition_new} 也成立，
+此时
 误差衰减速率为：
 $$
 -\lim_{n\to \infty} \frac{\log P_e}{\log n}
@@ -286,8 +298,8 @@ $$
 \begin{corollary}\label{cor:sbm}
 考虑
 $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
-对于\eqref{eq:mle}式中的ML算法， 
-若 条件 \eqref{eq:oneC} 满足，
+对于式\eqref{eq:mle}中的ML算法， 
+若 条件 \eqref{eq:oneC} 成立，
 则错误概率 $P_e$ 满足
 \begin{equation}\label{eq:cor}
 \lim_{n\to \infty} \frac{\log P_e}{\log n} =2-(\sqrt{a} - \sqrt{b})^2
@@ -296,13 +308,13 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 \end{corollary}
 相比于定理\ref{thm:error_rate}中的第2条，
 这里我们推导出了误差下界的表达式 \eqref{eq:PeMainL}，
-因而得到了紧的误差误差率 \eqref{eq:cor}。
+因而得到了紧的误差率 \eqref{eq:cor}。
 
 下面我们讨论本节的误差衰减速率项
 $\gamma D_{1/2}(P_0||P_1) +
 (\sqrt{a} - \sqrt{b})^2$与上一节
-精确恢复条件中的$I^+$ 的关系。我们有
-如下定理
+精确恢复条件中的切尔诺夫信息量 $I^+$ 的关系。
+我们有如下定理
 \begin{theorem}\label{thm:I_plus_relation}
     设$I_+$ 在 式 \eqref{equation:I+}
     中定义，则
@@ -336,13 +348,15 @@ $\gamma D_{1/2}(P_0||P_1) +
 	\end{equation} 
 \end{theorem}
 
-由定理\ref{thm:constant}可知，精确恢复误差指数下降。
+由定理\ref{thm:constant}可知，精确恢复误差
+随着$n$的增大
+指数衰减。
 当 $\gamma=0$ 时，定理\ref{thm:constant}指出
 $D_{1/2}(\Bern(p)||\Bern(q))$
 是精确恢复的误差指数。
 因为
-弱恢复与强恢复相差一个多项式的数量级，
-$D_{1/2}(\Bern(p)||\Bern(q))$ 也是弱恢复的误差指数
+几乎完全恢复与精确恢复相差一个$n$的数量级，
+$D_{1/2}(\Bern(p)||\Bern(q))$ 也是几乎完全恢复的误差指数
 \cite{zhang2016}。
 除此之外， 假设 $\gamma$ 为整数，
 误差指数可视为 
@@ -353,7 +367,7 @@ $\underbrace{P_0\times \dots \times P_0}_{\gamma} \times \Bern(p)$
 由独立性条件，
 我们可以把这一散度分解成如\eqref{eq:dense_error_exponent}
 所示的两项求和的形式。
-进一步的， 定理\ref{thm:constant}
+进一步地， 定理\ref{thm:constant}
 的结果要求
 $m$ 和 $n$ 量阶相同。
 当 $m=o(n)$ 时，
@@ -371,7 +385,7 @@ $m$ 和 $n$ 量阶相同。
 
 \section{实现精确恢复的SDP算法}\label{sec:sdp_exact}
 \subsection{算法描述}
-本节我们给出实现关于SBMSI的精确恢复的SDP算法。
+本节我们给出实现关于SBMSI 精确恢复的SDP算法。
 
 %给定节点标签$X$，
 %令 $S_1(X)$ 和 $S_2(X)$ 分别表示 标签为1和-1的节点集。
@@ -382,7 +396,7 @@ $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化�
     \max_{v}\, & h^T v + \frac{1}{4}v^T B v \notag \\
     \textrm{s.t. }\, & \mathbf{1}_n^T v = 0 \text{ 且 } v_i \in \{\pm 1 \} \label{eq:matrix_mle}
 \end{align}
-其中 $h$ 是 n 长的向量，第i个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
+其中 $h$ 是 $n$ 长的向量，第 $i$ 个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
 而  $n\times n $ 的矩阵 $B$ 在 式\eqref{eq:def_B_sdp} 中定义。
 
 令 $x^*$ 是 \eqref{eq:matrix_mle} 的最优值，
@@ -393,18 +407,20 @@ $(n+1)$ 维的向量。
 	则 式\eqref{eq:matrix_mle} 中目标函数的
     最优值等于 $\frac{1}{2} \langle \widetilde{B}, V^* \rangle$, 其中
 	\begin{equation}\label{eq:B_lambda_def}
-		\widetilde{B} = \begin{pmatrix} 0 & h^T  \\ h  & \frac{1}{2}B \end{pmatrix}.
+		\widetilde{B} = \begin{pmatrix} 0 & h^T  \\ h  & \frac{1}{2}B \end{pmatrix} 
 	\end{equation}
-	我们将证明 $V^*$ 是如下问题的唯一最优解：
+	是一个$(n+1)\times(n+1)$的矩阵。我们将证明 $V^*$ 是如下问题的唯一最优解：
 	\begin{align}
-		\max_V\, \langle \widetilde{B}, V \rangle  &\notag\\
+		\max_V\,& \langle \widetilde{B}, V \rangle  \notag\\
 		\textrm{ s.t. }\, V_{ii} &= 1, \notag\\
 		V &\succeq 0, \notag\\
-\sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in\{1,\ldots,n+1\}. \label{eq:sdp}
+\sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in\{1,\ldots,n+1\} 
+\label{eq:sdp}
 	\end{align}
 	注意到在 式\eqref{eq:sdp} 的最后一行
-    我们用了 $n+1$ 个约束条件 来描述标签 平衡的条件。 这些约束条件在证明$V^*$是式\eqref{eq:sdp}唯一的最优解时起到关键作用。
-    该结论可总结为下述定理。
+    我们用了 $n+1$ 个约束条件 来描述标签 平衡的条件。
+    这些约束条件在证明$V^*$是式\eqref{eq:sdp}唯一的最优解时起到关键作用。
+    该结论可总结为下述定理：
 	%When $m=0$ and $\kappa=1$,
 	%the SDP is exactly the one Abbe considered in \cite{abbe2015exact}.
 	%When $m=0$ and $\kappa=\frac{a-b}{\log a/b}\frac{\log n}{n}$, the SDP is
@@ -418,15 +434,15 @@ $(n+1)$ 维的向量。
         $\lim_{n\to\infty} P(\hat{V}=V^*)=1$，其中
 		$V^*=(1,x^*)(1,x^*)^T$。
 	\end{theorem}
-    该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现原社团的精确恢复。
+    该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现社团结构的精确恢复。
 
 
 \subsection{算法实现}\label{sec:sdp_admm}
 虽然半正定规划问题\eqref{eq:sdp}可以使用一般的SDP优化工具包进行，但针对其特殊形式，
 我们可以提前计算出投影矩阵，
 从而实现算法加速。
-这里我们借鉴 \citet{amini2018semidefinite} 中针对无辅助信息设计的SDP-1的算法，
-给出基于ADMM方法的算法实现。
+这里我们借鉴文献 \inlinecite{amini2018semidefinite} 中针对无辅助信息设计的SDP-1的算法，
+给出基于ADMM方法求解优化问题\eqref{eq:sdp}的算法实现。
 为方便讨论，本节假设所有的矩阵都是 $n$维的，而式 \eqref{eq:sdp} 中矩阵的维数是$n+1$，只需作整体替换即可。
 
 求解形如 式\eqref{eq:sdp} 的SDP优化问题可通过如下迭代进行，各矩阵的初始值$X^{(0)},Z^{(0)},U^{(0)}$可取为零矩阵。
@@ -437,7 +453,7 @@ $(n+1)$ 维的向量。
     \end{align}
 其中 $\rho>0$ 是 惩罚参数，$\Pi_{S_+^n}$ 表示在半正定锥上的投影。
 实际操作中先将输入矩阵 做特征值分解 $X=P\Lambda P^{-1}$，
-再将负的特征值改为零即得投影$\Pi_{S_+^n}(X)=P\frac{|\Lambda| + \Lambda}{2}P^{-1}$。
+再将负的特征值改为零即得投影矩阵$\Pi_{S_+^n}(X)=P\frac{|\Lambda| + \Lambda}{2}P^{-1}$。
 
 $\Pi_A$也是矩阵投影算子，是把一个矩阵投影到$L(X) = b$这个空间内，
 其中 $b=(0, -2 \mathbf{1}_{n-1}, \mathbf{1}_{n}) \in \mathbb{R}^{2n}$，
@@ -446,7 +462,7 @@ $L$ 是一个从 $\mathbb{R}^{n \times n} $ 到 $\mathbb{R}^{2n}$ 的线性映�
 $L$ 的精确定义需要引入矩阵$H_i$ 和 $F_i$，$i\in [n]$。
 $H_1$ 是一个第一行和第一列非对角线上元素为1，其余位置为0的对称矩阵。
 $H_i$ 是第$i$行和第$i$列非对角线上元素（$H_{1i}$ 和 $H_{i1}$除外）为1，其余位置为0的对称矩阵。
-$F_i$ 仅在 $(i,i)$ 位置取 1，其余位置为0。
+$F_i$ 仅在  位置$(i,i)$上取 1，其余位置为0。
 有了$H_i$ 和 $F_i$，对于 $i \in [n]$，
 $[L(X)]_i = \langle X,H_i \rangle$ 且 $[L(X)]_{i+n} = \langle X,F_i \rangle$。
 
@@ -459,7 +475,8 @@ $L$ 可视为一个 $2n \times n^2$ 的矩阵，
 其中 $L^*$  是 $L$ 的转置，设 $(\mu,\nu)$ 是一个$\mathbb{R}^{2n}$ 维的向量，
 则我们有 $L^*((\mu,\nu)) = \sum_{i=1}^n \mu_i H_i + \sum_{i=1}^n \nu_i F_i$。
 设 $(\mu',\nu')=LL^*((\mu,\nu))$。
-则$\mu'_j = \sum_{i=1}^n \langle H_i, H_j \rangle \mu_i$
+则$\mu'_j = \sum_{i=1}^n \langle H_i, H_j \rangle \mu_i
+=(2n-1)\mu'_j$，
 $\nu'=\nu$。
 因此 $L L^*$ 是一个 $2n\times 2n$的块对角矩阵 
 $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
@@ -476,17 +493,22 @@ $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
 针对 带有辅助信息的随机块模型 实现精确恢复的成功率。
 成功率是指 对每一组参数的若干次重复实验中，我们计算算法
 实现精确恢复的比率。
-我们固定 $n=300$， 对每一组参数$(a,b)$，尝试次数是 20。
+我们固定 $n=300$， 对每一组参数$(a,b)$，重复次数是 20。
 每个节点的辅助采样数量为 $m=10$，
 $P_0,P_1$ 两个分布分别为 $\Bern(0.2)$ 和 $\Bern(0.8)$。
-蓝线表示 对应着分界线 $\sqrt{a}-\sqrt{b}=\sqrt{2}$，令式\eqref{eq:cor}
-为零即可得到。红线对应着有辅助信息的分界线 $I_+ = 1$.
-由图可见使用SDP恢复的分界线 与红线 $I_+ = 1$ 对应，从而验证了
-定理\ref{thm:sdp}中的结论。
+红线对应着有辅助信息的分界线 $I_+ = 1$.
+由图可见，白色区域与灰色区域的分界线与红线 $I_+ = 1$ 大致对应，
+从而验证了定理\ref{thm:sdp}中的结论。
+另外在图中我们还画出了没有辅助信息时精确恢复的分界线，即蓝色的 
+$\sqrt{a}-\sqrt{b}=\sqrt{2}$，取式\eqref{eq:cor}
+的右端项为零即可得到。
+将两条分界线进行对比可以看出辅助信息使得满足精确恢复的参数$(a,b)$的
+组合更多了，降低了精确恢复的难度。
+
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.8\textwidth]{new_results.pdf}
-    \caption{有无辅助信息的分界线与SDP算法恢复性能的比较}
+    \caption{有（无）辅助信息的分界线与SDP算法恢复性能的比较}
     \label{fig:my_label}
 \end{figure}
 
