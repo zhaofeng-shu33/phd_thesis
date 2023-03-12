@@ -83,37 +83,6 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   $X, \dots Y$关于
   $U$的条件分布是独立的。
 \end{theorem}
-\begin{proof}
-  由$\epsilon$邻域的定义\ref{def:eps_neighborhood}，
-  $P_{Y|X=x}(y) = P_Y(y) + \sqrt{P_Y(y)}\phi_{Y|X=x}(y)
-  \epsilon$。令$\phi_{XY}(x,y)=\sqrt{P_X(x)}\phi_{Y|X=x}(y)$，
-  则有
-  $P_{XY}(x,y) = P_X(x)P_Y(y) + \sqrt{P_X(x)}\sqrt{P_Y(y)}\phi_{XY}(x,y)
-  \epsilon$。
-  假设$x\in \mathcal{X}$ 且 $y\in \mathcal{Y}$，
-  $\mathcal{X}, \mathcal{Y}$ 均为有限的字母集。
-  $\phi_{XY}$ 是 $|\mathcal{X}| \times |\mathcal{Y}|$
-  的矩阵，其秩为 $r$。$\phi_{XY}$可以通过$SVG$分解为
-  $\frac{1}{r}\sum_{i=1}^r \phi_i \psi^T_i$，其中$\phi, \psi$
-  是长度分别为$|\mathcal{X}|, |\mathcal{Y}|$的
-  列向量。构造 $U$ 是$\{1, 2, \dots, 2r\}$ 上的均匀分布。
-  而$Z_1, Z_2$ 做如下构造：
-  \begin{align*}
-    P(Z_1=x|U=i) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_{\lceil i/2 \rceil}(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
-    P(Z_2=y|U=i) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_{\lceil i/2 \rceil}(y) \sqrt{\epsilon}, y \in \mathcal{Y}
-  \end{align*}
-  $Z_1 | U$ 与$Z_2 | U$ 独立，因此，
-  $Z_1, Z_2$ 的联合分布为：
-  \begin{align*}
-  P(Z_1=x, Z_2=y)& =\sum_{i=1}^{2r}P(U=i)P(Z_1=x|U=i)P(Z_2=y|U=i)\\
-  &=P_X(x)P_Y(y) + \sqrt{P_X(x)}\sqrt{P_Y(y)}\frac{\epsilon}{r}
-  \sum_{i=1}^{r}\phi_i(x)
-  \psi(y) =P(X=x,Y=y)
-  \end{align*}
-  故$Z_1, Z_2$与$X,Y$具有相同的分布。
-  不难验证$(Z_1, Z_2)|U$在$(Z_1, Z_2)$的$\sqrt{\epsilon}$邻域内，
-  故结论得证。
-  \end{proof}
   定理\ref{thm:weak_independence_equivalent}的证明提供了一种生成
   满足弱独立条件的随机变量的方法。即给定均匀分布
   $U$ 在 $n! \times r$个点上取值，
@@ -927,6 +896,8 @@ Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 在上面的实验中我们假定已知异常值点的数量，
 而实际上我们本节提出的方法只需给出权值$\eta$即可自动获取类别数和异常值点的数量，
 相比其他需要提前知道异常值点的数量的方法具有明显的优势。
+
+\input{data/appendix_chap03.tex}
 
 \section{本章小结}\label{sec:hierarchical_summary}
 在本章中，

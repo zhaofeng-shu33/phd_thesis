@@ -301,6 +301,37 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 	的邻居节点，
 	而 $J_s(x, y) = \delta(x, y) - \delta(\omega_s \cdot x, y)$。
 \end{lemma}
+\begin{proof}
+	首先我们将
+  \eqref{eq:energy} 式改写成
+	\begin{equation*}
+	H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{i < j} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	- (1 + \gamma\frac{\log n}{n}) \sum_{ \{i, j\} \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	\end{equation*}
+	
+	接着我们逐步计算能量差：
+  \begin{align*}
+	H(\bar{\sigma}') - H(\bar{\sigma}) =& 
+  \left(1 + \gamma\frac{\log n}{n}
+  \right)
+  \cdot \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
+	\delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i)) \\
+	&+ \gamma \frac{\log n}{n}\sum_{i\neq r}
+	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
+	\delta( \bar{\sigma}_r, \bar{\sigma}_i) ) \\
+	 =& \left(
+     1 + \gamma\frac{\log n}{n}
+     \right)
+   \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i) \\
+	&+ \gamma \frac{\log n}{n}\sum_{i=1}^n
+	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
+	\delta( \bar{\sigma}_r, \bar{\sigma}_i) +1) \\
+	=& \left(1+\gamma \frac{\log n}{n}
+  \right)
+  \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)\\
+	&+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1)
+	\end{align*}
+\end{proof}
 \begin{remark}\label{re:energy_diff}
 	当 $\bar{\sigma}'$ 与 $X$ 仅在位置 $r$
 	上不同时， 在引理\ref{lem:lemmaDiff}中
@@ -680,7 +711,7 @@ $(\beta, n^{-g(\beta)})$
 $\beta=\beta^*$ 处
 从 0 跳变到 1。
 
-%\input{data/appendix_chap04}
+\input{data/appendix_chap04}
 
 \section{本章小结}\label{sec:summary_potts}
 在本章中， 

@@ -1,6 +1,6 @@
 % !TeX root = ../thuthesis-example.tex
 \section{定理证明}
-\subsection{定理\ref{thm:ab12} 的证明}
+\subsection{定理\ref{thm:ab12}的证明}
 \begin{lemma}\label{lem:ER_tr_counting}
   \newglossaryentry{e_r}{name=埃尔德什-雷尼模型, description={Erdős–Rényi model}}
   考虑一个由\gls{e_r}生成的随机图 $G$，它有  $n$
@@ -144,7 +144,7 @@ $N_E$ 的收敛性 %define if appropriate.
 \end{lemma}
 
 \begin{proof}
-	与引理\ref{lem:SBM_tr_counting_cross} 的证明类似，
+	与引理\ref{lem:SBM_tr_counting_cross}的证明类似，
 	$\E[T] = n^3 q^3$，对于$\E[T^2]$求和式中的项共如下4种情形：
 	\begin{enumerate}
 	\item 若 $\{i,j,k\} = \{i',j',k'\}$， 则 $E[Y_{ijk}Y_{i'j'k'}] = q^3$。
@@ -212,7 +212,7 @@ $$
 	O \left(\frac{1}{\log n} \right)
 	$$
 \end{proof}
-\begin{proof}[定理\ref{thm:ab12} 的证明]
+\begin{proof}[定理\ref{thm:ab12}的证明]
 	令 $e^*_1 = \frac{a+(k-1)b}{2k}$, $k^2 e^*_2 = \frac{a^3}{6} + \frac{k-1}{2}ab^2 + (k-1)(k-2)\frac{b^3}{6}$
 	且 $e_1 = \frac{T_1}{n\log n}, e_2 = \frac{T_2}{\log^3 n}$。
 	由 引理
@@ -244,39 +244,8 @@ $g(y)$ $\mathbb{R}$上的是增函数，
 $\hat{b} \to b$， $\hat{a} \to a$。
 \end{proof}
 
-\subsection{引理\ref{lem:lemmaDiff}的证明}
 
-\begin{proof}[引理\ref{lem:lemmaDiff}的证明]
-	首先我们将
-  \eqref{eq:energy} 式改写成
-	\begin{equation*}
-	H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{i < j} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
-	- (1 + \gamma\frac{\log n}{n}) \sum_{ \{i, j\} \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
-	\end{equation*}
-	
-	接着我们逐步计算能量差：
-  \begin{align*}
-	H(\bar{\sigma}') - H(\bar{\sigma}) =& 
-  \left(1 + \gamma\frac{\log n}{n}
-  \right)
-  \cdot \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
-	\delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i)) \\
-	&+ \gamma \frac{\log n}{n}\sum_{i\neq r}
-	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
-	\delta( \bar{\sigma}_r, \bar{\sigma}_i) ) \\
-	 =& \left(
-     1 + \gamma\frac{\log n}{n}
-     \right)
-   \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i) \\
-	&+ \gamma \frac{\log n}{n}\sum_{i=1}^n
-	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
-	\delta( \bar{\sigma}_r, \bar{\sigma}_i) +1) \\
-	=& \left(1+\gamma \frac{\log n}{n}
-  \right)
-  \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)\\
-	&+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1)
-	\end{align*}
-\end{proof}
+
 
 \subsection{定理\ref{thm:phase_transition}的证明}
 \label{sec:appendix_theorem_proof_phase_trans}
@@ -453,7 +422,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   从而式\eqref{eq:B_w}、\eqref{eq:A_w} 得证。
 \end{proof}
 
-从上面可以看到引理\ref{lem:minus} 的证明并没有很多技巧性，主要涉及一些计数
+从上面可以看到引理\ref{lem:minus}的证明并没有很多技巧性，主要涉及一些计数
 的技巧。
 当 $|\cI|$ 相比与 $n$ 很小时
 我们有如下的引理， 该引理是 \citet{ye2020exact} 中 陈述 6 的拓展。 
@@ -484,7 +453,7 @@ $|\cI|=1, N_{\bar{\sigma}}=0$，
 B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 即得到 式\eqref{eq:introduction_g_a_b_eps}。
 
-\begin{proof}[引理\ref{lem:enhanced_fb} 的证明]
+\begin{proof}[引理\ref{lem:enhanced_fb}的证明]
   由$f_{\beta}(t)$函数的定义，
   \eqref{eq:upmpt}式中
   $f_{\beta}(t) - \beta t$ 与$\beta$无关而只与
@@ -1006,7 +975,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	\end{align*}
 \end{proof}
 
-\begin{proof}[定理\ref{thm:phase_transition} 的证明]
+\begin{proof}[定理\ref{thm:phase_transition}的证明]
 	(1) 因为 $P_{\sigma}(\sigma \not \in S_k(X)) = \sum_{f\in S_k} P_{\sigma}(\sigma \neq f(X) | D(\sigma, f(X))) P_{\sigma}(D(\sigma, f(X)))$
   \footnote{$P_{\sigma}$中的下标 $\sigma$ 表示图$G$是随机的}，
 	我们只需证明 $P_{\sigma}(\sigma \neq X | D(\sigma, X)) \leq  n^{\tilde{g}(\beta)/2 + \epsilon}$。
@@ -1076,7 +1045,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	故$P_a(\hat{X}^*) \leq \exp(-Cn)$
   的结论成立。
 \end{proof}
-\subsection{定理\ref{thm:error_rate} 的证明}
+\subsection{定理\ref{thm:error_rate}的证明}
 在本节我们首先给出获得\eqref{eq:hatX_double_prime}
 和\eqref{eq:PG_energy}式 的推导过程。
 
@@ -1125,8 +1094,8 @@ $H(\bar{\sigma}) $ 等价于极小化
 	P(\sum_{i=1}^m (Z_i  - W_i) \geq 0) \leq \exp(-\frac{m \log n}{n}(\sqrt{a} - \sqrt{b})^2)
 	\end{equation}
 \end{lemma}
-引理\ref{lem:mZW} 的证明与引理\ref{lem:enhanced_fb}
-的证明类似，均为先计算
+引理\ref{lem:mZW}的证明与
+引理\ref{lem:enhanced_fb}的证明类似，均为先计算
 $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 =\exp(m \log(1-\B + \B e^s) + m \log(1-\A + \A e^{-s}))$。这里
 我们直接用 $\log(1+x)\leq x$的不等式进行放缩，
@@ -1180,8 +1149,8 @@ $B_{\sigma} > A_{\sigma}$。
 因此，
 当 $ \Dist(\sigma, X) \geq \frac{n}{\sqrt{\log n} }$ 且 $D(\sigma, X)$
 时，
-在引理\ref{lem:sigmaX}
-的证明中，条件2不会被满足，否则会推出$N_{\sigma}$
+在引理\ref{lem:sigmaX}的证明中，
+条件2不会被满足，否则会推出$N_{\sigma}$
 的一个非零下界，与  $N_{\sigma} = 0$矛盾。
 所以条件1被满足，
 由 \eqref{eq:Asigma}式，
