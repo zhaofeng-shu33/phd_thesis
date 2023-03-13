@@ -128,7 +128,7 @@ $N_E$ 的收敛性
 \begin{equation}\label{eq:ver_nn2}
   n\binom{n}{2} + 6n\binom{n}{4} + 12\binom{n}{2} \binom{n}{3} + 2\binom{n}{2}^2 + 6n\binom{n}{3} + 12\binom{n}{2}\binom{n}{4} = \left(n\binom{n}{2}\right)^2  
 \end{equation}
-\eqref{eq:ver_nn2}式右端中出现的$n\binom{n}{2}$ 是$\E[T] $ 中求和式的项数。
+式\eqref{eq:ver_nn2}右端中出现的$n\binom{n}{2}$ 是$\E[T] $ 中求和式的项数。
 \end{proof}
 \begin{lemma}\label{lem:SBM_tr_counting_3}
 	考虑 $\SSBM(3n, 3, p, q)$。它有3个社团，记为
@@ -185,7 +185,7 @@ $$
     可以忽略不计。
 	对于 $T_{ij}$， 我们使用 
   引理 \ref{lem:SBM_tr_counting_cross}  的结果。
-	在 \eqref{eq:SBM_tr_counting_cross} 式中
+	在 式\eqref{eq:SBM_tr_counting_cross} 中
   我们用 $n/k$ 代替 $n$， 取 $p=a\frac{\log n}{n}$ 且 $q=b\frac{\log n}{n}$。
 	$\Var[T_{ij}] \sim \frac{ab^2}{2k^3} \log^3 n$。
   因为 $\frac{T_{ij}}{\log^3 n}$ 的期望值是
@@ -623,7 +623,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     $N_{\bar{\sigma}}$的一个下界。
     因为
     $\Dist(\bar{\sigma}, X') - \Dist(\bar{\sigma}, X) \geq 0$，
-     由 \eqref{eq:distsmall} 式 我们有
+     由式 \eqref{eq:distsmall}  我们有
     $I_{ij} + I_{ji} + I_{i} + I_j \leq \frac{2n}{k} $。
     又因为 $I_i \geq I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$，
     从而$I_j $ 满足
@@ -633,14 +633,15 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
      $N_{\bar{\sigma}} \geq \frac{1}{2}(\frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{2k^2}(1+o(1))$。
     
     下面我们用
-     切尔诺夫不等式给出\eqref{eq:BwA}式描述的事件发生概率的上界。
+     切尔诺夫不等式给出式\eqref{eq:BwA}描述的事件发生概率的上界。
      在分析中我们可以省略不等号左边的 $\frac{\gamma \log n}{n}$ 一项
      ，因为其远小于$1$。
     令 $Z \sim \Bern\left(\A\right), Z' \sim \Bern\left(\B\right)$，则：
     \begin{align*}
     P_G(\widetilde{D}(\bar{\sigma}, C))
     &\leq (\mathbb{E}[\exp(sZ')])^{N_{B_{\bar{\sigma}}}}
-    (\mathbb{E}[\exp(-sZ)])^{N_{A_{\bar{\sigma}}}}\cdot \exp(-s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)) \\
+    (\mathbb{E}[\exp(-sZ)])^{N_{A_{\bar{\sigma}}}}\cdot 
+    \exp(-s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)) \\
     & \leq \exp\Big(N_{B_{\bar{\sigma}}}
     \frac{b\log n}{n}(e^s -1) + N_{A_{\bar{\sigma}}}\frac{a\log n}{n} (e^{-s} - 1) -s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)\Big) 
     \end{align*}
@@ -712,7 +713,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   因此，
   $\Dist(\sigma, f(X)) \geq \frac{2n}{k} - \frac{n}{\sqrt{\log n}} \geq \Dist(\sigma, X)$。
   从而我们得到
-  \eqref{eq:psigmaX} 式 等价于：
+  式\eqref{eq:psigmaX}  等价于：
   \begin{equation}\label{eq:psigmaX2}
   \frac{P_{\sigma|G}(\Dist(\sigma, X)=r)}
   {P_{\sigma|G}(\sigma=X)} <
@@ -810,7 +811,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \frac{P_{\sigma | G}(\sigma = \bar{\sigma}) }{P_{\sigma | X}(\sigma = X)} > \exp(-Cn)\\
   \end{align*}
   最后一个事件发生的概率小于 $k^ne^{-\tau(\beta, \gamma) n\sqrt{\log n}}<e^{-n}$。
-  因此，   \eqref{eq:psigmaX1} 式成立。
+  因此，    式\eqref{eq:psigmaX1}成立。
   \end{proof}
 
   如果 $\gamma > b$ 且 $\beta < \beta^*$，则我们有如下的引理：
@@ -844,12 +845,12 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	\frac{P_{\sigma|G}(\Dist(\sigma, X)=1 | D(\sigma, X))}
 	{P_{\sigma|G}(\sigma=X | D(\sigma, X))} \geq (k-1+o(1))n^{g(\beta_n)}
 	\end{equation}
-  其中 $\beta_n$ 在\eqref{eq:beta_n_def}式 中定义。
+  其中 $\beta_n$ 在式\eqref{eq:beta_n_def} 中定义。
 \end{lemma}
 
 \begin{proof}
-根据\eqref{eq:energy_diff} 式，
-\eqref{eq:diff1g}式的左边可以写成：
+根据 式\eqref{eq:energy_diff}，
+式\eqref{eq:diff1g}的左边可以写成：
 \begin{equation}\label{eq:knd}
 	\frac{P_{\sigma|G}(\Dist(\sigma, X)=1)}
 {P_{\sigma|G}(\sigma=X)}= (1+o(1))\sum_{s=1}^{k-1}\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0))
@@ -875,7 +876,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \end{equation*}
   
   因此，
-  由\eqref{eq:knd} 式我们可得：
+  由式\eqref{eq:knd} 我们可得：
   \begin{equation*}
     \frac{P_{\sigma|G}(\Dist(\sigma, X)=1)}
   {P_{\sigma|G}(\sigma=X)} \geq (k-1+o(1)) n^{g(\beta_n)}
@@ -951,7 +952,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	因此一般地我们有 $\frac{n^2}{\sqrt{\log n}}(1+o(1)) \leq N_{\bar{\sigma}} \leq \frac{n^2}{2}$。
 	
 	因为 $\frac{C}{\beta} n = o(\frac{\log n}{n} N_{\bar{\sigma}})$，
-  我们可以将  \eqref{eq:small} 式写成：
+  我们可以将 式 \eqref{eq:small} 写成：
 \begin{equation}
 	\left( \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i = X_j}} -Z_{ij}
 	+ \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i \neq X_j}} -Z_{ij} \right)\geq -\gamma\frac{\log n N_{\bar{\sigma}}}{n}(1+o(1))
@@ -992,8 +993,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	我们只需证明 $P_{\sigma}(\sigma \neq X | D(\sigma, X)) \leq  n^{\tilde{g}(\beta)/2 + \epsilon}$。
 	由引理 \ref{prop:small}， 对于 $\cG_n^{(r)}, r\in [n]$，
 	令 $\cG'_n = \cap_{r=1}^n \cG_n^{(r)}$ 
-  并且在 \eqref{eq:Gr} 式中选取 $\frac{\epsilon}{2}$；
-  由 \eqref{eq:Gr} 和 \eqref{eq:Gr1} 式，我们有：
+  并且在 式\eqref{eq:Gr} 中选取 $\frac{\epsilon}{2}$；
+  由 \eqref{eq:Gr} 和 \eqref{eq:Gr1}，我们有：
 	\begin{align*}
 	P_G(\cG'^c_n) &= P_G(\cup_{r=1}^n (\cG_n^{(r)})^c) \\
 	&\leq \sum_{r=1}^{n/\sqrt{\log n } } n^{r(\tilde{g}(\beta)/2 + \epsilon/2)}  + n e^{-n} \\
@@ -1002,7 +1003,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	其中最后一个不等式估计用了等比数列的求和。
 
 	另一方面， 对于每个 $G \in \cG'_n$，
-  由 \eqref{eq:psigmaX} 和 \eqref{eq:psigmaX1} 式，
+  由 \eqref{eq:psigmaX} 和 \eqref{eq:psigmaX1} ，
 	我们有：
 	\begin{align*}
 	\frac{P_{\sigma | G}(\sigma \neq X | D(\sigma, X))}{1-P_{\sigma | G}(\sigma \neq X | D(\sigma, X))} &= \frac{P_{\sigma | G}(\sigma \neq X | D(\sigma, X))}{P_{\sigma|G}(\sigma=X | D(\sigma, X))} \\
@@ -1041,7 +1042,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   对于任意的 $f\in S_k$，
   我们有
   $\Dist(f(X), \Lambda) = \frac{(k-1)n}{k} > \frac{n}{\sqrt{\log n}}$，
-  其中 $\Lambda$ 在\eqref{eq:Big_Lambda}式中定义。
+  其中 $\Lambda$ 在式\eqref{eq:Big_Lambda}中定义。
 	因此，由引理 \ref{lem:small}，
   我们可以找到一个图的集合 $\cG'_n$
   使得 $P_G(\cG'_n) \leq \exp(-nC)$
@@ -1057,7 +1058,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 \end{proof}
 \subsection{定理 \ref{thm:error_rate} 的证明}
 在本节我们首先给出获得\eqref{eq:hatX_double_prime}
-和\eqref{eq:PG_energy}式 的推导过程。
+和\eqref{eq:PG_energy} 的推导过程。
 
 由能量函数的表达式\eqref{eq:energy}，
 我们有：
@@ -1067,10 +1068,10 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 \end{equation}
 注意到$\sum_{1<i<j<n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)=\frac{k}{2}\frac{n}{k}(\frac{n}{k}-1)$
 是一个与$\bar{sigma}$ 无关的常数。因此极小化
-$H(\bar{\sigma}) $ 等价于极小化
-\eqref{eq:hatX_double_prime}式。
+$H(\bar{\sigma}) $ 等价于极小化式
+\eqref{eq:hatX_double_prime}。
 
-另外，由 \eqref{eq:GmL} 式，
+另外，由式 \eqref{eq:GmL} ，
 对数似然函数可写成
 \begin{align*}
   \log P_G(Z=z|X=\sigma)
@@ -1090,7 +1091,7 @@ $H(\bar{\sigma}) $ 等价于极小化
   \sum_{\{i,j\}\not \in E(G)}
   \delta(\sigma_i, \sigma_j)+ C
 \end{align*}
-从而得到\eqref{eq:PG_energy}式。
+从而得到式\eqref{eq:PG_energy}。
 
 定理 \ref{thm:error_rate} 的证明依赖下述引理：
 \begin{lemma}\label{lem:mZW}
@@ -1123,7 +1124,7 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
   $\Dist(\sigma, X) = r$ 且
   $H(\sigma) < H(X)$。
 	
-	由 \eqref{eq:energy_diff} 式，当
+	由式 \eqref{eq:energy_diff} ，当
   $\sigma$ 与 $X$ 仅在一个坐标上不同时，
   由 引理 \ref{lem:mZW}，
   $H(\sigma) < H(X)$ 发生的概率为
@@ -1146,13 +1147,13 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 	\leq & (1+o(1))\frac{(k-1) n^{g(\bar{\beta})}}{1-(k-1) n^{g(\bar{\beta})}} = (k-1+o(1))n^{g(\bar{\beta})}
 	\end{align*}   
 	
-当 $\sigma \in W^*$， 由\eqref{eq:number_of_sigma_r_equal_omega_i}式
+当 $\sigma \in W^*$， 由式\eqref{eq:number_of_sigma_r_equal_omega_i}
  我们有 $I'_i = I_i$。
 由 引理 \ref{lem:minus} 可得
 $N_{B_{\sigma}} = 
 N_{A_{\sigma}}$
 且 $N_{\sigma} = 0$。
-由 \eqref{eq:Hgeneral}式，
+由 式\eqref{eq:Hgeneral}，
 $H(\sigma) < H(X)$ 等价于
 $B_{\sigma} > A_{\sigma}$。
 
@@ -1163,7 +1164,7 @@ $B_{\sigma} > A_{\sigma}$。
 条件2不会被满足，否则会推出$N_{\sigma}$
 的一个非零下界，与  $N_{\sigma} = 0$矛盾。
 所以条件1被满足，
-由 \eqref{eq:Asigma}式，
+由 式\eqref{eq:Asigma}，
 我们有 $A_{\sigma} \geq \frac{n^2}{k^2(k-1)\sqrt{\log n} } (1+o(1))$。
 当 $m \geq \frac{n}{ \sqrt{\log n}}$ ，
 在 引理 \ref{lem:mZW}  中 取

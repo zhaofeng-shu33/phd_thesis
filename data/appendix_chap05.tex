@@ -60,8 +60,8 @@ $P(Y,Z|(X_1,\ldots,X_n),X_{i_1}=1,X_{i_2}=-1)$
 对于
 某个特定的节点标签
 $x^*$，
-若
-\eqref{eq:mle} 式中的 ML 算法
+若式
+\eqref{eq:mle} 中的 ML 算法
 无法精确恢复 
 $x^*$，则
 存在 $x\neq x^*$ 使得 $P(y,z|x) > P(y,z|x^*)$。
@@ -82,8 +82,8 @@ $x^*$，则
     $P(y,z|x) > P(y,z|x^*)$
     两边同时取
     对数
-    ， 并利用
-    \eqref{eq:lh} 式，
+    ， 并利用式
+    \eqref{eq:lh} ，
     可得如下等价不等式：
     \begin{equation}\label{eq:ein}
     \sum_{i=1}^{km}
@@ -99,7 +99,7 @@ $x^*$，则
     $P_0(P_1)$，
     且有 $z_{i} \sim \Bern(p), z'_{i} \sim \Bern(q)$。
     
-    我们把 \eqref{eq:ein} 式所描述的事件
+    我们把式 \eqref{eq:ein} 所描述的事件
     叫做 $A_k$，
     则每个 $F_k$ 
     可看成
@@ -122,7 +122,7 @@ $x^*$，则
      $\widetilde{Z}'$ 
      的定义类似 \eqref{eq:zu}。
  则
-    \eqref{eq:ein} 式可化为：
+ 式 \eqref{eq:ein} 可化为：
     \begin{align}
     &m\left[\sum_{y\in \mathcal{Y}}
     P_{\widetilde{Y}_1}(y)\log\frac{P_1(y)}
@@ -144,7 +144,7 @@ $x^*$，则
     下界，我们还需要如下两个引理。
     \begin{lemma}\label{lem:single_lower}
         对于 
-         在 \eqref{eq:ein}式中给出的事件 $A_1$ 
+         在式 \eqref{eq:ein}中给出的事件 $A_1$ 
           （取 $k=1$），
         我们有如下的不等式估计
         \begin{equation}\label{eq:pa1}
@@ -189,7 +189,7 @@ $P_{\widetilde{Y}^{*}_1}$
 中的引理 4，
 $P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)$ 下界为
  $n^{-(\sqrt{a} - \sqrt{b})^2 + o(1)}$。
-因此得到 \eqref{eq:pa1} 式。
+因此得到 式\eqref{eq:pa1} 。
         \end{proof}
 
 \begin{lemma}\label{lem:p0p1}
@@ -486,7 +486,7 @@ $\lambda$ 的方程：
     P_1^{\lambda} (y)}
     =0
 \end{align*}
-上式恰等价于 \eqref{eq:lambda} 式中目标函数对 $\lambda$求导后整个式子等于零。
+上式恰等价于 式\eqref{eq:lambda} 中目标函数对 $\lambda$求导后整个式子等于零。
 因此$P_{\widetilde{Y}}=P_{\lambda^*}(\lambda)$。
 代入$I_1$ 的表达式中化简后我们可得
 $I_1 = I_+$。
