@@ -232,7 +232,7 @@ $P_e(\hat{X}^*) \to 1$。
 %与式\eqref{eq:beta_star_sibm}的情形类似，
 注意到条件$\sqrt{a} - \sqrt{b} > \sqrt{k}$使得
 式\eqref{eq:beta_star}中根号下的项非负。
-这个条件来自于定理 \ref{thm:sbmk_phase_transition} ，
+这个条件来自于定理 \ref{thm:sbmk_phase_transition}，
 保证了随机块模型本身精确恢复可实现。
 
 
@@ -470,7 +470,7 @@ $\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
 当 $\gamma>b$ 时，
 我们可以选取一个足够大的 $\beta$ 使得
 $\beta > \beta^*$，
-则 由 定理 \ref{thm:phase_transition} ，
+则 由 定理 \ref{thm:phase_transition}，
 当$n$充分大时 $\sigma \in S_k(X)$ 几乎必然发生。
 这蕴含了 $P_{\sigma | G}(\sigma = X)$
 对于几乎所有 从 随机块模型生成的图  $G$来说 取得最大值。
@@ -551,7 +551,7 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 %这种联系。
 
 通过最大化对数似然函数可得到最大似然估计量。
-由 式\eqref{eq:GmL} ，该似然函数可以进一步写成：
+由 式\eqref{eq:GmL}，该似然函数可以进一步写成：
 \begin{equation}\label{eq:PG_energy}
 	\log P_G(Z=z|X=\sigma) = -\log\frac{a}{b} \cdot H(\sigma) + C
 \end{equation}
@@ -636,10 +636,10 @@ $k^n$的速率指数增大。
 针对我们研究的模型和能量表达式 \eqref{eq:energy}，
 我们对算法 \ref{alg:Metropolis} 进行
 改写，得到
-算法 \ref{alg:m} 。
+算法 \ref{alg:m}。
 算法 \ref{alg:m} 要求
 社团数量 $k$ 和参数 $\beta, \gamma$ 事先给定。
-根据定理 \ref{thm:phase_transition} ，我们需选取  $\beta>\beta^*, \gamma > b$
+根据定理 \ref{thm:phase_transition}，我们需选取  $\beta>\beta^*, \gamma > b$
 %\footnote{ $\beta^*$ 的定义参见式 \eqref{eq:beta_star} }
 。
 这里的 $a, b$
@@ -653,7 +653,7 @@ $k^n$的速率指数增大。
 	\begin{algorithmic}[1]
 		\STATE 随机初始化 $\bar{\sigma} \in W^n$ %\vskip 0.5em
 		\FOR{$i=1,2,\dots, N$}
-		\STATE 根据引理 \ref{lem:lemmaDiff} ，
+		\STATE 根据引理 \ref{lem:lemmaDiff}，
 		随机选取 $s, r$ 并得到新的状态
 		 $\bar{\sigma}'$
 		 %\vskip 0.5em
@@ -668,7 +668,7 @@ $k^n$的速率指数增大。
 		\ENDFOR
 	\end{algorithmic}
 \end{algorithm}
- 由 引理 \ref{lem:lemmaDiff} ， $\Delta H(r,s)$ 的计算需要 $O(\log n)$ 的时间。
+ 由 引理 \ref{lem:lemmaDiff}， $\Delta H(r,s)$ 的计算需要 $O(\log n)$ 的时间。
 有研究针对某种特殊的伊辛模型指出
 在$N=O(n\log n)$的条件下 即可得到近似的比较好的样本\cite{mcmc}。
 对于我们的模型，由于我们并不清楚 $ N = O(n\log n)$ 是否足够，

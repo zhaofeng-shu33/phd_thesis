@@ -25,7 +25,7 @@
 SSBM 模型的推广。为方便讨论又不失一般性，
 这里我们在2个社团的随机块模型的
 基础上引入辅助信息。
-由定义 \ref{def:SSBM} ，当$k=2$时，
+由定义 \ref{def:SSBM}，当$k=2$时，
 节点标签$X$满足$X_i \in \{\pm 1\}$
 且 $\sum_{i=1}^n X_i = 0$。
 除了图中边的集合
@@ -131,7 +131,7 @@ $\lceil \log n \rceil $ 的整数倍，同时
     \right)
     \right]
 \end{equation}
-而 $P_{\lambda}$ 类似式\eqref{eq:P_lambda_x} ，为
+而 $P_{\lambda}$ 类似式\eqref{eq:P_lambda_x}，为
 \begin{equation}\label{eq:P_lambda_0_1}
     P_{\lambda}(x) = \frac{P_0^{1-\lambda}(x) P_1^{\lambda} (x)}
     {\sum_{x \in \mathcal{X}}P_0^{1-\lambda}(x) P_1^{\lambda} (x)}        
@@ -181,7 +181,7 @@ $$
 + d - c^{\lambda^*}d^{1-\lambda^*}\right]
 + \gamma D(P_{\lambda^*} || P_0)
 \end{align*}
-即得式\eqref{equation:I+} 。
+即得式\eqref{equation:I+}。
 $\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another} 
 进行计算。目标函数为：
 \begin{align*}
@@ -207,15 +207,15 @@ $\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another}
 当 $\gamma=0$ 时，由式\eqref{eq:lambda} 可得 $\lambda^*=\frac{1}{2}$，
 则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。由 式 \eqref{eq:renyi_d12_ab}，
 $I_+$ 也可写成雷尼散度的形式。
-进一步地，由定理 \ref{thm:Pe} ，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
+进一步地，由定理 \ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
 时可精确恢复。定理 \ref{thm:Pe} 退化到
-定理 \ref{thm:sbm2_phase_transition} 。
+定理 \ref{thm:sbm2_phase_transition}。
 \end{remark}
 
 \section{误差衰减速率}\label{sec:sbmsi_error_decay_rate}
 在 \ref{sec:sbmsi_exact_recovery_condition} 节的基础上，
 我们讨论一种更强的要求，即恢复算法将SSBM各社团大小相等的条件考虑在内。
-类似定理 \ref{thm:error_rate} ，
+类似定理 \ref{thm:error_rate}，
 在这种情况下，利用带约束的最大似然估计，我们可以得到恢复算法更快的误差衰减速率。
 %{eq:mle_sibm}
 

@@ -91,8 +91,10 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 \lambda_k$ 是递增的数列，而 $h_{\P}(\lambda)=f[\P]-|\P|\lambda$。
 对于分割 $\P_0, \dots, \P_k$ 来说，
 它们也有一个序关系。我们称分割 $P$ 是 $Q$ 的一个细分，
-如果 $\forall C \in P, \exists C' \in Q, s.t.\, C\subset C'$，
-并记为 $P \preceq Q$。基于细分的此种定义，我们有
+记作 $P \preceq Q$：
+如果 $\forall C \in P, \exists C' \in Q$，
+使得$C\subset C'$。
+基于细分的此种定义，我们有
 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 其中 $\P_0=\{V\}$ 而 $\P_k=\cup_{i=1}^n \{ i\}$。
 
@@ -422,6 +424,7 @@ z_{ij}}q^{\sum_{x_i \neq x_j} z_{ij}}
 \newglossaryentry{mle}
 {name=最大似然估计,
 description={Maximum likelihood estimation}}
+上式中$P_G$中的下标$G$表示图$G$是由SSBM模型随机生成的。
 若 参数 $p, q$ 已知，
 通过求
 式\eqref{eq:GmL} 的最大值

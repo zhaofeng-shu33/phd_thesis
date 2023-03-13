@@ -302,7 +302,7 @@ $G[C_i](i=1,\dots, t)$
 
 \begin{example}
 	我们用一个简单的例子来说明
-  算法 \ref{alg:psp_i_simplified} 。
+  算法 \ref{alg:psp_i_simplified}。
   考虑图 $G(V, E)$，有 $V=\{1,2,3,4\}, E=\{(1,2),(1,3),(2,3),(1,4),(2,4)\}$。
   边的权值为 $w_{13}=2, w_{12}=5, w_{23}=2, w_{14}=1, w_{24}=1$。
 	图 \ref{fig:alg_eg} (a)中画出了 $G$
@@ -442,7 +442,7 @@ HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
 由于我们未存储子节点的信息，因此我们在
 获取分割的实现策略上需要另辟蹊径。
 为此，我们采用自底向上的方法获取全部的分割，
-具体实现见算法 \ref{alg:get_psp} 。
+具体实现见算法 \ref{alg:get_psp}。
 
 \begin{algorithm}[!ht]
 	\caption{从聚类树获取主分割序列}\label{alg:get_psp}
@@ -737,7 +737,7 @@ HPSP算法 实现数据的聚类的任务。
 罗马尼亚语同由拉丁语演变而来，
 图 \ref{fig:language_tree} 中亦反映出来这五种语言距离很近。
 
-有学者用了普通的聚合聚类的方式对10种常用语言进行聚类 \cite{al2017characterization} 。
+有学者用了普通的聚合聚类的方式对10种常用语言进行聚类 \cite{al2017characterization}。
 我们在这里指出其结果存在一定的不足，比如荷兰语和德语同属于日尔曼语系，在
 其获得的聚类树中无法体现，而在我们得到的图中荷兰语和德语的亲近性一目了然。
 
