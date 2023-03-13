@@ -1052,7 +1052,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	因此，由引理 \ref{lem:small}，
   我们可以找到一个图的集合 $\cG'_n$
   使得 $P_G(\cG'_n) \leq \exp(-nC)$
-	并且对 $G\not \in \cG'_n$， $P_{\sigma}(\sigma = f(X)) \leq \exp(-Cn)$。
+	并且对 $G\not \in \cG'_n$， $P_{\sigma|G}(\sigma = f(X)) \leq \exp(-Cn)$。
   因此
 	\begin{align*}
 	P_a(\hat{X}^*) \leq P_G(\cG'_n) + k! \exp(-Cn) = (1+k!)\exp (-Cn)
@@ -1069,12 +1069,13 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 由能量函数的表达式\eqref{eq:energy}，
 我们有：
 \begin{equation}
-	H(\bar{\sigma}) := (\gamma \frac{\log n}{n} + 1)\sum_{\{i,j\}\not\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	H(\bar{\sigma}) := \left(
+    \gamma \frac{\log n}{n} + 1 \right)\sum_{\{i,j\}\not\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	- \sum_{1<i<j<n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 \end{equation}
 注意到$\sum_{1<i<j<n} \delta(\bar{\sigma}_i, \bar{\sigma}_j)=\frac{k}{2}\frac{n}{k}(\frac{n}{k}-1)$
-是一个与$\bar{sigma}$ 无关的常数。因此极小化
-$H(\bar{\sigma}) $ 等价于极小化式
+是一个与$\bar{\sigma}$ 无关的常数。因此极小化
+$H(\bar{\sigma}) $ 等价于求解
 \eqref{eq:hatX_double_prime}。
 
 另外，由式 \eqref{eq:GmL} ，
@@ -1083,17 +1084,19 @@ $H(\bar{\sigma}) $ 等价于极小化式
   \log P_G(Z=z|X=\sigma)
   &= \log p \sum_{\sigma_i = \sigma_j} z_{ij}
   +\log q \sum_{\sigma_i \neq \sigma_j}z_{ij}\\
-  &+\log (1-p) \sum_{\sigma_i = \sigma_j}(1-z_{ij})
+  &\quad +\log (1-p) \sum_{\sigma_i = \sigma_j}(1-z_{ij})
   +\log (1-q) \sum_{\sigma_i \neq \sigma_j}(1-z_{ij})\\
   &= \log p \sum_{\{i,j\}\in E(G)}
-  \delta(\sigma_i, \sigma_j)
-  +\log q \sum_{\{i,j\}\in E(G)}(1-\delta(\sigma_i, \sigma_j))\\
-  &+\log (1-p) \sum_{\{i,j\}\not\in E(G)}
-  \delta(\sigma_i, \sigma_j)
+  \delta(\sigma_i, \sigma_j) +
+  \log q \sum_{\{i,j\}\in E(G)}(1-\delta(\sigma_i, \sigma_j))\\
+  &\quad+\log (1-p) \sum_{\{i,j\}\not\in E(G)}
+  \delta(\sigma_i, \sigma_j)\\
+  &\quad\quad
   +\log (1-q) \sum_{\{i,j\}\not\in E(G)}
   (1-\delta(\sigma_i, \sigma_j))\\
   &=\log \frac{a}{b} \sum_{\{i,j\}\in E(G)}
-  \delta(\sigma_i, \sigma_j) + (\log(1-p)-\log(1-q))
+  \delta(\sigma_i, \sigma_j) + (\log(1-p)-\log(1-q)) \\
+  &\quad\cdot
   \sum_{\{i,j\}\not \in E(G)}
   \delta(\sigma_i, \sigma_j)+ C
 \end{align*}
@@ -1104,11 +1107,12 @@ $H(\bar{\sigma}) $ 等价于极小化式
 	令 $m$ 为一正整数，
 	$Z_1, \dots, Z_m$
   是 i.i.d. 的 $\Bern\left(\B\right)$，
-  $W_1, \dots, W_m$ 是 i.i.d. $\Bern\left(\A\right)$，
+  $W_1, \dots, W_m$  i.i.d. 服从 $\Bern\left(\A\right)$，
   并且与 $Z_1, \dots, Z_m$独立，
 	则我们有：
 \begin{equation}
-	P(\sum_{i=1}^m (Z_i  - W_i) \geq 0) \leq \exp(-\frac{m \log n}{n}(\sqrt{a} - \sqrt{b})^2)
+	P(\sum_{i=1}^m (Z_i  - W_i) \geq 0) \leq 
+  \exp\left(-\frac{m \log n}{n} \left(\sqrt{a} - \sqrt{b} \right)^2 \right)
 	\end{equation}
 \end{lemma}
 引理 \ref{lem:mZW} 的证明与
