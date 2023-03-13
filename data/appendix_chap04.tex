@@ -30,7 +30,7 @@
   且  $\Var[N_E] = \frac{n(n-1)}{2} p(1-p) < a\frac{(n-1)\log n}{2}$。
 	则由切比雪夫不等式，
 	\begin{align*}
-	P(\Big|\frac{N_E}{n \log n } - \frac{a}{2} \frac{n-1}{n}\Big| > \epsilon) & \leq
+	P\left(\Big|\frac{N_E}{n \log n } - \frac{a}{2} \frac{n-1}{n}\Big| > \epsilon \right) & \leq
 	\frac{1}{\epsilon^2}\Var \left[\frac{N_E } {n \log n } \right] \\
 	& < \frac{a(n-1)}{2n^2\epsilon^2\log n}
 	\end{align*}
@@ -642,8 +642,12 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     &\leq (\mathbb{E}[\exp(sZ')])^{N_{B_{\bar{\sigma}}}}
     (\mathbb{E}[\exp(-sZ)])^{N_{A_{\bar{\sigma}}}}\cdot 
     \exp(-s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)) \\
-    & \leq \exp\Big(N_{B_{\bar{\sigma}}}
-    \frac{b\log n}{n}(e^s -1) + N_{A_{\bar{\sigma}}}\frac{a\log n}{n} (e^{-s} - 1) -s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)\Big) 
+    & \leq \exp\left(N_{B_{\bar{\sigma}}}
+    \frac{b\log n}{n}(e^s -1) + 
+    N_{A_{\bar{\sigma}}}\frac{a\log n}{n} \left(e^{-s} - 1 \right)\right. \\
+    &\quad \left. - s \left(\frac{\gamma \log n}{n} N_{\bar{\sigma}} 
+    - \frac{C}{\beta}n \right)
+    \right) 
     \end{align*}
     
     使用 $N_{B_{\bar{\sigma}}} = N_{\bar{\sigma}} + N_{A_{\bar{\sigma}}}$
@@ -657,13 +661,13 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     和 $g_2(s) = b(e^s - 1)-\gamma s$。
     两个函数 在 $s=0$ 处取值为零
     并且 $g_1'(s) = (be^s - ae^{-s}), g_2'(s) = be^s -\gamma$。
-    因此， $g_1'(0) = b-a<0, g_2'(0) = b - \gamma < 0$
+    因此， $g_1'(0) = b-a<0, g_2'(0) = b - \gamma < 0$。
     我们可以选择 $s^*>0$，使得 $g_1(s^*) < 0,g_2(s^*) < 0$。
     为了补偿 $sCn/\beta$ 这一项的影响，我们只需要确保
-    $\frac{\log n}{n} \min\{N_{A_{\bar{\sigma}}}, N_{\bar{\sigma}}\}$ 的阶次大于$n$。
+    $\frac{\log n}{n} \min\{N_{A_{\bar{\sigma}}}, N_{\bar{\sigma}}\}$ 的阶数大于$n$。
     由于   $N_{A_{\bar{\sigma}}}\geq \frac{n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$ 或 $N_{\bar{\sigma}} \geq \frac{n^2}{2k^2}(1+o(1))$
     有一个成立，
-    这一要求可以得到了满足。
+    这一要求得到了满足。
   \end{proof}
 
 \begin{lemma}\label{prop:small}
@@ -681,7 +685,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   n^{r \tilde{g}(\beta) /2}
   \end{equation}
   
-  对于 $r> \frac{n}{\sqrt{\log n}}$， 存在集合 $\cG^{(r)}$ 使得：
+  对于 $r> \frac{n}{\sqrt{\log n}}$， 存在集合 $\cG^{(r)}$， 使得：
 \begin{equation}\label{eq:Gr1}
   P(G\in\cG^{(r)}_n) \ge 1 - e^{-n}
   \end{equation}
@@ -693,7 +697,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \end{equation}
 \end{lemma}
 \begin{proof}
-  我们将讨论分为两种情况： $r\leq \frac{n}{\sqrt{\log n}}$
+  我们分两种情况讨论： $r\leq \frac{n}{\sqrt{\log n}}$
   和 $r > \frac{n}{\sqrt{\log n}}$。
   
   当 $r\leq \frac{n}{\sqrt{\log n}}$ 时，
@@ -724,11 +728,11 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \begin{align*}
   \frac{P_{\sigma|G}(\Dist(\sigma, X)=r)}
   {P_{\sigma|G}(\sigma=X)}  &= \sum_{\Dist(\bar{\sigma}, X)=r}\exp(-\beta(H(\bar{\sigma})-H(X)))\\
-  \textrm{ by \eqref{eq:Hgeneral} } &\leq \sum_{\Dist(\bar{\sigma}, X)=r}\exp(\beta_n(B_{\bar{\sigma}}-A_{\bar{\sigma}}))
+  \textrm{ 由 \eqref{eq:Hgeneral} } &\leq \sum_{\Dist(\bar{\sigma}, X)=r}\exp(\beta_n(B_{\bar{\sigma}}-A_{\bar{\sigma}}))
   \end{align*}
   其中 
   \begin{equation}\label{eq:beta_n_def}
-  \beta_n = \beta(1+\gamma\frac{\log n}{n})
+  \beta_n = \beta \left(1+\gamma\frac{\log n}{n} \right)
   \end{equation}
   
   定义
@@ -739,7 +743,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \end{equation}
   
   定义 事件 $\Lambda_n(G,r):=\{B_{\bar{\sigma}} -A_{\bar{\sigma}} < 0, \forall \bar{\sigma}\, \Dist(\bar{\sigma}, X)=r\}$，
-  然后我们采用下面的方式进行处理
+  然后我们采用下面的方式进行处理：
   \begin{align*}
   P_{G}(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2}) \leq
   P_G(\Lambda_n(G,r)^c)
@@ -785,7 +789,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \begin{align*}
   &n^{-r \tilde{g}(\beta) /2}\sum_{\Dist(\bar{\sigma}, X) = r}\sum_{\substack{tr\log n = \\ r(b-a)/k\log n} }^{-1}
   P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=t\log n)\exp(\beta_n rt \log n) \\
-  & \leq  (k-1)^r r\frac{b-a}{k} ( \log n )
+  & \leq  \frac{(k-1)^r r(b-a)}{k} ( \log n )
   n^{r(\tilde{g}(\beta_n) - \tilde{g}(\beta)/2)}\\
   & \leq  n^{r(\tilde{g}(\beta)/2 + \epsilon/2)} O(\log n) (k-1)^r
   \end{align*}
@@ -828,7 +832,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     \right] &\leq n^{g(\beta_n)}
 	\end{align}
 \end{lemma}
-引理 \ref{lem:7} 是 \citet{ye2020exact} 文中陈述 10 
+引理 \ref{lem:7} 是 文献 \inlinecite{ye2020exact} 中陈述 10 
 的拓展，并且可以用几乎一样的技巧证明。
 因此我们在这里省略引理 \ref{lem:7} 的证明。
 % This line can be changed if more detailed
@@ -836,7 +840,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 
 \begin{lemma}\label{prop:large2}
 	若 $\gamma > b$ 且 $\beta < \beta^*$，
- 存在一个集合 $\cG'_n$ 使得：
+ 则存在一个集合 $\cG'_n$ 使得：
 \begin{equation}
 	P_G(\cG'_n) \geq 1 - (1+o(1))\max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}
 	\end{equation}
@@ -861,7 +865,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 
 使用切比雪夫不等式， 我们有：
 \begin{equation*}
-  P_G(G \not\in \cG^{(2)}_n \Big\vert  G \in \cG^{(1)}_n) \leq n^{- g(\beta_n) + \epsilon}
+  P_G \left(G \not\in \cG^{(2)}_n \vert  G \in \cG^{(1)}_n \right)
+  \leq n^{- g(\beta_n) + \epsilon}
   \end{equation*}
   
   令 $\cG'_n = \cG^{(1)}_n \cap \cG^{(2)}_n$：
@@ -901,7 +906,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	$P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = \mathbf{1}_n)$
 	发生的概率 小于 $\exp(-\tau(\beta, \gamma) n \sqrt{\log  n} )$，
   其中 $C$ 是任意事先给定的常数，
-  $\tau(\beta, \gamma)$ 是某个依赖于$\gamma$和$\beta$的取值为正值的函数。
+  $\tau(\beta, \gamma)$ 是某个依赖于$\beta$ 和 $\gamma$的取值为正值的函数。
 \end{lemma}
 引理 \ref{lem:small} 和引理 \ref{lem:sigmaX}  具有某种对称性，但其证明不同，
 引理 \ref{lem:small} 的证明如下。
@@ -921,7 +926,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 \begin{align}
 	(1 + \frac{\gamma \log n}{n})
 	\left( \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} Z_{ij} +
-	\sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} Z_{ij} \right)\notag\\
+	\sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} Z_{ij} \right)
 	\leq \frac{\gamma \log n}{n} N_{\bar{\sigma}} + \frac{C}{\beta} n\label{eq:small}
 \end{align}
 		
@@ -944,18 +949,19 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	当 $n_0 > \frac{n}{2}$ 时，
 	我们有
   $N_{\bar{\sigma}} \geq n_0 (n - n_0) \geq \frac{n^2}{\sqrt{\log n}}(1+o(1))$。
-	当 $n_0 = n - \frac{n}{\sqrt{\log n}}$时，第二个不等式可达。
+	当 $n_0 = n - \frac{n}{\sqrt{\log n}}$时，第二个不等式取等号。
   当 $n_0 < \frac{n}{2}$ 时，
 	$N_{\bar{\sigma}} \geq \frac{n^2 - nn_0}{2} \geq \frac{n^2}{4}$，
   并且当 $n_0 = \frac{n}{2}$时，
-  第二个不等式成立。
-	因此一般地我们有 $\frac{n^2}{\sqrt{\log n}}(1+o(1)) \leq N_{\bar{\sigma}} \leq \frac{n^2}{2}$。
+  第二个不等式取等号。
+	因此，一般地，我们有 $\frac{n^2}{\sqrt{\log n}}(1+o(1)) \leq N_{\bar{\sigma}} \leq \frac{n^2}{2}$。
 	
 	因为 $\frac{C}{\beta} n = o(\frac{\log n}{n} N_{\bar{\sigma}})$，
   我们可以将 式 \eqref{eq:small} 写成：
 \begin{equation}
-	\left( \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i = X_j}} -Z_{ij}
-	+ \sum_{\substack{\bar{\sigma}_i  \neq \bar{\sigma}_j \\ X_i \neq X_j}} -Z_{ij} \right)\geq -\gamma\frac{\log n N_{\bar{\sigma}}}{n}(1+o(1))
+	\left( \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} -Z_{ij}
+	+ \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} -Z_{ij} \right)\geq 
+  -\gamma\frac{\log n N_{\bar{\sigma}}}{n}(1+o(1))
 	\end{equation}
 	
 	令 $N_1 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} 1$
@@ -973,7 +979,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   我们进一步有：
 	\begin{align*}
 	P_G(D'(\bar{\sigma}, C))
-	& \leq \exp( \frac{N_{\bar{\sigma}}\log n }{n}(b(e^{-s}-1)+ \gamma s + o(1))) 
+	& \leq \exp \left( \frac{N_{\bar{\sigma}}\log n }{n}(b(e^{-s}-1)+ \gamma s + o(1)) \right) 
 	\end{align*}
 	
 	令 $h_b(x) = x - b -x\log \frac{x}{b}$，
@@ -997,17 +1003,17 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   由 \eqref{eq:Gr} 和 \eqref{eq:Gr1}，我们有：
 	\begin{align*}
 	P_G(\cG'^c_n) &= P_G(\cup_{r=1}^n (\cG_n^{(r)})^c) \\
-	&\leq \sum_{r=1}^{n/\sqrt{\log n } } n^{r(\tilde{g}(\beta)/2 + \epsilon/2)}  + n e^{-n} \\
+	&\leq \sum_{r=1}^{n\left/\sqrt{\log n } \right. } n^{r(\tilde{g}(\beta)/2 + \epsilon/2)}  + n e^{-n} \\
 	& \leq \frac{1}{2} n^{\tilde{g}(\beta)/2 + \epsilon}
 	\end{align*}
-	其中最后一个不等式估计用了等比数列的求和。
+	其中最后一个不等式的估计用了等比数列的求和。
 
 	另一方面， 对于每个 $G \in \cG'_n$，
   由 \eqref{eq:psigmaX} 和 \eqref{eq:psigmaX1} ，
 	我们有：
 	\begin{align*}
 	\frac{P_{\sigma | G}(\sigma \neq X | D(\sigma, X))}{1-P_{\sigma | G}(\sigma \neq X | D(\sigma, X))} &= \frac{P_{\sigma | G}(\sigma \neq X | D(\sigma, X))}{P_{\sigma|G}(\sigma=X | D(\sigma, X))} \\
-	&< \sum_{r=1}^{n/\sqrt{\log n }}  n^{r\tilde{g}(\beta)/2} + n e^{-n}
+	&< \sum_{r=1}^{n \left/\sqrt{\log n } \right.}  n^{r\tilde{g}(\beta)/2} + n e^{-n}
 	\end{align*}
 	从中我们可以得到估计式 $P_{\sigma | G}(\sigma \neq X | D(\sigma, X))\leq \frac{1}{2}n^{\tilde{g}(\beta)/2 + \epsilon}$。
 	最后我们有： 
@@ -1030,8 +1036,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	
 	因此：
 	\begin{align*}
-	&P_{\sigma}(\sigma=X| D(\sigma, X))  \leq  P(\cG'^c_n) \\
-	&+ \sum_{G\in \cG'_n}P_G(G) P_{\sigma|G}(\sigma=X| D(\sigma, X)) \\
+	P_{\sigma}(\sigma=X| D(\sigma, X))  &\leq  P(\cG'^c_n) + \sum_{G\in \cG'_n}P_G(G) P_{\sigma|G}(\sigma=X| D(\sigma, X)) \\
 	& \leq \left(
     \frac{1}{k-1}+o(1) \right)
     n^{-g(\beta_n)} + (1+o(1)) \max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}\\
@@ -1046,14 +1051,14 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	因此，由引理 \ref{lem:small}，
   我们可以找到一个图的集合 $\cG'_n$
   使得 $P_G(\cG'_n) \leq \exp(-nC)$
-	并且对 $G\not \in \cG'_n$， $P_{\sigma |G}(\sigma = f(X)) \leq \exp(-Cn)$。
+	并且对 $G\not \in \cG'_n$， $P_{\sigma}(\sigma = f(X)) \leq \exp(-Cn)$。
   因此
 	\begin{align*}
-	P_a(\hat{X}^*) \leq P_G(\cG'_n) + k! \exp(-Cn) = (1+k!)\exp(-Cn)
+	P_a(\hat{X}^*) \leq P_G(\cG'_n) + k! \exp(-Cn) = (1+k!)\exp (-Cn)
 	\end{align*}
 	因为 $C$
   可取任意正数，
-	故$P_a(\hat{X}^*) \leq \exp(-Cn)$
+	故$P_a \left(\hat{X}^* \right) \leq \exp(-Cn)$
   的结论成立。
 \end{proof}
 \subsection{定理 \ref{thm:error_rate} 的证明}

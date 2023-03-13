@@ -298,10 +298,11 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 	差别为 $\bar{\sigma}'_r = \omega^s \cdot \bar{\sigma}_r$。
 	则 $\bar{\sigma}'$ 和 $\bar{\sigma}$ 的能量差为
 \begin{align}
-	H(\bar{\sigma}') - H(\bar{\sigma}) &= (1+\gamma \frac{\log n}{n})\sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)
+	H(\bar{\sigma}') - H(\bar{\sigma}) &= \left(1+\gamma \frac{\log n}{n} \right)
+	\sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)
 	+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1) \label{eq:DeltaH}
 	\end{align}
-	上式中 $m(\omega^j) := |\{i \in [n] | \bar{\sigma}_i = \omega^j | \}$，
+	上式中 $m(\omega^j) := \left|\left\{i \in [n] | \bar{\sigma}_i = \omega^j \right\} \right| $，
 	$N_r(G):=\{j | (r, j) \in E(G) \}$ 表示节点$r$
 	的邻居节点，
 	而 $J_s(x, y) = \delta(x, y) - \delta(\omega_s \cdot x, y)$。
@@ -311,7 +312,8 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
   \eqref{eq:energy} 式改写成
 	\begin{equation*}
 	H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{i < j} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
-	- (1 + \gamma\frac{\log n}{n}) \sum_{ \{i, j\} \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	- \left(1 + \gamma\frac{\log n}{n} \right)
+	\sum_{ \{i, j\} \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	\end{equation*}
 	
 	接着我们逐步计算能量差：
@@ -341,12 +343,13 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 	当 $\bar{\sigma}'$ 与 $X$ 仅在位置 $r$
 	上不同时， 在引理 \ref{lem:lemmaDiff} 中
 	取$\bar{\sigma}=X$，
-	结合条件  $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$，
+	结合条件  $|\{v \in [n] | X_v = u\}| = \frac{n}{k}$，
 	有 $m(\omega^s \cdot \bar{\sigma}_r)
 	=m(\bar{\sigma}_r)$，
 	进而：
 	\begin{equation}\label{eq:energy_diff}
-	H(\bar{\sigma}') - H(X) = (1+\gamma \frac{\log n}{n})(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
+	H(\bar{\sigma}') - H(X) = \left(1+\gamma \frac{\log n}{n} \right)
+	(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
 	\end{equation}
 	其中 $A^s_r$ 定义成
 	$A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
@@ -408,7 +411,7 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 我们有
 \begin{equation}\label{eq:introduction_g_a_b_eps}
   P_G(A_r^s - A_r^0 \ge t  \log n) 
-	\le  \exp\left(-\log n
+	\le  \exp\left(-\log n \cdot
 	\left(
    \frac{1}{k} g(a,b,kt) + O\left((\log n)^{-\delta} \right) \right)\right)
 \end{equation}
@@ -452,7 +455,8 @@ $Z_i, \dots, Z_n$ 是 i.i.d. $\Bern\left(\B\right)$ 而 $W_1, \dots, W_n$ 是 i.
 $Y_i$ 的概率质量函数可表示为 $[(1-q)p, qp+(1-p)(1-q), q(1-p)]$，对应 $[-1,0,1]$ 三个取值。
 首先我们计算得到 
 $\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
-=-a-b+be^t  + ae^{-t}$. 由 $\Lambda^*(s) = \sup_{t\in\mathbb{R}} st - \Lambda(t)$，
+=-a-b+be^t  + ae^{-t}$。
+由 $\Lambda^*(s) = \sup_{t\in\mathbb{R}}\ st - \Lambda(t)$，
 我们进一步得到 $\Lambda^*(s) = g(a,b,s)$。
 
 在我们的问题中， $\Gamma=[t, +\infty)$ 。
@@ -479,7 +483,7 @@ $\beta > \beta^*$，
 找到概率最大值的状态。
 等价地， 我们可以通过最小化 式\eqref{eq:energy}来获得状态的估计量：
 \begin{equation}\label{eq:hatX}
-\hat{X}' := \arg\min_{\bar{\sigma} \in W^n} H(\bar{\sigma})
+\hat{X}' := \argmin_{\bar{\sigma} \in W^n} H(\bar{\sigma})
 \end{equation}
 
 在 \eqref{eq:hatX} 中， 我们让 $\bar{\sigma}$ 在 $W^n$ 中取值。
@@ -490,7 +494,7 @@ $W^*:= \left\{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \f
 上。
 当 $\sigma \in W^*$ 时， 最小化 $H(\sigma)$ 等价于：
 \begin{equation}\label{eq:hatX_double_prime}
-\hat{X}'' := \arg\min_{\sigma \in W^*} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)
+\hat{X}'' := \argmin_{\sigma \in W^*} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)
 \end{equation}
 其最小值是不同社团之间的最小分割。
 
@@ -519,7 +523,7 @@ $\tilde{g}(\beta)$ 是一个常数。
 对于充分大的 $n$，我们有 
 \begin{enumerate}
 	\item 若 $\gamma > b$， $P_G(\hat{X}' \not\in S_k(X)) \leq (k-1+o(1))n^{g(\bar{\beta})}$；
-	\item $P_G(\hat{X}'' \not\in S_k(X)) \leq ((k-1)^2+o(1))n^{2g(\bar{\beta})}$。
+	\item $P_G(\hat{X}'' \not\in S_k(X)) \leq \left((k-1)^2+o(1) \right)n^{2g(\bar{\beta})}$。
 \end{enumerate}
 \end{theorem}
 因为 $g(\bar{\beta})<0$， 我们有大小关系 $n^{2g(\bar{\beta})} < n^{g(\bar{\beta})} < n^{g(\bar{\beta})/2}$。
@@ -564,19 +568,19 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 	\left(\log \left(1-\B \right) - \log \left(1-\A \right) \right)	 
 \end{equation}
 
-当 $n$ 充分大时，我们有 $\gamma \to \gamma_{ML} := \frac{a-b}{\log(a/b)}$。   
+当 $n$ 充分大时，我们有 $\gamma \to \gamma_{\mathrm{ML}} := \frac{a-b}{\log(a/b)}$。   
 也即，
-当 $\gamma = \gamma_{ML}$时，
+当 $\gamma = \gamma_{\mathrm{ML}}$时，
 最大似然估计量 渐近等价于 $\hat{X}'$。
 
 由式\eqref{eq:PG_energy}可知，
 最大化似然函数等价于极小化能量$H(\sigma)$，
 其中参数$\gamma$
-从式\eqref{eq:special_gamma_ML}中取值。
+由式\eqref{eq:special_gamma_ML}给出。
 其次，
 由式\eqref{eq:hatX_double_prime}，
 极小化能量$H(\sigma)$
-等价于$\min \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)$。
+等价于$\min_{\sigma} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)$。
 考虑到在$W^*$的约束下，
 $\sum_{1<i<j<n} \delta(\sigma_i, \sigma_j)$
 是一个常数，式\eqref{eq:hatX_double_prime}又等价于
@@ -596,18 +600,18 @@ Q(\sigma) = -\sum_{\{i,j\} \not\in E(G) } \frac{d_i d_j}{2 |E|}\delta(\sigma_i,\
 
 当$n$充分大时，平均意义上我们有 $d_i \sim  \frac{(a+(k-1)b)\log n}{k}, |E| \sim \frac{1}{2}n d_i$。
 因此，我们有
-$\frac{d_id_j}{2|E|} \to \gamma_{MQ} \frac{\log n}{n} $。
+$\frac{d_id_j}{2|E|} \to \gamma_{\mathrm{MQ}} \frac{\log n}{n} $。
 从式 \eqref{eq:Qtransform}我们可以看到，
-当 $\gamma = \gamma_{MQ} = \frac{a+(k-1)b}{k}$ 且 $n\to \infty$时，
+当 $\gamma = \gamma_{\mathrm{MQ}} = \frac{a+(k-1)b}{k}$ 且 $n\to \infty$时，
 $Q(\sigma) \to -H(\sigma)$。
-也即，当$\gamma = \gamma_{MQ}$ 时，
+也即，当$\gamma = \gamma_{\mathrm{MQ}}$ 时，
 最大模块度估计量渐近等价于
 $\hat{X}'$ 。
 
 
 通过$a>b$和 当$x>1$时的不等式 
  $x-1>\log x $，我们可以验证
-  $\gamma_{MQ} >b$ 且  $\gamma_{ML} > b$。
+  $\gamma_{\mathrm{MQ}} >b$ 且  $\gamma_{\mathrm{ML}} > b$。
   这说明 了
   最大似然估计和最大模块度估计都满足
   定理 \ref{thm:error_rate} 所述的精确恢复条件 $\gamma > b $。
@@ -659,9 +663,9 @@ $k^n$的速率指数增大。
 		 %\vskip 0.5em
 		\STATE 通过 式\eqref{eq:DeltaH} 计算 $\Delta H(r,s) = H(\bar{\sigma}') - H(\bar{\sigma})$ %\vskip 0.5em
 		\IF{$\Delta H(r,s)<0$}
-		\STATE $\sigma_r \leftarrow w^s \cdot \sigma_r$ %\vskip 0.5em
+		\STATE $\sigma_r \gets w^s \cdot \sigma_r$ %\vskip 0.5em
 		\ELSE
-		\STATE 以概率 $\exp(-\beta \Delta H(r,s))$ 使得
+		\STATE 以概率 $\exp(-\beta \upDelta H(r,s))$ 使得
 			$\sigma_r \leftarrow w^s \cdot \sigma_r$，
 			否则保持原状。 %\vskip 0.5em
 		\ENDIF %\vskip 0.5em
@@ -672,8 +676,8 @@ $k^n$的速率指数增大。
 有研究针对某种特殊的伊辛模型指出
 在$N=O(n\log n)$的条件下 即可得到近似的比较好的样本\cite{mcmc}。
 对于我们的模型，由于我们并不清楚 $ N = O(n\log n)$ 是否足够，
-因此我们在数值实验中经验地选取 $N=O(n^2)$。
-算法 \ref{alg:m} 总的时间复杂度为 $O(n^2 \log n)$。
+因此我们在数值实验中经验地选取 $N=O\left(n^2\right)$。
+算法 \ref{alg:m} 总的时间复杂度为 $O\left(n^2 \log n \right)$。
 
 
 
