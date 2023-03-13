@@ -104,7 +104,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
 若 $Z_1, \dots, Z_n$ $\epsilon$-弱独立, 则有
 \begin{equation}\label{eq:PXV}
 D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
-\sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_F^2 + o(\epsilon^2)
+\sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_{\mathrm{F}}^2 + o(\epsilon^2)
 \end{equation}
 其中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
 之间的$B$ 矩阵（参见式\eqref{eq:Ixy}）。
@@ -114,7 +114,7 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 因此，定理 \ref{thm:DPX} 可看成式 \eqref{eq:Ixy} 
 的拓展。
 
-在式\eqref{eq:PXV}中，$\norm{B_{ij}}_F^2 =O(\epsilon^2)$，
+在式\eqref{eq:PXV}中，$\norm{B_{ij}}_{\mathrm{F}}^2 =O(\epsilon^2)$，
 如果忽略高阶小量 $o(\epsilon^2)$，我们可以建立多变量互信息和图强度的
 联系。每个随机变量$Z_i$对应到图$G$的节点$i$，
 而分割 $\P$
@@ -122,7 +122,7 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 假设我们考虑的图 $G(V, E)$ 是有向的
 \footnote{有向图的假设可以减少计算量而不失一般性}，
 节点$i$和节点$j$之间边的权值$w_{ij}$为
-$\norm{B_{ij}}_F^2$。
+$\norm{B_{ij}}_{\mathrm{F}}^2$。
 对于 $C\subseteq V$
 我们定义图的入割函数 (in-cut function) $f(C)$ 
  为 $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，

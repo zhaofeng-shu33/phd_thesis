@@ -145,7 +145,7 @@ $\lceil \log n \rceil $ 的整数倍，同时
  \ref{lem:I_plus_expression}   之前，
 我们先列举泊松分布的一个重要的性质。
 \begin{lemma}\label{lem:poisson_property}
-假设 $P_0 \sim \Pois(c)$, $P_1 \sim \Pois(d)$.
+假设 $P_0 \sim \Pois(c)$, $P_1 \sim \Pois(d)$，
 且 $P_{\lambda}$ 由 式\eqref{eq:P_lambda_0_1}
 给出。
 
@@ -197,8 +197,8 @@ $\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another}
 )\\
 & = c^{1-\lambda} d^{\lambda} 
 + d^{\lambda} c^{1-\lambda} -c -d +
-\gamma\log(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
-)
+\gamma\log \left(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
+\right)
 \end{align*}
 极小化上式即等价于式\eqref{eq:lambda}。
 \end{proof}
@@ -257,7 +257,7 @@ $I_+$ 也可写成雷尼散度的形式。
     \end{equation}
     则精确恢复的误差上界为：
     \begin{equation}\label{eq:PeMain}
-    P_e \leq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right) }
+    P_e \leq \left(\frac{1}{4}+o(1) \right) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right) }
     \end{equation}
     如果下述条件满足，
     \begin{align}
@@ -266,7 +266,7 @@ $I_+$ 也可写成雷尼散度的形式。
     \end{align}
     则精确恢复的误差下界为：
     \begin{equation}\label{eq:PeMainL}
-    P_e \geq (\frac{1}{4}+o(1)) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right)}
+    P_e \geq \left(\frac{1}{4}+o(1) \right) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right)}
     \end{equation}
 \end{theorem}
 
@@ -466,7 +466,7 @@ $[L(X)]_i = \langle X,H_i \rangle$ 且 $[L(X)]_{i+n} = \langle X,F_i \rangle$。
 $L$ 可视为一个 $2n \times n^2$ 的矩阵，
 则矩阵 $Y$ 在 $L(X)=b$ 空间内的投影为
 \begin{align}\label{eq:proj:L:Y}
-\Pi_{A}(Y) := Y - L^* (L L^*)^{-1}[ L(Y) - b] .
+\Pi_{A}(Y) := Y - L^* (L L^*)^{-1}[ L(Y) - b] 
 \end{align}
 其中 $L^*$  是 $L$ 的转置，设 $(\mu,\nu)$ 是一个$\mathbb{R}^{2n}$ 维的向量，
 则我们有 $L^*((\mu,\nu)) = \sum_{i=1}^n \mu_i H_i + \sum_{i=1}^n \nu_i F_i$。
@@ -479,7 +479,7 @@ $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
 取矩阵$L L^*$的逆得
 \begin{align*}
 (LL^*)^{-1} = \diag\Big(\frac{1}{2n-2},\frac{1}{2(n-3)} 
-\big[ I_{n-1} - \frac{J_{n-1}}{2n-4} \big],\; I_n \Big) \ . 
+\big[ I_{n-1} - \frac{J_{n-1}}{2n-4} \big],\; I_n \Big)
 \end{align*}
 于是我们给出了 投影算子 $\Pi_{A} $ 
 的计算方法。
@@ -492,7 +492,7 @@ $LL^*=\diag\{2(n-1), 2[(n-3)I_{n-1}+J_{n-1}],I_n\} $。
 我们固定 $n=300$， 对每一组参数$(a,b)$，重复次数是 20。
 每个节点的辅助采样数量为 $m=10$，
 $P_0,P_1$ 两个分布分别为 $\Bern(0.2)$ 和 $\Bern(0.8)$。
-红线对应着有辅助信息的分界线 $I_+ = 1$.
+红线对应着有辅助信息的分界线 $I_+ = 1$。
 由图可见，白色区域与灰色区域的分界线与红线 $I_+ = 1$ 大致对应，
 从而验证了定理 \ref{thm:sdp} 中的结论。
 另外在图中我们还画出了没有辅助信息时精确恢复的分界线，即蓝色的 

@@ -791,12 +791,12 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=t\log n)\exp(\beta_n rt \log n) \\
   & \leq  \frac{(k-1)^r r(b-a)}{k} ( \log n )
   n^{r(\tilde{g}(\beta_n) - \tilde{g}(\beta)/2)}\\
-  & \leq  n^{r(\tilde{g}(\beta)/2 + \epsilon/2)} O(\log n) (k-1)^r
+  & \leq  n^{r(\tilde{g}(\beta)/2 + \epsilon/2)}  (k-1)^r O(\log n)
   \end{align*}
   
   结合上式， 我们可以得到：
   \begin{align*}
-  P_{G}(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2}) &\leq  n^{r(\tilde{g}(\beta)/2 + \epsilon/2)} O(\log n) (k-1)^r\\
+  P_{G}(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2}) &\leq  n^{r(\tilde{g}(\beta)/2 + \epsilon/2)}  (k-1)^r O(\log n)\\
   &\leq n^{r(\tilde{g}(\beta)/2 + \epsilon)}
   \end{align*}
   
@@ -860,7 +860,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 {P_{\sigma|G}(\sigma=X)}= (1+o(1))\sum_{s=1}^{k-1}\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0))
 \end{equation}
 
-令 $\cG^{(1)}_n$ 定义成 引理 \ref{lem:7} 所示的形式
+令 $\cG^{(1)}_n$ 为 引理 \ref{lem:7} 所示的形式
 并且 $\cG^{(2)}_n: = \{|\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) -\linebreak (1+o(1))n^{g(\beta_n)}  | \leq n^{g(\beta_n) - \epsilon / 2} \}$。
 
 使用切比雪夫不等式， 我们有：
@@ -970,7 +970,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	应用 切尔诺夫不等式 我们有：
 	\begin{align*}
 	P_G(D'(\bar{\sigma}, C))&
-	\leq (\mathbb{E}[\exp(-s Z )])^{N_1} (\mathbb{E}[\exp(-s Z' )])^{N_2} \cdot \exp(\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))) \\
+	\leq (\mathbb{E}[\exp(-s Z )])^{N_1} (\mathbb{E}[\exp(-s Z' )])^{N_2} \cdot 
+  \exp \left(\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1)) \right) \\
 	&= \exp \Big( \frac{\log n}{n}(1+o(1))(e^{-s}-1)(aN_1 + bN_2) 
 	+\gamma \frac{\log n N_{\bar{\sigma}} s}{n}(1+o(1))\Big)
 	\end{align*}
@@ -983,8 +984,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	\end{align*}
 	
 	令 $h_b(x) = x - b -x\log \frac{x}{b}$，
-  对于 $0<x<b$，该函数满足  $h_b(x) < 0$，
-	取 $s=-\log\frac{\gamma}{b} > 0$，使用
+  对于 $0<x<b$，该函数满足  $h_b(x) < 0$。
+	上式中取 $s=-\log\frac{\gamma}{b} > 0$，并使用
 	$N_{\bar{\sigma}} \geq \frac{n^2}{\sqrt{\log n}}$ 我们有：
 	\begin{align*}
 	P_G(D'(\bar{\sigma}, C))&\leq \exp( N_{\bar{\sigma}} \frac{\log n}{n} h_b(\gamma)(1+o(1))) \\

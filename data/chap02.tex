@@ -754,11 +754,11 @@ $\frac{\log n}{n}$
   \begin{algorithmic}[1]
     \STATE 随机初始化 $\bar{\sigma}$
     \STATE 随机选一个粒子进行状态翻转，新的系统状态记为 $\bar{\sigma}'$ 
-    \STATE 计算能量差 $\Delta H= H(\bar{\sigma}') - H(\bar{\sigma})$
-    \IF{$\Delta H < 0$}
+    \STATE 计算能量差 $\upDelta H= H(\bar{\sigma}') - H(\bar{\sigma})$
+    \IF{$\upDelta H < 0$}
     \STATE $\bar{\sigma} \leftarrow \bar{\sigma}'$
     \ELSE
-    \STATE 以概率 $\exp(-\beta \Delta H)$ 
+    \STATE 以概率 $\exp(-\beta \upDelta H)$ 
     使得 $\bar{\sigma} \leftarrow \bar{\sigma}'$，
     否则保持原状。 
     \ENDIF
@@ -1086,7 +1086,7 @@ I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsi
 \textrm{ 其中 }  B(x,y)=\frac{P_{X,Y}(x,y) - P_X(x) P_Y(y)}{\sqrt{P_X(x)P_Y(y)}}
 \end{equation}
 在式\eqref{eq:Ixy}中， $\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y)$
-一项可以写成 $\norm{B}_F^2$。这里 $B$表示$\mathcal{X} \times \mathcal{Y}$的矩阵，
+一项可以写成 $\norm{B}_{\mathrm{F}}^2$。这里 $B$表示$\mathcal{X} \times \mathcal{Y}$的矩阵，
 \newglossaryentry{not:norm_f}
 {
   type=notation,
@@ -1095,7 +1095,7 @@ I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsi
 }
 $F$表示\glsdesc{not:norm_f}。
 式 \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
-$I(X;Y)$可用$\frac{1}{2} \norm{B}_F^2$
+$I(X;Y)$可用$\frac{1}{2} \norm{B}_{\mathrm{F}}^2$
 近似，其阶数为 $O(\epsilon^2)$。
 
 \begin{example}\label{ex:Pweak_1}

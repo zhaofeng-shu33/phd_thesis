@@ -661,8 +661,8 @@ $k^n$的速率指数增大。
 		随机选取 $s, r$ 并得到新的状态
 		 $\bar{\sigma}'$
 		 %\vskip 0.5em
-		\STATE 通过 式\eqref{eq:DeltaH} 计算 $\Delta H(r,s) = H(\bar{\sigma}') - H(\bar{\sigma})$ %\vskip 0.5em
-		\IF{$\Delta H(r,s)<0$}
+		\STATE 通过 式\eqref{eq:DeltaH} 计算 $\upDelta H(r,s) = H(\bar{\sigma}') - H(\bar{\sigma})$ %\vskip 0.5em
+		\IF{$\upDelta H(r,s)<0$}
 		\STATE $\sigma_r \gets w^s \cdot \sigma_r$ %\vskip 0.5em
 		\ELSE
 		\STATE 以概率 $\exp(-\beta \upDelta H(r,s))$ 使得
@@ -672,7 +672,7 @@ $k^n$的速率指数增大。
 		\ENDFOR
 	\end{algorithmic}
 \end{algorithm}
- 由 引理 \ref{lem:lemmaDiff}， $\Delta H(r,s)$ 的计算需要 $O(\log n)$ 的时间。
+ 由 引理 \ref{lem:lemmaDiff}， $\upDelta H(r,s)$ 的计算需要 $O(\log n)$ 的时间。
 有研究针对某种特殊的伊辛模型指出
 在$N=O(n\log n)$的条件下 即可得到近似的比较好的样本\cite{mcmc}。
 对于我们的模型，由于我们并不清楚 $ N = O(n\log n)$ 是否足够，
