@@ -69,7 +69,7 @@
 	从而得到 $\frac{T}{\log^3 n} \xrightarrow{p} \frac{a^3}{6}$。
 \end{proof}
 因为每条边的生成是独立的，埃尔德什-雷尼模型中的
-$N_E$ 的收敛性 %define if appropriate.
+$N_E$ 的收敛性
 可以直接拓展到
 随机块模型。
 但是对于三角形的数量$T$，因为每个三角形存在与否并不独立，事情变得棘手。
@@ -254,7 +254,7 @@ $\hat{b} \to b$， $\hat{a} \to a$。
 我们需要介绍一些辅助的
 符号。
 
-% Some additional notation is needed for the proof.
+
 注释 \ref{re:energy_diff} 中指出了
 $X$改变一个状态前后的能量差表达式。
 对于一般的情形，即改变
@@ -556,7 +556,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     
     因为 $\sum_{i,j} I_{ij} = |\cI| \geq \frac{n}{\sqrt{\log n}}$，
     存在 $i,j$ 使得
-    $I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$.
+    $I_{ij} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$。
     对于这一对确定的 $i,j$，不妨先假设 $I_{ji} > \frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}}$，
     下面我们将推出矛盾说明该假设不成立。
     取 $X'$ 为在$X$ 的基础上交换$w^i$ 和 $w^j$ 位置后的向量，
@@ -599,7 +599,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
    \end{align*}
     
     在求和式中 $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}$
-    的每一项 $\sum_{j=0}^{k-1} I'^2_{ij}$ 其满足 $\sum_{j=0}^{k-1}
+    的每一项 $\sum_{j=0}^{k-1} I'^2_{ij}$
+    均满足 $\sum_{j=0}^{k-1}
     I'_{ij} = \frac{n}{k}$，当某个$I'_{ii}$取$\frac{n}{k}$
     而其余的项为零时$\sum_{j=0}^{k-1} I'^2_{ij}$
     最大。但由于条件1成立，有某一行不能取
@@ -607,7 +608,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     共有 $(k-1)$行求和得$ (k-1)\frac{n^2}{k^2}$
     而其中一行则必须保留$I'_{ij}, I'_{ii}$ 这两个非零项。
     因此 $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}
-    \leq (k-1)\frac{n^2}{k^2} + (\frac{n}{k} - I_{ij})^2 + I^2_{ij}$。
+    \leq (k-1)\frac{n^2}{k^2} + (\frac{n}{k} - I_{ij})^2 + I^2_{ij}$，
     而这里的
     $I_{ij}$ 满足条件1。
     进一步的， $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + (\frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2
@@ -855,7 +856,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 \end{equation}
 
 令 $\cG^{(1)}_n$ 定义成 引理 \ref{lem:7} 所示的形式
-并且 $\cG^{(2)}_n: = \{|\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) -\linebreak (1+o(1))n^{g(\beta_n)}  | \leq n^{g(\beta_n) - \epsilon / 2} \}$.
+并且 $\cG^{(2)}_n: = \{|\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0)) -\linebreak (1+o(1))n^{g(\beta_n)}  | \leq n^{g(\beta_n) - \epsilon / 2} \}$。
 
 使用切比雪夫不等式， 我们有：
 \begin{equation*}
@@ -887,13 +888,14 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   \Lambda := \{ \omega^j  \cdot \mathbf{1}_n | j=0, \dots,k-1\}   
 \end{equation}
 
-其中 \gls{not:all_one_vector} 是 \glsdesc{not:all_one_vector} %confirm.
+其中 \gls{not:all_one_vector}
+是\glsdesc{not:all_one_vector}，
 则我们有如下的引理：
  \begin{lemma}\label{lem:small}
 	假设 $\gamma < b $ 且 $\bar{\sigma}$
   满足 
   $\Dist(\bar{\sigma}, \mathbf{1}_n) \geq \frac{n}{\sqrt{\log  n}}$
-	且 $D(\bar{\sigma}, \mathbf{1}_n)$.
+	且 $D(\bar{\sigma}, \mathbf{1}_n)$。
 	则事件
 	$P_{\sigma | G}(\sigma = \bar{\sigma} ) > \exp(-Cn) P_{\sigma | G}(\sigma = \mathbf{1}_n)$
 	发生的概率 小于 $\exp(-\tau(\beta, \gamma) n \sqrt{\log  n} )$，
@@ -940,7 +942,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	并且从 $n_0 \geq n_r$ 推出 $n_0 \geq \frac{n}{k}$。
 	当 $n_0 > \frac{n}{2}$ 时，
 	我们有
-  $N_{\bar{\sigma}} \geq n_0 (n - n_0) \geq \frac{n^2}{\sqrt{\log n}}(1+o(1))$.
+  $N_{\bar{\sigma}} \geq n_0 (n - n_0) \geq \frac{n^2}{\sqrt{\log n}}(1+o(1))$。
 	当 $n_0 = n - \frac{n}{\sqrt{\log n}}$时，第二个不等式可达。
   当 $n_0 < \frac{n}{2}$ 时，
 	$N_{\bar{\sigma}} \geq \frac{n^2 - nn_0}{2} \geq \frac{n^2}{4}$，
@@ -1009,9 +1011,8 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	从中我们可以得到估计式 $P_{\sigma | G}(\sigma \neq X | D(\sigma, X))\leq \frac{1}{2}n^{\tilde{g}(\beta)/2 + \epsilon}$。
 	最后我们有： 
 	\begin{align*}
-	P_{\sigma}(\sigma \neq X|D(\sigma, X)) &= \sum_{G\in \cG'_n} P_G(G)P_{\sigma |G}(\sigma \neq X | D(\sigma, X)) \\
-	+ P_G(\cG'^c_n)
-	& \leq n^{\tilde{g}(\beta)/2 + \epsilon}.
+	P_{\sigma}(\sigma \neq X|D(\sigma, X)) &= \sum_{G\in \cG'_n} P_G(G)P_{\sigma |G}(\sigma \neq X | D(\sigma, X)) + P_G(\cG'^c_n)\\	
+	& \leq n^{\tilde{g}(\beta)/2 + \epsilon}
 	\end{align*}
 	
 	(2) 当 $\beta < \beta^*$，

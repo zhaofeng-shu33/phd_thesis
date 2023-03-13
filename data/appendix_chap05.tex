@@ -1,7 +1,7 @@
 \section{定理证明}
 \subsection{定理 \ref{thm:Pe} 的证明}
 当 $I_+ > 1$ 时精确恢复的可实现性可由 定理 \ref{thm:sdp}  给出的关于 SDP算法可实现精确恢复的论断证明。
-此处我们证明当 $I_+ < 1$ 时  %Most parts of the arguments follow a similar manner to those in \cite{abbe2015exact}.
+此处我们证明当 $I_+ < 1$ 时 
 精确恢复的不可实现性。
 同 \ref{sec:thm_sdp_proof} 节，$S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
 对于 节点 $i$ 和节点集 $S\subset [n]$，
@@ -36,7 +36,7 @@
     \sum_{j=1}^{m} \log \frac{P_1(y^{i_1}_{j})}{P_0(y^{i_1}_{j})}
     +\sum_{j=1}^{m} \log \frac{P_0(y^{i_2}_{j})}{P_1(y^{i_2}_{j})}
     \ge &\log \frac{p(1-q)}{q(1-p)}(E(i_1, S_1 \backslash \{i_1\}) + E(i_2, S_2 \backslash \{i_2\})\nonumber\\
-    &- E(i_1, S_2 \backslash \{i_2\}) - E(i_2, S_1 \backslash \{i_1\})) \label{eq:F1ij}.
+    &- E(i_1, S_2 \backslash \{i_2\}) - E(i_2, S_1 \backslash \{i_1\})) \label{eq:F1ij}
 \end{align}
 因此， 在 $I_1<1$ 和 $I_2<1$的条件下，以接近1的概率 式\eqref{eq:F1ij} 成立。
 根据 引理\ref{lem:p0p12}，
@@ -59,7 +59,7 @@ $P(Y,Z|(X_1,\ldots,X_n),X_{i_1}=1,X_{i_2}=-1)$
 
 对于
 某个特定的节点标签
-$x^*$,
+$x^*$，
 若
 \eqref{eq:mle} 式中的 ML 算法
 无法精确恢复 
@@ -173,7 +173,7 @@ $P(Y=y)=\frac{\sqrt{P_0(y)P_1(y)}}
 从而使得 $\epsilon =0$。
 对于这组特殊选取的
 $P_{\widetilde{Y}^{*}_1}$
-和 $P_{\widetilde{Y}^{*}_2}$,
+和 $P_{\widetilde{Y}^{*}_2}$，
 我们使用 Sanov 定理可得
 \begin{align*}
 &P(A_1)
@@ -183,10 +183,10 @@ $P_{\widetilde{Y}^{*}_1}$
 + D(P_{\widetilde{Y}^*_2} || P_1))
 \right)
 \cdot P\left(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0\right)\\
-& = \exp(-\log n (\gamma D_{1/2}(P_0||P_1)+o(1))) P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0).
+& = \exp(-\log n (\gamma D_{1/2}(P_0||P_1)+o(1))) P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)
 \end{align*}
-由 \citet{abbe2015exact}
-中的引理 4,
+由 文献\inlinecite{abbe2015exact}
+中的引理 4，
 $P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)$ 下界为
  $n^{-(\sqrt{a} - \sqrt{b})^2 + o(1)}$。
 因此得到 \eqref{eq:pa1} 式。
@@ -214,13 +214,12 @@ $P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)$ 下界为
     容易验证 $\frac{1}{p} + \frac{1}{q}=1$。
     \newglossaryentry{holder_ieq}{name=赫尔德不等式, description={Hölder's inequality}}
 
-    由 \gls{holder_ieq}
-    :
+    由\gls{holder_ieq}：
     \begin{equation}\label{eq:holder}
         (\sum_{x\in\mathcal{X}}f(x)g(x))\leq (\sum_{x\in\mathcal{X}} f^p(x))^{\frac{1}{p}}
         (\sum_{x\in\mathcal{X}} g^q(x))^{\frac{1}{q}}
     \end{equation}
-    因为 $\sum_{x\in\mathcal{X}} P_1(x)=1$, \eqref{eq:holder} 蕴含
+    因为 $\sum_{x\in\mathcal{X}} P_1(x)=1$， \eqref{eq:holder} 蕴含
     \eqref{eq:32}。
 \end{proof}
     
@@ -242,7 +241,8 @@ P(A_k) &\leq \mathbb{E}
     {P_0(y_{1i})}
 + \log \frac{P_0(y_{2i})}
     {P_1(y_{2i})} \right)
-\right)\right]\cdot \mathbb{E}
+\right)\right] \\
+&\quad\cdot \mathbb{E}
 \left[\exp\left(s\log \frac{a}{b}\sum_{i=1}^{k(n-2k)} (z'_i - z_i )\right)
 \right] \\
 & \stackrel{(a)}{=}
@@ -250,22 +250,22 @@ P(A_k) &\leq \mathbb{E}
 P_0^{1-s}(y)P_1^{s}(y)\right)^{km}
 \left(\sum_{y\in \mathcal{Y}} P_1^{1-s}(y) P_0^{s}(y)
 \right)^{km}\\
-&   \cdot \exp\left(
+&   \quad \cdot \exp\left(
     k\log n \left(1-\frac{2k}{n} \right)
     (-a-b+a^sb^{1-s}+b^sa^{1-s} +o(1)) 
     \right)
 \end{align*}
 其中 $(a)$ 由各样本相互独立可得。 取 $s=\frac{1}{2}$，
 则我们有
-$P(A_k) \leq  n^{-k(\theta^*_k+o(1))}$.
+$P(A_k) \leq  n^{-k(\theta^*_k+o(1))}$。
 
 当 $k \geq \frac{n}{\sqrt{\log n}}$ 时，
-由引理 \ref{lem:sigmaX} ,
+由引理 \ref{lem:sigmaX}，
 $P(F_k)$ 指数衰减。
 对于 $2\leq k < \frac{n}{\sqrt{\log n}}$
 的情形，
 错误概率通过如下的方式进行分析：
-由布尔不等式,
+由布尔不等式，
 我们可以给出 $P(F_k)$ 的上界为
 \begin{equation}\label{eq:FAk}
 P(F_k) \leq \binom{n/2}{k}^2 P(A_k)
@@ -339,7 +339,7 @@ $\sum_{(i,j) \neq (r,s)} P(A_{ij} \cap A_{rs})$
 我们首先 处理 $P(A_{ij})$ 的情况。
 注意到 单个事件 $A_{ij}$
 等价于 $A_1$。
-由 引理 \ref{lem:single_lower} ,
+由 引理 \ref{lem:single_lower}，
 $P(A_{ij})$ 的下界是
 $n^{-\gamma D_{1/2}(P_0 || P_1)-(\sqrt{a} - \sqrt{b})^2 +o(1)}$。
 因为
@@ -359,7 +359,7 @@ $A_{ijrs}$ 的不等式表达
 与 $A_2$ 一致。
 因此， $P(A_{ij} \cap A_{rs}) \leq n^{-2(\theta^*_2 + o(1))} $。
 集合 $S_1:=\{(i,j,r,s)| i<j, r<s, |\{i,j,r,s\}|=4\}$
-的元素个数是 $\binom{n}{4} \leq n^4$.
+的元素个数是 $\binom{n}{4} \leq n^4$。
 因此，概率和
 $\sum_{(i,j,r,s) \in S_1} P(A_{ij} \cap A_{rs})
 \leq n^{-2\mu +o(1)}$，因为$\mu > 0$，
@@ -407,7 +407,7 @@ $$
 集合 $S_2:=\{(i,j,r,s)| i<j, r<s, |\{i,j,r,s\}|=3\}$
 的元素个数小于 $n^3$，
 则我们有 $\sum_{(i,j,r,s)\in S_2}
-P(A_{ij}\cap A_{rs}) \leq n^{-\mu'/2-\mu+o(1)}$,
+P(A_{ij}\cap A_{rs}) \leq n^{-\mu'/2-\mu+o(1)}$，
 其阶数比 $n^{-\mu+o(1)}$ 小。
 
 基于以上讨论，
@@ -524,9 +524,9 @@ $P(A_k)$ 可用 Sanov 定理来估计。
 $-\frac{1}{kn}\log P(A_k) \to \theta^*_k$。
 这里$\theta^*_k$ 定义为
 \begin{align*}
-\theta^*_k =& \min_{\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}'}
-\gamma (D(P_{\widetilde{Y}_1}||P_0) + D(P_{\widetilde{Y}_2}||P_1))
-+ (1-\frac{2k}{n})
+\theta^*_k &= \min_{\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}'}
+\gamma (D(P_{\widetilde{Y}_1}||P_0) + D(P_{\widetilde{Y}_2}||P_1)) \\
+&\quad + (1-\frac{2k}{n})
 (D(P_{\widetilde{Z}}||\Bern(p)) + D(P_{\widetilde{Z}'}||\Bern(q)))  \\
 \textrm{s.t. } \, & (\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}')
 \textrm{ 满足 } \eqref{eq:mnk}
@@ -555,7 +555,7 @@ P_e \leq \sum_{k=1}^{n/4} \binom{n/2}{k}^2 P(A_k)\leq \sum_{k=1}^{n/4} \exp(-nf(
 $f(k) = \frac{2k}{n}\log \frac{2k}{ne} + k(C_1+C_2) - \frac{2k^2}{n}C_2$。
 进一步地， $f'(x)= \frac{2}{n} \log \frac{2x}{n} + C_1+C_2 - \frac{4C_2x}{n}$，
 $1\leq x \leq \frac{n}{4}$。
-由 $f'(1) > 0 , f'(\frac{n}{4}) > 0 $ 可推出 $f'(x) > 0$
+由 $f'(1) > 0, f'(\frac{n}{4}) > 0 $ 可推出 $f'(x) > 0$
 对于 $1\leq x \leq \frac{n}{4}$ 均成立。
 因此， $f(x)$ 在区间 $[1, \frac{n}{4}]$ 递增，
 且 $f(k) \geq f(1)$ 对于 $1\leq k \leq \frac{n}{4}$ 成立。
@@ -619,7 +619,7 @@ $$
     \begin{align}\label{eq:estimation}
         P(Z - X \geq t \log n) \leq \exp(-\frac{m}{n}\log n \cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
     \end{align}
-    其中 $g(a,b,\epsilon)$ 在 式\eqref{equation:g} 中定义.
+    其中 $g(a,b,\epsilon)$ 在 式\eqref{equation:g} 中定义。
 \end{lemma}
 \begin{proof}
     沿用引理 \ref{lem:enhanced_fb} 的证明，
@@ -639,7 +639,7 @@ $$
 \begin{align}
     \min_{a_1, \dots, a_{n+1}}\, &\sum_{i=1}^{n+1} a_i \nonumber\\
     \label{eq:dual}
-    \textrm{s.t. } &\, \diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B} \succeq 0, 
+    \textrm{s.t. } &\, \diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B} \succeq 0
 \end{align}
 其中 $(n+1)\times (n+1)$ 维的对称矩阵
 $\Xi$ 定义成 
@@ -682,7 +682,7 @@ $$
     &\diag(\{a_1, \dots, a_{n+1}\}) + \Xi - \widetilde{B} \nonumber\\
     =& \begin{pmatrix} h^T g & -h^T +(\mu + \lambda)\mathbf{1}_n^T \\
         -h+(\mu + \lambda )\mathbf{1}_n & \Xi_n \end{pmatrix}
-    \succeq 0, 
+    \succeq 0
 \end{align}
 其中
 \begin{align}\label{eq:Xi_n}
@@ -739,7 +739,7 @@ $\hat{g}_2 = \frac{1}{2}(-g +\mathbf{1}_n)$。
     \frac{\norm{\tilde{h}}^2}{n} - \left(\frac{1}{n}\tilde{h}^Tg \right)^2
     &=\frac{\norm{\tilde{h}}^2}{n} - 2\frac{(\tilde{h}^T \hat{g}_1)^2}{n^2} - 2\frac{(\tilde{h}^T \hat{g}_2)^2}{n^2} + \frac{(\tilde{h}^T\mathbf{1}_n)^2}{n^2} \\
     &=2\frac{ \sum_{i<j,i,j\in S_1} (\tilde{h}_i - \tilde{h}_j)^2 + \sum_{i<j,i,j\in S_2} (\tilde{h}_i - \tilde{h}_j)^2 }{n^2}+ \frac{\mu^2}{n^2}\\
-    & = I_1 + I_2 + \frac{\mu^2}{n^2}.
+    & = I_1 + I_2 + \frac{\mu^2}{n^2}
 \end{align*}
 其中 对于 $j\in\{1,2\}$
 $I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^T \hat{g}_j)^2}{n^2}$， 
@@ -775,8 +775,8 @@ $$
 在推导上式中我们用到了 $\E[A] = \frac{p-q}{2}gg^T + \frac{p+q}{2}J_n - pI_n$。
 注意到 $p,q,$ 以及 $\lambda$ 都是 $o(1)$ 并且
 $(g^{\perp})^TJ_n g^{\perp}\ge 0$。
-由 \citet{lei2015consistency} 中的定理 5.2，
-以概率 $1-n^{-r}$, 存在
+由 文献\inlinecite{lei2015consistency} 中的定理 5.2，
+以概率 $1-n^{-r}$， 存在
 常数 $r$ 和 $c$，使得不等式 $\lambda_{\max}(A-\mathbb{E}[A]) \leq c\sqrt{\log n}$
 成立。这里$\lambda_{\max}$ 表示矩阵的最大特征值。
 因此，我们有
@@ -811,8 +811,8 @@ $n^{-I_1 + o(1)}$，
 式 \eqref{eq:nodei} 不成立的概率上界为 
 $n^{-I_2 + o(1)}$。
 由引理\ref{lem:p0p12}，$I_1=I_2=I_+>1$，
-以及布尔不等式，  存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
+以及布尔不等式， 存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
 由条件 $I_+>1$，$n^{-I_+ + 1 + o(1)}$ 随$n$的增大 衰减到 $0$。
- 因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得 定理 \ref{thm:sdp}。 
+因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得定理 \ref{thm:sdp}。 
 
 
