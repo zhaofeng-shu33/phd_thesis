@@ -1124,9 +1124,9 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
 \leq \exp(m(1-\B + \B e^s - \A + \A e^{-s}))$。
 再取$s$使得 $be^s=ae^{-s}$。
-最后再应用切尔诺夫不等式引理 \ref{lem:mZW} 即可得证。
+最后再应用切尔诺夫不等式，引理 \ref{lem:mZW} 即可得证。
 
-\begin{proof}[引理 \ref{thm:error_rate} 的证明]
+\begin{proof}[定理 \ref{thm:error_rate} 的证明]
 
 	令 $P_F^{(r)}$ 表示
   下述事件发生的概率：
@@ -1140,7 +1140,8 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
   $H(\sigma) < H(X)$ 发生的概率为
 	$P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$。
   因此，$P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$。
-	我们由 $H(\sigma) < H(X)$ 可推出 $A_{\sigma} < B_{\sigma}$，进而由引理 \ref{lem:enhanced_fb} 
+	我们由 $H(\sigma) < H(X)$ 可推出 $A_{\sigma} < B_{\sigma}$，
+  进而由引理 \ref{lem:enhanced_fb} 
   可得，
   对于 $ r \leq \frac{n}{\sqrt{\log n}}$
   我们有
@@ -1179,7 +1180,7 @@ $B_{\sigma} > A_{\sigma}$。
 当 $m \geq \frac{n}{ \sqrt{\log n}}$ ，
 在 引理 \ref{lem:mZW}  中 取
 $m=N_{A_{\sigma}}$;
-误差项的上界为 $\sum_{r\geq \frac{n}{ \sqrt{\log n}}} P_F^{(r)} \leq \sum_{r\geq \frac{n}{ \sqrt{\log n}}} (k-1)^r \exp(-\frac{(\sqrt{a} - \sqrt{b})^2}{k^2(k-1)} n \sqrt{\log n}))
+误差项的上界为 $\sum_{r\geq \frac{n}{ \sqrt{\log n}}} P_F^{(r)} \leq \sum_{r\geq \frac{n}{ \sqrt{\log n}}} (k-1)^r \exp(-\frac{\left(\sqrt{a} - \sqrt{b}\right)^2}{k^2(k-1)} n \sqrt{\log n}))
 \leq \exp(-n)$，这是指数衰减的项。
 对于 $m < \frac{n}{ \sqrt{\log n}}$，
 我们可以直接使用引理 \ref{lem:enhanced_fb}   
@@ -1189,6 +1190,6 @@ $m=N_{A_{\sigma}}$;
 因此，我们有
 \begin{align*}
 P_F = & \sum_{r=2}^n P_F^{(r)} \leq (1+o(1)) \sum_{r=2}^{\infty} (k-1)^r n^{rg(\bar{\beta})}\\
-\leq & ((k-1)^2+o(1))n^{2g(\bar{\beta})}
+\leq & \left((k-1)^2+o(1)\right)n^{2g(\bar{\beta})}
 \end{align*}
 \end{proof}

@@ -125,7 +125,7 @@ $\lceil \log n \rceil $ 的整数倍，同时
 	\end{align}
 	其中
 	\begin{equation}\label{eq:lambda}
-    \lambda^* = \arg\min_{\lambda} \left[a^{1-\lambda}b^{\lambda} +
+    \lambda^* = \argmin_{\lambda} \left[a^{1-\lambda}b^{\lambda} +
     b^{1-\lambda}a^{\lambda} + 2\gamma \log
     \left(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
     \right)
@@ -193,8 +193,8 @@ $\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another}
 \right)^{\lambda}
 \left(\frac{d^k\exp(-d)}{k!} \right)^{1-\lambda}
 \right)+
-\gamma\log(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
-)\\
+\gamma\log \left(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
+\right)\\
 & = c^{1-\lambda} d^{\lambda} 
 + d^{\lambda} c^{1-\lambda} -c -d +
 \gamma\log \left(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
@@ -222,7 +222,7 @@ $I_+$ 也可写成雷尼散度的形式。
 具体而言，在式\eqref{eq:lh}中极小化$x$
 可得到如下的优化问题：
 \begin{align}
-    \hat{X} &= \arg\max_x\ P(y,z|X=x) \notag \\
+    \hat{X} &= \argmax_x\ P(y,z|X=x) \notag \\
     \textrm{s.t.} \ & x_i \in \{\pm 1\}, \sum_{i=1}^n x_i=0 \label{eq:mle}
 \end{align}
 类似式\eqref{eq:hatX_double_prime}，
@@ -253,11 +253,11 @@ $I_+$ 也可写成雷尼散度的形式。
     若
     \begin{equation}\label{eq:positive_condition_new}
     \gamma D_{1/2}(P_0||P_1) +
-     (\sqrt{a} - \sqrt{b})^2-2 > 0
+     \left(\sqrt{a} - \sqrt{b}\right)^2-2 > 0
     \end{equation}
     则精确恢复的误差上界为：
     \begin{equation}\label{eq:PeMain}
-    P_e \leq \left(\frac{1}{4}+o(1) \right) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right) }
+    P_e \leq \left(\frac{1}{4}+o(1) \right) n^{-\left(\gamma D_{1/2}(P_0||P_1) + \left(\sqrt{a} - \sqrt{b}\right)^2-2 + o(1)\right) }
     \end{equation}
     如果下述条件满足，
     \begin{align}
@@ -266,7 +266,7 @@ $I_+$ 也可写成雷尼散度的形式。
     \end{align}
     则精确恢复的误差下界为：
     \begin{equation}\label{eq:PeMainL}
-    P_e \geq \left(\frac{1}{4}+o(1) \right) n^{-\left(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2 + o(1)\right)}
+    P_e \geq \left(\frac{1}{4}+o(1) \right) n^{-\left(\gamma D_{1/2}(P_0||P_1) + \left(\sqrt{a} - \sqrt{b}\right)^2-2 + o(1)\right)}
     \end{equation}
 \end{theorem}
 
@@ -275,7 +275,7 @@ $I_+$ 也可写成雷尼散度的形式。
 一项 $\gamma D_{1/2}(P_0||P_1) $ 
 和辅助信息有关，表示成$P_0$和$P_1$的雷尼散度（在式\eqref{eq:renyi_divergence}
 中定义）
-，另一项 $ (\sqrt{a} - \sqrt{b})^2-2 $
+，另一项 $ \left(\sqrt{a} - \sqrt{b}\right)^2-2 $
 和 SSBM 的精确恢复条件有关，根据
 式\eqref{eq:renyi_d12_ab}，也可表示成雷尼散度的形式。
 
@@ -290,7 +290,7 @@ $\gamma D_{1/2}(P_0||P_1)$
 误差衰减速率为：
 $$
 -\lim_{n\to \infty} \frac{\log P_e}{\log n}
-= \gamma D_{1/2}(P_0||P_1) + (\sqrt{a} - \sqrt{b})^2-2
+= \gamma D_{1/2}(P_0||P_1) + \left(\sqrt{a} - \sqrt{b}\right)^2-2
 $$
 此外，当 $P_0=P_1$ 时，
 定理 \ref{thm:Pe_new} 给出了用带约束的最大似然算法
@@ -303,7 +303,7 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 若 条件 \eqref{eq:oneC} 成立，
 则错误概率 $P_e$ 满足
 \begin{equation}\label{eq:cor}
-\lim_{n\to \infty} \frac{\log P_e}{\log n} =2-(\sqrt{a} - \sqrt{b})^2
+\lim_{n\to \infty} \frac{\log P_e}{\log n} =2-\left(\sqrt{a} - \sqrt{b}\right)^2
 \end{equation}
 
 \end{corollary}
@@ -313,7 +313,7 @@ $\SSBM(n,\frac{a\log n}{n}, \frac{b \log n}{n}, 2)$，
 
 下面我们讨论本节的误差衰减速率项
 $\gamma D_{1/2}(P_0||P_1) +
-(\sqrt{a} - \sqrt{b})^2$与上一节
+\left(\sqrt{a} - \sqrt{b}\right)^2$与上一节
 精确恢复条件中的切尔诺夫信息量 $I^+$ 的关系。
 我们有如下定理
 \begin{theorem}\label{thm:I_plus_relation}
@@ -321,7 +321,7 @@ $\gamma D_{1/2}(P_0||P_1) +
     中定义，则
     \begin{equation}
         I_+ \geq \frac{1}{2}
-        (\sqrt{a} - \sqrt{b})^2 +
+        \left(\sqrt{a} - \sqrt{b}\right)^2 +
         \frac{\gamma}{2} D_{1/2}(P_0||P_1)
     \end{equation}
 \end{theorem}
@@ -394,7 +394,7 @@ $m$ 和 $n$ 量阶相同。
 极大化 关于
 $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化问题
 \begin{align}
-    \max_{v}\, & h^T v + \frac{1}{4}v^T B v \notag \\
+    \max_{v}\  & h^T v + \frac{1}{4}v^T B v \notag \\
     \textrm{s.t. }\, & \mathbf{1}_n^T v = 0 \text{ 且 } v_i \in \{\pm 1 \} \label{eq:matrix_mle}
 \end{align}
 其中 $h$ 是 $n$ 长的向量，第 $i$ 个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
@@ -412,7 +412,7 @@ $(n+1)$ 维的向量。
 	\end{equation}
 	是一个$(n+1)\times(n+1)$的矩阵。我们将证明 $V^*$ 是如下问题的唯一最优解：
 	\begin{align}
-		\max_V\,& \langle \widetilde{B}, V \rangle  \notag\\
+		\max_V\ & \langle \widetilde{B}, V \rangle  \notag\\
 		\textrm{ s.t. }\, V_{ii} &= 1, \notag\\
 		V &\succeq 0, \notag\\
 \sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in\{1,\ldots,n+1\} 
