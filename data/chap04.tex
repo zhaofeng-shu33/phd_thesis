@@ -49,17 +49,22 @@ $a$ 和 $b$。
 $T_2$进行计数，然后通过求解下述
 关于$(x,y)$的非线性方程组得到
 估计量 $\hat{a}, \hat{b}$：
-\begin{align}
-\frac{x+(k-1)y}{2k} & = \frac{T_1}{n\log n} \label{eq:e_1}\\
+\begin{equation} \label{eq:e_1}
+\left\{
+	\begin{alignedat}{1}
+	\frac{x+(k-1)y}{2k}  &= \frac{T_1}{n\log n} \\
 \frac{1}{k^2}
-\left(\frac{x^3}{6} + \frac{k-1}{2}xy^2 + (k-1)(k-2)\frac{y^3}{6}\right) & = \frac{T_2}{\log^3 n} \label{eq:e_2}
-\end{align}
+\left(\frac{x^3}{6} + \frac{k-1}{2}xy^2 + (k-1)(k-2)\frac{y^3}{6}\right)
+ &= \frac{T_2}{\log^3 n}
+	\end{alignedat}
+\right.
+\end{equation}
+
 
 解的理论保证由如下定理给出：
 \begin{theorem}\label{thm:ab12}
 当 $n$ 足够大时，
-关于 (\ref{eq:e_1}) 和
-(\ref{eq:e_2}) 的方程组
+关于方程组\eqref{eq:e_1}
 有唯一解 $(\hat{a}, \hat{b})$，
 \newglossaryentry{consistent_est}{name=一致估计量, description={Consistent estimator}}
 并且该解是参数$(a,b)$的\gls{consistent_est}，
@@ -135,7 +140,7 @@ $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
 在注释 \ref{rem:equivalence_H_energy} 的意义下
 退化成 式 \eqref{eq:ising_modified}。 
 
-这里的能量函数$H(\bar{\sigma})$ 同样有两部分组成:
+这里的能量函数$H(\bar{\sigma})$ 同样有两部分组成：
 没有边相连的节点之间排斥力的势能和
 有边相连的节点之间吸引力的势能。
 $\gamma$ 是没有边相连的节点间的作用力系数。
@@ -165,7 +170,7 @@ $P_e(\hat{X}^*) \to 1$。
 
 \begin{theorem}\label{thm:phase_transition}
 	假设 $\sqrt{a} - \sqrt{b} > \sqrt{k}$，
-	定义函数 $g(\beta)$ 和 $ \tilde{g}(\beta)$ 如下:
+	定义函数 $g(\beta)$ 和 $ \tilde{g}(\beta)$ 如下：
 	\begin{equation}
 		\label{eq:g_beta_main_article}
 		g(\beta) = \frac{be^{\beta} + a e^{-\beta}}{k} - \frac{a+b}{k} +1
@@ -287,7 +292,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 
 下面我们简单阐述下 定理 \ref{thm:phase_transition} 证明的思路。
 该思路主要通过对翻转一个状态的前后能量差的分析来估计概率的主项。
-下面的引理总结了翻转一个状态前后汉密尔顿能量的变化:
+下面的引理总结了翻转一个状态前后汉密尔顿能量的变化：
 \begin{lemma}\label{lem:lemmaDiff}
 	假设 $\bar{\sigma}'$ 仅在第$r$个位置上与 $\bar{\sigma}$ 不同，
 	差别为 $\bar{\sigma}'_r = \omega^s \cdot \bar{\sigma}_r$。
@@ -403,9 +408,9 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 我们有
 \begin{equation}\label{eq:introduction_g_a_b_eps}
   P_G(A_r^s - A_r^0 \ge t  \log n) 
-	\le  \exp\Big(-\log n
+	\le  \exp\left(-\log n
 	\left(
-   \frac{1}{k} g(a,b,kt) + O((\log n)^{-\delta}) \right)\Big)
+   \frac{1}{k} g(a,b,kt) + O\left((\log n)^{-\delta} \right) \right)\right)
 \end{equation}
 其中 函数 $g(a,b,\epsilon)$ 的定义为
 \begin{equation}  \label{equation:g}
@@ -443,7 +448,7 @@ $\Lambda(t) =\lim_{n\to \infty} \frac{1}{\gamma_n}\Lambda_n(\gamma_n t)$
 导出 $g(a,b,\epsilon)$ 的
 表达式。
 我们取 $\gamma_n= \log n$ 且 $\gamma_n S_n = \sum_{i=1}^n Y_i$，$Y_i=Z_i - W_i$，
-$Z_i, \dots, Z_n$ 是 i.i.d. $\Bern(\B)$ 而 $W_1, \dots, W_n$ 是 i.i.d. $\Bern(\A)$。
+$Z_i, \dots, Z_n$ 是 i.i.d. $\Bern\left(\B\right)$ 而 $W_1, \dots, W_n$ 是 i.i.d. $\Bern\left(\A\right)$。
 $Y_i$ 的概率质量函数可表示为 $[(1-q)p, qp+(1-p)(1-q), q(1-p)]$，对应 $[-1,0,1]$ 三个取值。
 首先我们计算得到 
 $\Lambda(t) = \lim_{n\to \infty} \frac{n}{\log n} \log \E[\exp(t Y_1)]
@@ -481,7 +486,7 @@ $\beta > \beta^*$，
 因为我们已知 $X$取各个标签的位置数相等，即对于每个标签值 $u$
 有 $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$，
 我们可以把搜索空间限制到
-$W^*:= \{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n}{k}, s=0,\dots, k-1 \}$
+$W^*:= \left\{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n}{k}, s=0,\dots, k-1 \right\}$
 上。
 当 $\sigma \in W^*$ 时， 最小化 $H(\sigma)$ 等价于：
 \begin{equation}\label{eq:hatX_double_prime}
@@ -546,7 +551,7 @@ $\tilde{g}(\beta) = 1- \frac{(\sqrt{a} - \sqrt{b})^2}{k}$，
 %这种联系。
 
 通过最大化对数似然函数可得到最大似然估计量。
-由 式\eqref{eq:GmL} ，该似然函数可以进一步写成:
+由 式\eqref{eq:GmL} ，该似然函数可以进一步写成：
 \begin{equation}\label{eq:PG_energy}
 	\log P_G(Z=z|X=\sigma) = -\log\frac{a}{b} \cdot H(\sigma) + C
 \end{equation}

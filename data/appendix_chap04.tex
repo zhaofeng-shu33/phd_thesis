@@ -37,15 +37,15 @@
 	
 	对于给定的 $\epsilon$， 当 $n$ 充分大时，
   \begin{align*}
-	P \left(\Big|\frac{N_E}{n \log n } - \frac{a}{2} \Big| > \epsilon \right) & <
-	P \left(\Big|\frac{N_E}{n \log n } - \frac{a}{2} \frac{n-1}{n}\Big| > 2\epsilon \right) \\
+	P \left(\left|\frac{N_E}{n \log n } - \frac{a}{2} \right| > \epsilon \right) & <
+	P \left(\left|\frac{N_E}{n \log n } - \frac{a}{2} \frac{n-1}{n}\right| > 2\epsilon \right) \\
 	& \leq \frac{n-1}{8n^2 \epsilon^2 \log n}
 	\end{align*}
 	
 	因此， 由依概率收敛的定义
   我们有 $\frac{N_E}{n \log n} \xrightarrow{p} \frac{a}{2}$。
 	
-	令 $X_{ijk}$ 表示参数为  $p^3$ 的 伯努利 随机变量。
+	令 $X_{ijk}$ 表示参数为  $p^3$ 的 伯努利 随机变量，
 	则 $T = \sum_{i,j,k} X_{ijk}$。
 	易得 $\mathbb{E}[T] = \binom{n}{3}p^3$。
   因为 $X_{ijk}$ 并不独立，
@@ -61,8 +61,8 @@
 	因此
 	由 切比雪夫不等式可得
 	\begin{align*}
-	P \left (\Big|\frac{T}{\log^3 n } - \frac{a^3}{6} \frac{(n-1)(n-2)}{n^2}\Big| > \epsilon \right)
-   &\leq \frac{1}{\epsilon^2} \Var[ \frac{T}{\log^3 n} ]\\ 
+	P \left (\left|\frac{T}{\log^3 n } - \frac{a^3}{6} \frac{(n-1)(n-2)}{n^2}\right| > \epsilon \right)
+   &\leq \frac{1}{\epsilon^2} \Var \left[ \frac{T}{\log^3 n} \right]\\ 
 	& = \frac{1}{\epsilon^2}O \left(\frac{1}{\log^3 n} \right)
 	\end{align*}
 	    
@@ -75,7 +75,7 @@ $N_E$ 的收敛性 %define if appropriate.
 但是对于三角形的数量$T$，因为每个三角形存在与否并不独立，事情变得棘手。
 下面的两个引理给出了随机块模型中的三角形个数的方差的公式。
 \begin{lemma}\label{lem:SBM_tr_counting_cross}
-	考虑 $\SSBM(2n, 2, p, q)$。它有两个
+	考虑 $\SSBM(2n, 2, p, q)$，它有两个
   社团，记为 $S_1$ 和 $S_2$。
     计算满足如下条件的三角形的个数 $T$：三角形
     有一个顶点在  $S_1$ 中，
@@ -108,12 +108,12 @@ $N_E$ 的收敛性 %define if appropriate.
     并且这个元素 在 $ S_2$ 中，则
     $E[Y_{ijk}Y_{i'j'k'}] = p^2q^4$。在 $\E[T^2]$的求和式
 		中共有 $12\binom{n}{2}\binom{n}{3}$ 项。
-		\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 恰有 2  个 共同的元素
+		\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 恰有 两  个 共同的元素
     并且这两个元素均在 $S_2$ 中，
     则 $E[Y_{ijk}Y_{i'j'k'}] = pq^4$。
     在 $\E[T^2]$的求和式
 		中共有  $2\binom{n}{2}\binom{n}{2}$ 项。
-\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 恰有2  个 共同的元素
+\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 恰有两  个 共同的元素
 且一个在 $S_1$ 中，另一个在 $S_2$ 中，则 $E[Y_{ijk}Y_{i'j'k'}] = p^2q^3$。
 在 $\E[T^2]$的求和式
 		中共有 $6n\binom{n}{3}$ 项。
@@ -133,8 +133,8 @@ $N_E$ 的收敛性 %define if appropriate.
 \begin{lemma}\label{lem:SBM_tr_counting_3}
 	考虑 $\SSBM(3n, 3, p, q)$。它有3个社团，记为
   $S_1,S_2$ 和 $S_3$。
-  计算三角形的个数 $T$，
-  并且这些三角形 有一个顶点在$S_1$中，有一个顶点在 $S_2$中，
+  计算满足如下条件的三角形的个数 $T$：
+  这些三角形 有一个顶点在$S_1$中，有一个顶点在 $S_2$中，
   有一个顶点在 $S_3$ 中。
 	则 $T$ 的方差为：
 	\begin{equation*}\label{eq:SBM_tr_counting_three}
@@ -150,9 +150,9 @@ $N_E$ 的收敛性 %define if appropriate.
 	$\E[T^2]$中 共有 $n^3$ 项。
 	\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 有一个共同的元素, 则 $E[Y_{ijk}Y_{i'j'k'}] = q^5$。
 	$\E[T^2]$中 共有 $12n\binom{n}{2}^2$ 项。
-	\item 若 $\{i,j,k\}$ and $\{i',j',k'\}$ 有两个共同的元素, 则 $E[Y_{ijk}Y_{i'j'k'}] = q^4$。
+	\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 有两个共同的元素, 则 $E[Y_{ijk}Y_{i'j'k'}] = q^4$。
 	$\E[T^2]$中 共有 $6\binom{n}{2}n^2$ 项。
-	\item If $\{i,j,k\}$ and $\{i',j',k'\}$ 没有共同的元素, 则  $E[Y_{ijk}Y_{i'j'k'}] = q^6$。
+	\item 若 $\{i,j,k\}$ 和 $\{i',j',k'\}$ 没有共同的元素, 则  $E[Y_{ijk}Y_{i'j'k'}] = q^6$。
 	$\E[T^2]$中 共有 $8\binom{n}{2}^3$ 项。
 \end{enumerate}	
 通过下面的求和式可以验证我们已经遍历了所有的情形：
@@ -168,7 +168,7 @@ $$
 \begin{proof}
  我们将 $T$ 分成三部分：
  第一部分是每个社团内部的三角形，记社团$i$里有$T_i$个三角形，则共有$k$个$T_i$的项。
- 第二部分包括有一个点在第i个社团内部，它所对的边在第$j$个社团里的那些三角形，记为 $T_{ij}$。
+ 第二部分包括有一个点在第 $i$ 个社团内部，它所对的边在第$j$个社团里的那些三角形，记为 $T_{ij}$。
  共有 $k(k-1)$ 个 $T_{ij}$ 的项。第三部分包括三个顶点分别在$i,j,k$三个不同社团的三角形，共有
  $\binom{n}{3}$ 项。
 	
@@ -193,8 +193,8 @@ $$
 	=\frac{n-1}{2n}\frac{ab^2}{k^3}$， 由切比雪夫不等式
   可得：
 	\begin{align*}
-	P \left( \Big|\frac{T_{ij}}{\log^3 n} - \frac{n-1}{2n}\frac{ab^2}{k^3} \Big| > \epsilon
-  \right) &\leq \frac{\Var[T_{ij} / \log^3 n]}{\epsilon^2} \\
+	P \left( \left|\frac{T_{ij}}{\log^3 n} - \frac{n-1}{2n}\frac{ab^2}{k^3} \right| > \epsilon
+  \right) &\leq \frac{\Var\left[T_{ij} / \log^3 n \right]}{\epsilon^2} \\
 	& = \frac{1}{\epsilon^2}
 	O \left( \frac{1}{\log^3 n} \right)
 	\end{align*}
@@ -204,9 +204,9 @@ $$
 	为证明
   $\frac{T_{ijk}}{\log^3 n}\to (b/k)^3$，
   从 引理 \ref{lem:SBM_tr_counting_3} 中
-  可得 $\Var[T_{ijk}] = O(\log^5 n)$:
+  可得 $\Var[T_{ijk}] = O\left(\log^5 n\right)$：
 	$$
-	P \left( \Big|\frac{T_{ijk}}{\log^3 n} -\frac{b^3}{k^3} \Big| > \epsilon
+	P \left( \left|\frac{T_{ijk}}{\log^3 n} -\frac{b^3}{k^3} \right| > \epsilon
   \right) \leq \frac{\Var[T_{ijk} / \log^3 n]}{\epsilon^2} = \frac{1}{\epsilon^2}
 	O \left(\frac{1}{\log n} \right)
 	$$
@@ -218,27 +218,28 @@ $$
   \ref{lem:ER_tr_counting} ， $e_1 \to e^*_1$。
 	由 引理 \ref{lem:sbmV} ， 当 $n\to \infty$ 时，
   $e_2 \to e^*_2$。
-	通过变量替换 $x=2ke_1 - (k-1)y$ 消元，我们可将
-  方程组 (\ref{eq:e_1},\ref{eq:e_2})
+	通过变量替换 $x=2ke_1 - (k-1)y$ 进行消元，
+  我们可将
+  方程组\eqref{eq:e_1}
   化简为如下的非线性方程：
 \begin{equation}\label{eq:gy_y3}
 g(y): = (k-1)(y^3 - 6 e_1 y^2 + 12 e_1^2 y) + 6 e_2 - 8 k e_1^3 = 0
 \end{equation}
 
 $g'(y) = 3(k-1)(y-2e_1)^2 \geq 0 $，
-$g(y)$ $\mathbb{R}$上的是增函数，
+$g(y)$ 是$\mathbb{R}$上的增函数，
 因此方程\eqref{eq:gy_y3} 最多有一个实根。
-下面我们证明\eqref{eq:gy_y3}式有一个实根
+下面我们证明式\eqref{eq:gy_y3}有一个实根
 在 区间 $(0, 2e_1)$ 内。
 \begin{align*}
-&\lim_{n\to \infty}g(0) =  6e^*_2 - 8k(e^*_1)^3 =-\frac{3}{k^2}(k-1)(k-2)ab^2 \\
-&-\frac{3(k-1)}{k^2}a^2b - \frac{k-1}{k^2} ((k-2)-(k-1)^2)b^3 < 0 \\
-&\lim_{n\to \infty}g(2e_1) = 6e^*_2 - 8(e^*_1)^3 = \frac{(k-1)(a-b)^3}{k^3} > 0
+\lim_{n\to \infty}g(0) &=  6e^*_2 - 8k(e^*_1)^3  \\
+&=-\frac{3}{k^2}(k-1)(k-2)ab^2-\frac{3(k-1)}{k^2}a^2b - \frac{k-1}{k^2} ((k-2)-(k-1)^2)b^3 < 0 \\
+\lim_{n\to \infty}g(2e_1) &= 6e^*_2 - 8(e^*_1)^3 = \frac{(k-1)(a-b)^3}{k^3} > 0
 % verified with sympy
 \end{align*}
 
-因此，\eqref{eq:gy_y3}式有一个实根，由 $g(y)$的连续性，当$n\to \infty $ 时，该实根收敛到 $b$。
-从而我们得到方程组 (\ref{eq:e_1},\ref{eq:e_2})有唯一解 $\hat{a},\hat{b}$，
+因此，式\eqref{eq:gy_y3}有一个实根。由 $g(y)$的连续性，当$n\to \infty $ 时，该实根收敛到 $b$。
+从而我们得到方程组\eqref{eq:e_1}有唯一解 $\hat{a},\hat{b}$，
 且
 $\hat{b} \to b$， $\hat{a} \to a$。
 \end{proof}
@@ -259,10 +260,10 @@ $X$改变一个状态后的能量差表达式。
 对于一般的情形，即改变
 $|\cI|:=\Dist(\bar{\sigma}, X)$
 个位置的状态后，
-我们可以将能量差写成:
+我们可以将能量差写成：
 \begin{equation}\label{eq:Hgeneral}
 H(\bar{\sigma}) - H(X)=
-(1 + \gamma \frac{ \log n}{n})[A_{\bar{\sigma}} - B_{\bar{\sigma}}] + \gamma\frac{ \log n}{n} N_{\bar{\sigma}}
+\left(1 + \gamma \frac{ \log n}{n} \right)[A_{\bar{\sigma}} - B_{\bar{\sigma}}] + \gamma\frac{ \log n}{n} N_{\bar{\sigma}}
 \end{equation}
 在上式中 我们使用
 $A_{\bar{\sigma}}$ 或
@@ -270,7 +271,7 @@ $B_{\bar{\sigma}}$ 来表示
 服从参数分别为 $\A$ 或 $\B$ 的二项分布的随机变量，并且
 $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非随机的正整数。
 引理 \ref{lem:minus}  给出了 $A_{\bar{\sigma}}, B_{\bar{\sigma}}$ 和 $N_{\bar{\sigma}}$
-的表达式:
+的表达式：
 
 \begin{lemma}\label{lem:minus}
 	对于 $\SSBM(n,k,p,q)$,
@@ -296,13 +297,14 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 \begin{align}
 	N_{\bar{\sigma}} &= \frac{1}{2}\sum_{i=0}^{k-1} (I_i - I_i')^2 \label{eq:N_w} \\
 	B_{\bar{\sigma}} & \sim \Binom(N_{B_{\bar{\sigma}}} , q),
-  N_{B_{\bar{\sigma}}}=\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji})
+  N_{B_{\bar{\sigma}}}=\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  
+  \left(-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji} \right)
   \label{eq:B_w}\\
 	A_{\bar{\sigma}} &
   \sim \Binom(N_{A_{\bar{\sigma}}}, p),
   N_{A_{\bar{\sigma}}}=
   \frac{n}{k}|\cI| - \frac{1}{2}\sum_{i=0}^{k-1}
-   (I^2_i + \sum_{j=0}^{k-1} I^2_{ij})
+   \left(I^2_i + \sum_{j=0}^{k-1} I^2_{ij} \right)
   \label{eq:A_w}
 	\end{align}
 \end{lemma}
@@ -624,7 +626,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
      切尔诺夫不等式给出\eqref{eq:BwA}式描述的事件发生概率的上界。
      在分析中我们可以省略不等号左边的 $\frac{\gamma \log n}{n}$ 一项
      ，因为其远小于$1$。
-    令 $Z \sim \Bern(\A), Z' \sim \Bern(\B)$，则:
+    令 $Z \sim \Bern\left(\A\right), Z' \sim \Bern\left(\B\right)$，则：
     \begin{align*}
     &P_G(\widetilde{D}(\bar{\sigma}, C))
     \leq (\mathbb{E}[\exp(sZ')])^{N_{B_{\bar{\sigma}}}}
@@ -659,7 +661,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   若 $\gamma>b$, $\beta>\beta^\ast$，
   对于 $1\leq r \leq \frac{n}{\sqrt{\log n}}$
   和 $\forall \epsilon > 0$，
-  存在集合 $\cG^{(r)}$ 使得:
+  存在集合 $\cG^{(r)}$ 使得：
 \begin{equation}\label{eq:Gr}
   P_G(\cG^{(r)}_n) \ge 1 - n^{r(\tilde{g}(\beta)/2 + \epsilon)}
   \end{equation}
@@ -742,7 +744,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   由 引理 \ref{lem:enhanced_fb}  可得
   $P_G(\Lambda_n(G,r)^c) \leq (k-1)^r n^{rg(\bar{\beta})} \leq n^{r (\tilde{g}(\beta) /2 + \epsilon/2)}$。
 
-  对于第二项，我们使用马尔可夫不等式:
+  对于第二项，我们使用马尔可夫不等式：
   \begin{align*}
   P_G(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2} |\Lambda_n(G,r) )
   \leq \mathbb{E}[\Xi_n(r)|\Lambda_n(G,r)]n^{-r \tilde{g}(\beta) /2} 
@@ -825,7 +827,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 
 \begin{lemma}\label{prop:large2}
 	若 $\gamma > b$ 且 $\beta < \beta^*$，
- 存在一个集合 $\cG'_n$ 使得:
+ 存在一个集合 $\cG'_n$ 使得：
 \begin{equation}
 	P_G(\cG'_n) \geq 1 - (1+o(1))\max\{n^{g(\bar{\beta})}, n^{- g(\beta_n) + \epsilon} \}
 	\end{equation}
@@ -839,7 +841,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 
 \begin{proof}
 根据\eqref{eq:energy_diff} 式，
-\eqref{eq:diff1g}式的左边可以写成:
+\eqref{eq:diff1g}式的左边可以写成：
 \begin{equation}\label{eq:knd}
 	\frac{P_{\sigma|G}(\Dist(\sigma, X)=1)}
 {P_{\sigma|G}(\sigma=X)}= (1+o(1))\sum_{s=1}^{k-1}\sum_{r=1}^n \exp(\beta_n (A_r^s - A_r^0))
@@ -853,7 +855,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   P_G(G \not\in \cG^{(2)}_n \Big\vert  G \in \cG^{(1)}_n) \leq n^{- g(\beta_n) + \epsilon}
   \end{equation*}
   
-  令 $\cG'_n = \cG^{(1)}_n \cap \cG^{(2)}_n$:
+  令 $\cG'_n = \cG^{(1)}_n \cap \cG^{(2)}_n$：
   \begin{align*}
   P_G(G \in \cG'_n) &= P_G(\cG^{(1)}_n) P_G(G \in \cG_n^{(2)} | G \in \cG_n^{(1)}) \\
   & \geq (1-n^{ - g(\beta_n) + \epsilon})(1-n^{g(\bar{\beta})}) \\
@@ -1016,7 +1018,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	P_{\sigma | G}(\sigma=X| D(\sigma, X)) \leq \left(\frac{1}{k-1}+o(1) \right) n^{-g(\beta_n)}
 	$$
 	
-	因此:
+	因此：
 	\begin{align*}
 	&P_{\sigma}(\sigma=X| D(\sigma, X))  \leq  P(\cG'^c_n) \\
 	&+ \sum_{G\in \cG'_n}P_G(G) P_{\sigma|G}(\sigma=X| D(\sigma, X)) \\
@@ -1085,8 +1087,8 @@ $H(\bar{\sigma}) $ 等价于极小化
 \begin{lemma}\label{lem:mZW}
 	令 $m$ 为一正整数，
 	$Z_1, \dots, Z_m$
-  是 i.i.d. 的 $\Bern(\B)$，
-  $W_1, \dots, W_m$ 是 i.i.d. $\Bern(\A)$，
+  是 i.i.d. 的 $\Bern\left(\B\right)$，
+  $W_1, \dots, W_m$ 是 i.i.d. $\Bern\left(\A\right)$，
   并且与 $Z_1, \dots, Z_m$独立，
 	则我们有：
 \begin{equation}
