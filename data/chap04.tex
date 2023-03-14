@@ -322,7 +322,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 	H(\bar{\sigma}') - H(\bar{\sigma}) =& 
   \left(1 + \gamma\frac{\log n}{n}
   \right)
-  \cdot \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
+   \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
 	\delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i)) \\
 	&+ \gamma \frac{\log n}{n}\sum_{i\neq r}
 	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
@@ -507,7 +507,7 @@ $W^*:= \left\{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \f
 当 $\hat{X}'' \neq X$ 时，
 我们必须有  $\Dist(\hat{X}'' ,X)\geq 2$
 以满足 硬约束 $\hat{X}'' \in W^*$。
-此外，估计量 $\hat{X}''$ 是无参的而 $\hat{X}'$的值受
+此外，估计量 $\hat{X}''$ 是无参的，而 $\hat{X}'$的值受
 参数 $\gamma$ 的影响。
 在
 $\hat{X}'$ 的表达式中出现的额外的参数 $\gamma$ 可视为

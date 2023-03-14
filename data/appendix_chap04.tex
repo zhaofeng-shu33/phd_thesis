@@ -3,7 +3,7 @@
 \subsection{定理 \ref{thm:ab12} 的证明}
 \begin{lemma}\label{lem:ER_tr_counting}
   \newglossaryentry{e_r}{name=埃尔德什-雷尼模型, description={Erdős–Rényi model}}
-  考虑一个由\gls{e_r}(\glsdesc{e_r})生成的随机图 $G$，它有  $n$
+  考虑一个由\gls{e_r} (\glsdesc{e_r})生成的随机图 $G$，它有  $n$
   个节点， 每条边以概率 $p$ 随机生成\cite{erdHos1960evolution}。
    假设
 	$p=\A$， 边的数量
@@ -207,7 +207,7 @@ $$
   可得 $\Var[T_{ijk}] = O\left(\log^5 n\right)$：
 	$$
 	P \left( \left|\frac{T_{ijk}}{\log^3 n} -\frac{b^3}{k^3} \right| > \epsilon
-  \right) \leq \frac{\Var[T_{ijk} / \log^3 n]}{\epsilon^2} = \frac{1}{\epsilon^2}
+  \right) \leq \frac{\Var \left[T_{ijk} / \log^3 n \right]}{\epsilon^2} = \frac{1}{\epsilon^2}
 	O \left(\frac{1}{\log n} \right)
 	$$
 \end{proof}
@@ -407,9 +407,14 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
   并且我们有
   \begin{align}
   \sum_{X_i \neq X_j, \bar{\sigma}_i = \bar{\sigma}_j} 1 
-  &= \sum_{i=0}^{k-1}[(\frac{n}{k} - I_i) I_i' + \frac{1}{2} \sum_{j=0}^{k-1} I_{ji}(I'_i - I_{ji}) ] 
+  &= \sum_{i=0}^{k-1}
+  \left[
+    \left(\frac{n}{k} - I_i \right)
+    I_i' + \frac{1}{2} \sum_{j=0}^{k-1} I_{ji}(I'_i - I_{ji}) 
+  \right] 
   \label{eq:x_i_neq_x_j_bar_sigma_i_eq_bar_sigma_j_0}\\
-	&=\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  (-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}) 
+	&=\frac{n}{k}|\cI| + \frac{1}{2}\sum_{i=0}^{k-1}  
+  \left(-2 I'_i I_i  + I'^2_i - \sum_{j=0}^{k-1} I^2_{ji}\right) 
   \label{eq:x_i_neq_x_j_bar_sigma_i_eq_bar_sigma_j_1}
   \end{align}
   在式\eqref{eq:x_i_neq_x_j_bar_sigma_i_eq_bar_sigma_j_0}
@@ -437,7 +442,7 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	和 $ |\cI| \le n/\log^{\delta} n$，我们有
 \begin{equation} \label{eq:upmpt}
 	P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n) 
-	\le  \exp\Big(|\cI|\log n
+	\le  \exp\Big(|\cI|\log n\cdot
 	\left(
     f_{\beta}(t) - \beta t -1	+ O((\log n)^{-\delta}) \right)\Big)
 	\end{equation}
@@ -509,9 +514,10 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 	由切尔诺夫不等式（参见 \eqref{eq:chernoff_bound}），
   对于 $s>0$，我们有
 	\begin{align*} 
-	& P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)\le
+	P_G(B_{\bar{\sigma}}-A_{\bar{\sigma}}\ge t |\cI| \log n)
+  & \le
 	\frac{\mathbb{E}[e^{s(B_{\bar{\sigma}}-A_{\bar{\sigma}})}]}{e^{st |\cI|  \log n}}  \\
-	\le & \exp\Big(\frac{|\cI|\log n}{k} \big(a e^{-s}+b e^s -kst -a-b
+  &\le \exp\Big(\frac{|\cI|\log n}{k} \big(a e^{-s}+b e^s -kst -a-b
 	+ O(\log^{-\delta}(n)) \big)\Big) 
 	\end{align*}
 	上式右端对$s\geq 0$取最小值即有
@@ -562,10 +568,11 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     取 $X'$ 为在$X$ 的基础上交换$w^i$ 和 $w^j$ 位置后的向量，
     然后我们考虑
   \begin{align}
-     \Dist(\bar{\sigma}, X') & - \Dist(\bar{\sigma}, X)= |\{ r \in [n]|X_r=w^i, \bar{\sigma}_r \neq w^j \}| \notag\\
-    &+ |\{ r \in [n]|X_r=w^j, \bar{\sigma}_r \neq w^i \}| \notag\\
-    &-|\{ r \in [n]|X_r=w^i, \bar{\sigma}_r \neq w^i \}| \notag\\
-    &- |\{ r \in [n]|X_r=w^j, \bar{\sigma}_r \neq w^j \}| \notag\\
+     \Dist(\bar{\sigma}, X')  - \Dist(\bar{\sigma}, X)
+     &= |\{ r \in [n]|X_r=w^i, \bar{\sigma}_r \neq w^j \}| 
+     + |\{ r \in [n]|X_r=w^j, \bar{\sigma}_r \neq w^i \}|\notag\\ 
+    &-|\{ r \in [n]|X_r=w^i, \bar{\sigma}_r \neq w^i \}| 
+    - |\{ r \in [n]|X_r=w^j, \bar{\sigma}_r \neq w^j \}| \notag\\
     & = \frac{n}{k} - I_{ij} +  \frac{n}{k} - I_{ji} - I_i - I_j\label{eq:distsmall} \\
     & < \frac{2}{k(k-1)}\frac{n}{\sqrt{\log n}} - I_i - I_j < 0\notag
     \end{align}

@@ -104,7 +104,8 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
 \begin{theorem}\label{thm:DPX}
 若 $Z_1, \dots, Z_n$ $\epsilon$-弱独立, 则有
 \begin{equation}\label{eq:PXV}
-D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
+D\left(P_{Z_V} || \prod_{C\in \P} P_{Z_C} \right)
+= {1 \over 2}
 \sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_{\mathrm{F}}^2 + o(\epsilon^2)
 \end{equation}
 其中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
@@ -786,7 +787,7 @@ $\gamma'_N \geq \gamma_N$。如果不等号严格成立，我们看到$i'$的作
 对应一个高维空间的向量$x_i$，新加入的点对应的向量是$x$，
 边的权值由RBF核给出，参数为$\eta$，则检测边界的方程为：
 \begin{equation}\label{eq:sum_exp_gamma_N}
-  \sum_{j \in B} \exp(-\eta \norm{x - x_j}^2)= \gamma_N
+  \sum_{j \in B} \exp\left(-\eta \norm{x - x_j}^2 \right)= \gamma_N
 \end{equation}
 
 上述讨论假设了所有正常值点同属一个类别，
@@ -806,7 +807,7 @@ $\P_{k-r}$，使得$K,M$都比较小。
 对于此多目标优化问题，我们需要一个折中方案，即通过枚举
 $r=1,2,\dots$ 求解下面的优化问题：
 \begin{align}\label{eq:outlier_detection_proposal}
-& \min_{r\in Z^+} r \\
+ \min_{r\in Z^+} \ &r \\
 \textrm{s.t.}\, & f(r):=(r+1)\abs{\P_{k-r}} < n \notag
 \end{align}
 在式\eqref{eq:outlier_detection_proposal}中，我们注意到函数
@@ -821,7 +822,8 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 分界值并且图$G$边的权值是使用 RBF 核 来构建的，
 那么边界曲线方程可以写成下面的形式：
 \begin{equation}\label{eq:boundary_curve_multiple}
-\sum_{j \in C_i} \exp(-\lambda \norm{x - x_j}^2)= \lambda_{k-r}, \textrm{ 其中 } \, C_i \in \P_{k-r} \textrm{且}\,  \abs{C_i} > 1
+\sum_{j \in C_i} 
+\exp\left(-\lambda \norm{x - x_j}^2 \right)= \lambda_{k-r}, \textrm{ 其中 } \, C_i \in \P_{k-r} \textrm{ 且 }  \abs{C_i} > 1
 \end{equation}
 注意到 $C_i$ 是其中一个类别，
 并且 一共有 $K$ 个 边界曲线。
