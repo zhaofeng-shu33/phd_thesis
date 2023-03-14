@@ -205,7 +205,7 @@ $\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another}
 
 \begin{remark}
 当 $\gamma=0$ 时，由式\eqref{eq:lambda} 可得 $\lambda^*=\frac{1}{2}$，
-则 $I_+=\frac{1}{2}(\sqrt{a}-\sqrt{b})^2$。由 式 \eqref{eq:renyi_d12_ab}，
+则 $I_+=\frac{1}{2}\left(\sqrt{a} - \sqrt{b}\right)^2$。由 式 \eqref{eq:renyi_d12_ab}，
 $I_+$ 也可写成雷尼散度的形式。
 进一步地，由定理 \ref{thm:Pe}，$\sqrt{a}-\sqrt{b} > \sqrt{2}$
 时可精确恢复。定理 \ref{thm:Pe} 退化到
@@ -261,8 +261,8 @@ $I_+$ 也可写成雷尼散度的形式。
     \end{equation}
     如果下述条件满足，
     \begin{align}
-    (\sqrt{a}-\sqrt{b})^2-2 
-    > 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2\label{eq:oneC}
+    \left(\sqrt{a} - \sqrt{b}\right)^2-2 
+    > 3a^{1/3}b^{1/3}\left(a^{1/6} - b^{1/6}\right)^2\label{eq:oneC}
     \end{align}
     则精确恢复的误差下界为：
     \begin{equation}\label{eq:PeMainL}
@@ -395,7 +395,8 @@ $m$ 和 $n$ 量阶相同。
 $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化问题
 \begin{align}
     \max_{v}\  & h^T v + \frac{1}{4}v^T B v \notag \\
-    \textrm{s.t. }\, & \mathbf{1}_n^T v = 0 \text{ 且 } v_i \in \{\pm 1 \} \label{eq:matrix_mle}
+    \textrm{s.t. }\, & \mathbf{1}_n^T v = 0 \text{ 且 } v_i \in \{\pm 1 \}
+    \label{eq:matrix_mle}
 \end{align}
 其中 $h$ 是 $n$ 长的向量，第 $i$ 个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
 而  $n\times n $ 的矩阵 $B$ 在 式\eqref{eq:def_B_sdp} 中定义。

@@ -1,12 +1,82 @@
 \section{定理证明}
 \subsection{定理 \ref{thm:Pe} 的证明}
+\begin{lemma}\label{lem:p0p12}
+    设 $P_{\widetilde{Y}}$ 是定义在字母集
+    $\mathcal{Y}$ 上的分布函数。
+    对于 $\SBMSI(n,m,p,q,P_0,P_1)$，定义
+    $I_1, I_2$ 如下
+    \begin{align}
+        I_1 &=\min_{P_{\widetilde{Y}}}\  \gamma D(P_{\widetilde{Y}}|| P_0)+ \frac{1}{2} g(a,b, 2\epsilon),
+        \text{ 其中}\nonumber\\
+        \epsilon &= \gamma \frac{D(P_{\widetilde{Y}} || P_1) - D(P_{\widetilde{Y}} || P_0) }{\log \frac{a}{b}}\label{eq:I1}
+    \end{align}
+    函数 $g(a,b,\epsilon)$ 在式 \eqref{equation:g}中定义，而 $I_2$ 的定义通过交换 $P_0, P_1$ 的位置得到：
+    \begin{align}
+        I_2 & = \min_{P_{\widetilde{Y}}} \gamma D(P_{\widetilde{Y}}|| P_1)+ \frac{1}{2} g(a,b, 2\epsilon),
+        \text{ 其中}\nonumber\\
+        \epsilon &= \gamma \frac{D(P_{\widetilde{Y}} || P_0) - D(P_{\widetilde{Y}} || P_1) }{\log \frac{a}{b}}
+        \label{eq:I2}
+    \end{align}
+     则我们有 $I_1=I_2=I_+$。
+\end{lemma}
+\begin{proof}
+    我们只需证明 $I_1=I_+$ 成立即可。
+另一半 $I_2=I_+$ 可由 $I_+$ 定义的对称性导出。
+
+我们用 拉格朗日乘子法 来求解 \eqref{eq:I1}。
+令
+\begin{align*}
+L(P_{\widetilde{Y}},\epsilon, \lambda)
+=\gamma D(P_{\widetilde{Y}}|| P_0)+
+\frac{1}{2} g(a,b, 2\epsilon)
+- \lambda(\epsilon \log\frac{a}{b}-\gamma
+D(P_{\widetilde{Y}} || P_1) + \gamma D(P_{\widetilde{Y}} || P_0))
+\end{align*}
+对于给定的 $\epsilon$，极小化 $L(P_{\widetilde{Y}},\epsilon, \lambda)$
+相当于极小化
+$(1-\lambda)D(P_{\widetilde{Y}} || P_0) +
+\lambda D(P_{\widetilde{Y}} || P_1) $。通过类似
+文献 \inlinecite{cover1999elements} 里 式(11.199) 中求导的方式，
+我们得到 $P_{\widetilde{Y}}(y) = P_{\lambda}(y)$，
+其中 $P_{\lambda}(y)$ 的定义见式\eqref{eq:P_lambda_0_1}。
+另一方面，由 $\frac{\partial L(P_{\widetilde{Y}},\epsilon, \lambda)}{\partial \epsilon}=0$
+并将 式\eqref{eq:P_lambda_0_1}
+代入到 式\eqref{eq:I1}， 我们得到
+\begin{align*}
+\lambda \log \frac{a}{b}
+& = \log \frac{\epsilon + \sqrt{\epsilon^2+ab}}{b} \\
+\epsilon \log \frac{a}{b}
+& = \gamma\frac{\sum_{Y \in \mathcal{Y}}P_0^{1-\lambda}(y) P_1^{\lambda} (y)
+\log \frac{P_0(y)}{P_1(y)}}{\sum_{y \in \mathcal{Y}}
+P_0^{1-\lambda}(y) P_1^{\lambda} (y)}
+\end{align*}
+上述两式消掉 $\epsilon$ 后，我们可以得到关于
+$\lambda$ 的方程：
+\begin{align*}
+\frac{\log\frac{a}{b}}{2}
+\left(a^{\lambda} b^{1-\lambda}
+-a^{1-\lambda} b^{\lambda}\right)
++ \gamma \frac{\sum_{y \in \mathcal{Y}}
+P_0^{1-\lambda}(y) P_1^{\lambda}(y)
+\log \frac{P_1(y)}{P_0(y)}}
+{\sum_{y \in \mathcal{Y}}P_0^{1-\lambda}(y)
+P_1^{\lambda} (y)}
+=0
+\end{align*}
+上式恰等价于 式\eqref{eq:lambda} 中目标函数对 $\lambda$求导后整个式子等于零。
+因此$P_{\widetilde{Y}}=P_{\lambda^*}(\lambda)$。
+代入$I_1$ 的表达式中化简后我们可得
+$I_1 = I_+$。
+\end{proof}
+
 当 $I_+ > 1$ 时精确恢复的可实现性可由 定理 \ref{thm:sdp}  给出的关于 SDP算法可实现精确恢复的论断证明。
 此处我们证明当 $I_+ < 1$ 时 
 精确恢复的不可实现性。
-同 \ref{sec:thm_sdp_proof} 节，$S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
+%同 \ref{sec:thm_sdp_proof} 节，
+令$S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
 对于 节点 $i$ 和节点集 $S\subset [n]$，
 令 $E(i,S)$ 表示图$G$中连接$i$和$S$中的节点的边的数量。
-采用和 \cite{abbe2015exact} 中第五节关于下界的讨论 类似的方法
+采用和文献 \inlinecite{abbe2015exact} 中第五节关于下界的讨论 类似的方法
 我们可以得到，当 $I_1<1$时，存在大小为 $\frac{n}{\log^3 n}$  的 子集合
     $H_1\subset S_1$ 和 节点 $i_1\in H_1$，使得下式以接近于1的概率成立：
 \begin{align}
@@ -38,8 +108,9 @@
     \ge &\log \frac{p(1-q)}{q(1-p)}(E(i_1, S_1 \backslash \{i_1\}) + E(i_2, S_2 \backslash \{i_2\})\nonumber\\
     &- E(i_1, S_2 \backslash \{i_2\}) - E(i_2, S_1 \backslash \{i_1\})) \label{eq:F1ij}
 \end{align}
-因此， 在 $I_1<1$ 和 $I_2<1$的条件下，以接近1的概率 式\eqref{eq:F1ij} 成立。
-根据 引理\ref{lem:p0p12}，
+因此， 在 $I_1<1$ 和 $I_2<1$的条件下，以接近1的概率，
+式\eqref{eq:F1ij} 成立。
+根据 引理 \ref{lem:p0p12}，
 该条件即为 $I_+<1$。
 又根据 式 \eqref{eq:lh} 和 $X$ 是均匀分布的假设，
 式 \eqref{eq:F1ij} 等价于在式 \eqref{eq:lh} 中定义的 似然函数
@@ -148,7 +219,10 @@ $x^*$，则
           （取 $k=1$），
         我们有如下的不等式估计
         \begin{equation}\label{eq:pa1}
-        P(A_1) \geq \exp(-(\gamma D_{1/2}(P_0||P_1) + (\sqrt{a}-\sqrt{b})^2 + o(1))\log n )
+        P(A_1) \geq \exp\left(-
+        \left(\gamma D_{1/2}(P_0||P_1) + \left(\sqrt{a} - \sqrt{b}\right)^2 + o(1)
+        \right)\log n
+        \right)
         \end{equation}
         \end{lemma}
         \begin{proof}[引理 \ref{lem:single_lower} 的证明] 
@@ -160,9 +234,8 @@ $\sum_{i=1}^{n-2} (z'_i - z_i)
 \begin{align*}
 \epsilon := &\frac{m}{\log a/b}\cdot 
 \Bigl[D(P_{\widetilde{Y}_{1}} || P_1) 
-- D(P_{\widetilde{Y}_{1}} || P_0) \\
-&+D(P_{\widetilde{Y}_{2}} || P_0) -
-D(P_{\widetilde{Y}_{2}} || P_1)\Bigr],
+- D(P_{\widetilde{Y}_{1}} || P_0) + D(P_{\widetilde{Y}_{2}} || P_0) -
+D(P_{\widetilde{Y}_{2}} || P_1)\Bigr]
 \end{align*}
 令 $P_{\widetilde{Y}^{*}_1}$
 和 $P_{\widetilde{Y}^{*}_2}$
@@ -176,14 +249,15 @@ $P_{\widetilde{Y}^{*}_1}$
 和 $P_{\widetilde{Y}^{*}_2}$，
 我们使用 Sanov 定理可得
 \begin{align*}
-&P(A_1)
-\geq\frac{1}
+P(A_1)
+&\geq\frac{1}
 {(m+1)^{2|\mathcal{Y}|}}
 \exp \left(-m(D(P_{\widetilde{Y}^*_1} || P_0)
 + D(P_{\widetilde{Y}^*_2} || P_1))
 \right)
 \cdot P\left(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0\right)\\
-& = \exp(-\log n (\gamma D_{1/2}(P_0||P_1)+o(1))) P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)
+& = \exp(-\log n \cdot (\gamma D_{1/2}(P_0||P_1)+o(1))) 
+P\left(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0 \right)
 \end{align*}
 由 文献\inlinecite{abbe2015exact}
 中的引理 4，
@@ -241,8 +315,8 @@ P(A_k) &\leq \mathbb{E}
     {P_0(y_{1i})}
 + \log \frac{P_0(y_{2i})}
     {P_1(y_{2i})} \right)
-\right)\right] \\
-&\quad\cdot \mathbb{E}
+\right)\right]\\
+&\quad \cdot \mathbb{E}
 \left[\exp\left(s\log \frac{a}{b}\sum_{i=1}^{k(n-2k)} (z'_i - z_i )\right)
 \right] \\
 & \stackrel{(a)}{=}
@@ -272,19 +346,21 @@ P(F_k) \leq \binom{n/2}{k}^2 P(A_k)
 \end{equation}
 并且结合不等式
 \begin{equation}\label{eq:nk_binom_small}
-    \binom{n}{k} \leq (\frac{ne}{k})^k
+    \binom{n}{k} \leq \left(\frac{ne}{k} \right)^k
 \end{equation}
 我们可以进一步 向上放缩 $P(F_k)$ 为
 \begin{align}
 P(F_k) & \leq \left(\frac{ne}{2k}\right)^{2k} P(A_k) 
 \label{eq:P_F_k_less_A_k}\\
-&\leq \exp(k(2\log(\frac{ne}{2k})-\theta_k^* \log n) + o(1))
+&\leq \exp\left(k\left(2\log
+\left(\frac{ne}{2k}\right)
+-\theta_k^* \log n\right) + o(1) \right)
 \notag
 \end{align}
 \begin{align*}
 P_e &\leq P(F_1)+(1+o(1))\sum_{k=2}^{\frac{n}{\sqrt{\log n}}} P(F_k) \\
 & \leq (1+o(1))\cdot \sum_{k=2}^{\frac{n}{\sqrt{\log n}}}
-\exp\left(k(-\mu \log n + \frac{2k}{n} \log n\left(\sqrt{a} - \sqrt{b}\right)^2 - 2\log 2k + 2)
+\exp\left(k\left(-\mu \log n + \frac{2k}{n} \log n\left(\sqrt{a} - \sqrt{b}\right)^2 - 2\log 2k + 2\right)
 \right)
 \end{align*}
 其中 $\mu$ 定义为
@@ -302,11 +378,11 @@ $$
 \begin{align*}
 P_e &\leq \frac{1}{4}n^{-\mu + o(1)} +(1+o(1)) \sum_{k=2}^{\frac{n}{\sqrt{\log n}}} \exp(k((-\mu + o(1)) \log n )) \\
 & =\frac{1}{4}n^{-\mu + o(1)}+(1+o(1)) \frac{n^{-\mu + o(1)}}{1-n^{-\mu + o(1)}} \\
-&= (\frac{1}{4}+o(1))n^{-\mu + o(1)}
+&= \left(\frac{1}{4}+o(1)\right)n^{-\mu + o(1)}
 \end{align*}
 因此， \eqref{eq:PeMain} 成立。
 
-为证明误差率下界表达式
+为证明误差率下界的表达式
 \eqref{eq:PeMainL}，
 我们首先定义事件 $A_{ij}$ 为
 $P(y,z|x) > P(y,z|x^*)$，
@@ -324,7 +400,7 @@ x_i^*=-x_j^*
 这一事件。
 由 Bonferroni 不等式，我们有
 \begin{equation}\label{eq:bonf}
-	P(\bigcup_{(i,j)\in S} A_{ij}) \geq
+	P\left(\bigcup_{(i,j)\in S} A_{ij} \right) \geq
 	\sum_{(i,j)\in S} P(A_{ij})
 	- \sum_{(i,j) \neq (r,s)} P(A_{ij} \cap A_{rs})		
 \end{equation}
@@ -368,21 +444,21 @@ $\sum_{(i,j,r,s) \in S_1} P(A_{ij} \cap A_{rs})
 另一种情形是 $|\{i,j,r,s\}|=3$。
 在这种情形下，
 不失一般性我们假设 $i=r, x^{(1)}_i = x^{(2)}_r = 1$。
-对于 $x^{(1)}_i = x^{(2)}_r = -1$ 的情形，
+而对于 $x^{(1)}_i = x^{(2)}_r = -1$ 的情形，
 我们只需交换
 $P_0$ 和 $P_1$ 的位置，
 如下的分析仍旧成立。
 可以推出
 \begin{align}
 A_{ijrs}: &\, 2\sum_{i=1}^m  \log \frac{P_1(y_{1i})}{P_0(y_{1i})}
-+ \sum_{i=1}^{2m} \log \frac{P_0(y_{2i})}{P_1(y_{2i})} \\
-& +\log\frac{a}{b}\left(
++ \sum_{i=1}^{2m} \log \frac{P_0(y_{2i})}{P_1(y_{2i})} 
+ +\log\frac{a}{b}\left(
 \sum_{i=1}^{n} (z'_i - z_i) + 2\sum_{i=n+1}^{3n/2} (z'_i - z_i)\right)  \geq 0\notag
 \end{align}
 由 切尔诺夫不等式，
 $P(A_{ijrs})$ 的上界可以写成
 \begin{align*}
-&P(A_{ijrs}) \leq
+P(A_{ijrs}) &\leq
 \left(\sum_{y\in \mathcal{Y}}
 P_0^{1-2s}(y) P_1^{2s}(y)\right)^m
 \left(\sum_{y\in \mathcal{Y}} P_1^{1-s}(y)P_0^{s}(y)\right)^{2m} \\
@@ -392,17 +468,24 @@ P_0^{1-2s}(y) P_1^{2s}(y)\right)^m
 令 $s=\frac{1}{3}$，则我们有
 \begin{align*}
 P(A_{ijrs})&\leq  \left(\sum_{y\in \mathcal{Y}}
-P_0^{1/3}(y) P_1^{2/3}(y) \right)^{3m} \cdot \exp(\frac{3}{2}\log n (-a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}+o(1))) \\
-&\leq   \exp(-\log n(\gamma D_{1/2}(P_1 || P_0) + \frac{3}{2} (a+b-a^{1/3}b^{2/3}-a^{2/3}b^{1/3})+o(1)))
+P_0^{1/3}(y) P_1^{2/3}(y) \right)^{3m} \\
+&\quad\cdot 
+\exp\left(\frac{3}{2}\log n \cdot \left(
+    -a-b+a^{1/3}b^{2/3}+a^{2/3}b^{1/3}+o(1) 
+\right) \right) \\
+&\leq   \exp \left(-\log n
+\cdot \left(\gamma D_{1/2}(P_1 || P_0) + \frac{3}{2} (a+b-a^{1/3}b^{2/3}-a^{2/3}b^{1/3})+o(1)
+\right) \right)
 \end{align*}
-其中 最后一个不等式由 引理\ref{lem:p0p1}
+其中 最后一个不等式由 引理 \ref{lem:p0p1}
 得出。
 因此我们有
 $$
-P(A_{ijrs}) \leq n^{-\mu'/2-1-(\gamma  D_{1/2}(P_0||P_1) + \left(\sqrt{a} - \sqrt{b}\right)^2) + o(1)}
+P(A_{ijrs}) \leq n^{-\mu'/2-1-
+\left(\gamma  D_{1/2}(P_0||P_1) + \left(\sqrt{a} - \sqrt{b}\right)^2 \right) + o(1)}
 $$
-其中 $\mu'=(\sqrt{a}-\sqrt{b})^2-2 
-- 3a^{1/3}b^{1/3}(a^{1/6}-b^{1/6})^2$。
+其中 $\mu'=\left(\sqrt{a} - \sqrt{b}\right)^2-2 
+- 3a^{1/3}b^{1/3}\left(a^{1/6} - b^{1/6}\right)^2$。
 由 式\eqref{eq:oneC}， $\mu'>0$。
 集合 $S_2:=\{(i,j,r,s)| i<j, r<s, |\{i,j,r,s\}|=3\}$
 的元素个数小于 $n^3$，
@@ -415,97 +498,37 @@ $\sum_{(i,j,r,s)\in S} P(A_{ij} \cap A_{rs})\leq n^{-2\mu + o(1)}
 + n^{-\mu - \mu'/2} = o(1) n^{-\mu + o(1)}$。
 因此我们推出
 \begin{align*}
-P_e=P(F) & \geq P(\cup_{(i,j)\in S} A_{ij}) \\
+P_e=P(F) & \geq P\left(\bigcup_{(i,j)\in S} A_{ij} \right) \\
 & \geq \frac{1}{4} n^{-\mu+o(1)}- o(1)n^{-\mu + o(1)},
 \textrm{ 由 } \eqref{eq:bonf}  \\
-&=(\frac{1}{4}+o(1))n^{-\mu + o(1)}
+&=\left(\frac{1}{4}+o(1)\right)n^{-\mu + o(1)}
 \end{align*}
 \end{proof}
 
 \subsection{定理 \ref{thm:I_plus_relation} 的证明}
-	\begin{lemma}\label{lem:p0p12}
-        设 $P_{\widetilde{Y}}$ 是定义在字母集
-        $\mathcal{Y}$ 上的分布函数。
-		对于 $\SBMSI(n,m,p,q,P_0,P_1)$，定义
-        $I_1, I_2$ 如下
-		\begin{align}
-			I_1 &=\min_{P_{\widetilde{Y}}} \gamma D(P_{\widetilde{Y}}|| P_0)+ \frac{1}{2} g(a,b, 2\epsilon),
-            \text{ 其中}\nonumber\\
-			\epsilon &= \gamma \frac{D(P_{\widetilde{Y}} || P_1) - D(P_{\widetilde{Y}} || P_0) }{\log \frac{a}{b}}\label{eq:I1}
-		\end{align}
-        函数 $g(a,b,\epsilon)$ 在式 \eqref{equation:g}中定义，而 $I_2$ 的定义通过交换 $P_0, P_1$ 的位置得到：
-		\begin{align}
-			I_2 & = \min_{P_{\widetilde{Y}}} \gamma D(P_{\widetilde{Y}}|| P_1)+ \frac{1}{2} g(a,b, 2\epsilon),
-            \text{ 其中}\nonumber\\
-			\epsilon &= \gamma \frac{D(P_{\widetilde{Y}} || P_0) - D(P_{\widetilde{Y}} || P_1) }{\log \frac{a}{b}}
-            \label{eq:I2}
-		\end{align}
- 		则我们有 $I_1=I_2=I_+$。
-    \end{lemma}
-    \begin{proof}
-        我们只需证明 $I_1=I_+$ 成立即可。
-另一半 $I_2=I_+$ 可由 $I_+$ 的定义对称性导出。
 
-我们用 拉格朗日乘子法 来求解 \eqref{eq:I1}。
-令
-\begin{align*}
-L(P_{\widetilde{Y}},\epsilon, \lambda)
-=\gamma D(P_{\widetilde{Y}}|| P_0)+
-\frac{1}{2} g(a,b, 2\epsilon)
-- \lambda(\epsilon \log\frac{a}{b}-\gamma
-D(P_{\widetilde{Y}} || P_1) + \gamma D(P_{\widetilde{Y}} || P_0))
-\end{align*}
-对于给定的 $\epsilon$，极小化 $L(P_{\widetilde{Y}},\epsilon, \lambda)$
-相当于极小化
-$(1-\lambda)D(P_{\widetilde{Y}} || P_0) +
-\lambda D(P_{\widetilde{Y}} || P_1) $。通过类似
-\citet{cover1999elements} 中 式(11.199) 中求导的方式，
-我们得到 $P_{\widetilde{Y}}(y) = P_{\lambda}(y)$，
-其中 $P_{\lambda}(y)$ 定义见式\eqref{eq:P_lambda_0_1}。
-另一方面，由 $\frac{\partial L(P_{\widetilde{Y}},\epsilon, \lambda)}{\partial \epsilon}=0$
-并将 式\eqref{eq:P_lambda_0_1}
-代入到 式\eqref{eq:I1}， 我们得到
-\begin{align*}
-    \lambda \log \frac{a}{b}
-    & = \log \frac{\epsilon + \sqrt{\epsilon^2+ab}}{b} \\
-    \epsilon \log \frac{a}{b}
-    & = \gamma\frac{\sum_{Y \in \mathcal{Y}}P_0^{1-\lambda}(y) P_1^{\lambda} (y)
-    \log \frac{P_0(y)}{P_1(y)}}{\sum_{y \in \mathcal{Y}}
-    P_0^{1-\lambda}(y) P_1^{\lambda} (y)}
-\end{align*}
-上述两式消掉 $\epsilon$ 后，我们可以得到关于
-$\lambda$ 的方程：
-\begin{align*}
-    \frac{\log\frac{a}{b}}{2}
-    (a^{\lambda} b^{1-\lambda}
-    -a^{1-\lambda} b^{\lambda})
-    + \gamma \frac{\sum_{y \in \mathcal{Y}}
-    P_0^{1-\lambda}(y) P_1^{\lambda}(y)
-    \log \frac{P_1(y)}{P_0(y)}}
-    {\sum_{y \in \mathcal{Y}}P_0^{1-\lambda}(y)
-    P_1^{\lambda} (y)}
-    =0
-\end{align*}
-上式恰等价于 式\eqref{eq:lambda} 中目标函数对 $\lambda$求导后整个式子等于零。
-因此$P_{\widetilde{Y}}=P_{\lambda^*}(\lambda)$。
-代入$I_1$ 的表达式中化简后我们可得
-$I_1 = I_+$。
-\end{proof}
 \begin{proof}[定理 \ref{thm:I_plus_relation} 的证明]
-    由引理\ref{lem:p0p12}，
-    我们只需证明 $I_1 \geq \frac{1}{2}[\gamma D_{1/2}(P_0||P_1)
-    + \left(\sqrt{a} - \sqrt{b}\right)^2]$。
+    由引理 \ref{lem:p0p12}，
+    我们只需证明
+    $$
+    I_1 \geq 
+    \frac{1}{2}\left[
+        \gamma D_{1/2}(P_0||P_1)
+    + \left(\sqrt{a} - \sqrt{b}\right)^2
+    \right]
+    $$
     由于定义在 式\eqref{equation:g} 中的 $g(a,b,\epsilon)$ 是关于 $\epsilon$
     的凸函数，则我们有
     \begin{equation}\label{eq:g_linear}
             g(a,b,\epsilon) \geq g(a,b,0) + g'(a,b,0)\epsilon = \left(\sqrt{a} - \sqrt{b}\right)^2 + \frac{\epsilon}{2}\log \frac{a}{b}
         \end{equation}
-        则由引理\ref{lem:p0p12}，
+        则由引理 \ref{lem:p0p12}，
         \begin{align}
-            I_1 \geq \min_{P_{\widetilde{Y}}}
-            \frac{1}{2}(\sqrt{a}-\sqrt{b})^2+\gamma
-            \frac{D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)}{2} \\
-            = \frac{1}{2}((\sqrt{a}-\sqrt{b})^2+\gamma D_{1/2}(P_0||P_1))
+            I_1 &\geq \frac{1}{2}\left(\sqrt{a} - \sqrt{b}\right)^2+\min_{P_{\widetilde{Y}}}\ 
+            \gamma
+            \frac{D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)}{2} \notag\\
+            &= \frac{1}{2}\left(\left(\sqrt{a} - \sqrt{b}\right)^2+\gamma D_{1/2}(P_0||P_1)
+            \right)
             \label{eq:I_1_ab_equal_renyi}
         \end{align}
         不难验证，$D(P_{\widetilde{Y}} || P_1) + D(P_{\widetilde{Y}} || P_0)$
@@ -533,12 +556,12 @@ $-\frac{1}{kn}\log P(A_k) \to \theta^*_k$。
 \end{align*}
 通过拉格朗日乘子法求解上述优化问题，我们可得
 \begin{align*}
-P_{\widetilde{Y}_1}(x) = c_1 P_0^{1-\lambda}(y)P_1^{\lambda}(y)\quad &
+P_{\widetilde{Y}_1}(x) = c_1 P_0^{1-\lambda}(y)P_1^{\lambda}(y),\quad &
 P_{\widetilde{Y}_2}(x) = c_2 P_1^{1-\lambda}(y)P_0^{\lambda}(y) \\
-P_{\widetilde{Z}}(z) = c_3 P_{B_p}^{1-\lambda}(x)P_{B_q}^{\lambda}(z)\quad &
+P_{\widetilde{Z}}(z) = c_3 P_{B_p}^{1-\lambda}(x)P_{B_q}^{\lambda}(z),\quad &
 P_{\widetilde{Z}'}(z) = c_4 P_{B_q}^{1-\lambda}(x)P_{B_p}^{\lambda}(z)
 \end{align*}
-其中$B_p, B_q$如式\eqref{eq:mnk}中的那样定义
+其中$B_p, B_q$的定义同式\eqref{eq:mnk}，
 而  $c_1, \dots, c_4$ 是这些分布的 归一化系数 。
 系数 $\lambda$ 的选取 要使得式\eqref{eq:mnk}
 变成等式约束，从而有 $\lambda=\frac{1}{2}$。
@@ -587,15 +610,15 @@ $$
 令 $\kappa = -\log\frac{1-p}{1-q} / \log\frac{p}{q} \sim \frac{a-b}{\log a/b}\frac{\log n}{n}$,
 则我们只需考虑
 $$
-\max \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
+\max\  \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
 +\sum_{(i,j) \in E} \delta(x_i, x_j)
 -\kappa\sum_{(i,j)\not\in E} \delta(x_i, x_j)
 $$
 令 $x_i = (v_i+1)/2$，其中 $v_i \in \{\pm 1 \}$。
 则我们有 $\delta(x_i, x_j) = \frac{v_i v_j + 1}{2}$。
-优化问题等价于求解：
+则上式等价于：
 $$
-\max \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m v_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
+\max\  \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m v_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
 +\sum_{(i,j) \in E} v_i v_j
 -\kappa\sum_{(i,j)\not\in E} v_i v_j
 $$
@@ -607,17 +630,21 @@ $$
 $$
 
 定义 矩阵 $B$ 为 \eqref{eq:def_B_sdp} 的形式，则
-优化问题 为$2\max h^T v + \frac{1}{4}v^T B v$ (忽略 $\kappa=o(1)$)，
+优化问题 化为$2\max h^T v + \frac{1}{4}v^T B v$ (忽略 $\kappa=o(1)$)，
 即为式\eqref{eq:matrix_mle}。
 
 下述引理是
-\citet{abbe2015exact}
+文献\inlinecite{abbe2015exact}
 中引理 8 的推广：
 \begin{lemma}\label{lem:zxt}
     假设 $m > n, Z \sim \Binom(m, \frac{b\log n}{n}), X\sim \Binom(m, \frac{a\log n}{n})$。
     对于 $ t \geq \frac{m}{n}(b - a)$, 我们有
     \begin{align}\label{eq:estimation}
-        P(Z - X \geq t \log n) \leq \exp(-\frac{m}{n}\log n \cdot ( g(a, b, \frac{n}{m}t) + O(\frac{\log n}{n})))
+        P(Z - X \geq t \log n) 
+        \leq \exp\left(-\frac{m}{n}\log n \cdot 
+        \left( g(a, b, \frac{n}{m}t) + O\left(\frac{\log n}{n} \right)
+        \right)
+        \right)
     \end{align}
     其中 $g(a,b,\epsilon)$ 在 式\eqref{equation:g} 中定义。
 \end{lemma}
@@ -628,7 +655,10 @@ $$
 =N_{B_{\bar{\sigma}}}=m$，利用
 切尔诺夫不等式我们有
 \begin{equation*}
-    P(Z - X \geq t \log n) \leq \exp(-\frac{m}{n}\log n (a+b-ae^{-s}-be^s+\frac{n}{m}ts + O(\frac{\log n}{n})))
+    P(Z - X \geq t \log n) \leq \exp\left(-\frac{m}{n}\log n \cdot
+    \left(a+b-ae^{-s}-be^s+\frac{n}{m}ts + O\left(\frac{\log n}{n} \right)
+    \right)
+    \right)
 \end{equation*}
 其中 $s \geq 0$。
 由 $g(a,b,\epsilon) = 
@@ -647,18 +677,18 @@ $\Xi$ 定义成
     \Xi_{ij} = \begin{cases}
         \lambda_1, & i=1\text{ 或 }j=1 \text{， 且 }i\ne j\\
         \lambda_i + \lambda_j, & i, j\in\{2,\ldots,n+1\}
-    \end{cases},
+    \end{cases}
 \end{equation}
-$\lambda_i$ 是只出现在约束条件中的优化的变量。
+$\lambda_i$ 是只出现在约束条件中的优化变量。
 假设 $g=(1,\ldots,1,-1,\ldots,-1)$ 是节点真实的标签，
 也即
 前一半和后一半的标签分别是  $1$ 和 $-1$。
-与 \citet{abbe2015exact} 中采用的方法类似，
+与文献 \inlinecite{abbe2015exact} 中采用的方法类似，
 $(1,g)(1,g)^T$ 是 \eqref{eq:sdp} 的唯一最优解
  被如下条件所保证：
 \begin{enumerate}
-    \item[(a)] $(1,g)(1,g)^T$ 是 原问题 \eqref{eq:matrix_mle} 的可行解。
-    \item[(b)] 存在 \eqref{eq:dual} 的可行解 $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$ 
+    \item[(a)] $(1,g)(1,g)^T$ 是 原问题 \eqref{eq:sdp} 的可行解。
+    \item[(b)] 存在 \eqref{eq:dual} 的可行解 $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$。
     \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})(1,g)=0$，即$(1,g)$是矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 特征值为0对应的特征向量。
     \item[(d)]  矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 第二小的特征值 大于零。 
 \end{enumerate}
@@ -666,7 +696,8 @@ $(1,g)(1,g)^T$ 是 \eqref{eq:sdp} 的唯一最优解
 $\sum_{i=1}^{n+1} a_i=\langle(1,g)(1,g)^T,\widetilde{B} \rangle$，
 即原问题和对偶问题最优值相等。
 
-首先直接将$(1,g)(1,g)^T$代入验证可知条件 (a) 满足。下面我们构造  $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$  满足条件 (c)。
+首先直接将$(1,g)(1,g)^T$代入验证可知条件 (a) 满足。
+下面我们构造  $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$  满足条件 (c)。
 令 $\mu=\frac{1}{n}\mathbf{1}_n^T h$ 且
 $\lambda = -\frac{\mu}{n}$。 先以如下方式取定 $(\lambda_1,\ldots,\lambda_{n+1})$
 $$
@@ -687,23 +718,24 @@ $$
 其中
 \begin{align}\label{eq:Xi_n}
     \Xi_n =\diag(hg^T + Agg^T -\lambda \mathbf{1}_ng^T)
-    + (\frac{1}{2} +2\lambda) J_n  - A + 2\lambda \Xi'
+    + \left(\frac{1}{2} +2\lambda \right)
+    J_n  - A + 2\lambda \Xi'
 \end{align}
 
 矩阵 $A=(B+J_n-I_n)/2$ 是图的邻接矩阵，
 而矩阵 $\Xi'$ 由 $\Xi'_{ij}=g_i + g_j$ 给出。
 
-接下来我们证明 $\Xi_n$ 是正定矩阵。
-若此结论成立，根据
 \newglossaryentry{cauchy_interlace}
 {name=柯西交错定理,
 description={Cauchy's Interlacing Theorem}}
-\gls{cauchy_interlace} \cite{hwang}，
-条件 (d) 成立。
+
+接下来我们证明 $\Xi_n$ 是正定矩阵。
+若此结论成立，根据\gls{cauchy_interlace} \cite{hwang}，
+条件 (d) 成立，
 从而完成证明。
 
 我们只需说明 $x^T \Xi_n x>0$ 对 任意 满足 $\norm{x}=1$ 的 $x \in \mathbb{R}^n$ 成立。
-，我们可以将 给定的 $x$ 分解成 $x=\frac{\beta}{\sqrt{n}} g
+我们可以将 给定的 $x$ 分解成 $x=\frac{\beta}{\sqrt{n}} g
 + \sqrt{1-\beta^2} g^{\perp}$， 其中 $g^Tg^{\perp}=0, \beta \in [0,1]$，
 且 $\norm{g^{\perp}}=1$。则我们有 
 \begin{align}\label{eq:xax}
@@ -741,7 +773,7 @@ $\hat{g}_2 = \frac{1}{2}(-g +\mathbf{1}_n)$。
     &=2\frac{ \sum_{i<j,i,j\in S_1} (\tilde{h}_i - \tilde{h}_j)^2 + \sum_{i<j,i,j\in S_2} (\tilde{h}_i - \tilde{h}_j)^2 }{n^2}+ \frac{\mu^2}{n^2}\\
     & = I_1 + I_2 + \frac{\mu^2}{n^2}
 \end{align*}
-其中 对于 $j\in\{1,2\}$
+其中 对于 $j\in\{1,2\}$，
 $I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^T \hat{g}_j)^2}{n^2}$， 
 $S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
 对于 $i\in S_j$ 和 $j\in\{1,2\}$
@@ -810,7 +842,7 @@ $n^{-I_1 + o(1)}$，
 对于 满足 $g_i=-1$ 的  $i$
 式 \eqref{eq:nodei} 不成立的概率上界为 
 $n^{-I_2 + o(1)}$。
-由引理\ref{lem:p0p12}，$I_1=I_2=I_+>1$，
+由引理 \ref{lem:p0p12}，$I_1=I_2=I_+>1$，
 以及布尔不等式， 存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
 由条件 $I_+>1$，$n^{-I_+ + 1 + o(1)}$ 随$n$的增大 衰减到 $0$。
 因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得定理 \ref{thm:sdp}。 

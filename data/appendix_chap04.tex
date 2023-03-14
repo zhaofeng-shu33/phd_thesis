@@ -498,7 +498,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     (be^s - b) 
     \right.\\
   & \left. \quad 
-  + \left(\frac{n}{k} |\cI| + O(|\cI|^2)\right)(ae^{-s}-a) + \frac{n}{k}|\cI|O(\frac{\log n}{n}) \Big)\right)\\
+  + \left(\frac{n}{k} |\cI| + O(|\cI|^2)\right)(ae^{-s}-a) + \frac{n}{k}|\cI|O\left(\frac{\log n}{n} \right) \Big)\right)\\
 	&=
    \exp\left(\frac{|\cI| \log n}{k}
    \left(a e^{-s}+b e^s-a-b +
@@ -1138,7 +1138,7 @@ $\E[\exp(s \sum_{i=1}^m (Z_i - W_i))]
   $\sigma$ 与 $X$ 仅在一个坐标上不同时，
   由 引理 \ref{lem:mZW}，
   $H(\sigma) < H(X)$ 发生的概率为
-	$P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{(\sqrt{a}-\sqrt{b})^2}{k}}$。
+	$P_G(A_r^s - A_r^0 > 0) \leq n^{-\frac{\left(\sqrt{a} - \sqrt{b}\right)^2}{k}}$。
   因此，$P_F^{(1)}  \leq (k-1)n^{g(\bar{\beta})}$。
 	我们由 $H(\sigma) < H(X)$ 可推出 $A_{\sigma} < B_{\sigma}$，
   进而由引理 \ref{lem:enhanced_fb} 
