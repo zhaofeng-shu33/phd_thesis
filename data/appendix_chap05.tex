@@ -727,7 +727,7 @@ $$
 
 \newglossaryentry{cauchy_interlace}
 {name=柯西交错定理,
-description={Cauchy's Interlacing Theorem}}
+description={Cauchy's interlacing theorem}}
 
 接下来我们证明 $\Xi_n$ 是正定矩阵。
 若此结论成立，根据\gls{cauchy_interlace} \cite{hwang}，
@@ -777,9 +777,10 @@ $\hat{g}_2 = \frac{1}{2}(-g +\mathbf{1}_n)$。
 $I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^T \hat{g}_j)^2}{n^2}$， 
 $S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
 对于 $i\in S_j$ 和 $j\in\{1,2\}$
-记 $\mathbb{E}[h_i]=m D_j, \Var[h_i]=m \bar{D}_j, \mathbb{E}[h_i^2]=\Var[h_i]+\mathbb{E}^2[h_i]=m \bar{D}_j+m^2 D^2_j, \Var[h_i^2] \leq m^4 \bar{C}_j$，
+记 $\mathbb{E}[h_i]=m D_j, \Var[h_i]=m \bar{D}_j, 
+\mathbb{E}[h_i^2]=\Var[h_i]+\mathbb{E}^2[h_i]=m \bar{D}_j+m^2 D^2_j, \Var[h_i^2] \leq m^4 \bar{C}_j$，
 易得
-$D_j, C_j,j\in\{1,2\}$ 是常数。
+$D_j,\bar{D}_j, \bar{C}_j,j\in\{1,2\}$ 是常数。
 由切比雪夫不等式，对于 $j\in\{1,2\}$
 我们有
 \begin{align*}
@@ -819,13 +820,13 @@ $(g^{\perp})^TJ_n g^{\perp}\ge 0$。
 % \begin{align*}
 % P(\Xi_{ii} \leq c\sqrt{\log n}, \forall 1\leq i \leq n)
 % \end{align*}
-下面我们估计下式对于 $i\in\{1,\ldots,n\}$ 均成立的概率
+下面我们估计下式对于 $i\in [n]$ 均成立的概率
 \begin{align}\label{eq:nodei}
     (-\lambda + h_i) g_i+\lambda + g_i (Ag)_i  - c \sqrt{\log n}\ge 0
 \end{align}
 对于 $g_i=1$，
 项 $g_i(Ag)_i$ 可以写成两个独立的二项分布的差的形式：
-$A_r^0-A_r^1$，其中 定义见 式\eqref{eq:energy_diff} 而取 $k=2$。
+$A_r^0-A_r^1$，其中 $A_r^0, A_r^1$ 定义见 式\eqref{eq:energy_diff}， 参数 $k=2$。
 $h_i$ 可以写成 $h_i=m \frac{D(P_{\widetilde{Y}_i} || P_1) - D(P_{\widetilde{Y}_i} || P_0) }{\log (a /b)}$
 的形式，
 其中 $P_{\widetilde{Y}_i}$ 是
@@ -839,11 +840,11 @@ $h_i$ 可以写成 $h_i=m \frac{D(P_{\widetilde{Y}_i} || P_1) - D(P_{\widetilde{
 $n^{-I_1 + o(1)}$，
 其中 $I_1$ 在 式 \eqref{eq:I1} 中定义。
 类似地，
-对于 满足 $g_i=-1$ 的  $i$
-式 \eqref{eq:nodei} 不成立的概率上界为 
+对于 满足 $g_i=-1$ 的  $i$，
+式 \eqref{eq:nodei} 不成立的概率的上界为 
 $n^{-I_2 + o(1)}$。
-由引理 \ref{lem:p0p12}，$I_1=I_2=I_+>1$，
-以及布尔不等式， 存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
+由引理 \ref{lem:p0p12}，$I_1=I_2=I_+>1$。
+由布尔不等式， 存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
 由条件 $I_+>1$，$n^{-I_+ + 1 + o(1)}$ 随$n$的增大 衰减到 $0$。
 因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得定理 \ref{thm:sdp}。 
 

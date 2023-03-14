@@ -5,7 +5,7 @@
 相关的理论研究成果进行简要介绍，作为我们
 后续研究的基础。
 \section{社团发现的数学模型}\label{sec:community_detection}
-\newglossaryentry{cd}{name=社团发现, description={Community Detection}}
+\newglossaryentry{cd}{name=社团发现, description={Community detection}}
 
 \newglossaryentry{graph}{name=图, description={Graph}}
 在网络中的社团发现中，
@@ -139,8 +139,8 @@ $h(\lambda)$ 也是如此。
 中的图将被 划分成 $\P^*=\P_1$，即节点1和3被分成一类，
 而节点2单独分成1类，这符合我们的直觉。
 
-\newacronym{acr:psp}{PSP}{Principal Sequence of Partition}
-\newglossaryentry{psp}{name=主分割序列, description={Principal Sequence of Partition}}
+\newacronym{acr:psp}{PSP}{Principal sequence of partition}
+\newglossaryentry{psp}{name=主分割序列, description={Principal sequence of partition}}
 对于一般的图，其节点数目可能很多，此时用枚举法计算
 $h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
 $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp}(\gls{acr:psp})的结构，
@@ -212,7 +212,7 @@ $[\lambda', \lambda_P]$
 $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 \texttt{Split} 函数。
 
-\newglossaryentry{dt}{name=迪尔沃思截断, description={Dilworth Truncation}}
+\newglossaryentry{dt}{name=迪尔沃思截断, description={Dilworth truncation}}
 在算法 \ref{alg:psp} 第 \ref{alg:lambda_f} 行，
 函数 \texttt{DT}(\glsdesc{dt})被用来求解式\eqref{eq:hlambda} 获得最优值
 $\tilde{h}$ 和最优值对应的分割 $P'$。
@@ -332,8 +332,8 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 最后，我们还介绍了与我们研究有关的两个社团发现算法。
 
 \subsection{随机块模型及其精确恢复问题}\label{sec:exact_recovery}
-\newglossaryentry{sbm}{name=随机块模型, description={Stochastic Block Model}}
-\newacronym{acr:sbm}{SBM}{Stochastic Block Model}
+\newglossaryentry{sbm}{name=随机块模型, description={Stochastic block model}}
+\newacronym{acr:sbm}{SBM}{Stochastic block model}
 \gls{sbm}（\gls{acr:sbm}）是社团发现问题中最常用的统计模型之一
 \cite{holland1983stochastic, abbe2017community}，
 本节介绍我们研究的一类特殊的随机块模型，
@@ -366,7 +366,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 }
 \gls{not:Wn} 表示 \glsdesc{not:Wn}。 
 
-\newacronym{acr:ssbm}{SSBM}{Symetric Stochastic Block Model}
+\newacronym{acr:ssbm}{SSBM}{Symetric stochastic block model}
 下面给出有$k$个社团的对称的随机块模型
 (\gls{acr:ssbm})
 的定义： 
@@ -503,7 +503,7 @@ $S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
 \end{example}
 
 给定 随机块模型，精确恢复问题的数学定义如下：
-\newglossaryentry{exact_recovery}{name=精确恢复, description={Exact Recovery}}
+\newglossaryentry{exact_recovery}{name=精确恢复, description={Exact recovery}}
 \begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
 给定节点标签 $X$， 并假设随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
 一个社团发现算法$\hat{X}$ 已知 $G$ 去估计$X$，
@@ -781,8 +781,8 @@ $\frac{\log n}{n}$
 可以看出，它们之间差了一个伸缩变换。
 \end{remark}
 
-\newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising Block Model}}
-\newacronym{acr:sibm}{SIBM}{Stochastic Ising Block Model}
+\newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising block model}}
+\newacronym{acr:sibm}{SIBM}{Stochastic Ising block model}
 将 \ref{sec:exact_recovery} 小节 介绍的随机块模型与 本小节介绍的 伊辛模型
 复合起来可得到\gls{sibm}(\gls{acr:sibm})\cite{ye2020exact}。
 该模型首先由 随机块模型生成随机图，
@@ -806,7 +806,7 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
 \citet{ye2020exact} 在其工作的技术证明中，用到了马尔可夫不等式和切尔诺夫不等式这两个概率论中常用的聚集不等式。
 由于我们在后面章节的技术证明中也要用到这两个不等式，故在本小节最后列出它们，方便后面引用。
 
-\newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov Inequality}}
+\newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov's inequality}}
 \begin{lemma}[\gls{markov_ieq}] 
   设 $X$ 是非负型随机变量，则对于非负实数$a$有：
   \begin{equation}
@@ -818,12 +818,12 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
     P(X\geq a) = P(e^{tX} \geq e^{ta}) \leq { 1 \over \exp(ta)} \E[\exp(tX)]
    \end{equation}
    对任意的$t>0$成立。
-   \newglossaryentry{chernoff}{name=切尔诺夫不等式, description={Chernoff Inequality}}
+   \newglossaryentry{chernoff}{name=切尔诺夫不等式, description={Chernoff inequality}}
 
    式\eqref{eq:chernoff_bound}也被称为\gls{chernoff}。
 \end{lemma}
 \newglossaryentry{chebyshev_ieq}{name=切比雪夫不等式, 
-description={Chebyshev's Inequality}}
+description={Chebyshev's inequality}}
 \begin{lemma}[\gls{chebyshev_ieq}]
   \newglossaryentry{not:variance}
 {
@@ -1192,7 +1192,7 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$。
 \end{equation}
 \end{theorem}
 由于$\Lambda^*(s)$描述了$P( \sum_{i=1}^n X_i \geq  ns)$随$n$增大衰减到零的速率，
-\newglossaryentry{rate_function}{name=速率函数, description={rate function}}
+\newglossaryentry{rate_function}{name=速率函数, description={Rate function}}
 我们把$\Lambda^*(s)$叫做\gls{rate_function}。
 
 为方便描述$\Lambda^*(s)$和$\Lambda(s)$的关系，
@@ -1249,7 +1249,7 @@ $D^*$的数学定义为：
 \end{equation}
 关于 $D^*$ 我们有如下定理：
 \begin{theorem}[\cite{cover1999elements}定理11.9.1]
-  \newglossaryentry{chernoff_information}{name=切尔诺夫信息, description={Chernoff Information}}
+  \newglossaryentry{chernoff_information}{name=切尔诺夫信息, description={Chernoff information}}
   最大误差指数 $D^*$，也称\gls{chernoff_information}， 满足
   \begin{equation}\label{eq:D_star_lambda_star}
     D^* = D(P_{\lambda^*} || P_1) = D(P_{\lambda^*}|| P_2)
