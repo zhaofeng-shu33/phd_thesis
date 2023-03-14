@@ -290,8 +290,9 @@ $P(\sum_{i=1}^{n-2} (z'_i - z_i) \geq 0)$ 下界为
 
     由\gls{holder_ieq}：
     \begin{equation}\label{eq:holder}
-        (\sum_{x\in\mathcal{X}}f(x)g(x))\leq (\sum_{x\in\mathcal{X}} f^p(x))^{\frac{1}{p}}
-        (\sum_{x\in\mathcal{X}} g^q(x))^{\frac{1}{q}}
+        \left(\sum_{x\in\mathcal{X}}f(x)g(x) \right)
+        \leq \left(\sum_{x\in\mathcal{X}} f^p(x) \right)^{\frac{1}{p}}
+        \left(\sum_{x\in\mathcal{X}} g^q(x) \right)^{\frac{1}{q}}
     \end{equation}
     因为 $\sum_{x\in\mathcal{X}} P_1(x)=1$， \eqref{eq:holder} 蕴含
     \eqref{eq:32}。
@@ -357,6 +358,7 @@ P(F_k) & \leq \left(\frac{ne}{2k}\right)^{2k} P(A_k)
 -\theta_k^* \log n\right) + o(1) \right)
 \notag
 \end{align}
+则错误概率$P_e$的上界为
 \begin{align*}
 P_e &\leq P(F_1)+(1+o(1))\sum_{k=2}^{\frac{n}{\sqrt{\log n}}} P(F_k) \\
 & \leq (1+o(1))\cdot \sum_{k=2}^{\frac{n}{\sqrt{\log n}}}
@@ -552,7 +554,7 @@ $-\frac{1}{kn}\log P(A_k) \to \theta^*_k$。
 &\quad + (1-\frac{2k}{n})
 (D(P_{\widetilde{Z}}||\Bern(p)) + D(P_{\widetilde{Z}'}||\Bern(q)))  \\
 \textrm{s.t. } \, & (\widetilde{Y}_1, \widetilde{Y}_2, \widetilde{Z}, \widetilde{Z}')
-\textrm{ 满足 } \eqref{eq:mnk}
+\textrm{ 满足 \eqref{eq:mnk}} 
 \end{align*}
 通过拉格朗日乘子法求解上述优化问题，我们可得
 \begin{align*}

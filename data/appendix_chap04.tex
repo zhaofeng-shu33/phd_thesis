@@ -313,12 +313,12 @@ $N_{\bar{\sigma}}$ 是一个依赖于 $\bar{\sigma}$ 但与图结构无关的非
 	\begin{align}
   \log P_{\sigma|G}(\sigma=\bar{\sigma})
   & = 
-  \beta(1 + \frac{\gamma \log n}{n}) \sum_{\{i,j\} \in E(G)}  \delta(\bar{\sigma}_i, \bar{\sigma}_j)  
+  \beta\left(1 + \frac{\gamma \log n}{n}\right) \sum_{\{i,j\} \in E(G)}  \delta(\bar{\sigma}_i, \bar{\sigma}_j)  
 	\notag\\
   &\quad- \beta\frac{\gamma \log n}{n} \sum_{1\leq i<j \leq n} \delta(\bar{\sigma}_i, \bar{\sigma}_j) 
   - \log Z_G(\beta, \gamma) \notag\\
   & = 
-  \beta(1 + \frac{\gamma \log n}{n}) \sum_{\bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}
+  \beta\left(1 + \frac{\gamma \log n}{n}\right) \sum_{\bar{\sigma}_i = \bar{\sigma}_j} Z_{ij}
 	- \beta\frac{\gamma \log n}{n}
   \sum_{\bar{\sigma}_i = \bar{\sigma}_j} 1 
   - \log Z_G(\beta, \gamma)
@@ -781,10 +781,11 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   
   而上式中的条件期望可以做如下估计：
   \begin{align*}
-  &\mathbb{E}[\Xi_n(r)|\Lambda_n(G,r)]=
+  \mathbb{E}[\Xi_n(r)|\Lambda_n(G,r)]&=
   \sum_{\Dist(\bar{\sigma}, X) = r}\sum_{tr\log n = -\infty }^{-1} 
    P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=tr\log n)\exp(\beta_n tr \log n) \\
-  & \leq (k-1)^r n^{r+r\beta_n(b-a)/k} +
+  & \leq (k-1)^r n^{r+r\beta_n(b-a)/k} \\
+  &\quad +
   \sum_{\Dist(\bar{\sigma}, X) = r}\sum_{tr\log n = r\frac{b-a}{k}\log n }^{-1} 
    P_G(B_{\bar{\sigma}} -A_{\bar{\sigma}}=tr\log n)\exp(\beta_n tr \log n)
   \end{align*}
@@ -940,7 +941,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   $D'(\bar{\sigma}, C)$，
 	该不等式等价于：
 \begin{align}
-	(1 + \frac{\gamma \log n}{n})
+	\left(1 + \frac{\gamma \log n}{n}\right)
 	\left( \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} Z_{ij} +
 	\sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} Z_{ij} \right)
 	\leq \frac{\gamma \log n}{n} N_{\bar{\sigma}} + \frac{C}{\beta} n\label{eq:small}
@@ -972,13 +973,13 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
   第二个不等式取等号。
 	因此，一般地，我们有 $\frac{n^2}{\sqrt{\log n}}(1+o(1)) \leq N_{\bar{\sigma}} \leq \frac{n^2}{2}$。
 	
-	因为 $\frac{C}{\beta} n = o(\frac{\log n}{n} N_{\bar{\sigma}})$，
+	因为 $\frac{C}{\beta} n = o\left(\frac{\log n}{n} N_{\bar{\sigma}} \right)$，
   我们可以将 式 \eqref{eq:small} 写成：
 \begin{equation}
 	\left( \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} -Z_{ij}
 	+ \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} -Z_{ij} \right)\geq 
   -\gamma\frac{\log n N_{\bar{\sigma}}}{n}(1+o(1))
-	\end{equation}
+\end{equation}
 	
 	令 $N_1 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i = X_j} 1$
 	且 $N_2 = \sum_{\bar{\sigma}_i  \neq \bar{\sigma}_j, X_i \neq X_j} 1 = N_{\bar{\sigma}} - N_1$。
