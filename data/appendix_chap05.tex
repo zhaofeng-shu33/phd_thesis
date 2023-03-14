@@ -1,4 +1,4 @@
-\section{定理证明}
+\section{定理证明}\label{sec:sbmsi_proof}
 \subsection{定理 \ref{thm:Pe} 的证明}
 \begin{lemma}\label{lem:p0p12}
     设 $P_{\widetilde{Y}}$ 是定义在字母集
@@ -98,15 +98,15 @@ $I_1 = I_+$。
     \sum_{j=1}^{m} \log \frac{P_1(y^{i_1}_{j})}{P_0(y^{i_1}_{j})}
     +\sum_{j=1}^{m} \log \frac{P_0(y^{i_2}_{j})}{P_1(y^{i_2}_{j})}
     &\ge \log \frac{p(1-q)}{q(1-p)}\Big(2\frac{\log n}{\log\log n}+2+E(i_1, S_1 \backslash H_1) \nonumber\\
-    &+ E(i_2, S_2 \backslash H_2)- E(i_1, S_2 ) - E(i_2, S_1 )\Big) \label{eq:G1ij}
+    &\quad + E(i_2, S_2 \backslash H_2)- E(i_1, S_2 ) - E(i_2, S_1 )\Big) \label{eq:G1ij}
 \end{align}	
     注意到 若 \eqref{eq:G1ij} 成立，考虑到 $\frac{\log n}{\log \log n} > E(i_1, H_1)$ 
     以接近1的概率成立，则有
 \begin{align}
     \sum_{j=1}^{m} \log \frac{P_1(y^{i_1}_{j})}{P_0(y^{i_1}_{j})}
     +\sum_{j=1}^{m} \log \frac{P_0(y^{i_2}_{j})}{P_1(y^{i_2}_{j})}
-    \ge &\log \frac{p(1-q)}{q(1-p)}(E(i_1, S_1 \backslash \{i_1\}) + E(i_2, S_2 \backslash \{i_2\})\nonumber\\
-    &- E(i_1, S_2 \backslash \{i_2\}) - E(i_2, S_1 \backslash \{i_1\})) \label{eq:F1ij}
+    &\ge \log \frac{p(1-q)}{q(1-p)}(E(i_1, S_1 \backslash \{i_1\}) + E(i_2, S_2 \backslash \{i_2\})\nonumber\\
+    &\quad - E(i_1, S_2 \backslash \{i_2\}) - E(i_2, S_1 \backslash \{i_1\})) \label{eq:F1ij}
 \end{align}
 因此， 在 $I_1<1$ 和 $I_2<1$的条件下，以接近1的概率，
 式\eqref{eq:F1ij} 成立。

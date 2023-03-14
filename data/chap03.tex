@@ -16,7 +16,8 @@
 在第 \ref{sec:hierarchical_experiment} 节，
 我们展示了HPSP算法在社团层次发现和数据层次聚类上的实验结果；
 在第 \ref{sec:outlier} 节，我们介绍了HPSP算法在异常值检测领域的应用；
-第 \ref{sec:hierarchical_summary} 节对全章内容进行总结。
+第 \ref{sec:mmi_proof} 节证明了本节提出的
+定理；第 \ref{sec:hierarchical_summary} 节对全章内容进行总结。
 
 \section{社团发现场景下的多变量互信息理论}\label{sec:weak_dep_mmi}
 在这一节中，我们首先把 \ref{sec:local_geometry} 节介绍
@@ -124,7 +125,7 @@ D(P_{Z_V} || \prod_{C\in \P} P_{Z_{C}}) = {1 \over 2}
 节点$i$和节点$j$之间边的权值$w_{ij}$为
 $\norm{B_{ij}}_{\mathrm{F}}^2$。
 对于 $C\subseteq V$
-我们定义图的入割函数 (in-cut function) $f(C)$ 
+我们定义图上的函数 $f(C)$ 
  为 $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
 它是所有进入$C$的有向边的权值之和。
 由式\eqref{eq:PXV}
@@ -476,7 +477,7 @@ HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
 而计算$\gamma$的时间复杂度是$O(n)$，其它操作不超过$O(n)$，
 因此整个转换算法的时间复杂度是$O(n^2)$，相比
 定理 \ref{thm:alg_complexity} 中
-给出的HPHP 的$O(n^4)$的时间复杂度，转换本身的时间开销
+给出的HPSP 的$O(n^4)$的时间复杂度，转换本身的时间开销
 可忽略不计。
 
 \subsection{代码实现}
@@ -501,11 +502,13 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 进行返回。用于求解例 \ref{ex:psp} 的示例 Python 代码如下。
 \begin{lstlisting}[language=Python]
   from pspartition import PsPartition
-  a = [[0,1,1], [0,2,5], [1,2,1]] #graph edge list,(i,j,weight)
+  a = [[0,1,1], [0,2,5], [1,2,1]] 
+  # graph edge list,(i,j,weight)
   p = PsPartition(3, a) #3 nodes
   p.run()
   cv = p.get_critical_values() #[2,5]
-  pl = p.get_partitions()#[[{0,1,2}],[{0,2},{1}],[{0},{1},{2}]]
+  pl = p.get_partitions()
+  #[[{0,1,2}],[{0,2},{1}],[{0},{1},{2}]]
 \end{lstlisting}
 
 \subsection{求解主分割序列算法效率比较}
@@ -515,9 +518,10 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 的运行效率。我们使用两种不同的数据集，图的边具有不同的
 稠密程度。
 
+\newglossaryentry{gb}{name=高斯斑点, description={Gaussian blobs}}
 第一个数据集是由
-4个相同大小的高斯斑点(Gaussian Blobs)组成，但我们可以改变
-每部分的样本数量。我们使用式
+4个相同大小的高斯斑点(\glsdesc{gb})组成，但我们可以改变
+每部分的样本数量。我们使用
   $w_{ij}=\exp(-\eta ||x_i-x_j||^2)$
 计算图中边的权值，边的数量满足 $|E|=\Theta(|V|^2)$。
 这里$\Theta$表示$|E|$与$|V|^2$量阶相同。
@@ -548,7 +552,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
     \caption{两层的随机块}
 	\end{subfigure}
 	\caption{
-  不同PSP实现的速度比较}\label{fig:esc}
+  不同求解主分割序列算法的速度比较}\label{fig:esc}
 \end{figure}
 
 另外我们注意到，
@@ -847,7 +851,7 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 \end{figure}
 
 另外我们也
-在图 \ref{fig:boundary} (d)画出了椭圆包络\cite{rousseeuw1999fast}(elliptic envelope)方法的决策边界曲线。
+在图 \ref{fig:boundary} (d)画出了椭圆包络\cite{rousseeuw1999fast}(Elliptic envelope)方法的决策边界曲线。
 由于后一种方法假设内部数据分布在凸的区域，
 因此决策边界是椭圆形状，
 不能很好地反映真实数据的分布。
@@ -861,10 +865,10 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 而后三个数据集在异常值检测算法比较的文章中大量使用
 \cite{campos2016evaluation}。
 我们对比的方法包括
-局部异常因子(local outlier factor \citep{Breunig})、
-孤立森林(isolation forest \citep{if})、
+局部异常因子(Local outlier factor \citep{Breunig})、
+孤立森林(Isolation forest \citep{if})、
 椭圆包络  和
-一类支持向量机 (one class SVM \citep{svm})。 
+一类支持向量机 (One class SVM \citep{svm})。 
 我们使用TPR和TNR来衡量检测的整体性能。
 %正常值点被视为正样本。
 TPR衡量的是正常值点集合中正确检测的百分比，
@@ -873,7 +877,7 @@ TPR衡量的是正常值点集合中正确检测的百分比，
 我们设法最大化TNR，同时控制每种方法的TPR$\geq 90\%$。
 每个方法的超参数和相似度度量都经过了调优，
 TNR的最佳结果如表 \ref{tab:odm} 所示。我们可以看到，
-基于HPSP算法的异常值检测（信息检测）在 GaussianBlob、Moon 和
+基于HPSP算法的异常值检测（信息检测）在 高斯斑点、Moon 和
 Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 但在 Glass 和  Ionosphere 两个数据集上性能有待提升。
 \begin{table}

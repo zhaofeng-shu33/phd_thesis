@@ -28,7 +28,8 @@
 的相变现象和恢复误差；接下来，
 在 \ref{sec:em} 节，我们分析了基于能量最小化的社团发现算法
 的恢复误差；在 \ref{sec:ms} 节，用梅特罗波利斯采样对
-玻茨模型的相变现象进行了验证；
+玻茨模型的相变现象进行了验证；第 \ref{sec:sibm_proof} 节给出了本节提出的
+定理的证明；
 第 \ref{sec:summary_potts} 节对全章进行了总结。
 \section{参数估计}\label{sec:parameter_estimation}
 
@@ -401,7 +402,12 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 的数学期望为 $n^{g(\beta)}$，
 通过讨论$g(\beta)$的正负可以部分说明
 定理 \ref{thm:phase_transition} 中的表述。
-\subsection{速率函数}\label{sub:rate_function}
+
+\subsection{误差衰减率与速率函数}\label{sub:rate_function}
+定理 \ref{thm:phase_transition} 除了给出定义在随机图上的
+玻茨模型的相变现象外，
+还给出了精确恢复条件下的误差衰减率。当$\beta^*<\beta<\bar{\beta}$时，
+该速率为$n^{g(\beta)/2}$。
 在\eqref{eq:expect_A_r_0_s} 中我们指出了$g(\beta)$与
 二项分布差$A_r^0 - A_r^s$的矩生成函数有关，本节将进一步挖掘
 其信息论的含义。

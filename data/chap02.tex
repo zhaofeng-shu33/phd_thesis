@@ -280,8 +280,10 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 %
 %\subsection{参数化的最大流算法}
 %最大流算法用于解决网络流中从一点到另一点的最优运输路径的问题。
+\newglossaryentry{pra}{name=推送重贴标签, description={Push–relabel}}
+
 求解最大流问题
-有一类基于前置推送-标签重贴(push-relabel) \cite{Goldberg1988} 的算法
+有一类基于\gls{pra}(push-relabel) 的算法\cite{Goldberg1988}
 具有良好的效率。如果要解一系列的最大流问题并且这一系列的问题
 之间有一定的关联性，重复调用最大流算法显然不是最优的选择。
 基于这种考虑，有学者提出了参数化的最大流算法\cite{Gallo1989}用于求解
@@ -663,7 +665,8 @@ $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
 我们在第 \ref{chap:sibm} 章也将展示社团发现的精确恢复问题
 中也有类似图 \ref{fig:square_lattice_b} 的相变现象。
 
-对于自发磁化现象可以通过统计力学中的正则系踪（Canonical ensemble）
+\newglossaryentry{canonical}{name=正则系踪, description={Canonical ensemble}}
+对于自发磁化现象可以通过统计力学中的\gls{canonical}(Canonical ensemble)
 理论进行解释。该理论
 假设粒子的分布为
 \begin{equation}\label{eq:canonical_ensemble}
@@ -672,7 +675,7 @@ P(\sigma = \bar{\sigma}) = \frac{1}{Z} \exp(-\beta H(\bar{\sigma}))
 其中$\sigma \in \{\pm 1\}^n$ 表示粒子的状态，
 $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的总能量，$\beta$是与温度成反比的参数，
 \newglossaryentry{inverse_temp}{name=逆温度, description={Thermodynamic beta}}
-也叫逆温度（\glsdesc{inverse_temp}），$Z$是配分函数，是概率分布的
+也叫逆温度(\glsdesc{inverse_temp})，$Z$是配分函数，是概率分布的
 归一化常数。
 
 
@@ -960,6 +963,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
   description={分布$P_X$ 和 $P_Y$之间的 KL 散度}
 }
 \newglossaryentry{mmi}{name=多变量互信息, description={Multivariate mutual information}}
+\newglossaryentry{gmc}{name=广义最大相关, description={Generalized maximal correlation}}
 \newacronym{acr:mmi}{MMI}{Multivariate mutual information}
 其中 $P_X, P_Y$表示边缘分布，$D(P_X||P_Y)$
 表示\glsdesc{not:kl_dev}。
@@ -969,7 +973,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
 其中\citet{ska} 提出了一种推广 具有多种好的性质，
 且涵盖了图结构的情形，我们把他的推广叫做\gls{mmi} (\gls{acr:mmi})。
 这里我们需要指出，MMI 并不是多个随机变量之间信息量的唯一度量方法，
-比如有学者基于HGR最大相关提出了广义最大相关(generalized maximal correlation)
+比如有学者基于HGR最大相关提出了\gls{gmc}(Generalized maximal correlation)
 也能实现类似的目的 \cite{huang2020information}。
 
 下面我们对MMI做简要的介绍。令$V$是随机变量
@@ -993,9 +997,10 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
   = \sum_{C \in \P}
   H(Z_C) - H(Z_V)
 \end{equation}
+\newacronym{acr:pin}{PIN}{Pairwise independent network}
+
 但对于一般的分布，式\eqref{eq:IZV}
-难于计算。\citet{ska} 又提出了一种特殊的PIN模型
-(pairewise independent network)\cite{chan2017pin}，
+难于计算。\citet{chan2017pin} 又提出了一种特殊的 \gls{acr:pin} 模型，
 使得多变量互信息可以用 \ref{sec:community_detection} 节
 介绍的PSP算法进行计算。
 这里略去PIN模型的数学定义，而是通过下面的例子
@@ -1248,9 +1253,10 @@ $D^*$的数学定义为：
  P^{(n)}_e
 \end{equation}
 关于 $D^*$ 我们有如下定理：
-\begin{theorem}[\cite{cover1999elements}定理11.9.1]
+\begin{theorem}[\inlinecite{cover1999elements}中定理11.9.1]
   \newglossaryentry{chernoff_information}{name=切尔诺夫信息, description={Chernoff information}}
-  最大误差指数 $D^*$，也称\gls{chernoff_information}， 满足
+  最大误差指数 $D^*$，也称\gls{chernoff_information}(\glsdesc{chernoff_information})，
+  满足
   \begin{equation}\label{eq:D_star_lambda_star}
     D^* = D(P_{\lambda^*} || P_1) = D(P_{\lambda^*}|| P_2)
   \end{equation}

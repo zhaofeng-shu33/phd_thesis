@@ -1,5 +1,5 @@
 % !TeX root = ../thuthesis-example.tex
-\section{定理证明}
+\section{定理证明}\label{sec:sibm_proof}
 \subsection{定理 \ref{thm:ab12} 的证明}
 \begin{lemma}\label{lem:ER_tr_counting}
   \newglossaryentry{e_r}{name=埃尔德什-雷尼模型, description={Erdős–Rényi model}}
@@ -912,7 +912,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 引理 \ref{lem:small} 的证明如下。
 \begin{proof}
 	令 $n_r = |\{\bar{\sigma}_i = w^r | i\in [n] \}|$。
-  因为 $\arg\,\min_{\sigma'\in \Lambda} \Dist(\bar{\sigma}, \sigma') = \mathbf{1}_n$，
+  因为 $\argmin_{\sigma'\in \Lambda} \Dist(\bar{\sigma}, \sigma') = \mathbf{1}_n$，
   我们有 $n_0 \geq n_r$ 对 $r=1, \dots, k-1$成立 
   。
 	不失一般性 我们假设 \mbox{$n_0 \geq n_1 \dots \geq n_{k-1}$}。

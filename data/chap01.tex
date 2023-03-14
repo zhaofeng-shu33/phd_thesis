@@ -229,12 +229,14 @@
 \cite{ZJSH201102017}。结合本文的研究范畴，下面我们对理论研究和算法设计层面的已有工作
 进行简要介绍。
 
+\newglossaryentry{cbm}{name=审查块模型, description={Censored block model}}
+
 理论研究主要是利用数学工具研究网络规模趋向于无穷大时社团发现的相变现象
 \cite{lenka2016physics}、
 算法的最优误差率与特定算法的误差率等内容。通常需要
 采用随机图进行建模，常用的随机图模型有随机块模型
 \cite{holland1983stochastic}，
-审查块模型(Censored Block Model) \cite{hajek2015censored}等。
+审查块模型(\glsdesc{cbm}) \cite{hajek2015censored}等。
 通过理论研究，可以设计出有理论保证的社团发现算法。%[其他范式的理论研究]
 %涉及该部分研究的多为概率统计学、统计物理和信息论等学科的文献。
 %有理论保证是指这一类算法针对随机块模型可以实现节点标签的精确恢复。
@@ -387,7 +389,7 @@ $\sqrt{a} - \sqrt{b} > \sqrt{2}$ \cite{abbe2015exact, mossel2016}。
 
 \subsection{有辅助信息的随机块模型}
 \newglossaryentry{side_info}{name=辅助信息, description={Side information}}
-通过添加\gls{side_info}，社团发现能达到更高的准确率。
+通过添加\gls{side_info}(\glsdesc{side_info})，社团发现能达到更高的准确率。
 通常的辅助信息是指节点属性信息\cite{he2019attribute}，
 其可以采用多种形式建模，
 比如已知部分节点的标签、已知被噪声污染的全部节点的标签、以及根据节点的标签基于不同的分布生成的一些观测值等\cite{saad2018community}。
@@ -418,7 +420,7 @@ $\sqrt{a} - \sqrt{b} > \sqrt{2}$ \cite{abbe2015exact, mossel2016}。
 普适信息论和基于随机图建模两种主要手段，并分别应用它们进一步
 深化社团发现领域的研究。具体来说，我们使用多变量互信息的度量研究社团
 层次发现的性质、算法效率的提升等内容；而在随机图建模方面则综合运用
-速率函数、雷尼散度\footnote{北京大学出版社出版的《数学对话录》对于原作者使用雷尼的译名。}等
+速率函数、雷尼\footnote{北京大学出版社出版的《数学对话录》对于原作者使用雷尼的译名。}散度(Rényi divergence)等
 多种信息论度量对社团发现算法的理论极限进行刻画，
 并借此开发新的高效算法。论文的结构安排如下：
 
