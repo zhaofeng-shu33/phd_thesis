@@ -614,12 +614,15 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     这种极端值，所以 $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}$中
     共有 $(k-1)$行求和得$ (k-1)\frac{n^2}{k^2}$
     而其中一行则必须保留$I'_{ij}, I'_{ii}$ 这两个非零项。
-    因此 $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}
+    因此
+    $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij}
     \leq (k-1)\frac{n^2}{k^2} + (\frac{n}{k} - I_{ij})^2 + I^2_{ij}$，
     而这里的
     $I_{ij}$ 满足条件1。
-    进一步的， $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + (\frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2
-    + (\frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{k} - \frac{2n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$。
+    进一步的， $\sum_{i=0}^{k-1} \sum_{j=0}^{k-1} I'^2_{ij} \leq (k-1)\frac{n^2}{k^2} + 
+    \left(\frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}} \right)^2
+    + \left(\frac{n}{k} - \frac{1}{k(k-1)}\frac{n}{\sqrt{\log n}} \right)^2 
+    = \frac{n^2}{k} - \frac{2n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))$。
     从而我们得到
   \begin{equation}\label{eq:Asigma}
     A_{\bar{\sigma}} \geq \frac{n^2}{k^2 (k-1)\sqrt{\log n}}(1+o(1))
@@ -637,7 +640,9 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     $I_j \leq \frac{2}{k(k-1)}\frac{n}{\sqrt{\log n} }$。
     进一步有 $I'_j - I_j \geq I_{ij} - I_j \geq  \frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n} }$。
     由 式\eqref{eq:N_w}有
-     $N_{\bar{\sigma}} \geq \frac{1}{2}(\frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n}})^2 = \frac{n^2}{2k^2}(1+o(1))$。
+     $N_{\bar{\sigma}} \geq \frac{1}{2}
+     \left(\frac{n}{k} - \frac{3}{k(k-1)}\frac{n}{\sqrt{\log n}} \right)^2 
+     = \frac{n^2}{2k^2}(1+o(1))$。
     
     下面我们用
      切尔诺夫不等式给出式\eqref{eq:BwA}描述的事件发生概率的上界。
@@ -648,7 +653,11 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
     P_G(\widetilde{D}(\bar{\sigma}, C))
     &\leq (\mathbb{E}[\exp(sZ')])^{N_{B_{\bar{\sigma}}}}
     (\mathbb{E}[\exp(-sZ)])^{N_{A_{\bar{\sigma}}}}\cdot 
-    \exp(-s(\frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n)) \\
+    \exp\left(
+      -s\left(
+        \frac{\gamma \log n}{n} N_{\bar{\sigma}}  - \frac{C}{\beta}n
+      \right)
+      \right) \\
     & \leq \exp\left(N_{B_{\bar{\sigma}}}
     \frac{b\log n}{n}(e^s -1) + 
     N_{A_{\bar{\sigma}}}\frac{a\log n}{n} \left(e^{-s} - 1 \right)\right. \\
@@ -766,7 +775,7 @@ B_{\bar{\sigma}} \sim \Binom(\frac{n}{k}, \B)$，
 
   对于第二项，我们使用马尔可夫不等式：
   \begin{align*}
-  P_G(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2} |\Lambda_n(G,r) )
+  P_G\left(\Xi_n(r) \geq n^{r \tilde{g}(\beta) /2} |\Lambda_n(G,r) \right)
   \leq \mathbb{E}[\Xi_n(r)|\Lambda_n(G,r)]n^{-r \tilde{g}(\beta) /2} 
   \end{align*}
   
