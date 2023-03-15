@@ -12,12 +12,19 @@
 通常将网络建模成\gls{graph} (\glsdesc{graph})结构。
 而社团没有严格的数学定义，
 通常认为社团内部连边紧密、不同社团间连边稀疏。\gls{cd} (\glsdesc{cd})，也称社团检测，
-即是在图结构的数据中上寻找特定的社团结构。
+即在图结构数据中上寻找特定的社团结构。
 %社团根据其属性
 %是否随时间变化可分为静态社团和动态社团，本文研究的是静态社团，
 %它可以用
 %静态图来建模，以下简称图。
+\newglossaryentry{not:n_bracket}
+{
+  type=notation,
+  name={\ensuremath{[n]}},
+  description={表示集合$\{1,\dots, n\}$}
+}
 一个图结构$G$ 由节点集 $V$ 和边的集合 $E$ 组成，记为 $G(V,E)$。
+为方便讨论，本文假设$V=\{1,\dots, n\}$，简写成 \gls{not:n_bracket}。
 根据边是否有方向可将图分为有向图和无向图。无向图可以看成是每条边
 有两个方向，从而针对有向图设计的社团发现算法也可以用到无向图上面来。
 此外，根据边是否有权值可将图分为有权图和无权图。有权图中节点 $i$
@@ -123,6 +130,7 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
     \caption{$h(\lambda)$ 的图像}
     \label{fig:dt}
     \end{subfigure}  
+    \caption{主划分序列求解示意图}
 \end{figure}
 
 因为
@@ -342,15 +350,7 @@ $\tilde{h}$ 和最优值对应的划分 $P'$。
 %它提供了一个基准人工数据集来评估不同的社团检测算法
 %并启发了许多社团检测任务算法的设计 \cite{fortunato2010community}。
 %
-\newglossaryentry{not:n_bracket}
-{
-  type=notation,
-  name={\ensuremath{[n]}},
-  description={表示集合$\{1,\dots, n\}$}
-}
 为此我们首先定义一些常用的符号。随机图仍用符号$G$表示，
-其节点集 $V=\{1,\dots, n\}$ 简写成 \gls{not:n_bracket}。
-
 每个节点的标签为 $X_i$，
 \newglossaryentry{not:W}
 {
@@ -393,7 +393,7 @@ $\tilde{h}$ 和最优值对应的划分 $P'$。
 
 \newglossaryentry{Bernoulli_distribution}{name=伯努利分布, description={Bernoulli distribution}}
 为进一步解释随机块模型，
-我们定义随机变量 $Z_{ij}:=\mathbf{1}[\{i,j\} \in E(G)]$，
+我们定义随机变量 $Z_{ij}:=\mathbf{1}[(i,j) \in E(G)]$，
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
 给定节点的标签向量 $X$，$Z_{ij}$ 服从\gls{Bernoulli_distribution}，
 \newglossaryentry{not:expectation}
@@ -441,7 +441,7 @@ description={Maximum likelihood estimation}}
   description={所有包含$n$个节点的图的集合}
 }
 
-这里顺便介绍一个后文中会用到的符号 \gls{not:cGn}，它表示
+同时我们介绍一个后文中会用到的符号 \gls{not:cGn}，它表示
 \glsdesc{not:cGn}。
 由概率分布的归一化的性质可得，
 $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$。
@@ -451,10 +451,10 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$。
 定义\ref{def:SSBM}的假设下，
 还有一个额外的约束，即 $X$ 中每一类的标签数量是严格相等的。
 在这个约束下最大化式\eqref{eq:GmL} 我们可以得到一个等价
-的优化问题——$k$类的最小割问题。
+的优化问题——$k$类的最小割问题，
 其形式为：
 \begin{equation}\label{eq:minimum_k_cut}
-  \min_{x\in W^n} \sum_{ \{i,j\} \in E} (1-\delta(x_i, x_j))
+  \min_{x\in W^n} \sum_{ (i,j) \in E} (1-\delta(x_i, x_j))
 \end{equation}
 这里，示性函数 $\delta(x,y)$ 定义为：
 \glsdesc{not:deltaxy}。
@@ -500,15 +500,16 @@ $\omega^0 = 1$ 且 $\omega \cdot \omega = \omega^2 = 1$。
 $f(1) = \omega$ 且 $f(\omega)=1$，
 则 $f \in S_2$ 且 $f(\sigma) = (\omega, 1)$。
 另外我们有 $\Dist(\sigma, f(\sigma)) = 2$，
-$S_k(\sigma) = \{\sigma, f(\sigma)\}$， 且
-$S_k^c(\sigma) = W^2 \backslash S_k(\sigma)
+$S_2(\sigma) = \{\sigma, f(\sigma)\}$， 且
+$S_2^c(\sigma) = W^2 \backslash S_2(\sigma)
 =\{(1, 1), (\omega, \omega)\}$。
 \end{example}
 
 给定 随机块模型，精确恢复问题的数学定义如下：
 \newglossaryentry{exact_recovery}{name=精确恢复, description={Exact recovery}}
 \begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
-给定节点标签 $X$， 并假设随机图 $G$ 从 $\SSBM(n,k,p,q)   $ 模型中采样。
+给定节点标签 $X$，
+并假设随机图 $G$ 从 $\SSBM(n,k,p,q)$ 模型中采样。
 一个社团发现算法$\hat{X}$ 已知 $G$ 去估计$X$，
 也被称做$X$ 的估计量。我们称该算法
 可精确恢复$X$，如果
@@ -552,7 +553,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 精确恢复误差的变化规律。
 因为最大似然算法相当于理论最优的估计量，他们的成果可总结为如下定理：
 \begin{theorem}\label{thm:sbm2_phase_transition}
-设 $P_e=P(\hat{X} \neq \pm X)$: 当 $n \to \infty$，
+设 $P_e=P(\hat{X} \neq \pm X)$， 当 $n \to \infty$，
 对于 $\SSBM(n,2,\A, \B)$ 模型，
 有如下两种情形：
 	\begin{enumerate}
@@ -666,7 +667,7 @@ $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
 我们在第 \ref{chap:sibm} 章也将展示社团发现的精确恢复问题
 中也有类似图 \ref{fig:square_lattice_b} 的相变现象。
 
-\newglossaryentry{canonical}{name=正则系踪, description={Canonical ensemble}}
+\newglossaryentry{canonical}{name=正则系综, description={Canonical ensemble}}
 对于自发磁化现象可以通过统计力学中的\gls{canonical} (Canonical ensemble)
 理论进行解释。该理论
 假设粒子的分布为
@@ -683,7 +684,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 伊辛模型除了定义在正方形网格上外，还可以推广到一般的图 $G(V, E)$ 上。
 对于没有外场的情形，伊辛模型的能量函数为
 \begin{equation}\label{eq:hamiltonian}
-	H(\sigma) = -\sum_{\{i,j\} \in E(G)} \sigma_i \cdot \sigma_j
+	H(\sigma) = -\sum_{(i,j) \in E(G)} \sigma_i \cdot \sigma_j
 \end{equation}
 在微观层面上，每种微观状态出现的概率均正比于 $\exp(-\beta H(\bar{\sigma}))$，
 概率越大或能量越低的状态越有可能出现；在宏观层面则表现为
@@ -726,9 +727,9 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 为此，可以采用下述修正模型，将没有边相连的粒子之间的
 作用力考虑进来。
 \begin{equation}\label{eq:ising_modified}
-  H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{\{i,j\}\not\in E(G)}
+  H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{(i,j)\not\in E(G)}
   \bar{\sigma}_i  \bar{\sigma}_j
-	- \sum_{\{i,j\}\in E(G)}
+	- \sum_{(i,j)\in E(G)}
   \bar{\sigma}_i  \bar{\sigma}_j
 \end{equation}
 这里引入了一个新的参数 $\gamma > 0$，表示反作用力的系数。
