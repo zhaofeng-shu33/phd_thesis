@@ -80,9 +80,9 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 划分$\P^*$的子集。
 
 下面介绍如何求解 $\lambda_1$ 及其对应的划分$\P^*$。实际上，
-求解 \eqref{eq:IP} 等价于求解下面的组合优化问题 \cite{mac}
+求解 \eqref{eq:IP} 等价于对给定的$\lambda$ 求解下面的组合优化问题 \cite{mac}
 \begin{align}\label{eq:hlambda}
-  h(\lambda) &= \min_{\P \in \Pi'} f[\P] - \abs{\P} \lambda 
+  h(\lambda) &:= \min_{\P \in \Pi'} f[\P] - \abs{\P} \lambda 
   \end{align}
 其中 $\lambda$ 是一个非负实数。
 式 \eqref{eq:hlambda} 中解的结构可以由一系列嵌套的划分
@@ -393,7 +393,7 @@ $\tilde{h}$ 和最优值对应的划分 $P'$。
 
 \newglossaryentry{Bernoulli_distribution}{name=伯努利分布, description={Bernoulli distribution}}
 为进一步解释随机块模型，
-我们定义随机变量 $Z_{ij}:=\mathbf{1}[(i,j) \in E(G)]$，
+我们定义随机变量 $Z_{ij}:=\mathds{1} [(i,j) \in E(G)]$，
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
 给定节点的标签向量 $X$，$Z_{ij}$ 服从\gls{Bernoulli_distribution}，
 \newglossaryentry{not:expectation}

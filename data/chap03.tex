@@ -228,7 +228,7 @@ $I(Z_V)=0.9$。
 从而实现计算效率比PSP算法提升一个数量级。
 
 在给出改进算法的描述之前，我们先定义两个对图的操作：
-图限制(restriction)和图收缩(contraction)。
+图限制(Restriction)和图收缩(Contraction)。
 我们称把图$G$限制到集合$C\subseteq V$是指
 考虑节点集为$C$而边的集合为$\{(i,j) \in E | i,j \in C \}$
 的子图，
@@ -377,9 +377,9 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
 仍比 算法 \ref{alg:psp} 的结果
 快 $5$ 倍。
 \subsection{聚类树的数据结构}
-在层次聚类中一般使用关联矩阵(linkage matrix)构造聚类树，但这种方法
+在层次聚类中一般使用关联矩阵(Linkage matrix)构造聚类树，但这种方法
 仅限于一次聚合两个节点的场景。
-在允许一次聚合多个节点的情形下，可以使用带权的并查集(weighted Union-Find set)的方法自底
+在允许一次聚合多个节点的情形下，可以使用带权的并查集(Weighted Union-Find set)的方法自底
 向上构造聚类树
 \cite{chan2020agglomerative}。 
 但由于我们设计的HPSP算法是
