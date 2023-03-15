@@ -149,11 +149,11 @@ D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) & ={1 \over 2} \sum_{z_1,\dots,z_n}
 的定义式 \eqref{eq:Ixy}，
 上式可化为对 $\norm{B_{ij}}^2_{\mathrm{F}}$
 的求和(平方和中的交叉项外面再求和得零)。
-因此，对于分割$\P=\{\{i\}|i\in V\}$ 我们得到
+因此，对于划分$\P=\{\{i\}|i\in V\}$ 我们得到
 \begin{equation}
 D(P_{Z_1,\dots, Z_n}|| P_{Z_1}\dots P_{Z_n}) =   {1 \over 2} \sum_{i\neq j} \norm{B_{ij}}^2_{\mathrm{F}} + o(\epsilon^2)
 \end{equation}
-对于任意的分割 $\P$，$C\in \P$，
+对于任意的划分 $\P$，$C\in \P$，
 由式\eqref{eq:sep}可得
 \begin{equation}
 P_{Z_C}(z_C) = \prod_{i\in C} P_{Z_i}(z_i)
@@ -242,7 +242,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 \subsection{定理 \ref{thm:triangle} 的证明}
 首先我们证明如下引理：
 \begin{lemma}\label{thm:trival}
-  分割 $\P_k = \{\{1\},\{2\},\dots,\{\abs{V}\}\}$ 
+  划分 $\P_k = \{\{1\},\{2\},\dots,\{\abs{V}\}\}$ 
   使得 $\frac{f[\P]}{\abs{\P}-1}$
   最小 当且仅当 式\eqref{eq:GFP} 成立。
   \begin{equation}\label{eq:GFP}
@@ -272,7 +272,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
   相等 当且仅当 \eqref{eq:GFP} 成立。
   \end{proof}
   \begin{proof}[定理 \ref{thm:triangle} 的证明]
-    我们将使用归纳法证明对于任意的分割$\P \in \Pi$，
+    我们将使用归纳法证明对于任意的划分$\P \in \Pi$，
     式\eqref{eq:GF} 成立。
     \begin{equation}\label{eq:GF}
     f[\P] \geq \frac{\abs{\P}-1}{\abs{V}-1} \sum_{(i,j) \in E} w_{ij}
@@ -289,7 +289,7 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
     $\abs{\P} \geq k+1(k\geq 2)$成立，
     下面我们讨论 $\P=\{C_1, \dots, C_k\}$
     的情形。
-    因为$\P$是非平凡的分割，
+    因为$\P$是非平凡的划分，
     因此存在某个$\abs{C_i}\geq 2$。
     不妨设$\abs{C_1}=n_1\geq 2$，
     构造$\P$的一个细分$\P'$如下：

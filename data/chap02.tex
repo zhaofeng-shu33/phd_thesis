@@ -29,20 +29,20 @@
 社团发现算法根据网络是否随时间变化与社团之间是否重叠可进行粗略的分类，
 本文研究的是静态网络中非重叠的社团发现算法，即$G$不随时间变化且
 社团之间不重叠。
-下面，我们首先介绍一个图分割算法，
+下面，我们首先介绍一个图划分算法，
 可将$V$可以分为互不重叠的若干子集。
 
-\section{基于图强度的图分割算法}\label{sec:graph_strength}
+\section{基于图强度的图划分算法}\label{sec:graph_strength}
 \newglossaryentry{graph_strength}{name=图强度, description={Strength of a graph}}
-根据\citet{fortunato2010community} 对社团发现算法的分类，图分割可用于社团发现，
+根据\citet{fortunato2010community} 对社团发现算法的分类，图划分(Graph partition)可用于社团发现，
 该类别属于20世纪末提出的传统算法。
 %不同的社团发现算法根据自己的标准寻找社团结构，这给一般意义上的比较造成了困难。
-在本节中我们介绍的图分割算法采用的度量标准叫做图强度。
+在本节中我们介绍的图划分算法采用的度量标准叫做图强度。
 \gls{graph_strength}这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}，
 它的推广包括最小化平均误差\cite{mac}和多变量互信息\cite{chan2016ic}等，
 其计算方法具有相似性。
 图强度可以定义在无权图或有权图上，
-在这里我们针对带权的有向图来介绍这一度量和基于图强度的图分割算法。
+在这里我们针对带权的有向图来介绍这一度量和基于图强度的图划分算法。
 
 给定有向图$G(V,E)$，其图强度定义为
 \begin{equation}\label{eq:IP}
@@ -53,44 +53,44 @@
 {
   type=notation,
   name={$\P(V)$},
-  description={集合$V$的一个分割，
-  也即  $P=\{C_1, \dots, C_k\},
-  \cup_{i=1}^k C_i=V$}
+  description={集合$V$的划分}
 }
-$\P$ 表示 \glsdesc{not:partition}。
+$\P$ 表示 \glsdesc{not:partition}，也即  $\P=\{C_1, \dots, C_k\},
+\cup_{i=1}^k C_i=V, C_i \cap C_j = \emptyset$。
 $\abs{\mathcal{P}}$ 表示集合 $\P$ 中元素的个数。
-$\Pi$ 是 $V$ 上所有分割的集合而 $\Pi'=\Pi\backslash\{V\}$ 表示 $\Pi$
+$\Pi$ 是 $V$ 上所有划分的集合而 $\Pi'=\Pi\backslash\{V\}$ 表示 $\Pi$
 除去 $V$本身。
 作用在$V$的子集$C$上的函数$f$
 表示$C$和 $C$的补集 $V\backslash C$ 之间边的权值之和，即
 $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
-而作用在$V$的分割$\P$上的函数 $f[\P]$ 则是$f$分别作用$\P$中每一个元素之和。
+而作用在$V$的划分$\P$上的函数 $f[\P]$ 则是$f$分别作用$\P$中每一个元素之和。
 即 $f[\P]=\sum_{C \in \P} f(C)$。有了如上的符号解释，
-式 \eqref{eq:IP} 即不难理解，它表示各分割之间所有边的和对分割总数的平均值。
+式 \eqref{eq:IP} 即不难理解，它表示各划分之间所有边的和对划分总数的平均值。
 
-式 \eqref{eq:IP} 实际给出了一个社团发现的标准，对于扁平化的社团而言，
+式 \eqref{eq:IP} 实际给出了一个社团发现的标准，
+对于扁平化的社团而言，
 最小值$\lambda_1$ 对应的社团为
-分割$\P^*$的子集。
+划分$\P^*$的子集。
 
-下面介绍如何求解 $\lambda_1$ 及其对应的分割$\P^*$。实际上，
+下面介绍如何求解 $\lambda_1$ 及其对应的划分$\P^*$。实际上，
 求解 \eqref{eq:IP} 等价于求解下面的组合优化问题 \cite{mac}
 \begin{align}\label{eq:hlambda}
   h(\lambda) &= \min_{\P \in \Pi'} f[\P] - \abs{\P} \lambda 
   \end{align}
 其中 $\lambda$ 是一个非负实数。
-式 \eqref{eq:hlambda} 中解的结构可以由一系列嵌套的分割
+式 \eqref{eq:hlambda} 中解的结构可以由一系列嵌套的划分
 来描述，即存在正整数$k$，使得式 \eqref{eq:hlambda} 的解
 为：
 \begin{equation}\label{eq:PSP_structure}
   h(\lambda) = \begin{cases} h_{\P_0}(\lambda) & 0\leq \lambda < \lambda_1 \\
-  h_{\P_i}(\lambda) & \lambda_i \leq \lambda < \lambda_{i+1} \textrm{ 对于 } i = 1, \dots, k-1 \\
+  h_{\P_i}(\lambda) & \lambda_i \leq \lambda < \lambda_{i+1} \textrm{ 对于 }\, i = 1, \dots, k-1 \\
   h_{\P_k}(\lambda) & \lambda \geq \lambda_k
   \end{cases}
 \end{equation}
 在式 \eqref{eq:PSP_structure} 中，$\lambda_1, \dots, \lambda_{k-1},
 \lambda_k$ 是递增的数列，而 $h_{\P}(\lambda)=f[\P]-|\P|\lambda$。
-对于分割 $\P_0, \dots, \P_k$ 来说，
-它们也有一个序关系。我们称分割 $P$ 是 $Q$ 的一个细分，
+对于划分 $\P_0, \dots, \P_k$ 来说，
+它们也有一个序关系。我们称划分 $P$ 是 $Q$ 的一个细分，
 记作 $P \preceq Q$：
 如果 $\forall C \in P, \exists C' \in Q$，
 使得$C\subset C'$。
@@ -109,7 +109,7 @@ $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
 \begin{example}\label{ex:psp}
 考虑一个带权的有向图$G(V,E)$，其结构
 如图 \ref{fig:example_directed} 所示。
-试求解该图的主分割序列。
+试求解该图的主划分序列。
 \end{example}
 \begin{figure}
   \centering
@@ -135,35 +135,35 @@ $h(\lambda)$
 是一个分段线性函数。一般的图$G$对应的
 $h(\lambda)$ 也是如此。
 
-因此，基于图分割的方法，\ref{fig:example_directed}
+因此，基于图划分的方法，\ref{fig:example_directed}
 中的图将被 划分成 $\P^*=\P_1$，即节点1和3被分成一类，
 而节点2单独分成1类，这符合我们的直觉。
 
 \newacronym{acr:psp}{PSP}{Principal sequence of partition}
-\newglossaryentry{psp}{name=主分割序列, description={Principal sequence of partition}}
+\newglossaryentry{psp}{name=主划分序列, description={Principal sequence of partition}}
 对于一般的图，其节点数目可能很多，此时用枚举法计算
 $h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
 $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp} (\gls{acr:psp})的结构，
 我们把这一算法称为PSP算法。
 由于原文献年代较为久远，作为替代，下面我们参考\citet{mac}论文中对PSP算法
 的描述对该算法进行进一步介绍。
-%\subsection{主分割序列}    
+%\subsection{主划分序列}    
 
 求解 \eqref{eq:PSP_structure} 只需得到在每一个
-分界点处对应的 $\lambda$ 和 分割$\P$ 即可。
+分界点处对应的 $\lambda$ 和 $\P$ 即可。
 考虑到 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$
 ，
 我们有 $|\P_0| \leq |\P_1| \dots \leq |\P_k|$，
 即随着 $\lambda $ 的增大，线性函数斜率的绝对值逐渐增大。
 这从图 \ref{fig:dt} 中也可以得到印证。
 利用这一特点并基于分治的思想，算法 \ref{alg:psp} 
-给出了获得主分割序列的步骤。
+给出了获得主划分序列的步骤。
 
 \renewcommand{\algorithmicrequire}{\textbf{输入：}\unskip}
 \renewcommand{\algorithmicensure}{\textbf{输出：}\unskip}
 
 \begin{algorithm}
-  \caption{求解主分割序列的算法 (PSP算法)}
+  \caption{求解主划分序列的算法 (PSP算法)}
   \label{alg:psp}
   \small
   \begin{algorithmic}[1]
@@ -215,7 +215,7 @@ $[\lambda_Q, \lambda_P]$ 内没有分界点，无需再调用
 \newglossaryentry{dt}{name=迪尔沃思截断, description={Dilworth truncation}}
 在算法 \ref{alg:psp} 第 \ref{alg:lambda_f} 行，
 函数 \texttt{DT} (\glsdesc{dt})被用来求解式\eqref{eq:hlambda} 获得最优值
-$\tilde{h}$ 和最优值对应的分割 $P'$。
+$\tilde{h}$ 和最优值对应的划分 $P'$。
 %该函数 \texttt{DT}
 %
 %是用于求解式\eqref{eq:hlambda}的算法，它实际上是一种贪心算法，
@@ -224,7 +224,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 %   \caption{迪尔沃思截断算法}\label{alg:dt}
 %   \begin{algorithmic}[1]
 %   \REQUIRE 图 $G$ 和 $\lambda$
-%   \ENSURE 分割 $\P$ 和 $h$
+%   \ENSURE  $\P$ 和 $h$
 %   \STATE
 %   $V^0 = \emptyset, x $ 是 $n$ 长的向量\footnotemark,
 %   $\mathcal{A} = \{\}$
@@ -283,7 +283,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 \newglossaryentry{pra}{name=推送重贴标签, description={Push–relabel}}
 
 求解最大流问题
-有一类基于\gls{pra} (push-relabel) 的算法\cite{Goldberg1988}
+有一类基于\gls{pra} (Push-relabel) 的算法\cite{Goldberg1988}
 具有良好的效率。如果要解一系列的最大流问题并且这一系列的问题
 之间有一定的关联性，重复调用最大流算法显然不是最优的选择。
 基于这种考虑，有学者提出了参数化的最大流算法\cite{Gallo1989}用于求解
@@ -336,7 +336,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 \subsection{随机块模型及其精确恢复问题}\label{sec:exact_recovery}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic block model}}
 \newacronym{acr:sbm}{SBM}{Stochastic block model}
-\gls{sbm}（\gls{acr:sbm}）是社团发现问题中最常用的统计模型之一
+\gls{sbm}(\gls{acr:sbm})是社团发现问题中最常用的统计模型之一
 \cite{holland1983stochastic, abbe2017community}，
 本节介绍我们研究的一类特殊的随机块模型，
 %它提供了一个基准人工数据集来评估不同的社团检测算法
@@ -406,8 +406,8 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 \begin{equation}
 \E[Z_{ij}] =
 \begin{cases}
-p & \textrm{ if } X_i = X_j \\ 
-q & \textrm{ if }  X_i \neq X_j
+p & X_i = X_j \\ 
+q & X_i \neq X_j
 \end{cases}
 \end{equation}
 
@@ -465,7 +465,7 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$。
   description={当 $x=y$ 时，$\delta(x,y) = 1$； 当 $x\neq y$，$\delta(x,y)=0$}
 }
 
-\newglossaryentry{planted}{name=植入性分割模型, description={Planted partition model}}
+\newglossaryentry{planted}{name=植入性划分模型, description={Planted partition model}}
 当$k=2$时，式\eqref{eq:minimum_k_cut} 即为\gls{planted}，
 是图论中经典的NP难的二分问题之一。
 
@@ -993,7 +993,7 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
 在上面的定义中，如果$Z_V$彼此独立，那么$I(Z_V)=0$，
 反之亦然。
 
-式\eqref{eq:IPZV}给出了特定分割下的多变量互信息，
+式\eqref{eq:IPZV}给出了特定划分下的多变量互信息，
 也可根据下式把KL散度改写成熵的形式。
 \begin{equation}\label{eq:entropy_expression}
   D\left(P_{Z_V} || \prod_{C\in \P} P_{Z_C} \right)
@@ -1038,7 +1038,7 @@ PSP算法进行计算。
 \end{align}
 理论分析表明，基于定义式\eqref{eq:czv} 可以得到和
 式\eqref{eq:PSP_structure}类似的层次聚类结果。
-即存在一系列的临界值$\lambda_1 < \dots < \lambda_k$和分割
+即存在一系列的临界值$\lambda_1 < \dots < \lambda_k$和划分
 $\P_k \preceq \dots \preceq \P_0$，使得
 $C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
 且$C_{\lambda_i}(Z_V) = \P_i$。
