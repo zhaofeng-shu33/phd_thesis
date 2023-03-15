@@ -377,8 +377,7 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
 仍比 算法 \ref{alg:psp} 的结果
 快 $5$ 倍。
 \subsection{聚类树的数据结构}
-在层次聚类中一般使用关联矩阵(linkage matrix)构造聚类树
-\cite{D2011Modern}，但这种方法
+在层次聚类中一般使用关联矩阵(linkage matrix)构造聚类树，但这种方法
 仅限于一次聚合两个节点的场景。
 在允许一次聚合多个节点的情形下，可以使用带权的并查集(weighted Union-Find set)的方法自底
 向上构造聚类树
