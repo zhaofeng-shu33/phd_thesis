@@ -52,8 +52,8 @@
 \newglossaryentry{not:partition}
 {
   type=notation,
-  name={$\P$},
-  description={$V$的一个分割，
+  name={$\P(V)$},
+  description={集合$V$的一个分割，
   也即  $P=\{C_1, \dots, C_k\},
   \cup_{i=1}^k C_i=V$}
 }
@@ -342,20 +342,21 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 %它提供了一个基准人工数据集来评估不同的社团检测算法
 %并启发了许多社团检测任务算法的设计 \cite{fortunato2010community}。
 %
-为此我们首先定义一些常用的符号。随机图仍用符号$G$表示，
-其节点集 $V=\{1,\dots, n\}$ 简写成 \gls{not:n_bracket}。
 \newglossaryentry{not:n_bracket}
 {
   type=notation,
   name={\ensuremath{[n]}},
   description={表示集合$\{1,\dots, n\}$}
 }
+为此我们首先定义一些常用的符号。随机图仍用符号$G$表示，
+其节点集 $V=\{1,\dots, n\}$ 简写成 \gls{not:n_bracket}。
+
 每个节点的标签为 $X_i$，
 \newglossaryentry{not:W}
 {
   type=notation,
   name={\ensuremath{W}},
-  description={循环群，即$\{1, \omega, \dots, \omega^{k-1}\}$，$k=2$时$\omega=-1$}
+  description={$k$阶循环群，即$\{1, \omega, \dots, \omega^{k-1}\}$}
 }
 从 \gls{not:W} $= \{1, \omega, \dots, \omega^{k-1}\}$中取值。
 为方便后续讨论，这里我们给$W$赋予群的结构，让它成为一个阶为$k$的循环群，
@@ -364,7 +365,7 @@ $\tilde{h}$ 和最优值对应的分割 $P'$。
 {
   type=notation,
   name={\ensuremath{W^n}},
-  description={$W$的$n$次笛卡尔积}
+  description={集合$W$的$n$次笛卡尔积}
 }
 \gls{not:Wn} 表示 \glsdesc{not:Wn}。 
 
@@ -478,7 +479,7 @@ $P_G(\cG_n) = \sum_{G\in \cG_n}P_G(G)=1$。
 {
   type=notation,
   name={$\Dist(\sigma, \sigma')$},
-  description={两个$W^n$中的向量的距离，即$|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$}
+  description={两个$W^n$中的向量的汉明距离，即$|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$}
 }
 我们用 $S_k$ 表示 $W$  上所有的置换函数， 
 $f$ 是 定义在 $W$ 上的置换函数
@@ -897,7 +898,7 @@ $ x^T A x $ 可以看成是 $\langle xx^T, A \rangle $，即矩阵
 {
   type=notation,
   name={$\langle A, B \rangle $},
-  description={矩阵$A$ 和 $B$ 的内积}
+  description={矩阵$A$ 和 $B$ 的 Frobenius 内积}
 }
 $xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
 半正定的矩阵，若对$Y$秩为1的条件进行松弛，则
@@ -1299,6 +1300,12 @@ $D^*$的数学定义为：
   P_2^{1-\lambda}(y) P_1^{\lambda}(y) 
   \right)
   \end{align*}
+\newglossaryentry{not:renyi_divergence_12}
+{
+  type=notation,
+  name={$D_{1/2}(P_1||P_2)$},
+  description={分布$P_1$和$P_2$之间阶数为$\frac{1}{2}$的雷尼散度}
+}
 该目标函数在$\lambda=\frac{1}{2}$
 处一阶导数为零而二阶导数为正，因此最小值
 在$\lambda=\frac{1}{2}$取到。该最小值
