@@ -479,9 +479,9 @@ $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
 随机块模型的精确恢复是指某社团发现算法可正确恢复
 由随机块模型生成的图的全部节点标签。
 因为我们考虑的是随机图，精确恢复是一个概率事件，
-并且，这里精确恢复特指当图的节点数目趋于无穷大时，
-准确概率收敛到1。
-为给出精确恢复严格的数学定义，
+当图的节点数目趋于无穷大时，
+若该准确概率收敛到1，则我们称达到精确恢复的要求。
+为给出精确恢复的数学定义，
 需要引入如下置换的符号。
 
 \newglossaryentry{not:dist}
@@ -893,7 +893,7 @@ $i$个节点的\gls{degree} (\glsdesc{degree})，$x_i$ 表示第$i$
 针对随机块模型的社团发现
 可以先将最大似然方法获得的目标函数
 写成整数优化问题的形式，
-再转化成 \gls{sdp} (\gls{acr:sdp}) 的优化问题进行求解。
+再转化成\gls{sdp} (\gls{acr:sdp}) 的优化问题进行求解。
 
 在 式\eqref{eq:minimum_k_cut} 中
 取 $\delta(y_i, y_j) = \frac{1+y_iy_j}{2}$，
@@ -935,7 +935,7 @@ $xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
   name={$I_n$},
   description={$n\times n$的单位矩阵}
 }
-$I_n$ 是 \glsdesc{not:identity_matrix}，
+$I_n$ 是\glsdesc{not:identity_matrix}，
 则
 优化的目标函数还可写成 $ \langle B, Y \rangle $，
 其中 $B$的定义为
@@ -1261,7 +1261,7 @@ $P_e^{(n)}$ 和决策变量$\widehat{H}$的选取有关。
 最小值。
 %更精确的说，最大的误差指数。因为
 在渐近情形下 $P_e^{(n)}$ 以 $\exp(-n D^*)$ 的速率指数衰减。
-我们把$D^*$叫做 \gls{error_exponent}。
+我们把$D^*$叫做\gls{error_exponent}。
 $D^*$的数学定义为：
 \begin{equation}
  D^* = \lim_{n\to \infty} -\frac{1}{n} \min_{\widehat{H}}
@@ -1321,7 +1321,7 @@ $D^*$的数学定义为：
 该目标函数在$\lambda=\frac{1}{2}$
 处一阶导数为零而二阶导数为正，因此最小值
 在$\lambda=\frac{1}{2}$取到。该最小值
-即为阶数为$\frac{1}{2}$的 \gls{renyi_divergence}。
+即为阶数为$\frac{1}{2}$的\gls{renyi_divergence}。
 \newglossaryentry{renyi_divergence}{name=雷尼散度, description={Rényi divergence}}
 记为：
 \begin{equation}\label{eq:renyi_divergence}
@@ -1338,11 +1338,13 @@ $D^*$的数学定义为：
 }
 雷尼散度在刻画随机块模型及其变体（如度修正的随机块模型）的误差衰减
 速率时被用到 \cite{zhang2016, gao2018community}。
-比如在两社团的随机块模型中，我们取$P_1=\Pois(\frac{a}{2}),P_2=\Pois(\frac{b}{2})$
+比如在两社团的随机块模型中，我们取$P_1=\Pois\left(\frac{a}{2}\right),P_2=\Pois\left(\frac{b}{2}\right)$
 代入式 \eqref{eq:renyi_divergence} 
 得
 \begin{equation}\label{eq:renyi_d12_ab}
-  D_{1/2}(\Pois(\frac{a}{2}) || \Pois(\frac{b}{2}))
+  D_{1/2} \left(
+    \Pois\left(\frac{a}{2}\right) || \Pois\left(\frac{b}{2}\right)
+  \right)
   = \frac{1}{2}\left(\sqrt{a} - \sqrt{b}\right)^2
 \end{equation}
 
