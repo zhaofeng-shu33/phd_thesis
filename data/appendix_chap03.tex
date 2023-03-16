@@ -19,13 +19,13 @@
   列向量。构造 $U$ 是$[2r]$ 上的均匀分布。
   而$Z_1, Z_2$ 做如下构造：
   \begin{align*}
-    P(Z_1=x|U=i) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_{\lceil i/2 \rceil}(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
-    P(Z_2=y|U=i) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_{\lceil i/2 \rceil}(y) \sqrt{\epsilon}, y \in \mathcal{Y}
+    P(Z_1=x|U=u) &= P_X(x) + (-1)^i\sqrt{P_X(x)}\phi_{\lceil i/2 \rceil}(x) \sqrt{\epsilon}, x \in \mathcal{X} \\
+    P(Z_2=y|U=u) &= P_Y(y) + (-1)^i\sqrt{P_Y(y)}\psi_{\lceil i/2 \rceil}(y) \sqrt{\epsilon}, y \in \mathcal{Y}
   \end{align*}
   $Z_1 | U$ 与$Z_2 | U$ 独立，因此，
   $Z_1, Z_2$ 的联合分布为：
   \begin{align*}
-  P(Z_1=x, Z_2=y)& =\sum_{i=1}^{2r}P(U=i)P(Z_1=x|U=i)P(Z_2=y|U=i)\\
+  P(Z_1=x, Z_2=y)& =\sum_{i=1}^{2r}P(U=u)P(Z_1=x|U=u)P(Z_2=y|U=u)\\
   &=P_X(x)P_Y(y) + \sqrt{P_X(x)}\sqrt{P_Y(y)}\frac{\epsilon}{r}
   \sum_{i=1}^{r}\phi_i(x)
   \psi(y) \\
@@ -71,13 +71,13 @@
   由引理 \ref{lem:xyz}  可得 $Z_i$
   和 $U$ $\epsilon$-弱独立，也即有 
 \begin{equation}\label{XUk}
-P_{Z_i | U=k}(z) = P_{Z_i} (z) \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} \right)
+P_{Z_i | U=u}(z) = P_{Z_i} (z) \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} \right)
 \end{equation}
 利用条件分布独立有
 \begin{align}
-P_{Z_i, Z_j | U = k}(z_i, z_j)
-&= P_{Z_i | U=k}(z_i)
-P_{Z_j | U=k}(z_j) \notag \\
+P_{Z_i, Z_j | U=u}(z_i, z_j)
+&= P_{Z_i | U=u}(z_i)
+P_{Z_j | U=u}(z_j) \notag \\
 &= P_{Z_i}(z_i)P_{Z_j}(z_j)
 \left(1 + \epsilon
 \left(\frac{\phi^{(k,i)}(z_i)}{\sqrt{P_{Z_i}(z_i)}}
@@ -91,11 +91,11 @@ P_{Z_j | U=k}(z_j) \notag \\
 \end{align}
 又因为
 \begin{align*}
-P_{Z_i}(z) &= \sum_{k=1}^{K} P_{Z_i | U=k}(z) P_U(u_k) \\
+P_{Z_i}(z) &= \sum_{k=1}^{K} P_{Z_i | U=u_k}(z) P_U(u_k) \\
 & =  \sum_{k=1}^{K}P_U(u_k)P_{Z_i} (z)
 \left( 1 + \epsilon {\phi^{(k,i)}(z) \over \sqrt{P_{Z_i}(z)}} 
-\right) \textrm{ 根据 } \eqref{XUk}\\
-\Rightarrow & \sum_{k=1}^{K} P_U(u_k){\phi^{(k, i)}(z) \over \sqrt{P_{Z_i}(z)}} =0,\forall i, z\in \mathcal{Z}
+\right) \textrm{ 根据 }\, \eqref{XUk}\\
+\Rightarrow & \sum_{k=1}^{K} P_U(u_k){\phi^{(k, i)}(z) \over \sqrt{P_{Z_i}(z)}} =0,\forall i \in V, z\in \mathcal{Z}
 \end{align*}
 因此 \eqref{eq:XiXj} 化简为
 \begin{equation}\label{eq:PXiXj}
@@ -108,9 +108,9 @@ P_{Z_j}(z_j) \left(
 \end{equation}
 对于2个以上的随机变量：
 \begin{align*}
-P_{Z_1,\dots,Z_n}(z_1,\dots,z_n)  &= \sum_{k=1}^{K} P_{Z_1,\dots,Z_n | U=k}(z_1,\dots,z_n) P_U(u_k) \\
-&=  \sum_{k=1}^{K}P_U(u_k) \prod_{i=1}^n P_{Z_i|U=k}(z_i)\\
-&= \sum_{k=1}^{K} P_U(u_k)\prod_{i=1}^n \left(P_{Z_i} (z_i)( 1 + \epsilon {\phi^{(k,i)}(z_i ) \over \sqrt{P_{Z_i}(z_i)}} )\right)\\
+P_{Z_1,\dots,Z_n}(z_1,\dots,z_n)  &= \sum_{k=1}^{K} P_{Z_1,\dots,Z_n | U=u_k}(z_1,\dots,z_n) P_U(u_k) \\
+&=  \sum_{k=1}^{K}P_U(u_k) \prod_{i=1}^n P_{Z_i|U=u_k}(z_i)\\
+&= \sum_{k=1}^{K} P_U(u_k)\prod_{i=1}^n \left(P_{Z_i} (z_i) \left( 1 + \epsilon {\phi^{(k,i)}(z_i) \over \sqrt{P_{Z_i}(z_i)}} \right)\right)\\
 &=  \sum_{k=1}^{K}P_U(u_k) (\prod_{i=1}^n  P_{Z_i} (z_i))
 \left( 1 + \epsilon\sum_{i=1}^n {\phi^{(k,i)}(z_i) \over \sqrt{P_{Z_i}(z_i)}} \right.\\
 &\left. \quad + \epsilon^2\sum_{i\neq j}{\phi^{(k,i)}(z_i)\phi^{(k,j)}(z_j)\over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)+o(\epsilon^2) \\

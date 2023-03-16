@@ -125,8 +125,8 @@ $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
 	\end{align}
 其中能量函数$H(\bar{\sigma})$的定义是
 \begin{equation}\label{eq:energy}
-	H(\bar{\sigma}) := \gamma \frac{\log n}{n} \sum_{\{i,j\}\not\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
-	- \sum_{\{i,j\}\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	H(\bar{\sigma}) := \gamma \frac{\log n}{n} \sum_{(i,j)\not\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	- \sum_{(i,j)\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	\end{equation}
 	
 	$P_{\sigma|G}$ 中的下标表示该分布依赖于$G$，
@@ -157,7 +157,7 @@ $\frac{\log n}{n}$ 是对由于边的数量不均匀造成两种势能量阶不�
 \subsection{误差的渐近性质}
 沿用注释 \ref{rem:metric_exact_recovery} 中的记号，
 使用$\hat{X}^*$估计$X$在精确恢复度量下的错误概率
-记为 $P_e(\hat{X}^*) := \sum_{G \in \cG_n} P_G(G) P_{\sigma | G}(S^c_k(X))$。
+记为 $P_e(\hat{X}^*) := \sum_{\bar{G} \in \cG_n} P_G(\bar{G}) P_{\sigma | \bar{G}}(S^c_k(X))$。
 类似文献 \inlinecite{ye2020exact} 中关于 SIBM 模型的讨论，
 玻茨模型的两个参数$(\beta, \gamma)$ 的取值
 对$P_e(\hat{X}^*)$
@@ -265,7 +265,7 @@ $\epsilon$ 并且当 $n \to \infty$，
 可以从$\sigma$的边缘分布的角度理解。
 玻茨模型取到某个特定状态$\bar{\sigma}$的概率为
  $\sigma: P_{\sigma}(\sigma =\bar{\sigma})
-=\sum_{G \in \cG_n}P_G(G)P_{\sigma |G}(\sigma=\bar{\sigma})$。
+=\sum_{\bar{G} \in \cG_n}P_G(\bar{G})P_{\sigma |\bar{G}}(\sigma=\bar{\sigma})$。
 我们用符号 $D(\sigma, \sigma')$ 表示 $\sigma$ 相比于它的所有置换其本身离 $\sigma'$ 最近
 这个事件。
 也即
@@ -307,7 +307,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 	\begin{equation*}
 	H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{i < j} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	- \left(1 + \gamma\frac{\log n}{n} \right)
-	\sum_{ \{i, j\} \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
+	\sum_{ (i,j) \in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	\end{equation*}
 	
 	接着我们逐步计算能量差：
@@ -489,11 +489,11 @@ $\beta > \beta^*$，
 因为我们已知 $X$取各个标签的位置数相等，即对于每个标签值 $u$
 有 $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$，
 我们可以把搜索空间限制到
-$W^*:= \left\{\sigma\in W^n \big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n}{k}, s=0,\dots, k-1 \right\}$
+$W^*:= \left\{\sigma\in W^n \Big\vert |\{v \in [n] : \sigma_v = \omega^s\}| = \frac{n}{k}, s=0,\dots, k-1 \right\}$
 上。
 当 $\sigma \in W^*$ 时， 最小化 $H(\sigma)$ 等价于：
 \begin{equation}\label{eq:hatX_double_prime}
-\hat{X}'' := \argmin_{\sigma \in W^*} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)
+\hat{X}'' := \argmin_{\sigma \in W^*} \sum_{(i,j) \not\in E(G) } \delta(\sigma_i, \sigma_j)
 \end{equation}
 其最小值是不同社团之间的最小分割。
 
@@ -579,11 +579,11 @@ $\tilde{g}(\beta) = 1- \frac{\left(\sqrt{a} - \sqrt{b}\right)^2}{k}$，
 其次，
 由式\eqref{eq:hatX_double_prime}，
 极小化能量$H(\sigma)$
-等价于$\min_{\sigma} \sum_{\{i,j\} \not\in E(G) } \delta(\sigma_i, \sigma_j)$。
+等价于$\min_{\sigma} \sum_{(i,j) \not\in E(G) } \delta(\sigma_i, \sigma_j)$。
 考虑到在$W^*$的约束下，
 $\sum_{1<i<j<n} \delta(\sigma_i, \sigma_j)$
 是一个常数，式\eqref{eq:hatX_double_prime}又等价于
-$-\sum_{ \{i,j\} \in E} \delta(\sigma_i, \sigma_j)$，
+$-\sum_{ (i,j) \in E} \delta(\sigma_i, \sigma_j)$，
 其与 式\eqref{eq:minimum_k_cut}只相差一个常数。
 从而我们得到了最大似然算法和最小割问题在$W^*$约束
 下的等价性，这个等价性不需要$n\to\infty$的渐近性条件也成立。
@@ -593,8 +593,8 @@ $-\sum_{ \{i,j\} \in E} \delta(\sigma_i, \sigma_j)$，
 忽略常数项，关于标签向量 $\sigma$的模块度 $Q$
 可以写成：
 \begin{align}
-Q(\sigma) = -\sum_{\{i,j\} \not\in E(G) } \frac{d_i d_j}{2 |E|}\delta(\sigma_i,\sigma_j) 
-+ \sum_{\{i,j\} \in E(G) } \left(1 - \frac{d_i d_j}{2 |E|} \right) \delta(\sigma_i,\sigma_j)  \label{eq:Qtransform}
+Q(\sigma) = -\sum_{(i,j) \not\in E(G) } \frac{d_i d_j}{2 |E|}\delta(\sigma_i,\sigma_j) 
++ \sum_{(i,j) \in E(G) } \left(1 - \frac{d_i d_j}{2 |E|} \right) \delta(\sigma_i,\sigma_j)  \label{eq:Qtransform}
 \end{align}
 
 当$n$充分大时，平均意义上我们有 $d_i \sim  \frac{(a+(k-1)b)\log n}{k}, |E| \sim \frac{1}{2}n d_i$。
