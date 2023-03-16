@@ -476,10 +476,13 @@ $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
 是图论中经典的NP难的二分问题之一。
 
 
-随机块模型的精确恢复是指某社团发现算法用在随机块模型上可以将
-每个节点的类别都正确地分出来。因为随机块模型具有随机性，
-这里正确的分出来是指当图的节点数目趋于无穷大时，正确概率收敛到1。
-为给出精确恢复严格的数学定义，需要引入如下置换的符号。
+随机块模型的精确恢复是指某社团发现算法可正确恢复
+由随机块模型生成的图的全部节点标签。
+因为我们考虑的是随机图，精确恢复是一个概率事件，
+并且，这里精确恢复特指当图的节点数目趋于无穷大时，
+准确概率收敛到1。
+为给出精确恢复严格的数学定义，
+需要引入如下置换的符号。
 
 \newglossaryentry{not:dist}
 {
@@ -487,7 +490,7 @@ $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
   name={$\Dist(\sigma, \sigma')$},
   description={两个$W^n$中的向量的汉明距离，即$|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$}
 }
-我们用 $S_k$ 表示 $W$  上所有的置换函数， 
+我们用 $S_k$ 表示 $W$  上所有的置换函数的集合， 
 $f$ 是 定义在 $W$ 上的置换函数
 并且可以通过逐元素作用的方式
 将其定义域扩展到 $W^n$ 上。
@@ -518,9 +521,11 @@ $S_2^c(\sigma) = W^2 \backslash S_2(\sigma)
 并假设随机图 $G$ 从 $\SSBM(n,k,p,q)$ 模型中采样。
 一个社团发现算法$\hat{X}$ 已知 $G$ 去估计$X$，
 也被称做$X$ 的估计量。我们称该算法
-可精确恢复$X$，如果
+可精确恢复$X$，如果准确概率
+$P_a(\hat{X}):=P(\hat{X} \in S_k(X)) $满足
 \begin{equation}\label{eq:Pa_hat_X}
-P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
+P_a(\hat{X})
+\to 1 \textrm{ 当 }\, n \to \infty
 \end{equation}
 \end{definition}
 
@@ -528,9 +533,9 @@ P_a(\hat{X}):=P(\hat{X} \in S_k(X)) \to 1 \textrm{ 当 }\, n \to \infty
 我们只能获得置换意义下相对于真实标签$X$的恢复结果。
 这是因为没有一个类别的基准导致的。
 这种情况在无监督学习领域比较常见。
-式\eqref{eq:Pa_hat_X}中记号 $P_a(\hat{X})$
-表示 估计量 $\hat{X}$ 的
-准确概率。
+%式\eqref{eq:Pa_hat_X}中记号 $P_a(\hat{X})$
+%表示 估计量 $\hat{X}$ 的
+%准确概率。
 \begin{remark}\label{rem:metric_exact_recovery}\,
   \begin{enumerate}
     \item 令 $P_e(\hat{X}) = 1 - P_a(\hat{X})$
