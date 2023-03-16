@@ -41,14 +41,14 @@
     \begin{table}
       \begin{tabular}{|c|c|c|c|c|}
         \hline
-        $P(U=i|X=j, Y=k)$ & $j=0,k=0$ &
-        $j=0,k=1$ & $j=1,k=0$  & $j=1,k=1$ \\
+        $P(U=u|X=x, Y=y)$ & $x=0,y=0$ &
+        $x=0,y=1$ & $x=1,y=0$  & $x=1,y=1$ \\
         \hline
-        $i=0$ & $\frac{(1-\sqrt{\epsilon})^2}{2(1+\epsilon)}$
+        $u=0$ & $\frac{(1-\sqrt{\epsilon})^2}{2(1+\epsilon)}$
         & $\frac{1}{2}$ & $\frac{1}{2}$ 
         &  $\frac{(1+\sqrt{\epsilon})^2}{2(1+\epsilon)}$\\
         \hline
-        $i=1$ & $\frac{(1+\sqrt{\epsilon})^2}{2(1+\epsilon)}$
+        $u=1$ & $\frac{(1+\sqrt{\epsilon})^2}{2(1+\epsilon)}$
         & $\frac{1}{2}$ & $\frac{1}{2}$
         & $\frac{(1-\sqrt{\epsilon})^2}{2(1+\epsilon)}$
         \\
@@ -57,8 +57,8 @@
 %      \caption{两个弱独立的随机变量}
     \end{table}
 
-    不难验证$P(X=j, Y=k | U=i)=P(X=j | U=i)
-      P(Y=k| U=i)$。此外， $(X, Y)|U=0$
+    不难验证$P(X=x, Y=y | U=u)=P(X=x | U=u)
+      P(Y=y| U=u)$。此外， $(X, Y)|U=0$
       的概率质量函数 可以写成向量
       $\frac{1}{4}[(1-\sqrt{\epsilon})^2,
       1-\epsilon,
@@ -90,9 +90,9 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   取 $Z_i|U$在分布$Z_i$的
   $\sqrt[n]{\epsilon}$ 邻域内，该条件分布为：
   \begin{equation}
-    P(Z_j=z|U=i) = P_{Z_j}(z) + 
-    (-1)^{i \,\mathrm{mod}\, n!}\sqrt{P_{Z_j(z)}}
-    \phi_{\lceil\, i/n!\, \rceil}(z) \sqrt[n]{\epsilon}, z \in \mathcal{Z_j}
+    P(Z_j=z|U=u) = P_{Z_j}(z) + 
+    (-1)^{u \,\mathrm{mod}\, n!}\sqrt{P_{Z_j(z)}}
+    \phi_{\lceil\, u/n!\, \rceil}(z) \sqrt[n]{\epsilon}, z \in \mathcal{Z_j}
   \end{equation}
   假设$Z_1|U, \dots, Z_n|U$ 独立，则可得到
   $(Z_1, \dots, Z_n)|U$的分布。
@@ -104,7 +104,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
 \begin{theorem}\label{thm:DPX}
 若 $Z_1, \dots, Z_n$ $\epsilon$-弱独立, 则有
 \begin{equation}\label{eq:PXV}
-D\left(P_{Z_V} || \prod_{C\in \P} P_{Z_C} \right)
+D\left(P_{Z_V} \Big|\Big| \prod_{C\in \P} P_{Z_C} \right)
 = {1 \over 2}
 \sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_{\mathrm{F}}^2 + o(\epsilon^2)
 \end{equation}

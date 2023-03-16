@@ -103,7 +103,7 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 使得$C\subset C'$。
 基于细分的此种定义，我们有
 $\P_k \preceq \dots \preceq \P_1 \preceq \P_0$。
-其中 $\P_0=\{V\}$ 而 $\P_k=\cup_{i=1}^n \{ i\}$。
+其中 $\P_0=\{V\}$ 而 $\P_k=\{ \{i\} | i \in [n]\}$。
 
 在得到 $h(\lambda)$ 的表达式后，
 我们指出 式 \eqref{eq:IP} 和
@@ -382,7 +382,7 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
 	令 $0\leq q<p\leq 1$, $V=[n]$ 且
   $X=(X_1,\dots,X_n)\in W^n$。 对任意的 $u\in W$，
   $X$ 满足约束
-  $|\{v \in [n] : X_v = u\}| = \frac{n}{k}$。
+  $|\{v \in [n] | X_v = u\}| = \frac{n}{k}$。
 	如果下面两个条件满足，
   则称随机图 $G$ 是通过 $\SSBM(n,k,p,q)$ 模型产生的。 
 	\begin{enumerate}
@@ -418,7 +418,7 @@ q & X_i \neq X_j
 
 则 有 $n$ 个节点的随机图 $G$ 
 被 
-随机变量 $Z:=\{Z_{ij}, 1\leq i<j\leq n\}$ 完全确定。
+随机变量 $Z:=\{Z_{ij}\}_{1\leq i<j\leq n}$ 完全确定。
 这里，每一个 $Z_{ij}$ 是相互独立的。
 $Z$ 的分布函数可以写为：
 \begin{align}\label{eq:mle_sibm}
@@ -497,7 +497,7 @@ $f$ 是 定义在 $W$ 上的置换函数
 对于任意 $\sigma \in W^n$，
 定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
 此外，我们定义两个$W^n$中的向量的
-距离为\gls{not:dist}$=|\{i\in[n]:\sigma_i\neq \sigma'_i\}|$，
+距离为\gls{not:dist}$=|\{i\in[n] |\sigma_i\neq \sigma'_i\}|$，
 其中 $\sigma,\sigma'\in W^n
 $。
 \begin{example}
@@ -1110,7 +1110,8 @@ I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsi
 \textrm{ 其中 }  B(x,y)=\frac{P_{X,Y}(x,y) - P_X(x) P_Y(y)}{\sqrt{P_X(x)P_Y(y)}}
 \end{equation}
 在式\eqref{eq:Ixy}中， $\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y)$
-一项可以写成 $\norm{B}_{\mathrm{F}}^2$。这里 $B$表示$\mathcal{X} \times \mathcal{Y}$的矩阵，
+一项可以写成 $\norm{B}_{\mathrm{F}}^2$。这里 $B$表示$|\mathcal{X}| \times |\mathcal{Y}|$
+的矩阵，称为典型相关矩阵(Canonical Dependence Matrix)\cite{huang2019universal}，
 \newglossaryentry{not:norm_f}
 {
   type=notation,
@@ -1156,8 +1157,8 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$，
 在信息论中，我们首先假定所有的元素均从字母集$\mathcal{X}$
 中选取。
 某个长度为$n$的序列$x$的\gls{type}是表示
-其各字符在该序列中出现的比例，用符号$\mathbb{P}_x$表示，
-而所有的$\mathbb{P}_x$组成集合$\mathbb{P}_n$。比如考虑字母集
+其各字符在该序列中出现的比例，用符号$\hat{P}_x$表示，
+而所有的$\hat{P}_x$组成集合$\mathbb{P}_n$。比如考虑字母集
 $\mathcal{X}=\{1,2,3\}$，对于$11321$这个序列
 它的型可以用三元组 $(\frac{3}{5}, 
 \frac{1}{5}, \frac{1}{5})$ 表示。注意到
@@ -1168,8 +1169,8 @@ $\mathcal{X}=\{1,2,3\}$，对于$11321$这个序列
 则它的联合分布的概率质量函数可以记为$Q^n(x)=\prod_{i=1}^n Q(x_i)$。
 对于任意长度为$n$的序列$x$，我们仍沿用上述关于$Q(x)$的定义。
 为衡量$Q$和另一个不包括$Q$的概率分布的集合 $E$ 之间的距离，我们引入如下的记号：
-$Q^n(E) = \sum_{x: \mathbb{P}_x \in E \cap \mathbb{P}_n} Q^n(x)$。
-这里 $\mathbb{P}_x$ 是 $x$的型。
+$Q^n(E) = \sum_{x: \hat{P}_x \in E \cap \mathbb{P}_n} Q^n(x)$。
+这里 $\hat{P}_x$ 是 $x$的型。
 
 \newacronym{acr:iid}{i.i.d.}{Independent and identically distributed}
 

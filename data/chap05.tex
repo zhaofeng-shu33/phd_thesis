@@ -30,7 +30,7 @@ SSBM 模型的推广。为方便讨论又不失一般性，
 节点标签$X$满足$X_i \in \{\pm 1\}$
 且 $\sum_{i=1}^n X_i = 0$。
 除了图中边的集合
-$\{Z_{i,j}\}_{1\le i<j\le n}$
+$\{Z_{ij}\}_{1\le i<j\le n}$
 和节点标签 $X$ 外，
 第 $i$  个节点 ($1\leq i \leq n$) 
 还含有 $m=\lceil \gamma \log n \rceil $ 个相关的数据样本 
@@ -41,18 +41,18 @@ $\{Y^{i}_j\}_{1\leq j \leq m}$。
 若 $X_i=-1$，则采样自 $P_1$。
 这里假设 $P_0, P_1$ 两个分布函数均为定义在字母集$\mathcal{Y}$上的离散分布。
 注意到 给定 标签 $X_i$，
-对于 $i\in [n]$，数据样本 $\{Y^{i}_j\}_{1\leq j \leq m}$ 与 $\{Z_{i,j}\}_{1\le i<j\le n}$ 独立。
- 因此，在标签 $X$ 给定的情况下，
-  $(\{Z_{i,j}\}_{1\le i<j\le n},\{Y^i_{j}\}_{1\le i\le n,1\le j\le m})$ 的联合分布为  
+对于 $i\in [n]$，数据样本 $\{Y^{i}_j\}_{1\leq j \leq m}$ 与 $\{Z_{ij}\}_{1\le i<j\le n}$ 独立。
+因此，在标签 $X$ 给定的情况下，
+  $(\{Z_{ij}\}_{1\le i<j\le n},\{Y^i_{j}\}_{1\le i\le n,1\le j\le m})$ 的联合分布为  
 \begin{align}\label{eq:lh}
-    &P(y=\{y^i_{j}\}_{1\le i\le n,1\le j\le m},z=\{z_{i,j}\}_{1\le i<j\le n}| (x_1,\ldots,x_n)) \nonumber\\
-    &= \prod_{1\le i < j\le n}P(z_{i,j}|x_i,x_j)\prod_{i=1}^n \prod_{j=1}^m P(y^i_j|x_i), 
+    &P(y=\{y^i_{j}\}_{1\le i\le n,1\le j\le m},z=\{z_{ij}\}_{1\le i<j\le n}| (x_1,\ldots,x_n)) \nonumber\\
+    &= \prod_{1\le i < j\le n}P(z_{ij}|x_i,x_j)\prod_{i=1}^n \prod_{j=1}^m P(y^i_j|x_i), 
 \end{align}
-其中$\prod_{1\le i,j\le n}P(z_{i,j}|x_i,x_j)$ 可写成
+其中$\prod_{1\le i,j\le n}P(z_{ij}|x_i,x_j)$ 可写成
 式\eqref{eq:mle_sibm} 的形式。
-对于$P(z_{i,j}|x_i,x_j)$，其具体定义为
+对于$P(z_{ij}|x_i,x_j)$，其具体定义为
 \begin{equation*}
-    P  (z_{i,j}=1|x_i,x_j) = \begin{cases}
+    P  (z_{ij}=1|x_i,x_j) = \begin{cases}
         p & \text{if } x_i = x_j \\
         q & \text{if } x_i\ne x_j
     \end{cases},
@@ -64,7 +64,7 @@ $\{Y^{i}_j\}_{1\leq j \leq m}$。
         P_1(y^i_j) & x_i = -1
     \end{cases}
 \end{equation*}
- $P(\{y^i_{j}\}_{1\le i\le n,1\le j\le m},\{z_{i,j}\}_{1\le i<j\le n}| x_1,\ldots,x_n)$ 
+ $P(\{y^i_{j}\}_{1\le i\le n,1\le j\le m},\{z_{ij}\}_{1\le i<j\le n}| x_1,\ldots,x_n)$ 
  的条件分布 依赖于
  $n,m,p, q, P_0$ 和 $P_1$ 这些参数，因此我们把 SBMSI 写成 $\SBMSI(n,m,p,q,P_0,P_1)$ 的形式。
  给定由 $\SBMSI(n,m,p,q,P_0,P_1)$ 生成的边$Z$和数据$Y$， 我们的目标是恢复 出$X$。
