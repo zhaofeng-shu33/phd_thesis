@@ -739,9 +739,9 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 作用力考虑进来。
 \begin{equation}\label{eq:ising_modified}
   H(\bar{\sigma}) = \gamma \frac{\log n}{n} \sum_{(i,j)\not\in E(G)}
-  \bar{\sigma}_i  \bar{\sigma}_j
+  \bar{\sigma}_i \cdot \bar{\sigma}_j
 	- \sum_{(i,j)\in E(G)}
-  \bar{\sigma}_i  \bar{\sigma}_j
+  \bar{\sigma}_i  \cdot \bar{\sigma}_j
 \end{equation}
 这里引入了一个新的参数 $\gamma > 0$，表示反作用力的系数。
 \eqref{eq:ising_modified}
@@ -789,7 +789,7 @@ $\frac{\log n}{n}$
   H(\sigma) = -\sum_{(i,j) \in E(G)}\delta(\sigma_i, \sigma_j)
 \end{equation}
 \begin{remark}\label{rem:equivalence_H_energy}
-需要注意的是，在状态数$k=2$的情形
+需要注意的是，在状态数$k=2$的情形，
 式\eqref{eq:Hsigma_multiple_state} 
 与式\eqref{eq:hamiltonian}
 并不严格等价。
@@ -819,12 +819,12 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
 而我们将在其工作的基础上，将伊辛模型拓展为节点有多个状态的玻茨模型，
 重点研究$m=1$时参数$\beta$的相变现象以及相关的社团发现算法。
 
-\citet{ye2020exact} 在其工作的技术证明中，用到了马尔可夫不等式和切尔诺夫不等式这两个概率论中常用的聚集不等式。
+\citet{ye2020exact} 在其工作的技术证明中，用到了马尔可夫不等式和切尔诺夫不等式这两个概率论中常用的集中不等式。
 由于我们在后面章节的技术证明中也要用到这两个不等式，故在本小节最后列出它们，方便后面引用。
 
 \newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov's inequality}}
 \begin{lemma}[\gls{markov_ieq}] 
-  设 $X$ 是非负型随机变量，则对于非负实数$a$有：
+  设 $X$ 是非负型随机变量，则对于非负实数$a$有
   \begin{equation}
     P(X\geq a) \leq {1 \over a} \E[X]   
   \end{equation}
@@ -900,19 +900,19 @@ $i$个节点的\gls{degree} (\glsdesc{degree})，$x_i$ 表示第$i$
 于是可得到如下
 的优化问题：
 \begin{align}
-  \max_x\  &  x^T A x \notag \\
-  \textrm{s.t. } & x_{i} = 1, i \in [n] \notag \\
-  & \mathbf{1}^T x = 0
+  \max_x\  &  x^{\mathrm{T}} A x \notag \\
+  \textrm{s.t. } & x_{i} \in \{\pm 1\}, i \in [n] \notag \\
+  & \mathbf{1}_n^{\mathrm{T}} x = 0
 \end{align}
 其中 $A$ 表示图的邻接矩阵。
-$ x^T A x $ 可以看成是 $\langle xx^T, A \rangle $，即矩阵
+$ x^{\mathrm{T}} A x $ 可以看成是 $\langle xx^{\mathrm{T}}, A \rangle $，即矩阵
 \newglossaryentry{not:matrix_inner_product}
 {
   type=notation,
   name={$\langle A, B \rangle $},
   description={矩阵$A$ 和 $B$ 的 Frobenius 内积}
 }
-$xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
+$xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
 半正定的矩阵，若对$Y$秩为1的条件进行松弛，则
 得到如下半正定规划问题：
 \begin{align}\label{eq:opt_A_Y_1}
@@ -926,7 +926,7 @@ $xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
   name={$J_n$},
   description={元素全为1的$n\times n$的矩阵}
 }
-其中 $J_n=\mathbf{1}_n\mathbf{1}_n^T$
+其中 $J_n=\mathbf{1}_n\mathbf{1}_n^{\mathrm{T}}$
 是\glsdesc{not:matrix_all_one}。
 令 $B=2A + I_n - J_n$，
 \newglossaryentry{not:identity_matrix}
@@ -938,17 +938,17 @@ $xx^T$ 与 $A$ 的内积。令$Y=xx^T$，则$Y$是一个
 $I_n$ 是\glsdesc{not:identity_matrix}，
 则
 优化的目标函数还可写成 $ \langle B, Y \rangle $，
-其中 $B$的定义为
+其中 $B$ 为
 \begin{equation}\label{eq:def_B_sdp}
     B_{ij} = \begin{cases}
         1, & \text{若 $i$ 与 $j$ 有边相连}, \\
-        -1,& \text{否则}
+        -1,& \text{其他情况}
     \end{cases}
 \end{equation}  
 
 以上方法可针对一般的图$G$进行求解，
 但对于$\SSBM(n,2, \A, \B)$，
-Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检测社团的
+Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中精确恢复的
 理论保证。
 \begin{theorem}
   设 $\hat{Y}$ 是
@@ -956,7 +956,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
   若 $\sqrt{a} - \sqrt{b}
   > \sqrt{2}$，
   则
-  $\lim_{n\to\infty} P(\hat{Y}=\sigma\sigma^T)=1$。
+  $\lim_{n\to\infty} P(\hat{Y}=\sigma\sigma^{\mathrm{T}})=1$。
 \end{theorem}
 \section{信息论度量}
 由于本文要用到多种信息论度量研究
@@ -965,7 +965,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
 本节也对局部信息几何做一个简要的介绍。
 \subsection{多变量互信息}\label{sec:info_clustering}
 在信息论领域，互信息提供了两个随机变量之间的
-距离度量。使用 KL 散度的记号，随机变量$X$
+距离度量。使用 K-L 散度的记号，随机变量$X$
 和 $Y$ 之间的互信息定义为：
 \begin{equation}\label{eq:mutual_info}
   I(X;Y) = D(P_{XY} ||P_XP_Y)
@@ -974,12 +974,12 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
 {
   type=notation,
   name={$D(P_X||P_Y)$},
-  description={分布$P_X$ 和 $P_Y$之间的 KL 散度}
+  description={分布$P_X$ 和 $P_Y$之间的 K-L 散度}
 }
 \newglossaryentry{mmi}{name=多变量互信息, description={Multivariate mutual information}}
 \newglossaryentry{gmc}{name=广义最大相关, description={Generalized maximal correlation}}
 \newacronym{acr:mmi}{MMI}{Multivariate mutual information}
-其中 $P_X, P_Y$表示边缘分布，$D(P_X||P_Y)$
+其中 $P_X, P_Y$表示$(X,Y)$的边缘分布，$D(P_X||P_Y)$
 表示\glsdesc{not:kl_dev}。
 而$P_{XY}$
 表示两个随机变量的联合分布。有多种方法可将互信息
@@ -990,32 +990,32 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中检�
 比如有学者基于HGR最大相关提出了\gls{gmc} (Generalized maximal correlation)
 也能实现类似的目的 \cite{huang2020information}。
 
-下面我们对MMI做简要的介绍。令$V$是随机变量
-的序号集合，$C$是 $V$的子集，$Z_C=\{Z_i | i \in C\}$
+下面我们对MMI做简要的介绍。令$V=[n]$是$n$个随机变量
+序号的集合，$C$是 $V$的子集，$Z_C=\{Z_i | i \in C\}$
 表示随机变量序号在 $C$ 中的随机变量 $Z_i$ 的集合。
 $P_{Z_C}$表示$Z_C$的联合分布。
 $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
 则MMI度量的定义为：
 \begin{align}
-  I(Z_V) &:= \min_{\P \in \Pi'} I_{\P}(Z_V),
-  \textrm{ 其中 } \label{eq:IZV}\\  
-  I_{\P}(Z_V) &:= \frac{1}{|\P| - 1}
-  D\left(P_{Z_V} || \prod_{C\in \P} P_{Z_C} \right) \label{eq:IPZV}
+  I(Z_V) &:= \min_{\P \in \Pi'} I_{\P}(Z_V)
+  \label{eq:IZV}\\  
+  \textrm{ 其中 } I_{\P}(Z_V) &:= \frac{1}{|\P| - 1}
+  D\left(P_{Z_V} \Big|\Big| \prod_{C\in \P} P_{Z_C} \right) \label{eq:IPZV}
 \end{align}
 在上面的定义中，如果$Z_V$彼此独立，那么$I(Z_V)=0$，
 反之亦然。
 
 式\eqref{eq:IPZV}给出了特定划分下的多变量互信息，
-也可根据下式把KL散度改写成熵的形式。
+也可根据下式把K-L散度改写成熵的形式。
 \begin{equation}\label{eq:entropy_expression}
-  D\left(P_{Z_V} || \prod_{C\in \P} P_{Z_C} \right)
+  D\left(P_{Z_V} \Big|\Big| \prod_{C\in \P} P_{Z_C} \right)
   = \sum_{C \in \P}
   H(Z_C) - H(Z_V)
 \end{equation}
 \newacronym{acr:pin}{PIN}{Pairwise independent network}
 
 但对于一般的分布，式\eqref{eq:IZV}
-难于计算。\citet{chan2017pin} 又提出了一种特殊的 \gls{acr:pin} 模型，
+难于计算。\citet{chan2017pin} 又提出了一种特殊的互独立网络 (\gls{acr:pin}) 模型，
 使得多变量互信息可以用 \ref{sec:community_detection} 节
 介绍的PSP算法进行计算。
 这里略去PIN模型的数学定义，而是通过下面的例子
@@ -1033,10 +1033,10 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
   +H(X_b)$。我们可以将上面的计算用图 \ref{fig:example_directed} 
   进行对应，即把$Z_i$对应到第$i$的节点，
   $Z_i$与$Z_j$之间的互信息对应到第$i$和第$j$个节点之间
-  边的权值，而KL散度即为不同的类别之间边的权值之和。
+  边的权值，而K-L散度即为不同的类别之间边的权值之和。
 \end{example}
 例 \ref{ex:mmi} 中虽然只有三个节点，
-但对于一般的情形，PIN模型也是和一个有向图有
+但对于一般的情形，PIN模型也和一个有向图有
 着类似的对应关系。因此，在PIN模型下多变量互信息可以用
 PSP算法进行计算。
 
@@ -1068,26 +1068,29 @@ $C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
 \cite{huang2019information}等问题。
 下面对本工作中用到的局部信息几何的内容进行简要的介绍。
 
-KL散度可用于度量两种不同概率分布
+\newglossaryentry{pmf}{name=概率质量函数, description={Probability mass function}}
+
+K-L散度可用于度量两种不同概率分布
 之间的距离。当这两种分布比较接近时，
-局部信息几何刻画了KL散度的近似表达式。
+局部信息几何刻画了K-L散度的近似表达式。
 我们以离散分布为例，给出表示分布之间距离接近的
 形式化定义。
-\newglossaryentry{pmf}{name=概率质量函数, description={Probability mass function}}
 $P_0$ 表示一\gls{pmf} (Probability mass function)，
 其定义域为字母集$\mathcal{X}$，
 $\epsilon$表示一无穷小量。
 \begin{definition}\label{def:eps_neighborhood}
-我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，如果
+如果
 \begin{equation}\label{eq:P_neighborhood}
-P \in N^{(\epsilon)}(P_0) \iff
 \sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P_0(x)} \leq \epsilon^2
 \end{equation}
 \end{definition}
+则我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，记作$P \in N^{(\epsilon)}(P_0)$。
 式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
 \sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式，其中 $\phi(x)$
 叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
-对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，我们有
+对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，
+记它们对应的特征函数分别为$\phi_1, \phi_2$，
+则我们有
 \begin{equation}\label{eq:approx:ig}
 D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
 \end{equation}
@@ -1119,7 +1122,8 @@ $I(X;Y)$可用$\frac{1}{2} \norm{B}_{\mathrm{F}}^2$
 近似，其阶数为 $O(\epsilon^2)$。
 
 \begin{example}\label{ex:Pweak_1}
-考虑 $P_0=(X_0,Y_0)$是一个两维的随机向量，对于$x,y \in \{0,1\}$，
+设 $(X_0,Y_0)$是一个两维的随机向量，分布函数为$P_0$，
+对于$x,y \in \{0,1\}$，
 $P_0(x,y)=\frac{1}{4}$。
 不难看出$X_0,Y_0$
 是独立同分布的伯努利随机变量。
@@ -1133,7 +1137,7 @@ $\phi(x,y) = \frac{(-1)^{x+y}}{2}$
 式\eqref{eq:approx:ig}的结论。
 此外，根据定义 \ref{def:weak_indepedent} 
 我们可以验证$X$与$Y$是弱独立的。
-这里，$X\times Y$ 服从分布$\frac{1}{4}(1+\epsilon (-1)^{x+y})$。
+这里，$X\times Y$ 的分布函数是 $\frac{1}{4}(1+\epsilon (-1)^{x+y})$。
 由式\eqref{eq:Ixy}可计算出
 $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$，
 与从互信息的定义式出发计算得到的结果相同，
@@ -1188,10 +1192,12 @@ $Q^n(E) = \sum_{x: P_x \in E \cap \P_n} Q^n(x)$。
 \begin{example}\label{ex:sanov_ldp}
 若$X_1, \dots, X_n$ i.i.d. $\sim \Bern(p)$，
 对于任意正数$\epsilon$，
-我们可以用 Sanov 定理估计 $P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$ 随着$n$增大收敛到零
-的速率，其中$\bar{X}$是$X_1,\dots, X_n$的样本均值。
+我们可以用 Sanov 定理估计 $P\left(
+  \frac{1}{n} \sum_{i=1}^n X_i > \E[X_1] + \epsilon
+  \right)$ 随着$n$增大收敛到零
+的速率。
 此时集合$E=\{\Bern(q)| q>p+\epsilon\}$，
-而$Q^n(E)=P(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon)$。
+而$Q^n(E)=P(\frac{1}{n} \sum_{i=1}^n X_i > \E[X_1] + \epsilon)$。
 因此由式\eqref{eq:limit_sanov}可得
 $\lim_{n\to \infty} \frac{1}{n} \log Q^n(E)=-D(\Bern(p+\epsilon)||\Bern(p))$。
 \end{example}
@@ -1218,7 +1224,7 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$。
 为方便描述$\Lambda^*(s)$和$\Lambda(s)$的关系，
 我们引入凸共轭函数的概念。
 \begin{definition}\label{def:convex_conjugate}
-  对于定义在$\R$ 上的光滑函数 $\Lambda(s)$，
+  对于 $\R$ 上的光滑函数 $\Lambda(s)$，
   它的凸共轭函数定义为
   $\Lambda^*(s) = \sup_{t \in \R} (st-\Lambda(t))$。
 %  $\Lambda^*(s)$ 再取一次凸共轭又得到 $\Lambda(s)$自身。    
@@ -1236,14 +1242,14 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$。
   \end{example}
 \begin{remark}
   注意到 $s^2/2=D(\mathcal{N}(s, 1) || \mathcal{N}(0,1))$。
-  从某种意义上说，速率函数是KL散度的推广。
+  从某种意义上说，速率函数是K-L散度的推广。
 \end{remark}
 \subsection{雷尼散度与切尔诺夫信息}
 雷尼散度\cite{renyi1961measures}通常由雷尼熵导出，但结合我们研究的问题，
 在本节中我们通过假设检验问题中的切尔诺夫信息导出我们需要的雷尼散度的形式。
 
 在假设检验的问题中，我们要确定 i.i.d. 采样的样本
-$X_1, \dots, X_n$ 服从
+$X_1, \dots, X_n\sim Q$ 服从
 $P_1$ 还是 $P_2$ 分布。为此，考虑两个假设：
 $H_1: Q=P_1$ 和 $H_2: Q=P_2$。
 决策变量$\widehat{H}$ 的值域为 $\{P_1, P_2\}$。
@@ -1265,7 +1271,7 @@ $P_e^{(n)}$ 和决策变量$\widehat{H}$的选取有关。
 $D^*$的数学定义为：
 \begin{equation}
  D^* = \lim_{n\to \infty} -\frac{1}{n} \min_{\widehat{H}}
- P^{(n)}_e
+ \log P^{(n)}_e
 \end{equation}
 关于 $D^*$ 我们有如下定理：
 \begin{theorem}[\inlinecite{cover1999elements}中定理11.9.1]
@@ -1278,7 +1284,7 @@ $D^*$的数学定义为：
   而 $P_{\lambda}$ 定义为
   \begin{equation}\label{eq:P_lambda_x}
     P_{\lambda}(x) = \frac{P^{1-\lambda}_1 (x) P^{\lambda}_2 (x)}
-    {\sum_{a \in \mathcal{X}} P^{1-\lambda}_1 (a) P^{\lambda}_2 (a)}
+    {\sum_{x' \in \mathcal{X}} P^{1-\lambda}_1 (x') P^{\lambda}_2 (x')}
   \end{equation}
   $\lambda^*$ 的取值使得  \eqref{eq:D_star_lambda_star} 式成立。
 \end{theorem}
@@ -1305,7 +1311,7 @@ $D^*$的数学定义为：
 由式 \eqref{eq:C_P_1_P_2_another}有
 \begin{align*}
   C(P_1 \times P_2||P_2 \times P_1) 
-  = -\min_{\lambda \in [0,1]}
+  = -\min_{0\leq \lambda \leq 1}
   \left(\log \sum_{x\in \mathcal{X}}
   P_1^{1-\lambda}(x) P_2^{\lambda}(x) 
   +\log \sum_{y\in \mathcal{X}}
@@ -1321,7 +1327,7 @@ $D^*$的数学定义为：
 该目标函数在$\lambda=\frac{1}{2}$
 处一阶导数为零而二阶导数为正，因此最小值
 在$\lambda=\frac{1}{2}$取到。该最小值
-即为阶数为$\frac{1}{2}$的\gls{renyi_divergence}。
+即为阶数为$\frac{1}{2}$的\gls{renyi_divergence}，
 \newglossaryentry{renyi_divergence}{name=雷尼散度, description={Rényi divergence}}
 记为：
 \begin{equation}\label{eq:renyi_divergence}
@@ -1349,6 +1355,6 @@ $D^*$的数学定义为：
 \end{equation}
 
 %\subsection{小节}
-以上介绍的三种度量都可以看做KL散度的某种推广，在实际使用中根据所研究
+以上介绍的三种度量都可以看做K-L散度的某种推广，在实际使用中根据所研究
 的问题选取较为方便的度量形式更易获得有启发性的结论，
 这一点我们将在后面的章节进行具体阐示。
