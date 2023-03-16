@@ -346,7 +346,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 	(A^0_r - A^s_r) + \gamma\frac{\log n}{n}
 	\end{equation}
 	其中 $A^s_r$ 定义成
-	$A^s_r := |\{j \in [n]\backslash \{r\}: \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
+	$A^s_r := |\{j \in [n]\backslash \{r\} | \{j, r\} \in E(G), X_j = \omega^s \cdot X_r \}|$。
 	因为$G$中各边的存在与否是独立的，
 	对于 $s\neq 0$
 	我们有 $A^s_r \sim \Binom \left(
@@ -380,7 +380,7 @@ D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\si
 由式\eqref{eq:Pratio} 可得
 $P_{\sigma | G}(\sigma = \bar{\sigma}')<P_{\sigma | G}(\sigma = \bar{\sigma})$。
 粗略而言， 如果
-$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
+$ \sum_{\Dist(\bar{\sigma}', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 收敛到零，
 我们可以预期，与$S_k(X)$不同的所有其他状态的概率收敛到零，
 即$P_{\sigma}(S_k(X))$趋于1。
@@ -391,7 +391,7 @@ $ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 此种分析展示了证明定理 \ref{thm:phase_transition} 的
 主要思路。应用这一思路，由式
 \eqref{eq:expect_A_r_0_s}，
-当$n$充分大时，$ \sum_{\Dist(\sigma', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
+当$n$充分大时，$ \sum_{\Dist(\bar{\sigma}', X)=1}\exp(-\beta(H(\bar{\sigma}') - H(X))) $
 的数学期望为 $n^{g(\beta)}$，
 通过讨论$g(\beta)$的正负可以部分说明
 定理 \ref{thm:phase_transition} 中的表述。

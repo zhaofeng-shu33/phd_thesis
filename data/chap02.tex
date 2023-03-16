@@ -462,7 +462,7 @@ $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
 \begin{equation}\label{eq:minimum_k_cut}
   \min_{x\in W^n} \sum_{ (i,j) \in E} (1-\delta(x_i, x_j))
 \end{equation}
-这里，示性函数 $\delta(x,y)$ 定义为：
+这里，函数 $\delta(x,y)$ 定义为：
 \glsdesc{not:deltaxy}。
 \newglossaryentry{not:deltaxy}
 {
@@ -1031,7 +1031,7 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
   \eqref{eq:entropy_expression}式，
   $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = H(X_a)
   +H(X_b)$。我们可以将上面的计算用图 \ref{fig:example_directed} 
-  进行对应，即把$Z_i$对应到第$i$的节点，
+  进行对应，即把$Z_i$对应到第$i$个节点，
   $Z_i$与$Z_j$之间的互信息对应到第$i$和第$j$个节点之间
   边的权值，而K-L散度即为不同的类别之间边的权值之和。
 \end{example}
@@ -1043,24 +1043,24 @@ PSP算法进行计算。
 基于多变量互信息可以对随机变量进行聚类，聚类簇
 定义为
 \begin{align}
-  C(Z_V) &:= \bigcup_{\gamma \in \R} C_{\gamma}(Z_V)
+  \mathcal{C}(Z_V) &:= \bigcup_{\gamma \in \R} \mathcal{C}_{\gamma}(Z_V)
   \label{eq:czv}\\
-  \textrm{其中 } C_{\gamma}(Z_V) &:= \textrm{maximal}
-  \{ B \subseteq V \big\vert |B|>1, I(Z_B) > \gamma  \} 
+  \textrm{其中 } \mathcal{C}_{\gamma}(Z_V) &:= \textrm{maximal}
+  \{ C \subseteq V \big\vert |C|>1, I(Z_C) > \gamma  \} 
 \end{align}
 上式中 maximal 表示在包含关系下最大的集合。
 理论分析表明，基于定义式\eqref{eq:czv} 可以得到和
 式\eqref{eq:PSP_structure}类似的层次聚类结果。
 即存在一系列的临界值$\lambda_1 < \dots < \lambda_k$和划分
 $\P_k \preceq \dots \preceq \P_0$，使得
-$C(Z_V) = \bigcup_{i=1}^{k} C_{\lambda_i}(Z_V)$
-且$C_{\lambda_i}(Z_V) = \P_i$。
+$\mathcal{C}(Z_V) = \bigcup_{i=1}^{k} \mathcal{C}_{\lambda_i}(Z_V)$
+且$\mathcal{C}_{\lambda_i}(Z_V) = \P_i$。
 
 最后，我们再介绍一个多变量互信息的性质，它在我们后面研究异常值检测问题中
 用到。这个性质给出了最大的临界值 $\lambda_k$
 的多变量互信息的表达式\cite{agg_ic}：
 \begin{equation}\label{eq:largest_threshold}
-\lambda_k = \max_{A\subseteq V} I(Z_A)
+\lambda_k = \max_{C\subseteq V} I(Z_C)
 \end{equation}
 
 \subsection{局部信息几何}\label{sec:local_geometry}
