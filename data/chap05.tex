@@ -135,7 +135,8 @@ $\lceil \log n \rceil $ 的整数倍，同时
 而 $P_{\lambda}$ 类似式\eqref{eq:P_lambda_x}，为
 \begin{equation}\label{eq:P_lambda_0_1}
     P_{\lambda}(x) = \frac{P_0^{1-\lambda}(x) P_1^{\lambda} (x)}
-    {\sum_{x \in \mathcal{X}}P_0^{1-\lambda}(x) P_1^{\lambda} (x)}        
+    {\sum_{x' \in \mathcal{X}}P_0^{1-\lambda}(x') 
+    P_1^{\lambda} (x')}        
 \end{equation}
 
 \end{lemma}
@@ -160,7 +161,7 @@ $\lceil \log n \rceil $ 的整数倍，同时
     + d-c^{1-\lambda}d^{\lambda}$
 \end{enumerate}
 \end{lemma}
-上面的第2、3条性质可由两个泊松分布的KL散度
+上面的第2、3条性质可由两个泊松分布的K-L散度
 公式导出。
 \begin{proof}[引理 \ref{lem:I_plus_expression} 的证明]
 由 切尔诺夫信息的定义式 \eqref{eq:D_star_lambda_star} 
@@ -395,22 +396,22 @@ $m$ 和 $n$ 量阶相同。
 极大化 关于
 $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化问题
 \begin{align}
-    \max_{v}\  & h^T v + \frac{1}{4}v^T B v \notag \\
-    \textrm{s.t. }\, & \mathbf{1}_n^T v = 0 \text{ 且 } v_i \in \{\pm 1 \}
+    \max_{v}\  & h^{\mathrm{T}} v + \frac{1}{4}v^{\mathrm{T}} B v \notag \\
+    \textrm{s.t. }\, & \mathbf{1}_n^{\mathrm{T}} v = 0 \text{ 且 } v_i \in \{\pm 1 \}
     \label{eq:matrix_mle}
 \end{align}
 其中 $h$ 是 $n$ 长的向量，第 $i$ 个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
 而  $n\times n $ 的矩阵 $B$ 在 式\eqref{eq:def_B_sdp} 中定义。
 
 令 $x^*$ 是 \eqref{eq:matrix_mle} 的最优值，
-且 $V^*=(1,x^*)(1,x^*)^T$， 
+且 $V^*=(1,x^*)(1,x^*)^{\mathrm{T}}$， 
 其中 $(1,x^*)$ 是一个
 将 $1$ 和 $x^*$ 连接起来的
 $(n+1)$ 维的向量。
 	则 式\eqref{eq:matrix_mle} 中目标函数的
     最优值等于 $\frac{1}{2} \langle \widetilde{B}, V^* \rangle$, 其中
 	\begin{equation}\label{eq:B_lambda_def}
-		\widetilde{B} = \begin{pmatrix} 0 & h^T  \\ h  & \frac{1}{2}B \end{pmatrix} 
+		\widetilde{B} = \begin{pmatrix} 0 & h^{\mathrm{T}}  \\ h  & \frac{1}{2}B \end{pmatrix} 
 	\end{equation}
 	是一个$(n+1)\times(n+1)$的矩阵。我们将证明 $V^*$ 是如下问题的唯一最优解：
 	\begin{align}
@@ -430,7 +431,7 @@ $(n+1)$ 维的向量。
         $x^*$ 是真实的标签向量。
 		若 $I_+ > 1$, 则
         $\lim_{n\to\infty} P(\hat{V}=V^*)=1$，其中
-		$V^*=(1,x^*)(1,x^*)^T$。
+		$V^*=(1,x^*)(1,x^*)^{\mathrm{T}}$。
 	\end{theorem}
     该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现社团结构的精确恢复。
 

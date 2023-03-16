@@ -626,13 +626,13 @@ $$
 $$
 取 $h_i = \frac{1}{\log a/b}\sum_{j=1}^m \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}$
 并
-将上式乘以2再减去常数 $\frac{1}{2}v^T(J_n-I_n)v$ 可得
+将上式乘以2再减去常数 $\frac{1}{2}v^{\mathrm{T}}(J_n-I_n)v$ 可得
 $$
 2\sum_{i=1}^n h_iv_i + \sum_{(i,j)\in E} v_i v_j - (2\kappa+1) \sum_{(i,j)\not\in E} v_i v_j
 $$
 
 定义 矩阵 $B$ 为 \eqref{eq:def_B_sdp} 的形式，则
-优化问题 化为$2\max h^T v + \frac{1}{4}v^T B v$ (忽略 $\kappa=o(1)$)，
+优化问题 化为$2\max h^{\mathrm{T}} v + \frac{1}{4}v^{\mathrm{T}} B v$ (忽略 $\kappa=o(1)$)，
 即为式\eqref{eq:matrix_mle}。
 
 下述引理是
@@ -686,40 +686,40 @@ $\lambda_i$ 是只出现在约束条件中的优化变量。
 也即
 前一半和后一半的标签分别是  $1$ 和 $-1$。
 与文献 \inlinecite{abbe2015exact} 中采用的方法类似，
-$(1,g)(1,g)^T$ 是 \eqref{eq:sdp} 的唯一最优解
+$(1,g)(1,g)^{\mathrm{T}}$ 是 \eqref{eq:sdp} 的唯一最优解
  被如下条件所保证：
 \begin{enumerate}
-    \item[(a)] $(1,g)(1,g)^T$ 是 原问题 \eqref{eq:sdp} 的可行解。
+    \item[(a)] $(1,g)(1,g)^{\mathrm{T}}$ 是 原问题 \eqref{eq:sdp} 的可行解。
     \item[(b)] 存在 \eqref{eq:dual} 的可行解 $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$。
     \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})(1,g)=0$，即$(1,g)$是矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 特征值为0对应的特征向量。
     \item[(d)]  矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{B})$ 第二小的特征值 大于零。 
 \end{enumerate}
 由对偶互补条件，可知(a-d) 保证了 
-$\sum_{i=1}^{n+1} a_i=\langle(1,g)(1,g)^T,\widetilde{B} \rangle$，
+$\sum_{i=1}^{n+1} a_i=\langle(1,g)(1,g)^{\mathrm{T}},\widetilde{B} \rangle$，
 即原问题和对偶问题最优值相等。
 
-首先直接将$(1,g)(1,g)^T$代入验证可知条件 (a) 满足。
+首先直接将$(1,g)(1,g)^{\mathrm{T}}$代入验证可知条件 (a) 满足。
 下面我们构造  $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$  满足条件 (c)。
-令 $\mu=\frac{1}{n}\mathbf{1}_n^T h$ 且
+令 $\mu=\frac{1}{n}\mathbf{1}_n^{\mathrm{T}} h$ 且
 $\lambda = -\frac{\mu}{n}$。 先以如下方式取定 $(\lambda_1,\ldots,\lambda_{n+1})$
 $$
 \lambda_1=\mu+\lambda, \text{  }\lambda_{i+1}=g_i\lambda + \lambda,~i\in\{1,\ldots,n\}
 $$
 则根据 条件 (c) 解出 $(a_1, \dots, a_{n+1})$ 为
 \begin{align}
-    a_1 &= h^T g \nonumber\\
-    a_{i+1} & = (h_i -\lambda)g_i  + \frac{1}{2}\diag\{Bgg^T\}_i, i = 1, \dots, n
+    a_1 &= h^{\mathrm{T}} g \nonumber\\
+    a_{i+1} & = (h_i -\lambda)g_i  + \frac{1}{2}\diag\{Bgg^{\mathrm{T}}\}_i, i = 1, \dots, n
 \end{align}
 接下来只需证明
 \begin{align}
     &\diag(\{a_1, \dots, a_{n+1}\}) + \Xi - \widetilde{B} \nonumber\\
-    =& \begin{pmatrix} h^T g & -h^T +(\mu + \lambda)\mathbf{1}_n^T \\
+    =& \begin{pmatrix} h^{\mathrm{T}} g & -h^{\mathrm{T}} +(\mu + \lambda)\mathbf{1}_n^{\mathrm{T}} \\
         -h+(\mu + \lambda )\mathbf{1}_n & \Xi_n \end{pmatrix}
     \succeq 0
 \end{align}
 其中
 \begin{align}\label{eq:Xi_n}
-    \Xi_n =\diag(hg^T + Agg^T -\lambda \mathbf{1}_ng^T)
+    \Xi_n =\diag(hg^{\mathrm{T}} + Agg^{\mathrm{T}} -\lambda \mathbf{1}_ng^{\mathrm{T}})
     + \left(\frac{1}{2} +2\lambda \right)
     J_n  - A + 2\lambda \Xi'
 \end{align}
@@ -736,47 +736,47 @@ description={Cauchy's interlacing theorem}}
 条件 (d) 成立，
 从而完成证明。
 
-我们只需说明 $x^T \Xi_n x>0$ 对 任意 满足 $\norm{x}=1$ 的 $x \in \mathbb{R}^n$ 成立。
+我们只需说明 $x^{\mathrm{T}} \Xi_n x>0$ 对 任意 满足 $\norm{x}=1$ 的 $x \in \mathbb{R}^n$ 成立。
 我们可以将 给定的 $x$ 分解成 $x=\frac{\beta}{\sqrt{n}} g
-+ \sqrt{1-\beta^2} g^{\perp}$， 其中 $g^Tg^{\perp}=0, \beta \in [0,1]$，
++ \sqrt{1-\beta^2} g^{\perp}$， 其中 $g^{\mathrm{T}}g^{\perp}=0, \beta \in [0,1]$，
 且 $\norm{g^{\perp}}=1$。则我们有 
 \begin{align}\label{eq:xax}
-    x^T \Xi_n x = \frac{\beta^2}{n} g^T \Xi_n g  
-    +		\frac{\beta}{\sqrt{n}}\sqrt{1-\beta^2} g^T \Xi_n g^{\perp}
+    x^{\mathrm{T}} \Xi_n x = \frac{\beta^2}{n} g^{\mathrm{T}} \Xi_n g  
+    +		\frac{\beta}{\sqrt{n}}\sqrt{1-\beta^2} g^{\mathrm{T}} \Xi_n g^{\perp}
     +
-    (1-\beta^2)(g^{\perp})^T \Xi_n g^{\perp}
+    (1-\beta^2)(g^{\perp})^{\mathrm{T}} \Xi_n g^{\perp}
 \end{align}
 接下来我们考察 式\eqref{eq:xax} 右端3项
 的下界。
 对于第一项，我们有
 \begin{align*}
-    g^T \Xi_n g = g^T(h -\lambda \mathbf{1}_n)   = g^T h
+    g^{\mathrm{T}} \Xi_n g = g^{\mathrm{T}}(h -\lambda \mathbf{1}_n)   = g^{\mathrm{T}} h
 \end{align*}
 因为 $\sum_{y \in \mathcal{Y}} \sqrt{P_0(y)P_1(y)} < 1$，
 由 切尔诺夫不等式， 
-$P(g^T h < 0) \leq (\sum_{y \in \mathcal{Y}} \sqrt{P_0(y)P_1(y)})^{mn}$
+$P(g^{\mathrm{T}} h < 0) \leq (\sum_{y \in \mathcal{Y}} \sqrt{P_0(y)P_1(y)})^{mn}$
 随 $n$ 的增大指数衰减。
-因此，以接近1的概率，第一项 $g^T \Xi_n g$ 为正。
+因此，以接近1的概率，第一项 $g^{\mathrm{T}} \Xi_n g$ 为正。
 
 对于第二项，令  $\tilde{h}=\Xi_n g
 =(n-1)\lambda\mathbf{1}_n+h$，则
-$g^T \Xi_n g^{\perp} = \tilde{h}^T g^{\perp} \geq -\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$，
-其中 模长 $\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}$ 满足
+$g^{\mathrm{T}} \Xi_n g^{\perp} = \tilde{h}^{\mathrm{T}} g^{\perp} \geq -\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^{\mathrm{T}}g)g}$，
+其中 模长 $\norm{\tilde{h}-\frac{1}{n}(\tilde{h}^{\mathrm{T}}g)g}$ 满足
 \begin{align*}
-    \norm{\tilde{h}-\frac{1}{n}(\tilde{h}^Tg)g}^2
-    =\norm{\tilde{h}}^2 - \frac{1}{n}(\tilde{h}^Tg)^2
+    \norm{\tilde{h}-\frac{1}{n}(\tilde{h}^{\mathrm{T}}g)g}^2
+    =\norm{\tilde{h}}^2 - \frac{1}{n}(\tilde{h}^{\mathrm{T}}g)^2
 \end{align*}
 令 $\hat{g}_1 = \frac{1}{2}(g + \mathbf{1}_n)$ 且
 $\hat{g}_2 = \frac{1}{2}(-g +\mathbf{1}_n)$。
-由 $\tilde{h}^T\mathbf{1}_n=\mu$，我们有
+由 $\tilde{h}^{\mathrm{T}}\mathbf{1}_n=\mu$，我们有
 \begin{align*}
-    \frac{\norm{\tilde{h}}^2}{n} - \left(\frac{1}{n}\tilde{h}^Tg \right)^2
-    &=\frac{\norm{\tilde{h}}^2}{n} - 2\frac{(\tilde{h}^T \hat{g}_1)^2}{n^2} - 2\frac{(\tilde{h}^T \hat{g}_2)^2}{n^2} + \frac{(\tilde{h}^T\mathbf{1}_n)^2}{n^2} \\
+    \frac{\norm{\tilde{h}}^2}{n} - \left(\frac{1}{n}\tilde{h}^{\mathrm{T}}g \right)^2
+    &=\frac{\norm{\tilde{h}}^2}{n} - 2\frac{(\tilde{h}^{\mathrm{T}} \hat{g}_1)^2}{n^2} - 2\frac{(\tilde{h}^{\mathrm{T}} \hat{g}_2)^2}{n^2} + \frac{(\tilde{h}^{\mathrm{T}}\mathbf{1}_n)^2}{n^2} \\
     &=2\frac{ \sum_{i<j,i,j\in S_1} (\tilde{h}_i - \tilde{h}_j)^2 + \sum_{i<j,i,j\in S_2} (\tilde{h}_i - \tilde{h}_j)^2 }{n^2}+ \frac{\mu^2}{n^2}\\
     & = I_1 + I_2 + \frac{\mu^2}{n^2}
 \end{align*}
 其中 对于 $j\in\{1,2\}$，
-$I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^T \hat{g}_j)^2}{n^2}$， 
+$I_j=\frac{\sum_{i\in S_j} h_i^2}{n} - 2\frac{(h^{\mathrm{T}} \hat{g}_j)^2}{n^2}$， 
 $S_1$ 和 $S_2$ 分别表示标签为 1 和 -1 的节点集合。
 对于 $i\in S_j$ 和 $j\in\{1,2\}$
 记 $\mathbb{E}[h_i]=m D_j, \Var[h_i]=m \bar{D}_j, 
@@ -788,7 +788,7 @@ $D_j,\bar{D}_j, \bar{C}_j,j\in\{1,2\}$ 是常数。
 \begin{align*}
     P\left(\Big| \frac{\sum_{i\in S_j} h_i^2}{n} - \frac{1}{2}(m \bar{D}_j + m^2D_j^2) \Big| \geq \log n \right)
     & \leq \frac{\bar{C}_j m^4}{2n\log^2 n} \\
-    P\left(\Big| \frac{h^T \hat{g}_j}{n} - \frac{m}{2}D_j\Big| \geq \log^{-1} n \right)
+    P\left(\Big| \frac{h^{\mathrm{T}} \hat{g}_j}{n} - \frac{m}{2}D_j\Big| \geq \log^{-1} n \right)
     & \leq \frac{\bar{D}_j m \log^{2} n}{2n}
 \end{align*}
 因此，对于 $j\in\{1,2\}$ 下式以概率 $1-n^{-1-o(1)}$ 成立。
@@ -797,26 +797,26 @@ $D_j,\bar{D}_j, \bar{C}_j,j\in\{1,2\}$ 是常数。
 \end{align*}
 从而我们得到式\eqref{eq:xax}第二项的一个下界
 $$
-\frac{1}{\sqrt{n}} g^T \Xi_n g^{\perp} \geq -\sqrt{\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^Tg)^2} = O(\sqrt{\log n})
+\frac{1}{\sqrt{n}} g^{\mathrm{T}} \Xi_n g^{\perp} \geq -\sqrt{\frac{\norm{\tilde{h}}^2}{n} - (\frac{1}{n}\tilde{h}^{\mathrm{T}}g)^2} = O(\sqrt{\log n})
 $$
-对于最后一项 $(g^{\perp})^T \Xi_n g^{\perp}$，
-由 式\eqref{eq:Xi_n} 和 $(g^{\perp})^Tg=0$，我们有
+对于最后一项 $(g^{\perp})^{\mathrm{T}} \Xi_n g^{\perp}$，
+由 式\eqref{eq:Xi_n} 和 $(g^{\perp})^{\mathrm{T}}g=0$，我们有
 \begin{align*}
-    (g^{\perp})^T \Xi_n g^{\perp} 
-    =& (g^{\perp})^T \diag( -\lambda \mathbf{1}_ng^T+hg^T + Agg^T) g^{\perp} + p \\
-    +& \frac{1}{2}(1-p-q+2\lambda)(g^{\perp})^TJ_n g^{\perp}
-    -(g^{\perp})^T(A-\E[A])g^{\perp},
+    (g^{\perp})^{\mathrm{T}} \Xi_n g^{\perp} 
+    =& (g^{\perp})^{\mathrm{T}} \diag( -\lambda \mathbf{1}_ng^{\mathrm{T}}+hg^{\mathrm{T}} + Agg^{\mathrm{T}}) g^{\perp} + p \\
+    +& \frac{1}{2}(1-p-q+2\lambda)(g^{\perp})^{\mathrm{T}}J_n g^{\perp}
+    -(g^{\perp})^{\mathrm{T}}(A-\E[A])g^{\perp},
 \end{align*}
-在推导上式中我们用到了 $\E[A] = \frac{p-q}{2}gg^T + \frac{p+q}{2}J_n - pI_n$。
+在推导上式中我们用到了 $\E[A] = \frac{p-q}{2}gg^{\mathrm{T}} + \frac{p+q}{2}J_n - pI_n$。
 注意到 $p,q,$ 以及 $\lambda$ 都是 $o(1)$ 并且
-$(g^{\perp})^TJ_n g^{\perp}\ge 0$。
+$(g^{\perp})^{\mathrm{T}}J_n g^{\perp}\ge 0$。
 由 文献\inlinecite{lei2015consistency} 中的定理 5.2，
 以概率 $1-n^{-r}$， 存在
 常数 $r$ 和 $c$，使得不等式 $\lambda_{\max}(A-\mathbb{E}[A]) \leq c\sqrt{\log n}$
 成立。这里$\lambda_{\max}$ 表示矩阵的最大特征值。
 因此，我们有
 \begin{align}\label{eq:lastterm}
-    (g^{\perp})^T \Xi_n g^{\perp} \geq \min_i\{(-\lambda + h_i) g_i+\lambda + g_i (Ag)_i \} - c \sqrt{\log n}
+    (g^{\perp})^{\mathrm{T}} \Xi_n g^{\perp} \geq \min_i\{(-\lambda + h_i) g_i+\lambda + g_i (Ag)_i \} - c \sqrt{\log n}
 \end{align}
 % The error probability is then bounded by
 % \begin{align*}
@@ -848,6 +848,6 @@ $n^{-I_2 + o(1)}$。
 由引理 \ref{lem:p0p12}，$I_1=I_2=I_+>1$。
 由布尔不等式， 存在 $i$ 使得 式 \eqref{eq:nodei} 不成立的概率 不超过 $n^{-I_+ + 1 + o(1)}$。
 由条件 $I_+>1$，$n^{-I_+ + 1 + o(1)}$ 随$n$的增大 衰减到 $0$。
-因此，以接近1的概率 $(g^{\perp})^T \Xi_n g^{\perp}\ge 0$，从而证得定理 \ref{thm:sdp}。 
+因此，以接近1的概率 $(g^{\perp})^{\mathrm{T}} \Xi_n g^{\perp}\ge 0$，从而证得定理 \ref{thm:sdp}。 
 
 
