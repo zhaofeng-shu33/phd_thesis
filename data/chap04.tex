@@ -264,23 +264,24 @@ $\epsilon$ 并且当 $n \to \infty$，
 定理 \ref{thm:phase_transition} 也
 可以从$\sigma$的边缘分布的角度理解。
 玻茨模型取到某个特定状态$\bar{\sigma}$的概率为
- $\sigma: P_{\sigma}(\sigma =\bar{\sigma})
-=\sum_{\bar{G} \in \cG_n}P_G(\bar{G})P_{\sigma |\bar{G}}(\sigma=\bar{\sigma})$。
-我们用符号 $D(\sigma, \sigma')$ 表示 $\sigma$ 相比于它的所有置换其本身离 $\sigma'$ 最近
-这个事件。
-也即
+ $P_{\sigma}(\sigma =\bar{\sigma})
+=\sum_{\bar{G} \in \cG_n}P_G(\bar{G})
+P_{\sigma |\bar{G}}(\sigma=\bar{\sigma})$。
+下面考虑$\sigma$离$X$较近时$\sigma=X$的概率。
+为此，定义函数
 \begin{equation}
 	\label{eq:D_sigma_sigma_prime}
-D(\sigma, \sigma') := \{  \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\sigma), \sigma')  \}
+\Phi(\sigma, \sigma') := \mathds{1} [ \Dist(\sigma, \sigma')  = \min_{f \in S_k} \Dist(f(\sigma), \sigma')  \}]
 \end{equation}
+则  $\Phi(\sigma, \sigma')=1$ 时， $\sigma$ 相比于它的所有置换其本身离 $\sigma'$ 最近。
 
-则 定理 \ref{thm:phase_transition} 对边缘分布 $P_{\sigma}$ 蕴含着如下的论断
+由定理 \ref{thm:phase_transition}， 对边缘分布 $P_{\sigma}$ 我们有如下论断
 ：
 \begin{corollary}\label{cor:phase4}
 假设 $\gamma > b$， 取决于 $\beta$ 的取值我们有
 \begin{enumerate}
-	\item 当 $\beta > \beta^*$时，$P_{\sigma}(\sigma = X | D(\sigma, X))  = 1-o(1)$；
-	\item 当 $\beta < \beta^*$时，$P_{\sigma}(\sigma = X | D(\sigma, X))  = o(1)$。
+	\item 当 $\beta > \beta^*$时，$P_{\sigma}(\sigma = X | \Phi(\sigma, X)=1)  = 1-o(1)$；
+	\item 当 $\beta < \beta^*$时，$P_{\sigma}(\sigma = X | \Phi(\sigma, X)=1)  = o(1)$。
 \end{enumerate}
 \end{corollary}
 
