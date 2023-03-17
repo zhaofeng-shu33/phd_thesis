@@ -66,7 +66,7 @@ $T_2$进行计数，然后通过求解下述
 \begin{theorem}\label{thm:ab12}
 当 $n$ 足够大时，
 关于方程组\eqref{eq:e_1}
-有唯一解 $(\hat{a}, \hat{b})=(x,y)$，
+有唯一解 $x=\hat{a}, y=\hat{b}$，
 \newglossaryentry{consistent_est}{name=一致估计量, description={Consistent estimator}}
 并且该解是参数$(a,b)$的\gls{consistent_est}，
 也即 $\hat{a}, \hat{b}$ 
@@ -112,9 +112,9 @@ $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
 随机块模型
 与 \ref{sec:ising} 节介绍的 玻茨模型
 复合起来可得到随机块-玻茨模型。该模型可以看成是SIBM模型的推广，
-每个节点由两状态变成了多状态。由于我们的研究重点并非
-从随机块-玻茨模型的多个样本恢复节点的原始标签，而是利用
-玻茨模型对随机块模型进行社团发现，因此我们首先给出
+每个节点由两状态变成了多状态。我们的研究重点是
+从随机块-玻茨模型生成的一个样本$\sigma$恢复节点的原始标签$X$，相当于利用
+玻茨模型对随机块模型进行社团发现。为此，我们首先给出
 在随机块模型生成的图上定义的玻茨模型：
 \begin{definition}\label{def:ising}
 	给定从$\SSBM(n,k,\A,\B)$ 中生成的随机图 $G$，
@@ -129,7 +129,7 @@ $\frac{1}{m} \sum_{i=1}^m (\hat{a}-a)^2 + (\hat{b}-b)^2$。
 	- \sum_{(i,j)\in E(G)} \delta(\bar{\sigma}_i, \bar{\sigma}_j)
 	\end{equation}
 	
-	$P_{\sigma|G}$ 中的下标表示该分布依赖于$G$，
+	$P_{\sigma|G}$ 中的下标表示节点状态$\sigma$的分布依赖于$G$，
     $Z_G(\beta, \gamma)$ 是该分布的归一化常数。
 \end{definition}
 
@@ -149,8 +149,9 @@ $\gamma$ 是没有边相连的节点间的作用力系数。
 $\frac{\log n}{n}$ 是对由于边的数量不均匀造成两种势能量阶不同的修正项。
 
 
-定义 \ref{def:ising} 实际上给出了一个估计$X$的随机算法 $\hat{X}^*$。
-这里，$\hat{X}^*$ 表示产生于玻茨模型的一个样本，
+定义\ref{def:ising}说明了 $X \leftrightarrow G \leftrightarrow \sigma$构成了马尔可夫链。
+由此我们得到一个$X$的估计量 $\hat{X}^*=\sigma$。
+这里，估计量 $\hat{X}^*$ 表示由玻茨模型生成的一个样本，
 记作$\hat{X}^* \sim \textrm{Potts}_G(\beta, \gamma)$。
 下面我们首先研究$\hat{X}^*$实现精确恢复的条件及误差上界，
 而关于如何进行玻茨模型的采样我们将在后面进行讨论。
