@@ -1077,7 +1077,7 @@ K-L散度可用于度量两种不同概率分布
 我们以离散分布为例，给出表示分布之间距离接近的
 形式化定义。
 $P_0$ 表示一\gls{pmf} (Probability mass function)，
-其定义域为字母集$\mathcal{X}$，
+其定义域为有限的字母集$\mathcal{X}$，
 $\epsilon$表示一无穷小量。
 \begin{definition}\label{def:eps_neighborhood}
 如果
@@ -1088,9 +1088,9 @@ $\epsilon$表示一无穷小量。
 则我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $\mathscr{N}^{\epsilon}(P_0)$ 内，记作$P \in \mathscr{N}^{\epsilon}(P_0)$。
 式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
 \sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式，其中 $\phi(x)$
-叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
+叫做信息向量(Information vector)，它的欧氏范数 $||\phi || $ 不超过1。
 对于两个在$P_0$的$\epsilon$邻域内的分布 $P_1, P_2$，
-记它们对应的特征函数分别为$\phi_1, \phi_2$，
+记它们对应的信息向量分别为$\phi_1, \phi_2$，
 则我们有
 \begin{equation}\label{eq:approx:ig}
 D(P_1 || P_2) = \frac{\epsilon^2}{2} ||\phi_1 - \phi_2||^2 + o(\epsilon^2)
@@ -1106,7 +1106,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内。
 在弱独立的假设下，由 $D(P_{XY}||P_XP_Y)$ 所定义的互信息$I(X;Y)$, 
 通过对式\eqref{eq:approx:ig}的化简，可以表示为：
 \begin{equation}\label{eq:Ixy}
-I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsilon^2)
+I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsilon^2),
 \textrm{ 其中 }  B(x,y)=\frac{P_{X,Y}(x,y) - P_X(x) P_Y(y)}{\sqrt{P_X(x)P_Y(y)}}
 \end{equation}
 在式\eqref{eq:Ixy}中， $\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y)$

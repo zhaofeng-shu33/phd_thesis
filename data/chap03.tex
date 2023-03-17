@@ -81,15 +81,15 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   使得
   $(X, Y)|U$的概率质量函数在 $(X, Y)$的
   $\sqrt{\epsilon}$邻域内并且
-  $X, \dots Y$关于
+  $(X, Y)$关于
   $U$的条件分布是独立的。
 \end{theorem}
-  定理 \ref{thm:weak_independence_equivalent} 的证明提供了一种生成
+  定理 \ref{thm:weak_independence_equivalent} 提供了一种生成
   满足弱独立条件的随机变量的方法。即给定均匀分布
   $U$ 在 $n! \times r$个点上取值，
   取 $Z_i|U=u$在分布$Z_i$的
   $\sqrt[n]{\epsilon}$ 邻域内，并记该条件分布对应
-  的特征函数为$\phi_{\lceil\, u/n!\, \rceil}$，则有：
+  的信息向量为$\phi_{\lceil\, u/n!\, \rceil}$，则有：
   \begin{equation}
     P(Z_j=z|U=u) = P_{Z_j}(z) + 
     (-1)^{u \,\mathrm{mod}\, n!}\sqrt{P_{Z_j(z)}}
