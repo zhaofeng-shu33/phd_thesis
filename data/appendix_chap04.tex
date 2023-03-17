@@ -7,7 +7,7 @@
   个节点， 每条边以概率 $p$ 随机生成\cite{erdHos1960evolution}。
    假设
 	$p=\A$， 边的数量
-  记为  $N_E$ 
+  为  $|E|$， 
   而图中三角形的
   数量记为  $T$。 则
   \newglossaryentry{not:converge_in_probability}
@@ -16,34 +16,34 @@
   name={$\xrightarrow{p}$},
   description={随机变量的依概率收敛}
 }
-	$\frac{N_E}{n \log n} \xrightarrow{p} \frac{a}{2}$ 且
+	$\frac{|E|}{n \log n} \xrightarrow{p} \frac{a}{2}$ 且
   $\frac{T}{\log^3 n} \xrightarrow{p} \frac{a^3}{6}$。
   这里, 符号 $\xrightarrow{p}$ 表示\glsdesc{not:converge_in_probability}。
 \end{lemma}
 \begin{proof}
 		令 $X_{ij}$ 表示
     参数 为 $p$ 的伯努利随机变量。
-     则 $N_E
+     则 $|E|
     = \sum_{i,j} X_{ij}$， $X_{ij}$ 是 i.i.d.
     的随机变量。
-	$\mathbb{E}[N_E] = \frac{n(n-1)}{2}p = \frac{(n-1)\log n}{2}a$ 
-  且  $\Var[N_E] = \frac{n(n-1)}{2} p(1-p) < a\frac{(n-1)\log n}{2}$。
+	$\mathbb{E}[|E|] = \frac{n(n-1)}{2}p = \frac{(n-1)\log n}{2}a$ 
+  且  $\Var[|E|] = \frac{n(n-1)}{2} p(1-p) < a\frac{(n-1)\log n}{2}$。
 	则由切比雪夫不等式，
 	\begin{align*}
-	P\left(\Big|\frac{N_E}{n \log n } - \frac{a}{2} \frac{n-1}{n}\Big| > \epsilon \right) & \leq
-	\frac{1}{\epsilon^2}\Var \left[\frac{N_E } {n \log n } \right] \\
+	P\left(\Big|\frac{|E|}{n \log n } - \frac{a}{2} \frac{n-1}{n}\Big| > \epsilon \right) & \leq
+	\frac{1}{\epsilon^2}\Var \left[\frac{|E| } {n \log n } \right] \\
 	& < \frac{a(n-1)}{2n^2\epsilon^2\log n}
 	\end{align*}
 	
 	对于给定的 $\epsilon$， 当 $n$ 充分大时，
   \begin{align*}
-	P \left(\left|\frac{N_E}{n \log n } - \frac{a}{2} \right| > \epsilon \right) & <
-	P \left(\left|\frac{N_E}{n \log n } - \frac{a}{2} \frac{n-1}{n}\right| > 2\epsilon \right) \\
+	P \left(\left|\frac{|E|}{n \log n } - \frac{a}{2} \right| > \epsilon \right) & <
+	P \left(\left|\frac{|E|}{n \log n } - \frac{a}{2} \frac{n-1}{n}\right| > 2\epsilon \right) \\
 	& \leq \frac{n-1}{8n^2 \epsilon^2 \log n}
 	\end{align*}
 	
 	因此， 由依概率收敛的定义
-  我们有 $\frac{N_E}{n \log n} \xrightarrow{p} \frac{a}{2}$。
+  我们有 $\frac{|E|}{n \log n} \xrightarrow{p} \frac{a}{2}$。
 	
 	令 $X_{ijk}$ 表示参数为  $p^3$ 的 伯努利 随机变量，
 	则 $T = \sum_{i,j,k} X_{ijk}$。
@@ -69,7 +69,7 @@
 	从而得到 $\frac{T}{\log^3 n} \xrightarrow{p} \frac{a^3}{6}$。
 \end{proof}
 因为每条边的生成是独立的，埃尔德什-雷尼模型中的
-$N_E$ 的收敛性
+$|E|$ 的收敛性
 可以直接拓展到
 随机块模型。
 但是对于三角形的数量$T$，因为每个三角形存在与否并不独立，事情变得棘手。
@@ -82,8 +82,8 @@ $N_E$ 的收敛性
     该顶点对应的边在 $S_2$中。
    则 $T$ 的方差为：
 \begin{align}
-\Var[T]  = \frac{n^2(n-1)}{2}pq^2 + n^2(n-1)(n-2)p^2q^3 
- + \frac{n^2(n-1)^2}{2}pq^4 - \frac{n^2(n-1)(3n-4)}{2} p^2 q^4
+\Var[T]  &= \frac{n^2(n-1)}{2}pq^2 + n^2(n-1)(n-2)p^2q^3 \notag \\
+  &\quad + \frac{n^2(n-1)^2}{2}pq^4 - \frac{n^2(n-1)(3n-4)}{2} p^2 q^4
  \label{eq:SBM_tr_counting_cross}
 \end{align}
 \end{lemma}

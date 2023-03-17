@@ -660,10 +660,10 @@ Abbe \cite{abbe2015exact} 和 Mossel
 
 下面我们介绍伊辛模型中一些常用的概念，
 如图 \ref{fig:square_lattice} 所示，
-在一个正方形网格中的格点上分布着磁偶极矩，一共有$N$个。
+在一个正方形网格中的格点上分布着磁偶极矩，一共有$n$个。
 $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
-总的磁化强度为 $M = \frac{1}{N} \sum_{i=1}^N \sigma_i$。
-理论研究时先考虑有限的正方形网格， 再取 $N\to \infty$。
+总的磁化强度为 $M = \frac{1}{n} \sum_{i=1}^n \sigma_i$。
+理论研究时先考虑有限的正方形网格， 再取 $n\to \infty$。
 由于磁偶极矩之间的磁力作用和受外场的影响，存在着磁化强度的相变现象，即
 \begin{enumerate}
 		\item $T< T_c, M>0$， 发生自发磁化。
@@ -896,7 +896,7 @@ $i$个节点的\gls{degree} (\glsdesc{degree})，$x_i$ 表示第$i$
 再转化成\gls{sdp} (\gls{acr:sdp}) 的优化问题进行求解。
 
 在 式\eqref{eq:minimum_k_cut} 中
-取 $\delta(y_i, y_j) = \frac{1+y_iy_j}{2}$，
+取 $\delta(x_i, x_j) = \frac{1+x_ix_j}{2}$，
 于是可得到如下
 的优化问题：
 \begin{align}
@@ -1024,13 +1024,13 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
   令$V=\{1,2,3\}$，$Z_1=(X_a, X_c)$，
   $Z_2=(X_a,X_b)$ 且 $Z_3=(X_b,X_c)$。
   $X_a,X_b,X_c$是独立的随机变量且它们的熵分别为：
-  $H(X_a)=H(X_b)=1, H(X_c)=5$。
-  利用联合熵的公式不难计算出$H(Z_1)=H(X_a)+H(X_c)$以及
-  $H(Z_1, Z_2) = H(X_a) + H(X_b) + H(X_c)$等。
+  $\mathcal{H}(X_a)=\mathcal{H}(X_b)=1, \mathcal{H}(X_c)=5$。
+  利用联合熵的公式不难计算出$ \mathcal{H}(Z_1)=\mathcal{H}(X_a)+\mathcal{H}(X_c)$以及
+  $\mathcal{H}(Z_1, Z_2) = \mathcal{H}(X_a) + \mathcal{H}(X_b) + \mathcal{H}(X_c)$等。
   若 $\P=\{\{1,2\}, \{3\}\}$，则根据
   \eqref{eq:entropy_expression}式，
-  $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = H(X_a)
-  +H(X_b)$。我们可以将上面的计算用图 \ref{fig:example_directed} 
+  $D(P_{Z_V}||P_{Z_1,Z_2}P_{Z_3}) = \mathcal{H}(X_a)
+  +\mathcal{H}(X_b)$。我们可以将上面的计算用图 \ref{fig:example_directed} 
   进行对应，即把$Z_i$对应到第$i$个节点，
   $Z_i$与$Z_j$之间的互信息对应到第$i$和第$j$个节点之间
   边的权值，而K-L散度即为不同的类别之间边的权值之和。
@@ -1085,7 +1085,7 @@ $\epsilon$表示一无穷小量。
 \sum_{x \in \mathcal{X}} \frac{(P(x) - P_0(x))^2}{P_0(x)} \leq \epsilon^2
 \end{equation}
 \end{definition}
-则我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $N^{(\epsilon)}(P_0)$ 内，记作$P \in N^{(\epsilon)}(P_0)$。
+则我们称 $P$ 在 $P_0$的 $\epsilon$ 邻域 $\mathscr{N}^{\epsilon}(P_0)$ 内，记作$P \in \mathscr{N}^{\epsilon}(P_0)$。
 式\eqref{eq:P_neighborhood}可以写成 $P(x) = P_0(x) + \epsilon
 \sqrt{P_0(x)} \phi(x) + o(\epsilon)$的简化形式，其中 $\phi(x)$
 叫做特征函数，它的欧氏范数 $||\phi || $ 不超过1。
@@ -1130,7 +1130,7 @@ $P_0(x,y)=\frac{1}{4}$。
 不难看出$X_0,Y_0$
 是独立同分布的伯努利随机变量。
 定义 $P(x,y)=\frac{1}{4}(1+\epsilon (-1)^{x+y})$，
-则 $P\in N^{(\epsilon)}(P_0)$，而
+则 $P\in \mathscr{N}^{\epsilon}(P_0)$，而
 $\phi(x,y) = \frac{(-1)^{x+y}}{2}$
 且有 $||\phi||=1$。
 利用 $\log(1+x) = x - \frac{1}{2}x^2 + o(x^2)$
