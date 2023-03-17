@@ -396,12 +396,12 @@ $m$ 和 $n$ 量阶相同。
 极大化 关于
 $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化问题
 \begin{align}
-    \max_{v}\  & h^{\mathrm{T}} v + \frac{1}{4}v^{\mathrm{T}} B v \notag \\
+    \max_{v}\  & h^{\mathrm{T}} v + \frac{1}{4}v^{\mathrm{T}} R v \notag \\
     \textrm{s.t. }\, & \mathbf{1}_n^{\mathrm{T}} v = 0 \text{ 且 } v_i \in \{\pm 1 \}
     \label{eq:matrix_mle}
 \end{align}
 其中 $h$ 是 $n$ 长的向量，第 $i$ 个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
-而  $n\times n $ 的矩阵 $B$ 在 式\eqref{eq:def_B_sdp} 中定义。
+而  $n\times n $ 的矩阵 $R$ 在 式\eqref{eq:def_B_sdp} 中定义。
 
 令 $x^*$ 是 \eqref{eq:matrix_mle} 的最优值，
 且 $V^*=(1,x^*)(1,x^*)^{\mathrm{T}}$， 
@@ -409,13 +409,13 @@ $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化�
 将 $1$ 和 $x^*$ 连接起来的
 $(n+1)$ 维的向量。
 	则 式\eqref{eq:matrix_mle} 中目标函数的
-    最优值等于 $\frac{1}{2} \langle \widetilde{B}, V^* \rangle$, 其中
+    最优值等于 $\frac{1}{2} \langle \widetilde{R}, V^* \rangle$, 其中
 	\begin{equation}\label{eq:B_lambda_def}
-		\widetilde{B} = \begin{pmatrix} 0 & h^{\mathrm{T}}  \\ h  & \frac{1}{2}B \end{pmatrix} 
+		\widetilde{R} = \begin{pmatrix} 0 & h^{\mathrm{T}}  \\ h  & \frac{1}{2}R \end{pmatrix} 
 	\end{equation}
 	是一个$(n+1)\times(n+1)$的矩阵。我们将证明 $V^*$ 是如下问题的唯一最优解：
 	\begin{align}
-		\max_V\ & \langle \widetilde{B}, V \rangle  \notag\\
+		\max_V\ & \langle \widetilde{R}, V \rangle  \notag\\
 		\textrm{ s.t. }\, V_{ii} &= 1, \notag\\
 		V &\succeq 0, \notag\\
 \sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in\{1,\ldots,n+1\} 
@@ -446,7 +446,7 @@ $(n+1)$ 维的向量。
 
 求解形如 式\eqref{eq:sdp} 的SDP优化问题可通过如下迭代进行，各矩阵的初始值$X^{(0)},Z^{(0)},U^{(0)}$可取为零矩阵。
 \begin{align}
-    X^{(k+1)} &= \Pi_A(Z^{(k)} - U^{(k)} + \frac{1}{\rho}B)\label{eq:admm} \\
+    X^{(k+1)} &= \Pi_A(Z^{(k)} - U^{(k)} + \frac{1}{\rho}R)\label{eq:admm} \\
     Z^{(k+1)} &= \Pi_{S_+^n}(X^{(k+1)} + U^{(k)}) \\
     U^{(k+1)} &= U^{(k)} + (X^{(k+1)} - Z^{(k+1)}) 
     \end{align}

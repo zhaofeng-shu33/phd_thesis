@@ -178,7 +178,7 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp} (\gls{
     \REQUIRE 图$G$
     \ENSURE 序列 $L=[\lambda_1, \dots, \lambda_k]$
     和 $\mathcal{Q}=[\P_0, \dots, \P_k]$
-    \STATE \textbf{L}  $\leftarrow []$
+    \STATE $L \leftarrow []$
     \STATE $\mathcal{Q}\leftarrow \{V\}, \P \leftarrow \{ \{i \} | i \in V\}$
     %\STATE $\mathbf{PSP}= [Q, P]$
     \STATE \texttt{Split}$(\mathcal{Q},\P)$
@@ -192,7 +192,7 @@ $h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp} (\gls{
      (\abs{\P} f(\mathcal{Q}) - \abs{\mathcal{Q}} f(\P))$
      \STATE\label{alg:lambda_f} $(\tilde{h}, \P') = \texttt{DT}(G,\lambda')$
      \IF{$\tilde{h} = h'$}
-       \STATE\label{algorithme:terminer} 将 $\lambda'$ 插入 $\mathbf{L}$
+       \STATE\label{algorithme:terminer} 将 $\lambda'$ 插入 $L$
      \ELSE
        \STATE 将 $P'$ 插入 $\mathcal{Q}$
        \STATE\label{algorithme:gauche} \texttt{Split}$(\mathcal{Q}, \P')$
@@ -928,7 +928,7 @@ $xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
 }
 其中 $J_n=\mathbf{1}_n\mathbf{1}_n^{\mathrm{T}}$
 是\glsdesc{not:matrix_all_one}。
-令 $B=2A + I_n - J_n$，
+令 $R=2A + I_n - J_n$，
 \newglossaryentry{not:identity_matrix}
 {
   type=notation,
@@ -937,10 +937,10 @@ $xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
 }
 $I_n$ 是\glsdesc{not:identity_matrix}，
 则
-优化的目标函数还可写成 $ \langle B, Y \rangle $，
-其中 $B$ 为
+优化的目标函数还可写成 $ \langle R, Y \rangle $，
+其中 $R$ 可进一步写成
 \begin{equation}\label{eq:def_B_sdp}
-    B_{ij} = \begin{cases}
+    R_{ij} = \begin{cases}
         1, & \text{若 $i$ 与 $j$ 有边相连}, \\
         -1,& \text{其他情况}
     \end{cases}
