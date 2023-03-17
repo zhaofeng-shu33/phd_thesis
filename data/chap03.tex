@@ -88,7 +88,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
   满足弱独立条件的随机变量的方法。即给定均匀分布
   $U$ 在 $n! \times r$个点上取值，
   取 $Z_i|U=u$在分布$Z_i$的
-  $\sqrt[n]{\epsilon}$ 邻域内，记条件分布对应
+  $\sqrt[n]{\epsilon}$ 邻域内，并记该条件分布对应
   的特征函数为$\phi_{\lceil\, u/n!\, \rceil}$，则有：
   \begin{equation}
     P(Z_j=z|U=u) = P_{Z_j}(z) + 
@@ -267,12 +267,12 @@ $G[C_i](i=1,\dots, t)$
 		\STATE \texttt{Split}($G$)
 		\FUNCTION{\texttt{Split}($G$)}
 		\STATE $w$ 是 $G$ 所有边的权值之和。
-		\STATE $\gamma' = \frac{w}{\abs{V(G)}-1}$
+		\STATE $\gamma' \gets \frac{w}{\abs{V(G)}-1}$
     其中 $V(G)$ 是 图$G$
     的节点集。
     \label{alg:gamma_apostrophe}
 		\STATE $(\tilde{h}, \P')
-    = \texttt{DT}(G, \gamma')$ 其中
+    \gets \texttt{DT}(G, \gamma')$ 其中
     $\P'$ 是在 式 \eqref{eq:hlambda} 中达到
     最小值 $h(\gamma')$的划分
     并且 $\tilde{h}$ 是对应的最小值。 \label{line:DT}
@@ -281,9 +281,9 @@ $G[C_i](i=1,\dots, t)$
     $\mathcal{T}$ 中把权值 $\gamma'$ 标记在从 $V(G)$ 出发
     到其所有子节点的边上。
 		\ELSE
-		\FOR{$S$ in $P'$ and $\abs{S}>1$}
+		\FOR{$S \in P'$ 且 $\abs{S}>1$}
 		\STATE 在聚类树
-    $\mathcal{T}$ 中构造新的节点$s=S$，
+    $\mathcal{T}$ 中构造新的节点$s$，
     并修改 $S$中元素的父亲节点 为$s$，
     而$s$的父节点为$V(G)$。
 		\STATE \texttt{Split}($G[S]$) \label{line:SplitDown}
@@ -408,16 +408,16 @@ HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
 		\STATE \texttt{Split}($G, 1$)
 		\FUNCTION{\texttt{Split}($G, s$)}
 		\STATE $w$ 是 $G$ 所有边的权值之和。
-		\STATE $\gamma' = \frac{w}{\abs{V(G)}-1}$
+		\STATE $\gamma' \gets \frac{w}{\abs{V(G)}-1}$
     其中 $V(G)$ 是 图$G$
     的节点集。
 		\STATE $(\tilde{h}, \P')
-    = \texttt{DT}(G, \gamma')$ 
+    \gets \texttt{DT}(G, \gamma')$ 
 		\IF{$\tilde{h} = - \gamma'$}
-		\STATE $W[i]=\gamma'$ for $ i \in V(G)$
-    \STATE $K[i]=s$ for $i\in V(G)$
+		\STATE $W[i] \gets \gamma'$ for $ i \in V(G)$
+    \STATE $K[i] \gets s$ for $i\in V(G)$
     \ELSE
-		\FOR{$S$ in $P'$ and $\abs{S}>1$}
+		\FOR{$S \in P'$ 且 $\abs{S}>1$}
 		\STATE \texttt{Split}($G[S], j$)，其中$j$为$S$中最小的元素。
 		\STATE $G=$ \texttt{Contract}($G, S, j$) \label{alg:contract}
     \ENDFOR 
@@ -459,13 +459,14 @@ HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
     \STATE 将 $P$ 加到 $Q$ 的头部，并将 $\gamma$ 加到 $L$ 的头部。
     \ENDWHILE
 		\FUNCTION{\texttt{Merge}($C$)}
-    \STATE $\gamma = \max_{i\in C} W[i]$
-    \STATE $D[k] = \{ j\in C | K[j] = k, W[j]=\gamma\} \cup \{k\} \cup D[k]$
+    \STATE $\gamma \gets \max_{i\in C} W[i]$
+    \STATE $D[k] \gets \{ j\in C | K[j] = k, W[j]=\gamma\} \cup \{k\} \cup D[k]$
     \FOR{$ j \in D[k]$}
-    \STATE $D[k] \leftarrow D[j] \cup D[k]$， 并从$D$中删除键值$j$。
+    \STATE $D[k] \leftarrow D[j] \cup D[k]$，
+    并从$D$中删除键值$j$。
     \ENDFOR
     \STATE $C' \leftarrow  \{j\in C | W[j]<\gamma\}$
-    \STATE $\P=\{D[k] | k \in \texttt{key}(D)\} \cup \{\{i\} | i \in [n]\backslash \cup_{k \in \texttt{key}(D)} D[k] \}$
+    \STATE $\P \gets \{D[k] | k \in \texttt{key}(D)\} \cup \{\{i\} | i \in [n]\backslash \cup_{k \in \texttt{key}(D)} D[k] \}$
     \RETURN $(\P, \gamma, C')$
 		\ENDFUNCTION
 	\end{algorithmic}

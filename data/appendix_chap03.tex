@@ -44,12 +44,13 @@
 \end{lemma}
 \begin{proof}
 	由两随机变量$\epsilon$-弱独立的定义 \ref{def:weak_indepedent}，
+  对于联合分布$X,Y|Z=z$，
   我们有
 	\begin{equation}\label{eq:pxy_eps}
 	P_{X,Y|Z=z}(x,y) = P_{X,Y}(x,y)\left(1+\epsilon \frac{\phi_z(x,y)}{\sqrt{P_{X,Y}(x,y)}}
   \right), z \in \mathcal{Z}
 	\end{equation}
-	对式\eqref{eq:pxy_eps} 关于 $y\in \mathcal{Y}$ 求和我们有
+	其中$\phi_z$是该分布的特征函数。对式\eqref{eq:pxy_eps} 关于 $y\in \mathcal{Y}$ 求和我们有
 	\begin{equation}
 	P_{X|Z=z}(x) = P_X(x)\left(1+\epsilon\frac{\tilde{\phi}_z(x)}{\sqrt{P_X(x)}} \right),
 	\textrm{ 其中 } \tilde{\phi}_z(x) = \frac{\sum_{y\in \mathcal{Y}} \sqrt{P_{X,Y}(x,y) }\phi_z(x,y)}{\sqrt{P_X(x)}}
