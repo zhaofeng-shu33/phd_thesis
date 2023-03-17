@@ -60,10 +60,10 @@
     不难验证$P(X=x, Y=y | U=u)=P(X=x | U=u)
       P(Y=y| U=u)$。此外， $(X, Y)|U=0$
       的概率质量函数 可以写成向量
-      $\frac{1}{4}[(1-\sqrt{\epsilon})^2,
+      $\frac{1}{4}\left[\left(1-\sqrt{\epsilon} \right)^2,
       1-\epsilon,
       1-\epsilon,
-      (1+\sqrt{\epsilon})^2]$的形式，它在
+      \left(1+\sqrt{\epsilon} \right)^2 \right]$的形式，它在
       表示$(X,Y)$概率质量函数 的向量
       $\frac{1}{4}[1+\epsilon, 1-\epsilon, 1-\epsilon, 1+\epsilon]$
       的 $\sqrt{\epsilon}$-邻域内。因此
@@ -75,7 +75,7 @@
 定义 \ref{def:weak_indepedent} 的拓展。
 \begin{theorem}\label{thm:weak_independence_equivalent}
   如果 对于任何 $x \in \mathcal{X}$，
-$Y$关于$X$的条件概率质量函数
+$Y$关于$X=x$的条件概率质量函数
 $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
 一个随机变量 $U$
   使得
@@ -107,7 +107,7 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
 \begin{equation}\label{eq:PXV}
 D\left(P_{Z_V} \Big|\Big| \prod_{C\in \P} P_{Z_C} \right)
 = {1 \over 2}
-\sum_{\substack{(i,j) \not\in C\\ C\in \P}} \norm{B_{ij}}_{\mathrm{F}}^2 + o(\epsilon^2)
+\sum_{C\in \P}\sum_{(i,j) \not\in C} \norm{B_{ij}}_{\mathrm{F}}^2 + o(\epsilon^2)
 \end{equation}
 其中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
 之间的典型相关矩阵（参见式\eqref{eq:Ixy}）。
@@ -151,7 +151,7 @@ I(Z_V) = \lambda_1 (1 + o(\epsilon))
 降低算法的时间和空间复杂度。
 \subsection{聚类树}
 
-\citet{chan2020agglomerative} 提到了有两种生成
+Chan等\cite{chan2020agglomerative} 提到了有两种生成
 式\eqref{eq:czv}定义的聚类簇的方法，其相互等价，
 但其描述过于复杂。
 本小节通过引入聚类树的结构
@@ -230,12 +230,14 @@ $I(Z_V)=0.9$。
 
 在给出改进算法的描述之前，我们先定义两个对图的操作：
 图限制(Restriction)和图收缩(Contraction)。
-我们称把图$G$限制到集合$C\subseteq V$是指
-考虑节点集为$C$而边的集合为$\{(i,j) \in E | i,j \in C \}$
-的子图，
-记为$G[C]$。给定$V$的划分 $\P=(C_1, \dots, C_k)$，
-图根据$\P$收缩得到一个新的图，其节点集为
-$[k]$，其中第$i$个节点对应$C_i$。边的集合为$\{(i,j) \in [k] | w(C_i, C_j) > 0 \}$。
+我们称把图$G$限制到集合$C\subseteq V$后得到$G$的一个子图，
+其节点集为$C$而边的集合为$\{(i,j) \in E | i,j \in C \}$，
+记为$G[C]$。
+给定$V$的划分 $\P=\{C_1, \dots, C_k\}$，
+图$G$根据$\P$收缩得到一个新的图，
+其节点集为
+$[k]$，其中第$i$个节点对应$C_i$。边的集合为
+$\{(i,j) \in [k] | w(C_i, C_j) \neq 0 \}$。
 其中$w(C_i, C_j)=\sum_{r \in C_i, s \in C_j} w_{rs} $
 也是新图节点$i$和 $j$之间的权重。我们把收缩后的图记为
 $G[\P]$。
@@ -258,7 +260,7 @@ $G[C_i](i=1,\dots, t)$
 	\caption{改进的求解主划分序列的算法(HPSP算法)}\label{alg:psp_i_simplified}
 	\begin{algorithmic}[1]
 		\REQUIRE 有向图 $G(V, E)$; 边的权值函数 $w(e)$，其中 $e\in E$
-		\ENSURE 聚类树 $\mathcal{T}(K, E)$ 其中 $K \subseteq 2^{V}$ 表示节点集
+		\ENSURE 聚类树 $\mathcal{T}(K, E)$ 其中 $K \subseteq 2^{V}$\footnotemark{} 表示节点集
     而 $E$ 表示边的集合。
 		\STATE 初始化 树 $\mathcal{T}$：
      $V$ 是根节点，
@@ -266,8 +268,8 @@ $G[C_i](i=1,\dots, t)$
      无其他节点。
 		\STATE \texttt{Split}($G$)
 		\FUNCTION{\texttt{Split}($G$)}
-		\STATE $w$ 是 $G$ 所有边的权值之和。
-		\STATE $\gamma' \gets \frac{w}{\abs{V(G)}-1}$
+		\STATE $w \gets \sum_{(i,j) \in E} w_{ij}$
+		\STATE $\gamma' \gets \frac{w}{\abs{V(G)}-1}$，
     其中 $V(G)$ 是 图$G$
     的节点集。
     \label{alg:gamma_apostrophe}
@@ -327,6 +329,7 @@ $G[C_i](i=1,\dots, t)$
   然后我们得到了最终的聚类树结构，如
   图 \ref{fig:alg_eg} (d)所示。
 \end{example}	
+\footnotetext{$2^V$ 是 $V$的幂集}
 \subsection{时间复杂度分析}
 
 本小节我们分析上小节提出的 HPSP算法 （算法 \ref{alg:psp_i_simplified} ）的时间复杂度。
@@ -407,8 +410,8 @@ HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
      和$W$。
 		\STATE \texttt{Split}($G, 1$)
 		\FUNCTION{\texttt{Split}($G, s$)}
-		\STATE $w$ 是 $G$ 所有边的权值之和。
-		\STATE $\gamma' \gets \frac{w}{\abs{V(G)}-1}$
+		\STATE$w \gets \sum_{(i,j) \in E} w_{ij}$
+		\STATE $\gamma' \gets \frac{w}{\abs{V(G)}-1}$，
     其中 $V(G)$ 是 图$G$
     的节点集。
 		\STATE $(\tilde{h}, \P')
@@ -439,7 +442,7 @@ HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
 
 另外，从构造好的聚类树中获取正确的划分也是
 我们要考虑的问题。
-\citet{chan2020agglomerative}曾采用一种
+Chan等\cite{chan2020agglomerative}曾采用一种
 类似深度优先搜索的策略在聚合的过程中逐步获取划分。
 由于我们未存储子节点的信息，因此我们在
 获取划分的实现策略上需要另辟蹊径。
@@ -565,7 +568,7 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 和维护并发线程的额外成本有关。在实际实现中，
 并发线程的创建和销毁的时间开销是不可忽略的，而这一部分
 在复杂度理论分析中并未考虑。
-另外，\citet{chan2020agglomerative} 提出的基于 最小化范数底的聚合算法
+另外，Chan等\cite{chan2020agglomerative} 提出的基于 最小化范数底的聚合算法
 也能用于求解图上的主划分序列，但由于该方法是针对一般的
 随机变量聚类问题提出的，对熵函数求值的额外开销过大，
 也面临理论优美、实际效率不高的问题。
@@ -611,8 +614,9 @@ LEMON 库在我们的算法包中用于构建所需的图数据结构和最大�
 	\centering
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{two_level-2023-02-16.pdf}
-		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14, z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$。}\label{fig:c1}
-	\end{subfigure}
+		\caption{拓扑结构，参数取值为$z_{\mathrm{in}_1} = 14$, \\
+    $z_{\mathrm{in}_2} = 3, z_{\mathrm{out}}=1$。}\label{fig:c1}
+	\end{subfigure}~
 	\begin{subfigure}{0.45\textwidth}
 		\includegraphics[width=\textwidth]{tree_info-clustering.pdf}
 		\caption{聚类树结构，可用PSP算法完全恢复出来。每个叶节点仍包含16个子节点未画出。}
@@ -685,7 +689,7 @@ HPSP算法 实现数据的聚类的任务。
 
 为了比较不同的层次聚类方法，最好直接比较聚类树。
 为此，
-我们使用来自\citet{khan2001classification}的基因表达的数据集。
+我们使用来自 Khan 等\cite{khan2001classification}的基因表达的数据集。
 该数据集共有6000多条基因数据，训练集的特征维度是64，
 测试集是25。这里我们只使用前300条基因的数据。
 由于我们不知道数据的真实聚类树的结构，
@@ -808,7 +812,7 @@ $\P_{k-r}$，使得$K,M$都比较小。
 对于此多目标优化问题，我们需要一个折中方案，即通过枚举
 $r=1,2,\dots$ 求解下面的优化问题：
 \begin{align}\label{eq:outlier_detection_proposal}
- \min_{r\in Z^+} \ &r \\
+ \min_{r\in \mathbb{N}^+} \ &r \\
 \textrm{s.t.}\, & f(r):=(r+1)\abs{\P_{k-r}} < n \notag
 \end{align}
 在式\eqref{eq:outlier_detection_proposal}中，我们注意到函数
