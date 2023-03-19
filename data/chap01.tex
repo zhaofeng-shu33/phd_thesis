@@ -401,7 +401,7 @@ $\sqrt{a} - \sqrt{b} > \sqrt{2}$ \cite{abbe2015exact, mossel2016}。
 \newglossaryentry{side_info}{name=辅助信息, description={Side information}}
 通过添加\gls{side_info} (\glsdesc{side_info})，社团发现能达到更高的准确率。
 通常的辅助信息是指节点属性信息\cite{he2019attribute}，
-其可以采用多种形式建模，
+其在理论分析中可以采用多种形式建模，
 比如已知部分节点的标签、已知被噪声污染的全部节点的标签、
 以及已知每个节点附带的一些观测值等\cite{saad2018community}。
 在现有的使用信息论的方法研究有辅助信息的网络中的社团发现问题中，
@@ -421,7 +421,10 @@ $\sqrt{a} - \sqrt{b} > \sqrt{2}$ \cite{abbe2015exact, mossel2016}。
 %随机块 问题的精确恢复条件本身蕴含着某种对称性，相应的可以用 雷尼 散度来刻划。这一个结论实际是对于具有
 %对称分布的一般假设检测问题的特例 \cite{gao2018community}。
 在算法层面，利用半正定规划算法检测带有部分节点标签的 随机块模型，
-可实现精确恢复 \cite{esmaeili2019exact}。
+可实现精确恢复 \cite{esmaeili2019exact}，
+通过引入更多的优化参数，基于半正定规划的算法可用于一般的属性网络社团发现问题
+\cite{tang2023semidefinite}。
+
 %是最大似然算法好的近似 。
 
 围绕着其他类型的恢复问题，比如几乎完全恢复，也有大量相关的研究\cite{kanade2016global, deshpande2018contextual}。
