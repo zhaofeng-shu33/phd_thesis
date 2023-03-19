@@ -1,28 +1,47 @@
 \documentclass{ctexart}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{adjustbox}
 %\xeCJKsetup{CJKecglue={}}
 \begin{document}
+我们把本节提出的基于玻茨模型的算法应用于实际的网络中。
+为了和经典的最大模块度等方法进行公平比较，
+我们取超参$\gamma=\gamma_{\mathrm{MQ}}$（参见式\eqref{eq:Qtransform}），
+使得$\gamma>b$的条件满足，并且能量函数的形式固定下来。
+由式\eqref{eq:e_1}，$\gamma = \frac{2|E|}{n \log n}$，
+故$\gamma$可由输入网络计算。
+通过算法 \ref{alg:m} 近似求解能量函数最大值，与模拟退火的优化策略不同，
+我们的算法使用的逆温度参数不随
+迭代次数而改变。
+我们考虑 Karate\cite{zachary1977information},
+American Football \cite{girvan2002community},
+Dolphin \cite{lusseau2003emergent}
+和 Polbooks \cite{newman2006modularity}
+四个常用于社团发现算法测试的数据集。
+这四个数据集均为有真实标签的无向图。
+并使用归一化的互信息\cite{Danon_2005}作为算法评价指标。
+我们对比的算法有
+Greedy GN \cite{clauset2004finding}，
+Fluid \cite{pares2018fluid},
+Louvain \cite{blondel2008fast},
+标签传播\cite{cordasco2010community}。
+结果如表 \ref{tab:flatten_result} 所示。
+从该表可以看出，我们的算法可以精确恢复 Karate 数据的社团结构，
+在其他数据集上也取得不逊于其他算法的结果。
+
 \begin{table}
-    我们把本节提出的基于玻茨模型的算法应用于实际的网络中。
-    为了和经典的最大模块度等方法进行公平比较，
-    我们取超参$\gamma=\gamma_{\mathrm{MQ}}$（参见式\eqref{eq:Qtransform}），
-    使得$\gamma>b$的条件满足，并且能量函数的形式固定下来。
-    通过算法 \ref{alg:m} 近似求解能量函数最大值，与模拟退火的优化策略不同，
-    我们的算法使用的逆温度参数不随
-    迭代次数而改变。
-    我们考虑 四个数据集。这四个数据集均为有真实标签的无向图。
-    并使用归一化的互信息\cite{Danon_2005}作为算法评价指标。
-    我们对比的算法有。结果如表 \ref{tab:flatten_result} 所示。
-    从该表可以看出，我们的算法可以精确恢复 Karate 数据的社团结构，
-    在其他
+    \begin{adjustbox}{width=\columnwidth,center}
     \begin{tabular}{cccccc}
+    \hline
     NMI               & Greedy GN & Fluid & Louvain  & label propagation & potts\\
+    \hline
     Karate            & 0.692     & 0.837 & 0.587   & 0.445         & 1.000     \\
     American Football & 0.698     & 0.851 & 0.857    & 0.870         & 0.870    \\
     Dolphin           & 0.573     & 0.655 & 0.516    & 0.527        & 0.701     \\
-    Polbooks          & 0.531     & 0.411 & 0.493  & 0.534          & 0.580     
+    Polbooks          & 0.531     & 0.411 & 0.493  & 0.534          & 0.580     \\
+    \hline
     \end{tabular}
+\end{adjustbox}
     \caption{}\label{tab:flatten_result}
 \end{table}
 
