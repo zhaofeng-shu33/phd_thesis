@@ -724,29 +724,32 @@ $\beta=\beta^*$ 处
 另外，我们把本节提出的基于玻茨模型的算法应用于实际的网络中。
 为了和经典的最大模块度等方法进行公平比较，
 我们取超参$\gamma=\gamma_{\mathrm{MQ}}$（参见式\eqref{eq:Qtransform}），
-使得$\gamma>b$的条件满足，并且能量函数的形式固定下来。
+使得$\gamma>b$的条件满足，并且能量函数\eqref{eq:energy}固定下来。
 由式\eqref{eq:e_1}，$\gamma = \frac{2|E|}{n \log n}$，
 故$\gamma$可由输入网络计算。
-通过算法 \ref{alg:m} (Potts) 近似求解能量函数最大值，与模拟退火的优化策略不同，
-我们的算法使用的逆温度参数不随
+然后我们通过算法 \ref{alg:m} (Potts) 近似求解能量函数最大值。
+该算法与模拟退火的优化策略不同，一旦设定了初始的逆温度参数$\beta$，
+$\beta$不随
 迭代次数而改变。
-我们考虑 Karate\cite{zachary1977information},
-American Football \cite{girvan2002community},
+在本组实验中我们取$N=40$，$\beta$在
+$[1.5,3.0]$的范围内进行超参优化。
+我们考虑 Karate\cite{zachary1977information}、
+American Football \cite{girvan2002community}、
 Dolphin \cite{lusseau2003emergent}
 和 Polbooks \cite{newman2006modularity}
 四个常用于社团发现算法测试的数据集。
 这四个数据集均为有真实标签的无向图。
-并使用归一化的互信息\cite{Danon_2005}作为算法评价指标，
+我们使用归一化的互信息\cite{Danon_2005}作为算法评价指标，
 其取值在0到1之间，NMI取1时表明精确恢复。
-我们对比的算法有
-Greedy GN \cite{clauset2004finding}，
-Fluid \cite{pares2018fluid},
-Louvain \cite{blondel2008fast},
+而我们对比的算法有
+Greedy GN \cite{clauset2004finding}、
+Fluid \cite{pares2018fluid}、
+Louvain \cite{blondel2008fast} 和
 标签传播\cite{cordasco2010community}。
-结果如表 \ref{tab:flatten_result} 所示。
+实验结果如表 \ref{tab:flatten_result} 所示。
 从该表可以看出，我们的算法可以精确恢复 Karate 数据的社团结构，
 在其他数据集上也取得不逊于其他算法的结果，从而验证了应用
-算法 \ref{alg:m}在实际网络中进行社团发现的可行性。
+算法 \ref{alg:m} 在实际网络中进行社团发现的可行性。
 
 \begin{table}[!ht]
     \begin{adjustbox}{width=\columnwidth,center}

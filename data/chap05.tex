@@ -53,8 +53,8 @@ $\{Y^{i}_j\}_{1\leq j \leq m}$。
 对于$P(z_{ij}|x_i,x_j)$，其具体定义为
 \begin{equation*}
     P  (z_{ij}=1|x_i,x_j) = \begin{cases}
-        p & \text{if } x_i = x_j \\
-        q & \text{if } x_i\ne x_j
+        p &   x_i = x_j \\
+        q &   x_i\ne x_j
     \end{cases},
 \end{equation*}
 并且
@@ -95,13 +95,13 @@ $\{Y^{i}_j\}_{1\leq j \leq m}$。
 有多种方式可推广一维的泊松分布，这里我们使用的是如下形式的二维泊松分布：
 
 \begin{definition}
-    称 $(X,Y)$ 服从参数为 $(\lambda, \mu)$ 的二维泊松分布，
+    称 $(X,Y)$ 服从参数为 $(\mu, \nu)$ 的二维泊松分布，
     如果其概率质量函数为：
     \begin{equation}
-        P(X=k, Y=j) = \frac{\lambda^k \mu^j}{k! j!}
-        e^{-\lambda - \mu}, k,j=0,1,\dots
+        P(X=i, Y=j) = \frac{\mu^i \nu^j}{i! j!}
+        e^{- \mu - \nu}, i,j=0,1,\dots
     \end{equation}
-    记为 $(X,Y) \sim \Pois(\lambda, \mu)$。
+    记为 $(X,Y) \sim \Pois(\mu, \nu)$。
 \end{definition}
 
 有了2维泊松分布的定义式，我们下面给出
@@ -131,12 +131,12 @@ $\lceil \log n \rceil $ 的整数倍，同时
 \begin{align}\label{equation:I+}
     I_+ &=\frac{\lambda^* }{2} (a^{1-\lambda^* }b^{\lambda^* } -
     b^{1-\lambda^* }a^{\lambda^* })\log\frac{b}{a}+\frac{a+b}{2}\notag \\
-    &-\frac{1}{2}(a^{1-\lambda^*}b^{\lambda^*} +
+    &\quad -\frac{1}{2}(a^{1-\lambda^*}b^{\lambda^*} +
     b^{1-\lambda^* }a^{\lambda^* })+\gamma D(P_{\lambda^* }||P_0) 
 	\end{align}
 	其中
 	\begin{equation}\label{eq:lambda}
-    \lambda^* = \argmin_{\lambda} \left[a^{1-\lambda}b^{\lambda} +
+    \lambda^* = \argmin_{0 \leq \lambda \leq 1} \left[a^{1-\lambda}b^{\lambda} +
     b^{1-\lambda}a^{\lambda} + 2\gamma \log
     \left(\sum_{x\in \mathcal{X}}P^{1-\lambda}_0(x) P^{\lambda}_1(x)
     \right)
@@ -177,8 +177,8 @@ $\lceil \log n \rceil $ 的整数倍，同时
 由 切尔诺夫信息的定义式 \eqref{eq:D_star_lambda_star} 
 可得：
 $$
-I_+ = D(\hat{P}_{\lambda^*} || \Pois\left(\frac{a}{2}\right))
-+ D(\hat{P}_{1-\lambda^*} || \Pois\left(\frac{b}{2}\right))
+I_+ = D\left(\hat{P}_{\lambda^*} || \Pois\left(\frac{a}{2}\right) \right)
++ D\left(\hat{P}_{1-\lambda^*} || \Pois\left(\frac{b}{2}\right) \right)
 + \gamma D(P_{\lambda^*} || P_0)
 $$
 其中 $\hat{P}_{\lambda^*}$由
@@ -189,7 +189,7 @@ $$
     I_+ &= \left[\lambda^* c^{1-\lambda^*}d^{\lambda^*}
     \log(\frac{d}{c})+ c-c^{1-\lambda^*}d^{\lambda^*}
     \right] \\
-&+ \left[\lambda^* c^{\lambda^*}d^{1-\lambda^*}\log(\frac{c}{d})
+&\quad + \left[\lambda^* c^{\lambda^*}d^{1-\lambda^*}\log(\frac{c}{d})
 + d - c^{\lambda^*}d^{1-\lambda^*}\right]
 + \gamma D(P_{\lambda^*} || P_0)
 \end{align*}
@@ -426,9 +426,9 @@ $(n+1)$ 维的向量。
 	是一个$(n+1)\times(n+1)$的矩阵。我们将证明 $V^*$ 是如下问题的唯一最优解：
 	\begin{align}
 		\max_V\ & \langle \widetilde{R}, V \rangle  \notag\\
-		\textrm{ s.t. }\, V_{ii} &= 1, \notag\\
+		\textrm{ s.t. }  &V_{ii} = 1, \notag\\
 		V &\succeq 0, \notag\\
-\sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in\{1,\ldots,n+1\} 
+\sum_{j=2}^{n+1} (V_{ij} + V_{ji})& = 0,~\forall\, i\in [n+1]
 \label{eq:sdp}
 	\end{align}
 	注意到在 式\eqref{eq:sdp} 的最后一行
@@ -456,7 +456,7 @@ $(n+1)$ 维的向量。
 
 求解形如 式\eqref{eq:sdp} 的SDP优化问题可通过如下迭代进行，各矩阵的初始值$X^{(0)},Z^{(0)},U^{(0)}$可取为零矩阵。
 \begin{align}
-    X^{(k+1)} &= \Pi_A(Z^{(k)} - U^{(k)} + \frac{1}{\rho}R)\label{eq:admm} \\
+    X^{(k+1)} &= \Pi_A\left(Z^{(k)} - U^{(k)} + \frac{1}{\rho}R \right)\label{eq:admm} \\
     Z^{(k+1)} &= \Pi_{S_+^n}(X^{(k+1)} + U^{(k)}) \\
     U^{(k+1)} &= U^{(k)} + (X^{(k+1)} - Z^{(k+1)}) 
     \end{align}
