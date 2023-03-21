@@ -712,14 +712,14 @@ $$
 \end{align}
 接下来只需证明
 \begin{align}
-    &\diag(\{a_1, \dots, a_{n+1}\}) + \Xi - \widetilde{R} \nonumber\\
+    &\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{R} \nonumber\\
     =& \begin{pmatrix} h^{\mathrm{T}} g & -h^{\mathrm{T}} +(\mu + \lambda)\mathbf{1}_n^{\mathrm{T}} \\
         -h+(\mu + \lambda )\mathbf{1}_n & \Xi_n \end{pmatrix}
     \succeq 0
 \end{align}
 其中
 \begin{align}\label{eq:Xi_n}
-    \Xi_n =\diag(hg^{\mathrm{T}} + Agg^{\mathrm{T}} -\lambda \mathbf{1}_ng^{\mathrm{T}})
+    \Xi_n =\diag\{hg^{\mathrm{T}} + Agg^{\mathrm{T}} -\lambda \mathbf{1}_ng^{\mathrm{T}}\}
     + \left(\frac{1}{2} +2\lambda \right)
     J_n  - A + 2\lambda \Xi'
 \end{align}
@@ -803,7 +803,7 @@ $$
 由 式\eqref{eq:Xi_n} 和 $(g^{\perp})^{\mathrm{T}}g=0$，我们有
 \begin{align*}
     (g^{\perp})^{\mathrm{T}} \Xi_n g^{\perp} 
-    =& (g^{\perp})^{\mathrm{T}} \diag( -\lambda \mathbf{1}_ng^{\mathrm{T}}+hg^{\mathrm{T}} + Agg^{\mathrm{T}}) g^{\perp} + p \\
+    =& (g^{\perp})^{\mathrm{T}} \diag\{ -\lambda \mathbf{1}_ng^{\mathrm{T}}+hg^{\mathrm{T}} + Agg^{\mathrm{T}} \} g^{\perp} + p \\
     +& \frac{1}{2}(1-p-q+2\lambda)(g^{\perp})^{\mathrm{T}}J_n g^{\perp}
     -(g^{\perp})^{\mathrm{T}}(A-\E[A])g^{\perp},
 \end{align*}
