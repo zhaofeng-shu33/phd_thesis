@@ -410,14 +410,16 @@ $(Y,Z)$ 的对数似然函数 式 \eqref{eq:lh} 等价于求解下面的优化�
     \textrm{s.t. }\, & \mathbf{1}_n^{\mathrm{T}} v = 0 \text{ 且 } v_i \in \{\pm 1 \}
     \label{eq:matrix_mle}
 \end{align}
-其中 $h$ 是 $n$ 长的向量，第 $i$ 个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
+其中 $h$ 是 长度为 $n$ 的向量，第 $i$ 个元素为$h_i = \frac{1}{\log \frac{a}{b}}\sum_{j=1}^m \log \frac{P_0(y^i_{j})}{P_1(y^i_{j})}, i\in [n]$，
 而  $n\times n $ 的矩阵 $R$ 在 式\eqref{eq:def_B_sdp} 中定义。
 
 令 $x^*$ 是 \eqref{eq:matrix_mle} 的最优值，
-且 $V^*=(1,x^*)(1,x^*)^{\mathrm{T}}$， 
-其中 $(1,x^*)$ 是一个
+且 $V^*=(1,{x^*}^{\mathrm{T}})
+(1,{x^*}^{\mathrm{T}})^{\mathrm{T}}
+$， 
+其中 $(1,{x^*}^{\mathrm{T}})$ 是一个
 将 $1$ 和 $x^*$ 连接起来的
-$(n+1)$ 维的向量。
+$(n+1)$ 维列向量。
 	则 式\eqref{eq:matrix_mle} 中目标函数的
     最优值等于 $\frac{1}{2} \langle \widetilde{R}, V^* \rangle$, 其中
 	\begin{equation}\label{eq:B_lambda_def}
@@ -441,7 +443,8 @@ $(n+1)$ 维的向量。
         $x^*$ 是真实的标签向量。
 		若 $I_+ > 1$, 则
         $\lim_{n\to\infty} P(\hat{V}=V^*)=1$，其中
-		$V^*=(1,x^*)(1,x^*)^{\mathrm{T}}$。
+		$V^*=(1,{x^*}^{\mathrm{T}})
+        (1,{x^*}^{\mathrm{T}})^{\mathrm{T}}$。
 	\end{theorem}
     该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现社团结构的精确恢复。
 

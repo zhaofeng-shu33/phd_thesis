@@ -316,25 +316,26 @@ P_{\sigma |\bar{G}}(\sigma=\bar{\sigma})$。
 	
 	接着我们逐步计算能量差：
   \begin{align*}
-	H(\bar{\sigma}') - H(\bar{\sigma}) =& 
+	& 　H(\bar{\sigma}') - H(\bar{\sigma}) \\
+	& =
   \left(1 + \gamma\frac{\log n}{n}
   \right)
-   \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
-	\delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i)) \\
-	&+ \gamma \frac{\log n}{n}\sum_{i\neq r}
+  \sum_{i \in N_r(G)} (\delta(\bar{\sigma}_r, \bar{\sigma}_i) -
+	\delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i))
+	 + \gamma \frac{\log n}{n}\sum_{i\neq r}
 	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
 	\delta( \bar{\sigma}_r, \bar{\sigma}_i) ) \\
-	 =& \left(
+	& = \left(
      1 + \gamma\frac{\log n}{n}
      \right)
-   \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i) \\
-	&+ \gamma \frac{\log n}{n}\sum_{i=1}^n
+   \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i) 
+	+ \gamma \frac{\log n}{n}\sum_{i=1}^n
 	( \delta(\omega^s \cdot \bar{\sigma}_r, \bar{\sigma}_i) -
 	\delta( \bar{\sigma}_r, \bar{\sigma}_i) +1) \\
-	=& \left(1+\gamma \frac{\log n}{n}
+	&= \left(1+\gamma \frac{\log n}{n}
   \right)
-  \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)\\
-	&+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1)
+  \sum_{i \in N_r(G)} J_s(\bar{\sigma}_r, \bar{\sigma}_i)
+	+ \gamma \frac{\log n}{n} (m(\omega^s \cdot \bar{\sigma}_r)-m(\bar{\sigma}_r)+1)
 	\end{align*}
 \end{proof}
 \begin{remark}\label{re:energy_diff}
