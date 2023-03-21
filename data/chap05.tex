@@ -107,8 +107,8 @@ $\{Y^{i}_j\}_{1\leq j \leq m}$。
 有了二维泊松分布的定义式，我们下面给出
 SBMSI 模型精确恢复的条件：
 \begin{theorem}\label{thm:Pe}
-    定义$I_+$ 为联合分布 $\textrm{Pois}(\frac{a}{2},\frac{b}{2})\times \underbrace{P_0 \times \dots \times P_0}_{\gamma}$
-    与 $\textrm{Pois}(\frac{b}{2}, \frac{a}{2})\times \underbrace{P_1 \times \dots \times P_1}_{\gamma}$ 
+    定义$I_+$ 为联合分布 $\textrm{Pois}(\frac{a}{2},\frac{b}{2})\times \underbrace{P_0 \times \dots \times P_0}_{\gamma \textrm{个}}$
+    与 $\textrm{Pois}(\frac{b}{2}, \frac{a}{2})\times \underbrace{P_1 \times \dots \times P_1}_{\gamma \textrm{个}}$ 
     之间的切尔诺夫信息。    
     对于 $\SBMSI(n,m=\lceil \gamma \log n \rceil, p=a\frac{\log n}{n},q=b\frac{\log n}{n},P_0,P_1)$，
     如果 $I_+>1$，则精确恢复可实现；
@@ -194,7 +194,7 @@ $$
 \end{align*}
 即得式\eqref{equation:I+}。
 $\lambda^*$ 可由式\eqref{eq:C_P_1_P_2_another} 
-进行计算。目标函数为：
+进行计算。该式的目标函数为：
 \begin{align*}
 &\log\left(\sum_{k=0}^{+\infty} \left(\frac{c^k\exp(-c)}{k!}
 \right)^{1-\lambda}

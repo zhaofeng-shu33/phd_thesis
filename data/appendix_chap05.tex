@@ -501,9 +501,8 @@ $\sum_{(i,j,r,s)\in S} P(A_{ij} \cap A_{rs})\leq n^{-2\mu + o(1)}
 因此我们推出
 \begin{align*}
 P_e=P(F) & \geq P\left(\bigcup_{(i,j)\in S} A_{ij} \right) \\
-& \geq \frac{1}{4} n^{-\mu+o(1)}- o(1)n^{-\mu + o(1)},
-\textrm{ 由 } \eqref{eq:bonf}  \\
-&=\left(\frac{1}{4}+o(1)\right)n^{-\mu + o(1)}
+& \geq \frac{1}{4} n^{-\mu+o(1)}- o(1)n^{-\mu + o(1)}  \\
+\textrm{ 由 } \eqref{eq:bonf}\ &=\left(\frac{1}{4}+o(1)\right)n^{-\mu + o(1)}
 \end{align*}
 \end{proof}
 
@@ -607,14 +606,14 @@ $$
 其中 $x_i \in \{0,1\}$。
 对给定的图$G$，忽略掉常数项， 极大化 $ \log L$ 等价于
 $$
-\max_{x \in \{\pm\}^n} \sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
+\max_{x \in \{\pm 1\}^n} \sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
 +\log\frac{p}{q}\sum_{(i,j) \in E} \delta(x_i, x_j)
 +\log \frac{1-p}{1-q}\sum_{(i,j)\not\in E} \delta(x_i, x_j)
 $$
 令 $\kappa = -\log\frac{1-p}{1-q} / \log\frac{p}{q} \sim \frac{a-b}{\log a/b}\frac{\log n}{n}$,
 则我们只需考虑
 $$
-\max_{x \in \{\pm\}^n}\  \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
+\max_{x \in \{\pm 1\}^n}\  \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m x_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
 +\sum_{(i,j) \in E} \delta(x_i, x_j)
 -\kappa\sum_{(i,j)\not\in E} \delta(x_i, x_j)
 $$
@@ -622,7 +621,7 @@ $$
 则我们有 $\delta(x_i, x_j) = \frac{v_i v_j + 1}{2}$。
 则上式等价于：
 $$
-\max_{x \in \{\pm\}^n}\  \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m v_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
+\max_{x \in \{\pm 1\}^n}\  \frac{1}{\log a/b}\sum_{i=1}^n \sum_{j=1}^m v_i \log \frac{P_0(y_i^{(j)})}{P_1(y_i^{(j)})}
 +\sum_{(i,j) \in E} v_i v_j
 -\kappa\sum_{(i,j)\not\in E} v_i v_j
 $$
@@ -688,19 +687,19 @@ $\lambda_i$ 是只出现在约束条件中的优化变量。
 也即
 前一半和后一半的标签分别是  $1$ 和 $-1$。
 与文献 \inlinecite{abbe2015exact} 中采用的方法类似，
-$(1,g)(1,g)^{\mathrm{T}}$ 是 \eqref{eq:sdp} 的唯一最优解
+$(1,g^{\mathrm{T}})^{\mathrm{T}}(1,g^{\mathrm{T}})$ 是 \eqref{eq:sdp} 的唯一最优解
  被如下条件所保证：
 \begin{enumerate}
-    \item[(a)] $(1,g)(1,g)^{\mathrm{T}}$ 是 原问题 \eqref{eq:sdp} 的可行解。
+    \item[(a)] $(1,g^{\mathrm{T}})^{\mathrm{T}}(1,g^{\mathrm{T}})$ 是 原问题 \eqref{eq:sdp} 的可行解。
     \item[(b)] 存在 \eqref{eq:dual} 的可行解 $(a_1,\ldots,a_{n+1},$ $\lambda_1,\ldots,\lambda_{n+1})$。
-    \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{R})(1,g)=0$，即$(1,g)$是矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{R})$ 特征值为0对应的特征向量。
+    \item[(c)] $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{R})(1,g^{\mathrm{T}})^{\mathrm{T}}=0$，即$(1,g^{\mathrm{T}})$是矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{R})$ 特征值为0对应的特征向量。
     \item[(d)]  矩阵 $(\diag\{a_1, \dots, a_{n+1}\} + \Xi - \widetilde{R})$ 第二小的特征值 大于零。 
 \end{enumerate}
 由对偶互补条件，可知(a-d) 保证了 
-$\sum_{i=1}^{n+1} a_i=\langle(1,g)(1,g)^{\mathrm{T}},\widetilde{R} \rangle$，
+$\sum_{i=1}^{n+1} a_i=\langle (1,g^{\mathrm{T}})^{\mathrm{T}}(1,g^{\mathrm{T}}),\widetilde{R} \rangle$，
 即原问题和对偶问题最优值相等。
 
-首先直接将$(1,g)(1,g)^{\mathrm{T}}$代入验证可知条件 (a) 满足。
+首先直接将$(1,g^{\mathrm{T}})^{\mathrm{T}}(1,g^{\mathrm{T}})$代入验证可知条件 (a) 满足。
 下面我们构造  $(a_1,\ldots,a_{n+1},\lambda_1,\ldots,\lambda_{n+1})$  满足条件 (c)。
 令 $\mu=\frac{1}{n}\mathbf{1}_n^{\mathrm{T}} h$ 且
 $\lambda = -\frac{\mu}{n}$。 先以如下方式取定 $(\lambda_1,\ldots,\lambda_{n+1})$
