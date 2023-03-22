@@ -48,8 +48,9 @@
 
 \begin{abstract*}
   With the advent of the era of big data, graph-structured data is increasingly used in
-  network science, information science, life science, and other fields.
-  Community discovery is an unsupervised learning method for automatically inferring community structure.
+  social science, information science, life science, and other fields.
+  Community discovery is an unsupervised learning method for automatically inferring community structure
+  in complex networks.
   It has played an important role in describing the community and gaining insight into the relationship between different communities.
   However, the algorithm design and parameter fine-tuning of community discovery are mostly carried out in an empirical way.
   While consuming a large number of computing resources,
@@ -61,14 +62,18 @@
 
   The contribution of this thesis can be summarized in the following three parts:
 
-  Firstly, we optimize a community discovery algorithm based on graph strength using a metric called multivariate mutual information.
-  Compared with existing techniques, we reduce the time complexity of this algorithm by an order of magnitude.
+  Firstly, based on the multivariate mutual information,
+  we establish the connection between clustering weakly independent random variables and computing the principal sequence of partition
+  on a graph.
+  Further, we use multivariate mutual information to optimize the algorithm for calculating the principal sequence of partition on a graph.
+  Compared with existing methods for calculating the principal sequence of partition,
+  the time complexity is reduced by an order of magnitude.
   The optimized algorithm can not only solve the problem of hierarchical community discovery, but can also be used in data clustering, outlier detection and other fields.
 
   On the other hand, based on the rate function,
   we study the conditions and the error rate of a random sampling algorithm based on Potts model
   for the stochastic block model with multiple community structures.
-  We obtain the phase transition property of the algorithm and provide a theoretical explanation
+  We obtain the phase transition property of the algorithm and provide a theoretical basis
   for the choice of hyper-parameters.
   In the asymptotic case, we further explore the connection between other algorithms, including the maximum likelihood algorithm, the maximum modularity algorithm and the minimum cut optimization.
   In the process we theoretically establish a unified framework for analyzing common object functions for community discovery.
@@ -78,16 +83,19 @@
   to conduct in-depth research on the scenario
   where the nodes of community have side information.
   From the perspective of theoretical study,
-  we derive the optimal error decay rate for the stochastic block model with side information.
+  for the stochastic block model with side information
+  we derive the required sample size to achieve exact recovery and optimal error decay rate.
   On the algorithm design level,
   an efficient algorithm is proposed, which can achieve exact recovery based on positive semi-definite programming.
   The effectiveness of the algorithm is verified through numerical experiments.
 
-  Generally speaking, this paper uses information theoretical metrics such as multivariate mutual information,
-  rate function, and Rényi divergence to reveal the theoretical
+  Generally speaking, this paper uses information theoretical metrics
+  such as multivariate mutual information,
+  rate function, and Rényi divergence to reveal the asymptotic
   optimal recovery rate achievable by the community discovery algorithms,
-  and to guide the algorithm design and optimization process.
-  Our approaches provide theoretical guarantees and salutary guidance
+  and to provide theoretical guarantees for the detection accuracy.
+  Further, our analysis can guide the algorithm design and optimization process,
+  which helps to save the computing resources and provide salutary guidance
   for community detection methods in practical scenarios.
   % Use comma as separator when inputting
   \thusetup{
