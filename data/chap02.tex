@@ -151,7 +151,7 @@ $h(\lambda)$ 也是如此。
 \newglossaryentry{psp}{name=主划分序列, description={Principal sequence of partition}}
 对于一般的图，其节点数目可能很多，此时用枚举法计算
 $h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
-$h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp} (\gls{acr:psp})的结构，
+$h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp} (\glsdesc{acr:psp}, PSP)的结构，
 我们把这一算法称为PSP算法。
 由于原文献年代较为久远，作为替代，下面我们参考文献\inlinecite{mac}
 对PSP算法进行简要介绍。
@@ -348,7 +348,7 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
 \subsection{随机块模型及其精确恢复问题}\label{sec:exact_recovery}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic block model}}
 \newacronym{acr:sbm}{SBM}{Stochastic block model}
-\gls{sbm}(\gls{acr:sbm})是社团发现问题中最常用的统计模型之一
+\gls{sbm}(\glsdesc{acr:sbm}, SBM)是社团发现问题中最常用的统计模型之一
 \cite{holland1983stochastic, abbe2017community}，
 本节介绍我们研究的一类特殊的随机块模型，
 %它提供了一个基准人工数据集来评估不同的社团检测算法
@@ -376,7 +376,7 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
 
 \newacronym{acr:ssbm}{SSBM}{Symetric stochastic block model}
 下面给出有$k$个社团的对称的随机块模型
-(\gls{acr:ssbm})
+(\glsdesc{acr:ssbm}, SSBM)
 的定义： 
 	\begin{definition}[有$k$ 个社团的 SSBM]\label{def:SSBM}
 	令 $0\leq q<p\leq 1$, $V=[n]$ 且
@@ -453,7 +453,7 @@ $\bar{G}$是$G$的一个样本。
 $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
 \newacronym{acr:ml}{ML}{Maximum Likelihood}
 
-不加说明的情况下，最大似然估计算法 是无约束的。但在
+不加说明的情况下，最大似然(\glsdesc{acr:ml}, ML)估计算法 是无约束的。但在
 定义\ref{def:SSBM}的假设下，
 还有一个额外的约束，即 $X$ 中每一类的标签数量是严格相等的。
 在这个约束下最大化式\eqref{eq:GmL} 我们可以得到一个等价
@@ -800,7 +800,7 @@ $\frac{\log n}{n}$
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising block model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising block model}
 将 \ref{sec:exact_recovery} 小节 介绍的随机块模型与 本小节介绍的 伊辛模型
-复合起来可得到\gls{sibm}(\gls{acr:sibm})\cite{ye2020exact}。
+复合起来可得到\gls{sibm}(\glsdesc{acr:sibm}, SIBM)\cite{ye2020exact}。
 该模型首先由 随机块模型生成随机图，
 再由随机图上定义的 伊辛模型多次生成节点的状态。
 SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实状态。
@@ -893,7 +893,7 @@ $i$个节点的\gls{degree} (\glsdesc{degree})，$x_i$ 表示第$i$
 针对随机块模型的社团发现
 可以先将最大似然方法获得的目标函数
 写成整数优化问题的形式，
-再转化成\gls{sdp} (\gls{acr:sdp}) 的优化问题进行求解。
+再转化成\gls{sdp} (\glsdesc{acr:sdp}, SDP) 的优化问题进行求解。
 
 在 式\eqref{eq:minimum_k_cut} 中
 取 $\delta(x_i, x_j) = \frac{1+x_ix_j}{2}$，
@@ -985,7 +985,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中精�
 表示两个随机变量的联合分布。有多种方法可将互信息
 的概念推广到两个及两个以上的随机变量间，
 其中Chan等\cite{ska} 提出的一种推广 具有多种好的性质，
-且涵盖了图结构的情形。我们把他的推广叫做\gls{mmi} (\gls{acr:mmi})。
+且涵盖了图结构的情形。我们把他的推广叫做\gls{mmi} (\glsdesc{acr:mmi}, MMI)。
 这里我们需要指出，MMI 并不是多个随机变量之间信息量的唯一度量方法，
 比如有学者基于HGR最大相关提出了\gls{gmc} (Generalized maximal correlation)
 也能实现类似的目的 \cite{huang2020information}。
@@ -1015,7 +1015,7 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
 \newacronym{acr:pin}{PIN}{Pairwise independent network}
 
 但对于一般的分布，式\eqref{eq:IZV}
-难于计算。\citet{chan2017pin} 又提出了一种特殊的互独立网络 (\gls{acr:pin}) 模型，
+难于计算。\citet{chan2017pin} 又提出了一种特殊的互独立网络 (\glsdesc{acr:pin}, PIN) 模型，
 使得多变量互信息可以用 \ref{sec:community_detection} 节
 介绍的PSP算法进行计算。
 这里略去PIN模型的数学定义，而是通过下面的例子
@@ -1213,7 +1213,7 @@ $P\left(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon \right)$
 \begin{theorem}\label{thm:cramer}
   \newglossaryentry{log_mgf}{name=对数矩生成函数, description={logarithmic moment generating function}}
   \newacronym{acr:log_mgf}{log-MGF}{Logarithmic moment generating function}
-  令 $X_1, \dots, X_n$ 为 i.i.d. 的随机变量序列，且$X_1$ 存在\gls{log_mgf} (\gls{acr:log_mgf})
+  令 $X_1, \dots, X_n$ 为 i.i.d. 的随机变量序列，且$X_1$ 存在\gls{log_mgf} (\glsdesc{acr:log_mgf}, log-MGF)
 $\Lambda(t)=\log \E[\exp(t X_1)]$。
 令 $\Lambda^*(s)= \sup_{t \in \R} (st-\Lambda(t))$，则对于所有$s>\E[X_1]$，
 我们有
