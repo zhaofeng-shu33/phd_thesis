@@ -9,9 +9,9 @@
 
 \newglossaryentry{graph}{name=图, description={Graph}}
 在网络中的社团发现中，
-通常将网络建模成\gls{graph} (\glsdesc{graph})结构。
+通常将网络建模成图 (Graph)结构。
 而社团没有严格的数学定义，
-通常认为社团内部连边紧密、不同社团间连边稀疏。\gls{cd} (\glsdesc{cd})，也称社团检测，
+通常认为社团内部连边紧密、不同社团间连边稀疏。社团发现 (Community detection)，也称社团检测，
 即在图结构数据中上寻找特定的社团结构。
 %社团根据其属性
 %是否随时间变化可分为静态社团和动态社团，本文研究的是静态社团，
@@ -24,7 +24,7 @@
   description={表示集合$\{1,\dots, n\}$}
 }
 一个图结构$G$ 由节点集 $V$ 和边的集合 $E$ 组成，记为 $G(V,E)$。
-为方便讨论，本文假设$V=\{1,\dots, n\}$，简写成 \gls{not:n_bracket}，
+为方便讨论，本文假设$V=\{1,\dots, n\}$，简写成$[n]$，
 $E$中的元素$(i,j)$表示图$G$中节点$i$到$j$有边相连。
 图结构根据边是否有方向可将图分为有向图和无向图。无向图可以看成是每条边
 有两个方向，从而针对有向图设计的社团发现算法也可以用到无向图上面来。
@@ -46,7 +46,7 @@ $E$中的元素$(i,j)$表示图$G$中节点$i$到$j$有边相连。
 该类别属于20世纪末提出的传统算法。
 %不同的社团发现算法根据自己的标准寻找社团结构，这给一般意义上的比较造成了困难。
 在本节中我们介绍的图划分算法采用的度量标准叫做图强度。
-\gls{graph_strength}这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}，
+图强度这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}，
 它的推广包括最小化平均误差\cite{mac}和多变量互信息\cite{chan2016ic}等，
 其计算方法具有相似性。
 图强度可以定义在无权图或有权图上，
@@ -63,7 +63,7 @@ $E$中的元素$(i,j)$表示图$G$中节点$i$到$j$有边相连。
   name={$\P(V)$},
   description={集合$V$的划分}
 }
-$\P$ 表示 \glsdesc{not:partition}，也即  $\P=\{C_1, \dots, C_k\},
+$\P$ 表示集合$V$的划分，也即  $\P=\{C_1, \dots, C_k\},
 \cup_{i=1}^k C_i=V$ 且对于$i\neq j, C_i \cap C_j = \emptyset$。
 $\abs{\mathcal{P}}$ 表示集合 $\P$ 中元素的个数。
 $\Pi$ 是 $V$ 上所有划分的集合而 $\Pi'=\Pi\backslash\{V\}$ 表示 $\Pi$
@@ -151,7 +151,7 @@ $h(\lambda)$ 也是如此。
 \newglossaryentry{psp}{name=主划分序列, description={Principal sequence of partition}}
 对于一般的图，其节点数目可能很多，此时用枚举法计算
 $h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
-$h(\lambda)$ 有多项式时间的算法。因该算法用到了\gls{psp} (\glsdesc{acr:psp}, PSP)的结构，
+$h(\lambda)$ 有多项式时间的算法。因该算法用到了主划分序列 (Principal sequence of partition, PSP)的结构，
 我们把这一算法称为PSP算法。
 由于原文献年代较为久远，作为替代，下面我们参考文献\inlinecite{mac}
 对PSP算法进行简要介绍。
@@ -225,7 +225,7 @@ $[\lambda_{\mathcal{Q}}, \lambda_{\P}]$ 内没有分界点，无需再调用
 
 \newglossaryentry{dt}{name=迪尔沃思截断, description={Dilworth truncation}}
 在算法 \ref{alg:psp} 第 \ref{alg:lambda_f} 行，
-函数 \texttt{DT} (\glsdesc{dt})被用来求解式\eqref{eq:hlambda} 获得最优值
+函数 \texttt{DT} (Dilworth truncation)被用来求解式\eqref{eq:hlambda} 获得最优值
 $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
 中按集合的大小排序}
 %该函数 \texttt{DT}
@@ -295,7 +295,7 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
 \newglossaryentry{pra}{name=推送重贴标签, description={Push–relabel}}
 
 求解最大流问题
-有一类基于\gls{pra} (Push-relabel) 的算法\cite{Goldberg1988}
+有一类基于推送重贴标签 (Push-relabel) 的算法\cite{Goldberg1988}
 具有良好的效率。如果要解一系列的最大流问题并且这一系列的问题
 之间有一定的关联性，重复调用最大流算法显然不是最优的选择。
 基于这种考虑，有学者提出了参数化的最大流算法\cite{Gallo1989}用于求解
@@ -348,7 +348,7 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
 \subsection{随机块模型及其精确恢复问题}\label{sec:exact_recovery}
 \newglossaryentry{sbm}{name=随机块模型, description={Stochastic block model}}
 \newacronym{acr:sbm}{SBM}{Stochastic block model}
-\gls{sbm}(\glsdesc{acr:sbm}, SBM)是社团发现问题中最常用的统计模型之一
+随机块模型(Stochastic block model, SBM)是社团发现问题中最常用的统计模型之一
 \cite{holland1983stochastic, abbe2017community}，
 本节介绍我们研究的一类特殊的随机块模型，
 %它提供了一个基准人工数据集来评估不同的社团检测算法
@@ -362,7 +362,7 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
   name={\ensuremath{W}},
   description={$k$阶循环群，即$\{1, \omega, \dots, \omega^{k-1}\}$}
 }
-从 \gls{not:W} $= \{1, \omega, \dots, \omega^{k-1}\}$中取值。
+从  $W= \{1, \omega, \dots, \omega^{k-1}\}$中取值。
 为方便后续讨论，这里我们给$W$赋予群的结构，让它成为一个阶为$k$的循环群，
 即$\omega^k=1$，比如复平面上的单位根即有这样的结构。
 特别地，当$k=2$时，$W=\{\pm 1\}$。
@@ -372,11 +372,11 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
   name={\ensuremath{W^n}},
   description={集合$W$的$n$次笛卡尔积}
 }
-\gls{not:Wn} 表示 \glsdesc{not:Wn}。 
+$W^n$ 表示集合$W$的$n$次笛卡尔积。 
 
-\newacronym{acr:ssbm}{SSBM}{Symetric stochastic block model}
+\newacronym{acr:ssbm}{SSBM}{Symmetric stochastic block model}
 下面给出有$k$个社团的对称的随机块模型
-(\glsdesc{acr:ssbm}, SSBM)
+(Symmetric stochastic block model, SSBM)
 的定义： 
 	\begin{definition}[有$k$ 个社团的 SSBM]\label{def:SSBM}
 	令 $0\leq q<p\leq 1$, $V=[n]$ 且
@@ -400,14 +400,14 @@ $\tilde{h}$ 和最优值对应的划分 $\P'$。\footnotetext{$\mathcal{Q}$
 为进一步解释随机块模型，
 我们定义随机变量 $Z_{ij}:=\mathds{1} [(i,j) \in E(G)]$，
 它是表示节点$i$和节点$j$之间是否存在边的指示函数。
-给定节点的标签向量 $X$，$Z_{ij}$ 服从\gls{Bernoulli_distribution}，
+给定节点的标签向量 $X$，$Z_{ij}$ 服从伯努利分布，
 \newglossaryentry{not:expectation}
 {
   type=notation,
   name={$\E[\cdot]$},
   description={数学期望}
 }
-其\glsdesc{not:expectation}值为
+其数学期望值为
 \begin{equation}
 \E[Z_{ij}] =
 \begin{cases}
@@ -438,7 +438,7 @@ $\bar{G}$是$G$的一个样本。
 通过求
 式\eqref{eq:GmL} 的最大值
 我们可以获得节点标签的估计量$\hat{X}$，此即
-利用\gls{mle}做社团发现。
+利用最大似然估计做社团发现。
 %\footnote{Maximum Likelihood, 缩写为 ML}。
 \newglossaryentry{not:cGn}
 {
@@ -447,13 +447,13 @@ $\bar{G}$是$G$的一个样本。
   description={所有包含$n$个节点的图的集合}
 }
 
-同时我们介绍一个后文中会用到的符号 \gls{not:cGn}，它表示
-\glsdesc{not:cGn}。
+同时我们介绍一个后文中会用到的符号$\cG_n$，它表示
+所有包含$n$个节点的图的集合。
 由概率分布归一化的性质可得，
 $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
-\newacronym{acr:ml}{ML}{Maximum Likelihood}
+\newacronym{acr:ml}{ML}{Maximum likelihood}
 
-不加说明的情况下，最大似然(\glsdesc{acr:ml}, ML)估计算法 是无约束的。但在
+不加说明的情况下，最大似然(Maximum likelihood, ML)估计算法 是无约束的。但在
 定义\ref{def:SSBM}的假设下，
 还有一个额外的约束，即 $X$ 中每一类的标签数量是严格相等的。
 在这个约束下最大化式\eqref{eq:GmL} 我们可以得到一个等价
@@ -463,7 +463,7 @@ $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
   \min_{x\in W^n} \sum_{ (i,j) \in E} (1-\delta(x_i, x_j))
 \end{equation}
 这里，函数 $\delta(x,y)$ 定义为：
-\glsdesc{not:deltaxy}。
+当 $x=y$ 时，$\delta(x,y) = 1$； 当 $x\neq y$，$\delta(x,y)=0$。
 \newglossaryentry{not:deltaxy}
 {
   type=notation,
@@ -472,7 +472,7 @@ $P_G(\cG_n) = \sum_{\bar{G}\in \cG_n}P_G(\bar{G})=1$。
 }
 
 \newglossaryentry{planted}{name=植入性划分模型, description={Planted partition model}}
-当$k=2$时，式\eqref{eq:minimum_k_cut} 即为\gls{planted}，
+当$k=2$时，式\eqref{eq:minimum_k_cut} 即为植入性划分模型，
 是图论中经典的NP难的二分问题之一。
 
 
@@ -497,7 +497,7 @@ $f$ 是 定义在 $W$ 上的置换函数
 对于任意 $\sigma \in W^n$，
 定义集合 $S_k(\sigma):=\{f(\sigma)| f\in S_k\}$。
 此外，我们定义两个$W^n$中的向量的
-距离为\gls{not:dist}$=|\{i\in[n] |\sigma_i\neq \sigma'_i\}|$，
+距离为$\Dist(\sigma, \sigma')=|\{i\in[n] |\sigma_i\neq \sigma'_i\}|$，
 其中 $\sigma,\sigma'\in W^n
 $。
 \begin{example}
@@ -516,7 +516,7 @@ $S_2^c(\sigma) = W^2 \backslash S_2(\sigma)
 
 给定 随机块模型，精确恢复问题的数学定义如下：
 \newglossaryentry{exact_recovery}{name=精确恢复, description={Exact recovery}}
-\begin{definition}[SBM 中的\gls{exact_recovery}] \label{def:SSBMR}
+\begin{definition}[SBM 中的精确恢复] \label{def:SSBMR}
 给定节点标签 $X$，
 并假设随机图 $G$ 从 $\SSBM(n,k,p,q)$ 模型中采样。
 一个社团发现算法$\hat{X}$ 已知 $G$ 去估计$X$，
@@ -595,7 +595,7 @@ Abbe \cite{abbe2015exact} 和 Mossel
 \newglossaryentry{hellinger}{name=海林格距离, description={Hellinger distance}}
 \begin{remark}
   Abbe 在文章中指出，定理 \ref{thm:sbmk_phase_transition} 
-  给出的结论和\gls{hellinger} (\glsdesc{hellinger})有关。
+  给出的结论和海林格距离 (Hellinger distance)有关。
   % 对于两个$\R^d$中的向量$u,v$，它们的
   % 海林格距离 
   % 的平方定义为
@@ -674,12 +674,12 @@ $\sigma_i \in \{ \pm 1\} $ 表示第$i$个磁偶极矩的状态，
 图 \ref{fig:square_lattice_b} 中给出了自发磁化的仿真实验结果，其中临界温度用
 红竖线标出。从图中可见在临界温度处磁化强度突然降为零，也即
 磁偶极矩的自旋方向由完全一致变成两种状态各占一半。我们称临界温度处伊辛模型
-的这种变化为相变（\glsdesc{phase_trans}）现象，
+的这种变化为相变(Phase transition)现象，
 我们在第 \ref{chap:sibm} 章也将展示社团发现的精确恢复问题
 中也有类似图 \ref{fig:square_lattice_b} 的相变现象。
 
 \newglossaryentry{canonical}{name=正则系综, description={Canonical ensemble}}
-对于自发磁化现象可以通过统计力学中的\gls{canonical} (Canonical ensemble)
+对于自发磁化现象可以通过统计力学中的正则系综 (Canonical ensemble)
 理论进行解释。该理论
 假设粒子的分布为
 \begin{equation}\label{eq:canonical_ensemble}
@@ -688,7 +688,7 @@ P(\sigma = \bar{\sigma}) = \frac{1}{Z} \exp(-\beta H(\bar{\sigma}))
 其中$\bar{\sigma} \in \{\pm 1\}^n$ 表示粒子的状态，
 $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的总能量，$\beta$是与温度成反比的参数，
 \newglossaryentry{inverse_temp}{name=逆温度, description={Thermodynamic beta}}
-也叫逆温度(\glsdesc{inverse_temp})，$Z$是配分函数，是概率分布的
+也叫逆温度(Thermodynamic beta)，$Z$是配分函数，是概率分布的
 归一化常数。
 
 
@@ -734,7 +734,7 @@ $H$叫做汉密尔顿能量函数，表示系统处于状态$\bar{\sigma}$时的
 指出，式\eqref{eq:hamiltonian} 所描述的
 伊辛模型不存在相变现象，因为式\eqref{eq:canonical_ensemble}
 给出的分布聚集在 $\sigma=\pm \mathbf{1}_n$ 附近，
-这里 \gls{not:all_one_vector} 表示\glsdesc{not:all_one_vector}。
+这里 $\mathbf{1}_n$ 表示长度为 $n$ 的全1的向量。
 为此，可以采用下述修正模型，将没有边相连的粒子之间的
 作用力考虑进来。
 \begin{equation}\label{eq:ising_modified}
@@ -763,7 +763,7 @@ $\frac{\log n}{n}$
 的状态并按一定的概率接受改变或保持原来的状态。
 给定形如式\eqref{eq:ising_modified}
 的能量函数，算法\ref{alg:Metropolis}
-给出了\gls{metropolis}的步骤。
+给出了梅特罗波利斯算法的步骤。
 
 \begin{algorithm}
   \caption{梅特罗波利斯算法}\label{alg:Metropolis}
@@ -800,7 +800,7 @@ $\frac{\log n}{n}$
 \newglossaryentry{sibm}{name=随机块-伊辛模型, description={Stochastic Ising block model}}
 \newacronym{acr:sibm}{SIBM}{Stochastic Ising block model}
 将 \ref{sec:exact_recovery} 小节 介绍的随机块模型与 本小节介绍的 伊辛模型
-复合起来可得到\gls{sibm}(\glsdesc{acr:sibm}, SIBM)\cite{ye2020exact}。
+复合起来可得到随机块-伊辛模型(Stochastic Ising block model, SIBM)\cite{ye2020exact}。
 该模型首先由 随机块模型生成随机图，
 再由随机图上定义的 伊辛模型多次生成节点的状态。
 SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实状态。
@@ -823,7 +823,7 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
 由于我们在后面章节的技术证明中也要用到这两个不等式，故在本小节最后列出它们，方便后面引用。
 
 \newglossaryentry{markov_ieq}{name=马尔可夫不等式, description={Markov's inequality}}
-\begin{lemma}[\gls{markov_ieq}] 
+\begin{lemma}[马尔可夫不等式] 
   设 $X$ 是非负型随机变量，则对于非负实数$a$有
   \begin{equation}
     P(X\geq a) \leq {1 \over a} \E[X]   
@@ -836,11 +836,11 @@ SIBM 模型的恢复任务是由多次生成的节点状态估计节点的真实
    对任意的$t>0$成立。
    \newglossaryentry{chernoff}{name=切尔诺夫不等式, description={Chernoff inequality}}
 
-   式\eqref{eq:chernoff_bound}也被称为\gls{chernoff}。
+   式\eqref{eq:chernoff_bound}也被称为切尔诺夫不等式。
 \end{lemma}
 \newglossaryentry{chebyshev_ieq}{name=切比雪夫不等式, 
 description={Chebyshev's inequality}}
-\begin{lemma}[\gls{chebyshev_ieq}]
+\begin{lemma}[切比雪夫不等式]
   \newglossaryentry{not:variance}
 {
   type=notation,
@@ -851,7 +851,7 @@ description={Chebyshev's inequality}}
   \begin{equation}
     P(\abs{X-\E[X]} \geq a) \leq {1 \over a^2} \Var[X]
   \end{equation}
-  这里，$\Var[X]$表示随机变量$X$的\glsdesc{not:variance}。
+  这里，$\Var[X]$表示随机变量$X$的方差。
 \end{lemma}
 
 % to do: add large deviation theory and hypothesis testing
@@ -862,7 +862,7 @@ description={Chebyshev's inequality}}
 最后，我们再简单介绍一下社团发现领域常用的最大模块度算法
 \cite{newman2006modularity}。
 \newglossaryentry{modularity}{name=模块度, description={Modularity}}
-\gls{modularity} (\glsdesc{modularity})
+模块度 (Modularity)
 是对网络中社团结构强弱程度的一种度量，既能作为评价
 不同社团发现算法的性能指标，也能
 通过近似求解其最大值的思路启发算法设计。
@@ -877,7 +877,7 @@ description={Chebyshev's inequality}}
 这里 $A$ 表示图的邻接矩阵，$|E|$表示边的数量，
 而$d_i$表示第
 \newglossaryentry{degree}{name=度, description={Degree}}
-$i$个节点的\gls{degree} (\glsdesc{degree})，$x_i$ 表示第$i$
+$i$个节点的度(Degree)，$x_i$ 表示第$i$
 个节点所属的社团。
 
 贪心法是用于近似求解式\eqref{eq:Q}
@@ -893,7 +893,7 @@ $i$个节点的\gls{degree} (\glsdesc{degree})，$x_i$ 表示第$i$
 针对随机块模型的社团发现
 可以先将最大似然方法获得的目标函数
 写成整数优化问题的形式，
-再转化成\gls{sdp} (\glsdesc{acr:sdp}, SDP) 的优化问题进行求解。
+再转化成半正定规划(Semi-definite programming, SDP) 的优化问题进行求解。
 
 在 式\eqref{eq:minimum_k_cut} 中
 取 $\delta(x_i, x_j) = \frac{1+x_ix_j}{2}$，
@@ -927,7 +927,7 @@ $xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
   description={元素全为1的$n\times n$的矩阵}
 }
 其中 $J_n=\mathbf{1}_n\mathbf{1}_n^{\mathrm{T}}$
-是\glsdesc{not:matrix_all_one}。
+是元素全为1的$n\times n$的矩阵。
 令 $R=2A + I_n - J_n$，
 \newglossaryentry{not:identity_matrix}
 {
@@ -935,7 +935,7 @@ $xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
   name={$I_n$},
   description={$n\times n$的单位矩阵}
 }
-$I_n$ 是\glsdesc{not:identity_matrix}，
+$I_n$ 是$n\times n$的单位矩阵，
 则
 优化的目标函数还可写成 $ \langle R, Y \rangle $，
 其中 $R$ 可进一步写成
@@ -980,14 +980,14 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中精�
 \newglossaryentry{gmc}{name=广义最大相关, description={Generalized maximal correlation}}
 \newacronym{acr:mmi}{MMI}{Multivariate mutual information}
 其中 $P_X, P_Y$表示$(X,Y)$的边缘分布，$D(P_X||P_Y)$
-表示\glsdesc{not:kl_dev}。
+表示分布$P_X$ 和 $P_Y$之间的 K-L 散度。
 而$P_{XY}$
 表示两个随机变量的联合分布。有多种方法可将互信息
 的概念推广到两个及两个以上的随机变量间，
 其中Chan等\cite{ska} 提出的一种推广 具有多种好的性质，
-且涵盖了图结构的情形。我们把他的推广叫做\gls{mmi} (\glsdesc{acr:mmi}, MMI)。
+且涵盖了图结构的情形。我们把他的推广叫做多变量互信息 (Multivariate mutual information, MMI)。
 这里我们需要指出，MMI 并不是多个随机变量之间信息量的唯一度量方法，
-比如有学者基于HGR最大相关提出了\gls{gmc} (Generalized maximal correlation)
+比如有学者基于HGR最大相关提出了广义最大相关 (Generalized maximal correlation)
 也能实现类似的目的 \cite{huang2020information}。
 
 下面我们对MMI做简要的介绍。令$V=[n]$是$n$个随机变量
@@ -1015,7 +1015,7 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
 \newacronym{acr:pin}{PIN}{Pairwise independent network}
 
 但对于一般的分布，式\eqref{eq:IZV}
-难于计算。\citet{chan2017pin} 又提出了一种特殊的互独立网络 (\glsdesc{acr:pin}, PIN) 模型，
+难于计算。\citet{chan2017pin} 又提出了一种特殊的互独立网络 (Pairwise independent network, PIN) 模型，
 使得多变量互信息可以用 \ref{sec:community_detection} 节
 介绍的PSP算法进行计算。
 这里略去PIN模型的数学定义，而是通过下面的例子
@@ -1076,7 +1076,7 @@ K-L散度可用于度量两种不同概率分布
 局部信息几何刻画了K-L散度的近似表达式。
 我们以离散分布为例，给出表示分布之间距离接近的
 形式化定义。
-$P_0$ 表示一\gls{pmf} (Probability mass function)，
+$P_0$ 表示一概率质量函数 (Probability mass function)，
 其定义域为有限的字母集$\mathcal{X}$，
 $\epsilon$表示一无穷小量。
 \begin{definition}\label{def:eps_neighborhood}
@@ -1118,7 +1118,7 @@ I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsi
   name={$||\cdot||_{\mathrm{F}}$},
   description={矩阵的Frobenius范数}
 }
-F 表示\glsdesc{not:norm_f}。
+F 表示矩阵的Frobenius范数。
 式 \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
 $I(X;Y)$可用$\frac{1}{2} \norm{B}_{\mathrm{F}}^2$
 近似，其阶数为 $O(\epsilon^2)$。
@@ -1156,7 +1156,7 @@ $I(X;Y)=\frac{1}{2}\epsilon^2+o(\epsilon^2)$，
 \newglossaryentry{type}{name=型, description={Type}}
 在信息论中，我们首先假定所有的元素均从字母集$\mathcal{X}$
 中选取。
-某个长度为$n$的序列$x$的\gls{type}是表示
+某个长度为$n$的序列$x$的型是表示
 其各字符在该序列中出现的比例，用符号$\hat{P}_x$表示，
 而所有的$\hat{P}_x$组成集合$\mathbb{P}_n$。比如考虑字母集
 $\mathcal{X}=\{1,2,3\}$，对于$11321$这个序列
@@ -1211,9 +1211,9 @@ $P\left(\frac{1}{n} \sum_{i=1}^n X_i > \bar{X} + \epsilon \right)$
 则可以用Sanov 定理的推广形式 Cramér定理来解决。我们下面先介绍该定理：
 
 \begin{theorem}\label{thm:cramer}
-  \newglossaryentry{log_mgf}{name=对数矩生成函数, description={logarithmic moment generating function}}
+  \newglossaryentry{log_mgf}{name=对数矩生成函数, description={Logarithmic moment generating function}}
   \newacronym{acr:log_mgf}{log-MGF}{Logarithmic moment generating function}
-  令 $X_1, \dots, X_n$ 为 i.i.d. 的随机变量序列，且$X_1$ 存在\gls{log_mgf} (\glsdesc{acr:log_mgf}, log-MGF)
+  令 $X_1, \dots, X_n$ 为 i.i.d. 的随机变量序列，且$X_1$ 存在对数矩生成函数 (logarithmic moment generating function, log-MGF)
 $\Lambda(t)=\log \E[\exp(t X_1)]$。
 令 $\Lambda^*(s)= \sup_{t \in \R} (st-\Lambda(t))$，则对于所有$s>\E[X_1]$，
 我们有
@@ -1224,7 +1224,7 @@ $\Lambda(t)=\log \E[\exp(t X_1)]$。
 \end{theorem}
 由于$\Lambda^*(s)$描述了$P( \sum_{i=1}^n X_i \geq  ns)$随$n$增大衰减到零的速率，
 \newglossaryentry{rate_function}{name=速率函数, description={Rate function}}
-我们把$\Lambda^*(s)$叫做\gls{rate_function}。
+我们把$\Lambda^*(s)$叫做速率函数。
 
 为方便描述$\Lambda^*(s)$和$\Lambda(s)$的关系，
 我们引入凸共轭函数的概念。
@@ -1275,7 +1275,7 @@ $P_e^{(n)}$ 和决策变量$\widehat{H}$的选取有关。
 最小值。
 %更精确的说，最大的误差指数。因为
 在渐近情形下 $P_e^{(n)}$ 以 $\exp(-n D^*)$ 的速率指数衰减。
-我们把$D^*$叫做\gls{error_exponent}。
+我们把$D^*$叫做误差指数。
 $D^*$的数学定义为：
 \begin{equation}
  D^* = \lim_{n\to \infty} -\frac{1}{n} \min_{\widehat{H}}
@@ -1284,7 +1284,7 @@ $D^*$的数学定义为：
 关于 $D^*$ 我们有如下定理：
 \begin{theorem}[\inlinecite{cover1999elements}中定理11.9.1]
   \newglossaryentry{chernoff_information}{name=切尔诺夫信息, description={Chernoff information}}
-  最大误差指数 $D^*$，也称\gls{chernoff_information} (\glsdesc{chernoff_information})，
+  最大误差指数 $D^*$，也称切尔诺夫信息 (Chernoff information)，
   满足
   \begin{equation}\label{eq:D_star_lambda_star}
     D^* = D(P_{\lambda^*} || P_1) = D(P_{\lambda^*}|| P_2)
@@ -1304,7 +1304,7 @@ $D^*$的数学定义为：
   description={分布$P_1$和$P_2$之间的切尔诺夫信息}
 }
 为方便讨论，我们使用符号$C(P_1||P_2)$
-来表示\glsdesc{not:chernoff_information}。
+来表示分布$P_1$和$P_2$之间的切尔诺夫信息。
 
 切尔诺夫信息的另一个等价定义是：
 \begin{equation}\label{eq:C_P_1_P_2_another}
@@ -1335,7 +1335,7 @@ $D^*$的数学定义为：
 该目标函数在$\lambda=\frac{1}{2}$
 处一阶导数为零而二阶导数为正，因此最小值
 在$\lambda=\frac{1}{2}$取到。该最小值
-即为阶数为$\frac{1}{2}$的\gls{renyi_divergence}，
+即为阶数为$\frac{1}{2}$的雷尼散度，
 \newglossaryentry{renyi_divergence}{name=雷尼散度, description={Rényi divergence}}
 记为：
 \begin{equation}\label{eq:renyi_divergence}
