@@ -8,14 +8,14 @@
   社团发现作为自动推断网络中社团结构的一种无监督学习方法，
   其在刻画社团性质、洞见社团相互关系等方面发挥了重要的作用。
   然而，社团发现的算法设计和参数调节多以经验和启发的方式进行，
-  在消耗大量计算资源的同时，算法的性能无法得到保障。有鉴于此，
+  不仅消耗大量的计算资源，而且算法的性能也无法得到保障。为解决这些问题，
   本文从信息论度量的角度入手，对社团发现问题进行理论建模并对算法进行性能优化。
   我们在改进已有算法效率的同时，也获得了有理论误差收敛率保证的社团发现算法，为社团发现领域的研究开辟了新的思路。
 
   本文的工作贡献可总结为以下三个部分：
 
   首先，基于多变量互信息这一信息论度量，
-  我们建立了对弱独立的随机变量进行聚类与计算图上的主划分序列问题的联系。
+  我们建立了对弱独立的随机变量进行聚类与计算图上的主划分序列的联系。
   进一步地，我们利用多变量互信息优化了计算图上的主划分序列的算法，
   其时间复杂度相比现有计算主划分序列的方法降低了一个数量级。
   该优化后的算法不仅可以解决社团的层次化发现问题，
@@ -37,7 +37,7 @@
   总体而言，本文使用了多变量互信息、速率函数以及雷尼散度等信息论度量，
   揭示了
   极限情况下社团发现算法可达的最优恢复率，为算法的检测效果提供了理论保证。
-  并籍此指导算法设计和进一步优化算法性能，节约计算资源，对于实际网络中的社团发现问题有
+  并借此指导算法设计和进一步优化算法性能，节约计算资源，对于实际网络中的社团发现问题有
  重要参考价值和借鉴意义。
 
   % 关键词用“英文逗号”分隔，输出时会自动处理为正确的分隔符
@@ -53,7 +53,7 @@
   in complex networks.
   It has played an important role in describing the community and gaining insight into the relationship between different communities.
   However, the algorithm design and parameter fine-tuning of community discovery are mostly carried out in an empirical way.
-  While consuming a large number of computing resources,
+  Although a large number of computing resources is consumed,
   the performance of the algorithm cannot be guaranteed.
   In view of this,
   we use information theoretic metrics to tackle the theoretical modeling and performance optimization of community discovery algorithms.
@@ -76,7 +76,7 @@
   We obtain the phase transition property of the algorithm and provide a theoretical basis
   for the choice of hyper-parameters.
   In the asymptotic case, we further explore the connection between our method and other algorithms, including the maximum likelihood algorithm, the maximum modularity algorithm and the minimum cut optimization.
-  In the process we theoretically establish a unified framework for analyzing common object functions for community discovery.
+  As a result, we theoretically establish a unified framework for analyzing common object functions for community discovery.
 
   In addition, based on Rényi divergence,
   we establish a reasonable probabilistic model
@@ -85,7 +85,7 @@
   From the perspective of theoretical study,
   for the stochastic block model with side information
   we derive the required sample size to achieve exact recovery and optimal error decay rate.
-  At the algorithm design level,
+  In terms of the algorithm design,
   an efficient algorithm is proposed, which can achieve exact recovery based on positive semi-definite programming.
   The effectiveness of the algorithm is verified through numerical experiments.
 
