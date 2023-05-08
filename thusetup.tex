@@ -191,5 +191,7 @@
 
 \usepackage[acronyms, sort=use]{glossaries}
 
-\usepackage[defaultcolor=yellow]{changes}
+%\usepackage[defaultcolor=yellow]{changes}
+\usepackage{cjkhl}
+\newcommand{\highlight}[1]{{\cjkhl{yellow}{#1}}}
 \newglossary[nlg]{notation}{not}{ntn}{主要符号对照表}
