@@ -407,6 +407,9 @@ $W^n$ 表示集合$W$的$n$次笛卡尔积。
   name={$\E[\cdot]$},
   description={数学期望}
 }
+\newglossaryentry{mle}
+{name=最大似然估计,
+description={Maximum likelihood estimation}}
 其数学期望值为
 \begin{equation}
 \E[Z_{ij}] =
@@ -415,24 +418,20 @@ p & X_i = X_j \\
 q & X_i \neq X_j
 \end{cases}
 \end{equation}
-
 则 有 $n$ 个节点的随机图 $G$ 
 被 
 随机变量 $Z:=\{Z_{ij}\}_{1\leq i<j\leq n}$ 完全确定。
 这里，每一个 $Z_{ij}$ 是相互独立的。
 $Z$ 的分布函数可以写为：
-\begin{align}\label{eq:mle_sibm}
-P_G(\bar{G}):=& P_G(Z = z| X=x) \\
+\begin{align}
+P_G(\bar{G}):=& P_G(Z = z| X=x) \notag\\
 =& p^{\sum_{i,j=1}^n
-z_{ij}\delta(x_i, x_j)}q^{\sum_{i,j=1}^n z_{ij}(1-\delta(x_i, x_j))} \\
+z_{ij}\delta(x_i, x_j)}q^{\sum_{i,j=1}^n z_{ij}(1-\delta(x_i, x_j))} \notag\\
 \quad& \cdot (1-p)^{\sum_{i,j=1}^n (1-z_{ij})\delta(x_i, x_j)}
 (1-q)^{\sum_{i,j=1}^n (1-z_{ij})(1-\delta(x_i, x_j))}
 \label{eq:GmL}
 \end{align}
-\newglossaryentry{mle}
-{name=最大似然估计,
-description={Maximum likelihood estimation}}
-上式中$P_G$中的下标$G$表示图$G$是由SSBM模型随机生成的，而
+\highlight{上式}中$P_G$中的下标$G$表示图$G$是由SSBM模型随机生成的，而
 $\bar{G}$是$G$的一个样本。
 若 参数 $p, q$ 已知，
 通过求
@@ -866,7 +865,7 @@ description={Chebyshev's inequality}}
 是对网络中社团结构强弱程度的一种度量，既能作为评价
 不同社团发现算法的性能指标，也能
 通过近似求解其最大值的思路启发算法设计。
-\replaced{模块度}{模板度}越高，则社团内部连接越紧密，
+\highlight{模块度}越高，则社团内部连接越紧密，
 而社团之间连接越稀疏。
 
 给定长度为$n$的向量$x$，模块度的数学定义为：
@@ -912,6 +911,12 @@ $ x^{\mathrm{T}} A x $ 可以看成是 $\langle xx^{\mathrm{T}}, A \rangle $，�
   name={$\langle A, B \rangle $},
   description={矩阵$A$ 和 $B$ 的 Frobenius 内积}
 }
+\newglossaryentry{not:matrix_all_one}
+{
+  type=notation,
+  name={$J_n$},
+  description={元素全为1的$n\times n$的矩阵}
+}
 $xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
 半正定的矩阵，若对$Y$秩为1的条件进行松弛，则
 得到如下半正定规划问题：
@@ -920,13 +925,7 @@ $xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
   \textrm{s.t. } & Y_{ii} = 1, i \in [n] \notag \\
   & \langle Y, J_n \rangle  = 0
 \end{align}
-\newglossaryentry{not:matrix_all_one}
-{
-  type=notation,
-  name={$J_n$},
-  description={元素全为1的$n\times n$的矩阵}
-}
-其中 $J_n=\mathbf{1}_n\mathbf{1}_n^{\mathrm{T}}$
+\highlight{其中} $J_n=\mathbf{1}_n\mathbf{1}_n^{\mathrm{T}}$
 是元素全为1的$n\times n$的矩阵。
 令 $R=2A + I_n - J_n$，
 \newglossaryentry{not:identity_matrix}
@@ -980,7 +979,7 @@ Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中精�
 \begin{equation}\label{eq:mutual_info}
   I(X;Y) = D(P_{XY} ||P_XP_Y)
 \end{equation}
-\replaced{}{ }其中 $P_X, P_Y$表示$(X,Y)$的边缘分布，$D(P_X||P_Y)$
+\highlight{其中}$P_X, P_Y$表示$(X,Y)$的边缘分布，$D(P_X||P_Y)$
 表示分布$P_X$ 和 $P_Y$之间的 K-L 散度。
 而$P_{XY}$
 表示两个随机变量的联合分布。有多种方法可将互信息
