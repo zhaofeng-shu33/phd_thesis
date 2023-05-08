@@ -869,7 +869,9 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 \cite{lazarevic2005feature}、 Glass 和 Ionosphere \cite{keller2012hics}。 
 前两个数据集如前所述是
 人工生成的，
-而后三个数据集在异常值检测算法比较的文章中大量使用
+\highlight{而后三个数据集原是聚类问题中的标准数据集，
+但通过取其中数量最少的一类为异常值点，也常被用于%
+异常值检测算法性能的比较}
 \cite{campos2016evaluation}。
 我们对比的方法包括
 局部异常因子(Local outlier factor \citep{Breunig})、
@@ -886,7 +888,10 @@ TPR衡量的是正常值点集合中正确检测的百分比，
 TNR的最佳结果如表 \ref{tab:odm} 所示。我们可以看到，
 基于HPSP算法的异常值检测（信息检测）在 高斯斑点、Moon 和
 Lymphography 数据集上表现最好，与局部异常因子效果差不多，
-但在 Glass 和  Ionosphere 两个数据集上性能有待提升。
+\highlight{由于 Glass 和 Ionosphere 两个数据集中异常值点数量较多，
+而异常值点数量的上升使得HPSP发现的社团层次结构反映异常值点信息的难度增大，
+从而导致信息检测的准确率下降。
+因此，信息检测在这两个数据集上性能有待提升。}
 \begin{table}
   \begin{adjustbox}{width=\columnwidth,center}
 \begin{tabular}{cccccc}
