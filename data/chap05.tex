@@ -447,7 +447,7 @@ $(n+1)$ 维列向量。
 		$V^*=(1,{x^*}^{\mathrm{T}})
         (1,{x^*}^{\mathrm{T}})^{\mathrm{T}}$。
 	\end{theorem}
-    该定理表明，只要满足恢复条件$I^+>1$，我们的SDP松弛方法可以高概率地实现社团结构的精确恢复。
+    该定理表明，只要满足恢复条件$I_+>1$，我们的SDP松弛方法可以高概率地实现社团结构的精确恢复。
 
 
 \subsection{算法实现}\label{sec:sdp_admm}
@@ -459,11 +459,15 @@ $(n+1)$ 维列向量。
 为方便讨论，本节假设所有的矩阵都是 $n$维的，而式 \eqref{eq:sdp} 中矩阵的维数是$n+1$，只需作整体替换即可。
 
 求解形如 式\eqref{eq:sdp} 的SDP优化问题可通过如下迭代进行，各矩阵的初始值$X^{(0)},Z^{(0)},U^{(0)}$可取为零矩阵。
-\begin{align}
-    X^{(k+1)} &= \upPi_A\left(Z^{(k)} - U^{(k)} + \frac{1}{\rho}R \right)\label{eq:admm} \\
+\begin{equation} \label{eq:admm}
+    \left\{\begin{alignedat}{1}
+    X^{(k+1)} &= \upPi_A\left(Z^{(k)} - U^{(k)} + \frac{1}{\rho}\widetilde{R} \right) \\
     Z^{(k+1)} &= \upPi_{S_+^n}(X^{(k+1)} + U^{(k)}) \\
     U^{(k+1)} &= U^{(k)} + (X^{(k+1)} - Z^{(k+1)}) 
-    \end{align}
+\end{alignedat}
+    \right.
+\end{equation}
+
 其中 $\rho>0$ 是 惩罚参数，$\upPi_{S_+^n}$ 表示在半正定锥$S_+^n$上的投影。
 实际操作中先将输入矩阵 做特征值分解 $X=P\Lambda P^{-1}$，
 再将负的特征值改为零即得投影矩阵$\upPi_{S_+^n}(X)=P\frac{|\Lambda| + \Lambda}{2}P^{-1}$。
@@ -499,6 +503,7 @@ $LL^*=\diag\{2(n-1), 2((n-3)I_{n-1}+J_{n-1}),I_n\} $。
 于是我们给出了 投影算子 $\upPi_{A} $ 
 的计算方法。
 
+\subsection{实验结果}
 基于以上方法，我们开展了SDP算法对SBMSI模型精确恢复的仿真实验。
 图 \ref{fig:my_label} 展示了 SDP算法
 针对 带有辅助信息的随机块模型 实现精确恢复的成功率。
@@ -522,6 +527,32 @@ $\sqrt{a}-\sqrt{b}=\sqrt{2}$，取式\eqref{eq:cor}
     \includegraphics[width=0.8\textwidth]{new_results.pdf}
     \caption{有（无）辅助信息的分界线与SDP算法恢复性能的比较}
     \label{fig:my_label}
+\end{figure}
+
+\highlight{此外，我们还针对 Lawyer friendship network 这一实际网络对
+算法进行初步的验证。该网络描述了71间律师之间的朋友关系，对每一位律师附加有
+年龄、性别等7种属性。}仿照Yuan等\cite{yuan2016community}的方法，
+我们取其中的地位这一属性信息作为真实标签，利用其他6种属性信息，我们
+分别通过 KMeans 方法（或谱嵌入）的方法得到分类标签（或一维特征）$\ell$，
+并用于构造式\eqref{eq:B_lambda_def}中的辅助信息向量$h=\xi\cdot \ell$，
+其中$\xi$是用来表示属性信息相对于图权重的超参数。
+通过改变$\xi$的值，利用迭代方法求解得到不同的NMI值，
+结果如图 \ref{fig:attribute_sdp} 所示。对于该数据集，我们发现对KMeans
+获得的特征，较大的$\xi$可以提升社团检测性能；而对于谱嵌入得到的一维特征，
+较小的$\xi$可以提升社团检测性能。
+这一点可从如下的角度进行解释。
+直接用 Kmeans 对属性聚类的NMI值为0.44，用谱嵌入得到的一维特征取中位数
+的方法得到的NMI为0.34，而如果直接对图数据用聚类NMI值为 0.40。
+因此，Kmeans得到的特征质量比图数据高，在SDP算法的输入变量构造中应赋予更大的权重。
+与之相反，谱嵌入得到的一维特征质量比图数据低，相应的辅助信息权重较小可以取得更优的检测较果。
+无论哪一种情形，结合图数据和辅助信息均可取得超过单一数据源的检测效果。
+最后我们指出，仅针对图数据使用SDP算法NMI只有0.25，而使用辅助信息后可大幅提升SDP算法本身
+检测的性能。
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{sdp_si_friendship.pdf}
+    \caption{属性信息权重对SDP算法检测性能的影响}
+    \label{fig:attribute_sdp}
 \end{figure}
 
 \input{data/appendix_chap05.tex}
