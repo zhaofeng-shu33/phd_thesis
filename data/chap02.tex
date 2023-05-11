@@ -45,7 +45,7 @@ $E$中的元素$(i,j)$表示图$G$中节点$i$到$j$有边相连。
 根据\citet{fortunato2010community} 对社团发现算法的分类，图划分(Graph partition)可用于社团发现，
 该类别属于20世纪末提出的传统算法。
 %不同的社团发现算法根据自己的标准寻找社团结构，这给一般意义上的比较造成了困难。
-在本节中我们介绍的图划分算法采用的度量标准叫做图强度。
+在本节中我们介绍的图划分算法采用的度量标准叫做图强度 (\highlight{Strength of a graph})。
 图强度这一概念最早由 Cunningham 提出 \cite{cunningham1985optimal}，
 它的推广包括最小化平均误差\cite{mac}和多变量互信息\cite{chan2016ic}等，
 其计算方法具有相似性。
@@ -781,6 +781,8 @@ $\frac{\log n}{n}$
 \end{algorithmic}  
 \end{algorithm}
 
+\newglossaryentry{potts_model}{name=玻茨模型, description={\highlight{Potts model}}}
+
 以上讨论的伊辛模型中粒子均只有$\{\pm 1\}$两个状态。
 实际上每个粒子的状态数可以扩展到多个，即 玻茨模型\cite{potts1952some}。
 类似式\eqref{eq:hamiltonian}，标准玻茨模型的汉密尔顿能量公式为：
@@ -861,7 +863,7 @@ description={Chebyshev's inequality}}
 最后，我们再简单介绍一下社团发现领域常用的最大模块度算法
 \cite{newman2006modularity}。
 \newglossaryentry{modularity}{name=模块度, description={Modularity}}
-模块度 (Modularity)
+模块度
 是对网络中社团结构强弱程度的一种度量，既能作为评价
 不同社团发现算法的性能指标，也能
 通过近似求解其最大值的思路启发算法设计。
