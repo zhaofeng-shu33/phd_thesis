@@ -95,7 +95,13 @@ $|E|$ 的收敛性
   因此， $\E[T] = n\binom{n}{2}pq^2$。
 	为计算 $T$ 我们需要求出 $\E[T^2] = \sum_{i,j,k}\sum_{i',j',k'} Y_{ijk}Y_{i'j'k'}$。
 	根据三元组 $(i,j,k)$ 和 $(i',j',k')$ 重合的情况
-  $\E[Y_{ijk}Y_{i'j'k'}]$的值一共有6种不同的情形：
+  $\E[Y_{ijk}Y_{i'j'k'}]$的值一共有6种不同的情形，
+  分别\highlight{如图} \ref{fig:illustration_triangles} 所示。
+  \begin{figure}[!ht]
+    \centering
+  \includegraphics[width=\textwidth]{illustration_discrete_triangles.pdf}    
+  \caption{关于两个三角形的重合情况讨论}\label{fig:illustration_triangles}
+  \end{figure}
 	\begin{enumerate}
 		\item $\{i,j,k\} = \{i',j',k'\}$，则 $E[Y_{ijk}Y_{i'j'k'}] = pq^2$。
 		在 $\E[T^2]$的求和式中共有 $n\binom{n}{2}$ 
