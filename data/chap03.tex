@@ -107,31 +107,22 @@ $P_{Y|X}(\cdot |x)$在$Y$的$\epsilon$邻域内，那么存在
 若 $Z_1, \dots, Z_n$ $\epsilon$-弱独立, 则有
 \begin{equation}\label{eq:PXV}
 D\left(P_{Z_V} \Big|\Big| \prod_{C\in \P} P_{Z_C} \right)
-= {1 \over 2}
-\sum_{C\in \P}\sum_{(i,j) \not\in C} \norm{B_{ij}}_{\mathrm{F}}^2 + o(\epsilon^2)
+= 
+\sum_{C\in \P}\sum_{(i,j) \not\in C} I(Z_i;Z_j) + o(\epsilon^2)
 \end{equation}
-其中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
-之间的典型相关矩阵（参见式\eqref{eq:Ixy}）。
 \end{theorem}
-若$ n = 2$，定理 \ref{thm:DPX} 即是用 典型相关矩阵估计互信息，
-与 式 \eqref{eq:Ixy} 相同。
-因此，定理 \ref{thm:DPX} 可看成式 \eqref{eq:Ixy} 
-的拓展。
+若$ n = 2$，忽略高阶量$o(\epsilon^2)$，定理 \ref{thm:DPX} 即是互信息的定义式。
+对于 $n\geq 3$，定理 \ref{thm:DPX} 将联合分布之间的KL散度的计算拆成了互信息
+求和的形式。
 
-在式\eqref{eq:PXV}中，$\norm{B_{ij}}_{\mathrm{F}}^2 =O(\epsilon^2)$，
-如果忽略高阶小量 $o(\epsilon^2)$，因此定理 \ref{thm:DPX} 建立了多变量互信息和图强度的
-联系。每个随机变量$Z_i$对应到图$G$的节点$i$，
+在式\eqref{eq:PXV}中，$I(Z_i;Z_j) =O(\epsilon^2)$ 阶数大于 $o(\epsilon^2)$。
+如果忽略高阶小量 $o(\epsilon^2)$，定理 \ref{thm:DPX} 建立了多变量互信息和图强度的
+联系。每个随机变量$Z_i$对应到有向图$G$的节点$i$，
 而划分 $\P$
 可看成是对节点集的划分。
-假设我们考虑的图 $G(V, E)$ 是有向的
-\footnote{有向图的假设可以减少计算量而不失一般性}，
 节点$i$和节点$j$之间边的权值$w_{ij}$为
-$\norm{B_{ij}}_{\mathrm{F}}^2$。
-对于 $C\subseteq V$
-我们定义图上的函数 $f(C)$ 
- 为 $f(C) = \sum_{i\not\in C, j\in C, (i,j) \in E} w_{ij}$，
-它是所有进入$C$的有向边的权值之和。
-由式\eqref{eq:PXV}
+$I(Z_i;Z_j)$。
+则由式\eqref{eq:PXV}、\eqref{eq:IZV}
 和 式 \eqref{eq:IP}，
 我们有
 \begin{equation}\label{eq:PXV_Data_Simplified}

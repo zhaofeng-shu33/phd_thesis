@@ -178,7 +178,10 @@ D(P_{Z_1,\dots, Z_n}|| \prod_{C\in \P}P_{Z_C}) & ={1 \over 2} \sum_{z_1,\dots,z_
 & = {1\over 2}\sum_{z_1,\dots,z_n} \prod_{i=1}^n  P_{Z_i} (z_i) \left(\sum_{\substack{(i,j) \not\in C\\ C\in \P}} {B_{ij}(z_i, z_j) \over \sqrt{P_{Z_i}(z_i)P_{Z_j}(z_j)} }\right)^2 +o(\epsilon^2) \\
 & = \frac{1}{2} \sum_{C\in \P}\sum_{(i,j) \not\in C} \norm{B_{ij}}_{\mathrm{F}}^2 + o(\epsilon^2)
 \end{align*}
-从而得到式\eqref{eq:PXV}。
+上式中 $B_{ij}$ 是 随机变量  $Z_i$ 和 $Z_j$
+之间的典型相关矩阵（参见式\eqref{eq:Ixy}），
+由典型相关矩阵与互信息的关系式\eqref{eq:Ixy_B_F}
+可得到式\eqref{eq:PXV}。
 \end{proof}
 
 

@@ -69,7 +69,7 @@ $\abs{\mathcal{P}}$ 表示集合 $\P$ 中元素的个数。
 $\Pi$ 是 $V$ 上所有划分的集合而 $\Pi'=\Pi\backslash\{V\}$ 表示 $\Pi$
 除去 $V$本身。
 作用在$V$的子集$C$上的函数$f$
-表示$C$和 $C$的补集 $V\backslash C$ 之间边的权值之和，即
+表示所有进入$C$的有向边的权值之和，即
 $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 而作用在$V$的划分$\P$上的函数 $f[\P]$ 则是$f$分别作用$\P$中每一个元素之和。
 即 $f[\P]=\sum_{C \in \P} f(C)$。有了如上的符号解释，
@@ -1121,9 +1121,12 @@ I(X;Y) = \frac{1}{2}\sum_{x\in \mathcal{X}, y\in \mathcal{Y}} B^2(x,y) + o(\epsi
   description={矩阵的Frobenius范数}
 }
 F 表示矩阵的Frobenius范数。
-式 \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时，
-$I(X;Y)$可用$\frac{1}{2} \norm{B}_{\mathrm{F}}^2$
-近似，其阶数为 $O(\epsilon^2)$。
+式 \eqref{eq:Ixy} 表明，当$X$和$Y$弱独立时有
+\begin{equation}\label{eq:Ixy_B_F}
+  I(X;Y)=\frac{1}{2} \norm{B}_{\mathrm{F}}^2
+  +o(\epsilon^2)    
+\end{equation}
+
 
 \begin{example}\label{ex:Pweak_1}
 设 $(X_0,Y_0)$是一个两维的随机向量，分布函数为$P_0$，
