@@ -145,8 +145,8 @@ I(Z_V) = \lambda_1 (1 + o(1))
 我们的改进算法HPSP是在不改变PSP计算结果的前提下
 降低算法的时间和空间复杂度。
 \subsection{聚类树}\label{subsection:clustering_tree}
-本章讨论的社团的概念的数学定义如下：
-\begin{definition}
+本章讨论的社团定义如下：
+\begin{definition}\label{def:cluster_def}
   给定有向图$G(V,E)$，边的权值为$w_{ij}$。
   定义$\lambda_1(C)$为$G$限制在$C$上的子图对应的图强度。
   $G$中所有社团构成集合$\mathcal{C}(V)$：
@@ -157,21 +157,22 @@ I(Z_V) = \lambda_1 (1 + o(1))
     \{ C \subseteq V \big\vert |C|>1, \lambda_1(C) > \gamma  \} 
   \end{align}
 \end{definition}
-定义虽是用图强度定义了社团，但根据上一节的讨论，对于$\epsilon$-弱独立的随
+定义 \ref{def:cluster_def} 虽是用图强度来定义社团，但根据上一节的讨论，对于$\epsilon$-弱独立的随
 机变量$Z_1,\dots, Z_n$且$I(Z_i;Z_j)=w_{ij}\epsilon^2$，
-式 \eqref{eq:czv} 中的定义的 $\mathcal{C}(Z_V)$ 当$\epsilon\to 0$时  与$ \mathcal{C}(V)$ 等价，
+式 \eqref{eq:czv} 中定义的 $\mathcal{C}(Z_V)$ 当$\epsilon\to 0$时
+与定义 \ref{def:cluster_def} 中的$ \mathcal{C}(V)$ 等价，
 因此多变量互信息的性质可用到讨论社团结构中来。
 
-$\mathcal{C}(V)$中的集合存在相互包含关系，构成了社团的层次结构。
+$\mathcal{C}(V)$中的元素存在相互包含关系，构成了社团的层次结构。
 该层次结构可用聚类树来描述，
 聚类树有一个根节点$V$，
 其所有的叶节点为 $\{j\}$，其他节点均对应着
-一个簇。
-针对式\eqref{eq:czv}定义的簇，Chan等\cite{chan2020agglomerative} 提到了有两种生成
-的方法，其相互等价，
+式\eqref{eq:czv}中定义的簇。
+对于$\mathcal{C}(Z_V)$，除定义外 Chan等\cite{chan2020agglomerative} 提到有两种构造
+方法，其相互等价，
 但其描述过于复杂。
 本小节引入的聚类树可以更为方便直观地
-对这两种生成方式进行描述。
+对这两种构造方式进行描述。
 
 
 \begin{description}
@@ -210,10 +211,10 @@ $\mathcal{C}(V)$中的集合存在相互包含关系，构成了社团的层次�
 下面我们用一个简单的例子来说明聚类树的结构。
   \begin{example}\label{ex:mmi_tree}
 考虑图 \ref{fig:threshold_b} 所示的情形，
-$V=\{1,2,3,4\}$。互信息在图的边上标出，
-比如 $I(Z_1;Z_2)=1, I(Z_1;Z_4)=0$。
-利用定义 \ref{eq:IZV} 不难求出
-$I(Z_V)=0.9$。 
+$V=\{1,2,3,4\}$。权值在图的边上标出，
+比如 $w_{12}=1, w_{14}=0$。
+利用定义 \ref{eq:IP} 不难求出
+$\lambda_1=0.9$。 进一步由式 \eqref{eq:PSP_structure}
 我们可以写出完整的聚类结果：
 \begin{equation*}
 \P = 
@@ -228,7 +229,7 @@ $I(Z_V)=0.9$。
  \ref{fig:threshold_a} 所示的结果。
 \end{example}
 
-聚类树可以由PSP算法先计算出主划分序列，再由主划分序列转换而来，
+聚类树可以由PSP算法先计算出主划分序列，再由主划分序列转换而来。
 考虑到PSP算法时间复杂度较高，下面我们采用改进算法
 直接得到聚类树。
 \subsection{HPSP算法}
