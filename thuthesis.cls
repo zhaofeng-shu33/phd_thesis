@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2005-2022 by Tsinghua University TUNA Association <tuna@tsinghua.edu.cn>
+%% Copyright (C) 2005-2023 by Tsinghua University TUNA Association <tuna@tsinghua.edu.cn>
 %% 
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3c
@@ -23,7 +23,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}[2017/04/15]
 \ProvidesClass{thuthesis}
-[2022/10/05 7.3.1 Tsinghua University Thesis Template]
+[2023/04/06 7.3.2 Tsinghua University Thesis Template]
 \newcommand\thu@error[1]{%
   \ClassError{thuthesis}{#1}{}%
 }
@@ -58,7 +58,7 @@
 }
 \hyphenation{Thu-Thesis}
 \def\thuthesis{ThuThesis}
-\def\version{7.3.1}
+\def\version{7.3.2}
 \RequirePackage{kvdefinekeys}
 \RequirePackage{kvsetkeys}
 \RequirePackage{kvoptions}
@@ -3728,9 +3728,6 @@
         aftertitle = ：,
       },
     }%
-    \ifthu@degree@graduate
-      \fontsize{12bp}{16bp}\selectfont
-    \fi
     \setlist[achievements]{
       topsep      = 6bp,
       itemsep     = 6bp,
@@ -3739,6 +3736,7 @@
       labelsep    = 0pt,
       align       = left,
       label       = [\arabic*],
+      resume     = achievements,
     }%
   \else
     \ctexset{
@@ -3761,6 +3759,7 @@
       labelsep    = 0.5cm,
       align       = right,
       label       = [\arabic*],
+      resume     = achievements,
     }%
   \fi
 }{}
