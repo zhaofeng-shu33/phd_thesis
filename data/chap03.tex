@@ -72,8 +72,8 @@
 例 \ref{ex:xy_weak_ext} 展示了定义 \ref{def:general} 和
 定义 \ref{def:weak_indepedent} 在两变量情形的一个共用的例子。
 事实上，我们可以证明定义 \ref{def:general} 是
-定义 \ref{def:weak_indepedent} 的拓展，\highlight{从而将弱独立的概念从两变量
-推广到多变量。}
+定义 \ref{def:weak_indepedent} 的拓展，从而将弱独立的概念从两变量
+推广到多变量。
 \begin{theorem}\label{thm:weak_independence_equivalent}
   如果 对于任何 $x \in \mathcal{X}$，
 $Y$关于$X=x$的条件概率质量函数
@@ -119,7 +119,7 @@ D\left(P_{Z_V} \Big|\Big| \prod_{C\in \P} P_{Z_C} \right)
 的拓展。
 
 在式\eqref{eq:PXV}中，$\norm{B_{ij}}_{\mathrm{F}}^2 =O(\epsilon^2)$，
-如果忽略高阶小量 $o(\epsilon^2)$，\highlight{因此定理} \ref{thm:DPX} 建立了多变量互信息和图强度的
+如果忽略高阶小量 $o(\epsilon^2)$，因此定理 \ref{thm:DPX} 建立了多变量互信息和图强度的
 联系。每个随机变量$Z_i$对应到图$G$的节点$i$，
 而划分 $\P$
 可看成是对节点集的划分。
@@ -870,9 +870,9 @@ $f(0)=|\P_k|=n$ 和 $f(k)=k+1<n$ ，从而可知优化问题有解。
 \cite{lazarevic2005feature}、 Glass 和 Ionosphere \cite{keller2012hics}。 
 前两个数据集如前所述是
 人工生成的，
-\highlight{而后三个数据集原是聚类问题中的标准数据集，
+而后三个数据集原是聚类问题中的标准数据集，
 但通过取其中数量最少的一类为异常值点，也常被用于%
-异常值检测算法性能的比较}
+异常值检测算法性能的比较
 \cite{campos2016evaluation}。
 我们对比的方法包括
 局部异常因子(Local outlier factor \citep{Breunig})、
@@ -889,11 +889,11 @@ TPR衡量的是正常值点集合中正确检测的百分比，
 TNR的最佳结果如表 \ref{tab:odm} 所示。我们可以看到，
 基于HPSP算法的异常值检测（信息检测）在 高斯斑点、Moon 和
 Lymphography 数据集上表现最好，与局部异常因子效果差不多，
-\highlight{由于 Glass 和 Ionosphere 两个数据集中异常值点数量较多，
+由于 Glass 和 Ionosphere 两个数据集中异常值点数量较多，
 而异常值点数量的上升使得HPSP算法得到的社团层次结构
 反映异常值点信息的难度增大，
 从而导致信息检测的准确率下降。
-因此，信息检测在这两个数据集上的性能有待提升。}
+因此，信息检测在这两个数据集上的性能有待提升。
 \begin{table}
   \begin{adjustbox}{width=\columnwidth,center}
 \begin{tabular}{cccccc}
@@ -935,8 +935,8 @@ Lymphography 数据集上表现最好，与局部异常因子效果差不多，
 本章的研究也存在一些不足之处。首先，尽管我们对HPSP算法进行了性能优化，
 相较于其他启发式算法，其算法复杂性仍较高，应用到较大规模的网络上存在一定的困难。
 其次，我们提出的社团层次发现算法的检测效果对网络中边的权值的大小较为敏感，在实际应用中需要调整赋权的参数才能达到
-较理想的效果。最后，\highlight{由于权重的累积效应，
-基于HPSP算法获得的社团层次结构呈现边缘节点向中心节点汇聚的特点}，
+较理想的效果。最后，由于权重的累积效应，
+基于HPSP算法获得的社团层次结构呈现边缘节点向中心节点汇聚的特点，
 更适用于有核心社团\cite{wang2011detecting}场景下的层次结构发现，而对平行结构下的层次结构检测能力相对较弱。
 
 在本章的研究中我们在高斯斑点与具有两层结构的随机图上对HPSP算法
