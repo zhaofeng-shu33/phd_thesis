@@ -96,8 +96,8 @@ $f(C)=\sum_{i \not\in C, j\in C, (i,j) \in E} w_{ij}$。
 \end{equation}
 在式 \eqref{eq:PSP_structure} 中，$\lambda_1, \dots, \lambda_{k-1},
 \lambda_k$ 是递增的数列，而 $h_{\P}(\lambda)=f[\P]-|\P|\lambda$。
-对于划分 $\P_0, \dots, \P_k$ 来说，
-它们也有一个序关系。我们称划分 $P$ 是 $Q$ 的一个细分，
+称划分 $\P_0, \dots, \P_k$ 为图$G$对应的 主划分序列 (Principal sequence of partition, PSP)。
+对于主划分序列来说存在如下的序关系。我们称划分 $P$ 是 $Q$ 的一个细分，
 记作 $P \preceq Q$：
 如果 $\forall C \in P, \exists C' \in Q$，
 使得$C\subset C'$。
@@ -151,7 +151,7 @@ $h(\lambda)$ 也是如此。
 \newglossaryentry{psp}{name=主划分序列, description={Principal sequence of partition}}
 对于一般的图，其节点数目可能很多，此时用枚举法计算
 $h(\lambda)$ 变得不可行。\citet{narayanan} 指出，计算
-$h(\lambda)$ 有多项式时间的算法。因该算法用到了主划分序列 (Principal sequence of partition, PSP)的结构，
+$h(\lambda)$ 有多项式时间的算法。因该算法是最早求解主划分序列 的算法，
 我们把这一算法称为PSP算法。
 由于原文献年代较为久远，作为替代，下面我们参考文献\inlinecite{mac}
 对PSP算法进行简要介绍。
@@ -1042,7 +1042,7 @@ $\P, \Pi'$等符号在 \ref{sec:graph_strength} 节定义。
 着类似的对应关系。因此，在PIN模型下多变量互信息可以用
 PSP算法进行计算。
 
-基于多变量互信息可以对随机变量进行聚类，聚类簇
+基于多变量互信息可以对随机变量进行聚类，所有簇的集合
 定义为
 \begin{align}
   \mathcal{C}(Z_V) &:= \bigcup_{\gamma \in \R} \mathcal{C}_{\gamma}(Z_V)

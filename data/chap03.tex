@@ -112,7 +112,7 @@ D\left(P_{Z_V} \Big|\Big| \prod_{C\in \P} P_{Z_C} \right)
 \end{equation}
 \end{theorem}
 若$ n = 2$，忽略高阶量$o(\epsilon^2)$，定理 \ref{thm:DPX} 即是互信息的定义式。
-对于 $n\geq 3$，定理 \ref{thm:DPX} 将联合分布之间的KL散度的计算拆成了互信息
+对于 $n\geq 3$，定理 \ref{thm:DPX} 将联合分布之间的K-L散度的计算拆成了互信息
 求和的形式。
 
 在式\eqref{eq:PXV}中，$I(Z_i;Z_j) =O(\epsilon^2)$ 阶数大于 $o(\epsilon^2)$。
@@ -126,7 +126,7 @@ $I(Z_i;Z_j)$。
 和 式 \eqref{eq:IP}，
 我们有
 \begin{equation}\label{eq:PXV_Data_Simplified}
-I(Z_V) = \lambda_1 (1 + o(\epsilon))
+I(Z_V) = \lambda_1 (1 + o(1))
 \end{equation}
 从而我们获得了在随机变量弱独立条件下多变量互信息和图强度的等价性。
 在 \ref{sec:info_clustering} 节我们提到的PIN模型下多变量互信息
@@ -144,19 +144,35 @@ I(Z_V) = \lambda_1 (1 + o(\epsilon))
 最后，我们通过实验比较求解主划分序列的三种不同的算法的效率。需要指出的是，
 我们的改进算法HPSP是在不改变PSP计算结果的前提下
 降低算法的时间和空间复杂度。
-\subsection{聚类树}
+\subsection{聚类树}\label{subsection:clustering_tree}
+本章讨论的社团的概念的数学定义如下：
+\begin{definition}
+  给定有向图$G(V,E)$，边的权值为$w_{ij}$。
+  定义$\lambda_1(C)$为$G$限制在$C$上的子图对应的图强度。
+  $G$中所有社团构成集合$\mathcal{C}(V)$：
+  \begin{align}
+    \mathcal{C}(V) &:= \bigcup_{\gamma \in \R} \mathcal{C}_{\gamma}(V)
+    \label{eq:czv_graph_strength}\\
+    \textrm{其中 } \mathcal{C}_{\gamma}(V) &:= \textrm{maximal}
+    \{ C \subseteq V \big\vert |C|>1, \lambda_1(C) > \gamma  \} 
+  \end{align}
+\end{definition}
+定义虽是用图强度定义了社团，但根据上一节的讨论，对于$\epsilon$-弱独立的随
+机变量$Z_1,\dots, Z_n$且$I(Z_i;Z_j)=w_{ij}\epsilon^2$，
+式 \eqref{eq:czv} 中的定义的 $\mathcal{C}(Z_V)$ 当$\epsilon\to 0$时  与$ \mathcal{C}(V)$ 等价，
+因此多变量互信息的性质可用到讨论社团结构中来。
 
-针对式\eqref{eq:czv}定义的聚类簇，Chan等\cite{chan2020agglomerative} 提到了有两种生成
-的方法，其相互等价，
-但其描述过于复杂。
-本小节通过引入聚类树的结构
-对这两种生成方式进行描述，更为方便直观，而且聚类树的结构
-也直接用于我们的改进算法设计中。
-聚类树可看成是一系列
-嵌套的划分$\P_i$的另一种描述方式。
+$\mathcal{C}(V)$中的集合存在相互包含关系，构成了社团的层次结构。
+该层次结构可用聚类树来描述，
 聚类树有一个根节点$V$，
 其所有的叶节点为 $\{j\}$，其他节点均对应着
-一个聚类簇。
+一个簇。
+针对式\eqref{eq:czv}定义的簇，Chan等\cite{chan2020agglomerative} 提到了有两种生成
+的方法，其相互等价，
+但其描述过于复杂。
+本小节引入的聚类树可以更为方便直观地
+对这两种生成方式进行描述。
+
 
 \begin{description}
   \item[自顶向下] 假设 $I_{\P^*}(Z_V)=I(Z_V)$，
@@ -211,6 +227,10 @@ $I(Z_V)=0.9$。
 将各临界值标到聚类树上即得到如图
  \ref{fig:threshold_a} 所示的结果。
 \end{example}
+
+聚类树可以由PSP算法先计算出主划分序列，再由主划分序列转换而来，
+考虑到PSP算法时间复杂度较高，下面我们采用改进算法
+直接得到聚类树。
 \subsection{HPSP算法}
 在我们对PSP算法的改进中，仍将使用
 算法 \ref{alg:psp} 中提到的
@@ -376,6 +396,7 @@ $T(n)$ 的复杂度的上界是 $C(3^4+4^4 + \dots + n^4) \sim \frac{1}{5}Cn^5$�
 仍比 算法 \ref{alg:psp} 的结果
 快 $5$ 倍。
 \subsection{聚类树的数据结构}
+为提升算法效率， \ref{subsection:clustering_tree} 节引入的聚类树在算法实现中需要使用高效的数据结构进行表示。
 在层次聚类中一般使用关联矩阵(Linkage matrix)构造聚类树，但这种方法
 仅限于一次聚合两个节点的场景。
 在允许一次聚合多个节点的情形下，可以使用带权的并查集(Weighted Union-Find set)的方法自底
@@ -435,8 +456,7 @@ HPSP算法 \ref{alg:psp_i_simplified} 使用静态数组的实现
 为了提升算法运行效率，和图限制$G[S]$类似，我们可以避免构建新图的操作，
 而是直接在原图$G$上进行修改。
 
-另外，从构造好的聚类树中获取正确的划分也是
-我们要考虑的问题。
+另外，HPSP算法也可用于计算主划分序列，此时需要从构造好的聚类树中获取正确的划分。
 Chan等\cite{chan2020agglomerative}曾采用一种
 类似深度优先搜索的策略在聚合的过程中逐步获取划分。
 由于我们未存储子节点的信息，因此我们在
@@ -472,7 +492,7 @@ Chan等\cite{chan2020agglomerative}曾采用一种
 
 在算法 \ref{alg:get_psp} 中，我们
 使用了额外的数组$C$来表示合并后当前
-剩余的节点，字典$D$储存了如何把剩余的节点展开成聚类簇
+剩余的节点，字典$D$储存了如何把剩余的节点展开成簇
 的信息。由于 \texttt{Merge} 函数最坏调用$n$次，
 而计算$\gamma$的时间复杂度是$O(n)$，其它操作不超过$O(n)$，
 因此整个转换算法的时间复杂度是$O(n^2)$，相比
