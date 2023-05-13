@@ -919,13 +919,13 @@ $ x^{\mathrm{T}} A x $ 可以看成是 $\langle xx^{\mathrm{T}}, A \rangle $，�
   name={$J_n$},
   description={元素全为1的$n\times n$的矩阵}
 }
-$xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
-半正定的矩阵，若对$Y$秩为1的条件进行松弛，则
+$xx^{\mathrm{T}}$ 与 $A$ 的内积。令$\Theta=xx^{\mathrm{T}}$，则$Y$是一个
+半正定的矩阵，若对$\Theta$秩为1的条件进行松弛，则
 得到如下半正定规划问题：
 \begin{align}\label{eq:opt_A_Y_1}
-  \max_Y\  & \langle A, Y \rangle  \notag \\
-  \textrm{s.t. } & Y_{ii} = 1, i \in [n] \notag \\
-  & \langle Y, J_n \rangle  = 0
+  \max_\Theta\  & \langle A, \Theta \rangle  \notag \\
+  \textrm{s.t. } & \Theta_{ii} = 1, i \in [n] \notag \\
+  & \langle \Theta, J_n \rangle  = 0
 \end{align}
 其中 $J_n=\mathbf{1}_n\mathbf{1}_n^{\mathrm{T}}$
 是元素全为1的$n\times n$的矩阵。
@@ -938,7 +938,7 @@ $xx^{\mathrm{T}}$ 与 $A$ 的内积。令$Y=xx^{\mathrm{T}}$，则$Y$是一个
 }
 $I_n$ 是$n\times n$的单位矩阵，
 则
-优化的目标函数还可写成 $ \langle R, Y \rangle $，
+优化的目标函数还可写成 $ \langle R, \Theta \rangle $，
 其中 $R$ 可进一步写成
 \begin{equation}\label{eq:def_B_sdp}
     R_{ij} = \begin{cases}
@@ -952,12 +952,12 @@ $I_n$ 是$n\times n$的单位矩阵，
 Hajek 等学者 \cite{hajek2016achieving} 得到了SDP在随机块模型中精确恢复的
 理论保证。
 \begin{theorem}
-  设 $\hat{Y}_n$ 是
-  优化问题 \eqref{eq:opt_A_Y_1} 的解，$\sigma$ 是节点的真实标签向量。
+  设 $\hat{\Theta}_n$ 是
+  优化问题 \eqref{eq:opt_A_Y_1} 的解，$x^*$ 是节点的真实标签向量。
   若 $\sqrt{a} - \sqrt{b}
   > \sqrt{2}$，
   则
-  $\lim_{n\to\infty} P(\hat{Y}_n=\sigma\sigma^{\mathrm{T}})=1$。
+  $\lim_{n\to\infty} P(\hat{\Theta}_n=x^*x^{*\mathrm{T}})=1$。
 \end{theorem}
 \section{信息论度量}
 由于本文要用到多种信息论度量研究

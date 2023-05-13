@@ -760,18 +760,17 @@ Louvain \cite{blondel2008fast} 和
 算法 \ref{alg:m} 在实际网络中进行社团发现的可行性。
 
 \begin{table}[!ht]
-    \begin{adjustbox}{width=\columnwidth,center}
+    \centering
     \begin{tabular}{cccccc}
     \hline
     NMI               & Greedy GN & Fluid & Louvain  & 标签传播 & Potts\\
     \hline
-    Karate            & 0.692     & 0.837 & 0.587   & 0.445         & 1.000     \\
-    American Football & 0.698     & 0.851 & 0.857    & 0.870         & 0.870    \\
-    Dolphin           & 0.573     & 0.655 & 0.516    & 0.527        & 0.701     \\
-    Polbooks          & 0.531     & 0.411 & 0.493  & 0.534          & 0.580     \\
+    Karate            & 0.692     & 0.837 & 0.587   & 0.445         & \textbf{1.000}     \\
+    American Football & 0.698     & 0.851 & 0.857    & \textbf{0.870} & \textbf{0.870}    \\
+    Dolphin           & 0.573     & 0.655 & 0.516    & 0.527        & \textbf{0.701}     \\
+    Polbooks          & 0.531     & 0.411 & 0.493  & 0.534          & \textbf{0.580}     \\
     \hline
     \end{tabular}
-\end{adjustbox}
     \caption{常用社团发现算法在实际网络上的性能比较}\label{tab:flatten_result}
 \end{table}
 
